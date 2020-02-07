@@ -8,18 +8,15 @@ subtitle: ''
 description: 'There is nothing to say now'
 keywords:
 author: Sudaku
-language:
-- zh-cn
-- en
+language: zh-cn
 timezone: 'Asia/Shanghai'
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
 url: http://blog.sudaku233.com
 root: /
-permalink: :lang/:category/:year/:title/
+permalink: :lang/:category/:title/
 permalink_defaults:
-  lang: zh-cn
 pretty_urls:
   trailing_index: true # Set to false to remove trailing 'index.html' from permalinks
   trailing_html: true # Set to false to remove trailing '.html' from permalinks
@@ -96,7 +93,7 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: next
+theme: landscape
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
