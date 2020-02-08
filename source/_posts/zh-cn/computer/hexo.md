@@ -168,8 +168,6 @@ hexo g
 
 别忘了 chmod +x post-update
 
-*注意*: 后面安装主题后hook有改动
-
 ### Nginx配置
 
 ```bash
@@ -222,49 +220,16 @@ message: 这个是博客查看时, 密码输入框上面的描述性文字
 
 ### 下载主题文件
 
-```
+```bash
 $ cd hexo
-$ git clone https://github.com/theme-next/hexo-theme-next themes/next
-```
-
-由于我使用git管理整个博客文件目录, 还要设置一下git的submodule
-
-```bash
-$ git submodule add https://github.com/theme-next/hexo-theme-next themes/next
-$ git submodule update --init #将.gitmodules的内容纳入.git/config文件, 并更新子模块仓库
-```
-
-#### GIT HOOK注意
-
-**由于Bare仓库不能checkout submodule**只能这样的方式
-
-1. git hook修改为
-
-```bash blog.git/hooks/post-update
-shopt -s extglob
-#rm -rf /var/www/blog/!(node_modules)
-#git --work-tree=/var/www/blog --git-dir=/home/git/blog.git checkout -f
-cd /var/www/blog
-git pull
-git submodule update --init
-
-if [ ! -d /var/www/blog/node_modules ]; then npm install; fi
-hexo cl # 清理上一次文件
-hexo g
-```
-
-2. 在/var/www/blog clone一个可以进行submodule操作的普通仓库
-
-```bash
-$ cd /var/www/blog
-$ git clone git@gitserver:~/blog.git
-$ git submodule update --init
+# git clone https://github.com/theme-next/hexo-theme-next themes/next -b v7.7.1
+# 这里使用git-subrepo, 方便以后pull操作(不用submodule是因为不够好用)
+git subrepo clone --branch=v7.7.1 https://github.com/theme-next/hexo-theme-next themes/next
 ```
 
 ### 启动和配置主题
 
-
-#### HEXO配置
+#### HEXO主题设置
 
 open `site config file`, find `theme` section, and change its value to `next`.
 
@@ -272,7 +237,7 @@ open `site config file`, find `theme` section, and change its value to `next`.
 theme: next
 ```
 
-#### NexT主题配置
+#### NexT主题设置
 
 ```yml hexo/theme/next/_config.yml
 toc:
