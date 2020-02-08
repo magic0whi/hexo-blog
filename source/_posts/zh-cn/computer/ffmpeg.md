@@ -5,18 +5,28 @@ date: 2020-02-08 14:12:31
 tags:
 ---
 
+记一些 ffmpeg 的使用
+
+本页面有些命令过长, 可以使用`Shift + 鼠标滚轮`的方式左右滚动查看
+
+<!-- more -->
+
 ## 查看文件信息
 
-`$ ffprobe -v quiet -print_format json -show_format -show_streams output.mkv`
+```bash
+$ ffprobe -v quiet -print_format json -show_format -show_streams output.mkv
+```
 
 ## 查看文件长度
 
-`$ ffprobe -select_streams v:0 -show_entries stream=duration -of default=noprint_wrappers=1:nokey=1 output.mkv`
+```bash
+$ ffprobe -select_streams v:0 -show_entries stream=duration -of default=noprint_wrappers=1:nokey=1 output.mkv
+```
 
 ## 将动漫压成HEVC格式
 
-```
-$ <输入流> | x265 --y4m -D 10 --preset slower --deblock -1:-1 --ctu 32 --qg-size 8 --crf 15.0 --pbratio 1.2 --cbqpoffs -2 --crqpoffs -2 --no-sao --me 3 --subme 5 --merange 38 --b-intra --limit-tu 4 --no-amp --ref 4 --weightb --keyint 360 --min-keyint 1 --bframes 6 --aq-mode 1 --aq-strength 0.8 --rd 5 --psy-rd 2.0 --psy-rdoq 1.0 --rdoq-level 2 --no-open-gop --rc-lookahead 80 --scenecut 40 --qcomp 0.65 --no-strong-intra-smoothing --output "EP01.hevc" -
+```bash
+$ <输出流> | x265 --y4m -D 10 --preset slower --deblock -1:-1 --ctu 32 --qg-size 8 --crf 15.0 --pbratio 1.2 --cbqpoffs -2 --crqpoffs -2 --no-sao --me 3 --subme 5 --merange 38 --b-intra --limit-tu 4 --no-amp --ref 4 --weightb --keyint 360 --min-keyint 1 --bframes 6 --aq-mode 1 --aq-strength 0.8 --rd 5 --psy-rd 2.0 --psy-rdoq 1.0 --rdoq-level 2 --no-open-gop --rc-lookahead 80 --scenecut 40 --qcomp 0.65 --no-strong-intra-smoothing --output "EP01.hevc" -
 ```
 
 > 受 VCB-Studio 启发

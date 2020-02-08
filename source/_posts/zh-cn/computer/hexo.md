@@ -5,6 +5,10 @@ date: 2020-02-08 12:24:49
 tags:
 ---
 
+记录在搭建 Hexo 博客的途中都折腾了哪些内容
+
+<!-- more -->
+
 ## 常用命令
 
 创建新文章: `$ hexo new [layout] <title> --lang en --category <你最好填个分类>`
@@ -160,7 +164,12 @@ git --work-tree=/var/www/blog --git-dir=/home/git/blog.git checkout -f
 
 # 安装依赖, 生成静态网页
 cd /var/www/blog
-if [ ! -d /var/www/blog/node_modules ]; then npm install; fi
+if [ ! -d /var/www/blog/node_modules ]; then
+    npm install;
+    npm install hexo-symbols-count-time
+    npm install hexo-generator-searchdb
+fi
+
 hexo g
 ```
 
@@ -208,7 +217,9 @@ message: 这个是博客查看时, 密码输入框上面的描述性文字
 
 ## LaTex支持
 
-本人还没实装, 请见 [LaTex支持](https://skywalkeratlas.github.io/2019/02/04/blog-hexo-git-nginx/#LaTex%E6%94%AF%E6%8C%81)
+在需要LaTex表达式的文章Front-matter中加上 `mathjax: true`
+
+本人还没实装, 请见 [NexT数学表达式](https://theme-next.org/docs/third-party-services/math-equations)
 
 ## 安装主题 - NexT
 
@@ -238,7 +249,68 @@ theme: next
 #### NexT主题设置
 
 ```yml hexo/theme/next/_config.yml
+# 展开所有各级标题
 toc:
   ...
   expand_all: true
+
+# 主题
+scheme: Gemini
+
+# 关于页面
+menu:
+  ...
+  about: /about/ || user
+
+# Back to top 按钮
+back2top:
+  scrollpercent: true # 阅读进度百分比
+
+# 页脚
+footer:
+  since: 2020
+  ...
+  powered:
+    ...
+    version: false # 不显示具体版本
+  theme:
+    ...
+    version: false # 不显示具体版本
+
+# 阅读字数统计和时间估计
+symbols_count_time:
+  awl: 2 # 多少字符统计为一个字, 中文为2
+  wpm: 250 # 一分钟读多少字
+
+# 禁止百度提供"移动端优化版"网页
+disable_baidu_transformation: true
+```
+
+
+
+#### 站内搜索
+
+站点配置
+
+```yml hexo/_config.yml
+search:
+  path: search.xml
+  field: post
+  format: html
+  limit: 10000
+```
+
+主题配置
+
+```yml theme/next/_config.yml
+local_search:
+  enable: true
+
+```
+
+#### NexT 主题额外需要安装的插件
+
+```
+hexo-symbols-count-time # 字数统计
+hexo-generator-searchdb # 站内搜索
 ```
