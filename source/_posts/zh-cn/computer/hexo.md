@@ -7,89 +7,15 @@ tags:
 
 记录在搭建 Hexo 博客的途中都折腾了哪些内容
 
-<!-- more -->
-
-## 常用命令
-
-创建新文章: `$ hexo new [layout] <title> --lang en --category <你最好填个分类>`
-
-清除缓存(在hexo g之前做一次): `$ hexo clean`
-
-网站发布: `$ hexo generate`
-
-## 一些概念
-
-### 布局(Layout)
-
-Hexo 默认有三种布局: `post`, `page`, `draft`, 分别对应了文章的生成路径source/_posts/, source/, source/_drafts/
-
-可在scaffolds文件夹内增加新的布局模板
-
-### Front-matter
-
-Front-matter是文件最上方以 `---` 分隔的区域, 用于指定个别文件的变量, 举例来说
-
-```markdown
----
-title: Hello World
-date: 2013/7/13 20:46:25
----
-```
-
-> 注意: 一般Front-matter使用的yaml语法, yaml语法需要注意空格, 如title: Hello World冒号需要有一个空格, 当然除YAML 外, 你也可以使用 JSON 来编写 Front-matter.
-
-### 分类和标签
-
-只有文章支持分流和标签, 您可以在 Front-matter 中设置. 在其他系统中, 分类和标签听起来很接近, 但是在 Hexo 中两者有着明显的差别: **分类具有顺序性和层次性而标签没有顺序和层次**
-
-```markdown
-categories:
-- Diary
-tags:
-- PS3
-- Games
-```
-
-### 文章摘要
-
-设置文章摘要, 我们只需在想显示为摘要的内容之后添 <!-- more --> 即可. 像下面这样:
-
-```
----
-title: hello hexo markdown
-date: 2016-11-16 18:11:25
-tags:
-- hello
-- hexo
-- markdown
----
-
-我是短小精悍的文章摘要(๑•̀ㅂ•́) ✧
+本文所有配置皆为**增量改动**
 
 <!-- more -->
-
-紧接着文章摘要的正文内容
-```
-
-### 资源引用
-
-写个博客, 有时候会想添加个图片或者其他形式的资源等等. 有以下两种方式进行解决:
-
-使用绝对路径引用资源, 在 Web 世界中就是资源的 URL
-使用相对路径引用资源
-对于使用相对路径引用资源的, 我们可以使用 Hexo 提供的资源文件夹功能.
-
-使用文本编辑器打开站点根目录下的 _ config.yml 文件, 将 post_asset_folder 值设置为 true.
-
-    post_asset_folder: true
-
-修改之后会开启 Hexo 的文章资源文件管理功能. Hexo 将会在我们每一次通过 `hexo new <title>` 命令创建新文章时自动创建一个同名文件夹, 于是我们便可以将文章所引用的相关资源放到这个同名文件夹下, 然后通过相对路径引用.例如, 你把一个 example.jpg 图片放在了这个同名文件夹中，使用相对路径的常规 markdown 语法 `![](./example.jpg)`即可访问.
 
 ## 配置改动
 
-### _config.yml
+### Hexo 设置
 
-```yml
+```yml hexo/_config.yml
 # 标签页标题
 title: Sudaku's blog
 description: 'There is nothing to say now'
@@ -109,144 +35,24 @@ permalink: :lang/:category/:year/:title/
 permalink_defaults:
   lang: en
 
-# Writing
+# 新文章文件目录
 new_post_name: :lang/:category/:title.md
-```
 
-## 部署教程
+# 资源文件夹
+post_asset_folder: true
 
-以上假设已完成以下操作
-
-```bash
-$ npm install -g hexo-cli
-$ hexo init <folder>
-$ cd <folder>
-$ npm install
-```
-
-### 部署Git仓库
-
-```bash
-#创建git用户
-useradd -m -s /usr/bin/git-shell git
-#给git用户设置密码,或者在git用户的.ssh目录的authorized_keys文件里面添加自己的公钥
-passwd git
-#切换到git用户
-su git
-cd /home/git
-git init --bare hexo.git
-
-#回到hexo目录
-git init
-git add .
-git commit -m 'initial commit'
-#这里的gitserver就是你的git服务器的ip或者域名
-git remote add origin git@gitserver:~/blog.git
-git push -u origin master
-```
-
-### 配置 Git hook
-
-使用post-update以在收到commit后自动进行`hexo g`
-
-将`/home/git/blog.git/hooks/post-update`下直接新建post-update:
-
-```
-#!bin/bash
-# 首先删除旧文件
-# 启用extglob才能用!(xx)之类的语法
-shopt -s extglob
-rm -rf /var/www/blog/!(node_modules)
-
-# git checkout
-git --work-tree=/var/www/blog --git-dir=/home/git/blog.git checkout -f
-
-
-# 安装依赖, 生成静态网页
-cd /var/www/blog
-if [ ! -d /var/www/blog/node_modules ]; then
-    npm install;
-    npm install hexo-symbols-count-time
-    npm install hexo-generator-searchdb
-fi
-
-hexo g
-```
-
-别忘了 chmod +x post-update
-
-### Nginx配置
-
-```bash
-#在服务器选择一个放置网站的目录, 假设这个目录为/var/www/blog
-mkdir -p /var/www/blog
-#设置权限
-chown git:git -R /var/www/blog
-```
-
-// TODO: 将记录在单独的Nginx改动文档nginx.md
-
-## Hexo 文章加密
-
-```bash
-cd blog
-npm install hexo-blog-encrypt
-
-nano /Hexo/_config.yml  添加如下内容
-
-# Security
-## 文章加密 hexo-blog-encrypt
-encrypt:
-    enable: true
-
-然后在想加密的文章头部添加上对应字段, 如
-
----
-title: hello world
-date: 2016-03-30 21:18:02
-tags:
-password: 12345   （密码）
-abstract: Welcome to my blog, enter password to read.
-message: Welcome to my blog, enter password to read.
----
-
-password: 是该博客加密使用的密码
-abstract: 是该博客的摘要, 会显示在博客的列表页
-message: 这个是博客查看时, 密码输入框上面的描述性文字
-```
-
-## LaTex支持
-
-在需要LaTex表达式的文章Front-matter中加上 `mathjax: true`
-
-本人还没实装, 请见 [NexT数学表达式](https://theme-next.org/docs/third-party-services/math-equations)
-
-## 安装主题 - NexT
-
-这里选用NexT, 是因为它的浮动TOC在查阅较长的文章时能提供很大的帮助
-
-先贴上[Getting-Started链接](https://theme-next.org/docs/getting-started/#Configuring-Menu-Items)
-
-### 下载主题文件
-
-```bash
-$ cd hexo
-# git clone https://github.com/theme-next/hexo-theme-next themes/next -b v7.7.1
-# 这里使用git-subrepo, 方便以后pull操作(不用submodule是因为不够好用)
-git subrepo clone --branch=v7.7.1 https://github.com/theme-next/hexo-theme-next themes/next
-```
-
-### 启动和配置主题
-
-#### HEXO主题设置
-
-open `site config file`, find `theme` section, and change its value to `next`.
-
-```yml hexo/_config.yml
+# 主题
 theme: next
+
+# 站内搜索[1/2]
+search:
+  path: search.xml
+  field: post
+  format: html
+  limit: 10000
 ```
 
-#### NexT主题设置
+### NexT 主题设置
 
 ```yml hexo/theme/next/_config.yml
 # 展开所有各级标题
@@ -284,33 +90,135 @@ symbols_count_time:
 
 # 禁止百度提供"移动端优化版"网页
 disable_baidu_transformation: true
-```
 
-
-
-#### 站内搜索
-
-站点配置
-
-```yml hexo/_config.yml
-search:
-  path: search.xml
-  field: post
-  format: html
-  limit: 10000
-```
-
-主题配置
-
-```yml theme/next/_config.yml
+# 站内搜索[2/2]
 local_search:
   enable: true
-
 ```
 
-#### NexT 主题额外需要安装的插件
+### Git Hook
+
+```bash /home/git/blog.git/hooks/post-update
+#!bin/bash
+# 首先删除旧文件
+# 启用extglob才能用!(xx)之类的语法
+shopt -s extglob
+rm -rf /var/www/blog/!(node_modules)
+
+# git checkout
+git --work-tree=/var/www/blog --git-dir=/home/git/blog.git checkout -f
+
+
+# 安装依赖, 生成静态网页
+cd /var/www/blog
+if [ ! -d /var/www/blog/node_modules ]; then
+    npm install;
+    npm install hexo-symbols-count-time
+    npm install hexo-generator-searchdb
+fi
+
+hexo g
+```
+
+### 额外需要的插件
 
 ```
 hexo-symbols-count-time # 字数统计
 hexo-generator-searchdb # 站内搜索
 ```
+
+## 部署教程
+
+以上假设已完成以下操作
+
+```bash
+$ npm install -g hexo-cli
+$ hexo init <folder>
+$ cd <folder>
+$ npm install
+```
+
+### 部署Git仓库
+
+```bash
+#创建git用户
+useradd -m -s /usr/bin/git-shell git
+#给git用户设置密码,或者在git用户的.ssh目录的authorized_keys文件里面添加自己的公钥
+passwd git
+#切换到git用户
+su git
+cd /home/git
+git init --bare hexo.git
+
+#回到hexo目录
+git init
+git add .
+git commit -m 'initial commit'
+#这里的gitserver就是你的git服务器的ip或者域名
+git remote add origin git@gitserver:~/blog.git
+git push -u origin master
+```
+
+然后就是Git Hook的配置, 见[前面](#Git-Hook)
+别忘了 chmod +x post-update
+
+### Nginx配置
+
+```bash
+#在服务器选择一个放置网站的目录, 假设这个目录为/var/www/blog
+mkdir -p /var/www/blog
+#设置权限
+chown git:git -R /var/www/blog
+```
+
+Nginx配置文件见: {% post_link nginx "nginx配置改动" %}
+
+### 安装主题 - NexT
+
+这里选用NexT, 是因为它的浮动TOC在查阅较长的文章时能提供很大的帮助
+
+先贴上[Getting-Started链接](https://theme-next.org/docs/getting-started/#Configuring-Menu-Items)
+
+下载主题文件
+
+```bash
+$ cd hexo
+# git clone https://github.com/theme-next/hexo-theme-next themes/next -b v7.7.1
+# 这里使用git-subrepo, 方便以后pull操作(不用submodule是因为不够好用)
+git subrepo clone --branch=v7.7.1 https://github.com/theme-next/hexo-theme-next themes/next
+```
+
+## Hexo 文章加密
+
+```bash
+cd blog
+npm install hexo-blog-encrypt
+
+nano /Hexo/_config.yml  添加如下内容
+
+# Security
+## 文章加密 hexo-blog-encrypt
+encrypt:
+    enable: true
+
+然后在想加密的文章头部添加上对应字段, 如
+
+---
+title: hello world
+date: 2016-03-30 21:18:02
+tags:
+password: 12345   （密码）
+abstract: Welcome to my blog, enter password to read.
+message: Welcome to my blog, enter password to read.
+---
+
+password: 是该博客加密使用的密码
+abstract: 是该博客的摘要, 会显示在博客的列表页
+message: 这个是博客查看时, 密码输入框上面的描述性文字
+```
+
+## LaTex支持
+
+在需要LaTex表达式的文章Front-matter中加上 `mathjax: true`
+
+本人还没实装, 请见 [NexT数学表达式](https://theme-next.org/docs/third-party-services/math-equations)
