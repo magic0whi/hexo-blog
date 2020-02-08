@@ -1,11 +1,9 @@
 ---
-title: hexo
+title: Hexo 配置改动及常用命令
 category: computer
 date: 2020-02-08 12:24:49
 tags:
 ---
-
-# Hexo 配置改动及常用命令
 
 ## 常用命令
 
