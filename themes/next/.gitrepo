@@ -1,0 +1,12 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/git-commands/git-subrepo#readme
+;
+[subrepo]
+	remote = https://github.com/theme-next/hexo-theme-next
+	branch = v7.7.1
+	commit = 87305b105696b9c28859dfd2ee1487d9fa63516a
+	parent = 6d4febc2f1635d77a40b2bf2d9d83788d345023f
+	method = merge
+	cmdver = 0.4.1
