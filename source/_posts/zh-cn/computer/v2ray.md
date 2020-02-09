@@ -7,7 +7,11 @@ tags:
 
 ## 配置文件
 
-直接贴上: {% asset_link config.json.example "config.json" %}
+直接贴上:
+
+* 服务端 {% asset_link config.json.example "config.json" %}
+
+* 客户端 {% asset_link config-client.json.example "config.json" %}
 
 ## 透明代理(TPROXY)客户端命令
 
