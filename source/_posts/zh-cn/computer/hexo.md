@@ -67,10 +67,12 @@ toc:
 # 主题
 scheme: Gemini
 
-# 关于页面
+# 关于页面, 添加关于, 标签, 分类页面
 menu:
   ...
   about: /about/ || user
+  tags: /tags/ || tags
+  categories: /categories/ || th
 
 # Back to top 按钮
 back2top:
