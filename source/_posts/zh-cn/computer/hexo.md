@@ -50,6 +50,10 @@ search:
   field: post
   format: html
   limit: 10000
+
+# 解决半角符号渲染成全角的问题
+marked:
+  smartypants: false
 ```
 
 ### NexT 主题设置
@@ -94,6 +98,14 @@ disable_baidu_transformation: true
 # 站内搜索[2/2]
 local_search:
   enable: true
+
+font:
+  enable: true
+  ...
+  global:
+    ...
+    family: Noto Serif SC # 谷歌思源宋体
+    size: 0.875 # 更好的字体大小, 约14px
 ```
 
 ### Git Hook
@@ -216,6 +228,8 @@ password: 是该博客加密使用的密码
 abstract: 是该博客的摘要, 会显示在博客的列表页
 message: 这个是博客查看时, 密码输入框上面的描述性文字
 ```
+
+另见[Github项目说明](https://github.com/MikeCoder/hexo-blog-encrypt/blob/master/ReadMe.zh.md)
 
 ## LaTex支持
 
