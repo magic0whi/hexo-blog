@@ -53,12 +53,12 @@ server {
 
 	listen		0.0.0.0:80;
 	listen		[::]:80;
-	server_name	www.sudaku233.com blog.sudaku233.com ipv6.sudaku233.com;	#注：填写自己的域名
+	server_name	www.example.com blog.example.com;	#注：填写自己的域名
 	return		301 https://$host/;
 }
 
 upstream v2ray {
-        server		127.0.0.1:23333;	#注：v2ray后端监听地址、端口
+        server		127.0.0.1:8891;	#注：v2ray后端监听地址、端口
         keepalive	2176;   # 链接池空闲链接数
 }
 
@@ -123,7 +123,7 @@ server {
 	# Add index.php to the list if you are using PHP
 	index index.html index.htm  index.php ;
 
-	server_name	www.sudaku233.com blog.sudaku233.com ipv6.sudaku233.com;	#注： 将domain.Name 替换成你的域名
+	server_name	www.example.com blog.example.com;	#注： 将domain.Name 替换成你的域名
 
 	location /minecraft {
 		alias /usr/share/nginx/html/minecraft/;
@@ -151,17 +151,9 @@ server {
 		
 		#后端错误重定向
 		proxy_intercept_errors on;
-                error_page 400 = https://github.com/magic0whi;		# url是一个网站地址。例如:https://www.xxxx.com/
-		if ($http_host = "www.sudaku233.com") {	#注： 修改 domain.Name 为自己的域名
+                error_page 400 = https://github.com/;		# url是一个网站地址。例如:https://www.xxxx.com/
+		if ($http_host = "www.example.com") {	#注： 修改 domain.Name 为自己的域名
 			#v2ray 后端 查看上面"upstream"字段
-			proxy_pass      http://v2ray;
-		}
-		if ($http_host = "blog.sudaku233.com") {	#注： 修改 domain.Name 为自己的域名
-			#v2ray 后端 查看上面"upstream"字段
-			proxy_pass      http://v2ray;
-		}
-		# for ipv6
-		if ($http_host = "ipv6.sudaku233.com") {
 			proxy_pass      http://v2ray;
 		}
 	}
