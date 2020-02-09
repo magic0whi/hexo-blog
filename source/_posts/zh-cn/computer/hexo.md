@@ -106,6 +106,11 @@ font:
     ...
     family: Noto Serif SC # 谷歌思源宋体
     size: 0.875 # 更好的字体大小, 约14px
+
+# 文本居左以避免出现奇怪的空格间距
+text_align:
+  desktop: start
+  mobile: start
 ```
 
 ### Git Hook
