@@ -5,7 +5,7 @@ date: 2020-02-08 16:45:08
 tags:
 ---
 
-Cherno C++ Tutorial Notes
+Notes on Cherno C++ Tutorial
 
 TODO: 重新格式化这篇博文
 
@@ -13,7 +13,7 @@ TODO: 重新格式化这篇博文
 
  > 写在前面: 如果你在看到一半的时候, 若出现**还没有讲到过的操作出现在示范代码中**(比如new), 知道它**基本起什么作用**即可, 在后面的episodes肯定会细讲
 
-else if = else { if(){} }
+## Visual Studio Setup for C++
 
 在Solution Explorer下使用Show All Files视图
 
@@ -22,8 +22,15 @@ else if = else { if(){} }
 Intermediate Directory为$(SolutionDir)bin\intermediate\$(Platform)\$(Configuration)\
 bin前不加\因为$(SolutionDir)变量自带backslash
 
-for是自由的不需要循规蹈矩
+## CONDITIONS and BRANCHES in C++
 
+else if = else { if(){} }
+
+## Loops in C++
+
+C++的语法是自由的, 不一定循规蹈率, 比如 for循环 可以写成这样
+
+```C++
 int i = 0;
 bool condition = true;
 for ( ; condition; )
@@ -33,60 +40,84 @@ for ( ; condition; )
     if (!(i<5))
         condition = false;
 }
-
-指针: 指针仅仅只是一个数字, 一个内存地址, 指针的数据类型一般用于标志指针对应地址上数据的数据类型.
-如果我们不关心数据的数据类型, just using void*
-
-例子, 分配一个8个char的空间的array, memset填充00, 最后delete[]操作删除数组的内存
-	char* buffer = new char[8];
-	memset(buffer, 0, 8);
-
-	delete[] buffer;
-
-指向指针的指针如 char** ptr = &buffer;
-实际运行ptr为0x00B6FED4 (指针buffer的地址), 对应地址的数据为f0 dd d0 00 (指针buffer指向地址), 由于x86是反转的, 实际值为00 d0 dd f0, 即0x00d0ddf0对应地址上的就是buffer实际的数据
-
-Reference
-函数使用引用类型参数可以使代码相比指针参数更简洁(访问变量不需要去引用化)
-
-Class vs Struct
-Struct和Class无本质区别, Struct变量默认是Public修饰, Class可以继承Struct(编译器会报警)
-Struct更适合存储多个对象或基本数据类型
-
-写Class规范
-m_LogLevel的"m_"表示变量是类内部(private)变量
-public和private可以分离, 如一部分Public修饰变量, 另一部分Public修饰函数:
-(这个例子中LogLevel等级可以使用枚举代替)
-```C++
-public:
-    const int LogLevelError = 0;
-    const int LogLevelWarning = 1;
-    const int LogLevelInfo = 2;
-private:
-    int m_LogLevel = LogLevelInfo;
-public:
-    void SetLevel(int level)
-    {
-        m_LogLevel = level;
-    }
-
-    void Error(const char* message){
-        if (m_LogLevel >= LogLevelError)
-            std::cout << "[Error]:" << message << std::endl;
-    }
-
-    void Warn(const char* message){
-        if (m_LogLevel >= LogLevelWarning)
-        std::cout << "[WARNING]:" << message << std::endl;
-    }
-    void Info(const char* message){
-        if (m_LogLevel >= LogLevelInfo)
-        std::cout << "[INFO]:" << message << std::endl;
-    }
 ```
 
-Static on C++
-Basically just to cut to the chase (切入正题/长话短说),
+## POINTERS in C++
+
+指针: 指针代表的仅仅只是一个数字, 一个内存地址, 指针的数据类型一般用于标志指针对应地址上数据的数据类型.
+
+如果我们不关心数据的数据类型, just using `void*`
+
+例子, 分配一个8个char的空间的数组, memset填充00, 最后delete[]操作删除数组的内存
+
+```C++
+char* buffer = new char[8];
+memset(buffer, 0, 8);
+
+delete[] buffer;
+```
+
+指向指针的指针
+
+```C++
+... // 接上面的那个栗子
+char** ptr = &buffer;
+```
+
+解说: 若实际运行时`ptr`储存的数据为`0x00B6FED4` (也就是 `buffer` 这个变量的地址), 用VS2019自带的Memory View查看,
+**我们看到的是**指针buffer储存的数据为`f0 dd d0 00` (指针`buffer`指向的 `8个char的空间的数组` 的地址),
+由于x86的设计我们从Memory View**看到的是反转的数据**, 实际内容应该是`00 d0 dd f0` (即 0x00d0ddf0), 这个地址就是 `8个char的空间的数组` 所在地.
+
+## Reference in C++
+
+函数使用引用类型参数可以使代码**相比指针参数更简洁**(访问变量不使用需要去引用化符号 "*")
+
+## CLASSES vs STRUCTS in C++
+
+Struct和Class**无本质区别**; Struct中的变量默认是Public修饰. 同时, Class可以继承Struct(但编译器会报警)
+
+Struct更适合存储多个对象或基本数据类型
+
+@Cherno 写Class的规范:
+
+1. m_LogLevel的"m_"表示变量是类内部(private)变量
+2. public和private可以分离, 如一部分Public修饰变量, 另一部分Public修饰函数:
+
+   ```C++
+   class Log {
+   public:
+       const int LogLevelError = 0;
+       const int LogLevelWarning = 1;
+       const int LogLevelInfo = 2;
+   private:
+       int m_LogLevel = LogLevelInfo;
+   public:
+       void SetLevel(int level)
+       {
+           m_LogLevel = level;
+       }
+   
+       void Error(const char* message){
+           if (m_LogLevel >= LogLevelError)
+               std::cout << "[Error]:" << message << std::endl;
+       }
+   
+       void Warn(const char* message){
+           if (m_LogLevel >= LogLevelWarning)
+           std::cout << "[WARNING]:" << message << std::endl;
+       }
+       void Info(const char* message){
+           if (m_LogLevel >= LogLevelInfo)
+           std::cout << "[INFO]:" << message << std::endl;
+       }
+   }
+   ```
+
+   可以看到这个类有两处 `public:`
+
+## Static in C++
+
+Basically just to `cut to the chase` (切入正题/长话短说),
 static outside of class means that the linkage of that symbol that you declare to be static is going to be internal meaning. It;s only going to be visible to that translation unit that you've defined it in.
 
 Whereas a static variable inside a class or struct means that variable is actually going to share memory with all of the instances of the class meaning that basically across all instances that you create of that class or struct, there's only going to be one instance of that static variable
@@ -94,13 +125,16 @@ and a similar thing applies to static methods in a class there is no instance of
 
 第一种情况翻译: 由于translation unit中的(不是class中的)全局变量/函数是全局可见的, 所以加上static让全局变量只在它所在的translation unit可见. 否则在不同的translation unit声明相同符号的变量将在链接阶段报重复定义错误. 类似于translation unit的private修饰
 
-命名规范
-s_开头代表变量为静态
-static int s_Variable = 5;
+@Cherno 的命名规范:
+
+s_开头代表变量为静态 `static int s_Variable = 5;`
+
+***
 
 尽量在头文件使用static变量, 因为它只是简单将内容复制到cpp文件
 
-局部Static类型变量
+### 局部Static类型变量
+
 使变量在局部可见的同时有static的性质
 
 ```c++
@@ -120,12 +154,17 @@ int main()
 }
 ```
 
-经典的Singleton类
+### 经典的Singleton类
+
+Singleton类在整个程序中只有一个实例
+
 ```C++
+// 第一种实现
 class Singleton
 {
 private:
 	static Singleton* s_Instance;
+    Singleton() {}; // 这一行作用阻止类被实例化, 后面构造函数会讲
 public:
 	static Singleton& Get() { return *s_Instance; };
 	void Hello() { std::cout << "Hello" << std::endl; };
@@ -136,11 +175,14 @@ Singleton* Singleton::s_Instance = nullptr;
 int main()
 {
 	Singleton::Get().Hello();
+```
 
-或者放在局部静态变量
-
+```C++
+// 或者将对象实例放在局部静态变量中(好处: 相比上一种更少的代码量)
 class Singleton
 {
+private:
+    Singleton() {}; // 这一行作用阻止类被实例化, 后面构造函数会讲
 public:
 	static Singleton& Get() 
 	{
@@ -157,11 +199,12 @@ int main()
 }
 ```
 
-## Enum枚举
+## Enum in C++
 
-管理标识符, 增强代码可读性, 本质是Integer(可指定which types of integer you want to be)
+枚举用来管理标识符, 增强代码可读性, 本质是Integer(可指定which types of integer you want to be)
 如
 (模式是32位Integer, 这里用unsigned char只有8位可以节约内存)
+
 ```C++
 enum Example : unsigned char
 {
@@ -211,7 +254,7 @@ int main() {
 }
 ```
 
-# Constructors in C++
+## Constructors in C++
 
 You have to manually initialize all of your primitive types otherwise they will be set to whatever was left over in that memory.
 
@@ -242,13 +285,13 @@ int main()
 }
 ```
 
-# Destructors in C++
+## Destructors in C++
 
 折构函数可以被这样调用, 但是基本上不会用到, It's weired
 
 someClass.~someClass();
 
-# Inheritance in C++
+## Inheritance in C++
 
 没啥好说的, 唯一要注意的是继承的类的大小将是: 父类所有的变量总和 + 自己声明变量总和
 
@@ -261,7 +304,7 @@ class Sub_Class : Main_Class
 }
 ```
 
-# Virtual Function in C++
+## Virtual Function in C++
 
 为什么要有Virtual函数
 

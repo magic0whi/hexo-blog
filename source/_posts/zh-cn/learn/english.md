@@ -11,6 +11,12 @@ divided by preposition/adverb.
 
 通式: _v. + prep./adv._
 
+动词含义弱化: 介词(对象), 副词(方向)
+
+副词: apart, aside, as, away, back, forward
+介词: against, at, for, from, of, into
+介副均可: across, about, after, around, by, down, on/off, in
+
 <!-- more -->
 
 ## 动词 + across

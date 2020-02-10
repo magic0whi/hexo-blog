@@ -146,7 +146,7 @@ AQ Mode: 选择 AQ 的算法。Disable(aq-mode=0,不用 aq)，Variance AQ(aq-mod
 
 一般来说，日常压动漫就选 3，压真人特典选 1 或者 4
 
-Strength，就是 aq 的强度。动漫选 0.6~1.0 左右，真人选 0.8~1.2 左右。越是高质量的编码，aq 的 strength 应该越高。
+Strength，就是 aq 的强度。动漫选 0.6 \~ 1.0 左右，真人选 0.8 \~ 1.2 左右。越是高质量的编码，aq 的 strength 应该越高。
 
 ### MBTree
 
