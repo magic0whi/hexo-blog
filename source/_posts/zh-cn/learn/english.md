@@ -5,7 +5,9 @@ date: 2020-02-09 18:45:10
 tags:
 ---
 
-# 25个常用动词短语
+# 25个常用动词的短语
+
+divided by preposition/adverb.
 
 通式: _v. + prep./adv._
 
