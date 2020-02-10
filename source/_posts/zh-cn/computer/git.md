@@ -54,6 +54,8 @@ if [[ ! "$SSH_AUTH_SOCK" ]]; then
 fi
 ```
 
+Windows用户见[Github Docs](https://help.github.com/en/github/authenticating-to-github/working-with-ssh-key-passphrases#auto-launching-ssh-agent-on-git-for-windows)
+
 ### Github测试
 
 先添加ssh key: [快捷通道](https://github.com/settings/keys)

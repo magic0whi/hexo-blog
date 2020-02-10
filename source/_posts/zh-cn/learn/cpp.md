@@ -400,3 +400,78 @@ The default visibility of a Class would actually be private; if its a Struct the
 private标记的内容只有本类能访问, 子类也不行, 但是朋友类(friend class)可以, 会在以后视频中讲到.
 
 protected标记是在private基础上, 子类可以访问
+
+## Arrays in C++
+
+### Raw Arrays
+
+举个例子`int example[5]`
+
+数组名称 example 是一个指针, 指向 example[0] 的所在地址
+
+请注意, 不能使用超出数组下标的操作(如`example[-1] = 0`), 那意味着访问不在当前数组许可范围内的内存; 在debug模式下它会报错, 但在release下它可能会造成不可预料的后果
+
+还可以用指针的方式访问数组
+
+```C++
+int example[5];
+int* ptr = example;
+for (int i = 0; i< 5; i++)
+    example[i] = 2;
+
+example[2] = 5;
+// equals to *(ptr + 2) = 5;
+// 因为这个指针是int类型, 所以每次+1都向后偏移4字节的内存地址(对指针进行加减操作是不同于普通的);
+// 所以也可以写成:
+// *(int*)((char*)ptr + 8) = 6;
+// 即先以1 byte的char*进行指针加法操作, 然后再转回int*
+// It is pretty wild line of code.
+```
+
+更多的, 两种不同的创建数组的方式
+
+```C++
+int example[5];
+int* another = new int[5];
+// 前者是创建在stack上的并且会在函数执行完后被摧毁
+// 后者是创建在heap上的
+// 建议在类中使用前者, 在函数中使用后者
+
+// We need to delete using the square brackets
+delete[] another;
+```
+
+**在C++中你无法动态地检查一个普通数组的大小**
+
+```C++
+int* another = new int[5];
+// 使用这样的方式是不靠谱的
+int count = sizeof(another) / sizeof(int);
+// 由于another是个指针, 所以最终 count 的结果是1, 这
+```
+
+一个比较好的办法是管理一些记录数组大小的常量
+
+```C++
+static const int exampleSize = 5;
+int example[size];
+```
+
+### C++11 Standard Arrays
+
+好处是能很方便地检查一个数组的大小
+
+```C++
+#include <array>
+
+int main(){
+    std::array<int, 5> another;
+
+    for (int i = 0; i < another.size(); i++)
+        eanother[i] = 2;
+}
+```
+
+两者区别是Standard Arrays 相比 Raw Array s有更多性能的开销(但是值得), 且更安全
+
+@TheCherno 更喜欢用Raw Arrays, Because he like to live dangerously :)
