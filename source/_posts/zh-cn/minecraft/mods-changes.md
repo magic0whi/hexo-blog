@@ -13,220 +13,91 @@ tags:
 
 ## 关闭MOD更新检查
 
-1. 应用能源2: config/AppliedEnergistics2/VersionChecker.cfg
-2. 砍树 config/bspkrscore.cfg
-3. 史诗攻城config/epicsiegemod.cfg
+1. 应用能源2: `config/AppliedEnergistics2/VersionChecker.cfg`
+2. 砍树: `config/bspkrscore.cfg`
+3. 史诗攻城: `config/epicsiegemod.cfg`
 
 ## 应用能源2
 
-1. (在其他id世界也生成陨石) config/AppliedEnergistics2.cfg:
+1. 陨石生成是白名单模式, 让其他id世界也生成陨石
 
-```cfg config/AppliedEnergistics2.cfg:
-worldgen {
-    ...
-    I:  <
-        0
-        3 // 一般都是这个, 从level.dat可以看nbt数据
-     >
-```
+   ```conf config/AppliedEnergistics2.cfg:
+   worldgen {
+       ...
+       I:  <
+           0
+           3 # 一般第二个主世界都是这个id, 从level.dat可以看nbt数据
+        >
+   ```
 
 ## 工业2
 
-1. (将高炉炼钢时间缩短为一分钟) config/ic2/blast_furnace.ini :
+1. 主配置文件改动
 
-```ini config/ic2/blast_furnace.ini
-; Iron Ingot
-minecraft:iron_ingot = ic2:ingot#steel ic2:misc_resource#slag @fluid:1 @duration:600
-; Crushed Iron Ore
-OreDict:crushedIron = ic2:ingot#steel ic2:misc_resource#slag @fluid:1 @duration:600
-; Iron Ore
-minecraft:iron_ore = ic2:ingot#steel ic2:misc_resource#slag @fluid:1 @duration:600
-; Purified Crushed Iron Ore
-OreDict:crushedPurifiedIron = ic2:ingot#steel ic2:misc_resource#slag @fluid:1 @duration:600
-; Iron Dust
-OreDict:dustIron = ic2:ingot#steel ic2:misc_resource#slag @fluid:1 @duration:600
-```
+   ```ini config/IC2.ini
+   ; 移动储电箱无电量损耗
+   energyRetainedInStorageBlockDrops = 1
+   ; 通过传送器时，玩家的背包重量不会增加能量消耗
+   teleporterUseInventoryWeight = false
+   ; (未应用)修改矿物生成让工业2的矿脉更大更集中, 缓解烦人的挖矿
+   [worldgen / copper]
+   count = 7
+   size = 20
+   [worldgen / lead]
+   count = 4
+   size = 8
+   [worldgen / tin]
+   count = 12
+   size = 12
+   [worldgen / uranium]
+   count = 10
+   size = 6
+   ```
 
-2. config/IC2.ini :
+2. 让打粉机可以打AE2的石英粉(这是IC2的锅)
 
-```ini
-; 移动储电箱无电量损耗
-energyRetainedInStorageBlockDrops = 1
-; 通过传送器时，玩家的背包重量不会增加能量消耗
-teleporterUseInventoryWeight = false
-; (未应用)修改矿物生成让工业2的矿脉更大更集中, 缓解烦人的挖矿
-[worldgen / copper]
-count = 7
-size = 20
-[worldgen / lead]
-count = 4
-size = 8
-[worldgen / tin]
-count = 12
-size = 12
-[worldgen / uranium]
-count = 10
-size = 6
-```
+   ```ini config/ic2/macerator.ini
+   ; certus quartz dust
+   OreDict:crystalCertusQuartz = appliedenergistics2:material@2
+   
+   ; nether quartz dust
+   OreDict:gemQuartz = appliedenergistics2:material@3
+   
+   ; fluix dust
+   OreDict:crystalFluix = appliedenergistics2:material@8
+   ```
 
-3. 配合AE2让打粉机可以打石英粉 config/ic2/macerator.ini:
+3. 将高炉炼钢时间缩短为一分钟
 
-```ini
-; certus quartz dust
-OreDict:crystalCertusQuartz = appliedenergistics2:material@2
-
-; nether quartz dust
-OreDict:gemQuartz = appliedenergistics2:material@3
-
-; fluix dust
-OreDict:crystalFluix = appliedenergistics2:material@8
-```
+   ```ini config/ic2/blast_furnace.ini
+   ; Iron Ingot
+   minecraft:iron_ingot = ic2:ingot#steel ic2:misc_resource#slag    @fluid:1 @duration:600
+   ; Crushed Iron Ore
+   OreDict:crushedIron = ic2:ingot#steel ic2:misc_resource#slag    @fluid:1 @duration:600
+   ; Iron Ore
+   minecraft:iron_ore = ic2:ingot#steel ic2:misc_resource#slag    @fluid:1 @duration:600
+   ; Purified Crushed Iron Ore
+   OreDict:crushedPurifiedIron = ic2:ingot#steel    ic2:misc_resource#slag @fluid:1 @duration:600
+   ; Iron Dust
+   OreDict:dustIron = ic2:ingot#steel ic2:misc_resource#slag @fluid:1    @duration:600
+   ```
 
 ## SCP: Lockdown
 
-1. (关闭和地形格格不入的废弃设施生成, 设成很大的数即可) config/Secure. Contain. Protect. v2.1.cfg:
+关闭和地形格格不入的废弃设施生成 (设成很大的数即可)
 
-```cfg
+```cfg config/Secure. Contain. Protect. v2.1.cfg
 I:"Abandoned facility rarity"=2147483647
 ```
 
-## (已移除)Tiquality
-1. 让mod增加的流体能正常流动 config/Tiquality.cfg :
-
-```ini
-(在后面追加)
-S:NATURAL_BLOCKS <
-            ic2:distilled_water
-            ic2:uu_matter
-            biomesoplenty:sand
-            buildcraftenergy:fluid_block_oil_heat_0
-            buildcraftenergy:fluid_block_fuel_gaseous_heat_1
-         >
-```
-
-
-## EpicBanItem
-
-1. (检查当工业2的采矿镭射枪nbt数据中充能大于0时触发ban物品) config/epicbanitem/banitem.conf :
-
-```ini
-    "ic2:mining_laser"=[
-        {
-            name=ban-mining-laser-in-ic2
-            priority=5
-            query {
-                id="ic2:mining_laser"
-                "tag.charge" {
-                    "$gt"="0.0d"
-                }
-            }
-            update {
-                "$set" {
-                    Damage=0
-                    id="minecraft:air"
-                }
-            }
-        }
-    ]
-```
-
-
-
-## (已弃用)Flexiblelogin:
-
-1. (汉化) config/flexiblelogin/locale.conf
-
-
-## Nucleus:
-
-1. 世界需要玩家有"nucleus.worlds.<worldname>"权限才能进入 config/nucleus/main.conf :
-```ini
-separate-permissions=true
-```
-
-2. fjk(first join kit) 新手礼包 nucleus/kits.json
-
-```txt
-具体见nucleus fjk配置
-```
-
-
-## (已移除)环境污染
-1.adpother.cfg关闭污染源
-
-```cfg
-# 生物死亡排碳
-B:AnimalDeath=false
-# 生物喂食排碳
-B:AnimalFeeding=false
-# 火焰排放
-B:Fire=false
-# 玩家死亡排放
-B:PlayerDeath=false
-# 玩家吃食排放
-B:PlayerEating=false
-# 原版熔炉排放
-B:VanillaFurnace=false
-```
-
-2.torch.cfg关闭火把排放:
-
-```cfg
-# 零排碳
-S:carbon=0.0
-# 零排硫
-S:sulfur=0.0
-```
-
-
-## SpongeForge
-1.禁用异步光照(因为Phosphor): 
-```
-        async-lighting {
-            # If 'true', lighting updates are run asynchronously.
-            enabled=false
-        }
-```
-
-2. 使用新的红石算法
-```
-        eigen-redstone {
-            enabled=true
-        }
-```
-3. 取消碰撞箱限制防止冰与火之歌的5级龙被清理
-```
-        # Maximum size of an entity's bounding box before removing it. Set to 0 to disable
-        max-bounding-box-size=0
-```
-4. 最大视距为8 :
-```
-view-distance=8
-```
-
-## (已移除) MyCrayfish's Gun mod:
-1. (客户端配置文件) 解决右键冲突 config/cgm.cfg
-
-```
-        controls {
-            # If true, uses the old controls in order to aim and shoot
-            B:"Use Old Controls"=true
-        }
-```
-
-
 ## BuildCraft
 
-1. (未应用)与RTG沙漠海洋生态环境的兼容问题(禁用沙漠海洋油田生态) config/buildcraft/main.cfg:
+```conf config/buildcraft/main.cfg
+# (未应用)与RTG沙漠海洋生态环境的兼容问题(禁用沙漠海洋油田生态)
+B:oil_desert_biome=true
+B:oil_ocean_biome=true
 
-```
-        B:oil_desert_biome=true
-        B:oil_ocean_biome=true
-```
-
-2. 允许石油生成维度为白名单模式 config/buildcraft/main.cfg:
-
-```
+# 允许石油生成维度为白名单模式
 B:excludedDimensionsIsBlacklist=true
 I:excludedDimensions <
     0
@@ -236,28 +107,29 @@ I:excludedDimensions <
 
 ## BiomesOPlenty
 
-关闭主界面全景图替换 config/biomesoplenty/misc.cfg:
+关闭主界面全景图替换:
 
-```
+```conf config/biomesoplenty/misc.cfg
 B:"Enable Biomes O' Plenty Main Menu Panorama"=false
 ```
 
 ## SereneSeasons
 
-季节是白名单only, 给第二个世界也添加季节影响 config/sereneseasons/seasons.cfg:
+由于季节启用是白名单模式, 给第二个世界也添加季节影响:
 
+```conf config/sereneseasons/seasons.cfg
 S:"Whitelisted Dimensions" <
     0
-    3
+    3 // 一般第二个世界维度都是3
+    14 // Catserver skantos dimension
  >
+ ```
 
 ## Cuisine
 
-config/cuisine.cfg
-
 添加竹子, 庄稼, 农作物的维度生成白名单
 
-```
+```conf config/cuisine.cfg
     I:BamboosGenDimensions <
         0
         3
@@ -276,25 +148,20 @@ config/cuisine.cfg
 
 ## Epic Siege
 
-苦力怕不隔墙爆
-
+```conf config/epicsiegemod.cfg
+# 苦力怕不隔墙爆
 B:Breaching=false
 
-怪物不隔墙感知
-
+# 怪物不能隔墙感知
 I:"Xray Mobs"=0
 
-反转黑名单, 可破坏方块为白名单模式
-
+# 反转黑名单, 可破坏方块为白名单模式
 B:"Invert Digging Blacklist"=true
 
-蜘蛛只有1%的概率吐丝
-
+# 蜘蛛只有1%的概率吐丝
 I:"Webbing Chance"=1
 
-可破坏方块白名单
-
-```
+# 可破坏方块白名单
     S:"Digging Blacklist" <
         minecraft:crafting_table
         minecraft:furnace
@@ -343,8 +210,9 @@ I:"Webbing Chance"=1
 
 ## 砍树TreeCapitator
 
-config/treecapitator:
-```
+与工业2橡胶树的兼容
+
+```conf config/treecapitator.cfg
         ic2_rubber_tree {
             S:logs=IC2:rubber_wood
             S:leaves=IC2:leaves
@@ -355,28 +223,82 @@ config/treecapitator:
 
 设置难度(他说不设置服务器可能会有影响)
 
-```
+```conf config/forestry/common.cfg
 difficulty {
     S:game.mode=NORMAL
-```
 
-(未应用)关闭背包补给, 提高服务器性能
-
-```
+# (这段未应用)关闭背包补给, 提高服务器性能
 performance {
     B:backpacks.resupply=true
 }
+
+# 关闭铜/锡的生成, 以IC2的取代
+ore {
+    ...
+    B:copper=false
+    B:tin=false
+}
 ```
 
-关闭铜/锡的生成, 以IC2的取代
+## (暂时移除)环境污染
 
-```
-B:copper=false
-B:tin=false
+1.关闭污染源
+
+   ```conf config/adpother.cfg
+   # 生物死亡排碳
+   B:AnimalDeath=false
+   # 生物喂食排碳
+   B:AnimalFeeding=false
+   # 火焰排放
+   B:Fire=false
+   # 玩家死亡排放
+   B:PlayerDeath=false
+   # 玩家吃食排放
+   B:PlayerEating=false
+   # 原版熔炉排放
+   B:VanillaFurnace=false
+   ```
+
+2.关闭火把排放
+
+```conf config/torch.cfg
+# 零排碳
+S:carbon=0.0
+# 零排硫
+S:sulfur=0.0
 ```
 
-## 服务器主配置文件server.properties:
-```
+## (已移除) MyCrayfish's Gun mod
+
+1. (客户端配置文件) 解决右键冲突 config/cgm.cfg
+
+   ```conf
+           controls {
+               # If true, uses the old controls in order to aim and shoot
+               B:"Use Old Controls"=true
+           }
+   ```
+
+## (已移除)Tiquality
+
+1. 让mod增加的流体能正常流动
+
+   ```conf config/Tiquality.cfg
+   (在后面追加)
+   S:NATURAL_BLOCKS <
+               ic2:distilled_water
+               ic2:uu_matter
+               biomesoplenty:sand
+               buildcraftenergy:fluid_block_oil_heat_0
+               buildcraftenergy:fluid_block_fuel_gaseous_heat_1
+            >
+   ```
+
+## Sponge
+
+## 服务器主配置文件
+
+```conf server.properties
 #防止服务器卡顿触发自动关闭
 max-tick-time=-1
 
@@ -402,10 +324,82 @@ level-seed=981506332
 motd=\u897F\u4EAC\u6469\u767B - The modern of Shikyo
 ```
 
+## SpongeForge配置改动
 
-## 以下是需要保护的配置文件&数据
+```conf config/sponge/global.conf
+    # 禁用异步光照(因为启用了Phosphor)
+    async-lighting {
+       # If 'true', lighting updates are run asynchronously.
+       enabled=false
+    }
 
+    # 使用新的红石算法
+    eigen-redstone {
+        enabled=true
+    }
+
+    # 取消碰撞箱限制(防止冰与火之歌的5级龙因为碰撞箱过大被清理)
+    entity {
+        ...
+        # Maximum size of an entity's bounding box before removing it. Set to 0 to disable
+        max-bounding-box-size=0
+    }
+
+    # 最大视距为8
+    world {
+        ...
+        view-distance=8
+        ...
+    }
+```
+
+## 海绵端服务器Mod配置
+
+### Nucleus
+
+1. 世界需要玩家有 `nucleus.worlds.<worldname>` 权限才能进入
+
+   ```conf config/nucleus/main.conf
+   separate-permissions=true
+   ```
+
+2. fjk(first join kit) 新手礼包 nucleus/kits.json
+   具体见nucleus fjk配置
+
+## EpicBanItem
+
+1. (检查当工业2的采矿镭射枪nbt数据, 充能大于0时触发ban物品)
+
+   ```conf config/epicbanitem/banitem.conf
+       "ic2:mining_laser"=[
+           {
+               name=ban-mining-laser-in-ic2
+               priority=5
+               query {
+                   id="ic2:mining_laser"
+                   "tag.charge" {
+                       "$gt"="0.0d"
+                   }
+               }
+               update {
+                   "$set" {
+                       Damage=0
+                       id="minecraft:air"
+                   }
+               }
+           }
+       ]
+   ```
+
+### (已弃用)Flexiblelogin
+
+(替换为汉化文件) config/flexiblelogin/locale.conf
+
+## 以下是海绵端需要保护的配置文件&数据
+
+```
 config/griefprevention/GlobalPlayerData/*
 config/griefprevention/worlds/minecraft/overworld/shikyo/ClaimData/*
 config/flexiblelogin/database.mv.db
 luckperms/luckperms-h2.mv.db
+```

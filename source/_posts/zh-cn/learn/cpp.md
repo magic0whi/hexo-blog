@@ -488,9 +488,10 @@ delete[] another;
 
 ```C++
 int* another = new int[5];
-// 使用这样的方式是不靠谱的
+
 int count = sizeof(another) / sizeof(int);
-// 由于another是个指针, 所以最终 count 的结果是1, 这
+// 使用这样的方式是不靠谱的
+// 由于another是个指针, 所以最终 count 的结果是1, 这显然不对
 ```
 
 一个比较好的办法是管理一些记录数组大小的常量

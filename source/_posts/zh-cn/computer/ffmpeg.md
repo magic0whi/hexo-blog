@@ -39,11 +39,11 @@ C:/> ffmpeg.exe -i input.mp4 -c:v libx265 -x265-params "y4m:depth=10:preset=slow
 
 > 受 VCB-Studio 启发
 
-## 通过VA-API压Hevc (缺少很多参数设置)
+## 通过VA-API压Hevc (相比软压缺少很多参数设置)
 
 `ffmpeg -hwaccel vaapi -hwaccel_device /dev/dri/renderD128 -vaapi_device /dev/dri/renderD128 -ss 0 -t 4:59 -i output.mkv -vf 'format=nv12,hwupload' -c:v hevc_vaapi -crf 26 -r 24 -acodec aac -strict -2 -ac 2 -ab 192k -ar 44100 -f mp4 -y sendready4.mp4`
 
-## 通过Nvidia的nvenc压HEVC (缺少很多参数设置)
+## 通过Nvidia的nvenc压HEVC (相比软压缺少很多参数设置)
 
 只有meduim | slow | fast 三种present可选
 

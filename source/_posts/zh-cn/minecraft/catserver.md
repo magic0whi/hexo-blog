@@ -9,8 +9,6 @@ Catserver & Spigot 系Mod服务器配置
 
 不含mod的配置改动(除非有MOD遇到Catserver水土不服)
 
-本文所有配置皆为**增量改动**
-
 <!-- more -->
 
 ## 启动参数
@@ -108,8 +106,6 @@ DynmapBlockScan可以自动添加一些Mod方块的支持(然而截止1-31-2020 
 
 有用的链接:
 
-[官方构建Dynmap Builds](http://mikeprimm.com/dynmap/builds/dynmap/)
-
 [DynmapBlockScan (Universal Renderer)](https://github.com/LolHens/DynmapBlockScan/tree/universal-renderer)
 
 ## LuckPerms 权限记录
@@ -121,6 +117,8 @@ DynmapBlockScan可以自动添加一些Mod方块的支持(然而截止1-31-2020 
 ### admin 组
 
 ## Mod兼容改动
+
+治疗水土不服
 
 ### RandomPatches
 
