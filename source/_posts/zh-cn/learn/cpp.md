@@ -519,3 +519,59 @@ int main(){
 两者区别是Standard Arrays 相比 Raw Array s有更多性能的开销(但是值得), 且更安全
 
 @TheCherno 更喜欢用Raw Arrays, Because he like to live dangerously :)
+
+## How Strings Work in C++ (and how to use them)
+
+### C风格字符串
+
+```C++
+const char* name = "Cherno";
+```
+
+字符串分配的内存是fixed allocated block, 这表示想要扩充只能通过分配全新的字符串(新的地址)并删除旧的字符串来实现
+同时由于这是个char指针所以这个字符串不能用delete(后面会细讲new和delete, rule of thumb is just if you don't use 'new' keyword dont't use the 'delete' keyword)
+
+#### 细节的东西
+
+`null termination character`: 每个字符串末尾都会有一个null结束符0(int类型, 等价于'\0'这个char类型)
+比如 `char name[7] = {'C', 'h', 'e', 'r', 'n', 'o', '\0'};`
+如果没有结束符, 那么当使用cout输出字符串时, 它会一直输出接下来的内存数据直到读到'\0'. (表现为输出"Cherno"然后跟着一串乱码)
+
+**注意**: Double quote "" by default it becomes a char pointer; 翻译: "Cherno" 默认表示为类型为 char* 的数据.
+为什么是 const char* ? 因为字符串本质是char数组, 而数组变量本质上储存的也就是这个数组的起始地址, 所以用 const char* 没毛病, cout对const char*有特殊对待不不断地读下去直到碰到前文所说的`null termination character`
+
+同时, 从Memory View看到的十六进制 `cc` 大概率表示we are right outside of the bounds of our allocation.
+
+### C++ 标准字符串
+
+本质上是char array
+
+```C++
+#include <iostream>
+#include <string> // cout没有输出string类型的overload, 如果不输出可以不用include
+
+int main()
+{
+    std::string name = "Cherno";
+
+    // std::string name = "Cherno" + " hello!"; 这种方式是不对的, 因为"Cherno"是一个 const char* 类型
+    // name += " hello!"; 这种是对的, a nice easy way, because you are adding it to a string, and "+=" is overloaded in the string class to be able to let you do that.
+    // 或者这样 std::string("Cherno") + " hello!";
+
+    std::cout << name << std::endl;
+}
+```
+
+简单的使用:
+
+```C++
+// 判断字符串是否包含指定文字
+bool const contains = name.find("no") != std::string::npos // std::string::npos 代表没有找到返回的值
+
+// 使用const xxx&这样将对象以只读形式传入函数, 因为字符串操作在c++中很普遍, 而每次都进行不必要的对象复制无疑很低效
+void PrintString(const std::string& string)
+{
+    string += "h";
+    std::cout << string << std::endl;
+}
+```
