@@ -48,7 +48,7 @@ java -javaagent:authlib-injector-1.1.26-41a7a47.jar=https://littleskin.cn/api/yg
    level-seed=981506332
    
    # 视距
-   view-distance=12
+   view-distance=8
    
    # bukkit系似乎不需要转码
    motd=地表沉降\: 热寂的斯卡纳托斯
@@ -68,6 +68,9 @@ java -javaagent:authlib-injector-1.1.26-41a7a47.jar=https://littleskin.cn/api/yg
 3. spigot.yml
 
    ```yml catserver/spigot.yml
+   settings:
+     ...
+     moved-too-quickly-multiplier: 100.0 // 减少出现 xxx moved too quickly! 的几率
    world-settings:
      default:
        verbose: false // 关闭启动时打印世界配置信息
@@ -76,8 +79,16 @@ java -javaagent:authlib-injector-1.1.26-41a7a47.jar=https://littleskin.cn/api/yg
          item: 4.0
          exp: 6.0
        ...
-       view-distance: 12 // 视距
+       view-distance: 8 // 视距
        ...
+   hunger:
+     jump-walk-exhaustion: 0.025
+     jump-sprint-exhaustion: 0.1
+     combat-exhaustion: 0.05
+     regen-exhaustion: 3.0
+     swim-multiplier: 0.005
+     sprint-multiplier: 0.05
+     other-multiplier: 0.0
    ```
 
    给我的提醒: 诸如seed-village之类的不需要管它, 默认值就是根据世界种子而配置

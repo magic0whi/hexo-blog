@@ -16,6 +16,7 @@ tags:
 1. 应用能源2: `config/AppliedEnergistics2/VersionChecker.cfg`
 2. 砍树: `config/bspkrscore.cfg`
 3. 史诗攻城: `config/epicsiegemod.cfg`
+4. Forge自带 `config/forge.cfg`
 
 ## 应用能源2
 
@@ -208,7 +209,7 @@ I:"Webbing Chance"=1
      >
 ```
 
-## 砍树TreeCapitator
+## 砍树
 
 与工业2橡胶树的兼容
 
@@ -240,6 +241,35 @@ ore {
 }
 ```
 
+## 家具
+
+```conf config/cfm.cfg
+B:welcome_message=false
+```
+
+## 动态环绕
+
+```conf config/dsurround/dsurround.cfg
+    # Enable player footprints [default: true]
+    B:Footprints=false
+```
+
+## 更好的树叶
+
+```conf config/betterfoliage.cfg
+# 关闭违和感较强的被雪覆盖的树叶
+leaves {
+    B:snowEnabled=false
+}
+# 关闭草地上的短草
+shortGrass {
+    B:grassEnabled=false
+    B:myceliumEnabled=false
+    B:snowEnabled=false
+    B:shaderWind=false
+}
+```
+
 ## (暂时移除)环境污染
 
 1.关闭污染源
@@ -266,6 +296,20 @@ ore {
 S:carbon=0.0
 # 零排硫
 S:sulfur=0.0
+```
+
+## (暂时移除) 高级火箭
+
+```conf config/advancedRocketry.cfg
+# 主世界天空盒不改变
+B:overworldSkyOverride=false
+```
+
+## (TLS未安装) 冰与火之歌
+
+```conf config/ice_and_fire.cfg
+不要更改主界面
+B:"Custom main menu"=false
 ```
 
 ## (已移除) MyCrayfish's Gun mod
@@ -395,7 +439,7 @@ motd=\u897F\u4EAC\u6469\u767B - The modern of Shikyo
 
 (替换为汉化文件) config/flexiblelogin/locale.conf
 
-## 以下是海绵端需要保护的配置文件&数据
+## 海绵端需要保护的配置文件&数据
 
 ```
 config/griefprevention/GlobalPlayerData/*

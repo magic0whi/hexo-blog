@@ -16,3 +16,7 @@ tags:
 标题英文: `NOVECENTOWIDE`
 
 基建英文: `Bender`
+
+### The New Order
+
+LOGO主标题: Tannenberg

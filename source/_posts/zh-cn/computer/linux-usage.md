@@ -34,7 +34,7 @@ $ rsync -aXv -P $SOURCE_DIR/ $TARGET_DIR/`
 仅复制, 不保留权限
 
 ```bash
-`rsync -rlt -P $TARGET_DIR/ $SOURCE_DIR/`
+`rsync -rlt -P --no-owner --no-group --no-perms $SOURCE_DIR/ $TARGET_DIR/`
 ```
 
 同步文件夹(小心, 有--delete参数, 会删光目标文件夹多余的文件)
@@ -65,6 +65,34 @@ $ rsync -aXv -P $SOURCE_DIR/ $TARGET_DIR/`
 
 -W, --whole-file            copy files whole (without delta-xfer algorithm)
 ```
+
+### 查看电池电量
+
+以我的平板举个例子
+
+```bash
+$ cat /sys/class/power_supply/axp288_fuel_gauge/capacity
+```
+
+### 生成随机密码
+
+生成20个长度为12的 含大写字母 `-c` , 数字 `-n` , 符号 `-y` , 完全随机 `-s` 的密码
+
+```bash
+pwgen -cnys 12 20
+```
+
+### Recursively chmod all directories except files
+
+To recursively give directories read&execute privileges:
+
+    find /path/to/base/dir -type d -exec chmod 755 {} +
+
+To recursively give files read privileges:
+
+    find /path/to/base/dir -type f -exec chmod 644 {} +
+
+Reference from [StackExchange](https://superuser.com/questions/91935/how-to-recursively-chmod-all-directories-except-files)
 
 ## shell相关知识
 
