@@ -34,6 +34,10 @@ Host github.com
     IdentityFile ~/.ssh/id_ed25519.github
 ```
 
-### .ssh/bashrc
+### ~/.bashrc
 
 //TODO: 直接贴上配置文件地址
+
+### aria2
+
+{% asset_link aria2.conf.example "aria2.conf" %}

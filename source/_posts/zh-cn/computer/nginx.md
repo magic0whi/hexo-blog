@@ -47,26 +47,15 @@ http {
 
 server {
 	# 禁用不需要的请求方式 以下只允许 get、post
-        if ($request_method  !~ ^(POST|GET)$) {
-                return	444;
-        }
+    if ($request_method  !~ ^(POST|GET)$) {
+            return	444;
+    }
 
 	listen		0.0.0.0:80;
 	listen		[::]:80;
-	server_name	www.example.com blog.example.com;	#注：填写自己的域名
-	return		301 https://$host/;
+	server_name example.com;	#注：填写自己的域名
+	return		301 https://$host$request_uri;
 }
-
-upstream v2ray {
-        server		127.0.0.1:8891;	#注：v2ray后端监听地址、端口
-        keepalive	2176;   # 链接池空闲链接数
-}
-
-map $http_upgrade $connection_upgrade {
-        default		upgrade;
-        ''		close;
-}
-
 
 server {
 	#要开启 HTTP/2 注意nginx版本 
@@ -77,25 +66,23 @@ server {
 	charset         utf-8;
 
 	#证书配置
-	ssl_certificate		/etc/v2ray/v2ray.crt;	#注：填写自己证书路径
-	ssl_certificate_key	/etc/v2ray/v2ray.key;	#注：填写密钥路径
+	ssl_certificate		/etc/letsencrypt/live/example.com/fullchain.pem;	#注：填写自己证书路径
+	ssl_certificate_key	/etc/letsencrypt/live/example.com/privkey.pem;	#注：填写密钥路径
 
-	ssl_session_cache	shared:SSL:50m;
 	ssl_session_timeout	1d;
+	ssl_session_cache	shared:MozSSL:10m;
 	ssl_session_tickets	off;
 	
-	# https://nginx.org/en/docs/http/ngx_http_ssl_module.html
-	ssl_protocols	TLSv1.2 TLSv1.3;
-	#openssl ciphers
-	#注：懒人配置	https://mozilla.github.io/server-side-tls/ssl-config-generator/
-	ssl_ciphers	TLS-CHACHA20-POLY1305-SHA256:TLS-AES-256-GCM-SHA384:TLS-AES-128-GCM-SHA256:EECDH+CHACHA20:EECDH+AESGCM:EECDH+AES;
-	ssl_prefer_server_ciphers on;
+	#注：懒人配置	https://ssl-config.mozilla.org/
+	ssl_protocols	TLSv1.3;
+	ssl_prefer_server_ciphers off;
 	
 	#安全设定
 	#屏蔽请求类型
-        if ($request_method  !~ ^(POST|GET)$) {
-                return  444;
-        }
+    if ($request_method  !~ ^(POST|GET)$) {
+            return  444;
+    }
+
 	add_header      X-Frame-Options         DENY;
 	add_header      X-XSS-Protection        "1; mode=block";
 	add_header      X-Content-Type-Options  nosniff;
@@ -121,41 +108,30 @@ server {
 	root	/var/www/blog/public;
 
 	# Add index.php to the list if you are using PHP
-	index index.html index.htm  index.php ;
+	index index.html index.htm index.php;
 
-	server_name	www.example.com blog.example.com;	#注： 将domain.Name 替换成你的域名
+	server_name example.com;	#注： 将domain.Name 替换成你的域名
 
 	location /minecraft {
 		alias /usr/share/nginx/html/minecraft/;
 		autoindex off;
 	}
 
-	location /projectv/ {	#注：修改路径
-		proxy_http_version	1.1;
-		proxy_set_header	Upgrade $http_upgrade;
-		proxy_set_header	Connection $connection_upgrade;	#此处与<map>对应
-		proxy_set_header	Host $http_host;
-		
-		# 向后端传递访客ip
-                proxy_set_header X-Real-IP $remote_addr;
-                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-		
-		
-		sendfile                on;
-		tcp_nopush              on;
-		tcp_nodelay             on;
-		keepalive_requests      25600;
-		keepalive_timeout	300 300;
-		proxy_buffering         off;
-		proxy_buffer_size       8k;
-		
-		#后端错误重定向
-		proxy_intercept_errors on;
-                error_page 400 = https://github.com/;		# url是一个网站地址。例如:https://www.xxxx.com/
-		if ($http_host = "www.example.com") {	#注： 修改 domain.Name 为自己的域名
-			#v2ray 后端 查看上面"upstream"字段
-			proxy_pass      http://v2ray;
+	location /stream {	#注：修改路径
+	    if ($http_upgrade != "websocket") { # WebSocket协商失败时返回404
+			return 404;
 		}
+		proxy_redirect off;
+		proxy_pass http://127.0.0.1:10000;
+		proxy_http_version 1.1;
+		proxy_set_header Upgrade $http_upgrade;
+		proxy_set_header Connection "upgrade";
+		proxy_set_header Host $http_host;
+		# Show real IP in v2ray access.log
+		proxy_set_header X-Real-IP $remote_addr;
+		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
+		proxy_read_timeout 300s;
 	}
 }
 ```

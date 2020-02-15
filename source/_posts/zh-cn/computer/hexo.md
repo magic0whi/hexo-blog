@@ -161,13 +161,13 @@ $ npm install
 
 ```bash
 #创建git用户
-useradd -m -s /usr/bin/git-shell git
+useradd -m -s /bin/bash git
 #给git用户设置密码,或者在git用户的.ssh目录的authorized_keys文件里面添加自己的公钥
 passwd git
 #切换到git用户
 su git
 cd /home/git
-git init --bare hexo.git
+git init --bare blog.git
 
 #回到hexo目录
 git init
@@ -180,6 +180,7 @@ git push -u origin master
 
 然后就是Git Hook的配置, 见[前面](#Git-Hook)
 别忘了 chmod +x post-update
+若想使用git-shell: `usermod -s /usr/bin/git-shell git`
 
 ### Nginx配置
 

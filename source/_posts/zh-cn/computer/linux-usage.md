@@ -94,7 +94,19 @@ To recursively give files read privileges:
 
 Reference from [StackExchange](https://superuser.com/questions/91935/how-to-recursively-chmod-all-directories-except-files)
 
+### SWAP file
+
+```
+# truncate -s 0 /swapfile
+# chattr +C /swapfile
+# btrfs property set /swapfile compression none
+```
+
 ## shell相关知识
+
+### ssh访问遇到 Access denied
+
+请检查该用户的 shell 的路径是否在 `/etc/shells` 列表中
 
 ### if判断条件
 

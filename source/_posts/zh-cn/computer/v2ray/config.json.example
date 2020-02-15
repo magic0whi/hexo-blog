@@ -14,23 +14,14 @@
   },
   // List of inbound proxy configurations.
   "inbounds": [{
-    // Port to listen on. You may need root access if the value is less than 1024.
-    "port": 8888,
-
-    // IP address to listen on. Change to "0.0.0.0" to listen on all network interfaces.
+    "port": 1000,
     "listen": "0.0.0.0",
-
-    // Tag of the inbound proxy. May be used for routing.
-    "tag": "vmess-inbound",
-
-    // Protocol name of inbound proxy.
+    "tag": "quic-inbound",
     "protocol": "vmess",
-
-    // Settings of the protocol. Varies based on protocol.
     "settings": {
       "clients": [
         {
-          "id": "uuid",
+          "id": "uuid-uuid-uuid-uuid-uuid",
           "alterId": 64,
           "security": "auto",
           "level": 0
@@ -38,70 +29,33 @@
       ]
     },
     "streamSettings": {
-      "network": "mkcp",
-      "kcpSettings": {
-        "mtu": 1350,
-        "tti": 20,
-        "uplinkCapacity": 1,
-        "downlinkCapacity": 100,
-        "congestion": true,
-        "readBufferSize": 2,
-        "writeBufferSize": 1,
+      "network": "quic",
+      "security": "tls",
+      "quicSettings": {
+        "security": "aes-128-gcm",
+        "key": "password",
         "header": {
         "type": "none"
         }
-      }
-    },
-
-    // Enable sniffing on TCP connection.
-    "sniffing": {
-      "enabled": true,
-      // Target domain will be overriden to the one carried by the connection, if the connection is HTTP or HTTPS.
-      "destOverride": ["http", "tls"]
-    }
-  },{
-    "port": 8889,
-    "listen": "0.0.0.0",
-    "tag": "vmess-inbound2",
-    "protocol": "vmess",
-    "settings": {
-      "clients": [
-        {
-          "id": "uuid",
-          "alterId": 64,
-          "security": "auto",
-          "level": 0
-        }
-      ]
-    },
-    "sniffing": {
-      "enabled": true,
-      "destOverride": ["http", "tls"]
-    },
-    "streamSettings": {
-      "network": "h2",
-      "httpSettings": {
-        "path": "/v2ray"
       },
-      "security": "tls",
       "tlsSettings": {
         "certificates": [
           {
-            "certificateFile": "/etc/v2ray/v2ray.crt",
-            "keyFile": "/etc/v2ray/v2ray.key"
+            "certificateFile": "/etc/letsencrypt/live/example.com/fullchain.pem",
+            "keyFile": "/etc/letsencrypt/live/example.com/privkey.pem"
           }
         ]
       }
     }
   },{
-    "port": 8890,
+    "port": 1001,
     "listen": "0.0.0.0",
-    "tag": "vmess-inbound3",
+    "tag": "vmess-inbound",
     "protocol": "vmess",
     "settings": {
       "clients": [
         {
-          "id": "uuid",
+          "id": "uuid-uuid-uuid-uuid-uuid",
           "alterId": 64,
           "security": "auto",
           "level": 0
@@ -117,7 +71,7 @@
     }
   },{
     "protocol": "vmess",
-    "port": "10000-20000",
+    "port": "2000-3000",
     "tag": "dynamicPort",
     "settings": {
       "default": {
@@ -130,13 +84,13 @@
       "refresh": 5
     }
   },{
-    "port": 8891,
+    "port": 10000,
     "listen": "127.0.0.1",
     "tag": "ws-in",
     "protocol": "vmess",
     "settings": {
       "clients": [{
-        "id": "uuid",
+        "id": "uuid-uuid-uuid-uuid-uuid",
         "alterId": 64,
         "security": "auto",
         "level": 0
@@ -145,7 +99,7 @@
     "streamSettings": {
       "network": "ws",
       "wsSettings": {
-        "path": "/projectv/",
+        "path": "/projectv",
         "headers": { }
       }
     }

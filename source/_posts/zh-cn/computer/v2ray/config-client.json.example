@@ -63,11 +63,11 @@
     "settings": {
       "vnext": [
         {
-          "address": "www.example.com",
-          "port": 8888,
+          "address": "example.com",
+          "port": 1000,
           "users": [
             {
-              "id": "uuid",
+              "id": "uuid-uuid-uuid-uuid-uuid",
               "security": "aes-128-gcm",
               "alterId": 64
             }
@@ -76,25 +76,18 @@
       ]
     },
     "streamSettings": {
-      "network": "kcp",
-      "kcpSettings": {
-        "uplinkCapacity": 5,
-        "downlinkCapacity": 50,
-        "readBufferSize": 2,
-        "mtu": 1350,
+      "network": "quic",
+      "security":"tls",
+      "quicSettings": {
+        "security":"aes-128-gcm",
+        "key":"password",
         "header": {
-          "type": "none",
-          "request": null,
-          "response": null
-        },
-        "tti": 50,
-        "congestion": true,
-        "writeBufferSize": 2
+          "type": "none"
+        }
       },
-      "wsSettings": null,
-      "tcpSettings": null,
-      "tlsSettings": {},
-      "security": "",
+      "tlsSettings": {
+        "serverName":"example.com"
+      },
       "sockopt": {
         "mark": 255
       }

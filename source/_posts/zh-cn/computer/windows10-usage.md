@@ -29,3 +29,13 @@ tags:
 
     1. 如果只有svchost.exe而查不到其他使用该句柄的程序, 则一般是某个uwp应用在使用该设备
     2. 也可以查看其他设备(如麦克风)
+
+## Windows 系统部署
+
+### 下载最新的esd镜像
+
+请访问 [TechBench by WZT](https://tb.rg-adguard.net/public.php)
+
+### 将esd制成可烧录的iso镜像
+
+[decrypt-multi-esd(俄语)](https://rg-adguard.net/decrypt-multi-release/)

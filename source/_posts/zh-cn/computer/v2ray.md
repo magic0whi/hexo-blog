@@ -13,6 +13,18 @@ tags:
 
 * 客户端 {% asset_link config-client.json.example "config.json" %}
 
+## 泛域名证书
+
+```bash
+certbot certonly --preferred-challenges dns --manual  -d *.example.com
+```
+
+## 获取uuid
+
+```bash
+cat /proc/sys/kernel/random/uuid
+```
+
 ## 透明代理(TPROXY)客户端命令
 
 ```bash
