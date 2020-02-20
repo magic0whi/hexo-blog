@@ -9,6 +9,20 @@ tags:
 
 <!-- more -->
 
+## Settings (UWP)
+
+默认使用半角标点符号
+```
+Time & Language
+  -> Language
+    -> Chinese (Simplified, China)
+      -> Microsoft Pinyin
+        -> Options
+          -> General
+            -> Use English punctuations when in Chinese input mode: On
+
+```
+
 ## 组策略
 
 ### 禁用遥感 [1/2]
@@ -31,3 +45,20 @@ Task Scheduler Library
    -> Application Experience
     -> Microsoft Compatibility Appraiser -> Disable
 ```
+
+## 注册表
+
+### 启用UTC
+
+Open `regedit` and add a `DWORD` value for 32-bit Windows, or `QWORD` for 64-bit one, with hexadecimal value `1` to the registry:
+```
+HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TimeZoneInformation\RealTimeIsUniversal
+```
+
+[原文](https://wiki.archlinux.org/index.php/System_time#UTC_in_Windows)
+
+## AmazingApps
+
+### MPV
+
+放入 portable_config/{% asset_link mpv.conf.example "mpv.conf" %}

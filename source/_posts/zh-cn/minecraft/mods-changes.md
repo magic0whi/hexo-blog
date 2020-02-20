@@ -36,6 +36,7 @@ tags:
 1. 主配置文件改动
 
    ```ini config/IC2.ini
+   [balance]
    ; 移动储电箱无电量损耗
    energyRetainedInStorageBlockDrops = 1
    ; 通过传送器时，玩家的背包重量不会增加能量消耗
@@ -53,6 +54,9 @@ tags:
    [worldgen / uranium]
    count = 10
    size = 6
+   [protection]
+   ; 关闭扳手拆机器log
+   wrenchLogging = false
    ```
 
 2. 让打粉机可以打AE2的石英粉(这是IC2的锅)
@@ -152,17 +156,19 @@ S:"Whitelisted Dimensions" <
 ```conf config/epicsiegemod.cfg
 # 苦力怕不隔墙爆
 B:Breaching=false
+general {
+    ...
+    # 合适的怪物警戒范围
+    I:"Awareness Radius"=32
+    ...
+    # 怪物不能隔墙感知
+    I:"Xray Mobs"=0
+    ...
+}
 
-# 怪物不能隔墙感知
-I:"Xray Mobs"=0
-
-# 反转黑名单, 可破坏方块为白名单模式
-B:"Invert Digging Blacklist"=true
-
-# 蜘蛛只有1%的概率吐丝
-I:"Webbing Chance"=1
-
-# 可破坏方块白名单
+other {
+    ...
+    # 可破坏方块白名单
     S:"Digging Blacklist" <
         minecraft:crafting_table
         minecraft:furnace
@@ -207,6 +213,21 @@ I:"Webbing Chance"=1
         minecraft:glass_pane
         minecraft:stained_glass_pane
      >
+    ...
+    # 反转黑名单, 可破坏方块为白名单模式
+    B:"Invert Digging Blacklist"=true
+    ...
+    # 蜘蛛只有1%的概率吐丝
+    I:"Webbing Chance"=1
+    ...
+}
+
+skeletons {
+    ...
+    # 合理的骷髅射手开火距离
+    I:"Fire Distance"=32
+    ...
+}
 ```
 
 ## 砍树
