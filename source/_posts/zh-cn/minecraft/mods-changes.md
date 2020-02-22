@@ -31,91 +31,12 @@ tags:
         >
    ```
 
-## 工业2
-
-1. 主配置文件改动
-
-   ```ini config/IC2.ini
-   [balance]
-   ; 移动储电箱无电量损耗
-   energyRetainedInStorageBlockDrops = 1
-   ; 通过传送器时，玩家的背包重量不会增加能量消耗
-   teleporterUseInventoryWeight = false
-   ; (未应用)修改矿物生成让工业2的矿脉更大更集中, 缓解烦人的挖矿
-   [worldgen / copper]
-   count = 7
-   size = 20
-   [worldgen / lead]
-   count = 4
-   size = 8
-   [worldgen / tin]
-   count = 12
-   size = 12
-   [worldgen / uranium]
-   count = 10
-   size = 6
-   [protection]
-   ; 关闭扳手拆机器log
-   wrenchLogging = false
-   ```
-
-2. 让打粉机可以打AE2的石英粉(这是IC2的锅)
-
-   ```ini config/ic2/macerator.ini
-   ; certus quartz dust
-   OreDict:crystalCertusQuartz = appliedenergistics2:material@2
-   
-   ; nether quartz dust
-   OreDict:gemQuartz = appliedenergistics2:material@3
-   
-   ; fluix dust
-   OreDict:crystalFluix = appliedenergistics2:material@8
-   ```
-
-3. 将高炉炼钢时间缩短为一分钟
-
-   ```ini config/ic2/blast_furnace.ini
-   ; Iron Ingot
-   minecraft:iron_ingot = ic2:ingot#steel ic2:misc_resource#slag    @fluid:1 @duration:600
-   ; Crushed Iron Ore
-   OreDict:crushedIron = ic2:ingot#steel ic2:misc_resource#slag    @fluid:1 @duration:600
-   ; Iron Ore
-   minecraft:iron_ore = ic2:ingot#steel ic2:misc_resource#slag    @fluid:1 @duration:600
-   ; Purified Crushed Iron Ore
-   OreDict:crushedPurifiedIron = ic2:ingot#steel    ic2:misc_resource#slag @fluid:1 @duration:600
-   ; Iron Dust
-   OreDict:dustIron = ic2:ingot#steel ic2:misc_resource#slag @fluid:1    @duration:600
-   ```
-
 ## SCP: Lockdown
 
 关闭和地形格格不入的废弃设施生成 (设成很大的数即可)
 
 ```cfg config/Secure. Contain. Protect. v2.1.cfg
 I:"Abandoned facility rarity"=2147483647
-```
-
-## BuildCraft
-
-```conf config/buildcraft/main.cfg
-# (未应用)与RTG沙漠海洋生态环境的兼容问题(禁用沙漠海洋油田生态)
-B:oil_desert_biome=true
-B:oil_ocean_biome=true
-
-# 允许石油生成维度为白名单模式
-B:excludedDimensionsIsBlacklist=true
-I:excludedDimensions <
-    0
-    3
- >
-```
-
-## BiomesOPlenty
-
-关闭主界面全景图替换:
-
-```conf config/biomesoplenty/misc.cfg
-B:"Enable Biomes O' Plenty Main Menu Panorama"=false
 ```
 
 ## SereneSeasons
@@ -129,27 +50,6 @@ S:"Whitelisted Dimensions" <
     14 // Catserver skantos dimension
  >
  ```
-
-## Cuisine
-
-添加竹子, 庄稼, 农作物的维度生成白名单
-
-```conf config/cuisine.cfg
-    I:BamboosGenDimensions <
-        0
-        3
-     >
-
-    I:CropsGenDimensions <
-        0
-        3
-     >
-
-    I:FruitTreesGenDimensions <
-        0
-        3
-     >
-```
 
 ## Epic Siege
 
@@ -291,7 +191,7 @@ shortGrass {
 }
 ```
 
-## (暂时移除)环境污染
+## 环境污染 (暂时移除)
 
 1.关闭污染源
 
@@ -319,21 +219,21 @@ S:carbon=0.0
 S:sulfur=0.0
 ```
 
-## (暂时移除) 高级火箭
+## 高级火箭 (暂时移除)
 
 ```conf config/advancedRocketry.cfg
 # 主世界天空盒不改变
 B:overworldSkyOverride=false
 ```
 
-## (TLS未安装) 冰与火之歌
+## 冰与火之歌 (已移除)
 
 ```conf config/ice_and_fire.cfg
 不要更改主界面
 B:"Custom main menu"=false
 ```
 
-## (已移除) MyCrayfish's Gun mod
+## MyCrayfish's Gun mod (已移除)
 
 1. (客户端配置文件) 解决右键冲突 config/cgm.cfg
 
@@ -344,7 +244,7 @@ B:"Custom main menu"=false
            }
    ```
 
-## (已移除)Tiquality
+## Tiquality (已移除)
 
 1. 让mod增加的流体能正常流动
 
@@ -358,6 +258,112 @@ B:"Custom main menu"=false
                buildcraftenergy:fluid_block_fuel_gaseous_heat_1
             >
    ```
+
+## 工业2 (已移除)
+
+1. 主配置文件改动
+
+   ```ini config/IC2.ini
+   [balance]
+   ; 移动储电箱无电量损耗
+   energyRetainedInStorageBlockDrops = 1
+   ; 通过传送器时，玩家的背包重量不会增加能量消耗
+   teleporterUseInventoryWeight = false
+   ; (未应用)修改矿物生成让工业2的矿脉更大更集中, 缓解烦人的挖矿
+   [worldgen / copper]
+   count = 7
+   size = 20
+   [worldgen / lead]
+   count = 4
+   size = 8
+   [worldgen / tin]
+   count = 12
+   size = 12
+   [worldgen / uranium]
+   count = 10
+   size = 6
+   [protection]
+   ; 关闭扳手拆机器log
+   wrenchLogging = false
+   ```
+
+2. 让打粉机可以打AE2的石英粉(这是IC2的锅)
+
+   ```ini config/ic2/macerator.ini
+   ; certus quartz dust
+   OreDict:crystalCertusQuartz = appliedenergistics2:material@2
+
+   ; nether quartz dust
+   OreDict:gemQuartz = appliedenergistics2:material@3
+
+   ; fluix dust
+   OreDict:crystalFluix = appliedenergistics2:material@8
+
+   ; sky stone dust
+   appliedenergistics2:sky_stone_block = appliedenergistics2:material@45
+
+   ; ender dust
+   minecraft:ender_pearl = appliedenergistics2:material@46
+   ```
+
+3. 将高炉炼钢时间缩短为一分钟
+
+   ```ini config/ic2/blast_furnace.ini
+   ; Iron Ingot
+   minecraft:iron_ingot = ic2:ingot#steel ic2:misc_resource#slag    @fluid:1 @duration:600
+   ; Crushed Iron Ore
+   OreDict:crushedIron = ic2:ingot#steel ic2:misc_resource#slag    @fluid:1 @duration:600
+   ; Iron Ore
+   minecraft:iron_ore = ic2:ingot#steel ic2:misc_resource#slag    @fluid:1 @duration:600
+   ; Purified Crushed Iron Ore
+   OreDict:crushedPurifiedIron = ic2:ingot#steel    ic2:misc_resource#slag @fluid:1 @duration:600
+   ; Iron Dust
+   OreDict:dustIron = ic2:ingot#steel ic2:misc_resource#slag @fluid:1    @duration:600
+   ```
+
+## BuildCraft (已移除)
+
+```conf config/buildcraft/main.cfg
+# (未应用)与RTG沙漠海洋生态环境的兼容问题(禁用沙漠海洋油田生态)
+B:oil_desert_biome=true
+B:oil_ocean_biome=true
+
+# 允许石油生成维度为白名单模式
+B:excludedDimensionsIsBlacklist=true
+I:excludedDimensions <
+    0
+    3
+ >
+```
+
+## Cuisine (已移除)
+
+添加竹子, 庄稼, 农作物的维度生成白名单
+
+```conf config/cuisine.cfg
+    I:BamboosGenDimensions <
+        0
+        3
+     >
+
+    I:CropsGenDimensions <
+        0
+        3
+     >
+
+    I:FruitTreesGenDimensions <
+        0
+        3
+     >
+```
+
+## BiomesOPlenty (已移除)
+
+关闭主界面全景图替换:
+
+```conf config/biomesoplenty/misc.cfg
+B:"Enable Biomes O' Plenty Main Menu Panorama"=false
+```
 
 ## Sponge
 
