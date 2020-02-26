@@ -520,6 +520,7 @@ int main(){
 
 @TheCherno 更喜欢用Raw Arrays, Because he like to live dangerously :)
 
+
 ## How Strings Work in C++ (and how to use them)
 
 ### C风格字符串
@@ -544,7 +545,7 @@ const char* name = "Cherno";
 
 ### C++ 标准字符串
 
-本质上是char array
+**本质上是char array**
 
 ```C++
 #include <iostream>
@@ -552,11 +553,14 @@ const char* name = "Cherno";
 
 int main()
 {
-    std::string name = "Cherno";
+    
 
-    // std::string name = "Cherno" + " hello!"; 这种方式是不对的, 因为"Cherno"是一个 const char* 类型
-    // name += " hello!"; 这种是对的, a nice easy way, because you are adding it to a string, and "+=" is overloaded in the string class to be able to let you do that.
-    // 或者这样 std::string("Cherno") + " hello!";
+    std::string name = "Cherno" + " hello!"; //这种方式是不对的, 因为"Cherno"是一个 const char* 类型
+    
+    std::string name = "Cherno";
+    name += " hello!"; // 这种是对的, a nice easy way, because you are adding it to a string, and "+=" is overloaded in the string class to be able to let you do that.
+    // 或者这样(虽然会有更多的对象拷贝操作, 大多数情况下性能影响不大)
+    std::string name = std::string("Cherno") + " hello!";
 
     std::cout << name << std::endl;
 }
@@ -568,10 +572,141 @@ int main()
 // 判断字符串是否包含指定文字
 bool const contains = name.find("no") != std::string::npos // std::string::npos 代表没有找到返回的值
 
-// 使用const xxx&这样将对象以只读形式传入函数, 因为字符串操作在c++中很普遍, 而每次都进行不必要的对象复制无疑很低效
+// 因为字符串操作在c++中很普遍, 而每次都进行不必要的对象复制无疑很低效, 使用const xxx&将对象直接以只读形式传入函数
 void PrintString(const std::string& string)
 {
     string += "h";
     std::cout << string << std::endl;
+}
+```
+## String literals
+
+
+Terminal character will actuall break the behavior of this string in many cases
+```C++
+#include <stdlib.h>
+
+int main()
+{
+    const char name[8] = "Che\0rno";
+    std::cout << strlen(name) << std::endl;
+}
+```
+
+String literals are stored in read-only section of memory
+This code might not vaild for all CPP compilers.
+And edit this string is actually didn't work.
+```C++
+int main()
+{
+    char* name = "Cherno";
+    // 实际上这种定义是错误的, 字符串类型指针应该永远是const char*
+    // 要想运行时修改字符串, 正确操作应是定义一个字符串数组而不是一个指针
+    // char name[] = "Cherno";
+    name[2] = 'a';
+    std::cout << name << std::endl;
+}
+
+```
+
+### 其他类型的字符串
+```C++
+int main()
+{
+    const char* name = u8"Cherno"; // utf-8, u8前缀非必要
+    const char16_t* name2 = u"Cherno"; // two bytes per character (utf-16)
+    const char32_t* name3 = U"Cherno"; // four bytes per character (utf-32)
+    const wchar_t* name4 = L"Cherno"; // 由编译器决定, eitger 2 ir 4 bytes, its 2 bytes on Windows and 4 on Linux and I acpect Mac as well
+}
+```
+
+C++14标准
+```C++
+int main()
+{
+    using namespace std::string_literals;
+    std::string name0 = "Cherno"s + " hello";
+    std::wstring name1 = L"Cherno"s + L" hello";
+    std::u32string name1 = U"Cherno"s + U" hello";
+
+// raw形式赋值, 对拷贝大篇文章时保留文章格式有用
+    const char* rawstring = R"(Line1
+Line2
+Line3
+Line4)";
+}
+```
+
+## const in C++
+
+### const pointer
+
+在前, you cannot change the data at that memory address
+在后, you cannot reassign the actual pointer itself to point something else
+
+```C++
+const inst MAX_AGE = 90;
+
+// 1. Pointer to const value
+const int* a = new int;
+*a = 2; // I cannot change the contents of the pointer
+a = (int*) &MAX_AGE; // But I can change the pointer itself
+
+// 2. Const pointers
+int* const b = new int;
+*b = 2;
+b = (int*) &MAX_AGE; // but you cannot change the pointer whose value
+
+// 3. Const pointer to a const value
+const int* const c = (int*) &MAX_AGE;
+```
+
+注意: `const int*` 和 `int const*` 是相等的, 你需要将`const` 放在 `*` 号后面
+
+### const method
+
+const 修饰的方法无法改变类中的变量
+Only avaliable in class method
+
+涉及内容:
+1. const方法返回指针类型时
+2. const Object& 类型只能访问const方法
+3. `mutable` 变量
+
+```C++
+class Entity
+{
+private:
+    int m_X, *m_Y, *m_Z; // 定义多个变量时指针类型要为每个单独加 '*' 号
+    mutable int var;
+public:
+    int GetX() const
+    {
+        // m_X = 2; 你不能修改变量的值
+        var = 233; // 但我们可以在const方法中修改mutable修饰的变量
+        return m_X;
+    }
+
+    const int* const GetY() const // 若const方法要返回指针类型变量, 方法数据类型应为 "const int* const"
+    {
+        return m_Y;
+    }
+
+    void SetX()
+    {
+        m_X = 2;
+    }
+}
+
+void PrintEntity (const Eneity& e)
+{
+    // std::cout << e.SetX() << endl; 常量型对象无法访问无const修饰的方法
+    std::cout << e.GetX() << endl;
+}
+
+int main()
+{
+    Entity e = new Entity();
+    PrintEneity(e);
 }
 ```
