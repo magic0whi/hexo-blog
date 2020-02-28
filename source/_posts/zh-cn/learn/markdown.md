@@ -55,3 +55,13 @@ TOC
 [Github-MD基础书写和格式](https://help.github.com/cn/github/writing-on-github/basic-writing-and-formatting-syntax)
 
 [Github-使用表格组织化信息](https://help.github.com/cn/github/writing-on-github/organizing-information-with-tables)
+
+### 锚点
+
+```markdown
+<!-- 定义锚点 --> 
+<span id="const_method"></span>
+
+<!-- 锚点链接 --> 
+[#const method](#const_method)
+```

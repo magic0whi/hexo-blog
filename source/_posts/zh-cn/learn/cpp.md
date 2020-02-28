@@ -11,7 +11,9 @@ TODO: 重新格式化这篇博文
 
 <!-- more -->
 
- > 写在前面: 如果你在看到一半的时候, 若出现**还没有讲到过的操作出现在示范代码中**(比如new), 知道它**基本起什么作用**即可, 在后面的episodes肯定会细讲
+> 写在前面: 如果你在看到一半的时候, 若出现**还没有讲到过的操作出现在示范代码中**(比如new), 知道它**基本起什么作用**即可, 在后面的episodes肯定会细讲
+
+> 如果你看到夹杂英文, 那是我直接copy了@Cherno的话并懒得翻译
 
 ## Visual Studio Setup for C++
 
@@ -663,14 +665,15 @@ const int* const c = (int*) &MAX_AGE;
 
 注意: `const int*` 和 `int const*` 是相等的, 你需要将`const` 放在 `*` 号后面
 
+<span id="const_method"></span>
 ### const method
 
 const 修饰的方法无法改变类中的变量
 Only avaliable in class method
 
 涉及内容:
-1. const方法返回指针类型时
-2. const Object& 类型只能访问const方法
+1. 当const方法返回指针类型时怎么做
+2. 以 `const Object&` 实例化的对象只能访问const方法
 3. `mutable` 变量
 
 ```C++
@@ -710,3 +713,23 @@ int main()
     PrintEneity(e);
 }
 ```
+
+## Mutable Keyword in C++
+
+`mutalbe`有两种用法, \
+第一种用于常量方法中, 见[#const method](#const_method),
+第二种用于lambda, 用的不多
+
+```C++
+int x = 8;
+auto f = [=]() mutable
+{
+    x++;
+    std::cout << x << std::endl;
+}
+
+f();
+// x is still = 8, 因为[=]模式 is just copy this value into this lambda, mutable代表它能更改传递进来的值并且不让编译器报错, 但实际上8本身是个常数所以没有效果.
+```
+
+什么是lambda: a lambda is basically like a little throwaway function that you can write and assign to a variable quickly.
