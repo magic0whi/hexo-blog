@@ -732,4 +732,4 @@ f();
 // x is still = 8, 因为[=]模式 is just copy this value into this lambda, mutable代表它能更改传递进来的值并且不让编译器报错, 但实际上8本身是个常数所以没有效果.
 ```
 
-什么是lambda: a lambda is basically like a little throwaway function that you can write and assign to a variable quickly.
+**什么是lambda**: a lambda is basically like a little throwaway function that you can write and assign to a variable quickly.

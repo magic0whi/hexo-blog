@@ -1,5 +1,5 @@
 ---
-title: linux
+title: linux-usage
 category: computer
 date: 2020-02-08 16:42:06
 tags:
@@ -22,8 +22,6 @@ $ grep -iRl "your-text-to-find" ./
 ```
 
 ### rsync
-
-#### Rsync常用命令
 
 拷贝文件, 保留所有信息
 
@@ -79,20 +77,27 @@ $ cat /sys/class/power_supply/axp288_fuel_gauge/capacity
 生成20个长度为12的 含大写字母 `-c` , 数字 `-n` , 符号 `-y` , 完全随机 `-s` 的密码
 
 ```bash
-pwgen -cnys 12 20
+$ pwgen -cnys 12 20
 ```
 
 ### Recursively chmod all directories except files
 
 To recursively give directories read&execute privileges:
 
-    find /path/to/base/dir -type d -exec chmod 755 {} +
+    # find /path/to/base/dir -type d -exec chmod 755 {} +
 
 To recursively give files read privileges:
 
-    find /path/to/base/dir -type f -exec chmod 644 {} +
+    # find /path/to/base/dir -type f -exec chmod 644 {} +
 
 Reference from [StackExchange](https://superuser.com/questions/91935/how-to-recursively-chmod-all-directories-except-files)
+
+### 带排除项删除文件和目录
+
+```bash
+# shopt -s extglob    #打开extglob模式
+# rm -fr !(file1)
+```
 
 ### SWAP file
 
@@ -100,6 +105,15 @@ Reference from [StackExchange](https://superuser.com/questions/91935/how-to-recu
 # truncate -s 0 /swapfile
 # chattr +C /swapfile
 # btrfs property set /swapfile compression none
+```
+
+### 查看主机公钥指纹
+
+```bash
+ssh-keygen -lf /path/to/ssh/key
+
+# MD5 格式
+ssh-keygen -E md5 -lf <fileName>
 ```
 
 ## shell相关知识

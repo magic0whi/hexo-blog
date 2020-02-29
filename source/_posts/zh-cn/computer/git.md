@@ -103,8 +103,9 @@ $ git merge topic
 Already up-to-date.
 ```
 
-topic 中并没有东西不能从 master 中追踪到达。 更糟的是，如果你在 topic 中增加工作然后再次合并，Git 只会引入被还原的合并 之后 的修改。
-解决这个最好的方式是再次**撤消之前的那个revert commit**
+master分支并没有还未从topic合并的commit。更糟的是，如果你在 topic 中增加新的commit然后再次合并，Git **只会引入被还原的合并之后的改动** 而不会恢复被撤销的commit改动。
+
+解决此问题的最好方式是再次**撤消之前的那个revert commit**
 
 ## git ssh协议下使用代理
 
@@ -123,9 +124,41 @@ ProxyCommand nc -v -x 127.0.0.1:1080 %h %p
 还可将子目录变为子仓库:
 
 ```bash
-git subrepo init <subdir> [-r <remote>] [-b <branch>] [--method <merge|rebase>]
+$ git subrepo init <subdir> [-r <remote>] [-b <branch>] [--method <merge|rebase>]
 ```
 
 ## Git LFS
 
 https://zzz.buzz/zh/2016/04/19/the-guide-to-git-lfs/
+
+## Git Cherry-pick
+
+git cherry-pick用于把另一个本地分支的commit修改应用到当前分支
+
+假设`dev`分支有一个hash为`38361a68`的commit
+```
+$ git checkout master
+$ git cherry-pick 38361a68
+```
+
+## Git Format-patch
+
+1. 两个commit间的修改(包含两个commit)
+```bash
+git format-patch <r1>..<r2>
+```
+
+2. 单个commit
+```bash
+git format-patch -1 <r1>
+```
+
+3. 从某commit以来的修改(不包含该commit)
+```bash
+$ git format-patch <r1>
+```
+
+4. 应用.patch文件
+```bash
+$ git am 0001-xxxx.patch
+```
