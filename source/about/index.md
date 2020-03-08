@@ -3,12 +3,16 @@ title: about
 date: 2020-02-08 15:14:28
 ---
 
-我是一个普通人, 怕冷, 喜欢折腾
-想当个探险家.
+我是一个普通人, 混合性別, 怕冷, 喜欢折腾電子產品
 
-P社游戏爱好者, Minecraft
+人生的最終目標是想要探索這個世界的奧秘
+所以想成爲一個探險家.
 
-喜欢(看别人的)非人物摄影/艺术创作
+P社游戏爱好者, Minecraft, Tom Clancy's The Division 2
 
-对生物技术, 机器学习, 经济学 感兴趣
+喜欢(看别人的)景物摄影/艺术创作
+
+对生物科学, 机器学习, 经济学 感兴趣
 但都没有入门
+
+I am no bird; and no net ensuares me: I am a free human being with an independent will. - Jane Eyre

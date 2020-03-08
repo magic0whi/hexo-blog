@@ -25,3 +25,17 @@ TLDW  Too Long; Didn't Watch
 ## 心理学
 
 Echo Chamber 回音室效应 In news media, echo chamber is a metaphorical description of a situation in which beliefs are amplified or reinforced by communication and repetition inside a closed system. By visiting an "echo chamber", people are able to seek out information that reinforces their existing views, potentially as an unconscious exercise of confirmation bias. This may increase social and political polarization and extremism... 
+
+## 经济学
+
+GDP gross domestic product 国内生产总值
+
+CPI Consumer Price Index 消費者物價指數(通货膨胀率)
+
+PPI Producer Price Index 生产者价格指数
+
+PMI Purchasing Managers' Index 采购经理人指数(以50%作為經濟強弱的分界點)
+
+## 化學
+
+NFPA 704 美國消防協會(National Fire Protection Association)制定的危险品紧急处理系统鉴别标准
