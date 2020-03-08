@@ -80,7 +80,6 @@ other {
         minecraft:soul_sand
         minecraft:grass
         minecraft:grass_path
-        minecraft:farmland
         minecraft:dirt
         minecraft:stone
         minecraft:cobblestone

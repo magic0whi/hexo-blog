@@ -39,7 +39,6 @@ WorldEdit-Bukkit仅作为使GriefDefender的CUI可视化能正常工作的依赖
 | -------- | ------------- | ---------- |
 | 砍树(依赖) | [bspkrsCore-universal-7.6.0.1](https://www.curseforge.com/minecraft/mc-mods/bspkrscore-updated/files/all) | Jun 10, 2019 |
 | 砍树 | [TreeCapitator-client-1.43.0](https://www.curseforge.com/minecraft/mc-mods/treecapitator-updated/files/all) | Jun 10, 2019 |
-| 高级太阳能 | [Advanced Solar Panels-4.3.0](https://www.curseforge.com/minecraft/mc-mods/advanced-solar-panels/files/all) | Dec 25, 2018 |
 | Mod通用bug修复 | [AnotherCommonBugFix-1.0.7](https://www.mcbbs.net/thread-857865-1-1.html) | Jan 9, 2020 |
 | 应用能源2 | [appliedenergistics2-rv6-stable-7](https://ae-mod.info/Downloads/) | Jul 24, 2019 |
 | 更好的音箱 | [BetterRecords-1.6.1](https://www.curseforge.com/minecraft/mc-mods/better-records/files/all) | Nov 17, 2018 |
