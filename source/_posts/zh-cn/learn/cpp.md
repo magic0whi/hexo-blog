@@ -15,6 +15,81 @@ TODO: 重新格式化这篇博文
 
 > 如果你看到夹杂英文, 那是我直接copy了@Cherno的话并懒得翻译
 
+## How C++ Works
+
+概念：每个cpp都会编译成一个obj,但一个cpp基本等于一个translation unit，除非这些cpp互相include组成一个大cpp文件
+
+## How the C++ Compiler Works
+
+Compile按钮(ctrl+f7)
+
+## How the C++ Linker Works
+
+工程设置->Preprocessor->Preprocess to a File以生产预处理文件（经编译器解析了宏的源码）
+编译阶段只是编译文件，外部definaion函数在link阶段，没有被调用的函数声明会被优化掉
+static基本表示该函数只为这个translation unit声明的
+宏使用`#if`和`#endif`作为条件判断
+`#if 1`为`true`
+
+**头文件函数出现重复定义的问题和`inline`的使用** （inline实际上就是将函数整个代码复制到条用这个函数的函数那里）
+
+## Variables in C++
+
+数据类型大小
+| | |
+|---| --- |
+| char | 1字节 |
+| short | 2字节 |
+| int | 4字节 | 
+| long | **通常**4字节 |
+| long long | 8字节 |
+| float | 4字节 |
+| double | 8字节 |
+
+核心思想：c++所有数据类型仅仅只是一个变量存储空间大小的规定
+
+默认的浮点数是double类型的, 所以别忘了给加上"f"如5.5f如果你只用float的精度
+
+
+节约内存的小技巧
+由于内存只能寻址到byte,而bool类型只有1字节，巧妙的方法是将8个bool存在一个byte里
+
+sizeof(数据类型)查看数据类型大小
+
+## Functions in C++
+
+函数functions与方法methods的区别仅仅在于方法是包含在类中的。当说到函数时就是明确地说某种不属于某个class的东西
+
+划分函数不要太过分，为了让我们调用一个函数，我们需要为这个函数创建一整个stack frame(栈框架)，
+也就是说我们得把参数之类的东西push到栈上，还要把一个叫做返回地址的东西放到栈上(以在函数执行完之后返回调用函数的地方)，
+所以为了执行函数指令而在内存中跳转来跳转去会消耗额外的时间，
+
+总结，函数的主要目的是防止代码重复
+通常将函数拆分为声明和定义：声明写在头文件中，定义写在translation unit中
+
+## C++ Header Files
+
+头文件：任何以#开头的都是预处理语句，
+
+#pragma once可以防止在一个translation unit中多次include一个头文件
+(遇到多次include的现象可能是头文件include另一个头文件)
+
+比#pragma once更烂的方法（clion自带）：
+Log.h中，有
+```C++
+#ifndef _LOG_H
+#define _LOG_H
+
+......
+
+#endif
+```
+
+## How to DEBUG C++ in VISUAL STUDIO
+
+调试：vs中watch界面可以指定监视的变量，memory window可以搜索&a查看变量a的地址
+未初始化的变量值默认为0xccccccc
+
 ## Visual Studio Setup for C++
 
 在Solution Explorer下使用Show All Files视图
@@ -25,6 +100,8 @@ Intermediate Directory为$(SolutionDir)bin\intermediate\$(Platform)\$(Configurat
 bin前不加\因为$(SolutionDir)变量自带backslash
 
 ## CONDITIONS and BRANCHES in C++
+
+基本上0代表false, 任何其他的数代表true
 
 else if = else { if(){} }
 
