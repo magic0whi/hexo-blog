@@ -17,9 +17,9 @@ tags:
 
 ```yml hexo/_config.yml
 # 标签页标题
-title: Sudaku's blog
+title: Ndoskrnl's blog
 description: 'There is nothing to say now'
-author: Sudaku
+author: Ndoskrnl
 # 多语言支持
 language:
 - zh-cn
@@ -28,7 +28,7 @@ language:
 timezone: 'Asia/Shanghai'
 
 # Url
-url: http://blog.sudaku233.com
+url: http://blog.ndoskrnl.net
 # 文章永久链接(目录)
 permalink: :lang/:category/:year/:title/
 # 永久链接变量默认值配置
