@@ -3,11 +3,11 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Sudaku's blog
+title: Ndoskrnl's blog
 subtitle: ''
 description: 'There is nothing to say now'
 keywords:
-author: Sudaku
+author: Ndoskrnl
 language:
 - zh-cn
 - en
@@ -15,7 +15,7 @@ timezone: 'Asia/Shanghai'
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://blog.sudaku233.com
+url: http://blog.ndoskrnl.net
 root: /
 permalink: :lang/:category/:year/:title/
 permalink_defaults:
