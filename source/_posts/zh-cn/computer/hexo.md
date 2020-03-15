@@ -134,7 +134,6 @@ if [ ! -d /var/www/blog/node_modules ]; then
     npm install;
     npm install hexo-symbols-count-time
     npm install hexo-generator-searchdb
-    npm install hexo-simple-mindmap
 fi
 
 hexo g
@@ -145,7 +144,6 @@ hexo g
 ```
 hexo-symbols-count-time # 字数统计
 hexo-generator-searchdb # 站内搜索
-hexo-simple-mindmap # 思维导图
 ```
 
 ## 部署教程
