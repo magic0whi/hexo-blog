@@ -90,3 +90,30 @@ Example:
 ```
 
 具体见: [标签插件](https://hexo.io/zh-cn/docs/tag-plugins.html)
+
+### 思维导图
+
+需要插件`hexo-simple-mindmap`
+
+```
+{% pullquote mindmap mindmap-md %}
+- [Hexo 的思维导图插件](https://hunterx.xyz/hexo-simple-mindmap-plugin-intro.html)
+  - 前言
+  - 使用方法
+    - 一
+    - 二
+    - 三
+  - 太长不看
+  - 参考资料
+{% endpullquote %}
+```
+{% pullquote mindmap mindmap-md %}
+- [Hexo 的思维导图插件](https://hunterx.xyz/hexo-simple-mindmap-plugin-intro.html)
+  - 前言
+  - 使用方法
+    - 一
+    - 二
+    - 三
+  - 太长不看
+  - 参考资料
+{% endpullquote %}

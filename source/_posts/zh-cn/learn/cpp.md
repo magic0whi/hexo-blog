@@ -810,3 +810,6 @@ f();
 ```
 
 **什么是lambda**: a lambda is basically like a little throwaway function that you can write and assign to a variable quickly.
+
+
+## Memory Initializer Lists in C++ (Constructor Initializer List)
