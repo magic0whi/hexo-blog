@@ -113,6 +113,12 @@ font:
 text_align:
   desktop: start
   mobile: start
+
+# 启用 Latex 支持
+math:
+  ...
+  katex:
+    enable: true
 ```
 
 ### Git Hook
@@ -134,6 +140,8 @@ if [ ! -d /var/www/blog/node_modules ]; then
     npm install;
     npm install hexo-symbols-count-time
     npm install hexo-generator-searchdb
+    npm uninstall hexo-renderer-marked
+    npm install hexo-renderer-markdown-it-plus
 fi
 
 hexo g
@@ -144,6 +152,7 @@ hexo g
 ```
 hexo-symbols-count-time # 字数统计
 hexo-generator-searchdb # 站内搜索
+hexo-renderer-markdown-it-plus # 支持katex的渲染器(需要卸载默认的hexo-renderer-marked)
 ```
 
 ## 部署教程
