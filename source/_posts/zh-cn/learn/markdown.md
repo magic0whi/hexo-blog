@@ -65,3 +65,32 @@ TOC
 <!-- 锚点链接 --> 
 [#const method](#const_method)
 ```
+
+## katex语法
+
+详见[Katex支持语法](https://katex.org/docs/supported.html)
+
+使用左花括号(opening curly brackets)和右花括号(closing curly brackets)来包含多个字符: 如`e^{2 \pi i \xi x}`
+
+空格Space: `\,`
+
+除数`\frac a b`, $\frac a b$
+
+上标Superscript: 如`x^3`, $x^3$
+
+下标Subscript: 如`x_1`, $x_1$
+
+包含: 如`x\in R`, $x\in R$
+
+无限infinty符号: `\infty`, $\infty$
+
+函数上面的小帽子: 如`\hat f`, $\hat f$
+
+积分(Integral)符号 `\int`, $\int$
+
+
+### 希腊字母
+
+ξ: `\xi`
+
+π: `\pi`

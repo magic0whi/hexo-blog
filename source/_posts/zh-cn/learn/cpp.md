@@ -813,3 +813,73 @@ f();
 
 
 ## Memory Initializer Lists in C++ (Constructor Initializer List)
+
+使用构造初始化列表可以避免实列化两次对象
+
+```C++
+class Example
+{
+public:
+    Example()
+    {
+        std::cout << "Created Entity!" << std::endl;
+    }
+
+    Example(int x)
+    {
+        std::cout << "Create Entity with " << x << "!" << std::endl;
+    }
+}
+
+class Entity
+{
+private:
+    Example m_example;
+    int x, y, z;
+public:
+    Entity()
+        : m_example(Example(8)), x(0), y(0), z(0) // m_example(Example(8)) 或者m_example(8)都行
+        {
+            // m_Example = Example(8); 如果在构造函数中实列化内部变量, 该对象会实例化两次
+        }
+}
+
+int main()
+{
+    Entity e0;
+}
+```
+
+## Ternary Operators in C++ (Conditional Assignment)
+
+使用三目运算符可以简化if_else语句
+```C++
+#include <string>
+
+static int s_Level = 1;
+static int s_Speed = 2;
+
+int main()
+{
+    s_Speed = s_Level > 5 && s_Level < 100 ? s_Level > 10 ? 15 : 10 : 5;
+
+    std::cout << s_Speed << std::endl;
+
+    // 以上式子等价于
+    // if (s_Level > 5 && s_Level < 100)
+    // {
+    //     if(s_Level > 10)
+    //     {
+    //         s_Speed = 15;
+    //     }
+    //     else
+    //     {
+    //         s_Speed = 10;
+    //     }
+    // } 
+    // else 
+    // {
+    //     s_Speed = 5;
+    // }
+}
+```
