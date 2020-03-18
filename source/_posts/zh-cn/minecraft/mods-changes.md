@@ -77,10 +77,6 @@ other {
         minecraft:snow
         minecraft:ice
         minecraft:netherrack
-        minecraft:soul_sand
-        minecraft:grass
-        minecraft:grass_path
-        minecraft:dirt
         minecraft:stone
         minecraft:cobblestone
         minecraft:sand
