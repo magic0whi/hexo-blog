@@ -55,7 +55,7 @@ WorldEdit-Bukkit仅作为使GriefDefender的CUI可视化能正常工作的依赖
 | 通用机械 | [Mekanism-9.8.3.390](https://www.curseforge.com/minecraft/mc-mods/mekanism/files/all?filter-game-version=1738749986%3A628) | Dec 1, 2019 |
 | 通用机械-发电机 | [MekanismGenerators-9.8.3.390](https://www.curseforge.com/minecraft/mc-mods/mekanism-generators/files) | Dec 1, 2019 |
 | 通用机械-工具 | [MekanismTools-9.8.3.390](https://www.curseforge.com/minecraft/mc-mods/mekanism-tools/files) | Dec 1, 2019 |
-| 更好的ID表 | [JustEnoughIDs-1.0.3-54](https://github.com/DimensionalDevelopment/JustEnoughIDs/releases) | Mar 18, 2020 |
+| (有更新) 更好的ID表 | [JustEnoughIDs-1.0.3-52](https://github.com/DimensionalDevelopment/JustEnoughIDs/releases) | Jan 8, 2020 |
 | 投票睡觉 | [Morpheus-3.5.106](https://www.curseforge.com/minecraft/mc-mods/morpheus/files/all?filter-game-version=1738749986%3A628) | Jan 25, 2019 |
 | 随缘补丁集合 | [randompatches-1.21.0.0](https://www.curseforge.com/minecraft/mc-mods/randompatches/files/all?filter-game-version=1738749986%3A628) | Jan 19, 2020 |
 | 精致存储 | [refinedstorage-1.6.15](https://www.curseforge.com/minecraft/mc-mods/refined-storage/files/all?filter-game-version=1738749986%3A628) | Jul 21, 2019 |
