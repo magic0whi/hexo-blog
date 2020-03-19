@@ -163,28 +163,7 @@ ore {
 B:welcome_message=false
 ```
 
-## 动态环绕
 
-```conf config/dsurround/dsurround.cfg
-    # Enable player footprints [default: true]
-    B:Footprints=false
-```
-
-## 更好的树叶
-
-```conf config/betterfoliage.cfg
-# 关闭违和感较强的被雪覆盖的树叶
-leaves {
-    B:snowEnabled=false
-}
-# 关闭草地上的短草
-shortGrass {
-    B:grassEnabled=false
-    B:myceliumEnabled=false
-    B:snowEnabled=false
-    B:shaderWind=false
-}
-```
 
 ## 环境污染 (暂时移除)
 
@@ -358,6 +337,29 @@ I:excludedDimensions <
 
 ```conf config/biomesoplenty/misc.cfg
 B:"Enable Biomes O' Plenty Main Menu Panorama"=false
+```
+
+## 动态环绕 (已移除)
+
+```conf config/dsurround/dsurround.cfg
+    # Enable player footprints [default: true]
+    B:Footprints=false
+```
+
+## 更好的树叶 (已移除)
+
+```conf config/betterfoliage.cfg
+# 关闭违和感较强的被雪覆盖的树叶
+leaves {
+    B:snowEnabled=false
+}
+# 关闭草地上的短草
+shortGrass {
+    B:grassEnabled=false
+    B:myceliumEnabled=false
+    B:snowEnabled=false
+    B:shaderWind=false
+}
 ```
 
 ## Sponge
