@@ -39,8 +39,6 @@ WorldEdit-Bukkit仅作为使GriefDefender的CUI可视化能正常工作的依赖
 
 | Mod name | Download link | Last Update |
 | -------- | ------------- | ---------- |
-| LibVulpes(依赖) | [LibVulpes-0.4.2-74-universal.jar](https://www.curseforge.com/minecraft/mc-mods/libvulpes/files/all?filter-game-version=1738749986%3A628) | Feb 10, 2020 |
-| 高级火箭 | [AdvancedRocketry-1.7.0-208-universal.jar](https://www.curseforge.com/minecraft/mc-mods/advanced-rocketry/files/all?filter-game-version=1738749986%3A628) | Feb 24, 2020 |
 | 砍树(依赖) | [bspkrsCore-universal-7.6.0.1](https://www.curseforge.com/minecraft/mc-mods/bspkrscore-updated/files/all) | Jun 10, 2019 |
 | 砍树 | [TreeCapitator-client-1.43.0](https://www.curseforge.com/minecraft/mc-mods/treecapitator-updated/files/all) | Jun 10, 2019 |
 | Mod通用bug修复 | [AnotherCommonBugFix-1.0.7](https://www.mcbbs.net/thread-857865-1-1.html) | Jan 9, 2020 |
@@ -66,6 +64,7 @@ WorldEdit-Bukkit仅作为使GriefDefender的CUI可视化能正常工作的依赖
 | Thut核心(依赖) | [thutcore-5.21.0](https://www.curseforge.com/minecraft/mc-mods/thutcore/files/all?filter-game-version=1738749986%3A628) | May 20, 2019 |
 | Thut的电梯 | [thuttech-6.1.6](https://www.curseforge.com/minecraft/mc-mods/thuts-elevators/files/all?filter-game-version=1738749986%3A628) | May 19, 2019 |
 | 风滚草 | [tumbleweed-1.12-0.4.7](https://www.curseforge.com/minecraft/mc-mods/tumbleweed/files/all?filter-game-version=1738749986%3A628) | Feb 8, 2020 |
+| 新兴技术 | [EmergingTechnology-1.3.20-beta](https://www.curseforge.com/minecraft/mc-mods/emerging-technology-hydroponics/files/all) | Mar 17, 2020 |
 
 
 ### Client-Side Mods
