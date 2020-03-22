@@ -39,6 +39,8 @@ WorldEdit-Bukkit仅作为使GriefDefender的CUI可视化能正常工作的依赖
 
 | Mod name | Download link | Last Update |
 | -------- | ------------- | ---------- |
+| 地幔(依赖) | [Mantle-1.12-1.3.3.55](https://www.curseforge.com/minecraft/mc-mods/mantle/files/all?filter-game-version=1738749986%3A628) | May 20, 2019 |
+| 匠魂 | [TConstruct-1.12.2-2.13.0.183](https://www.curseforge.com/minecraft/mc-mods/tinkers-construct/files/all) | Mar 16, 2020 |
 | 砍树(依赖) | [bspkrsCore-universal-7.6.0.1](https://www.curseforge.com/minecraft/mc-mods/bspkrscore-updated/files/all) | Jun 10, 2019 |
 | 砍树 | [TreeCapitator-client-1.43.0](https://www.curseforge.com/minecraft/mc-mods/treecapitator-updated/files/all) | Jun 10, 2019 |
 | Mod通用bug修复 | [AnotherCommonBugFix-1.0.7](https://www.mcbbs.net/thread-857865-1-1.html) | Jan 9, 2020 |
@@ -53,13 +55,13 @@ WorldEdit-Bukkit仅作为使GriefDefender的CUI可视化能正常工作的依赖
 | 通用机械 | [Mekanism-9.8.3.390](https://www.curseforge.com/minecraft/mc-mods/mekanism/files/all?filter-game-version=1738749986%3A628) | Dec 1, 2019 |
 | 通用机械-发电机 | [MekanismGenerators-9.8.3.390](https://www.curseforge.com/minecraft/mc-mods/mekanism-generators/files) | Dec 1, 2019 |
 | 通用机械-工具 | [MekanismTools-9.8.3.390](https://www.curseforge.com/minecraft/mc-mods/mekanism-tools/files) | Dec 1, 2019 |
+| 通用机械-矿石 | [mekores-2.0.13](https://www.curseforge.com/minecraft/mc-mods/mekanismores/files/all) | Feb 20, 2020 |
 | (有更新) 更好的ID表 | [JustEnoughIDs-1.0.3-52](https://github.com/DimensionalDevelopment/JustEnoughIDs/releases) | Jan 8, 2020 |
 | 投票睡觉 | [Morpheus-3.5.106](https://www.curseforge.com/minecraft/mc-mods/morpheus/files/all?filter-game-version=1738749986%3A628) | Jan 25, 2019 |
 | 随缘补丁集合 | [randompatches-1.21.0.0](https://www.curseforge.com/minecraft/mc-mods/randompatches/files/all?filter-game-version=1738749986%3A628) | Jan 19, 2020 |
 | 精致存储 | [refinedstorage-1.6.15](https://www.curseforge.com/minecraft/mc-mods/refined-storage/files/all?filter-game-version=1738749986%3A628) | Jul 21, 2019 |
 | 精致存储附属 | [refinedstorageaddons-0.4.4](https://www.curseforge.com/minecraft/mc-mods/refined-storage-addons/files/all?filter-game-version=1738749986%3A628) | Mar 23, 2019 |
 | 自然地形生成器 | [RTG-1.12.2-6.1.0.0-snapshot.1](https://www.curseforge.com/minecraft/mc-mods/realistic-terrain-generation/files/all) | Sep 11, 2019 |
-| SCP: Lockdown | [SCP+Lockdown-2.2.2-release](https://www.curseforge.com/minecraft/mc-mods/scp-lockdown/files/all) | Mar 6, 2020 |
 | 静谧四季 | [SereneSeasons-1.2.18](https://www.curseforge.com/minecraft/mc-mods/serene-seasons/files/all?filter-game-version=1738749986%3A628) | Oct 1, 2019 |
 | Thut核心(依赖) | [thutcore-5.21.0](https://www.curseforge.com/minecraft/mc-mods/thutcore/files/all?filter-game-version=1738749986%3A628) | May 20, 2019 |
 | Thut的电梯 | [thuttech-6.1.6](https://www.curseforge.com/minecraft/mc-mods/thuts-elevators/files/all?filter-game-version=1738749986%3A628) | May 19, 2019 |

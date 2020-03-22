@@ -238,8 +238,8 @@ divided by preposition/adverb.
 4. **come** on 加油, 赶快
 5. **comment** on 评论
 6. **concentrate** on 专心
-7. **count** on 信赖, 依靠
-8. **depend** on 信赖, 依靠
+7. **count** on 指望
+8. **depend** on 取决于
 9. **rely** on 信赖, 依靠
 10. **feed** on 以...为食
 11. **live** on 以...为生

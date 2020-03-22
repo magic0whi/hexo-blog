@@ -29,6 +29,9 @@ java -javaagent:authlib-injector-1.1.26-41a7a47.jar=https://littleskin.cn/api/yg
 1. server.properties配置
 
    ```conf catserver/server.properties
+   # 网络封包压缩阈值
+   network-compression-threshold=512
+
    # 地图类型, 这里使用RTG地形
    level-type=RTG
    
@@ -57,12 +60,12 @@ java -javaagent:authlib-injector-1.1.26-41a7a47.jar=https://littleskin.cn/api/yg
 2. bukkit.yml配置
 
    ```yml catserver/bukkit.yml
-   # 提高了怪物数量的上限
+   # 可适当降低怪物数量的上限, 此为默认值
    spawn-limits:
-     monsters: 140
-     animals: 30
-     water-animals: 10
-     ambient: 30
+     monsters: 70
+     animals: 15
+     water-animals: 5
+     ambient: 15
    ```
 
 3. spigot.yml
@@ -74,6 +77,22 @@ java -javaagent:authlib-injector-1.1.26-41a7a47.jar=https://littleskin.cn/api/yg
    world-settings:
      default:
        verbose: false // 关闭启动时打印世界配置信息
+       hunger:
+         jump-walk-exhaustion: 0.025
+         jump-sprint-exhaustion: 0.1
+         combat-exhaustion: 0.05
+         regen-exhaustion: 3.0
+         swim-multiplier: 0.005
+         sprint-multiplier: 0.05
+         other-multiplier: 0.0
+       ...
+       mob-spawn-range: 3 // 怪物生成范围
+       ...
+       entity-activation-range:
+         animals: 16
+         monsters: 24
+         misc: 8
+         tick-inactive-villagers: true
        ...
        merge-radius: // 更大合并掉落物范围
          item: 4.0
@@ -81,14 +100,7 @@ java -javaagent:authlib-injector-1.1.26-41a7a47.jar=https://littleskin.cn/api/yg
        ...
        view-distance: 8 // 视距
        ...
-   hunger:
-     jump-walk-exhaustion: 0.025
-     jump-sprint-exhaustion: 0.1
-     combat-exhaustion: 0.05
-     regen-exhaustion: 3.0
-     swim-multiplier: 0.005
-     sprint-multiplier: 0.05
-     other-multiplier: 0.0
+
    ```
 
    给我的提醒: 诸如seed-village之类的不需要管它, 默认值就是根据世界种子而配置

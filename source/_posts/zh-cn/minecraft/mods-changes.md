@@ -18,6 +18,18 @@ tags:
 3. 史诗攻城: `config/epicsiegemod.cfg`
 4. Forge自带 `config/forge.cfg`
 
+## 精致存储
+
+```conf config/refinedstorage.cfg
+wirelesstransmitter {
+    # The base range of the Wireless Transmitter [range: 0 ~ 2147483647, default: 16]
+    I:range=2048
+
+    # The additional range per Range Upgrade in the Wireless Transmitter [range: 0 ~ 2147483647, default: 8]
+    I:rangePerUpgrade=1024
+}
+```
+
 ## 应用能源2
 
 1. 陨石生成是白名单模式, 让其他id世界也生成陨石
@@ -30,14 +42,6 @@ tags:
            3 # 一般第二个主世界都是这个id, 从level.dat可以看nbt数据
         >
    ```
-
-## SCP: Lockdown
-
-关闭和地形格格不入的废弃设施生成 (设成很大的数即可)
-
-```cfg config/Secure. Contain. Protect. v2.1.cfg
-I:"Abandoned facility rarity"=2147483647
-```
 
 ## SereneSeasons
 
@@ -360,6 +364,14 @@ shortGrass {
     B:snowEnabled=false
     B:shaderWind=false
 }
+```
+
+## SCP: Lockdown (已移除)
+
+关闭和地形格格不入的废弃设施生成 (设成很大的数即可)
+
+```cfg config/Secure. Contain. Protect. v2.1.cfg
+I:"Abandoned facility rarity"=2147483647
 ```
 
 ## Sponge
