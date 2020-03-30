@@ -30,19 +30,6 @@ wirelesstransmitter {
 }
 ```
 
-## 应用能源2
-
-1. 陨石生成是白名单模式, 让其他id世界也生成陨石
-
-   ```conf config/AppliedEnergistics2.cfg:
-   worldgen {
-       ...
-       I:  <
-           0
-           3 # 一般第二个主世界都是这个id, 从level.dat可以看nbt数据
-        >
-   ```
-
 ## SereneSeasons
 
 由于季节启用是白名单模式, 给第二个世界也添加季节影响:
@@ -63,7 +50,7 @@ B:Breaching=false
 general {
     ...
     # 合适的怪物警戒范围
-    I:"Awareness Radius"=32
+    I:"Awareness Radius"=24
     ...
     # 怪物不能隔墙感知
     I:"Xray Mobs"=0
@@ -80,8 +67,6 @@ other {
         minecraft:snow_layer
         minecraft:snow
         minecraft:ice
-        minecraft:netherrack
-        minecraft:stone
         minecraft:cobblestone
         minecraft:sand
         minecraft:sandstone
@@ -95,7 +80,6 @@ other {
         minecraft:acacia_door
         minecraft:dark_oak_door
         minecraft:fence
-        minecraft:nether_brick_fence
         minecraft:spruce_fence
         minecraft:birch_fence
         minecraft:jungle_fence
@@ -107,10 +91,6 @@ other {
         minecraft:jungle_fence_gate
         minecraft:dark_oak_fence_gate
         minecraft:acacia_fence_gate
-        minecraft:glass
-        minecraft:stained_glass
-        minecraft:glass_pane
-        minecraft:stained_glass_pane
      >
     ...
     # 反转黑名单, 可破坏方块为白名单模式
@@ -124,7 +104,7 @@ other {
 skeletons {
     ...
     # 合理的骷髅射手开火距离
-    I:"Fire Distance"=32
+    I:"Fire Distance"=16
     ...
 }
 ```
@@ -153,7 +133,7 @@ performance {
     B:backpacks.resupply=true
 }
 
-# 关闭铜/锡的生成, 以IC2的取代
+# 关闭铜/锡的生成, 以Mekanism的取代
 ore {
     ...
     B:copper=false
@@ -365,6 +345,19 @@ shortGrass {
     B:shaderWind=false
 }
 ```
+
+## 应用能源2 (已移除)
+
+1. 陨石生成是白名单模式, 让其他id世界也生成陨石
+
+   ```conf config/AppliedEnergistics2.cfg:
+   worldgen {
+       ...
+       I:  <
+           0
+           3 # 一般第二个主世界都是这个id, 从level.dat可以看nbt数据
+        >
+   ```
 
 ## SCP: Lockdown (已移除)
 

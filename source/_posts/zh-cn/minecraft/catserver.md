@@ -30,13 +30,13 @@ java -javaagent:authlib-injector-1.1.26-41a7a47.jar=https://littleskin.cn/api/yg
 
    ```conf catserver/server.properties
    # 网络封包压缩阈值
-   network-compression-threshold=512
+   network-compression-threshold=256
 
    # 地图类型, 这里使用RTG地形
    level-type=RTG
    
    # 最大玩家
-   max-players=20
+   max-players=64
    
    # 关闭watchdog
    max-tick-time=-1
@@ -54,7 +54,7 @@ java -javaagent:authlib-injector-1.1.26-41a7a47.jar=https://littleskin.cn/api/yg
    view-distance=8
    
    # bukkit系似乎不需要转码
-   motd=地表沉降\: 热寂的斯卡纳托斯
+   motd=Mojangの奇妙冒险
    ```
 
 2. bukkit.yml配置
@@ -62,10 +62,12 @@ java -javaagent:authlib-injector-1.1.26-41a7a47.jar=https://littleskin.cn/api/yg
    ```yml catserver/bukkit.yml
    # 可适当降低怪物数量的上限, 此为默认值
    spawn-limits:
-     monsters: 70
-     animals: 15
+     monsters: 35
+     animals: 10
      water-animals: 5
-     ambient: 15
+     ambient: 10
+   ticks-per:
+     monster-spawns: 3
    ```
 
 3. spigot.yml
@@ -73,7 +75,8 @@ java -javaagent:authlib-injector-1.1.26-41a7a47.jar=https://littleskin.cn/api/yg
    ```yml catserver/spigot.yml
    settings:
      ...
-     moved-too-quickly-multiplier: 100.0 // 减少出现 xxx moved too quickly! 的几率
+     moved-wrongly-threshold: 0.0625
+     moved-too-quickly-multiplier: 200.0 // 减少出现 xxx moved too quickly! 的几率
    world-settings:
      default:
        verbose: false // 关闭启动时打印世界配置信息
@@ -92,7 +95,6 @@ java -javaagent:authlib-injector-1.1.26-41a7a47.jar=https://littleskin.cn/api/yg
          animals: 16
          monsters: 24
          misc: 8
-         tick-inactive-villagers: true
        ...
        merge-radius: // 更大合并掉落物范围
          item: 4.0
@@ -131,6 +133,19 @@ DynmapBlockScan可以自动添加一些Mod方块的支持(然而截止1-31-2020 
 
 [DynmapBlockScan (Universal Renderer)](https://github.com/LolHens/DynmapBlockScan/tree/universal-renderer)
 
+## WorldBorder
+
+世界边界设置
+
+```yml config/WorldBorder/config.yml
+worlds:
+  world:
+    x: -263.5
+    z: 250.5
+    radiusX: 10000
+    radiusZ: 10000
+    wrapping: false
+```
 ## LuckPerms 权限记录
 
 这里记录我添加了哪些权限, 用于哪些命令
