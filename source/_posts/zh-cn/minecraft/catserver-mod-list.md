@@ -19,7 +19,6 @@ tags:
 
 | Plugin name | New version support 1.12 | Release Date |
 | ----------- | ------------------- | ----------- |
-| [CoreProtect-2.14.4](https://www.spigotmc.org/resources/coreprotect.8631/) | No | Jul 26, 2018 |
 | [EssentialsX-2.17.2](https://www.spigotmc.org/resources/essentialsx.9089/) | Yes | Feb 27, 2020 |
 | [GriefDefender-1.2.5c](https://www.spigotmc.org/resources/griefdefender.68900/) | Yes | Feb 1, 2020 |
 | [LuckPerms-Bukkit-5.0.94](https://ci.lucko.me/view/LuckPerms/job/LuckPerms/) | Yes | Mar 14, 2020 |
@@ -28,10 +27,8 @@ tags:
 | [Spark-1.3.2](https://www.spigotmc.org/resources/spark.57242/) | Yes | Feb 6, 2020 |
 | [Vault-1.7.2](https://www.spigotmc.org/resources/vault.34315/) | No (Still work) | Apr 29, 2019 |
 | [WorldBorder-1.8.7](https://dev.bukkit.org/projects/worldborder/) | No | May 5, 2017 |
-| [WorldEdit-Bukkit-6.1.9](https://dev.bukkit.org/projects/worldedit/) | No | Aug 4, 2018 |
-
-WorldEdit-Bukkit仅作为使GriefDefender的CUI可视化能正常工作的依赖,
-**实际应用请使用Mod版WorldEdit**
+| [FastAsyncWorldEdit-bukkit-19.09.25-e76d576-1287-23.0.3](https://github.com/Mohist-Community/FastAsyncWorldedit/) | Yes | Sep 25, 2019 |
+| [ProtocolLib-4.5.0]() | Yes | Dec 25, 2019 |
 
 ## Mods
 
@@ -41,9 +38,6 @@ WorldEdit-Bukkit仅作为使GriefDefender的CUI可视化能正常工作的依赖
 | -------- | ------------- | ---------- |
 | 地幔(依赖) | [Mantle-1.12-1.3.3.55](https://www.curseforge.com/minecraft/mc-mods/mantle/files/all?filter-game-version=1738749986%3A628) | May 20, 2019 |
 | 匠魂 | [TConstruct-1.12.2-2.13.0.183](https://www.curseforge.com/minecraft/mc-mods/tinkers-construct/files/all) | Mar 16, 2020 |
-| 砍树(依赖) | [bspkrsCore-universal-7.6.0.1](https://www.curseforge.com/minecraft/mc-mods/bspkrscore-updated/files/all) | Jun 10, 2019 |
-| 砍树 | [TreeCapitator-client-1.43.0](https://www.curseforge.com/minecraft/mc-mods/treecapitator-updated/files/all) | Jun 10, 2019 |
-| Mod通用bug修复 | [AnotherCommonBugFix-1.0.7](https://www.mcbbs.net/thread-857865-1-1.html) | Jan 9, 2020 |
 | 基因工程 | [binnie-mods-2.5.1.200](https://www.curseforge.com/minecraft/mc-mods/binnies-mods/files/all) | Feb 15, 2020 |
 | 中式工坊 | [ChineseWorkshop-1.2.6](https://www.curseforge.com/minecraft/mc-mods/chineseworkshop/files/all?filter-game-version=1738749986%3A628) | Apr 10, 2019 |
 | 合并经验球 | [Clumps-3.1.2](https://www.curseforge.com/minecraft/mc-mods/clumps/files/all?filter-game-version=1738749986%3A628) | Jan 29, 2019 |
@@ -58,14 +52,12 @@ WorldEdit-Bukkit仅作为使GriefDefender的CUI可视化能正常工作的依赖
 | 通用机械-矿石 | [mekores-2.0.13](https://www.curseforge.com/minecraft/mc-mods/mekanismores/files/all) | Feb 20, 2020 |
 | (有更新) 更好的ID表 | [JustEnoughIDs-1.0.3-52](https://github.com/DimensionalDevelopment/JustEnoughIDs/releases) | Jan 8, 2020 |
 | 投票睡觉 | [Morpheus-3.5.106](https://www.curseforge.com/minecraft/mc-mods/morpheus/files/all?filter-game-version=1738749986%3A628) | Jan 25, 2019 |
-| 随缘补丁集合 | [randompatches-1.21.0.0](https://www.curseforge.com/minecraft/mc-mods/randompatches/files/all?filter-game-version=1738749986%3A628) | Jan 19, 2020 |
 | 精致存储 | [refinedstorage-1.6.15](https://www.curseforge.com/minecraft/mc-mods/refined-storage/files/all?filter-game-version=1738749986%3A628) | Jul 21, 2019 |
 | 精致存储附属 | [refinedstorageaddons-0.4.4](https://www.curseforge.com/minecraft/mc-mods/refined-storage-addons/files/all?filter-game-version=1738749986%3A628) | Mar 23, 2019 |
 | 自然地形生成器 | [RTG-1.12.2-6.1.0.0-snapshot.1](https://www.curseforge.com/minecraft/mc-mods/realistic-terrain-generation/files/all) | Sep 11, 2019 |
 | 静谧四季 | [SereneSeasons-1.2.18](https://www.curseforge.com/minecraft/mc-mods/serene-seasons/files/all?filter-game-version=1738749986%3A628) | Oct 1, 2019 |
 | Thut核心(依赖) | [thutcore-5.21.0](https://www.curseforge.com/minecraft/mc-mods/thutcore/files/all?filter-game-version=1738749986%3A628) | May 20, 2019 |
 | Thut的电梯 | [thuttech-6.1.6](https://www.curseforge.com/minecraft/mc-mods/thuts-elevators/files/all?filter-game-version=1738749986%3A628) | May 19, 2019 |
-| 风滚草 | [tumbleweed-1.12-0.4.7](https://www.curseforge.com/minecraft/mc-mods/tumbleweed/files/all?filter-game-version=1738749986%3A628) | Feb 8, 2020 |
 | 新兴技术 | [EmergingTechnology-1.3.20-beta](https://www.curseforge.com/minecraft/mc-mods/emerging-technology-hydroponics/files/all) | Mar 17, 2020 |
 
 

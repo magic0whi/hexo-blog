@@ -36,7 +36,11 @@ Host github.com
 
 ### ~/.bashrc
 
-//TODO: 直接贴上配置文件地址
+{% asset_link bashrc.example ".bashrc" %}
+
+### ~/.zshrc
+
+{% asset_link zshrc.example ".zshrc" %}
 
 ### aria2
 

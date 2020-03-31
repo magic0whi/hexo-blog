@@ -1,0 +1,37 @@
+# Created by newuser for 5.7.1
+# grml-zsh unset prompt
+prompt off
+
+powerline-daemon -q  # run powerline daemon
+source /usr/share/powerline/bindings/zsh/powerline.zsh
+
+#自动建议？
+#需要安装zsh-autosuggestions zsh-syntax-highlighting zsh-history-substring-search
+export ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd history completion)
+export ZSH_AUTOSUGGEST_USE_ASYNC=true
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+
+# key bindings
+# TODO: key fixes for urxvt
+
+# arrow up
+bindkey "^[[A" history-substring-search-up
+# arrow down
+bindkey "^[[B" history-substring-search-down
+
+# alt+p
+bindkey "^[p" up-line-or-search
+# alt+n
+bindkey "^[n" down-line-or-searc
+
+export SHELL=/bin/zsh
+
+[ -f $HOME/.bashrc ] && source $HOME/.bashrc
+
+#列出运行命令的频率（有意思）
+# zsh_stats from oh-my-zsh https://github.com/robbyrussell/oh-my-zsh/blob/master/lib/functions.zsh
+function zsh_stats() {
+  fc -l 1 | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | grep -v "./" | column -c3 -s " " -t | sort -nr | nl |  head -n20
+}

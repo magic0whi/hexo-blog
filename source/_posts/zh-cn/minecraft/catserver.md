@@ -20,9 +20,11 @@ java -javaagent:authlib-injector-1.1.26-41a7a47.jar=https://littleskin.cn/api/yg
 ## 关闭数据分析&检查更新
 
 1. plugins/bStats/config.yml: `enabled: false`
-2. plugins/CoreProtect/config.yml: `check-updates: false`
-3. plugins/PluginMetrics/config.yml: `opt-out: true`
-4. plugins/Vault/config.yml: `update-check: false`
+2. plugins/PluginMetrics/config.yml: `opt-out: true`
+3. plugins/Vault/config.yml: `update-check: false`
+4. plugins/ProtocolLib/config.yml `auto updater: notify: false`, `metrics: false`
+5. plugins/Updater/config.yml `disable: true`
+5. plugins/FastAsyncWorldEdit/config.yml `update: "false"`, `metrics: false`
 
 ## Spigot配置
 
@@ -123,7 +125,7 @@ skin-url: "https://littleskin.cn/skin/%player%.png"
 
 1. `Dynmap-forge` 不支持 `Luckperms-spigot`, 只能`op <player>`
 2. `Dynmap-forge` 无法和 `WorldBorder-spigot` 插件联动
-3. 已知 版本`3.0-beta-10-forge` 不能用, **请使用3.0-beta-9-forge**
+3. 已知 版本`3.0-beta-10-forge, 3.0-SNAPSHOT-forge` 不能用, **请使用3.0-beta-9-forge**
 4. `DynmapBlockScan` 和 **Dynmap-_spigot_**: 不能, 会崩.
 5. `DynmapBlockScan-Universal-Renderer` 此版本调用了客户端Side的类, 无法在服务器上运行
 
@@ -146,6 +148,7 @@ worlds:
     radiusZ: 10000
     wrapping: false
 ```
+
 ## LuckPerms 权限记录
 
 这里记录我添加了哪些权限, 用于哪些命令

@@ -144,6 +144,17 @@ ssh-keygen -E md5 -lf <fileName>
 -s 文件大小非0时为真
 -t 当文件描述符(默认为1)指定的设备为终端时为真
 
+# 用于字符串判断
+string1 = string2 and string1 == string2 - The equality operator returns true if the operands are equal.
+    Use the = operator with the test [ command.
+    Use the == operator with the [[ command for pattern matching.
+string1 != string2 - The inequality operator returns true if the operands are not equal.
+string1 =~ regex- The regex operator returns true if the left operand matches the extended regular expression on the right.
+string1 > string2 - The greater than operator returns true if the left operand is greater than the right sorted by lexicographical (alphabetical) order.
+string1 < string2 - The less than operator returns true if the right operand is greater than the right sorted by lexicographical (alphabetical) order.
+-z string - True if the string length is zero.
+-n string - True if the string length is non-zero.
+
 # 逻辑判断
 -a 与
 -o 或
