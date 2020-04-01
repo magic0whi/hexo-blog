@@ -1,11 +1,11 @@
 ---
-title: catserver-usage
+title: mohist-usage
 category: minecraft
 date: 2020-02-08 19:09:15
 tags:
 ---
 
-Catserver & Spigot 系插件使用笔记
+Mohist & Spigot 系插件使用笔记
 
 <!-- more -->
 
@@ -21,7 +21,7 @@ Usage:
 
 使用原版的世界边界`/worldborder` 是全局性的, **无法** 针对单个世界设置不同的边界大小
 
-由于Catserver 目前为1.12.2, 实测1.13的WorldBorder插件无法正常添加边界, 遂使用旧版v1.8.7
+由于Mohist 目前为1.12.2, 实测1.13的WorldBorder插件无法正常添加边界, 遂使用旧版v1.8.7
 
 插件命令为`/wb`, 具体见[Full list of Commands and Permissions](https://www.spigotmc.org/threads/worldborder.339635/#post-3162179)
 
@@ -58,7 +58,7 @@ Usage:
 
 ## ClearLag (已弃用)
 
-由于CatServer目前表现良好, 服务器日常空载, 所以不需要定期清理实体和掉落物
+由于Mohist目前表现良好, 服务器日常空载, 所以不需要定期清理实体和掉落物
 
 ## GriefPrevention (已弃用)
 

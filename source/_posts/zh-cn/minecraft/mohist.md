@@ -1,20 +1,20 @@
 ---
-title: catserver
+title: mohist
 category: minecraft
 date: 2020-02-08 16:43:15
 tags:
 ---
 
-Catserver & Spigot 系Mod服务器配置
+Mohist & Spigot 系Mod服务器配置
 
-不含mod的配置改动(除非有MOD遇到Catserver水土不服)
+不含mod的配置改动(除非有MOD遇到Mohist水土不服)
 
 <!-- more -->
 
 ## 启动参数
 
-```bash catserver/start.sh
-java -javaagent:authlib-injector-1.1.26-41a7a47.jar=https://littleskin.cn/api/yggdrasil -XX:+UnlockExperimentalVMOptions -XX:+UseG1GC -XX:G1NewSizePercent=20 -XX:G1ReservePercent=20 -XX:MaxGCPauseMillis=50 -XX:G1HeapRegionSize=16M -XX:-UseAdaptiveSizePolicy -XX:-OmitStackTraceInFastThrow -Xmn128m -Xmx2048m -jar CatServer-a9501ab-async.jar nogui --tweakClass net.minecraftforge.fml.common.launcher.FMLServerTweaker
+```bash mohist/start.sh
+java -javaagent:authlib-injector-1.1.26-41a7a47.jar=https://littleskin.cn/api/yggdrasil -XX:+UnlockExperimentalVMOptions -XX:+UseG1GC -XX:G1NewSizePercent=20 -XX:G1ReservePercent=20 -XX:MaxGCPauseMillis=50 -XX:G1HeapRegionSize=16M -XX:-UseAdaptiveSizePolicy -XX:-OmitStackTraceInFastThrow -Xmn128m -Xmx2048m -jar Mohist-3e598b2-server.jar nogui --tweakClass net.minecraftforge.fml.common.launcher.FMLServerTweaker
 ```
 
 ## 关闭数据分析&检查更新
@@ -30,7 +30,7 @@ java -javaagent:authlib-injector-1.1.26-41a7a47.jar=https://littleskin.cn/api/yg
 
 1. server.properties配置
 
-   ```conf catserver/server.properties
+   ```conf mohist/server.properties
    # 网络封包压缩阈值
    network-compression-threshold=256
 
@@ -61,7 +61,7 @@ java -javaagent:authlib-injector-1.1.26-41a7a47.jar=https://littleskin.cn/api/yg
 
 2. bukkit.yml配置
 
-   ```yml catserver/bukkit.yml
+   ```yml mohist/bukkit.yml
    # 可适当降低怪物数量的上限, 此为默认值
    spawn-limits:
      monsters: 35
@@ -74,7 +74,7 @@ java -javaagent:authlib-injector-1.1.26-41a7a47.jar=https://littleskin.cn/api/yg
 
 3. spigot.yml
 
-   ```yml catserver/spigot.yml
+   ```yml mohist/spigot.yml
    settings:
      ...
      moved-wrongly-threshold: 0.0625
@@ -113,7 +113,7 @@ java -javaagent:authlib-injector-1.1.26-41a7a47.jar=https://littleskin.cn/api/yg
 
 由于使用第三方littleskin提供的服务, 需要配置configuration.txt
 
-```yml catserver/dynmap/configuration.txt
+```yml mohist/dynmap/configuration.txt
 # Control loading of player faces (if set to false, skins are never fetched)
 fetchskins: true
 
@@ -156,17 +156,6 @@ worlds:
 ### default 组
 
 ### admin 组
-
-## Mod兼容改动
-
-治疗水土不服
-
-### RandomPatches
-
-```conf catserver/config/randompatches.cfg
-  B:portalBucketReplacementFix=false
-  B:patchNetHandlerPlayServer=true
-```
 
 ## 清理配置残留
 

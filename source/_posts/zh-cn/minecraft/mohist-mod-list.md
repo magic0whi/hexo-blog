@@ -1,5 +1,5 @@
 ---
-title: catserver-mod-list
+title: mohist-mod-list
 category: minecraft
 date: 2020-02-11 11:45:01
 tags:
@@ -13,7 +13,7 @@ tags:
 
 | Server name | Release Date | Minecraft Version |
 | ----------- | ------------ | ----------------- |
-| [CatServer-878ecaa-async](https://github.com/Luohuayu/CatServer/releases) | Feb 2, 2020 | 1.12.2 |
+| [Mohist-3e598b2-server](https://github.com/Mohist-Community/Mohist) | April 1, 2020 | 1.12.2 |
 
 ### Plugins
 
@@ -28,7 +28,7 @@ tags:
 | [Vault-1.7.2](https://www.spigotmc.org/resources/vault.34315/) | No (Still work) | Apr 29, 2019 |
 | [WorldBorder-1.8.7](https://dev.bukkit.org/projects/worldborder/) | No | May 5, 2017 |
 | [FastAsyncWorldEdit-bukkit-19.09.25-e76d576-1287-23.0.3](https://github.com/Mohist-Community/FastAsyncWorldedit/) | Yes | Sep 25, 2019 |
-| [ProtocolLib-4.5.0]() | Yes | Dec 25, 2019 |
+| [ProtocolLib-4.5.0](https://www.spigotmc.org/resources/protocollib.1997/) | Yes | Dec 25, 2019 |
 
 ## Mods
 
@@ -59,7 +59,6 @@ tags:
 | Thut核心(依赖) | [thutcore-5.21.0](https://www.curseforge.com/minecraft/mc-mods/thutcore/files/all?filter-game-version=1738749986%3A628) | May 20, 2019 |
 | Thut的电梯 | [thuttech-6.1.6](https://www.curseforge.com/minecraft/mc-mods/thuts-elevators/files/all?filter-game-version=1738749986%3A628) | May 19, 2019 |
 | 新兴技术 | [EmergingTechnology-1.3.20-beta](https://www.curseforge.com/minecraft/mc-mods/emerging-technology-hydroponics/files/all) | Mar 17, 2020 |
-
 
 ### Client-Side Mods
 

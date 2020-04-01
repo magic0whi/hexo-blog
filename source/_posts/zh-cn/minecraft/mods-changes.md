@@ -38,7 +38,6 @@ wirelesstransmitter {
 S:"Whitelisted Dimensions" <
     0
     3 // 一般第二个世界维度都是3
-    14 // Catserver skantos dimension
  >
  ```
 
@@ -109,17 +108,6 @@ skeletons {
 }
 ```
 
-## 砍树
-
-与工业2橡胶树的兼容
-
-```conf config/treecapitator.cfg
-        ic2_rubber_tree {
-            S:logs=IC2:rubber_wood
-            S:leaves=IC2:leaves
-        }
-```
-
 ## 林业
 
 设置难度(他说不设置服务器可能会有影响)
@@ -146,7 +134,6 @@ ore {
 ```conf config/cfm.cfg
 B:welcome_message=false
 ```
-
 
 
 ## 环境污染 (暂时移除)
@@ -365,6 +352,17 @@ shortGrass {
 
 ```cfg config/Secure. Contain. Protect. v2.1.cfg
 I:"Abandoned facility rarity"=2147483647
+```
+
+## 砍树
+
+与工业2橡胶树的兼容
+
+```conf config/treecapitator.cfg
+        ic2_rubber_tree {
+            S:logs=IC2:rubber_wood
+            S:leaves=IC2:leaves
+        }
 ```
 
 ## Sponge
