@@ -1,12 +1,11 @@
 # Created by newuser for 5.7.1
+# You need install grml-zsh-config powerline zsh-autosuggestions zsh-syntax-highlighting zsh-history-substring-search
 # grml-zsh unset prompt
 prompt off
 
 powerline-daemon -q  # run powerline daemon
 source /usr/share/powerline/bindings/zsh/powerline.zsh
 
-#自动建议？
-#需要安装zsh-autosuggestions zsh-syntax-highlighting zsh-history-substring-search
 export ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd history completion)
 export ZSH_AUTOSUGGEST_USE_ASYNC=true
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
