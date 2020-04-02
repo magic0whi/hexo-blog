@@ -159,7 +159,7 @@ hexo-renderer-markdown-it-plus # 支持katex的渲染器(需要卸载默认的he
 
 以上假设已完成以下操作
 
-```bash
+```console
 $ npm install -g hexo-cli
 $ hexo init <folder>
 $ cd <folder>
@@ -168,23 +168,19 @@ $ npm install
 
 ### 部署Git仓库
 
-```bash
-#创建git用户
-useradd -m -s /bin/bash git
-#给git用户设置密码,或者在git用户的.ssh目录的authorized_keys文件里面添加自己的公钥
-passwd git
-#切换到git用户
-su git
-cd /home/git
-git init --bare blog.git
+```console
+root@blog # useradd -m -s /bin/bash git    #创建git用户
+root@blog # passwd git    #给git用户设置密码,或者在git用户的.ssh目录的authorized_keys文件里面添加自己的公钥
+root@blog # su git    #切换到git用户
+git@blog ~$ cd /home/git
+git@blog ~$ git init --bare blog.git
 
-#回到hexo目录
-git init
-git add .
-git commit -m 'initial commit'
-#这里的gitserver就是你的git服务器的ip或者域名
-git remote add origin git@gitserver:~/blog.git
-git push -u origin master
+ndoskrnl@pc ~$ cd hexo
+ndoskrnl@pc hexo$ git init
+ndoskrnl@pc hexo$ git add .
+ndoskrnl@pc hexo$ git commit -m 'initial commit'
+ndoskrnl@pc hexo$ git remote add origin git@blog:~/blog.git    #这里的blog就是你的git服务器的ip或者域名
+ndoskrnl@pc hexo$ git push -u origin master
 ```
 
 然后就是Git Hook的配置, 见[前面](#Git-Hook)
@@ -193,11 +189,9 @@ git push -u origin master
 
 ### Nginx配置
 
-```bash
-#在服务器选择一个放置网站的目录, 假设这个目录为/var/www/blog
-mkdir -p /var/www/blog
-#设置权限
-chown git:git -R /var/www/blog
+```console
+# mkdir -p /var/www/blog    #在服务器选择一个放置网站的目录, 假设这个目录为/var/www/blog
+# chown git:git -R /var/www/blog    #设置权限
 ```
 
 Nginx配置文件见: {% post_link nginx "nginx配置改动" %}
@@ -210,40 +204,35 @@ Nginx配置文件见: {% post_link nginx "nginx配置改动" %}
 
 下载主题文件
 
-```bash
+```console
 $ cd hexo
-# git clone https://github.com/theme-next/hexo-theme-next themes/next -b v7.7.1
-# 这里使用git-subrepo, 方便以后pull操作(不用submodule是因为不够好用)
-git subrepo clone --branch=v7.7.1 https://github.com/theme-next/hexo-theme-next themes/next
+$ git clone https://github.com/theme-next/hexo-theme-next themes/next -b v7.7.1 --depth=1
 ```
 
 ## Hexo 文章加密
 
-```bash
-cd blog
-npm install hexo-blog-encrypt
-
-nano /Hexo/_config.yml  添加如下内容
-
+```console
+$ cd blog
+$ npm install hexo-blog-encrypt
+$ nano /Hexo/_config.yml
+```
+添加如下内容
+```yml
 # Security
 ## 文章加密 hexo-blog-encrypt
 encrypt:
     enable: true
-
+```
 然后在想加密的文章头部添加上对应字段, 如
-
+```yml
 ---
 title: hello world
 date: 2016-03-30 21:18:02
 tags:
-password: 12345   （密码）
-abstract: Welcome to my blog, enter password to read.
-message: Welcome to my blog, enter password to read.
+password: 12345
+abstract: 是该博文的摘要
+message: 这个是博文查看时, 密码输入框上面的描述性文字
 ---
-
-password: 是该博客加密使用的密码
-abstract: 是该博客的摘要, 会显示在博客的列表页
-message: 这个是博客查看时, 密码输入框上面的描述性文字
 ```
 
 另见[Github项目说明](https://github.com/MikeCoder/hexo-blog-encrypt/blob/master/ReadMe.zh.md)
@@ -252,4 +241,4 @@ message: 这个是博客查看时, 密码输入框上面的描述性文字
 
 在需要LaTex表达式的文章Front-matter中加上 `mathjax: true`
 
-本人还没实装, 请见 [NexT数学表达式](https://theme-next.org/docs/third-party-services/math-equations)
+请见 [NexT数学表达式](https://theme-next.org/docs/third-party-services/math-equations)

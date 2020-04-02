@@ -15,19 +15,19 @@ tags:
 
 ## 泛域名证书
 
-```bash
-certbot certonly --preferred-challenges dns --manual  -d *.example.com
+```console
+$ certbot certonly --preferred-challenges dns --manual  -d *.example.com
 ```
 
 ## 获取uuid
 
-```bash
-cat /proc/sys/kernel/random/uuid
+```console
+$ cat /proc/sys/kernel/random/uuid
 ```
 
 ## 透明代理(TPROXY)客户端命令
 
-```bash
+```console
 # 设置策略路由
 ip rule add fwmark 1 table 100
 ip route add local 0.0.0.0/0 dev lo table 100

@@ -14,29 +14,29 @@ tags:
 1. 第一步创建SSH key
 
    rsa密钥
-   
-       $ ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
-   
+   ```console
+   $ ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+   ```
    或者ed25519密钥
-   
-       $ ssh-keygen -t ed25519 -C "your_email@example.com"
-   
+   ```console
+   $ ssh-keygen -t ed25519 -C "your_email@example.com"
+   ```
    若设置了passphrase, 下面的命令可在需要时更改passphrase密码
-   
-       $ ssh-keygen -p
-
+   ```console
+   $ ssh-keygen -p
+   ```
 2. 启用SSH key
 
    首先以后台模式启动ssh-agent
 
-   ```bash
+   ```console
    $ eval "$(ssh-agent -s)"
    > Agent pid 59566
    ```
 
    添加你SSH私钥到ssh-agent
 
-   ```bash
+   ```console
    $ ssh-add ~/.ssh/id_rsa
    ```
 
@@ -62,7 +62,7 @@ Windows用户见[Github Docs](https://help.github.com/en/github/authenticating-t
 
 然后:
 
-```bash
+```console
 $ ssh -T git@github.com
 ```
 
@@ -82,15 +82,21 @@ $ ssh -T git@github.com
 
 ## 友好地输出日志
 
-git log --graph --oneline --decorate --all
+```console
+$ git log --graph --oneline --decorate --all
+```
 
 输出最近一次commit及diff格式的改动
 
+```console
 git log --cc -1
+```
 
 查看commit间的修改
 
+```console
 git diff HEAD HEAD~
+```
 
 ## 撤销合并（2种方法）
 
@@ -98,7 +104,7 @@ git diff HEAD HEAD~
 
 2. 新建一个revert提交(适用于多人合作) git revert -m 1 HEAD，但如果你尝试再次合并 topic 到 master Git 会感到困惑：
 
-```
+```console
 $ git merge topic
 Already up-to-date.
 ```
@@ -123,7 +129,7 @@ ProxyCommand nc -v -x 127.0.0.1:1080 %h %p
 
 还可将子目录变为子仓库:
 
-```bash
+```console
 $ git subrepo init <subdir> [-r <remote>] [-b <branch>] [--method <merge|rebase>]
 ```
 
@@ -144,21 +150,21 @@ $ git cherry-pick 38361a68
 ## Git Format-patch
 
 1. 两个commit间的修改(包含两个commit)
-```bash
-git format-patch <r1>..<r2>
+```console
+$ git format-patch <r1>..<r2>
 ```
 
 2. 单个commit
-```bash
-git format-patch -1 <r1>
+```console
+$ git format-patch -1 <r1>
 ```
 
 3. 从某commit以来的修改(不包含该commit)
-```bash
+```console
 $ git format-patch <r1>
 ```
 
 4. 应用.patch文件
-```bash
+```console
 $ git am 0001-xxxx.patch
 ```

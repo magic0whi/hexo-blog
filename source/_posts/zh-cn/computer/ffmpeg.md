@@ -13,19 +13,19 @@ tags:
 
 ## 查看文件信息
 
-```bash
+```console
 $ ffprobe -v quiet -print_format json -show_format -show_streams output.mkv
 ```
 
 ## 查看文件长度
 
-```bash
+```console
 $ ffprobe -select_streams v:0 -show_entries stream=duration -of default=noprint_wrappers=1:nokey=1 output.mkv
 ```
 
 ## 将动漫压成HEVC格式
 
-```bash
+```console
 $ <输出流> | x265 --y4m -D 10 --preset slower --deblock -1:-1 --ctu 32 --qg-size 8 --crf 15.0 --pbratio 1.2 --cbqpoffs -2 --crqpoffs -2 --no-sao --me 3 --subme 5 --merange 38 --b-intra --limit-tu 4 --no-amp --ref 4 --weightb --keyint 360 --min-keyint 1 --bframes 6 --aq-mode 1 --aq-strength 0.8 --rd 5 --psy-rd 2.0 --psy-rdoq 1.0 --rdoq-level 2 --no-open-gop --rc-lookahead 80 --scenecut 40 --qcomp 0.65 --no-strong-intra-smoothing --output "EP01.hevc" -
 ```
 
@@ -33,7 +33,7 @@ $ <输出流> | x265 --y4m -D 10 --preset slower --deblock -1:-1 --ctu 32 --qg-s
 
 ## Windows 10 下我压游戏录像的ffmpeg参数
 
-```
+```cmd
 C:/> ffmpeg.exe -i input.mp4 -c:v libx265 -x265-params "y4m:depth=10:preset=slower:deblock=-1:-1:ctu=32:qg-size=8:crf=15.0:cbqpoffs=-2:crqpoffs=-2:no-sao:me=3:subme=5:merange=38:limit-tu=4:no-amp:ref=4:weightb:keyint=360:min-keyint=1:bframes=6:aq-mode=1:aq-strength=0.8:rd=5:psy-rd=2.0:psy-rdoq=1.0:rdoq-level=2:no-open-gop:rc-lookahead=80:scenecut=40:qcomp=0.65:no-strong-intra-smoothing=true" -acodec aac -strict -2 -ac 2 -ab 192k -ar 44100 output.mkv
 ```
 
@@ -41,13 +41,17 @@ C:/> ffmpeg.exe -i input.mp4 -c:v libx265 -x265-params "y4m:depth=10:preset=slow
 
 ## 通过VA-API压Hevc (相比软压缺少很多参数设置)
 
-`ffmpeg -hwaccel vaapi -hwaccel_device /dev/dri/renderD128 -vaapi_device /dev/dri/renderD128 -ss 0 -t 4:59 -i output.mkv -vf 'format=nv12,hwupload' -c:v hevc_vaapi -crf 26 -r 24 -acodec aac -strict -2 -ac 2 -ab 192k -ar 44100 -f mp4 -y sendready4.mp4`
+```console
+$ ffmpeg -hwaccel vaapi -hwaccel_device /dev/dri/renderD128 -vaapi_device /dev/dri/renderD128 -ss 0 -t 4:59 -i output.mkv -vf 'format=nv12,hwupload' -c:v hevc_vaapi -crf 26 -r 24 -acodec aac -strict -2 -ac 2 -ab 192k -ar 44100 -f mp4 -y sendready4.mp4
+```
 
 ## 通过Nvidia的nvenc压HEVC (相比软压缺少很多参数设置)
 
 只有meduim | slow | fast 三种present可选
 
-`ffmpeg -hwaccel cuvid -c:v h264_cuvid -i input.mkv -c:v h264_nvenc -preset slow -b:v 2048 -bufsize 4096 -r 30 -profile:v high -level:v 4.1 -acodec aac -strict -2 -ac 2 -ab 192k -ar 44100 -pass 1 -f matroska output.mkv -y`
+```console
+$ ffmpeg -hwaccel cuvid -c:v h264_cuvid -i input.mkv -c:v h264_nvenc -preset slow -b:v 2048 -bufsize 4096 -r 30 -profile:v high -level:v 4.1 -acodec aac -strict -2 -ac 2 -ab 192k -ar 44100 -pass 1 -f matroska output.mkv -y
+```
 
 ## 选项解释
 

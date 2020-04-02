@@ -17,7 +17,7 @@ tags:
 
 根据文件内容搜索文件
 
-```bash
+```console
 $ grep -iRl "your-text-to-find" ./
 ```
 
@@ -25,25 +25,25 @@ $ grep -iRl "your-text-to-find" ./
 
 拷贝文件, 保留所有信息
 
-```bash
+```console
 $ rsync -aXv -P $SOURCE_DIR/ $TARGET_DIR/`
 ```
 
 仅复制, 不保留权限
 
-```bash
-`rsync -rlt -P --no-owner --no-group --no-perms $SOURCE_DIR/ $TARGET_DIR/`
+```console
+$ rsync -rlt -P --no-owner --no-group --no-perms $SOURCE_DIR/ $TARGET_DIR/
 ```
 
 同步文件夹(小心, 有--delete参数, 会删光目标文件夹多余的文件)
 
-```bash
-`rsync -aXv -P --delete $SOURCE_DIR/ $TARGET_DIR/`
+```console
+$ rsync -aXv -P --delete $SOURCE_DIR/ $TARGET_DIR/
 ```
 
 #### 参数详解
 
-```bash
+```
 -a, --archive               archive mode; equals -rlptgoD (no -H,-A,-X)
 -X, --xattrs                preserve extended attributes
 -v, --verbose               increase verbosity
@@ -64,11 +64,25 @@ $ rsync -aXv -P $SOURCE_DIR/ $TARGET_DIR/`
 -W, --whole-file            copy files whole (without delta-xfer algorithm)
 ```
 
+### ss
+ss is a member of iproute tools set
+ss has only 22 parameters
+
+列出套接字统计
+```console
+$ ss -s
+```
+
+查看端口占用
+```console
+# ss -nlptu | grep <端口号>
+```
+
 ### 查看电池电量
 
 以我的平板举个例子
 
-```bash
+```console
 $ cat /sys/class/power_supply/axp288_fuel_gauge/capacity
 ```
 
@@ -76,7 +90,7 @@ $ cat /sys/class/power_supply/axp288_fuel_gauge/capacity
 
 生成20个长度为12的 含大写字母 `-c` , 数字 `-n` , 符号 `-y` , 完全随机 `-s` 的密码
 
-```bash
+```console
 $ pwgen -cnys 12 20
 ```
 
@@ -84,24 +98,28 @@ $ pwgen -cnys 12 20
 
 To recursively give directories read&execute privileges:
 
-    # find /path/to/base/dir -type d -exec chmod 755 {} +
+```console
+# find /path/to/base/dir -type d -exec chmod 755 {} +
+```
 
 To recursively give files read privileges:
 
-    # find /path/to/base/dir -type f -exec chmod 644 {} +
+```console
+# find /path/to/base/dir -type f -exec chmod 644 {} +
+```
 
 Reference from [StackExchange](https://superuser.com/questions/91935/how-to-recursively-chmod-all-directories-except-files)
 
 ### 带排除项删除文件和目录
 
-```bash
+```console
 # shopt -s extglob    #打开extglob模式
 # rm -fr !(file1)
 ```
 
 ### SWAP file
 
-```
+```console
 # truncate -s 0 /swapfile
 # chattr +C /swapfile
 # btrfs property set /swapfile compression none
@@ -109,7 +127,7 @@ Reference from [StackExchange](https://superuser.com/questions/91935/how-to-recu
 
 ### 查看主机公钥指纹
 
-```bash
+```console
 ssh-keygen -lf /path/to/ssh/key
 
 # MD5 格式
