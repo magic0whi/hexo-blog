@@ -13,6 +13,22 @@ P社游戏爱好者, Minecraft, Tom Clancy's The Division 2
 喜欢(看别人的)景物摄影/艺术创作
 
 对生物科学, 机器学习, 经济学 感兴趣
-但都没有入门
+高山仰止，景行行止。雖不能至，心嚮往之...
+
+{% mplayer %}
+    playlist: [
+        {
+            name: 'Tayuta',
+            artist: 'FELT',
+            src: 'FELT-Tayuta.mp3',
+            poster: '3444769938584968.jpg'
+        }
+    ],
+    autoplay: false,
+    volume: 0.75,
+    playmode: "listloop",
+    big: false,
+    dark: false
+{% endmplayer %}
 
 I am no bird; and no net ensuares me: I am a free human being with an independent will. - Jane Eyre

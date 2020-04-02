@@ -22,6 +22,7 @@
     "hexo-renderer-markdown-it-plus": "^1.0.4",
     "hexo-renderer-stylus": "^1.1.0",
     "hexo-server": "^1.0.0",
-    "hexo-symbols-count-time": "^0.7.1"
+    "hexo-symbols-count-time": "^0.7.1",
+    "hexo-tag-mplayer": "^1.0.1"
   }
 }
