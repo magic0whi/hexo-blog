@@ -885,3 +885,31 @@ int main()
 ```
 
 ## How to CREATE/INSTANTIATE OBJECTS in C++
+
+There are two main section of memory: the stack and heap
+
+Stack objects have an automatic lifespan, there lifetime is actually controlled by the scope their declared
+
+Heap: once you allocated an object in that heap, it's gonna sit there unill you explicit delete it
+
+栈空间一般只有1M到几M(取决于平台), 如果你需要创建一个巨大的对象, 你将不得不将他创建在堆内存上
+
+
+不使用 `new` 关键字, 对象创建在栈空间上
+```C++
+Entity entity("Cherno");
+// 或者
+Entity entity = Entity("Cherno");
+```
+
+使用 `new` 关键字, 对象创建在堆空间上
+```C++
+// new 返回的是创建对象的内存地址, 所以用 Entity*
+Entity* entity = new Entity("Cherno");
+// 你需要手动删除 new 创建的对象来释放内存
+delete entity;
+```
+
+所以用 `new` 创建对象很容易导致内存泄漏, 之后会讲的 **智能指针** 可用很好地解决这个问题
+
+## The NEW Keyword in C++
