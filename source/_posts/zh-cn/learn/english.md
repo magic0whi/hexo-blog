@@ -38,8 +38,8 @@ divided by preposition/adverb.
 
 ## 动词 + after
 
-1. **go** after 追求, 跟随
-2. **run** after 追求, 跟踪
+1. **go** after 追求
+2. **run** after 跟踪
 3. **look** after 照顾
 
 ## 动词 + against
@@ -52,8 +52,8 @@ divided by preposition/adverb.
 ## 动词 + apart
 
 1. **fall** apart 崩溃
-2. **set** apart 区别, 留出
-3. **tell** apart 区分, 分辨
+2. **set** apart 留出
+3. **tell** apart 分辨
 
 ## 动词 + around
 
@@ -71,12 +71,12 @@ divided by preposition/adverb.
 ## 动词 + as
 
 1. **accept**...as... 认可...是...
-2. **consider**...as... 把...认为是...
-3. **regard**...as... 把...当做
-4. **see**...as... 把...看做是...
-5. **serve**...as... 把...当做
-6. **take**...as... 把...看做是...
-7. **treat**...as... 把...当做...
+2. **consider**...as... 认为(把...看作)
+3. **regard**...as... 把...认作
+4. **see**...as... 把...看为...
+5. **serve**...as... 充当...
+6. **take**...as... 把...当作是...
+7. **treat**...as... 把...看作...
 
 ## 动词 + at
 
@@ -92,71 +92,71 @@ divided by preposition/adverb.
 ## 动词 + away
 
 1. **blow** away 吹走
-2. **break** away 脱离, 放弃
+2. **break** away 脱离; 放弃
 3. **die** away 渐渐消失
-4. **give** away 分发, 泄露
+4. **give** away 分发; 泄露
 5. **go** away 离开
 6. **pass** away 去世
 7. **put** away 把...收好
-8. **run** away 跑开
+8. **run** away 逃跑
 9. **take** away 拿走
 10. **throw** away 扔掉
 11. **wear** away 磨损
-12. **turn** away 解雇, 转过脸
+12. **turn** away 解雇; 转过脸
 
 ## 动词 + back
 
-1. **bring** back 使想起, 带回
+1. **bring** back 使想起; 带回
 2. **call** back 回电话
 3. **come** back 回来
 4. **date** back 回溯
-5. **hold** back 忍住, 隐瞒
+5. **hold** back 抑制住; 隐瞒
 6. **pay** back 偿还
-7. **look** back 回顾
-8. **take** back 取回, 拿回
+7. **look** back 回顾; 回头
+8. **take** back 拿回
 
 ## 动词 + by
 
 1. **judge** by 根据...判断
 2. **live** by 靠...生活
-3. **stand** by 站在旁边, 支持
+3. **stand** by 支持; 站在旁边
 4. **pass** by 经过
 
 ## 动词 + forward
 
-1. **bring** forward 提出, 提前
+1. **bring** forward 提前; 提出
 2. **look** forward **_to_** 盼望
-3. **put** forward 提出, 建议
+3. **put** forward 提出建议
 
 ## 动词 + down
 
-1. **break** down 出故障, 分解
+1. **break** down 分解; 损坏
 2. **bring** down 使降低
-3. **cut** down 削减, 砍倒
+3. **cut** down 削减; 砍倒
 4. **calm** down 平静下来
-5. **lay** down 放下, 铺设
+5. **lay** down 放下; 铺设
 6. **put** down 镇压
-7. **settle** down 定居, 安家
+7. **settle** down 定居
 8. **take** down 记下
-9. **turn** down 调小, 拒绝
+9. **turn** down 调低; 拒绝
 10. **write** down 记下
 
 ## 动词 + for
 
 1. **account** for 解释
-2. **allow** for 考虑到, 顾及
+2. **allow** for 考虑到
 3. **apply** for 申请
 4. **arrange** for 安排
 5. **beg** for 乞求
 6. **call** for 要求
-7. **care** for 关心
+7. **care** for 关心(指照顾)
 8. **envy sb.** for 嫉妒某人
 9. **hunt** for 追寻
 10. **look** for 寻找
 11. **go** for 努力获得
-12. **long** for 盼望
+12. **long** for 渴望
 13. **pay** for 为...付账
-14. **stand** for 代表, 象征
+14. **stand** for 象征
 15. **wait** for 等候
 
 ## 动词 + from
