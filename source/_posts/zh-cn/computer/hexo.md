@@ -121,6 +121,29 @@ math:
     enable: true
 ```
 
+主线以归档的形式显示文章, 感谢[@liolok](https://github.com/liolok/hexo-theme-next/commit/745fcd6e4d0bbec2bd7c3b83424d96d16da44459)
+```patch hexo/themes/next/layout/index.swig
+ {% extends '_layout.swig' %}
++{% import '_macro/post-collapse.swig' as post_template with context %}
+ {% import '_macro/sidebar.swig' as sidebar_template with context %}
+ 
+ {% block title %}{{ title }}{%- if theme.index_with_subtitle and subtitle %} - {{ subtitle }}{%- endif %}{% endblock %}
+ 
+ {% block content %}
+ 
+-  <div class="posts-expand">
+-    {%- for post in page.posts.toArray() %}
+-      {{ partial('_macro/post.swig', {post: post, is_index: true}) }}
+-    {%- endfor %}
++  <div class="post-block">
++    <div class="posts-collapse">
++      {{ post_template.render(page.posts) }}
++    </div>
+   </div>
+ 
+   {% include '_partials/pagination.swig' %}
+```
+
 ### Git Hook
 
 ```bash /home/git/blog.git/hooks/post-update

@@ -7,6 +7,8 @@ tags:
 
 一个简单的局域网DNS
 
+本文所有配置皆为**增量改动**
+
 <!-- more -->
 
 架构 Overture -> Unbound -> dnscrypt-proxy

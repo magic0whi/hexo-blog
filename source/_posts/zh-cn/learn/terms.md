@@ -26,6 +26,8 @@ TLDW  Too Long; Didn't Watch
 
 Echo Chamber 回音室效应 In news media, echo chamber is a metaphorical description of a situation in which beliefs are amplified or reinforced by communication and repetition inside a closed system. By visiting an "echo chamber", people are able to seek out information that reinforces their existing views, potentially as an unconscious exercise of confirmation bias. This may increase social and political polarization and extremism... 
 
+D-K effect 达克效应，全称为邓宁-克鲁格效应（Dunning-Kruger effect）。它是一种认知偏差现象，指的是能力欠缺的人在自己欠考虑的决定的基础上得出错误结论，但是无法正确认识到自身的不足，辨别错误行为。这些能力欠缺者们沉浸在自我营造的虚幻的优势之中，常常高估自己的能力水平，却无法客观评价他人的能力。
+
 ## 经济学
 
 GDP gross domestic product 国内生产总值

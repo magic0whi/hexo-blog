@@ -913,3 +913,41 @@ delete entity;
 所以用 `new` 创建对象很容易导致内存泄漏, 之后会讲的 **智能指针** 可用很好地解决这个问题
 
 ## The NEW Keyword in C++
+
+更多new的细节
+
+How the `new` keyword find free space on memory? There is something called *free list* which actually maintain the addresses that have bytes free. It's obvously written in intelligent but its stll quite slow.
+
+几点事实:
+1. `new` is just an operator, means that you can overload `new` and change its bahavious
+2. Usually calling `new` will call the underlying C Function `malloc()`
+3. **delete** also calls the destructor
+
+三种 `new` 的不同使用方法(normal new, array new, placement new)
+```C++
+int main()
+{
+    // If we wanted an array of entries (An array which is stored 50 Objects of Entity)
+    Entity* entity = new Entity();
+
+    delete entity; // Remember delete object
+
+    // If using new with square bracket "[" and "]"
+    // The new operator is actually a slightly differ function than normal
+    Entity* entity2 = new Entity()[50];
+    // Also we need calling delete with square bracket
+    delete[] eneity2;
+
+    // Placement New is where you actually get to decide kind of where the memory comes from.
+    // You don't really allocating memory wieh new,
+    // you're just calling the constructor and initializing you Object in a specific memory address
+    int* buffer = new int[50];
+    Entity* entity3 = new(buffer) Entity();
+    delete entity3;
+    delete[] buffer;
+    // in C there are some kinds of equivalent:
+    // Entity* entity = (Entity*) malloc(sizeof(Entity));
+    // malloc() will not call the constructor so you need to call it in manual
+    // So it's better don't use this in C++
+}
+```

@@ -36,12 +36,16 @@ Host github.com
 
 ### ~/.bashrc
 
-{% asset_link bashrc.example ".bashrc" %}
+{% asset_link bashrc.example "~/.bashrc" %}
 
 ### ~/.zshrc
 
-{% asset_link zshrc.example ".zshrc" %}
+{% asset_link zshrc.example "~/.zshrc" %}
 
 ### aria2
 
 {% asset_link aria2.conf.example "aria2.conf" %}
+
+### ddclient
+
+{% asset_link ddclient.conf.example "/etc/ddclient/ddclient.conf" %}

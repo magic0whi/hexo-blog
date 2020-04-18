@@ -2,56 +2,20 @@
   "BindAddress": ":53",
   "PrimaryDNS": [
     {
-      "Name": "Arkua233 DNS",
+      "Name": "Ndoskrnl DNS",
       "Address": "127.0.0.1:5354",
       "Protocol": "udp",
       "SOCKS5Address": "",
       "Timeout": 5,
       "EDNSClientSubnet": {
         "Policy": "auto",
-        "ExternalIP": "117.62.85.237",
+        "ExternalIP": "114.514.191,981",
 	"NoCookie": true
       }
     }
   ],
-  "AlternativeDNS": [
-    {
-      "Name": "Google DNS",
-      "Address": "8.8.8.8:53",
-      "Protocol": "tcp",
-      "SOCKS5Address": "",
-      "Timeout": 5,
-      "EDNSClientSubnet": {
-        "Policy": "disable",
-        "ExternalIP": ""
-      }
-    },
-    {
-      "Name": "OpenDNS",
-      "Address": "208.67.222.222:443",
-      "Protocol": "tcp",
-      "SOCKS5Address": "",
-      "Timeout": 5,
-      "EDNSClientSubnet":{
-        "Policy": "disable",
-        "ExternalIP": ""
-      }
-    }
-  ],
+  ...
   "OnlyPrimaryDNS": true,
-  "IPv6UseAlternativeDNS": false,
-  "WhenPrimaryDNSAnswerNoneUse": "PrimaryDNS",
-  "IPNetworkFile": {
-	  "Primary": "/etc/overture/china_ip_list.txt",
-	  "Alternative": ""
-  },
-  "DomainFile": {
-	  "Primary": "",
-	  "Alternative": "/etc/overture/gfwlist.txt"
-  },
-  "HostsFile": "/etc/overture/hosts",
-  "MinimumTTL": 0,
-  "DomainTTLFile": "/etc/overture/domain_ttl.txt",
   "CacheSize": 0,
-  "RejectQtype": [255]
+  ...
 }
