@@ -78,6 +78,18 @@ $ ss -s
 # ss -nlptu | grep <端口号>
 ```
 
+### dd
+
+备份GPT分区表
+```console
+# dd if=/dev/sda of=gpt-partition.bin bs=512 count=34
+```
+
+恢复GPT分区表
+```console
+# dd if=gpt-partition.bin of=/dev/sda bs=512 count=34
+```
+
 ### 查看电池电量
 
 以我的平板举个例子
