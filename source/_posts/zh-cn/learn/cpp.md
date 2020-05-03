@@ -951,3 +951,52 @@ int main()
     // So it's better don't use this in C++
 }
 ```
+
+## Implicit Conversion and the Explicit Keyword in C++
+
+```C++
+class Entity
+{
+private:
+    std::string m_Name;
+    int m_Age;
+public:
+    Entity(const std::string& name)
+        : m_Name(name), m_Age(-1) P{}
+    // Use explicit keyword to disable implicit conversion
+    explicit Entity(int age)
+        : m_Name("Unknown"), m_Age(age) {}
+}
+
+void PrintEntity(const Entity& entity)
+{
+    // Printing Statements
+}
+
+int main()
+{
+    // It's weird , you can't do this in other languages(such as C# or Java)
+    // This is called implicit conversion
+    // It implicit converting "Cherno" into Entity's Constructor Method: Entity(const std::string& name)
+    Entity a = "Cherno";
+    // 虽然上面是个很好的隐式转换的例子, 但是不建议用这种语法实例化对象
+
+
+    // You cannot do explicit conversion with explicit method anymore
+    // This is not allowed
+    Entity b = 22;
+    // Correct sentence:
+    Entity b = Entity(22);
+    
+
+    // This is not allowed
+    PrintEntity("Cherno"); 
+    // "Cherno" is a const char array
+    // C++ need to do two conversions, one from const char* to std::string, and then call into Entity(const std::string& name)
+    // It's only allowed to do one implicit conversion at same time
+    // Correct sentence:
+    PrintEntity(std::string("Cherno");
+    // or as normal:
+    PrintEntity(Entity("Cherno"));
+}
+```
