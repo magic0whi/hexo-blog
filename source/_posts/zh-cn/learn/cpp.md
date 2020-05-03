@@ -1000,3 +1000,73 @@ int main()
     PrintEntity(Entity("Cherno"));
 }
 ```
+
+## OOERATORS and OPERATOR OVERLOADING in C++
+
+In the case of operator overloading you're allowed to define or change the behavior of operator
+
+**Operators are just functions**
+
+Here goes some examples:
+```C++
+struct Vector2
+{
+    float x, y;
+
+    Vector2(float x, float y)
+        : x(x), y(y) {}
+
+    // overload the function "operator+()" equals redefine the behavior of operator plus in this Object
+    Vector2 operator+(const Vector2& other) const
+    {
+        return Vector2(x + other.x, y + other.y);
+    }
+
+    // As same with above
+    Vector2 operator*(const Vector2& other) const
+    {
+        return Vector2(x * other.x, y * other.y);
+    }
+
+    // As same with above
+    bool operator==(const Vector2& other) const
+    {
+        return x == other.x && y == other.y;
+    }
+    
+    bool operator!=(const Vector2& other) const
+    {
+        // We have a simple way
+        return !operator==(other);
+        // Or
+        // return !(*this == other);
+    }
+};
+
+// See the use case in main()
+std::ostream& operator<<(std::string& stream, const Vector2& other)
+{
+    stream << other.x << ", " << other.y;
+    return stream;
+}
+
+int main()
+{
+    Vector2 position(4.0f, 4.0f);
+    Vector2 speed(0.5f, 1.5f);
+    Vector2 powerup(1.1f, 1.1f);
+
+
+    Vector2 result1 = position + speed * powerup;
+
+    // We cannot output the variables in vector directly
+    // We need overload the function "operator<<"
+    std::cout << result1 << std::endl;
+
+
+    // In programs such like Java we have to use equals() to compare objects
+    // but in C++ we can simply overload the "operator=="
+    if(retult1 == position) std::cout<< "foo" << std::endl;
+
+}
+```
