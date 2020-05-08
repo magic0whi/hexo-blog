@@ -119,6 +119,8 @@ master分支并没有还未从topic合并的commit。更糟的是，如果你在
 ...
 ProxyCommand nc -v -x 127.0.0.1:1080 %h %p
 ...
+# 或者 socat (http代理)
+ProxyCommand=socat - PROXY:127.0.0.1:%h:%p,proxyport=1080
 ```
 
 ## 更好的Submodule

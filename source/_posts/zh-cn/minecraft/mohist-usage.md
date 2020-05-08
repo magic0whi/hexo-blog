@@ -63,3 +63,9 @@ Usage:
 ## GriefPrevention (已弃用)
 
 目前使用替代方案GriefDefender
+
+## 挂载备份目录
+
+```console
+# mount -t cifs //192.168.x.x/public/Game/minecraft/mohist_backup /mnt/mohist_backup -o username=xxxxxxxx,password=xxxxxxxx,workgroup=workgroup,iocharset=utf8,uid=mohist,gid=mohist
+```
