@@ -90,3 +90,25 @@ Example:
 ```
 
 具体见: [标签插件](https://hexo.io/zh-cn/docs/tag-plugins.html)
+
+#### UML Diagram
+
+```markdown
+{% plantuml %}
+@startuml
+Object <|-- ArrayList
+Object : equals()
+ArrayList : Object[] elementData
+ArrayList : size()
+@enduml
+{% endplantuml %}
+```
+
+{% plantuml %}
+@startuml
+Object <|-- ArrayList
+Object : equals()
+ArrayList : Object[] elementData
+ArrayList : size()
+@enduml
+{% endplantuml %}

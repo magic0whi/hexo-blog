@@ -166,6 +166,7 @@ if [ ! -d /var/www/blog/node_modules ]; then
     npm uninstall hexo-renderer-marked
     npm install hexo-renderer-markdown-it-plus
     npm install hexo-tag-mplayer
+    npm install hexo-filter-plantuml
 fi
 
 hexo g
@@ -178,6 +179,7 @@ hexo-symbols-count-time # 字数统计
 hexo-generator-searchdb # 站内搜索
 hexo-renderer-markdown-it-plus # 支持katex的渲染器(需要卸载默认的hexo-renderer-marked)
 hexo-tag-mplayer # 音乐播放器
+hexo-filter-plantuml # UML Diagram for hexo
 ```
 
 ## 部署教程
