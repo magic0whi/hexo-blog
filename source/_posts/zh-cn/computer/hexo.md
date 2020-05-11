@@ -74,13 +74,14 @@ cd /var/www/blog
 
 # 若node_modules文件夹不存在, 安装依赖插件
 if [ ! -d /var/www/blog/node_modules ]; then
-    npm install;
+    npm install
 fi
 
 # 若package.json有改动, 更新插件
 CHANGED=$(git --git-dir=/home/git/blog.git diff HEAD^! --stat -- package.json | wc -l)
 if [ $CHANGED -gt 0 ]; then
-    npm update
+    rm -rf /var/www/blog/node_modules
+    npm install
 fi
 
 # 生成静态网页
