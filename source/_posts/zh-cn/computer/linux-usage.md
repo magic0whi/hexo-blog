@@ -3,6 +3,7 @@ title: linux-usage
 category: computer
 date: 2020-02-08 16:42:06
 tags:
+toc: true
 ---
 
 一份我的Linux手扎
@@ -12,6 +13,13 @@ tags:
 <!-- more -->
 
 ## linux命令
+
+### sed
+
+从Next的Katex行内式 `$...$`迁移到Icarus的Katex行内式`\\(...\\)`
+```console
+$ sed -i 's,\$\([^$]*\)\$,\\\\(\1\\\\),g' file.md
+```
 
 ### grep
 

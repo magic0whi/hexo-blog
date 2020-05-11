@@ -4,6 +4,7 @@ lang: zh-cn
 category: learn
 date: 2020-04-04 19:16:59
 tags:
+toc: true
 ---
 
 一个更简单的<<提问的智慧>>, 缓解 TL; DR

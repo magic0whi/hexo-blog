@@ -3,6 +3,7 @@ title: dns
 category: computer
 date: 2020-02-08 16:41:37
 tags:
+toc: true
 ---
 
 一个简单的局域网DNS

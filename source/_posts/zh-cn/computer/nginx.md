@@ -3,6 +3,7 @@ title: nginx
 category: computer
 date: 2020-02-08 16:42:15
 tags:
+toc: true
 ---
 
 # Nginx 配置改动

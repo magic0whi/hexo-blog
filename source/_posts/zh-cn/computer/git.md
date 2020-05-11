@@ -3,6 +3,7 @@ title: git
 category: computer
 date: 2020-02-08 16:41:45
 tags:
+toc: true
 ---
 
 一些git的使用技巧

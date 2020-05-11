@@ -3,6 +3,7 @@ title: hexo-usage
 category: computer
 date: 2020-02-08 17:51:36
 tags:
+toc: true
 ---
 
 Hexo 的一些命令和概念速记
@@ -16,6 +17,16 @@ Hexo 的一些命令和概念速记
 清除缓存(在hexo g之前做一次): `$ hexo clean`
 
 网站发布: `$ hexo generate`
+
+### 升级Hexo
+
+```console
+# npm update -g # 升级npm全局插件
+# npm install npm-check npm-upgrade -g # 针对package.json的操作, 前者只是检查有更新的插件, 后者应用改动
+$ cd /path/to/your/blog
+$ npm-upgrade # 更新package.json中的插件版本
+$ npm update # 实际更新插件
+```
 
 ## 一些概念
 
@@ -46,6 +57,7 @@ date: 2013/7/13 20:46:25
 categories:
 - Diary
 tags:
+toc: true
 - PS3
 - Games
 ```
@@ -59,6 +71,7 @@ tags:
 title: hello hexo markdown
 date: 2016-11-16 18:11:25
 tags:
+toc: true
 - hello
 - hexo
 - markdown

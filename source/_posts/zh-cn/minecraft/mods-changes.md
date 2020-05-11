@@ -3,6 +3,7 @@ title: mods-changes
 category: minecraft
 date: 2020-02-08 16:43:28
 tags:
+toc: true
 ---
 
 我的世界Mod配置文件的改动记录

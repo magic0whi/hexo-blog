@@ -3,6 +3,7 @@ title: mohist-mod-list
 category: minecraft
 date: 2020-02-11 11:45:01
 tags:
+toc: true
 ---
 
 一张详细的猫端服务器&插件&Mod版本列表

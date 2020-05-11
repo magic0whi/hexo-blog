@@ -3,6 +3,7 @@ title: linux
 category: computer
 date: 2020-02-08 16:42:06
 tags:
+toc: true
 ---
 
 记录linux的配置修改

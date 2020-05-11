@@ -3,6 +3,7 @@ title: windows10-usage
 category: computer
 date: 2020-02-09 09:44:22
 tags:
+toc: true
 ---
 
 记录一些windows的使用技巧

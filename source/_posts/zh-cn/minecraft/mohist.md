@@ -3,6 +3,7 @@ title: mohist
 category: minecraft
 date: 2020-02-08 16:43:15
 tags:
+toc: true
 ---
 
 Mohist & Spigot 系Mod服务器配置

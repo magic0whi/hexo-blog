@@ -3,6 +3,7 @@ title: Hexo 配置改动及常用命令
 category: computer
 date: 2020-02-08 12:24:49
 tags:
+toc: true
 ---
 
 记录在搭建 Hexo 博客的途中都折腾了哪些内容
@@ -42,107 +43,19 @@ new_post_name: :lang/:category/:title.md
 post_asset_folder: true
 
 # 主题
-theme: next
-
-# 站内搜索[1/2]
-search:
-  path: search.xml
-  field: post
-  format: html
-  limit: 10000
+theme: icarus
 
 # 解决半角符号渲染成全角的问题
 marked:
   smartypants: false
 ```
 
-### NexT 主题设置
+### Icarus 主题设置
 
-```yml hexo/theme/next/_config.yml
-# 展开所有各级标题
-toc:
-  ...
-  expand_all: true
+主题设置由于改动较多且时效性不高, 这里不作记录
+具体请见主题配置文件 `theme/icarus/_config.yml`
 
-# 主题
-scheme: Gemini
-
-# 关于页面, 添加关于, 标签, 分类页面
-menu:
-  ...
-  about: /about/ || user
-  tags: /tags/ || tags
-  categories: /categories/ || th
-
-# Back to top 按钮
-back2top:
-  scrollpercent: true # 阅读进度百分比
-
-# 页脚
-footer:
-  since: 2020
-  ...
-  powered:
-    ...
-    version: false # 不显示具体版本
-  theme:
-    ...
-    version: false # 不显示具体版本
-
-# 阅读字数统计和时间估计
-symbols_count_time:
-  awl: 2 # 多少字符统计为一个字, 中文为2
-  wpm: 250 # 一分钟读多少字
-
-# 禁止百度提供"移动端优化版"网页
-disable_baidu_transformation: true
-
-# 站内搜索[2/2]
-local_search:
-  enable: true
-
-font:
-  enable: true
-  ...
-  global:
-    ...
-    family: Noto Serif SC # 谷歌思源宋体
-    size: 0.875 # 更好的字体大小, 约14px
-
-# 文本居左以避免出现奇怪的空格间距
-text_align:
-  desktop: start
-  mobile: start
-
-# 启用 Latex 支持
-math:
-  ...
-  katex:
-    enable: true
-```
-
-主线以归档的形式显示文章, 感谢[@liolok](https://github.com/liolok/hexo-theme-next/commit/745fcd6e4d0bbec2bd7c3b83424d96d16da44459)
-```patch hexo/themes/next/layout/index.swig
- {% extends '_layout.swig' %}
-+{% import '_macro/post-collapse.swig' as post_template with context %}
- {% import '_macro/sidebar.swig' as sidebar_template with context %}
- 
- {% block title %}{{ title }}{%- if theme.index_with_subtitle and subtitle %} - {{ subtitle }}{%- endif %}{% endblock %}
- 
- {% block content %}
- 
--  <div class="posts-expand">
--    {%- for post in page.posts.toArray() %}
--      {{ partial('_macro/post.swig', {post: post, is_index: true}) }}
--    {%- endfor %}
-+  <div class="post-block">
-+    <div class="posts-collapse">
-+      {{ post_template.render(page.posts) }}
-+    </div>
-   </div>
- 
-   {% include '_partials/pagination.swig' %}
-```
+将主页样式变为归档页形式: 直接将`theme/icarus/layout/index.jsx` 替换成 `theme/icarus/layout/archive.jsx` 内的内容
 
 ### Git Hook
 
@@ -156,28 +69,29 @@ rm -rf /var/www/blog/!(node_modules)
 # git checkout
 git --work-tree=/var/www/blog --git-dir=/home/git/blog.git checkout -f
 
-
-# 安装依赖, 生成静态网页
+# 进入网页文件夹目录
 cd /var/www/blog
+
+# 若node_modules文件夹不存在, 安装依赖插件
 if [ ! -d /var/www/blog/node_modules ]; then
     npm install;
-    npm install hexo-symbols-count-time
-    npm install hexo-generator-searchdb
-    npm uninstall hexo-renderer-marked
-    npm install hexo-renderer-markdown-it-plus
-    npm install hexo-tag-mplayer
-    npm install hexo-filter-plantuml
 fi
 
+# 若package.json有改动, 更新插件
+CHANGED=$(git --git-dir=/home/git/blog.git diff HEAD^! --stat -- package.json | wc -l)
+if [ $CHANGED -gt 0 ]; then
+    npm update
+fi
+
+# 生成静态网页
 hexo g
 ```
 
-### 额外需要的插件
+### 额外安装的插件
 
 ```
 hexo-symbols-count-time # 字数统计
-hexo-generator-searchdb # 站内搜索
-hexo-renderer-markdown-it-plus # 支持katex的渲染器(需要卸载默认的hexo-renderer-marked)
+hexo-renderer-markdown-it # 更快的渲染器(需要卸载默认的hexo-renderer-marked)
 hexo-tag-mplayer # 音乐播放器
 hexo-filter-plantuml # UML Diagram for hexo
 ```
@@ -256,6 +170,7 @@ encrypt:
 title: hello world
 date: 2016-03-30 21:18:02
 tags:
+toc: true
 password: 12345
 abstract: 是该博文的摘要
 message: 这个是博文查看时, 密码输入框上面的描述性文字

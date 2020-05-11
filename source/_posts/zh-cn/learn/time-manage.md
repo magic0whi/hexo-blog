@@ -3,6 +3,7 @@ title: time-manage
 category: learn
 date: 2020-02-08 16:44:48
 tags:
+toc: true
 ---
 
 使用 Trello + Toggl 来管理时间

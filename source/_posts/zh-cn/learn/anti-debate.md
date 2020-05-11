@@ -3,6 +3,7 @@ title: anti-debate
 category: learn
 date: 2020-02-14 16:35:21
 tags:
+toc: true
 ---
 
 以下记录的是一些为了减少发生争执所作出的努力

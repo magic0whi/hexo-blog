@@ -3,6 +3,7 @@ title: mohist-usage
 category: minecraft
 date: 2020-02-08 19:09:15
 tags:
+toc: true
 ---
 
 Mohist & Spigot 系插件使用笔记

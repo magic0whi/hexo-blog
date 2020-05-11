@@ -3,6 +3,7 @@ title: mpv
 category: computer
 date: 2020-02-29 18:57:17
 tags:
+toc: true
 ---
 
 MPV的配置

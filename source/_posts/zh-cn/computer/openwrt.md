@@ -4,6 +4,7 @@ category: computer
 lang: zh-cn
 date: 2020-04-27 09:51:33
 tags:
+toc: true
 ---
 
 记录小米路由器3G 的 Openwrt 配置
