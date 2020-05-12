@@ -1074,3 +1074,66 @@ int main()
 
 ## Ths "this" keyword in C++
 
+this是一个指向当前方法所在对象的指针
+避免形参名字和对象成员变量的名字一样所造成的歧义
+
+```C++
+class Entity
+{
+public:
+    int x, y;
+    Entity(int x, int y)
+    {
+        // 这里只是示范, 实际有更方便的构造参数列表来赋值
+        this->x = x; // or (*this).x = x;
+    }
+}
+```
+
+## Object Lifetime in C++ (Stack/Scope Lifetimes)
+
+下面的例子讲了三件事:
+1. 编写函数时不要返回在stack内存空间创建的对象
+2. 使用 `{}` 创建局部scope以使stack上的对象更早地被自动清理
+3. Unique Pointer的基本原理展示
+
+```C++
+int* CreateArray()
+{
+    // Don't write code like this
+    // The array gets cleared as soon as we go out of scope
+    int array[50];
+    return array;
+}
+
+class ScopedPtr
+{
+private:
+    Entity* m_Ptr;
+public:
+    ScopedPtr(Entity* ptr) : m_Ptr(ptr)
+    {}
+
+    ~ScopedPtr()
+    {
+        delete m_Ptr; // delete Entity when ScopedPtr get deleted
+    }
+}
+
+int main()
+{
+    // scope with brace
+    {
+        Entity e; // the object created on stack will gets free when out of the scope
+
+        // We could use something in the standard library called unique pointer which is a scoped pointer
+        // but here we write our own to explain how it works
+        ScopedPtr e = new Entity(); // It's implicit conversion
+        // because the scoped pointer object gets allocated on the stack which means it will gets deleted when out of the scope and call ~ScopedPtr()
+        // then corresponding the Entity will gets deleted
+    }
+}
+```
+
+## SMART POINTERS in C++ (std::unique_ptr, std::shared_ptr, std::weak_ptr)
+
