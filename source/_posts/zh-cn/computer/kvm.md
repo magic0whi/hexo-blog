@@ -4,13 +4,16 @@ category: computer
 lang: zh-cn
 date: 2020-05-20 10:31:33
 tags:
+toc: true
 ---
 
 This article includes:
-KVM + Libvirt + WebVirtCloud
-PCI passthrough via OVMF
+1. KVM + Libvirt + WebVirtCloud
+2. PCI passthrough via OVMF
 
 <!-- more -->
+
+## KVM + Libvirt + WebVirtCloud 安装
 
 先安装这个[webvirtcloud](https://github.com/magic0whi/aur-webvirtcloud-git)
 然后执行 `/srv/webvirtcloud/configuration-install.sh`
