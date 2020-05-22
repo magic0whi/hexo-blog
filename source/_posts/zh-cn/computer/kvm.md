@@ -40,11 +40,14 @@ done;
 然后注意, 如果你的PCIe插槽未作隔离(PCIe的IOMMU组中有多个设备, 包括PCIe本身), 如这样
 ```
 IOMMU Group 1:
-	 00:01.0 PCI bridge: Intel Corporation Xeon E3-1200 v2/3rd Gen Core processor PCI Express Root Port (rev 09)
+	 00:01.0 PCI bridge: Intel Corporation Xeon E3-1200 v2/3rd Gen Core processor PCI Express Root Port [8086:0151] (rev 09)
 	 01:00.0 VGA compatible controller: NVIDIA Corporation GM107 [GeForce GTX 750] (rev a2)
 	 01:00.1 Audio device: NVIDIA Corporation Device 0fbc (rev a1)
 ```
-解决方案是把要透传的显卡换一个PCIe插槽
+解决方案(两种):
+* 把要透传的显卡换一个PCIe插槽
+* 安装带 ACS override patch 的 [linux-vfio](https://aur.archlinux.org/packages/linux-vfio/), 然后 [kernel parameter](https://wiki.archlinux.org/index.php/Kernel_parameter) 加上 `pcie_acs_override =id:8086:0151` , 其中 `8086:0151` 是你的PCI插槽的 VendorID:DeviceID
+
 关于此问题更多详见[IOMMU Gotchas](https://wiki.archlinux.org/index.php/PCI_passthrough_via_OVMF#Gotchas)
 
 
@@ -73,7 +76,6 @@ HOOKS=(... modconf ...)
 由于N卡有两个设备,一个是VGA(PCI地址03:00.0), 另一个是 Audio(PCI地址03:00.1)
 就要有2个\<hostdev\>
 
-
 执行`virsh -c qemu:///system edit <VM-Name>` 添加下列字段:
 ```xml
   <devices>
@@ -84,7 +86,7 @@ HOOKS=(... modconf ...)
       <address domain='0x0000' bus='0x03' slot='0x00' function='0x0'/>
     </source>
     <rom file='/var/lib/libvirt/customroms/gt610_updGOP.rom'/>
-    <address type='pci' domain='0x0000' bus='0x00' slot='0x04' function='0x0'/>
+    <address type='pci' domain='0x0000' bus='0x09' slot='0x00' function='0x0' multifunction='on'/>
   </hostdev>
   <hostdev mode='subsystem' type='pci' managed='yes'>
     <driver name='vfio'/>
@@ -92,10 +94,13 @@ HOOKS=(... modconf ...)
       <address domain='0x0000' bus='0x03' slot='0x00' function='0x1'/>
     </source>
     <rom file='/var/lib/libvirt/customroms/gt610_updGOP.rom'/>
-    <address type='pci' domain='0x0000' bus='0x00' slot='0x05' function='0x0'/>
+    <address type='pci' domain='0x0000' bus='0x09' slot='0x00' function='0x1'/>
   </hostdev>
   ...
   </devices>
 ```
 
+这里我总线地址选了 `0x09` , 只要没被xml下别的虚拟设备声明的PCI总线地址都行
+
 这里我用了经过GOPupd升级的自定义的VBIOS, 因为我的GT610固件不支持EFI
+5-22-20: GT610不行, PCI PassThrough 下只要从VGA模式切换到带3D加速的显卡驱动就会Kernel Freeze, 最终只能充当 boot_vga
