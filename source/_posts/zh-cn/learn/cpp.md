@@ -1137,3 +1137,75 @@ int main()
 
 ## SMART POINTERS in C++ (std::unique_ptr, std::shared_ptr, std::weak_ptr)
 
+Smart pointers mean that when you call `new` , you don't have to call `delete`
+In face in many cases with smart pointers we don't even have to call `new`
+
+This episode introduce:
+1. unique pointer
+2. shared pointer & weak pointer
+
+```C++
+#include <iostream>
+#include <string>
+#include <memory>
+
+class Entity()
+{
+public:
+    Entity()
+    {
+        std::cout << "Created Entity!" << std::endl;
+    }
+
+    ~Entity()
+    {
+        std::cout << "Destoryed Entity~" << std::endl;
+    }
+
+    void Print() {}
+}
+
+int main()
+{
+    {
+        // All smart pointer are marked as explicit
+        std::unique_ptr<Entity> uniqueEntity(new Entity());
+        // The preferred way through to construct this would be to assign it to std::make_unique<Entity>
+        // The primary that is important for unique pointers is due to exception safety
+        std::unique_ptr<Entity> uniqueEntity = std::make_unique<Entity>();
+
+        // You can access it like you would normally
+        uniqueEntity->Print();
+
+        // Tou cannot copy unique pointer, you will get a compile error
+        std::unique_ptr<Entity> e0 = entity;
+
+        
+        // If you go to definition of unique pointer you'll see that the copy constructor
+        // and copy assignment operator are deleted;
+
+         // shared pointer is use something called reference counting
+         // You create one shread pointer and you define another shared pointer and copy the
+         // previous one, the reference count is now 2,
+         // when the first one dies(out of scope), the reference count goes down 1
+         // and when the last one dies. the reference count goes back to zero,
+         // and free the memory.
+         // BTW, for shared pointer using make_shared is very recommand because its more efficient
+         
+         // There is something else that you can use with shared pointer is called weak pointer
+         // weak pointer will not increase the reference count
+         std::weak_ptr<Entity> weakEntity;
+         {
+
+             std::shared_ptr<Entity> sharedEntity = std::make_shared<Entity>();
+             weakEntity = sharedEntity2;
+         }
+         // The sharedEntity will still be free immediately here.
+
+    }
+    
+}
+
+```
+
+## Copying and Copy Constructors in C++
