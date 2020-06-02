@@ -16,6 +16,11 @@ TODO: 重新格式化这篇博文
 
 > 如果你看到夹杂英文, 那是我直接copy了@Cherno的话并懒得翻译
 
+## Notice
+
+1. Always pass your function parameters with const
+2. if object have pointer variable, write copy constructor
+
 ## How C++ Works
 
 概念：每个cpp都会编译成一个obj,但一个cpp基本等于一个translation unit，除非这些cpp互相include组成一个大cpp文件
@@ -1209,3 +1214,87 @@ int main()
 ```
 
 ## Copying and Copy Constructors in C++
+
+1. Ues "="(called Shallow Copy) to copy 
+   an object created on stack(with `new`) which is without a Copy Constuctors
+   or an object created on heap but with private pointer variables
+   will lead to unexpected results.
+   It's essentially just copy the address data in pointer variable
+2. So you need a Copy Constructor which delimit the behavior of the copy operation.
+
+```C++
+class String
+{
+private:
+    char* m_Buffer;
+    unsigned int m_Size;
+public:
+    String(const char* string)
+    {
+        m_Size = strlen(string);
+        m_Buffer = new char[m_Size + 1]; // +1 for last null termination char
+        // You can also use strcpy()
+        memcpy(m_Buffer, string, m_Size + 1);
+    }
+
+    // Copy Consturcor
+    String(const String& other)
+        : m_Size(other.m_Size)
+    {
+        m_Buffer = new char[m_Size + 1];
+        // Or if you want to be more exciting, you can use this instead
+        // memcpy(this, &other, sizeof(String));
+    }
+
+    // Or you can just prevent this object to do copy operation
+    //String(const String& other) = delete;
+
+    ~String()
+    {
+        delete[] m_Buffer;
+    }
+
+    char& operator[](unsigned int index)
+    {
+        return m_Buffer[index];
+    }
+
+    // make <<() to be a fried so it can access private variables in this object
+    friend std::ostream& operator<<(std::ostream& stream, const String& string);
+};
+
+std::ostream& operator<<(std::ostream& stream, const String& string)
+{
+    stream << string.m_Buffer;
+    return stream;
+}
+
+int main()
+{
+    String first_String = "Cherno";
+    String second_string = first_string;
+    
+    second_string[2] = 'a';
+
+    std::cout << first_String << endl;
+    std::cout << first_String << endl;
+}
+``` 
+
+## The Arrow Operator in C++
+
+## Dynamic Arrays in C++ (std::vector)
+
+## Optimizing the usage of std::vector in C++
+
+## Using Libraries in C++ (Static Linking)
+
+## Using Dynamic Libraries in C++
+
+## Making and Working with Libraries in C++ (Multiple Projects in Visual Studio)
+
+## How to Deal with Multiple Return Values in C++
+
+## Templates in C++
+
+## Stack vs Heap Memory in C++
