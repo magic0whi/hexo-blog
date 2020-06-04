@@ -755,7 +755,7 @@ const 修饰的方法无法改变类中的变量
 Only avaliable in class method
 
 涉及内容:
-1. 当const方法返回指针类型时怎么做
+1. 当const方法返回指针类型时怎么做: 方法数据类型应为 "const int* const"
 2. 以 `const Object&` 实例化的对象只能访问const方法
 3. `mutable` 变量
 
@@ -1216,8 +1216,8 @@ int main()
 ## Copying and Copy Constructors in C++
 
 1. Ues "="(called Shallow Copy) to copy 
-   an object created on stack(with `new`) which is without a Copy Constuctors
-   or an object created on heap but with private pointer variables
+   an object created on heap(with `new`) which is without a Copy Constuctors
+   or an object created on stack but with private pointer variables(objects created on heap)
    will lead to unexpected results.
    It's essentially just copy the address data in pointer variable
 2. So you need a Copy Constructor which delimit the behavior of the copy operation.
@@ -1283,9 +1283,155 @@ int main()
 
 ## The Arrow Operator in C++
 
+0. Normal usage
+   ```C++
+   int main()
+   {
+       Entity* entity = new Entity();
+       entity->x = 2; // = (*entity).x = 2;
+   }
+   ```
+1. It is actually possible to overload the Arror Operator and use it in specific class such as ScopedPtr (For more see previous chapter: SMART POINTERS in C++).
+   ```C++
+   class Entity
+   {
+   public:
+       void Print() const { std::cout << "Hello!" << std::endl; }
+   };
+
+   class ScopedPtr
+   {
+   private:
+       Entity* m_Obj;
+   public:
+       ScopedPtr(Entity* entity)
+           : m_Obj(entity)
+       {}
+
+       ~ScopedPtr()
+       {
+           delete m_Obj;
+       }
+
+       Entity* operator->()
+       {
+           return m_Obj;
+       }
+   };
+
+   int main()
+   {
+       ScopedPtr entity = new Entity(); // Do you still remember the Implicit Conversion?
+       entity->Print();
+   }
+   ```
+2. It can also be used to get the variable's memory offset in an Object (In some memory hack :)
+   ```C++
+   struct Vector3
+   {
+       // I deliberately desrupt the naming order to make it in a different memory layout.
+       float z, y, x;
+   };
+   
+   int main()
+   {
+       // Get the offset of that 'x'
+       int offset = (int) &((Vector3*)0)->x; // Or &((Vector3*)nullptr)->x;
+       std::cout << offset << std::endl;
+   }
+   ```
+
 ## Dynamic Arrays in C++ (std::vector)
 
+1. Vector in C++ is not mathematical vector, it's kind of like Dynamic Arrays
+
+```C++
+struct Vertex
+{
+    float x, y, z;
+};
+
+std::ostream& operator<<(std::ostream& stream, const Vertex& vertex)
+{
+    stream << vertex.x << ", " << vertex.y << ", " << vertex.z;
+    return stream;
+}
+
+int main()
+{
+    // the '<Object>' is called template, will show in later chapter
+    // For now, we only need to know this definite the type which the Dynamic Arrarys stores
+    std::vector<Vertex> vertices;
+    // It is hard to decide whether you should be using like vertex pointers
+    // or just vertex object in this case
+    // Which is object stored in line or fragmented in memory
+
+    // Add object to the end of Dynamic Array
+    vertices.push_back({ 1, 2, 3 }); // Note: Implicit conversion
+    vertices.push_back({ 4, 5, 6 });
+
+    // Using range based 'for loop' to iterate the object in Dynamic Array
+    for (const Vertex& v : vertices)
+        std::cout << v << sed::endl;
+
+    // We can remove object in dynamic array individually
+    // This remove the second object in dynamic array
+    vertices.erase(vertices.begin() + 1);
+
+    // Or we can clean the whole dynamic array
+    vertices.clear();
+}
+```
+
 ## Optimizing the usage of std::vector in C++
+
+Two ways to reduce memory copy
+
+```C++
+struct Vertex
+{
+    float x, y, z;
+
+    Vertex(float x, float y, float z)
+        : x(x), y(y), z(z)
+    {
+    }
+
+    // Copy Constructor, used to capture copied times
+    Vertex(const Vertex& v)
+        : x(v.x), y(v.y), z(v.z)
+    {
+        // Output to console to see how many times copied
+        std::cout << "Copied!" << std::endl;
+    }
+};
+
+int main()
+{
+    std::vector<Vertex> vertices_bad;
+    vertices_bad.push_back(Vertex(1, 2, 3)); // Make it easier to read than previous chapter
+    vertices_bad.push_back(Vertex(4, 5, 6));
+    vertices_bad.push_back(Vertex(7, 8, 9));
+    vertices_bad.push_back(Vertex(10, 11, 12));
+    // Each pass parameter operation in push_back() will cause 1 copy operation
+    // And **each push_back() called will cause memory rearrange**,
+    // which are copy previous objects in dynamic array into new memory area.
+    // So total copied times: 1 + (1 + 1) + (1 + 2) + (1 + 3) = 10
+
+    std::cout << "vertices good" << std::endl;
+    std::vector<Vertex> vertices_good;
+
+    // Below is the optimized implementation
+    // 1. Use reserver() to prevent memory rearrange.
+    vertices_good.reserve(4);
+    // 2. Replace push_back() with emplace_back() to prevent parameter copy
+    // it acts as a proxy to process you provided parameter into Constructor.
+    vertices_good.emplace_back(1, 2, 3);
+    vertices_good.emplace_back(4, 5, 6);
+    vertices_good.emplace_back(7, 8, 9);
+    vertices_good.emplace_back(10, 11, 12);
+}
+```
 
 ## Using Libraries in C++ (Static Linking)
 
