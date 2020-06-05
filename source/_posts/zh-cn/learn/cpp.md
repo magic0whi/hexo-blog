@@ -1433,9 +1433,73 @@ int main()
 }
 ```
 
-## Using Libraries in C++ (Static Linking)
+## Using Libraries in C++
 
-## Using Dynamic Libraries in C++
+Preposition work:
+ Visual Studio Setup
+   Using GLFW as example:
+   1. Create a folder called "Dependencies" under your project directory
+      and then put your libraries into it.
+      ```txt C:\Users\USERNAME\source\repos\Your_Project_Directory\
+      Dependencies\
+      -> GLFW\
+         -> include\
+            -> GLFW\
+               glfw3.h
+               ...
+         -> lib-vc2015\
+            glfw3.dll
+            glfw3.lib
+            glfw3.dll.lib
+      ```
+   2. Open your project settings:
+      -> Configuration: All Configuration
+      -> C/C++ -> Additional Include Directories: `$(SolutionDir)\Dependencies\GLFW\include`
+      -> Linker -> General -> Additional Library Directories: `$(SolutionDir)\Dependencies\GLFW\lib-vc2015`
+
+### Static linking
+
+Static linking happens at compile time, the lib intergrate into executable or a dynamic library
+
+1. Open your project setting
+   -> Linker -> Input -> Additional Dependencies: `glfw3.lib;xxxxxx;balabala;...`
+2. Static Link
+   ```C++ Main.cpp
+   // quote for header in this project, regular bracket for external library
+   #include <GLFW/glfw3.h>
+   \\ Or `extern "C" int glfwInit();`
+   \\ Because GLFW is actually a C library so we need `extern "C"`
+   int main()
+   {
+       int result = glfwInit();
+       std::cout << result << std::endl;
+   }
+   ```
+
+### Dynamic linking
+
+Dynamic linking happens at runtime
+
+* Some librarys like GLFW  supports both static and dynamic linking in a single header file
+* `glfw3.dll.lib` is basically a series of pointers into `glwfw3.dll`
+
+0. Code is basically as same as the Static linking above
+1. Open your project settings:
+   -> Linker -> Input -> Additional Dependencies: `glfw3.dll.lib;xxxxxx;balabala;...`
+2. put your dll file(`glfw3.dll`) to the same folder as your executable file(i.e: `$(SolutionDir)\Debug`)
+3. In fact, to call a function in dynamic library, it needs a prefix called `__declspec(dllimport)`
+   If you explore `glfw3.h` you will see there is a `GLFWAPI` prefix in every function definition,
+   ```C++
+   #elif defined(_WIN32) && defined(GLFW_DLL)
+   /* We are calling GLFW as a Win32 DLL */
+    #define GLFWAPI __declspec(dllimport)
+   ```
+   So **you need to define a Macro** in VS:
+   Open your project setting:
+   -> C/C++ -> Preprocessor -> Preprocessor Definitions: `GLFW_DLL;xxxxx;bababa...`
+   
+   But why it seems stll work properly without the `dllimport` prefix?
+   In modern windows, `dllimport` is not needed for functions, but `dllimport` is still needed for C++ classes and global variables.
 
 ## Making and Working with Libraries in C++ (Multiple Projects in Visual Studio)
 
