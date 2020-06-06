@@ -32,3 +32,4 @@ P社游戏爱好者, Minecraft, Tom Clancy's The Division 2
 {% endmplayer %}
 
 I am no bird; and no net ensuares me: I am a free human being with an independent will. - Jane Eyre
+进一步的推论: 我不是鸟, 但我知道有希望; 深刻的故事固然不错, 但书写希望才是人们所需要的. 如果100年前的鲁迅先生, 想到了这点, 他的文章又会如何呢? - 观Ref:rain有感
