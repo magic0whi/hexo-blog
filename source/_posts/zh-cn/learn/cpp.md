@@ -1503,8 +1503,64 @@ Dynamic linking happens at runtime
 
 ## Making and Working with Libraries in C++ (Multiple Projects in Visual Studio)
 
+1. Visual Studio Setup:
+   1. Create one solution with 2 projects "Game" and "Engine",
+   2. Project "Game":
+   -> Ceneral->Project Defaults->Configuration Type: Application (.exe)
+   -> C/C++ -> General -> Additional include Directories: `$(SolutionDir)\Engine\src;`
+
+   3. Project "Engine":
+   Ceneral->Project Defaults->Configuration Type: Static library (.lib)
+
+   4. Right click on projects "Game" -> Add -> Reference -> Select project "Enginx"
+2. Code for project "Engine":
+   ```C++ Your_Project_Directory\src\Engine.h
+   #pragma once
+
+   namespace engine {
+       void PrintMessage();
+   }
+   ```
+   ```C++ Your_Project_Directory\src\Engine.cpp
+   #include "Engine.h"
+
+   #include <iostream>
+
+   namespace engine {
+       void PrintMessage()
+       {
+           std::cout << "Hello World!" << std::endl;
+       }
+   }
+   ```
+3. Code for project "Game":
+   ```C++ Your_Project_Directory\src\Application.cpp
+   #include "Engine.h"
+
+   int main()
+   {
+       engine::PrintMessage();
+   }
+   ```
+
 ## How to Deal with Multiple Return Values in C++
 
 ## Templates in C++
 
 ## Stack vs Heap Memory in C++
+
+## Macros in C++
+
+## The "auto" keyword in C++
+
+## Static Arrays in C++ (std::array)
+
+## Function Pointers in C++
+
+## Lambdas in C++
+
+## Why I don't "using namespace std"
+
+## Namespaces in C++
+
+## Threads in C++
