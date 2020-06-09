@@ -1545,7 +1545,163 @@ Dynamic linking happens at runtime
 
 ## How to Deal with Multiple Return Values in C++
 
+Example scenario: we have a function called `ParseShader()` , it needs to return two strings
+
+1. Return a struct cotains two strings (Cherno's choose):
+   ```C++
+   struct ShaderProgramSource
+   {
+       std::string VertexSource;
+       std::string FragmentSource;
+   }
+
+   ShaderProgramSource ParseShader()
+   {
+       // Some statements that process result 'vs' and 'fs'
+       // ...
+       return { vs, fs };
+   }
+   ```
+2. Using reference paremeter (Probably one of the most optimal way)
+   ```C++
+   void ParseShader(std::string& outVertexSource, std::string& outFragmentSource)
+   {
+       // Some statements that process result 'vs' and 'fs'
+       // ...
+       outVertexSource = vs;
+       outFragmentSource = fs;
+   }
+
+   main()
+   {
+       std::string vertexSource, fragmentSource;
+       ParseShader(vertexSource, fragmentSource)
+   }
+
+   // Or using Pointer parameter if you want to pass nullptr(ignore the output):
+   // void ParseShader(std::string* outVertexSource, std::string* outFragmentSource)
+   // {
+   //     if (outVertexSource)
+   //         *outVertexSource = vs;
+   //     if (outFragmentSource)
+   //         *outFragmentSource = fs;
+   // }
+   // main()
+   // {
+   //     ParseShader(nullptr, &fragmentSource)
+   // }
+   ```
+3. Return a `std::array` or `std::vector`(ignored, too simple)
+   The different is primarly the arrays can be create on the stack where as
+   vectors gonna store its underlying storage on the heap.
+   So technically returning a standard array would be faster.
+   ```C++
+   #include <array>
+
+   std::array<std::string, 2> ParseShader()
+   {
+       // Some statements that process result 'vs' and 'fs'
+       // ...
+       std::array<std::string, 2> result;
+       result[0] = vs;
+       result[1] = fs;
+       return result;
+   }
+   ```
+4. Using `std::tuple` and `std::pair`
+   1. `std:tuple`
+      ```C++
+      #include <tuple>
+
+      std::tuple<std::string, std::string> ParseShader()
+      {
+          // Some statements that process result 'vs' and 'fs'
+          // ...
+          return std::make_pair(vs.fs);
+          // template type is don't need, equal with:
+          // return std::make_pair<std::string, std::string>(vs.fs);
+      }
+
+      int main()
+      {
+          // 'auto' means automatically check the return type
+          auto sources = ParseShader();
+          // Get values in std::tuple
+          vertexSource = std::get<0>(sources);
+          fragmentSource = std::get<1>(sources);
+      }
+      ```
+   2. `std::pair` (A little bit better than tuple)
+      ```C++
+      // Show the only difference with 'std::tuple'
+      std::pair<std::string, std::string> ParseShader()
+      {
+          // ...
+      }
+
+      int main()
+      {
+          // ...
+          vertexSource = sources.first;
+          vertexSource = sources.second;
+      }
+      ```
+
 ## Templates in C++
+
+Template can improve code reuse rate and reduce duplicate code (for example function overload)
+The essence of template is similar to macros
+
+This chapter includes:
+1. template type
+2. template argument
+```C++
+// In this case, template specifying how to create methods based on your usage of them.(Automatically generate corresponding overloaded function)
+// So if nobody call this function, it's code will not exist in compiled file,
+// even if there is a grammatical error in this function code, it will still compile successfully.
+
+template<typename T>// exactly same with: "template<class T>"
+void Print(T value)
+{
+    std::cout << value << std::endl;
+}
+
+int main()
+{
+    Print(5);
+    // I actually specifying the type explicitly
+    // The complete code should be:
+    // Print<int>(5);
+    Print("Hello");
+    Print(5.5f);
+}
+```
+
+```C++
+// Yes, multiple template targets can be in one template definition
+template<typename T, int N>
+class Array
+{
+private:
+    T m_Arry[N];
+public:
+    int GetSize() const { return N; }
+};
+
+int main()
+{
+    Array<int, 5> array;
+    // Which means its will generate the following code:
+    // class Array
+    // {
+    // private:
+    //     int m_Arry[5];
+    // public:
+    //     int GetSize() const { return 5; }
+    // };
+    std::cout << array.GetSize() << std::endl;
+}
+```
 
 ## Stack vs Heap Memory in C++
 
