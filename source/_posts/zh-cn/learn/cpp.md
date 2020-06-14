@@ -1707,6 +1707,32 @@ int main()
 
 ## Macros in C++
 
+1. Macros do text replace when preprocessor
+   ```C++
+   #define WAIT std::cin.get()
+
+   int main()
+   {
+       WAIT;
+   }
+   ```
+2. Macros function and combine with the environment
+   Environment variables can be defined at:
+   Open your project settings:
+   C/C++ -> Preprocessor -> Preprocessor Definitions
+   ```C++
+   #ifdef PR_DEBUG
+   #define LOG(x) std::cout << x << std::endl
+   #elif defined(PR_RELEASE)
+   #define LOG(x) // Do nothing
+   #endif
+   
+   int main()
+   {
+       LOG("Hello");
+   }
+   ```
+
 ## The "auto" keyword in C++
 
 ## Static Arrays in C++ (std::array)
