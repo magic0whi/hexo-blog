@@ -1735,6 +1735,48 @@ int main()
 
 ## The "auto" keyword in C++
 
+1. be careful with `auto`
+```C++
+std::string GetName()
+{
+    return "Cherno";
+}
+
+int main()
+{
+    auto name = GetName();
+    // Call a type specific method
+    // if the return type of GetName() changed to "char*" , this will be broken
+    int a = name.size();
+    std::cout << a << std::endl;
+}
+```
+1. `auto`' to reduce type length
+   ```C++
+   class DeviceManager
+   {
+   private:
+       std::unordered_map<std::string, std::vector<Device*>> m_Devices;
+   public:
+       const std::unordered_map<std::string, std::vector<Device*>>& GetDevices() const
+       {
+           return m_Devices;
+       }
+   }
+
+   int main()
+   {
+       DeviceManager dm;
+       // The type is too mass
+       const std::unordered_map<std::string, std::vector<Device*>>& devices = dm.GetDevices();
+       // You can use keyword "using" or "typedef"
+       using DeviceMap = std::unordered_map<std::string, std::vector<Device*>>;
+       const DeviceMap& devices2 = dm.GetDevices();
+       // Or auto
+       const auto& devices3 = dm.GetDevices();
+   }
+   ```
+
 ## Static Arrays in C++ (std::array)
 
 ## Function Pointers in C++
