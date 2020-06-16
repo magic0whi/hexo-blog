@@ -17,7 +17,7 @@ This article includes:
 
 先安装这个[webvirtcloud](https://github.com/magic0whi/aur-webvirtcloud-git)
 然后执行 `/srv/webvirtcloud/configuration-install.sh`
-最后启动服务 `systemctl start nginx supersivor libvirtd-tcp.socket`
+最后启动服务 `systemctl start nginx supersivord libvirtd-tcp.socket`
 基本就完事了
 
 ## Isolating the GPU

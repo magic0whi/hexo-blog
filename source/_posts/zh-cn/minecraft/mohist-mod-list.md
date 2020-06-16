@@ -37,6 +37,8 @@ toc: true
 
 | Mod name | Download link | Last Update |
 | -------- | ------------- | ---------- |
+| 沉浸工程 | [ImmersiveEngineering-0.15-103](https://www.curseforge.com/minecraft/mc-mods/immersive-engineering/files/all?filter-game-version=2020709689%3A7722) | Jun 15, 2020 |
+
 | 地幔(依赖) | [Mantle-1.12-1.3.3.55](https://www.curseforge.com/minecraft/mc-mods/mantle/files/all?filter-game-version=1738749986%3A628) | May 20, 2019 |
 | 匠魂 | [TConstruct-1.12.2-2.13.0.183](https://www.curseforge.com/minecraft/mc-mods/tinkers-construct/files/all) | Mar 16, 2020 |
 | 基因工程 | [binnie-mods-2.5.1.200](https://www.curseforge.com/minecraft/mc-mods/binnies-mods/files/all) | Feb 15, 2020 |
