@@ -1705,6 +1705,8 @@ int main()
 
 ## Stack vs Heap Memory in C++
 
+Ignore...
+
 ## Macros in C++
 
 1. Macros do text replace when preprocessor
@@ -1779,11 +1781,131 @@ int main()
 
 ## Static Arrays in C++ (std::array)
 
+Ignore...
+
 ## Function Pointers in C++
+
+1. 3 ways to definite a Function Pointers
+   ```C++
+   void HelloWorld(int a)
+   {
+       std::cout << "Hello World! Value: " << a << std::endl;
+   }
+   
+   int main()
+   {
+       auto function = HelloWorld();
+
+       // second way:
+       // void(*function)(int) = HelloWorld();
+
+       // third way:
+       // typedef void(*Balabala)(int);
+       // Balabala function = HelloWorld;
+   
+       function(233);
+   }
+   ```
+2. A simple usage - the ForEach function:
+   ```C++
+   void PrintValue(int value)
+   {
+       std::cout << "Value: " << value << std::endl;
+   }
+
+   void ForEach(const std::vector<int>& values, void(*func)(int))
+   {
+       for(int value : values)
+           func(value);
+   }
+
+   int main()
+   {
+       std::vector<int> values = { 1, 5, 4, 2, 3 };
+       ForEach(values, PrintValue);
+       // We can use lambda to simply the function PrintValue() (see more in next episode)
+       // ForEach(values, [](int value) { std::cout << "Value: " << value << std::endl; })
+   }
+   ```
 
 ## Lambdas in C++
 
+1. How to put outside variables into lambda function
+   [=] : Pass everything in by value, the pass in variables is independent of the outside.
+   [&] : Pass everything in by reference.
+   [a] : Pass 'a' by value
+   [&a] : Pass 'a' by reference.
+2. using `mutable` keyword to allow modify outside variables
+```C++
+int main()
+{
+    int a = 5;
+    auto lambda = [=]() mutable { a = 5; std::cout << "Value: " << a << std::endl; };
+}
+```
+3. We need to use std::function instand of raw function pointer if our callback lambda function have pass in variables.
+   ```C++
+   #include<functional>
+
+   // Here is the only difference (Use "const &" because its an object)
+   // "void(*func)(int)" to "const std::function<void(int)>& func"
+   void ForEach(const std::vector<int>* values, const std::function<void(int)>& func)
+   {
+       // ...
+   }
+
+   int main()
+   {
+       // ...
+       int a = 5;
+       auto lambda = [=](int value)) {std::cout << "Value: " << a << std::endl;
+
+       ForEach(values, lambda};
+
+   }
+   ```
+4. Usage of std::find_if (Returns an iterator to the first element for which callback function returns true)
+   ```C++
+   std::vector<int> values = { 1, 5, 4, 2, 3 };
+   auto iterator = std::find_if(values.begin(), values.end(), [](int value) { return value > 3;});
+   std::cout << *iterator << std::endl;
+   ```
+
 ## Why I don't "using namespace std"
+
+Don't absolutely use `using namespace` in header files
+But if you must using `using namespace`, please use it in a small scope as possible, but NEVER EVER in a header file.
+
+For example a serious issue of implicit conversion :
+```C++
+namespace apple
+{
+    void print(cout std::string& text)
+    {
+        std::cout << text << std::endl;
+    }
+}
+
+namespace orange
+{
+    void print(const char* text)
+    {
+        std::string temp = text;
+        std::reverse(temp.begin(), temp.end());
+        std::cout << temp << std::endl;
+    }
+}
+
+using namespace apple;
+using namespace orange;
+
+int main()
+{
+    print("Hello");
+    // Which one will get called?
+    // Answer: the orange::print() will be called, because the type of "Hello" is "char*"
+}
+```
 
 ## Namespaces in C++
 

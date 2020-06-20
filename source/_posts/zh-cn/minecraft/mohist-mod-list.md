@@ -38,6 +38,34 @@ toc: true
 | Mod name | Download link | Last Update |
 | -------- | ------------- | ---------- |
 | 沉浸工程 | [ImmersiveEngineering-0.15-103](https://www.curseforge.com/minecraft/mc-mods/immersive-engineering/files/all?filter-game-version=2020709689%3A7722) | Jun 15, 2020 |
+| 吸血鬼 | [Vampirism-1.15.2-1.6.0](https://www.curseforge.com/minecraft/mc-mods/vampirism-become-a-vampire/files/all?filter-game-version=2020709689%3A7722) | Jun 17, 2020 |
+| 地幔(依赖) | [Mantle-1.15.2-1.5.15](https://www.curseforge.com/minecraft/mc-mods/mantle/files/all?filter-game-version=2020709689%3A7722) | Apr 29, 2020 |
+| 匠魂 | [TConstruct-1.15.2-3.0.1.48](https://dvs1.progwml6.com/jenkins/job/SlimeKnights/job/TinkersConstruct/job/1.15/) | Jun 17, 2020 |
+| 原版死亡箱子 | [vanilladeathchest-1.15.2-1.10.3.8](https://www.curseforge.com/minecraft/mc-mods/vanilladeathchest/files/all?filter-game-version=2020709689%3A7722) | Apr 16, 2020 |
+| 通用机械 | [Mekanism-1.15.2-9.10.8.421](https://www.curseforge.com/minecraft/mc-mods/mekanism/files/all?filter-game-version=2020709689%3A7722) | Jun 17, 2020 |
+| 通用机械-发电机 | [MekanismGenerators-1.15.2-9.10.8.421](https://www.curseforge.com/minecraft/mc-mods/mekanism-generators/files/all?filter-game-version=2020709689%3A7722) | Jun 17, 2020 |
+| 通用机械-工具 | [MekanismTools-1.15.2-9.10.8.421](https://www.curseforge.com/minecraft/mc-mods/mekanism-tools/files/all?filter-game-version=2020709689%3A7722) | Jun 17, 2020 |
+| 更多通用机械矿石 | [MoreMekanismOres-1.15.2-1.0.5](https://www.curseforge.com/minecraft/mc-mods/more-mekanism-ores/files/all) | Apr 19, 2020 |
+| 棒棒糖(依赖) | [Lollipop-1.15.2-1.0.15](https://www.curseforge.com/minecraft/mc-mods/lollipop/files/all) | Apr 27, 2020 |
+| 仁慈的虚空 | [ForgivingVoid_1.15.1-4.0.0](https://www.curseforge.com/minecraft/mc-mods/forgiving-void/files/all) | Jan 19, 2020 |
+| 仇恨显示 | [Enemyz-1.15.2-1.0.1](https://www.curseforge.com/minecraft/mc-mods/enemyz/files/all) | Mar 2, 2020 |
+| 安全工艺 | [[1.15.2] SecurityCraft v1.8.18.1](https://www.curseforge.com/minecraft/mc-mods/security-craft/files/all?filter-game-version=2020709689%3A7722) | May 19, 2020 |
+| 吊桥 | [mcw-bridges-1.0.4fix-mc1.15.2](https://www.curseforge.com/minecraft/mc-mods/macaws-bridges/files/all?filter-game-version=2020709689%3A7722) | Mar 5, 2020 |
+| Kiwi(依赖) | [Kiwi-1.15.2-2.7.2](https://www.curseforge.com/minecraft/mc-mods/kiwi/files/all?filter-game-version=2020709689%3A7722) | Jun 8, 2020 |
+| ThutCore(依赖) | [thutcore-1.15.2-7.2.1](https://www.curseforge.com/minecraft/mc-mods/thutcore/files/all?filter-game-version=2020709689%3A7722) | May 24, 202 |
+| Thut's Elevators | [thuttech-1.15.2-8.2.2](https://www.curseforge.com/minecraft/mc-mods/thuts-elevators/files/all?filter-game-version=2020709689%3A7722) | May 28, 2020 |
+| 静谧四季 | [Serene Seasons 1.15.2-3.0.0.72](https://www.curseforge.com/minecraft/mc-mods/serene-seasons/files/all?filter-game-version=2020709689%3A7722) | May 27, 2020 |
+| 投票睡觉 | [Morpheus-1.15.2-4.2.50](https://www.curseforge.com/minecraft/mc-mods/morpheus/files/all?filter-game-version=2020709689%3A7722) | Mar 12, 2020 |
+| 精致存储 | [Refined Storage 1.8.4](https://www.curseforge.com/minecraft/mc-mods/refined-storage/files/all?filter-game-version=2020709689%3A7722) | May 27, 2020 |
+| 精致存储拓展 | [Refined Storage Addons 0.6.1](https://www.curseforge.com/minecraft/mc-mods/refined-storage-addons/files/all?filter-game-version=2020709689%3A7722) | Jan 30, 2020 |
+| 中式工坊 | [ChineseWorkshop-1.15.2-2.4.5](https://www.curseforge.com/minecraft/mc-mods/chineseworkshop/files/all?filter-game-version=2020709689%3A7722) | Jun 9, 2020 |
+| Guide-API Village and Pillage(依赖) | [Guide-API-VP-1.15.2-2.2.0](https://www.curseforge.com/minecraft/mc-mods/guide-api-village-and-pillage/files/all?filter-game-version=2020709689%3A7722) | May 10, 2020 |
+| Chem Lib(依赖) | [chemlib-1.15.2-3](https://www.curseforge.com/minecraft/mc-mods/chemlib/files/all?filter-game-version=2020709689%3A7722) | Mar 23, 2020 |
+| A Lib(依赖) | [alib-1.15.2-1](https://www.curseforge.com/minecraft/mc-mods/a-lib/files/all?filter-game-version=2020709689%3A7722) | Jan 25, 2020 |
+| 化学 | [alchemistry-1.15.2-5](https://www.curseforge.com/minecraft/mc-mods/alchemistry/files/all?filter-game-version=2020709689%3A7722) | Feb 14, 2020 |
+| Clumps | [Clumps-5.0.2](https://www.curseforge.com/minecraft/mc-mods/clumps/files/all?filter-game-version=2020709689%3A7722) | Mar 21, 2020 |
+| 家具 | [Furniture Mod 7.0.0-pre16](https://www.curseforge.com/minecraft/mc-mods/mrcrayfish-furniture-mod/files/all?filter-game-version=2020709689%3A7722) | Jan 2, 2020 |
+| JEI | [jei-1.15.2-6.0.0.4](https://www.curseforge.com/minecraft/mc-mods/jei/files/all?filter-game-version=2020709689%3A7722) | Apr 30, 2020 |
 
 | 地幔(依赖) | [Mantle-1.12-1.3.3.55](https://www.curseforge.com/minecraft/mc-mods/mantle/files/all?filter-game-version=1738749986%3A628) | May 20, 2019 |
 | 匠魂 | [TConstruct-1.12.2-2.13.0.183](https://www.curseforge.com/minecraft/mc-mods/tinkers-construct/files/all) | Mar 16, 2020 |
