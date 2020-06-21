@@ -1909,4 +1909,89 @@ int main()
 
 ## Namespaces in C++
 
+Use Namespace to
+1. avoid naming conflict: `apple::print()`, `orange::print()`
+2. avoid C library like naming: `GLFW_initialize` to `GLFW::initialize`
+
+Usage:
+1. We can set to use only specific symbol in a namespace
+   ```C++
+   namespcae apple {
+       void print(const char* text)
+       {
+           //...
+       }
+       void print_again()
+       { 
+           ///...
+       }
+   }
+   
+   int main()
+   {
+       using apple::print;
+       print("Hello");
+       
+       //We still need "apple::" to call print_again()
+       apple::print_again();
+   }
+   ```
+2. Nested Namespaces can be shorten using Alias
+   ```C++
+   namespace apple { // Or apple::functions (c++17)
+       namespace functions {
+           void print(const char* test)
+           {
+               // ...
+           }
+       }
+   }
+
+   int main()
+   {
+       namespace a = apple::functions;
+
+       a::print("Hello");
+   } 
+   ```
+
 ## Threads in C++
+
+If we want to do something else when we called functions that will block the current thread, we can use threads.
+
+Here is an example:
+We created a thread that will do loop on outputting "Working..",
+and simultaneously the main() function is waiting for user input.
+```C++
+#include <iostream>
+#include <thread>
+
+static bool is_Finished = false;
+
+void DoWork()
+{
+    using namespace std::literals::chrono_literals;
+
+    std::cout << "Started thread id=" << std::this_thread::get_id() << std::endl;
+
+    while (!is_Finished)
+    {
+        std::cout << "Working...\n";
+
+        std::this_thread::sleep_for(1s);
+    }
+}
+
+int main()
+{
+    // As soon as we create instance, it's going to immediately kick off that thread
+    std::thread worker(DoWork);
+
+    std::cin.get();
+    is_Finished = true;
+
+    // Call main thread to wait this thread (block main thread)
+    worker.join();
+    std::cout << "Finished." << std::endl;
+}
+```
