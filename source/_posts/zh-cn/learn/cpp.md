@@ -1995,3 +1995,62 @@ int main()
     std::cout << "Finished." << std::endl;
 }
 ```
+
+## Timing in C++
+
+1. Make a Timer for statistical time-consuming
+```C++
+struct Timer
+{
+    std::chrono::time_point<std::chrono::steady_clock> start, end;
+    std::chrono::duration<float> duration;
+
+    Timer()
+    {
+        start = std::chrono::high_resolution_clock::now();
+    }
+
+    ~Timer()
+    {
+        end = std::chrono::high_resolution_clock::now();
+        duration = end - start;
+
+        float ms = duration.count() * 1000.0f;
+        std::<< "Timer took " << ms << "ms " << std::endl;
+    }
+}
+
+void Function()
+{
+    // The timer will be auto delete when run out of the scope
+    Timer timer;
+
+    for (int i = 0; i < 100; i++)
+        std::cout << "Hello\n"; // std::endl is quiet slow
+} 
+
+int main()
+{
+    Function();
+}
+```
+
+## Multidimensional Arrays in C++
+
+## Sorting in C++
+
+## Type Punning in C++
+
+## Unions in C++
+
+## Virtual Destructors in C++
+
+## Casting in C++
+
+## Conditional and Action Breakpoints in C++
+
+## Safety in modern C++ and how to teach it
+
+## Precompiled Headers in C++
+
+## Dynamic Casting in C++
