@@ -2037,7 +2037,101 @@ int main()
 
 ## Multidimensional Arrays in C++
 
+```C++
+int main()
+{
+    // Allocate a 2D array to store twenty integer pointers
+    int** a2d = new int*[20];
+
+    // We can set each of these pointers to point to an array
+    for (int i = 0; i < 20; i++)
+        a2d[i] = new int[50];
+    
+    // 3D array, you can imagine a cube with size of 20x30x40
+    int*** a3d = new int**[20];
+    for (int i = 0 i < 20; i++)
+    {
+        a3d[i] = new int*[30];
+        for (int j = 0; j < 20; j++)
+        {
+            a3d[i][j] = new int[40]:
+        }
+            
+    }
+
+    a3d[0][0][0] = 666;
+
+    // When you want to delete this array, you have to go through inner array and delete all of those arrays from inside to out
+    for(int i = 0; i < 20; i++)
+    {
+        for (int j = 0; j < 30; j++)
+        {
+            delete[] a3d[i][j];
+        }
+        delete[] a3d[i];
+    }
+    delete[] a3d;
+}
+```
+
+The most issue is that the Multidimensional Arrays will results memory fragmentation.
+When iterating the array we have to jump to another location to read or write that data,
+and that's results probably a cache miss which means that we're wasting time fetching data from our actual RAM.
+
+One of the most important things you can do is just store them in a single dimensional array:
+
+```C++
+int main()
+{
+    int* array =new int[5 * 5];
+    for (int x = 0; x < 5; y++)
+    {
+        for (int y = 0; y < 5; x++)
+        {
+            array[x * 5 + y] = 2;
+        }
+    }
+}
+```
+
 ## Sorting in C++
+
+```C++
+#include <algorithm>
+
+int main()
+{
+    std::vector<int> values = { 3, 5, 1, 4, 2 };
+    std::sort(values.begin(), values.end());
+
+    // Output the results
+    for (int value : values)
+        std::cout << value << std::endl;
+
+    // We can define how the sorting rule the sort() dose
+    // Such like sorting by big to small
+    std::sort(values.begin(), values.end(), [](int a, int b)
+    {
+        return a > b;
+    });
+
+    // Output the results
+    for (int value : values)
+        std::cout << value << std::endl;
+
+    // Or force '1' to the last of array list
+    std::sort(values.begin(), values.end(), [](int a, int b)
+    {
+        // Return true equals do exchange the position of a, b
+        if(a == 1)
+            return false;
+        if(b == 1)
+            return true;
+
+        return b < a;
+    });
+}
+```
 
 ## Type Punning in C++
 
