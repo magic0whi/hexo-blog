@@ -2159,6 +2159,53 @@ int main()
 
 ## Unions in C++
 
+Defined member in one Union means same memory location
+
+We have Vector2 and Vector2, but there is only one function `PrintVector2()` can output Vector2,
+what can we do?
+
+```C++
+struct Vector2
+{
+    float x, y;
+};
+
+void PrintVector2(const Vector2& vector)
+{
+    std::cout << vector.x << ", " << vector.y << std::endl;
+}
+
+struct Vector4
+{
+    union
+    {
+        // The benefit of anonymous struct is converting all variables in struct into a single member which is what the Union expects
+        struct
+        {
+            float x, y, z, w;
+        };
+        struct
+        {
+            // 'zy' will be the same memory as 'x, y', and 'zw' will be the same memory as 'z, w' 
+            Vector2 xy, zw;
+        };
+    };
+};
+
+int main()
+{
+    Vector4 vector = { 1.0f, 2.0f, 3.0f, 4.0f };
+    PrintVector2(vector.xy);
+    PrintVector2(vector.zw);
+    std::cout << "------------------" << std::endl;
+    vector.z = 500.0f;
+    PrintVector2(vector.xy);
+    PrintVector2(vector.zw);
+}
+```
+
+Type Punning can do as the same result, but using Union makes it more concise.
+
 ## Virtual Destructors in C++
 
 ## Casting in C++
