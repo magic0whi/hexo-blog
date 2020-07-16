@@ -2208,12 +2208,86 @@ Type Punning can do as the same result, but using Union makes it more concise.
 
 ## Virtual Destructors in C++
 
+Virtual Destructors is really important if you are writing a father class,
+otherwise no one's going to be able to safely delete the extend class
+(Because without `virtual` mark you are just adding a new Destructor instead of overload it)
+
+```C++
+class Base
+{
+public:
+    Base() { std::cout << "Base Constructor\n"; }
+    virtual ~Base() { std::cout << "Base Destructor\n"; }
+};
+
+class Derived : public Base
+{
+public:
+    Derived() { std::cout << "Derived Constructor\n"; }
+    ~Derived() { std::cout << "Derived Destructor\n"; }
+};
+
+int main()
+{
+    // Polymorphic kind of type
+    // without `virturl`, the "~Derived()" will not be called
+    Base* poly = new Derived();
+    delete poly;
+}
+```
+
 ## Casting in C++
+
+C++ cast not do anything that C-style casts cannot do
+those casts do make you code more solid and looks better.
+
+1. Static cast (Will do compile time checking)
+2. Interpret cast (for Type Punning)
+3. Dynamic cast (Will return `NULL` if casting is failed)
+4. Const cast (TODO: Supplement this content)
+
+```C++
+class Base
+{
+public:
+    Base() { }
+    virtual ~Base() { }
+};
+
+class Derived : public Base
+{
+    // ...
+};
+
+int main()
+{
+    // Static cast
+    double value = 5.5;
+    double s = static_cast<int>(value);
+
+    Base* base = new Base();
+    Derived* ac = dynamic_cast<Derived*>(base);
+    if (!ac) { std::cout << "Converting failed\n"; }
+}
+```
 
 ## Conditional and Action Breakpoints in C++
 
+Condition Breakpoints: If I only want the breakpoint to trigger under a certain condition
+Action Breakpoints: Generally print something to the console when a breakpoint is hit
+They can prevent recompile and save time
+
+For details. please [watch the video](https://www.youtube.com/watch?v=9ncNA6Co2Nk&list=PLlrATfBNZ98dudnM48yfGUldqGD0S4FFb&index=70)
+
 ## Safety in modern C++ and how to teach it
+
+You should 100% use smart pointers if you are doing serious work
 
 ## Precompiled Headers in C++
 
+Look to 7:07
+
 ## Dynamic Casting in C++
+
+```C++
+```
