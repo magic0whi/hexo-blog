@@ -1970,7 +1970,7 @@ static bool is_Finished = false;
 
 void DoWork()
 {
-    using namespace std::literals::chrono_literals;
+    using namespace std::literals::chrono_literals; // Or use "sleep_for(std::chrono::seconds(1))" below
 
     std::cout << "Started thread id=" << std::this_thread::get_id() << std::endl;
 
@@ -2289,5 +2289,97 @@ Look to 7:07
 
 ## Dynamic Casting in C++
 
+If we force type casting a Enemy class to Player and access data(funcions, variables) that is unique to player, the program will probablly crash.
+
+Dynamic Casting is actually does some validation for us to ensure that cast is valid
 ```C++
+class Entity
+{
+};
+
+class Player : public Entity
+{
+};
+
+class Enemy : public Entity
+{
+};
+
+int main()
+{
+    Entity* actuallyPlayer = new Player();
+    Entity* actuallyEnemy = new Enemy();
+
+    // How does it know that actuallyPlayer is actually a Player and not an Enemy?
+    // The way it does that is it stores runtime type information(RTTI)
+    // This does add an overhead but it lets you do things like dynamic casting
+    // Be aware that RTTI can be enabled or disabled
+    Player* p0 = dynamic_cast<Player*>(actuallyPlayer);
+    
+    // Will return null
+    Player* p1 = dynamic_cast<Player*>(actuallyEnemy);
+
+    // dynamic_cast<xxx*>(xxx); equal to xxx instanceof xxx
+}
+```
+
+## BENCHMARKING in C++ (how to measure performance)
+
+Always make sure that you profile is actually meaningful in a releases because you're not gonna be shipping code in debug anyway
+
+```C++
+class Timer
+{
+private:
+    std::chrono::time_point<std::chrono::steady_clock> m_StartTime, m_EndTime;
+public:
+    Timer()
+    {
+        m_StartTime = std::chrono::high_resolution_clock::now();
+    }
+
+    ~Timer()
+    {
+        m_EndTime = std::chrono::high_resolution_clock::now();
+        auto start = std::chrono::time_point_cast<std::chrono::microseconds>(m_StartTime).time_since_epoch().count();
+        auto end = std::chrono::time_point_cast<std::chrono::microseconds>(m_EndTime).time_since_epoch().count();
+
+        auto duration = end - start;
+
+        double ms = duration * 0.001;
+        std::cout << duration << "us (" << ms << "ms)\n" << std::endl;
+    }
+};
+
+int main()
+{
+    struct Vector2
+    {
+        float x, y;
+    };
+
+    std::cout << "Make Shared\n";
+    {
+        std::array<std::shared_ptr<Vector2>, 1000> sharedPtrs;
+        Timer timer;
+        for (int i = 0; i < sharedPtrs.size(); i++)
+            sharedPtrs[i] = std::make_shared<Vector2>();
+    }
+
+    std::cout << "New Shared\n";
+    {
+        std::array<std::shared_ptr<Vector2>, 1000> sharedPtrs;
+        Timer timer;
+        for (int i = 0; i < sharedPtrs.size(); i++)
+            sharedPtrs[i] = std::shared_ptr<Vector2>(new Vector2());
+    }
+
+    std::cout << "Make Unique\n";
+    {
+        std::array<std::shared_ptr<Vector2>, 1000> sharedPtrs;
+        Timer timer;
+        for (int i = 0; i < sharedPtrs.size(); i++)
+            sharedPtrs[i] = std::make_shared<Vector2>();
+    }
+}
 ```
