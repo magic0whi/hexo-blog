@@ -18,6 +18,10 @@ KDF Key derivation function 密钥派生函数; KDF是hash函数，通常用来�
 
 LIR Regional Internet registry 区域互联网注册管理机构 是管理世界上某特定地区Internet资源的组织。Internet资源包括IP地址（包含IPv4和IPv6）和使用在BGP路由中的自治系统号（Autonomous System number）。现在世界上有五个正在运作的区域互联网注册管理机构
 
+### 网络
+
+MTU Maximum transmission unit 最大传输单元; 指数据链接层上面所能通过的最大数据包大小
+
 ## 日常交流
 
 TLDR  Too Long; Didn't read. 太长不看

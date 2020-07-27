@@ -1609,29 +1609,32 @@ Example scenario: we have a function called `ParseShader()` , it needs to return
    }
    ```
 4. Using `std::tuple` and `std::pair`
-   1. `std:tuple`
+   1. `std:tuple` (Can return more than two elements)
       ```C++
       #include <tuple>
 
-      std::tuple<std::string, std::string> ParseShader()
+      std::tuple<std::string, int> CreatePerson()
       {
-          // Some statements that process result 'vs' and 'fs'
-          // ...
-          return std::make_pair(vs.fs);
-          // template type is don't need, equal with:
-          // return std::make_pair<std::string, std::string>(vs.fs);
+          return { "Cherno", 24 }; // Implicit conversation
+          // Or use "std::make_pair()":
+          // return std::make_pair("Cherno", 24);
       }
 
       int main()
       {
           // 'auto' means automatically check the return type
-          auto sources = ParseShader();
+          auto person = CreatePerson();
           // Get values in std::tuple
-          vertexSource = std::get<0>(sources);
-          fragmentSource = std::get<1>(sources);
+          std::string& name = std::get<0>(person);
+          int age = std::get<1>(person);
+      
+          // Or using std::tie()
+          std::string name2;
+          int age2;
+          std::tie(name2, age2) = person;
       }
       ```
-   2. `std::pair` (A little bit better than tuple)
+   2. `std::pair` (A little bit faster than tuple)
       ```C++
       // Show the only difference with 'std::tuple'
       std::pair<std::string, std::string> ParseShader()
@@ -2383,3 +2386,72 @@ int main()
     }
 }
 ```
+
+## STURCTURED BINDINGS in C++
+
+Only in C++17 and newer
+a better way compare to How to Deal with Multiple Return Values in C++
+
+```C++
+std::tuple<std::string, int> CreatePerson()
+{
+    return { "Cherno", 24 };
+}
+
+int main()
+{
+    // Structured binding
+    auto[name, age] = CreatePerson();
+    std::cout << name;
+}
+```
+
+## How to Deal with OPTIONAL Data in C++
+
+## Multiple TYPES of Data in a SINGLE VARIABLE in C++?
+
+## How to store ANY data in C++
+
+## How to make C++ run FASTER (with std::async)
+
+```C++
+```
+
+## How to make your STRINGS FASTER in C++!
+
+```C++
+```
+
+## VISUAL BENCHMARKING in C++ (how to measure performance visually)
+
+## SINGLETONS in C++
+
+```C++
+```
+
+## Small String Optimization in C++
+
+## Track MEMORY ALLOCATIONS the Easy Way in C++
+
+```C++
+```
+
+## lvalues and rvalues in C++
+
+```C++
+```
+
+## Continuous Integration in C++
+
+## Static Analysis in C++
+
+## Argument Evaluation Order in C++
+
+## Move Semantics in C++
+
+```C++
+```
+
+## std::move and the Move Assignment Operator in C++
+
+## ARRAY - Making DATA STRUCTURES in C++
