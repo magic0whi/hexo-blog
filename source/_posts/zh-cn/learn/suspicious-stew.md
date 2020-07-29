@@ -15,3 +15,7 @@ This article is used to record some interesting things on the Internet
    [IMG TO ISO](https://www.hanselman.com/blog/HowToConvertAnIMGFileToAnStandardISOEasilyWithLinuxOnWindows10.aspx)
 2. [FreeBSD](https://www.freebsd.org/) (并不好用)
 3. [Android Island](https://play.google.com/store/apps/details?id=com.oasisfeng.island&hl=en_US) (隔离CN应用)
+4. Gnome中我不需要的包: epiphany gnome-software gedit totem gnome-music evince simple-scan gnome-font-viewer yelp gnome-characters gnome-maps
+5. sudo禁用超时 `Defaults passwd_timeout=0`
+6. <永久记录>:
+   XKeyscore搜索格式编码伪装

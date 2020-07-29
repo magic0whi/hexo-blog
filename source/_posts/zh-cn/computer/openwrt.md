@@ -44,7 +44,7 @@ luci-app-mwan3
 
 ## 配置
 
-1. 使用硬解随机数生成器:
+1. 使用硬解随机数生成器(需要路由器支持):
    ```console
    # uci set system.@rngd[0].enabled="1"
    # uci set system.@rngd[0].device="/dev/urandom"

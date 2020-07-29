@@ -138,19 +138,6 @@ ndoskrnl@pc hexo$ git push -u origin master
 
 Nginx配置文件见: {% post_link nginx "nginx配置改动" %}
 
-### 安装主题 - NexT
-
-这里选用NexT, 是因为它的浮动TOC在查阅较长的文章时能提供很大的帮助
-
-先贴上[Getting-Started链接](https://theme-next.org/docs/getting-started/#Configuring-Menu-Items)
-
-下载主题文件
-
-```console
-$ cd hexo
-$ git clone https://github.com/theme-next/hexo-theme-next themes/next -b v7.7.1 --depth=1
-```
-
 ## Hexo 文章加密
 
 ```console
@@ -179,9 +166,3 @@ message: 这个是博文查看时, 密码输入框上面的描述性文字
 ```
 
 另见[Github项目说明](https://github.com/MikeCoder/hexo-blog-encrypt/blob/master/ReadMe.zh.md)
-
-## LaTex支持
-
-在需要LaTex表达式的文章Front-matter中加上 `mathjax: true`
-
-请见 [NexT数学表达式](https://theme-next.org/docs/third-party-services/math-equations)
