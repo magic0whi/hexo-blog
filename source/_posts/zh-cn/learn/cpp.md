@@ -680,12 +680,12 @@ int main()
 
 String literals are stored in read-only section of memory
 This code might not vaild for all CPP compilers.
-And edit this string is actually didn't work.
+And edit this string is actually didn't work:
 ```C++
 int main()
 {
     char* name = "Cherno";
-    // 实际上这种定义是错误的, 字符串类型指针应该永远是const char*
+    // 这种定义是错误的, 字符串类型指针应该永远是const char*
     // 要想运行时修改字符串, 正确操作应是定义一个字符串数组而不是一个指针
     // char name[] = "Cherno";
     name[2] = 'a';
