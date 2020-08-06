@@ -2415,7 +2415,54 @@ int main()
 ## How to make C++ run FASTER (with std::async)
 
 ```C++
+#include <future>
+
+std::vector<std::std::future<void>> m_Futures // void is the return type of the function LoadMesh()
+
+static std::mutex s_MeshesMutex;
+
+// Here we use pointer parameter because reference parameter doesn't work(Cherno not entirely sure why)
+static void LoadMesh(const std::vector<Ref<Mesh>>* meshes, std::string filepath)
+{
+    auto mesh = Mesh::Load(filepath);
+
+    // We need to lock this meshes vector while it been modify
+    // lock the push_back() function
+    std::lock_guard<std::mutex> lock(s_MeshesMutex);
+    meshes->push_back(mesh);
+}
+
+void EditorLayer::LoadMeshes()
+{
+    // Get file context use c++ file stream
+    std::ifstream stream("src/Models.txt");
+    std::string line;
+    std::vector<std::string> meshFilepaths;
+    while (std::getLine(stream, line))
+        meshFilepaths.push_back(line);
+
+    // m_Meshes is a vector in this class
+#define ASYNC 1
+#if ASYNC
+    // Asynchronous
+    for (const auto& file : meshFilepaths)
+    {
+        // std::async() will return std::future and its really important to handle that std::future or its will be destoryed and peform the destructor to make sure the async is actually finished
+        // that basically means it won't be parallel at all 
+        m_Futures.push_back(std::async(std::launch::async, LoadMesh, &m_Meshes, file));
+    }
+#else
+    // Sequence
+    for (const auto& file : meshFilepaths)
+    {
+        m_Meshes.push_back(Mesh::Load(file));
+    }
+#endif
+}
 ```
+
+In VS, you can use DEBUG->Windows->Parrllel Stacks (Ctrl+Shift+D)
+to do window parallel debugs
 
 ## How to make your STRINGS FASTER in C++!
 
