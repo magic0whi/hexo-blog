@@ -2485,7 +2485,22 @@ to do window parallel debugs
 
 ## lvalues and rvalues in C++
 
+In my opinion, any data that is not being attached by a symbol(not being explicitly assigned an address) is an R-value, otherwise it's an L-value.
+
+1. L-value reference and R-value reference
+   ```C++
+   int i = 10;
+   // L-value reference can accept L-value and R-value
+   int& = i;
+   // R-value reference can only accept R-value
+   int&& = 10;
+   ```
+2. `const type&` is a special rule, realistically what happens is the compiler will probably create like a temporary variable.
+   there are not to kind of avoid creating an L-value but rather to just kind of support both support both L-value and R-values
 ```C++
+const int& a = 10;
+// int temp = 10;
+// const int& a = temp
 ```
 
 ## Continuous Integration in C++
