@@ -972,7 +972,7 @@ public:
     // Use explicit keyword to disable implicit conversion
     explicit Entity(int age)
         : m_Name("Unknown"), m_Age(age) {}
-}
+};
 
 void PrintEntity(const Entity& entity)
 {
@@ -984,7 +984,7 @@ int main()
     // It's weird , you can't do this in other languages(such as C# or Java)
     // This is called implicit conversion
     // It implicit converting "Cherno" into Entity's Constructor Method: Entity(const std::string& name)
-    Entity a = "Cherno";
+    Entity a = std::string("Cherno");
     // 虽然上面是个很好的隐式转换的例子, 但是不建议用这种语法实例化对象
 
 
@@ -996,7 +996,10 @@ int main()
     
 
     // This is not allowed
+    Entity a = "Cherno";
+    // and
     PrintEntity("Cherno"); 
+    
     // "Cherno" is a const char array
     // C++ need to do two conversions, one from const char* to std::string, and then call into Entity(const std::string& name)
     // It's only allowed to do one implicit conversion at same time
@@ -2500,7 +2503,7 @@ In my opinion, any data that is not being attached by a symbol(not being explici
 ```C++
 const int& a = 10;
 // int temp = 10;
-// const int& a = temp
+// const int& a = temp;
 ```
 
 ## Continuous Integration in C++
@@ -2512,8 +2515,171 @@ const int& a = 10;
 ## Move Semantics in C++
 
 ```C++
+class String
+{
+public:
+	String() = default; // equals with String(){}
+
+	String(const char* string)
+	{
+		printf("Created!\n");
+		m_Size = strlen(string);
+		m_Data = new char[m_Size];
+		memcpy(m_Data, string, m_Size);
+	}
+
+	String(const String& other)
+	{
+		printf("Copied!\n");
+		m_Size = other.m_Size;
+		m_Data = new char[m_Size];
+		memcpy(m_Data, other.m_Data, m_Size);
+	}
+
+	String(String&& older) noexcept // use noexcept to get rid of compiler warning
+	{
+		printf("Moved!\n");
+		m_Size = older.m_Size;
+		// This immediately presents a problem
+		// because when the old one gets deleted
+		// it's going to delete the m_Data with us
+		m_Data = older.m_Data;
+		// so this is the major thing that we need to do
+		older.m_Size = 0;
+		older.m_Data = nullptr;
+	}
+
+	~String()
+	{
+		printf("Destroyed!\n");
+		delete m_Data;
+	}
+
+	void Print()
+	{
+		for (uint32_t i = 0; i < m_Size; i++)
+			printf("%c", m_Data[i]);
+
+		printf("\n");
+	}
+private:
+	char* m_Data;
+	uint32_t m_Size;
+};
+
+class Entity
+{
+public:
+	Entity(const String& name)
+		: m_Name(name)
+	{
+	}
+
+	Entity(String&& name)
+		: m_Name(std::move(name)) // equals to m_Name((String&&) name)
+	{
+	}
+
+	void PrintName()
+	{
+		m_Name.Print();
+	}
+private:
+	String m_Name;
+};
+
+int main()
+{
+	Entity entity("Cherno");
+	entity.PrintName();
+}
 ```
 
 ## std::move and the Move Assignment Operator in C++
+
+`std::move` actually do force casting but can make your program more search friendly
+
+Move Assignment will allow us do move operation on existing objects
+
+```C++
+class String
+{
+public:
+	String() = default;
+
+	String(const char* string)
+	{
+		printf("Created!\n");
+		m_Size = strlen(string);
+		m_Data = new char[m_Size];
+		memcpy(m_Data, string, m_Size);
+	}
+
+	String(String&& older) noexcept
+	{
+		printf("Moved!\n");
+		m_Size = older.m_Size;
+		m_Data = older.m_Data;
+
+		older.m_Size = 0;
+		older.m_Data = nullptr;
+	}
+
+    // define move assignment
+    String& operator=(String&& older) noexcept
+    {
+        if (this != &older)
+        {
+            // Because use move assignment meaning assure there already existing data in currently class
+            // So clean the current class
+            delete[] m_Data;
+        
+		    printf("Moved!\n");
+		    m_Size = older.m_Size;
+		    m_Data = older.m_Data;
+
+		    older.m_Size = 0;
+		    older.m_Data = nullptr;
+        }
+
+        return *this;
+    }
+
+	~String()
+	{
+		printf("Destroyed!\n");
+		delete m_Data;
+	}
+
+	void Print()
+	{
+		for (uint32_t i = 0; i < m_Size; i++)
+			printf("%c", m_Data[i]);
+
+		printf("\n");
+	}
+private:
+	char* m_Data;
+	uint32_t m_Size;
+};
+
+int main()
+{
+    String apple = "Apple";
+    String dest;
+
+    std::cout<< "Apple: ";
+    apple.Print();
+    std::cout<< "Dest: ";
+    dest.Print();
+
+    dest = std::move(apple);
+
+    std::cout<< "Apple: ";
+    apple.Print();
+    std::cout<< "Dest: ";
+    dest.Print();
+}
+```
 
 ## ARRAY - Making DATA STRUCTURES in C++
