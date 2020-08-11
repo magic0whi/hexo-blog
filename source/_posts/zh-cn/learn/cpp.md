@@ -2500,15 +2500,20 @@ In my opinion, any data that is not being attached by a symbol(not being explici
    ```
 2. `const type&` is a special rule, realistically what happens is the compiler will probably create like a temporary variable.
    there are not to kind of avoid creating an L-value but rather to just kind of support both support both L-value and R-values
-```C++
-const int& a = 10;
-// int temp = 10;
-// const int& a = temp;
-```
+   ```C++
+   const int& a = 10;
+   // int temp = 10;
+   // const int& a = temp;
+   ```
 
 ## Continuous Integration in C++
 
 ## Static Analysis in C++
+
+Static Analysis is a very important thing that even for an experienced programmer there is still going to be stuff what you miss.
+It can find logic errors in your code and gives you some tips to fix it
+
+`clang-tidy` is a free tool to do static analysis
 
 ## Argument Evaluation Order in C++
 
