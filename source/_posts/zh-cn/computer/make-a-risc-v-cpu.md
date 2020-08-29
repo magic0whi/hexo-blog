@@ -11,6 +11,9 @@ toc: true
 
 <!-- more -->
 
+> Bit Extender 和 Splitter 都可以用来扩充地址以使信号兼容高位宽线路, 
+> 此外, Splitter 可裁剪数据以使电路兼容低位宽线路, 如程序计数器
+
 ## 二进制
 
 可按4位二进制对应1位16进制, 从右往左转换为16进制数
@@ -87,31 +90,52 @@ Multiplexer 多路复用器, 简称 Mux
 寄存器由 8 个 D 触发器构成
 {% asset_img A_register.png %}
 
-1. S-R 锁存器
+触发器=锁存器+时钟信号的调控
+
+1. S-R 触发器
    S-R 代表 Set-Reset
-   由2个或非门组成
-2. D 锁存器
-   D-Data, E-Enable
-   由4个与非门组成
-3. D 触发器
-   D 触发器要求只能在时钟信号的上升沿的一小段时间内进行数据的修改
-   原理是给 D 锁存器的 E 端接入一个时钟信号的上升沿触发器
+2. D 触发器
+   D 代表 Data
+
    {% asset_img Clock_signal_and_Rising_edge.png %}
+
+   将时钟上沿信号直接接到Enable端口上, 数据的更改受到时钟信号调控,
+   然而不能长期保存数据
+3. 寄存器
+   在时钟信号这边另加一个与门和端口, 这样就可以决定是否放行时钟信号,
+   从而防止数据被时钟信号刷掉
 
 具体实现:
 {% asset_img Registers.png %}
 附文件: {% asset_link Four_way_multiplexer.circ "Four_way_multiplexer.circ" %}
 
-### 时钟
-
 ### RAM
 
-RAM分为SRAM和DRAM
-内存单元
+然后是底层原理:
+Logisim中无法直接模拟DRAM, SRAM我试过也不行
 
-### 程序计数器
+{% asset_img RAM.png %}
+横着的线称为字线(wordline), 用于启用指定地址下的8个内存单元
+竖着的线称为位线(bitline), 负责数据的输入和输出
+解码器(Decoder)负责根据输入的内存地址开启对应的字线
 
-### 解码器
+附上解码器(Decoder)的具体实现
+{% asset_img 2_bit_Decoder.png %}
+附文件: {% asset_link 2_bit_Decoder.circ "2_bit_Decoder.circ" %}
+
+附上一个RAM的使用示例:
+{% asset_img RAM_example.png %}
+文件: {% asset_link RAM_example.circ "RAM_example.circ" %}
+
+#### 程序计数器
+
+{% asset_img _Program_Counter.png %}
+程序计数器用于指向当前指令(IMEN)内存中的地址
+时钟每上沿一次, 计数+4(内存中一条字线管理32位的数据, 也就是4个字节)
+
+具体实现:
+{% asset_img Program_Counter.png %}
+{% asset_link Program_Counter.circ "Program_Counter.circ" %}
 
 ## RISC-V 架构
 
