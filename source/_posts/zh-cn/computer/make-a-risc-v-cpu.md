@@ -42,6 +42,24 @@ CPU中用来计算加减乘除的单元
 
 {% asset_img ALU.png %}
 
+ALUSel:
+0000 加法(add)
+0001 and
+0010 or
+0011 xor
+0100 shift logical right(srl)
+0101 shift arithmetic right(sra)
+0110 shift logical left(sll)
+0111 compare less than(slt)
+1000 除法(div)
+1001 求余(rem)
+1010 正数乘法(mul)
+1011 正数乘法(后32位)(mulh)
+1100 减法(sub)
+1101 直接输出B(bsel)
+1110 我还不知道
+1111 我还不知道
+
 #### 加法器
 
 元件符号: {% asset_img Adder.png %}
@@ -216,3 +234,11 @@ funct3: 000
 000000000001  00000    000   00001  0010011
 
 为了方便可以转成16进制: 0x00100093
+
+## CPU实现
+
+附上一个花了我三天的CPU实现, 参考了 [T-K-233](https://space.bilibili.com/14120234/) 的设计, 一些地方略有不同
+
+{% asset_img risv_v_simple.png %}
+
+{% asset_link risv_v_simple.circ "risv_v_simple.circ" %}
