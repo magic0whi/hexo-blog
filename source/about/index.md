@@ -3,6 +3,8 @@ title: about
 date: 2020-02-08 15:14:28
 ---
 
+你好, nihao, Hello, my friends in Cyberspace
+
 Who am I? from where? go where?
 I am no bird; and no net ensuares me: I am a free human being with an independent will. - Jane Eyre
 过去的记忆令我不能满意, 正尝试改变将来的记忆.
