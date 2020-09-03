@@ -475,7 +475,7 @@ end TCL_Generic;&#13;
     <comp lib="0" loc="(2580,390)" name="Tunnel">
       <a name="facing" val="south"/>
       <a name="width" val="3"/>
-      <a name="label" val="func3"/>
+      <a name="label" val="funct3"/>
     </comp>
     <comp lib="0" loc="(2510,400)" name="Bit Extender">
       <a name="out_width" val="32"/>
@@ -510,10 +510,6 @@ end TCL_Generic;&#13;
     </comp>
     <comp lib="8" loc="(1216,245)" name="Text">
       <a name="text" val="ALU输出线"/>
-      <a name="font" val="SansSerif plain 12"/>
-    </comp>
-    <comp lib="8" loc="(1347,247)" name="Text">
-      <a name="text" val="从ALU输出到PC或别的寄存器或WB"/>
       <a name="font" val="SansSerif plain 12"/>
     </comp>
     <comp lib="8" loc="(1386,194)" name="Text">
@@ -761,7 +757,7 @@ end TCL_Generic;&#13;
     </comp>
     <comp lib="0" loc="(990,540)" name="Tunnel">
       <a name="width" val="7"/>
-      <a name="label" val="func7"/>
+      <a name="label" val="funct7"/>
     </comp>
     <comp lib="0" loc="(990,510)" name="Tunnel">
       <a name="width" val="5"/>
@@ -773,7 +769,7 @@ end TCL_Generic;&#13;
     </comp>
     <comp lib="0" loc="(990,450)" name="Tunnel">
       <a name="width" val="3"/>
-      <a name="label" val="func3"/>
+      <a name="label" val="funct3"/>
     </comp>
     <comp lib="0" loc="(990,390)" name="Tunnel">
       <a name="width" val="7"/>
@@ -893,6 +889,18 @@ end TCL_Generic;&#13;
     <comp lib="8" loc="(2506,1224)" name="Text">
       <a name="text" val="WB Write Back"/>
       <a name="font" val="SansSerif bold 24"/>
+    </comp>
+    <comp lib="8" loc="(1398,247)" name="Text">
+      <a name="text" val="从ALU输出到PC或别的寄存器或WB(作为WB的偏移量)"/>
+      <a name="font" val="SansSerif plain 12"/>
+    </comp>
+    <comp lib="8" loc="(2474,365)" name="Text">
+      <a name="text" val="分别对应lb, lh, lw"/>
+      <a name="font" val="SansSerif plain 12"/>
+    </comp>
+    <comp lib="8" loc="(2535,341)" name="Text">
+      <a name="text" val="lb, lh, lw这三个指令可用funct3区分"/>
+      <a name="font" val="SansSerif plain 12"/>
     </comp>
   </circuit>
   <circuit name="reg_file">
@@ -1979,10 +1987,6 @@ end TCL_Generic;&#13;
       <a name="bit30" val="0"/>
       <a name="bit31" val="0"/>
     </comp>
-    <comp lib="8" loc="(641,501)" name="Text">
-      <a name="text" val="整合后0-4 rd, 5-11 func7"/>
-      <a name="font" val="SansSerif plain 12"/>
-    </comp>
     <comp lib="0" loc="(600,480)" name="Splitter">
       <a name="incoming" val="32"/>
       <a name="appear" val="center"/>
@@ -2027,16 +2031,8 @@ end TCL_Generic;&#13;
       <a name="text" val="20-31 imm"/>
       <a name="font" val="SansSerif plain 12"/>
     </comp>
-    <comp lib="8" loc="(535,514)" name="Text">
-      <a name="text" val="25-31 func7"/>
-      <a name="font" val="SansSerif plain 12"/>
-    </comp>
-    <comp lib="8" loc="(545,499)" name="Text">
-      <a name="text" val="7-11 rd"/>
-      <a name="font" val="SansSerif plain 12"/>
-    </comp>
     <comp lib="8" loc="(535,481)" name="Text">
-      <a name="text" val="R类型指令"/>
+      <a name="text" val="S类型指令"/>
       <a name="font" val="SansSerif plain 12"/>
     </comp>
     <comp lib="8" loc="(480,341)" name="Text">
@@ -2329,6 +2325,14 @@ end TCL_Generic;&#13;
     <comp lib="0" loc="(120,200)" name="Pin">
       <a name="width" val="32"/>
       <a name="label" val="inst"/>
+    </comp>
+    <comp lib="8" loc="(527,499)" name="Text">
+      <a name="text" val="7-11 imm[4:0]"/>
+      <a name="font" val="SansSerif plain 12"/>
+    </comp>
+    <comp lib="8" loc="(520,518)" name="Text">
+      <a name="text" val="25-31 imm[11:5]"/>
+      <a name="font" val="SansSerif plain 12"/>
     </comp>
   </circuit>
   <circuit name="branch_comp">
