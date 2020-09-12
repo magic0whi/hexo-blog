@@ -714,7 +714,7 @@ int main()
     std::wstring name1 = L"Cherno"s + L" hello";
     std::u32string name1 = U"Cherno"s + U" hello";
 
-// raw形式赋值, 对拷贝大篇文章时保留文章格式有用
+    // raw形式赋值, 对拷贝大篇文章时保留文章格式有用
     const char* rawstring = R"(Line1
 Line2
 Line3
