@@ -15,12 +15,23 @@ class Footer extends Component {
             visitorCounterTitle
         } = this.props;
 
+        let footerLogo = '';
+        if (logo) {
+            if (logo.text) {
+                footerLogo = logo.text;
+            } else {
+                footerLogo = <img src={logoUrl} alt={siteTitle} height="28" />;
+            }
+        } else {
+            footerLogo = siteTitle;
+        }
+
         return <footer class="footer">
             <div class="container">
                 <div class="level">
                     <div class="level-start">
                         <a class="footer-logo is-block mb-2" href={siteUrl}>
-                            {logo && logo.text ? logo.text : <img src={logoUrl} alt={siteTitle} height="28" />}
+                            {footerLogo}
                         </a>
                         <p class="size-small">
                             <span dangerouslySetInnerHTML={{ __html: `&copy; ${siteYear} ${author || siteTitle}` }}></span>
@@ -74,6 +85,6 @@ module.exports = cacheComponent(Footer, 'common.footer', props => {
         author,
         links,
         showVisitorCounter: plugins && plugins.busuanzi === true,
-        visitorCounterTitle: _p('plugin.visitor', '<span id="busuanzi_value_site_uv">0</span>')
+        visitorCounterTitle: _p('plugin.visitor_count', '<span id="busuanzi_value_site_uv">0</span>')
     };
 });

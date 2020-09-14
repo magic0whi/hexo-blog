@@ -115,7 +115,7 @@ toc: true
    * 存储空间地址 data
    * 线性表的最大存储容量 MaxSize
    * 线性表的当前有效长度 length
-3. 线性表的顺序存储的结构代码:
+3. 线性表的顺序存储结构代码:
    ```C++
    typedef int ElemType;          /* ElemType类型根据实际情况而定, 这里假设为int */
    
@@ -165,18 +165,19 @@ toc: true
    }
    ```
 2. 插入操作
-   {% asset_img List-insert-operation.png %}
+   {% asset_img List-sequence-insert.png %}
    思路:
    * 为了给插入元素腾出空间, 遍历从 i 开始至最后一个元素, 将它们向后移动一个位置(除非插入到表尾).
    * 将元素插入位置 i 处
    * 表长+1
    * 若插入位置不合理, 抛出异常
    * 若线性表已满, 抛出异常或动态增加容量
+   
    实现代码如下:
    ```C++
    #define OK 0
    #define ERROR -1
-
+   
    int ListInsert(SequenceList *list, int i, ElemType e)
    {
    
@@ -197,11 +198,12 @@ toc: true
    }
    ```
 3. 删除操作
-   {% asset_img List-delete-operation.png %}
+   {% asset_img List-sequence-delete.png %}
    思路:
    * 为了缩回空出的地方, 遍历从 i 开始至最后一个元素, 将它们向前移动一个位置(除非删除的是表尾的元素).
    * 表长-1
    * 如果删除位置不合理, 抛出异常
+   
    实现代码如下:
    ```C++
    #define OK 0
@@ -240,7 +242,203 @@ toc: true
 因此有了存储形式非线性的链式线性表
 
 1. 结构特点:
-   1. 用一组任意的存储单元存储线性表的数据元素，这组存储单元可以是连续的，也可以是不连续的。这些数据元素可以存在内存未被占用的任意位置
+   1. 用一组任意的存储单元存储线性表的数据，这组存储单元可以是连续的，也可以是不连续的。这些数据可以存在内存未被占用的任意位置
       {% asset_img List-chain-structure.png %}
-   2. 链式结构中，除了要存数据元素信息外，还要存储它的后继元素的存储地址。
+   2. 存储元素的区域称为**数据域**, 存储后继位置的域称为**指针域**
+      这样的一个单元称为**结点**
+      因为此链表的每个结点只包含一个指针域, 所以叫作**单链表**
+      {% asset_img List-chain-structure-element.png %}
+      注意:
+         * 为了方便记录链表信息, 可在链表在第一个结点前附设一个**头结点**, 头结点的数据域可以存储如线性表长度等信息.
+         * 指向链表起始位置的指针称为**头指针**, 若链表有头结点, 则是指向头结点
+         * 链表最后一个结点的指针为空(用 "**NULL**" 或 "**^**" 表示)
+2. 线性表的单链表存储结构代码
+   ```C++
+   typedef struct
+   {
+      ElemType data;
+      struct Node *next;
+   } Node;
+   typedef struct Node *LinkList;
+   ```
+
+#### 单链表的读取
+
+1. 获得链表第 i 结点上数据的算法思路:
+   1. 声明一个指针 p 用于存储遍历的地址, 初始值为第一个结点地址
+   2. 初始化循环子 j=1, 当 j < 1 时, 就遍历链表, 让 p 指针向后移动, 不断指向下一结点, j 累加 1
+   3. 若循环到 p 为 NULL (还没到 i 结点就到单链表结尾了), 说明第 i 结点不存在, 抛出异常
+   4. 若非法输入 i < 1, 抛出异常
+2. 实现代码如下:
+   ```C++
+   int GetElem(LinkList list, int i, ElemType *e)
+   {
+      LinkList p = list->next;  /* 声明一指针p, 让p指向链表list的第一个结点 */
+      int j = 1                 /* j为计数器 */
+
+      for(; j < i && p; j++)    /* p不为空且计数器j还没有等于i时，循环继续 */
+          p = p->next;          /* 让p指向下一个结点 */
+      
+      if(!p || i < 1)
+          return ERROR          /* 第i个结点不存在 */
+      
+      *e = p->data;             /* 取第i个结点的数据 */
+      return OK;
+   }
+   ```
+   最坏情况时间复杂度为 \\(O(n)\\) (对比顺序线性表读取始终为 \\(O(1)\\))
+
+#### 单链表的插入与删除
+
+1. 单链表的插入
+   {% asset_img List-chain-insert.png %}
+   先把结点 \\(s\\) 的后继指向 \\(p\to next\\) , 再把结点 \\(p\\) 的后继改为指向结点 \\(s\\)
+   ```
+   s->next = p->next;
+   p->next = s;
+   ```
+   执行后:
+   {% asset_img List-chain-insert-2.png %}
+   对于单链表的表头和表尾的情况, 因为只要动前一个元素的后继指向, 所以操作是相同的
+2. 单链表插入为第 i 个结点
+   1. 首先需要获得链表第 i-1 结点的地址(参考上一章, 但不同的是 p 初始没有指向第一个结点)
+   2. 若查找成功, 生成空结点 s, 将数据 e 赋给 s->data
+   3. 进行上面讲的插入操作
    
+   实现代码如下:
+   ```C++
+   int ListInsert(LinkList *list, int i, ElemType e)
+   {
+      LinkList p, s;
+      int j = 1;
+      
+      p = *list;
+
+      for(; j < i && p; j++)               /* 遍历寻找第i-1个结点 */
+         p = p->next;
+
+      if(!p || i < 1)
+          return ERROR                     /* 第i个结点不存在 */
+      
+      s = (LinkList) malloc(sizeof(Node)); /* 分配内存空间(C标准函数) */
+      s->data = e;
+      s->next = p->next;                   /* 将p的后继结点赋给s的后继 */
+
+      p->next = s;                         /* 将s赋值给p的后继 */
+   }
+   ```
+3. 单链表第 i 个结点删除
+   {% asset_img List-chain-delete.png %}
+   思路:
+   1. 首先需要获得链表第 i-1 结点的地址(参考上一章)
+   2. 将结点 i-1 的后继指向结点 i+1 : `p->next = q->next`
+   
+   实现代码如下:
+   ```C++
+   int ListDelete(LinkList *list, int i, ElemType *e)
+   {
+      LinkList p, q;
+      int j = 1;
+
+      p = *list;
+      for(; j < i && p->next; j++)    /* 遍历寻找第i-1个结点 */
+         p = p->next;
+      
+      if(!(p->next) || i < 1)
+          return ERROR;
+
+      q = p->next;
+
+      p->next = q->next;              /* 将q的后继赋值给p的后继 */
+      *e = q->data;                   /* 将q结点中的数据给e */
+
+      free(q);                        /* 释放内存 */
+      return OK;
+
+   }
+   ```
+4. 插入与删除的时间复杂度分析
+   单链表的插入和删除算法, 都是由遍历查找第 i 结点和插入和删除结点这两部分构成, 时间复杂度都是 \\(O(n)\\)
+   如果不知道第 i 个结点的指针位置, 单链表结构在插入和删除操作上与顺序线性表是没有太大优势的.
+   但若希望从第 i 个位置, 插入 10 个结点, 对于顺序存储结构来说每次插入都需要 \\(O(n)\\); 单链表只需要在第一次时找到第 i 个位置的指针, 此时为 \\(O(n)\\) , 接下来只是简单地移动指针, 时间复杂度都是 O(1) .
+   因此, **对于插入或删除数据越频繁的操作，单链表的效率优势就越是明显**
+
+#### 单链表的整表创建
+
+创建单链表的过程是一个动态生成链表的过程. 即从"空表"的初始状态起, 依次建立各元素结点, 并逐个插入链表
+
+* 头插法: 类似于插队, 始终让新结点在第一的位置
+  思路:
+  1. 创建空表
+  2. 循环以下动作:
+     1. 创建新结点, 随机生成数字赋给该节点的数据域
+     2. 将头指针的值赋给该结点的后继
+     3. 将该结点插入到头结点之后
+
+  实现代码如下:
+  ```C++
+  /* n 为要建立的单链表长度 */
+  void CreateListHead(LinkList *list, int n)
+  {
+     LinkList p;
+
+     // 初始化随机数种子
+     srand(time(0));
+
+     // 先建立一个带头结点的单链表
+     *list = (LinkList) malloc(sizeof(Node));
+     (*list)->next= NULL;
+
+     for(int i = 0; i < n; i++)
+     {
+        p = (LinkList) malloc(sizeof(Node)); // 生成新结点
+        p->data = rand() % 100 + 1; // 随机生成 100 以内的数字
+        p->next = (*list)->next; // 设置结点的后继
+
+        (*list)->next = p; // 插入到表头
+     }
+  }
+  ```
+* 尾插法
+  思路:
+  1. 创建空表
+  2. 需要一个指针来记录尾部结点(以下称 r)
+  3. 循环以下动作:
+     1. 创建新结点, 随机生成数字赋给该节点的数据域
+     2. 将尾部结点(也就是 r)的后继设为新结点的地址
+     3. 将新结点设为尾部结点(r = 新节点)
+
+  实现代码如下:
+  ```C++
+  /* n 为要建立的单链表长度 */
+  void CreateListTail(LinkList *list, int n)
+  {
+     LinkList p, r;
+
+     // 初始化随机数种子
+     srand(time(0));
+
+     // 先建立一个带头结点的单链表
+     *list = (LinkList) malloc(sizeof(Node));
+     r = *list; // r 记录尾部结点的地址
+
+     for(int i = 0; i < n; i++)
+     {
+        p = (LinkList) malloc(sizeof(Node)); // 生成新结点
+        p->data = rand() % 100 + 1; // 随机生成 100 以内的数字
+
+        r->next = p; // 将表尾结点的后继指向新结点
+        r = p; // 将新节点定义为表尾结点
+     }
+
+     r->next = NULL; // 别忘了初始化表尾结点的后继
+  }
+  ```
+
+  #### 单链表的整表删除
+
+  单链表整表删除的算法思路如下:
+  TODO: 摸鱼摸鱼摸鱼
+  实现代码如下:
+  ```C++
+  ```
