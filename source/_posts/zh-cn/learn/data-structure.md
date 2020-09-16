@@ -7,6 +7,10 @@ tags:
 toc: true
 ---
 
+需要对C语言的指针和数组有一定的了解
+函数名使用帕斯卡命名法
+变量使用驼峰命名(我平时用匈牙利命名法)
+
 ## 数据结构概论
 
 了解一下就好
@@ -119,20 +123,17 @@ toc: true
    * 线性表的当前有效长度 length
 3. 线性表的顺序存储结构代码:
    ```C++
-   typedef int ElemType;          /* ElemType类型根据实际情况而定, 这里假设为int */
+   typedef int ElemType;         // ElemType类型根据实际情况而定, 这里假设为int
    
    typedef struct
-   {          
-       ElemType data[MAXSIZE];    /* 数组存储数据元素, 最大值为MAXSIZE */    
-       int length;                /* 线性表当前长度 */
+   {
+       ElemType data[MAXSIZE];   // 数组存储数据元素, 最大值为MAXSIZE
+       int length;               // 线性表当前长度
    
    } SequenceList;
    ```
 4. 地址的计算:
-   要取得 \\(a_i\\) 的地址
-   ```C++
-   ElemType a_i = data + (i-1) * sizeof(ElemType);
-   ```
+   要取得 \\(a_i\\) 的地址: `ElemType a_i = data + (i-1) * sizeof(ElemType);`
 5. 线性表顺序存储结果的优缺点
    <table>
    <thead>
@@ -232,10 +233,10 @@ toc: true
    }
    ```
 4. 插入与删除的时间复杂度分析
-   * 如果元素要插入到最后一个位置, 或者删除最后一个元素, 时间复杂度为 \\(O(1)\\)
+   * 如果元素要插入到最后一个位置, 或者删除最后一个元素, 时间复杂度为 \\(O(1)\\), 通常把具有这一特点的存储结构称为**随机存取结构**.
    * 如果元素要插入到第一个位置或者删除第一个元素, 意味着要移动所有的元素向后或者向前, 时间复杂度为 \\(O(n)\\)
    * 平均情况:
-      由于元素插入到第 i 个位置, 或删除第 i 个元素，需要移动 n-i 个元素. 平均执行次数是 \\(\frac{(n-1)+(n-2)+\dots+(n-n)}{n}=\frac{n^2-\frac{(1+n)n}{2}}{n}=n-\frac{1+n}{2}=\frac{n-1}{2}\\) (运用等差数列的知识进行化简)
+      由于元素插入到第 i 个位置, 或删除第 i 个元素, 需要移动 n-i 个元素. 平均执行次数是 \\(\frac{(n-1)+(n-2)+\dots+(n-n)}{n}=\frac{n^2-\frac{(1+n)n}{2}}{n}=n-\frac{1+n}{2}=\frac{n-1}{2}\\) (运用等差数列的知识进行化简)
       化为大O阶后平均时间复杂度还是 \\(O(n)\\)
 
 ### 线性表的链式存储结构
@@ -244,7 +245,7 @@ toc: true
 因此有了存储形式非线性的链式线性表
 
 1. 结构特点:
-   1. 用一组任意的存储单元存储线性表的数据，这组存储单元可以是连续的，也可以是不连续的。这些数据可以存在内存未被占用的任意位置
+   1. 用一组任意的存储单元存储线性表的数据, 这组存储单元可以是连续的, 也可以是不连续的. 这些数据可以存在内存未被占用的任意位置
       {% asset_img List-chain-structure.png %}
    2. 存储元素的区域称为**数据域**, 存储后继位置的域称为**指针域**
       这样的一个单元称为**结点**
@@ -253,7 +254,7 @@ toc: true
       注意:
          * 为了方便记录链表信息, 可在链表在第一个结点前附设一个**头结点**, 头结点的数据域可以存储如线性表长度等信息.
          * 指向链表起始位置的指针称为**头指针**, 若链表有头结点, 则是指向头结点
-         * 链表最后一个结点的指针为空(用 "**NULL**" 或 "**^**" 表示)
+         * 链表最后一个结点(称为**终端结点**)的**尾指针**为空(用 "**NULL**" 或 "**^**" 表示)
 2. 线性表的单链表存储结构代码
    ```C++
    typedef struct
@@ -278,7 +279,7 @@ toc: true
       LinkList p = list->next;  /* 声明一指针p, 让p指向链表list的第一个结点 */
       int j = 1                 /* j为计数器 */
 
-      for(; j < i && p; j++)    /* p不为空且计数器j还没有等于i时，循环继续 */
+      for(; j < i && p; j++)    /* p不为空且计数器j还没有等于i时, 循环继续 */
           p = p->next;          /* 让p指向下一个结点 */
       
       if(!p || i < 1)
@@ -363,7 +364,7 @@ toc: true
    单链表的插入和删除算法, 都是由遍历查找第 i 结点和插入和删除结点这两部分构成, 时间复杂度都是 \\(O(n)\\)
    如果不知道第 i 个结点的指针位置, 单链表结构在插入和删除操作上与顺序线性表是没有太大优势的.
    但若希望从第 i 个位置, 插入 10 个结点, 对于顺序存储结构来说每次插入都需要 \\(O(n)\\); 单链表只需要在第一次时找到第 i 个位置的指针, 此时为 \\(O(n)\\) , 接下来只是简单地移动指针, 时间复杂度都是 O(1) .
-   因此, **对于插入或删除数据越频繁的操作，单链表的效率优势就越是明显**
+   因此, **对于插入或删除数据越频繁的操作, 单链表的效率优势就越是明显**
 
 #### 单链表的整表创建
 
@@ -373,9 +374,9 @@ toc: true
   思路:
   1. 创建空表
   2. 循环以下动作:
-     1. 创建新结点, 随机生成数字赋给该节点的数据域
-     2. 将头指针的值赋给该结点的后继
-     3. 将该结点插入到头结点之后
+     1. 创建新结点, 随机生成数字赋给新结点的数据域
+     2. 将头指针的值赋给新结点的后继
+     3. 将新结点插入到头结点之后
 
   实现代码如下:
   ```C++
@@ -406,9 +407,9 @@ toc: true
   1. 创建空表
   2. 需要一个指针来记录尾部结点(以下称 r)
   3. 循环以下动作:
-     1. 创建新结点, 随机生成数字赋给该节点的数据域
+     1. 创建新结点, 随机生成数字赋给新结点的数据域
      2. 将尾部结点(也就是 r)的后继设为新结点的地址
-     3. 将新结点设为尾部结点(r = 新节点)
+     3. 将新结点设为尾部结点(r = 新结点)
 
   实现代码如下:
   ```C++
@@ -422,7 +423,7 @@ toc: true
 
      // 先建立一个带头结点的单链表
      *list = (LinkList) malloc(sizeof(Node));
-     r = *list; // r 记录尾部结点的地址
+     r = *list; // r 记录尾部结点的地址(这里表刚创好只有一个结点所以赋 *list)
 
      for(int i = 0; i < n; i++)
      {
@@ -430,7 +431,7 @@ toc: true
         p->data = rand() % 100 + 1; // 随机生成 100 以内的数字
 
         r->next = p; // 将表尾结点的后继指向新结点
-        r = p; // 将新节点定义为表尾结点
+        r = p; // 将新结点定义为表尾结点
      }
 
      r->next = NULL; // 别忘了初始化表尾结点的后继
@@ -439,8 +440,240 @@ toc: true
 
   #### 单链表的整表删除
 
-  单链表整表删除的算法思路如下:
-  TODO: 摸鱼摸鱼摸鱼
-  实现代码如下:
-  ```C++
-  ```
+  单链表整表删除:
+1. 思路:
+   1. 新建一个指针 p 存储第一个结点 
+   2. 向后不断遍历结点的后继并删除当前结点, 将 p 不断后移
+   3. 最终将头指针置空
+2. 实现代码如下:
+   ```C++
+   int ClearList(LinkList *list)
+   {
+      LinkList p = (*list)->next; // p 初始化指向第一个结点
+ 
+      while(p) // 循环直到 p 为 NULL
+      {
+         LinkList q = p->next; // 需要一个临时变量来存储地址
+         free(p);
+         p = q; // 将下一结点的地址赋给 p 
+      }
+ 
+      // 最后将头指针设为空
+      (*list)->next = NULL;
+      return OK;
+   }
+   ```
+
+### 顺序存储结构和单链表结构的比较
+
+<table>
+<thead>
+  <tr>
+    <th>存储分配方式</th>
+    <th>时间性能</th>
+    <th>空间性能</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>* 顺序存储结构用一段连续的存储单元依次存储线性表的数据元素<br>* 单链表采用链式存储结构, 用一组任意的存储单元存放线性表的元素</td>
+    <td>* 查找<br>  * 顺序存储结构 O(1)<br>  * 单链表 O(n)<br>* 插入和删除<br>  * 顺序存储结构需要平均移动表长一半的元素, 时间为 O(n)<br>  * 单链表在找出某位置的指针(O(n))后, 插入和删除时间仅为 O(1)</td>
+    <td>* 顺序存储结构需要预分配存储空间, 分大了, 浪费, 分小了易发生上溢<br>* 单链表不需要分配存储空间, 只要有就可以分配, 元素个数也不受限制</td>
+  </tr>
+</tbody>
+</table>
+
+* 若线性表需要频繁查找, 很少进行插入和删除操作时, 宜采用顺序存储结构. 若需要频繁插入和删除时, 宜采用单链表结构
+* 当线性表中的元素个数变化较大或者根本不知道有多大时, 最好用单链表结构, 这样可以不需要考虑存储空间的大小问题. 而如果事先知道线性表的大致长度, 用顺序存储结构效率会高很多
+
+### 静态链表
+
+用数组储存结点的链表叫做静态链表(游标实现法).
+为了方便插入数据, 通常会把数组建得大一些, 以防止空间不够而溢出
+
+```C++
+#define MAXSIZE 1000
+
+typedef struct
+{
+   ElemType data;
+   int cur; // 游标(Cursor), 为 0 时表示无指向
+} Component, StaticLinkList[MAXSIZE];
+```
+
+{% asset_img List-static-chain-list.png %}
+如图所示, 静态链表中:
+1. 数组中未被使用的空间称为**备用链表**
+2. 数组的第一个结点和终端结点作为特殊结点, 不存数据.
+   第一个结点(下标为 0)的 cur 存放备用链表的第一个结点的下标;
+   终端结点的 cur 存放第一个有数值结点的下标(相当于单链表中的头指针), 若整个链表为空时, 则为 0 .
+3. 实现代码如下:
+   ```C++
+   // 假设 MAXSIZE = 1000
+   int InitList(StaticLinkList list)
+   {
+      // 初始化数组下标 0~998 的游标
+      for(int i = 0; i < MAXSIZE -1; i++)
+          list[i].cur = i + 1;
+      
+      // 将终端结点(下标 999)的游标置为 0
+      list[MAXSIZE - 1].cur = 0;
+      return OK;
+   }
+
+   // 通过遍历游标并统计遍历次数的方法得到表长
+   int ListLength(StaticLinkList list)
+   {
+      int length = 0;
+      int lastCursor = list[MAXSIZE - 1].cur;
+      while(lastCursor)
+      {
+         lastCursor = list[lastCursor].cur;
+         length++;
+      }
+      return length;
+   }
+   ```
+4. 举个例子:
+   假设已经将数据存入静态链表，比如分别存放着"甲"、"乙"、"丁"、"戊"、"己"、"庚"等数据
+   {% asset_img List-static-chain-list-example.png %}
+
+#### 静态链表的插入操作
+
+1. 首先要解决的是: 如何用静态(预分配了内存空间)模拟动态链表的存储空间分配, 即需要时申请, 无用时释放.
+   解决方案是将数组上所有未被使用的及已删除的分量用游标链成一个备用链表, 每当进行插入时, 便可以从备用链表取它的第一个分量作为待插入的新结点
+   实现代码如下:
+   ```C++
+   // 若备用链表非空, 则返回备用链表第一个分量的下标, 否则返回 0
+   int Malloc_SLL(StaticLinkList list)
+   {
+      // 根据静态链表定义, 当前数组第一个结点的cur存的值, 即为备用链表第一个分量的下标
+      int i = list[0].cur;
+   
+      if(list[0].cur) // 判断是否还有下一个分量
+          list[0].cur = list[i].cur; // 将它的下一个分量赋给第一个结点的cur
+      return i;
+   }
+   ```
+2. 插入为第 i 结点:
+   思路:
+   1. 首先从备用链表获得一个分量的游标, 然后将数据赋给此分量.
+   2. 从终端结点的游标开始遍历, 直到第 i-1 号结点的下标;
+   3. 然后参考单链表的插入操作
+   ```C++
+   // i 为要插入的下标
+   int ListInsert(StaticLinkList list, int i, ElemType e)
+   {
+      int lastCursor, spaceCursor;
+      lastCursor = MAXSIZE - 1; // 首先将这个记录用变量初始化为终端结点的下标
+
+      if (i < 1 || i > ListLength(list) + 1)
+          return ERROR;
+
+      spaceCursor = Malloc_SSL(list);
+      if (spaceCursor)
+      {
+         // 将数据 e 赋给此分量
+         list[spaceCursor].data = e;
+
+         // 类似于单链表, 找到第 i-1 结点
+         for (int j = 1; j <= i - 1; j++)
+             lastCurser = list[lastCursor].cur;
+         
+         // 参考单链表的插入操作
+         list[spaceCursor].cur = list[lastCursor].cur;
+         list[lastCursor].cur = spaceCursor;
+         return OK;
+      }
+      return ERROR;
+   }
+   ```
+
+静态链表实现了在数组中, 不移动元素, 却插入了数据的操作. (但失去了随机读取的特性)
+
+#### 静态链表的删除操作
+
+1. 首先需要考虑把删除的空间回收到备用链表
+   ```C++
+   // 回收第 i 结点
+   void Free_SSL(StaticLinkList list, int i)
+   {
+      // 采用头插法
+      list[i].cur = list[0].cur;
+      list[0].cur = k;
+   }
+   ```
+2. 删除第 i 结点:
+```C++
+int ListDelete(StaticLinkList list, int i)
+{
+   int j, lastCursor;
+   if (i < 1 || i > ListLength(list))
+       return ERROR;
+   
+   lastCursor = MAXSIZE - 1;
+
+   // 类似于单链表, 找到第 i-1 结点
+   for (j = 1; j <= i - 1; j++)
+       lastCursor = list[lastCursor].cur;
+   
+   j = list[lastCursor].cur; // j 重复利用
+   list[lastCursor].cur = list[j].cur; // 将 i-1 结点的后继设为 i+1 (跳过第 i 结点)
+   Free_SSL(list, j);
+   return OK
+}
+```
+
+#### 静态链表优缺点
+
+<table>
+<thead>
+  <tr>
+    <th>优点</th>
+    <th>缺点</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>* 在插入和删除操作时, 只需要修改游标, 不需要移动元素, 从而改进了在顺序存储结构中的插入和删除操作需要移动大量元素的缺点</td>
+    <td>* 没有解决连续存储分配带来的表长难以确定的问题<br>* 失去了顺序存储结构随机读取的特性</td>
+  </tr>
+</tbody>
+</table>
+
+### 循环链表
+
+将单链表中终端结点的后继由空指针改为指向头结点, 就使整个单链表形成一个环, 称为单循环链表, 简称循环链表(Circular Linked List)
+
+1. 示意图:
+   1. 空的循环链表(只有一个头结点):
+      {% asset_img List-circular-linked-list-empty.png %}
+   2. 非空的循环链表
+      {% asset_img List-circular-linked-list-non-empty.png %}
+2. 循环列表的特点
+   循环链表和单链表的主要区别在于循环的判断条件上, 原来是判断 p->next 是否为空, 现在则是 p->next 不等于头结点, 则循环未结束.
+   有头结点的单链表可以用 \\(O(1)\\) 的时间访问第一个结点, 访问到终端结点却需要 \\(O(n)\\) 的时间, 因为需要将单链表全部遍历一遍
+3. 尾循环列表
+   为了解决终端节点访问效率低的问题, 再改造一下这个循环链表, 不用头指针而用指向终端结点的尾指针来表示链表.
+   {% asset_img List-circular-linked-list-tail.png %}
+4. 尾循环列表的特点
+   终端结点用尾指针 `rear` 表示, 查找终端结点时间为 \\(O(1)\\) , 第一个结点是 `rear->next->next` , 时间也为 \\(O(1)\\)
+
+将尾指针分别是 `rearA` 和 `rearB` 的两个循环链表合并成一个表:
+{% asset_img List-circular-linked-list-merge.png %}
+合并后:
+{% asset_img List-circular-linked-list-merge-2.png %}
+如图所示, 具体操作为:
+1. 将 A 表的 `rearA` 指向 B 表的第一个结点, 同时释放 B 表的头结点
+2. 将 B 表的 `rearB` 指向 A 表的头结点
+实现代码为:
+TODO: 代码有错误
+```C++
+p = rearA->next; // 保存 A 表的头结点(即 ①)
+rearA->next = rearB->next-next; // 将 A 表的头结点替换为 B 表的第一个结点
+rearB->next = p; // 将原 A 表的头结点赋给 rearB->next (即 uu)
+free(p)
+```
+
+### 双向链表
+ 
