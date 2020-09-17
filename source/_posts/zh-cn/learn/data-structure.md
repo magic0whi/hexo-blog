@@ -257,12 +257,11 @@ toc: true
          * 链表最后一个结点(称为**终端结点**)的**尾指针**为空(用 "**NULL**" 或 "**^**" 表示)
 2. 线性表的单链表存储结构代码
    ```C++
-   typedef struct
+   typedef struct Node
    {
       ElemType data;
       struct Node *next;
-   } Node;
-   typedef struct Node *LinkList;
+   } Node, *LinkList;
    ```
 
 #### 单链表的读取
@@ -560,6 +559,8 @@ typedef struct
    1. 首先从备用链表获得一个分量的游标, 然后将数据赋给此分量.
    2. 从终端结点的游标开始遍历, 直到第 i-1 号结点的下标;
    3. 然后参考单链表的插入操作
+   
+   实现代码如下:
    ```C++
    // i 为要插入的下标
    int ListInsert(StaticLinkList list, int i, ElemType e)
@@ -604,25 +605,25 @@ typedef struct
    }
    ```
 2. 删除第 i 结点:
-```C++
-int ListDelete(StaticLinkList list, int i)
-{
-   int j, lastCursor;
-   if (i < 1 || i > ListLength(list))
-       return ERROR;
+   ```C++
+   int ListDelete(StaticLinkList list, int i)
+   {
+      int j, lastCursor;
+      if (i < 1 || i > ListLength(list))
+          return ERROR;
+      
+      lastCursor = MAXSIZE - 1;
    
-   lastCursor = MAXSIZE - 1;
-
-   // 类似于单链表, 找到第 i-1 结点
-   for (j = 1; j <= i - 1; j++)
-       lastCursor = list[lastCursor].cur;
-   
-   j = list[lastCursor].cur; // j 重复利用
-   list[lastCursor].cur = list[j].cur; // 将 i-1 结点的后继设为 i+1 (跳过第 i 结点)
-   Free_SSL(list, j);
-   return OK
-}
-```
+      // 类似于单链表, 找到第 i-1 结点
+      for (j = 1; j <= i - 1; j++)
+          lastCursor = list[lastCursor].cur;
+      
+      j = list[lastCursor].cur; // j 重复利用
+      list[lastCursor].cur = list[j].cur; // 将 i-1 结点的后继设为 i+1 (跳过第 i 结点)
+      Free_SSL(list, j);
+      return OK
+   }
+   ```
 
 #### 静态链表优缺点
 
@@ -658,22 +659,82 @@ int ListDelete(StaticLinkList list, int i)
    {% asset_img List-circular-linked-list-tail.png %}
 4. 尾循环列表的特点
    终端结点用尾指针 `rear` 表示, 查找终端结点时间为 \\(O(1)\\) , 第一个结点是 `rear->next->next` , 时间也为 \\(O(1)\\)
-
-将尾指针分别是 `rearA` 和 `rearB` 的两个循环链表合并成一个表:
-{% asset_img List-circular-linked-list-merge.png %}
-合并后:
-{% asset_img List-circular-linked-list-merge-2.png %}
-如图所示, 具体操作为:
-1. 将 A 表的 `rearA` 指向 B 表的第一个结点, 同时释放 B 表的头结点
-2. 将 B 表的 `rearB` 指向 A 表的头结点
-实现代码为:
-TODO: 代码有错误
-```C++
-p = rearA->next; // 保存 A 表的头结点(即 ①)
-rearA->next = rearB->next-next; // 将 A 表的头结点替换为 B 表的第一个结点
-rearB->next = p; // 将原 A 表的头结点赋给 rearB->next (即 uu)
-free(p)
-```
+5. 合并多个尾循环列表
+   将尾指针分别是 `rearA` 和 `rearB` 的两个循环链表合并成一个表:
+   {% asset_img List-circular-linked-list-merge.png %}
+   合并后:
+   {% asset_img List-circular-linked-list-merge-2.png %}
+   如图所示, 具体操作为:
+   1. 将 B 表的 `rearB` 指向 A 表的头结点
+   2. 将 A 表的 `rearA` 指向 B 表的第一个结点, 同时释放 B 表的头结点
+   
+   实现代码为:
+   ```C++
+   CircularLinkList p = rearA->next; // 保存 A 表的头结点
+   rearA->next = rearB->next->next; // 将 A 表的头结点替换为 B 表的第一个结点
+   free(rearB->next); // 释放 B 表的头结点(不再需要)
+   rearB->next = p; // 将 B 表尾指针指向 A 表的头结点
+   ```
 
 ### 双向链表
- 
+
+双向链表(Double linked list)是在单链表的每个结点中, 再设置一个指向其前驱节点的指针域. 双向链表中的结点都有两个指针域, 一个指向后继, 一个指向后驱
+
+```C++
+typedef struct DuLinkNode
+{
+   ElemType data;
+   struct DuLinkNode *prior; // 前驱指针
+   struct DuLinkNode *next; // 后继指针
+} DuLinkNode, *DuLinkList;
+```
+
+这里我们讨论循环+双向列表的情况
+
+1. 示意图:
+   1. 空的循环双向链表:
+      {% asset_img List-circular-double-linked-list-empty.png %}
+   2. 非空的循环链表
+      {% asset_img List-circular-double-linked-list-non-empty.png %}
+2. 双向链表插入结点
+   {% asset_img List-circular-double-linked-list-insert.png %}
+   思路: 先搞定 s 的前驱和后继, 再搞定后结点的前驱, 最后解决前结点的后继
+   实现代码如下:
+   ```C++
+   s->prior = p; // 1. s 的前驱是 p
+   s->next = p->next; // 2. s 的后继是 p->next
+   p->next->prior = s; // 3. 后结点的前驱是 s
+   p->next = s; // 3. 前结点的后继是 s
+   ```
+3. 双向列表删除结点
+   思路: 先搞定前结点的后继, 再搞定后结点的前驱, 最后释放 p 的空间
+   ```C++
+   p->prior->next = p->next;
+   p->next->prior = p->prior;
+   free(p)
+   ```
+
+## 栈与队列
+
+### 栈的定义
+
+### 栈的抽象数据类型
+
+### 栈的顺序存储结构及实现
+
+### 栈的作用
+
+### 栈的应用
+
+#### 递归
+
+#### 四则运算表达式求值
+
+### 队列的定义
+
+### 队列的抽象数据类型
+
+### 循环队列
+
+### 队列的链式存储结构及实现
+
