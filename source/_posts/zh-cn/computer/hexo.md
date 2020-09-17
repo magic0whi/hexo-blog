@@ -64,23 +64,23 @@ marked:
 # 首先删除旧文件
 # 启用extglob才能用!(xx)之类的语法
 shopt -s extglob
-rm -rf /var/www/blog/!(node_modules)
+rm -rf /srv/git/www/!(node_modules)
 
 # git checkout
-git --work-tree=/var/www/blog --git-dir=/home/git/blog.git checkout -f
+git --work-tree=/srv/git/www --git-dir=/srv/git/blog.git checkout -f
 
 # 进入网页文件夹目录
-cd /var/www/blog
+cd /srv/git/www
 
 # 若node_modules文件夹不存在, 安装依赖插件
-if [ ! -d /var/www/blog/node_modules ]; then
+if [ ! -d /srv/git/www/node_modules ]; then
     npm install
 fi
 
 # 若package.json有改动, 更新插件
-CHANGED=$(git --git-dir=/home/git/blog.git diff HEAD^! --stat -- package.json | wc -l)
+CHANGED=$(git --git-dir=/srv/git/blog.git diff HEAD^! --stat -- package.json | wc -l)
 if [ $CHANGED -gt 0 ]; then
-    rm -rf /var/www/blog/node_modules
+    rm -rf /srv/git/www/node_modules
     npm install
 fi
 

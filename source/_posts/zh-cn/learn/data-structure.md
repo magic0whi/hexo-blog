@@ -8,6 +8,7 @@ toc: true
 ---
 
 需要对C语言的指针和数组有一定的了解
+全部代码示例皆为C语言
 函数名使用帕斯卡命名法
 变量使用驼峰命名(我平时用匈牙利命名法)
 
@@ -718,9 +719,78 @@ typedef struct DuLinkNode
 
 ### 栈的定义
 
+栈(Stack)是限定仅在表尾进行插入和删除操作的线性表
+
+**栈顶(top)**允许数据插入和删除, 另一端叫**栈底(bottom)**
+栈又被称为**后进先出(Last In, First Out)**的线性表, 简称**LIFO结构**
+
+* 栈的插入操作称作**压栈、进栈**或**入栈**
+  {% asset_img Stack-push.png %}
+* 栈的删除操作称作**弹栈**或**出栈**
+  {% asset_img Stack-pop.png %}
+
 ### 栈的抽象数据类型
 
+```ADT
+ADT 栈(Stack)
+Data
+    同线性表. 元素具有相同的类型, 相邻元素具有前驱和后继关系
+Operation
+    InitStack(*S) : 初始化操作, 建立一个空栈 S
+    DestoryStack(*S) : 将栈销毁
+    ClearStack(*S) : 将栈清空
+    StackEmpty(S) 若栈为空, 返回 true ; 否则返回 false
+    GetTop(S, *e) : 用 e 返回栈 S 的栈顶元素
+    Push(*S, e) ： 插入新元素 e 到栈 S 中并成为栈顶元素. 又称: 压栈, 进栈, 入栈
+    Pop(*S, *e) : 删除栈 S 中栈顶元素, 并用 e 返回其值. 又称: 弹栈, 出栈
+    StackLength(S) : 返回栈 S 的元素个数
+endADT
+```
+
 ### 栈的顺序存储结构及实现
+
+1. 栈的顺序存储结构
+   {% asset_img Stack-top-example.png %}
+   栈顶指针**top**指向当前栈顶部元素的地址. 它在空栈时为 -1 , 存在一个元素时为 0 .
+   ```C++
+   // SElemType类型根据实际情况而定, 这里假设为 int
+   typedef int SElemType
+   typedef struct
+   {
+      SElemType data[MAXSIZE];
+      int top; // 栈顶指针(下标)
+   } SqStack;
+   ```
+2. 顺序栈的进栈
+   {% asset_img Stack-sequence-push.png %}
+   ```C++
+   // 插入元素 e 为新的栈顶元素
+   int Push(SqStack *S, SElemType e)
+   {
+      if (S->top == MAXSIZE - 1) // 栈满
+          return ERROR;
+      
+      S->top++; // 栈顶指针+1
+      S->data[S->top] = e; // 将新加入的元素赋给栈顶空间
+      return OK;
+   }
+   ```
+3. 顺序栈的出栈
+   ```C++
+   // 删除栈顶元素, 用 e 返回其值
+   int Pop(SqStack *S, SElemType *e)
+   {
+      if (S->top == -1) // 若栈为空
+          return ERROR;
+      
+      *e = S->data[S->top]; // 将要删除的栈顶元素赋值给 e
+      S->top--; // 栈顶指针-1
+      return OK;
+   }
+   ```
+   值得一提的是, 出栈并没有清除数据, 因为栈在创建时即分配了固定的内存空间, 没有必要清理数据.
+4. 时间复杂度分析
+   入栈和出栈的时间复杂度均是 \\(O(1)\\)
 
 ### 栈的作用
 
