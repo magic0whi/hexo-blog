@@ -60,7 +60,7 @@ marked:
 ### Git Hook
 
 ```bash /home/git/blog.git/hooks/post-update
-#!bin/bash
+#!/bin/bash
 # 首先删除旧文件
 # 启用extglob才能用!(xx)之类的语法
 shopt -s extglob
