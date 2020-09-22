@@ -1165,59 +1165,37 @@ Unicode编码由16位二进制数表示一个字符, 共能表示 \\(2^16\\) 个
 线性表关注的是单个元素的操作
 串关注的是多个元素的操作, 如查找子串位置, 得到指定位置子串, 替换子串等操作
 
-1. 串的抽象数据类型
-   ```C++
-   ADT 串(string)
-   Data
-       串中单个元素仅由一个字符组成, 相邻元素具有前驱和后继关系.
-   Operation
-       StrAssign(T, *chars) : 生成一个值为*chars的串T
-       StrCopy(T, S) : 若串S存在, 由串S复制得串T
-       
-       ClearString(S) : 若串S存在, 将串清空
-       StringEmpty(S) : 若串S为空, 返回true, 否则返回false
-       
-       StrLength(S) : 返回串S的长度
-       
-       StrCompare(S, T) : 若 S>T, 返回值 >0; 若 S=0 返回 0; 若 S<T, 返回值 <0
-       
-       Concat(T, S1, S2) : 用T返回由S1和S2联接而成的新串
-       
-       SubString(Sub, S, pos, len) : 若串S存在, 且 1 ≤ pos ≤ StrLength(S) , 0 ≤ len ≤ StrLength(S) - pos + 1 .
+串的抽象数据类型
+```C++
+ADT 串(string)
+Data
+    串中单个元素仅由一个字符组成, 相邻元素具有前驱和后继关系.
+Operation
+    StrAssign(T, *chars) : 生成一个值为*chars的串T
+    StrCopy(T, S) : 若串S存在, 由串S复制得串T
+    
+    ClearString(S) : 若串S存在, 将串清空
+    StringEmpty(S) : 若串S为空, 返回true, 否则返回false
+    
+    StrLength(S) : 返回串S的长度
+    
+    StrCompare(S, T) : 若 S>T, 返回值 >0; 若 S=0 返回 0; 若 S<T, 返回值 <0
+    
+    Concat(T, S1, S2) : 用T返回由S1和S2联接而成的新串
+    
+    SubString(Sub, S, pos, len) : 若串S存在, 且 1 ≤ pos ≤ StrLength(S) , 0 ≤ len ≤ StrLength(S) - pos + 1 .
                                      返回截取从pos起长度为len的子串Sub
-
-       Index(S, T, pos) : 若串S和串T存在, T是非空串, 且 1 ≤ pos ≤ StrLength(S) . 若主串S中存在和串T相同的子串,
-                          则返回它在主串S中第pos个字符起第一次出现的位置, 否则返回 -1
-       
-       Replace(S, T, V) : 若串S、T、V存在, 且T是非空串. 用V替换主串S中出现的所有与T相等的子串.
-       
-       StrInsert(S, pos, T) : 若串S和T存在, 且 1 ≤ pos ≤ StrLength(S) + 1 . 在串S第pos个字符之前插入串T
-       
-       StrDelete(S, pos, len) : 若串S存在, 且 1 ≤ pos ≤ StrLength(S) - len + 1 . 从串S中删除以第pos个字符起长度为len的子串
-   endADT
-   ```
-
-2. 操作Index(S, T, pos) 的实现算法
-   思路: 主串 S 从 pos 之后, 不断截取长度为 Strlength(T) 的子串与 T 进行比较
-   ```C++
-   int Index(String S, String T, int pos)
-   {
-      int n, m, i;
-      String sub;
-
-      if(pos > 0)
-      {
-         n = StrLength(S); // 得到主串S长度
-         m = Strlength(T); // 得到子串T长度
-         for(i = pos; i <= n - m + 1; i++)
-         {
-             SubString(sub, S, i, m);
-             if (StrCompare(sub, T) == 0) // 如果两串相等
-                 return i;
-         }
-      return -1; // 若无子串与T相等, 返回 -1
-   }
-   ```
+    
+    Index(S, T, pos) : 若串S和串T存在, T是非空串, 且 1 ≤ pos ≤ StrLength(S) . 若主串S中存在和串T相同的子串,
+                       则返回它在主串S中第pos个字符起第一次出现的位置, 否则返回 -1
+    
+    Replace(S, T, V) : 若串S、T、V存在, 且T是非空串. 用V替换主串S中出现的所有与T相等的子串.
+    
+    StrInsert(S, pos, T) : 若串S和T存在, 且 1 ≤ pos ≤ StrLength(S) + 1 . 在串S第pos个字符之前插入串T
+    
+    StrDelete(S, pos, len) : 若串S存在, 且 1 ≤ pos ≤ StrLength(S) - len + 1 . 从串S中删除以第pos个字符起长度为len的子串
+endADT
+```
 
 ### 串的存储结构
 
@@ -1241,6 +1219,53 @@ Unicode编码由16位二进制数表示一个字符, 共能表示 \\(2^16\\) 个
    如图, 竖直连线表示相等, 闪电状弯折连线表示不等.
    TODO: 截止到这里
 
+操作Index(S, T, pos) 的实现算法
+
+思路: 主串 S 从 pos 之后, 不断截取长度为 Strlength(T) 的子串与 T 进行比较
+```C++
+int Index(String S, String T, int pos)
+{
+   int n, m, i;
+   String sub;
+
+   if(pos > 0)
+   {
+      n = StrLength(S); // 得到主串S长度
+      m = Strlength(T); // 得到子串T长度
+      for(i = pos; i <= n - m + 1; i++)
+      {
+          SubString(sub, S, i, m);
+          if (StrCompare(sub, T) == 0) // 如果两串相等
+              return i;
+      }
+   return -1; // 若无子串与T相等, 返回 -1
+}
+```
+不用StrLength(), SubString(), StrCompare() 实现 Index()
+```C++
+int Index(String S, String T, int pos)
+{
+   int i = pos; // i 用于存储主串S中遍历的当前下标
+   int j = 1; // j 用于存储子串T中遍历的当前下标
+
+   while (i<= S[0] && j <= T[0])
+   {
+      if (S[i] == T[j]) // 两字母相等则继续比对
+      {
+         i++;
+         j++;
+      }
+      else // 如果比对出现不同
+      {
+         i = i - j + 2; // i 退回到上次匹配的下一位
+         j = 1; // j退回到子串T的首位
+      }
+   }
+}
+```
+
 ### KMP模式匹配算法
+
+
 
 ## 树
