@@ -7,6 +7,7 @@ tags:
 toc: true
 ---
 
+从0开始
 需要对C语言的指针和数组有一定的了解
 全部代码示例皆为C语言
 函数中所有用到的变量都声明在开头
@@ -1214,58 +1215,264 @@ endADT
 
 **子串的定位操作通常称做串的模式匹配(Pattern matching)**
 
-举个例子: 从主串 S="goodgoogle" 中找到 T="google" 这个子串的位置
-1. 主串 S 第一位开始, S 与 T 前三个字母都匹配成功, 但 S 第四个字符是 'd' 而子串 T 的是 'g', 因此第一位匹配失败.
-   如图, 竖直连线表示相等, 闪电状弯折连线表示不等.
-   TODO: 截止到这里
+1. 举个例子: 从主串 S="goodgoogle" 中找到 T="google" 这个子串的位置
 
-操作Index(S, T, pos) 的实现算法
-
-思路: 主串 S 从 pos 之后, 不断截取长度为 Strlength(T) 的子串与 T 进行比较
-```C++
-int Index(String S, String T, int pos)
-{
-   int n, m, i;
-   String sub;
-
-   if(pos > 0)
+   (图中, 竖直线表示相等, 闪电状弯折表示不等.)
+   1. 主串 S 第一位开始, S 与 T 前三个字母都匹配成功, 但 S 第四个字符是 'd' 而子串 T 的是 'g', 因此第一位匹配失败.
+      {% asset_img String-naive-pattern-match-1.png %}
+   2. 从主串 S 第二位开始, 首字母是 'o', 与 T 的 'g' 不同, 匹配失败
+      {% asset_img String-naive-pattern-match-2.png %}
+   3. 从主串 S 第三位开始, 首字母还是 'o', 与 T 的 'g' 不同, 匹配失败
+      {% asset_img String-naive-pattern-match-3.png %}
+   4. 从主串 S 第四位开始, s首字母是 'd', 与 T 的 'g' 不同, 匹配失败
+      {% asset_img String-naive-pattern-match-4.png %}
+   5. 从主串 S 第五位开始, 6 个字母全匹配, 匹配成功
+      {% asset_img String-naive-pattern-match-5.png %}
+2. 操作 `Index(S, T, pos)` 的实现算法
+   思路: 主串 S 从 pos 之后, 不断截取长度为 Strlength(T) 的子串与 T 进行比较
+   ```C++
+   int Index(String S, String T, int pos)
    {
-      n = StrLength(S); // 得到主串S长度
-      m = Strlength(T); // 得到子串T长度
-      for(i = pos; i <= n - m + 1; i++)
-      {
-          SubString(sub, S, i, m);
-          if (StrCompare(sub, T) == 0) // 如果两串相等
-              return i;
-      }
-   return -1; // 若无子串与T相等, 返回 -1
-}
-```
-不用StrLength(), SubString(), StrCompare() 实现 Index()
-```C++
-int Index(String S, String T, int pos)
-{
-   int i = pos; // i 用于存储主串S中遍历的当前下标
-   int j = 1; // j 用于存储子串T中遍历的当前下标
-
-   while (i<= S[0] && j <= T[0])
-   {
-      if (S[i] == T[j]) // 两字母相等则继续比对
-      {
-         i++;
-         j++;
-      }
-      else // 如果比对出现不同
-      {
-         i = i - j + 2; // i 退回到上次匹配的下一位
-         j = 1; // j退回到子串T的首位
-      }
+       int n, m, i;
+       String sub;
+       
+       if(pos > 0)
+       {
+           n = StrLength(S); // 得到主串S长度
+           m = Strlength(T); // 得到子串T长度
+           for(i = pos; i <= n - m + 1; i++)
+           {
+               SubString(sub, S, i, m);
+               if (StrCompare(sub, T) == 0) // 如果两串相等
+                   return i;
+           }
+       }
+       return -1; // 若无子串与T相等, 返回 -1
    }
-}
-```
+   ```
+   不用StrLength(), SubString(), StrCompare() 的实现
+   ```C++
+   int Index(String S, String T)
+   {
+       int i, j; // i, j 分别记录循环在 S, T 比较的下标
+       for (i = 1, j = 1; i <= S.[0] && j <= T.[0];)
+       {
+           if (S[i] == T[j])
+           {
+               i++;
+               j++;
+           }
+           else // 如果比较失败
+           {
+               i = i - j + 2; // i 回溯并+1
+               j = 1; // j 回溯
+           }
+           if (j = T.[0])
+               return (i - T.[0];
+           else
+               return 0;
+       }
+   }
+   ```
+3. 时间复杂度分析:
+   最坏情况下, 每次不成功的匹配都发生在串 T 的最后一个字符
+   设 S 和 T 长度分别为 n=32, m=8
+   如主串 S="00000000000000000000000000000001", 而要匹配的子串 T="00000001",
+   所以最坏情况时间复杂度为 m(n-m+1)=O(m(n-m))
 
 ### KMP模式匹配算法
 
+KMP (Knuth, Morris, Pratt 三人发现)
+KMP算法的改进之处在于主串的 i 指针不用回溯, 而是利用之前"匹配程度"(以 j 指针来反应)将匹配串T向右滑动尽可能远的距离后继续比较.
 
+定义一个数组 next[j] 表示当子串T中第j个字符与主串第i个字符不等时, 下一次子串T比较的位置
+{% asset_img String-KMP.png %}
+如图中 next[6] = 3, 则将 T[3]与 S[6] 比较
+
+在此贴上 next[i] 的定义:
+\\(next[j]=\begin{cases} 0, 当 j=1 时 \\\ Max\\{k|1<k<j, 且 "a_1 a_2 \dots a_{k=1}=a_{j-k+1} a_{j-k+1}\dots a_{j-1}"\\} \\\ 1, 其他情况\end{cases}\\)
+
+具体实现代码:
+```C++
+void get_next(String T, int *next)
+{
+   int i, j;
+   i = 1;
+   j = 0;
+   next[1] = 0;
+   while(i < T.[0]) // 此处T[0]表示串T的长度
+   {
+      if (j == 0 || T[i] == T[j])
+      {
+          i++;
+          j++;
+          next[i] = j;
+      }
+      else
+          j = next[j]; // j 值回溯
+   }
+}
+
+int Index_KMP(String S, String T, int pos)
+{
+    int i = pos;
+    int j = 1;
+    int next[255];
+    get_next(T, next);
+    while (i <= S[0] && j <= T[0])
+    {
+        if (j == 0 || S[i] == T[i])
+        {
+            i++;
+            j++;
+        }
+        else
+            j = next[i];
+    }
+    if (j > T[0])
+        return i - T[0];
+    else
+        return 0;
+}
+```
+2. 时间复杂度分析
+TODO
 
 ## 树
+
+### 树的定义
+
+树(Tree) 是 n (n≥0) 个结点的有限集, n=0 时称为**空树**.
+在任意一颗非空树中:
+1. 有且仅有一个特定的根(Root)结点
+2. 当 n>1 时, 其余结点可分为 m (m>0) 个互不相交的有限集 \\(T_1, T_2, \dots, T_m\\) ,
+   其中每一个集合本身又是一棵树, 并且称为根的**子树**
+   {% asset_img Tree-example-1.png %}
+   如下图, 子树 \\(T_1\\) 和 \\(T_2\\) 是根结点 A 的子树
+   (D、G、H、I是以B为根结点的子树, E、J是以C为根结点的子树)
+   {% asset_img Tree-example-2.png %}
+3. 子数之间一定是互不相交的, 下图的两个结构就不符合树的定义
+   {% asset_img Tree-non-tree.png %}
+
+2. 结点的分类
+   树的结点包含: 
+   数据元素和若干指向其子树的分支.
+   结点的子树数量称为结点的**度(Degree)**.
+   度为0的结点称为**叶结点**或**终端结点**;
+   度不为0的结点称为**分支结点**或**非终端结点**, 非根结点的分支结点也叫**内部结点**.
+   树的度为树内各结点的度的最大值.
+   举个例子:
+   {% asset_img Tree-node-example.png %}
+   此树的度为3
+3. 结点间关系
+   孩子(Child), 双亲(Parent), 兄弟(Sibling)
+   {% asset_img Tree-node-relationship-example.png %}
+4. 树的其他相关概念
+   1. 结点的层次(Level)
+      一个**深度(Depth)**或**高度**为4的树
+      {% asset_img Tree-depth-example.png %}
+   2. 如果将树中结点的各子树看出从左至右是有次序的, 不能互换的, 则称该树为**有序树**, 否则称为无序树.
+   3. **森林(Forest)**是 m (m≥0) 课互不相交的树的集合. 对树中每个结点而言, 其子树的集合即为森林.
+
+### 树的抽象数据类型
+
+```
+ADT 树(tree)
+Data
+    树是由一个根节点和若干课子树构成, 树中结点具有相同数据类型及层次关系
+Operation
+    InitTree(*T) : 构造空树T
+    DestroyTree(*T) : 摧毁树T
+    CreateTree(*T, definition) : 按definition中给出的树的定义来构造树
+    ClearTree(*T) : 若树T存在, 则将树T清空
+    TreeEmpty(T) : 若T为空树, 返回true, 否则返回false
+    TreeDepth(T) : 返回树T的深度
+    Root(T) : 返回树T的根节点
+    Value(T, cur_e) : cur_e是树T中一个结点, 返回此结点的数据
+    Assign(T, cur_e, value) : 给树T的结点cur_e赋值为value
+    Parent(T, cur_e) : 若cur_e是树T的非根节点, 返回它的双亲, 否则返回空
+    LeftChild(T, cur_e) : 若cur_e是树T的非叶结点, 则返回它最左边的孩子, 否则返回空
+    RightSibling(T, cur_e) : 若cur_e有右兄弟, 则返回它的右兄弟, 否则返回空
+    InsertChild(*T, *p, i, c) : p指向树T的某个结点, i为所指结点p的度加上1, 非空树c与T不相交
+                                操作结果为插入树c为树T中p所指结点的第i颗子树
+    DeleteChile(*T, *p, i) : 其中p指向树T的某个结点, i为所指结点p的度, 操作结果为删除树T中p所指结点的第i颗子树
+endADT
+```
+
+### 树的存储结构
+
+### 二叉树的定义
+
+### 二叉树的性质
+
+### 二叉树的存储结构
+
+### 遍历二叉树
+
+### 二叉树的建立
+
+### 线索二叉树
+
+### 树、森林与二叉树的转换
+
+### 赫夫曼树及其应用
+
+## 图
+
+### 图的定义
+
+### 图的抽象数据类型
+
+### 图的存储结构
+
+### 图的遍历
+
+### 最小生成树
+
+### 最短路径
+
+### 拓补排序
+
+### 关键路径
+
+## 查找
+
+### 查找概论
+
+### 顺序表查找
+
+### 有序表查找
+
+### 线性索引查找
+
+### 二叉排序树
+
+### 平衡二叉树(AVL树)
+
+### 多路查找树(B树)
+
+### 散列表查找(哈希表)概述
+
+### 散列函数的构造方法
+
+### 处理散列冲突的方法
+
+### 散列表查找实现
+
+## 排序
+
+### 排序的基本概念与分类
+
+### 冒泡排序
+
+### 简单选择排序
+
+### 直接插入排序
+
+### 希尔排序
+
+### 堆排序
+
+### 归并排序
+
+### 快速排序
