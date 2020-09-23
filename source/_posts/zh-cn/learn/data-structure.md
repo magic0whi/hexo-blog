@@ -1285,7 +1285,8 @@ endADT
 KMP (Knuth, Morris, Pratt 三人发现)
 KMP算法的改进之处在于主串的 i 指针不用回溯, 而是利用之前"匹配程度"(以 j 指针来反应)将匹配串T向右滑动尽可能远的距离后继续比较.
 
-定义一个数组 next[j] 表示当子串T中第j个字符与主串第i个字符不等时, 下一次子串T比较的位置
+如何决定滑动的距离呢?
+定义一个数组 next[j] 表示当子串T中第j个字符与主串第i个字符不等时, 下一次比较的位置为 T[next[j]]
 {% asset_img String-KMP.png %}
 如图中 next[6] = 3, 则将 T[3]与 S[6] 比较
 
@@ -1296,20 +1297,20 @@ KMP算法的改进之处在于主串的 i 指针不用回溯, 而是利用之前
 ```C++
 void get_next(String T, int *next)
 {
-   int i, j;
-   i = 1;
-   j = 0;
+   int j, k;
+   j = 1;
+   k = 0;
    next[1] = 0;
-   while(i < T.[0]) // 此处T[0]表示串T的长度
+   while(j < T.[0]) // 此处T[0]表示串T的长度
    {
-      if (j == 0 || T[i] == T[j])
+      if (k == 0 || T[j] == T[k]) // 
       {
-          i++;
           j++;
-          next[i] = j;
+          k++;
+          next[j] = k;
       }
       else
-          j = next[j]; // j 值回溯
+          k = next[k]; // k 值回溯, 同样利用了KMP, 利用之前已经算好的next[k]
    }
 }
 
@@ -1335,7 +1336,7 @@ int Index_KMP(String S, String T, int pos)
         return 0;
 }
 ```
-2. 时间复杂度分析
+1. 时间复杂度分析
 TODO
 
 ## 树
