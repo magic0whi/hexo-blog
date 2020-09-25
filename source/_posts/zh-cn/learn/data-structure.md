@@ -1356,8 +1356,7 @@ TODO
    {% asset_img Tree-non-tree.png %}
 
 2. 结点的分类
-   树的结点包含: 
-   数据元素和若干指向其子树的分支.
+   树的结点包含数据元素和若干指向其子树的分支.
    结点的子树数量称为结点的**度(Degree)**.
    度为0的结点称为**叶结点**或**终端结点**;
    度不为0的结点称为**分支结点**或**非终端结点**, 非根结点的分支结点也叫**内部结点**.
@@ -1370,10 +1369,10 @@ TODO
    {% asset_img Tree-node-relationship-example.png %}
 4. 树的其他相关概念
    1. 结点的层次(Level)
-      一个**深度(Depth)**或**高度**为4的树
+      一个 **深度(Depth)** 或 **高度** 为4的树
       {% asset_img Tree-depth-example.png %}
    2. 如果将树中结点的各子树看出从左至右是有次序的, 不能互换的, 则称该树为**有序树**, 否则称为无序树.
-   3. **森林(Forest)**是 m (m≥0) 课互不相交的树的集合. 对树中每个结点而言, 其子树的集合即为森林.
+   3. **森林(Forest)** 是 m (m≥0) 课互不相交的树的集合. 对树中每个结点而言, 其子树的集合即为森林.
 
 ### 树的抽象数据类型
 
@@ -1401,6 +1400,38 @@ endADT
 ```
 
 ### 树的存储结构
+
+1. 双亲表示法
+   假设以一组连续空间存储树的结点, 同时在每个结点中, 附设一个治时期指示其双亲结点在数组中的位置. 每个结点除了知道自己是谁以外, 还知道它的双亲在哪里
+   ```C++
+   #define MAX_TREE_SIZE 100
+
+   typedef int TElemType; // 假设储存的是整型
+
+   typedef struct PTNode
+   {
+       TElemType data; // 结点数据
+       int parent;  // 双亲位置
+   } PTNode; // 结点结构
+
+   typedef struct
+   {
+       PTNode nodes[MAX_TREE_SIZE]; // 结点数组
+       int r, n; // 根的位置和结点数
+   } PTree;
+   ```
+   由于根节点没有双亲, 约定根节点的 parent 设为 -1
+   {% asset_img Tree-parent-representation.png %}
+   改进:
+   * 增加一个存储最左边孩子的 **长子域(firstChild)**, 如果结点没有孩子, 就设为 -1
+     {% asset_img Tree-parent-representation-firstchild.png %}
+   * 增加一个存储右兄弟的域(rightsib), 如果结点没有右兄弟, 就设为 -1
+     {% asset_img Tree-parent-representation-rightsib.png %}
+2. 孩子表示法
+   由于树中每个结点可能有多颗子树, 可以考虑多重链表, 即**每个指针指向一棵子树的根节点**, 这种方法叫**多重链表表示法**.
+   * 方案一: 指针域的个数等于树的度
+   * 方案二: 按需分配空间
+3. 孩子兄弟表示法
 
 ### 二叉树的定义
 
