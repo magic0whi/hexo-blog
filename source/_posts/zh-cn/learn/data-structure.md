@@ -1092,7 +1092,7 @@ endADT
    {
       QueuePtr newNode = (QueuePtr) malloc(sizeof(QNode));
       
-      if(!s) // 存储分配失败
+      if(!newNode) // 存储分配失败
           exit(OVERFLOW);
       
       newNode->data = e;
@@ -1544,17 +1544,146 @@ endADT
 
 ### 二叉树的存储结构
 
-#### 二叉树顺序存储结构
+1. 完全二叉树的存储
+   二叉树顺序结构是用一维数组存储二叉树中的结点, 并且结点的存储位置(即数组下标)要能体现结点之间的逻辑关系, 比如双亲与孩子的关系, 左右兄弟的关系
+   {% asset_img Tree-binary-tree-sequence-structure-1.png %}
 
-二叉树顺序结构是用一维数组存储二叉树中的结点, 并且结点的存储位置(即数组下标)要能体现结点之间的逻辑关系, 比如双亲与孩子的关系, 左右兄弟的关系
+   将这颗二叉树存入到数组中, 相应的下标对于其同样的位置
+   {% asset_img Tree-binary-tree-sequence-structure-2.png %}
 
-#### 二叉链表
+   完全二叉树存入到数组中, 相应的下标对应同样的位置, 一般的二叉树层序编号不能反映逻辑关系, 但可以将其补全为完全二叉树来编号, 把不存在的结点设置为"^"
+   {% asset_img Tree-binary-tree-sequence-structure-3.png %}
+
+   但使用这种方式编号也有缺点, 一种机端的情况是一颗深度为 k 的右斜树, 它只有 k 个节点, 却需要分配 \\(2^k-1\\) 个存储单元, 会造成对空间的极度浪费, 所以顺序结构一般**只用于完全二叉树**
+   {% asset_img Tree-binary-tree-sequence-structure-4.png %}
+2. 二叉链表
+   二叉树每个结点最多有两个孩子, 设计一个数据域和两个指针域
+   {% asset_img Tree-binary-tree-link-structure-1.png %}
+   结构定义代码如下:
+   ```C++
+   typedef struct BiTNode // 结点结构
+   {
+       TElemType data;
+       struct BiTNode *lchild, *rchild; // 左右孩子指针
+   } BiTNode, *BiTree;
+   ```
+   结构示意图:
+   {% asset_img Tree-binary-tree-link-structure-2.png %}
 
 ### 遍历二叉树
 
+1. 二叉树遍历方法
+   1. 前序遍历
+      若二叉树为空, 则空操作返回, 否则
+      1. 先访问根节点
+      2. 前序遍历左子树
+      3. 前序遍历右子树
+      {% asset_img Tree-binary-tree-traversal-preorder-traversal.png %}
+
+      图中遍历的顺序为:ABDGHCEIF
+      实现代码如下:
+      ```C++
+      /* 二叉树前序遍历递归算法 */
+      void PreOrderTraverse(BiTree T)
+      {
+          if (T == NULL)
+              return;
+          
+          printf("%c", T->data);
+          
+          PreOrderTraverse(T->lchild); // 前序遍历左子树
+          PreOrderTraverse(T->rchild); // 前序遍历右子树
+      }
+      ```
+   2. 中序遍历
+      若二叉树为空, 则空操作返回, 否则
+      1. 从根结点开始(注意不是先访问根结点)
+      2. 中序遍历根节点的左子树, 然后是访问根节点
+      3. 中序遍历右子树
+      {% asset_img Tree-binary-tree-traversal-inorder-traversal.png %}
+
+      图中遍历的顺序为: GDHBAEICF
+      实现代码如下:
+      ```C++
+      /* 二叉树中序遍历递归算法 */
+      void InOrderTraverse(BiTree T)
+      {
+          if (T == NULL)
+              return;
+          
+          InOrderTraverse(T->lchild); // 中序遍历左子树
+          
+          printf("%c", T->data);
+          
+          InOrderTraverse(T->rchild); // 中序遍历右子树
+      }
+      ```
+   3. 后序遍历
+      若二叉树为空, 则空操作返回, 否则
+      1. 从左到右先叶子后结点的方式遍历访问左右子树
+      2. 最后是访问根结点
+      {% asset_img Tree-binary-tree-traversal-postorder-traversal.png %}
+
+      图中遍历的顺序为: GHDBIEFCA
+      实现代码如下:
+      ```C++
+      void PostOrderTraverse(BiTree T)
+      {
+          if (T == NULL)
+              return;
+          
+          PostOrderTraverse(T->lchild); // 后续遍历左子树
+          PostOrderTraverse(T->rchild); // 后续遍历右子树
+          printf("%c", T->data);
+      }
+      ```
+   4. 层序遍历
+      若树为空, 则空操作返回, 否则
+      1. 从树的第一层, 也就是根结点开始访问
+      2. 从上而下逐层遍历
+      3. 中同一层中, 按从左到右的顺序对结点逐个访问
+      {% asset_img Tree-binary-tree-traversal-level-order-traversal.png %}
+2. 推导遍历结果
+   * 已知前序遍历序列和中序遍历序列, 能够唯一确定一颗二叉树
+   * 已知后序遍历序列和中序遍历序列, 能够唯一确定一颗二叉树
+   * 已知前序和后续遍历, 不能唯一确定一颗二叉树
+
 ### 二叉树的建立
 
+要建立一颗普通的二叉树, 将这颗二叉树中每一个结点的空指针引出一个虚结点, 其值为一特定值, 比如"#".
+处理好的二叉树为扩展二叉树, 扩展二叉树能够通过一个"前序"或"后序"遍历序列确定一颗二叉树
+(这样就方便用一串字符序列来建立二叉树了)
+
+{% asset_img Tree-binary-tree-create.png %}
+图中前序遍历序列为AB#D##C##
+
+实现代码如下:
+```C++
+// 按前序输入二叉树中各点的值
+void CreateBitree(Bitree *T)
+{
+    TElemType ch;
+    scanf("%c", &ch); // 输入结点数据字符
+    if(ch == '#')
+        *T = NULL;
+    else
+    {
+        *T = (BiTree) malloc(sizeof(BiTNode));
+        if(!*T) // 如果分配失败
+            exit(OVERFLOW);
+         
+        (*T)->data = ch; // 给结点数据域赋值
+        CreateBiTree(&(*T)->lchild); // 构造左孩子(子树)
+        CreateBiTree(&(*T)->rchild); // 构造右孩子(子树)
+    }
+}
+```
+
 ### 线索二叉树
+
+1. 线索二叉树原理
+   一个有 n 个节点的二叉链表. 每一个结点
+2. 线索二叉树结构实现
 
 ### 树、森林与二叉树的转换
 
