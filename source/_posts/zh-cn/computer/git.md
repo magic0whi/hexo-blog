@@ -81,23 +81,24 @@ $ ssh -T git@github.com
 * SHA256:nThbg6kXUpJWGl7E1IGOCspRomTxdCARLviKw6E5SY8 (RSA)
 * SHA256:br9IjFspm1vxR3iA35FWE+4VTyz1hYVLIE2t1/CeyWQ (DSA)
 
-## 友好地输出日志
+## GIT常用输出命令
 
-```console
-$ git log --graph --oneline --decorate --all
-```
-
-输出最近一次commit及diff格式的改动
-
-```console
-git log --cc -1
-```
-
-查看commit间的修改
-
-```console
-git diff HEAD HEAD~
-```
+1. 友好地输出日志:
+   ```console
+   $ git log --graph --oneline --decorate --all
+   ```
+2. 输出最近一次commit及diff格式的改动:
+   ```console
+   git log --cc -1
+   ```
+3. 查看commit间的修改
+   ```console
+   git diff HEAD HEAD~
+   ```
+4. 查看commit diffstat
+   ```console
+   git diff HEAD^! --stat
+   ```
 
 ## 撤销合并（2种方法）
 
