@@ -1913,7 +1913,7 @@ TODO: 补充图片
       * 顶点集合 \\(V_1=\\{A, B, C, D\\}\\)
       * 边集合 \\(E_1=\\{(A,B),(B,C),(C,D),(D,A),(A,C)\\}\\)
    
-   2. 若从顶点 \\(v_i\\) 到 \\(v_j\\) 的边有方向, 则称这条边为有向边, 也称为弧(Arc). 用有序偶对<\\(v_i\\), \\(v_j\\)>来表示, \\(v_i\\) 称为狐尾(Tail), \\(v_j\\) 称为弧头(Head).
+   2. 若从顶点 \\(v_i\\) 到 \\(v_j\\) 的边有方向, 则称这条边为有向边, 也称为弧(Arc). 用有序偶对<\\(v_i\\), \\(v_j\\)>来表示, \\(v_i\\) 称为弧尾(Tail), \\(v_j\\) 称为弧头(Head).
       如果图中任意两个顶点之间的边都是有向边, 则称该图为**有向图(Directed graphs)**
       TODO: 补充图片
       有序对<A,D>, A是弧尾, D是弧头, 不能写成<D,A>
@@ -2032,13 +2032,199 @@ TODO: 补充图片
    图的邻接矩阵（Adjacency Matrix)存储方式是用两个数组来表示图.
    一个一维数组存储图中顶点信息, 一个二维数组(即邻接矩阵)存储图中的边或弧的信息
    设 G 有 n 个顶点, 则邻接矩阵是一个 n×n 的方阵, 定义为:
+   \\(arc[i][j]=\begin{cases} 1, \text{若}(v_i, v_j)\in E \text{或} <v_i, v_j>\in E \\\ 0, 反之 \end{cases}\\)
    TODO: 补充图片
+   顶点数组为 \\(\text{vertex}[4]=\\{v_0, v_1, v_2, v_3\\}\\) , 边数组 \\(\text{arc}[4][4]\\) 为右图这样的一个矩阵.
+   矩阵的主对角线的值全为 0 是因为不存在顶点到自身的边, 无向图的边数组是一个对称矩阵.
+   **对称矩阵就是 n 阶矩阵的元满足 \\(a_{ij}=a_{ji} \quad(0\leqslant i, j\leqslant n)\\) , 即从矩阵左上至右下角的主对角线为轴呈对称关系**
+
+   特点:
+   1. 判定任意两顶点是否邻接
+   2. 要知道顶点 \\(v_i\\) 的度, 可求 \\(v_i\\) 在邻接矩阵中第i行(或第i列)的元素之和(有向图中横向出度统计, 纵向入度统计)
+   
+   2. 有向图
+      顶点数组为 \\(\text{vertex}[4]=\\{v_0, v_1, v_2, v_3\\}\\) , 边数组 \\(\text{arc}[4][4]\\) 为右图这样的一个矩阵.
+      对角线上数值依旧为0, 此矩阵并不对称
+      
+      TODO: 补充图片
+      特点:
+      1. 有向图讲究入度与出度, 如顶点 \\(v_1\\) 入度为第 i 纵列总和, 出度为第 i 横行总和
+      2. 判断从顶点 \\(v_i\\) 到 \\(v_j\\) 是否存在弧, 只需要查找矩阵中 arc[i][j] 是否为 1
+      
+   3. 网图
+      设图 G 是网图, 有 n 个顶点, 则邻接矩阵是一个 n×n 的方阵, 定义为:
+      \\(\text{arc}[i][j]=\begin{cases} W_{ij} & \text{if } (v_i, v_j)\in E \text{ or } <v_i, v_j>\in E \\\ 0 & \text{if } i=j \\\ \infty & \text{other} \end{cases}\\)
+      TODO: 补充图片
+      ∞ 表示一个计算机允许的、大于所有边上权值的值, 也就是一个不可能的极限值
+      
+      网图的邻接矩阵存储结构代码:
+      ```C++
+      #define MAXVEX 100      // 最大顶点数
+      #define INFINITY 65535  // 用 65535 代替网图邻接矩阵的 ∞
+      
+      typedef char VertexType; // 顶点类型, 假设为 char
+      typedef int EdgeType;   // 边上的权值类型, 假设为 int
+      
+      typedef struct
+      {
+          VertexType vexs[MAXVEX];      // 顶点表
+          EdgeType arc[MAXVEX][MAXVEX]; // 邻接矩阵(边表)
+          int numVertexes, numEdges;    // 图的当前顶点数和边数
+      } NGraph;
+      ```
+
+      **无向**网图的邻接矩阵结构 CreateGraph() :
+      ```C++
+      void CreateNGraph(NGraph *G)
+      {
+         int i, j, k, w;
+         
+         printf("输入顶点数和边数:\n");
+         scanf("%d,%d", &G->numVertexes, &G->numEdges);
+
+         // 给顶点表赋值
+         for (i = 0; i < G->numVertexes; i++)
+             scanf(&G->vexs[i]);
+
+         // 邻接矩阵初始化
+         for (i = 0; i < G->numVertexes; i++)
+             for (j = 0; j < numVertexes; j++)
+                 G->arc[i][j] = INFINITY;
+         
+         for (k = 0; k < G->numEdges; k++)
+         {
+            printf("输入边 (v_i, v_j) 的 i、j 和该边的权 w :\n");
+            scanf("%d,%d,%d", &i, &j, &w);
+            G->arc[i][j] = w;
+            G->arc[j][i] = G->arc[i][j]; // 因为是无向图, 矩阵对称 (有向则没有这句)
+         }
+      }
+      ```
+
+      时间复杂度分析:
+      n 个顶点和 e 条边的无向网图的创建, 时间复杂度为 \\(O(n+n^2+e)\\)
+      
+   邻接矩阵存储结构对于边数相对顶点较少的图来说极大浪费存储空间
 2. 邻接表
+   **数组与链表相结合的存储方法称为邻接表(Adjacency List)**
+   邻接表的处理方法:
+   1. 顶点用一个一维数组存储.
+      顶点数组中, 每个元素还有一个指针域, 指向该顶点的第一个邻接点
+   2. 图中每个顶点的所有邻接点构成一个线性表(存储邻接点在顶点数组中的下标), 由于邻接点的个数不定, 所以用单链表存储
+      无向图称为顶点 \\(v_i\\) 的边表; 有向图则称为顶点 \\(v_i\\) 的出边表(有向图也可以建立一个逆邻接表, 即为每个顶点建立一个入边表)
+   3. 对于带权值的网图, 可以在边表结点定义在再增加一个数据域存储权值
+   
+   TODO: 补充图片, 补充下一张图片, 补充下一张图片
+
+   特点:
+   1. 要想查某个顶点的度, 就去查这个顶点的边表中结点的个数.
+   2. 若要判断顶点 \\(v_i\\) 到 \\(v_j\\) 是否存在边, 只需测试顶点 \\(v_i\\) 的边表中是否存在结点 \\(v_j\\) 的下标 j .
+
+   边表结点定义代码:
+   ```C++
+   #define MAXVEX 100      // 最大顶点数
+
+   typedef char VertexType; // 顶点类型, 假设为 char
+   typedef int EdgeType;   // 边上的权值类型, 假设为 int
+   
+   // 边表结点
+   typedef struct EdgeNode
+   {
+       int adjVex;      // 邻接点域, 存储该顶点对应下标
+       EdgeType weight; // 存储权值, 非网图可以不需要
+       struct EdgeNode *next;
+   } EdgeNode;
+
+   // 顶点表元素
+   typedef struct VertexNode
+   {
+       VertexType data;     // 顶点域, 存储顶点信息
+       EdgeNode *firstEdge; // 该顶点边表的头指针
+   } VertexNode, AdjList[MAXVEX];
+
+   typedef struct
+   {
+       AdjList adjList;
+       int numVertexes, numEdges; // 图的当前顶点数和边数
+   } GraphAdjList;
+   ```
+
+   无向图的邻接表结构 CreateGraph() :
+   ```C++
+   void CreateALGraph(GraphAdjList *G)
+   {
+      int i, j, k;
+      EdgeNode *e;
+
+      printf("输入顶点数和边数:\n");
+      scanf("%d,%d", &G->numVertexes, &G->numEdges);
+
+      for (i = 0; i < G->numVertexes; i++)
+      {
+          scanf(&G->adjList[i].data); // 输入顶点信息
+          G->adjList[i].firstEdge = NULL; // 初始化边表指针
+      }
+
+      for (k = 0; l < G->numEdges; k++)
+      {
+          printf("输入边 (v_i, v_j) 上的顶点序号:\n");
+          scanf("%d,%d", &i, &j);
+
+          // 创建边表新结点
+          e = (EdgeNode*) malloc(sizeof(EdgeNode));
+          e->adjVex = j; // 邻接结点下标为 j
+          // 使用头插法
+          e->next = G->adjList[i].firstEdge;
+          G->adjList[i].firstEdge = e;
+
+          // 因为是无向图, 添加对应邻接结点的边表结点 (有向则没有下面的内容)
+          e = (EdgeNode*) malloc(sizeof(EdgeNode));
+          e->adjVex = i;
+          e->next = G->adjList[j].firstEdge;
+          G->adjList[j].firstEdge = e;
+      }
+   }
+   ```
+   
+   时间复杂度分析:
+   本算法对于 n 个顶点 e 条边来说是 O(n+e)
+   
+   邻接表的缺陷:
+   * 只关心出度问题, 想了解入度就必须遍历整个图
+   * 逆邻接表解决了入度却不了解出度的情况
 3. 十字链表
+   **把邻接表和逆邻接表结合起来的存储结构叫十字链表(Orthogonal List)**
+   TODO: 做成表格
+   重新定义顶点表结点结构: data, firstin(指向逆邻接表第一个结点), firstout(指向邻接表第一个结点)
+   重新定义边表结点结构: tailvex, headvex, headlink, taillink
+   (headlink逆邻接表的下一个结点, taillink邻接表下一个结点)
+   TODO: 补充图片(最好把图片改一改, 划分一下区域)
+
+   十字链表的优势:
+   * 把邻接表和逆邻接表整合在了一起, 容易找到以 \\(v_i\\) 为尾的弧和以 \\(v_i\\) 为头的弧, 容易求得顶点的出度和入度
+   * 除了结构复杂一点外, CreateGraph() 的时间复杂度和邻接表相同
 4. 邻接多重表
+   重新定义边表结点结构: ivex, ilink, jvex, jlink
+   ivex和jvex是某条边依附的两个顶点的下标. link指向依附顶点ivex的下一条边, jlink指向依附顶点jvex的下一条边
+   ilink指向的结点的jvex一定要和它本身的ivex的值相同
+   TODO: 补充下下张图片(一张)
+   邻接多重表和邻接表的区别: 在邻接多重表中同一条边只有一个结点. 若要删除左图的 \\((v_0, v_2)\\) 这条边, 只需要将右图的 ⑥⑨ 的链接改为 ∧ 即可
 5. 边集数组
+   边集数组是由两个一维数组构成. 一个存储顶点的信息(vexs[MAXVEX]); 另一个存储边的信息(edges[MAXEDGE])
+   TODO: 做成表格
+   边数组中每个元素的结构: begin, end, weight
+   TODO: 补充图片
+   边集数组关注的是边的集合, 在边集数组中要查找一个顶点的度需要扫描整个边数组, 效率并不高.
+   因此他更适合对边依次进行处理的操作, 而不适合对顶点相关的操作
 
 ### 图的遍历
+
+从图中某一顶点出发访遍图中其余顶点且每个顶点仅被访问一次, 这一过程称为图的遍历(Traversing Graph)
+
+1. 深度优先遍历(Depth First Search)
+   也称深度优先搜索, 简称DFS. 类似于树的前序遍历
+2. 广度优先遍历(Breadth First Search)
+   也称广度优先搜索, 简称BFS. 类似于树的层序遍历
 
 ### 最小生成树
 
