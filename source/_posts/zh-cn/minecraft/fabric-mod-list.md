@@ -37,6 +37,7 @@ A detailed list of mods in my Minecraft server
 | FallingTree | [FallingTree-Fabric-1.16.3-2.5.1](https://www.curseforge.com/minecraft/mc-mods/falling-tree/files/all?filter-game-version=2020709689%3A8056) | Oct 2, 2020 |
 | Cloth API (Fabric) | [[Fabric 1.16.2/3] v1.4.8](https://www.curseforge.com/minecraft/mc-mods/cloth-api/files/all) | Sep 9, 2020 |
 | Cloth Config API (Fabric) | [[Fabric 1.16.2/3] ClothConfig2-4.8.2](https://www.curseforge.com/minecraft/mc-mods/cloth-config/files/all) | Sep 25, 2020 |
+| Polymorph (Fabric) | [polymorph-fabric-0.0.5-1.16.3](https://www.curseforge.com/minecraft/mc-mods/polymorph-fabric/files) | Set 17, 2020 |
 
 ### Client-Side Mods
 

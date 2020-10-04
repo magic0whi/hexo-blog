@@ -987,7 +987,7 @@ endADT
    {% asset_img Queue-front-rear.png %}
 2. 循环队列定义
    队列的这种头尾相接的顺序存储结构称为循环队列
-   (即 rear 可以在 front 的前面)
+   (即指针 rear 可以在指针 front 的前面)
    {% asset_img Queue-circular-example.png %}
    1. 队列已满判断
       如果我们再入队两个元素:
@@ -1084,7 +1084,7 @@ endADT
    } LinkQueue;
    ```
 2. 入队操作
-   入队操作就是再链表尾部插入结点
+   入队操作就是在链表尾部插入结点
    {% asset_img Queue-linked-insert.png %}
    实现代码如下:
    ```C++
@@ -2012,7 +2012,7 @@ Operation
     LocateVex(G, u) : 若图G中存在顶点 u, 则返回图中的位置
     GetVex(G, v) : 返回图G中顶点 v 的值
     PutVex(G, v, value) : 将图 G 中顶点 v 赋为 value
-    FirstAdjvex(G, *v) : 返回顶点 v 的一个邻接顶点, 若顶点在 G 中无邻接顶点返回 NULL
+    FirstAdjVex(G, *v) : 返回顶点 v 的一个邻接顶点, 若顶点在 G 中无邻接顶点返回 NULL
     NextAdjVex(G, v, *w) : 返回顶点 v 相对于顶点 w 的下一个邻接顶点, 若 w 是 v 的最后一个邻接点则返回 NULL
     InsertVex(*G, v) : 在图G中增添新顶点 v
     DeleteVex(*G, v) : 删除图 G 中顶点 v 及其相关的弧
@@ -2042,7 +2042,7 @@ TODO: 补充图片
    1. 判定任意两顶点是否邻接
    2. 要知道顶点 \\(v_i\\) 的度, 可求 \\(v_i\\) 在邻接矩阵中第i行(或第i列)的元素之和(有向图中横向出度统计, 纵向入度统计)
    
-   2. 有向图
+   2. 有向图的邻接矩阵
       顶点数组为 \\(\text{vertex}[4]=\\{v_0, v_1, v_2, v_3\\}\\) , 边数组 \\(\text{arc}[4][4]\\) 为右图这样的一个矩阵.
       对角线上数值依旧为0, 此矩阵并不对称
       
@@ -2051,7 +2051,7 @@ TODO: 补充图片
       1. 有向图讲究入度与出度, 如顶点 \\(v_1\\) 入度为第 i 纵列总和, 出度为第 i 横行总和
       2. 判断从顶点 \\(v_i\\) 到 \\(v_j\\) 是否存在弧, 只需要查找矩阵中 arc[i][j] 是否为 1
       
-   3. 网图
+   3. 网图的邻接矩阵
       设图 G 是网图, 有 n 个顶点, 则邻接矩阵是一个 n×n 的方阵, 定义为:
       \\(\text{arc}[i][j]=\begin{cases} W_{ij} & \text{if } (v_i, v_j)\in E \text{ or } <v_i, v_j>\in E \\\ 0 & \text{if } i=j \\\ \infty & \text{other} \end{cases}\\)
       TODO: 补充图片
@@ -2223,10 +2223,266 @@ TODO: 补充图片
 
 1. 深度优先遍历(Depth First Search)
    也称深度优先搜索, 简称DFS. 类似于树的前序遍历
+
+   (深度优先指的是: 优先找邻接点, 贯穿整个图)
+   从图中某个顶点 \\(v_i\\) 出发, 然后从 \\(v_i\\) 周围的(未被访问的)邻接点 \\(v_j\\) 出发找邻接点, 重复此过程直至图中所有和 \\(v_i\\) 有路径相通的顶点都被访问到.
+   以上说的只是连通图, 对于非连通图, 只需要对它的连通分量分别进行深度优先遍历. 即进行一次深度优先遍历后, 若图中尚有顶点未被访问, 则另选图个一个未被访问的顶点作为起始点, 再次进行深度优先遍历. 重复此过程直到所有顶点都被访问过
+
+   访问数组 visited[n], n 是图中顶点的个数, 数组中元素初值为 0, 访问后为 1
+
+   邻接矩阵的深度优先遍历算法:
+   ```C++
+   typedef enum { false, true } bool; // C++ 中自带 bool 类型, 可以不用这句
+   bool visited[MAX]; // MAX 等于图的 numVertexes
+
+   // 邻接矩阵的深度优先递归算法, i 为当前遍历顶点的下标
+   void DFS(MGraph G, int i)
+   {
+       int j;
+       visited[i]=true;
+
+       printf("%c", G.vexs[i]) // 打印顶点数据, 也可以是其他操作
+
+       for (j = 0; j < G.numVertexes; j++)
+       {
+           if (G.arc[i][j] == 1 && !visited[j]) // 找任何与 v_i 邻接的邻接点(未被访问过的)
+               DFS(G, j); // 对要访问的邻接点递归调用 DFS()
+       }
+   }
+
+   // 从这个函数开始
+   void DFSTraverse(MGraph G)
+   {
+       int i;
+
+       // 初始化 visited 数组
+       for (i = 0; i < G.numVertexes; i++)
+           visited[i] = false;
+
+       for (i = 0; i < G.numVertexes; i++)
+           if (!visited[i])
+               DFS(G, i); // 对未访问过的结点调用 DFS() (若是连通图这行代码只会执行一次)
+   }
+   ```
+
+   对于邻接表结构的图, DFS() 会稍有不同
+   邻接表的深度优先遍历算法:
+   ```C++
+   typedef enum { false, true } bool; // C++ 中自带 bool 类型, 可以不用这句
+   bool visited[MAX]; // MAX 等于图的 numVertexes
+
+   // i 为当前遍历顶点的下标
+   void DFS(GraphAdjList GL, int i)
+   {
+       EdgeNode *p;
+       visited[i] = true;
+
+       printf("%c", GL->adjList[i].data);
+
+       p = GL->adjList[i].firstEdge;
+       while (p)
+       {
+           if (!visited[p->adjVex])
+               DFS(GL, p->adjvex); // 对要访问的邻接点递归调用 DFS()
+
+           p = p->next;
+       }
+   }
+
+   void DFSTraverse(GraphAdjList GL)
+   {
+       int i;
+
+       // 初始化 visited 数组
+       for (i = 0; i < GL->numVertexes; i++)
+           visited[i] = false;
+
+       for (i = 0; i < GL->numVertexes; i++)
+           if (!visited[i])
+               DFS(GL, i); // 对未访问过的结点调用 DFS() (若是连通图这行代码只会执行一次)
+   }
+   ```
+
+   时间复杂度分析:
+   如果是邻接矩阵结构表示的图, 每次找邻接点都需要把顶点下标遍历一遍, 时间复杂度 \\(O(n^2)\\)
+   而邻接表结构表示的图, 找邻接点所需时间取决于该顶点的出边数量, 时间复杂度 \\(O(n+e)\\)
+   对于点多边少的稀疏图来说, 邻接表结构的优势更大
 2. 广度优先遍历(Breadth First Search)
    也称广度优先搜索, 简称BFS. 类似于树的层序遍历
 
+   如图, 将第一幅图稍微变形.
+   规则是顶点 A 放置在最上第一层, 使与它邻接的顶点 B、F 为第二层,
+   再让与 B 和 F 邻接的 C、I、G、E 为第三层,  再将与这四个顶点邻接的 D、H 放在第四层.
+   TODO: 补充图片
+
+   邻接矩阵的广度优先遍历算法:
+   ```C++
+   typedef enum { false, true } bool; // C++ 中自带 bool 类型, 可以不用这句
+   bool visited[MAX]; // MAX 等于图的 numVertexes
+
+   void BFSTraverse(MGraph G)
+   {
+       int i, j, k;
+       Queue Q; // 临时存储顶点下标用队列
+
+       // 初始化 visited 数组
+       for (i = 0; i < G.numVertexes; i++)
+           visited[i] = false;
+
+       InitQueue(&Q); // 初始化队列
+       
+       for (i = 0; i < G.numVertexes; i++)
+       {
+           if (!visited[i]) // 对未访问过的结点进行广度优先遍历 (若是连通图 if 内的代码只会执行一次)
+           {
+               // 将起始顶点进行打印等操作后加入队列
+               visited[i] = true; // 将当前顶点设置为被访问过
+
+               printf("%c", G.vexs[i]); // 打印顶点, 也可以是其他操作
+
+               EnQueue(&Q, i); // 将此顶点加入队列
+
+               while (!QueueEmpty(Q)) // 若当前队列不为空
+               {
+                   DeQueue(&Q, &k); // 将队列中元素取出赋给变量 k
+
+                   for (j = 0; j < G.numVertexes; j++)
+                   {
+                       if (G.arc[k][j] == 1 && !visited[j]) // 遍历当前顶点 v_k 的邻接点并加入队列
+                       {
+                           visited[j] = true; // 将找到的邻接点设置为已访问
+
+                           printf("%c", G.vexs[j]); // 打印顶点, 也可以是其他操作
+
+                           EnQueue(&Q, j);
+                       }
+                   }
+               }
+           }
+       }
+   }
+   ```
+
+   邻接矩阵的广度优先遍历算法:
+   ```C++
+   typedef enum { false, true } bool; // C++ 中自带 bool 类型, 可以不用这句
+   bool visited[MAX]; // MAX 等于图的 numVertexes
+
+   void BFSTraverse(GraphAdjList GL)
+   {
+       int i;
+       EdgeNode *p;
+       Queue Q; // 临时存储顶点下标用队列
+
+       // 初始化 visited 数组
+       for (i = 0; i < GL->numVertexes; i++)
+           visited = false;
+
+       InitQueue(&Q);
+       for (i = 0; i < GL->numVertexes; i++)
+       {
+           if (!visited[i])
+           {
+               visited[i] = true;
+
+               printf("%c", GL->adjList[i].data); // 打印顶点, 也可以是其他操作
+
+               EnQueue(&Q, i); // 起始顶点加入队列
+
+               while (!QueueEmpty(Q))
+               {
+                   DeQueue(&Q, &i);
+
+                   // 遍历该顶点的边表
+                   p = GL->adjList[i].firstEdge;
+                   while (p)
+                   {
+                       if (!visited[p->adjVex]) // 若此顶点未被访问
+                       {
+                           visited[p->adjVex] = true;
+
+                           printf("%c", GL->adjList[p->adjVex].data); // 打印顶点, 也可以是其他操作
+
+                           EnQueue(&Q, p->adjVex); // 将此顶点加入列
+                       }
+                       p = p->next;
+                   }
+               }
+           }
+       }
+   }
+   ```
+
+   时间复杂度分析:
+   图的深度优先算法的时间复杂度和广度优先算法一样, 不同之处仅在于对顶点的访问次序.
+   深度优先算法更适合目标比较明确的, 以找到目标为主要目的的情况;
+   而广度优先算法更适合在不断扩大的遍历范围时找到相对最优解的情况
+
 ### 最小生成树
+
+最小生成树: 将一个连通加权无向图变为生成树(即只剩 n-1 条边), 其中权值总和最小的生成树就叫最小生成树
+
+1. 普里姆(Prim)算法
+   TODO: 补充图片
+
+   思路:
+   设 adjVex[j] 存储当前到顶点 j 权值最小的顶点, lowCost[j] 存储当前已知的到顶点 j 最小的权值.
+   将 adjVex 和 lowCost 初始化为顶点 v_0 到其他点的权值(读取邻接矩阵第 v_0 行)
+   从 v_0 开始, 将 v_0 到附近顶点的权重计入数组 lowCost, 将 lowCost 中权重最小的下标作为最小生成树的下一个顶点(假设为 v_k)
+   再将 v_k 到附近的点(假设为 v_j)的权重与当前数组 lowCost[j] 对应的值比较, 如果 v_k 到 v_j 的权重更小则计入 lowCost[j].
+   重复, 将 lowCost 中权重最小的下标作为生成树的下一个顶点...直到所有顶点都被纳入最小生成树中(每次循环增加一个结点, 所以循环 MAXVEX 次).
+
+   实现代码如下:
+   ```C++
+   #define INFINITY 65535
+
+   // Prim 算法生成最小生成树
+   void MiniSpanTree_Prim(MGraph MG)
+   {
+       int min, i, j, k;
+       int adjVex[MAXVEX]; // 存储当前到顶点 j 权值最小的顶点
+       int lowCost[MAXVEX]; //  存储当前已知的到顶点 j 最小的权值.
+       adjVex[0] = 0; // 初始顶点为 v_0 顶点
+       lowCost[0] = 0; // 值为 0 表示该顶点被纳入最小生成树
+
+       for (i = 1; i < MG.numVertexes; i++) // 遍历除下标为0外的全部顶点
+       {
+           lowCost[i] = MG.arc[0][i]; // 读取矩阵第一行数据赋给lowCost
+           adjVex[i] = 0;
+       }
+
+       for (i = 1; i < MG.numVertexes; i++)
+       {
+           min = INFINITY;
+           k = 0;
+           
+           // 从 lowCost 找当前最小的权值, 以作为生成树的下一个顶点(设下一个顶点为 v_k)
+           for (j = 1; j < MG.numVertexes; j++)
+           {
+               if (lowCost[j] != 0 && lowCost[j] < min) // lowCost[j] != 0 排除已纳入最小生成树的结点
+               {
+                   min = lowCost[j];
+                   k = j;
+               }
+           }
+
+           printf("(%d, %d)", adjVex[k], k); // 打印最小生成树的边, 可根据需要改为添加实际的边
+           lowCost[k] = 0; // 将 v_k 纳入最小生成树中
+
+           // 找 v_k 到邻接点的权值, 如果更小则更新 lowCost 和 adjVex
+           for (j = 1; j < MG.numVertexes; j++)
+           {
+               // 如果顶点 v_k 到附近的邻接点权值比起始点到那个点小
+               if (lowCost[j] != 0 && MG.arc[k][j] < lowCost[j]) // 查找邻接矩阵第 k 行的各个权值
+               {
+                   adjVex[j] = k; // 从 v_k 点到 v_j 点权值更低
+                   lowCost[j] = MG.arc[k][j]; // 设置当前到 v_j 的最小权值
+               }
+           }
+       }
+   }
+   ```
+2. 克鲁斯卡尔(Kruskal)算法
 
 ### 最短路径
 
