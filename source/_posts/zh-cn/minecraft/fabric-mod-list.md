@@ -44,7 +44,8 @@ A detailed list of mods in my Minecraft server
 | Mod name | Download link | Last Update |
 | -------- | ------------- | ---------- |
 | Hwyla | [Hwyla-fabric-1.16.2-1.9.23-79](https://www.curseforge.com/minecraft/mc-mods/hwyla/files/all?filter-game-version=2020709689%3A8056) | Aug 16, 2020 |
-| REI | [[Fabric 1.16.2/3] v5.6.0](https://www.curseforge.com/minecraft/mc-mods/roughly-enough-items/files/all?filter-game-version=2020709689%3A8056) | Sep 30, 2020 |
+| Roughly Enough Items (REI) | [[Fabric 1.16.2/3] v5.6.1](https://www.curseforge.com/minecraft/mc-mods/roughly-enough-items/files/all?filter-game-version=2020709689%3A8056) | Oct 4, 2020 |
+| Roughly Enough Resources | [[Fabric 1.16.2/3] v2.1.2](https://www.curseforge.com/minecraft/mc-mods/roughly-enough-resources/files/all) | Sep 19, 2020 |
 | Autofish | [Autofish-0.9.0-fabric-mc1.16(.2/.3)](https://www.curseforge.com/minecraft/mc-mods/autofish/files/all?filter-game-version=2020709689%3A8056) | Aug 16, 2020 |
 | Xaero's Minimap | [Xaeros_Minimap_20.25.0_Fabric_1.16.3](https://chocolateminecraft.com/minimapdownload.php) | Oct 2, 2020 |
 | Light Overlay | [[Forge / Fabric 1.16.2/3] v5.5.3](https://www.curseforge.com/minecraft/mc-mods/light-overlay/files/all?filter-game-version=2020709689%3A8056) | Sep 9, 2020 |

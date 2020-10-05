@@ -2112,22 +2112,22 @@ TODO: 补充图片
       顶点数组中, 每个元素还有一个指针域, 指向该顶点的第一个邻接点
    2. 图中每个顶点的所有邻接点构成一个线性表(存储邻接点在顶点数组中的下标), 由于邻接点的个数不定, 所以用单链表存储
       无向图称为顶点 \\(v_i\\) 的边表; 有向图则称为顶点 \\(v_i\\) 的出边表(有向图也可以建立一个逆邻接表, 即为每个顶点建立一个入边表)
-   3. 对于带权值的网图, 可以在边表结点定义在再增加一个数据域存储权值
+   3. 对于带权值的网图, 可以在边表顶点定义在再增加一个数据域存储权值
    
    TODO: 补充图片, 补充下一张图片, 补充下一张图片
 
    特点:
-   1. 要想查某个顶点的度, 就去查这个顶点的边表中结点的个数.
-   2. 若要判断顶点 \\(v_i\\) 到 \\(v_j\\) 是否存在边, 只需测试顶点 \\(v_i\\) 的边表中是否存在结点 \\(v_j\\) 的下标 j .
+   1. 要想查某个顶点的度, 就去查这个顶点的边表中顶点的个数.
+   2. 若要判断顶点 \\(v_i\\) 到 \\(v_j\\) 是否存在边, 只需测试顶点 \\(v_i\\) 的边表中是否存在顶点 \\(v_j\\) 的下标 j .
 
-   边表结点定义代码:
+   边表顶点定义代码:
    ```C++
    #define MAXVEX 100      // 最大顶点数
 
    typedef char VertexType; // 顶点类型, 假设为 char
    typedef int EdgeType;   // 边上的权值类型, 假设为 int
    
-   // 边表结点
+   // 边表顶点
    typedef struct EdgeNode
    {
        int adjVex;      // 邻接点域, 存储该顶点对应下标
@@ -2170,14 +2170,14 @@ TODO: 补充图片
           printf("输入边 (v_i, v_j) 上的顶点序号:\n");
           scanf("%d,%d", &i, &j);
 
-          // 创建边表新结点
+          // 创建边表新顶点
           e = (EdgeNode*) malloc(sizeof(EdgeNode));
-          e->adjVex = j; // 邻接结点下标为 j
+          e->adjVex = j; // 邻接顶点下标为 j
           // 使用头插法
           e->next = G->adjList[i].firstEdge;
           G->adjList[i].firstEdge = e;
 
-          // 因为是无向图, 添加对应邻接结点的边表结点 (有向则没有下面的内容)
+          // 因为是无向图, 添加对应邻接顶点的边表顶点 (有向则没有下面的内容)
           e = (EdgeNode*) malloc(sizeof(EdgeNode));
           e->adjVex = i;
           e->next = G->adjList[j].firstEdge;
@@ -2195,20 +2195,20 @@ TODO: 补充图片
 3. 十字链表
    **把邻接表和逆邻接表结合起来的存储结构叫十字链表(Orthogonal List)**
    TODO: 做成表格
-   重新定义顶点表结点结构: data, firstin(指向逆邻接表第一个结点), firstout(指向邻接表第一个结点)
-   重新定义边表结点结构: tailvex, headvex, headlink, taillink
-   (headlink逆邻接表的下一个结点, taillink邻接表下一个结点)
+   重新定义顶点表顶点结构: data, firstin(指向逆邻接表第一个顶点), firstout(指向邻接表第一个顶点)
+   重新定义边表顶点结构: tailvex, headvex, headlink, taillink
+   (headlink逆邻接表的下一个顶点, taillink邻接表下一个顶点)
    TODO: 补充图片(最好把图片改一改, 划分一下区域)
 
    十字链表的优势:
    * 把邻接表和逆邻接表整合在了一起, 容易找到以 \\(v_i\\) 为尾的弧和以 \\(v_i\\) 为头的弧, 容易求得顶点的出度和入度
    * 除了结构复杂一点外, CreateGraph() 的时间复杂度和邻接表相同
 4. 邻接多重表
-   重新定义边表结点结构: ivex, ilink, jvex, jlink
+   重新定义边表顶点结构: ivex, ilink, jvex, jlink
    ivex和jvex是某条边依附的两个顶点的下标. link指向依附顶点ivex的下一条边, jlink指向依附顶点jvex的下一条边
-   ilink指向的结点的jvex一定要和它本身的ivex的值相同
+   ilink指向顶点的jvex一定要和它本身的ivex的值相同
    TODO: 补充下下张图片(一张)
-   邻接多重表和邻接表的区别: 在邻接多重表中同一条边只有一个结点. 若要删除左图的 \\((v_0, v_2)\\) 这条边, 只需要将右图的 ⑥⑨ 的链接改为 ∧ 即可
+   邻接多重表和邻接表的区别: 在邻接多重表中同一条边只有一个顶点. 若要删除左图的 \\((v_0, v_2)\\) 这条边, 只需要将右图的 ⑥⑨ 的链接改为 ∧ 即可
 5. 边集数组
    边集数组是由两个一维数组构成. 一个存储顶点的信息(vexs[MAXVEX]); 另一个存储边的信息(edges[MAXEDGE])
    TODO: 做成表格
@@ -2261,7 +2261,7 @@ TODO: 补充图片
 
        for (i = 0; i < G.numVertexes; i++)
            if (!visited[i])
-               DFS(G, i); // 对未访问过的结点调用 DFS() (若是连通图这行代码只会执行一次)
+               DFS(G, i); // 对未访问过的顶点调用 DFS() (若是连通图这行代码只会执行一次)
    }
    ```
 
@@ -2299,7 +2299,7 @@ TODO: 补充图片
 
        for (i = 0; i < GL->numVertexes; i++)
            if (!visited[i])
-               DFS(GL, i); // 对未访问过的结点调用 DFS() (若是连通图这行代码只会执行一次)
+               DFS(GL, i); // 对未访问过的顶点调用 DFS() (若是连通图这行代码只会执行一次)
    }
    ```
 
@@ -2333,7 +2333,7 @@ TODO: 补充图片
        
        for (i = 0; i < G.numVertexes; i++)
        {
-           if (!visited[i]) // 对未访问过的结点进行广度优先遍历 (若是连通图 if 内的代码只会执行一次)
+           if (!visited[i]) // 对未访问过的顶点进行广度优先遍历 (若是连通图 if 内的代码只会执行一次)
            {
                // 将起始顶点进行打印等操作后加入队列
                visited[i] = true; // 将当前顶点设置为被访问过
@@ -2430,7 +2430,7 @@ TODO: 补充图片
    将 adjVex 和 lowCost 初始化为顶点 v_0 到其他点的权值(读取邻接矩阵第 v_0 行)
    从 v_0 开始, 将 v_0 到附近顶点的权重计入数组 lowCost, 将 lowCost 中权重最小的下标作为最小生成树的下一个顶点(假设为 v_k)
    再将 v_k 到附近的点(假设为 v_j)的权重与当前数组 lowCost[j] 对应的值比较, 如果 v_k 到 v_j 的权重更小则计入 lowCost[j].
-   重复, 将 lowCost 中权重最小的下标作为生成树的下一个顶点...直到所有顶点都被纳入最小生成树中(每次循环增加一个结点, 所以循环 MAXVEX 次).
+   重复, 将 lowCost 中权重最小的下标作为生成树的下一个顶点...直到所有顶点都被纳入最小生成树中(每次循环增加一个顶点, 所以循环 MAXVEX 次).
 
    实现代码如下:
    ```C++
@@ -2459,14 +2459,14 @@ TODO: 补充图片
            // 从 lowCost 找当前最小的权值, 以作为生成树的下一个顶点(设下一个顶点为 v_k)
            for (j = 1; j < MG.numVertexes; j++)
            {
-               if (lowCost[j] != 0 && lowCost[j] < min) // lowCost[j] != 0 排除已纳入最小生成树的结点
+               if (lowCost[j] != 0 && lowCost[j] < min) // lowCost[j] != 0 排除已纳入最小生成树的顶点
                {
                    min = lowCost[j];
                    k = j;
                }
            }
 
-           printf("(%d, %d)", adjVex[k], k); // 打印最小生成树的边, 可根据需要改为添加实际的边
+           printf("(%d, %d)", adjVex[k], k); // 打印最小生成树的边, 可以是其他操作
            lowCost[k] = 0; // 将 v_k 纳入最小生成树中
 
            // 找 v_k 到邻接点的权值, 如果更小则更新 lowCost 和 adjVex
@@ -2482,9 +2482,123 @@ TODO: 补充图片
        }
    }
    ```
+
+   时间复杂度分析:
+   由算法代码中的循环嵌套可得知此算法的时间复杂度为 \\(O(n^2)\\)
 2. 克鲁斯卡尔(Kruskal)算法
+   将邻接矩阵转化为右图所示的边集数组, 将它们按权值从小到大排序, 且 begin < end
+   然后按权值从小到大的顺序开始生成最小生成树, 如果这条边的两个顶点都已经被纳入最小生成树(即这两个顶点已经相通), 跳过这条边
+   TODO: 补充图片
+   
+   如何判断两个顶点已经相通呢? 使用并查集思想, 见下面具体代码
+   实现代码如下:
+   ```C++
+   // 边集数组 Edge 的元素结构
+   typedef struct
+   {
+       int begin;
+       int end;
+       int weight;
+   } Edge;
+
+   // 查找该顶点的最终好友
+   int Find(int *buddy, int f)
+   {
+       while (buddy[f] > 0) // 如果该顶点有好友(好友指可以不邻接但是已经连通)
+           f = buddy[f]; // 从它的好友开始继续判断还有无别的好友
+       return f;
+   }
+
+   // Kruskal 算法生成最小生成树
+   void MiniSpanTree_Kruskal(MGraph G)
+   {
+       int i, n, m;
+       Edge edges[MAXEDGE]; // 边集数组, MAXEDGE 为原图的边数
+       int buddy[MAXVEX];  // 定义数组 buddy 来帮助判断边与边是否形成环路
+       // 这里用到了并查集思想
+       // 即 buddy[a]==c, buddy[b]==d, 若 buddy[c]==buddy[d] 则说明 a 已经连通 b 
+
+       // 初始化数组 buddy
+       for (i = 0; i < G.numVertexes; i++)
+       {
+           buddy[i] = 0; // 初始化为 0 是因为边集的 end 不可能是 0
+       }
+
+       // 依次遍历 edge 数组
+       for (i = 0; i < G.numEdges; i++)
+       {
+           n = Find(buddy, edges[i].begin);
+           m = Find(buddy, edges[i].end);
+           if (n != m) // n != m 代表这条边两个顶点的最终好友不同(所以还未连通)
+           {
+               buddy[n] = m; // 将这两个顶点建立好友关系
+               printf("(%d, %d) %d", edges[i].begin, edges[i].end, edges[i].weight) // 打印最小生成树的边, 可以是其他操作
+           }
+       }
+   }
+   ```
+
+   实际复杂度分析:
+   设 n 为边数, 克鲁斯卡尔算法的时间复杂度为 \\(O(n\log n)\\) (其中 Find() 函数时间花费 \\(O(\log n\\))
+   克鲁斯卡尔算法主要是针对边来展开, 边数少时效率会非常高, 对于稀疏图有很大的优势;
+   普里姆算法对于稠密图, 即边数非常多的情况会更好一些
 
 ### 最短路径
+
+非网图的最短路径, 是指两顶点之间经过的边数最少的路径;
+网图的最短路径是指两顶点之间经过的边上权值之和最少的路径.
+称路径上的第一个顶点是源点, 最好一个顶点是终点
+距离就是两顶点间权值之和, 非网图可理解为所有边权值都为 1 的网图
+
+1. 迪杰斯特拉(Dijkstra)算法
+   ```C++
+   #define MAXVEX 9
+   #define INFINITY 65535
+
+   typedef int Patharc[MAXVEX]         // 用于存储最短路径下标的数组
+   typedef int ShortPathTable[MAXVEX]; // 用于存储到各点最短路径的权值和
+
+   // v_0 为起始点, P 为用于存储最短路径下标的数组
+   void ShortestPath_Dijkstar(MGraph G, int v_0, Patharc P, ShortPathTable D)
+   {
+       int v, w, k, min;
+       int final[MAXVEX]; // final[w] = 1 表示已经求得顶点v_0到 v_w 的最短路径
+
+       // 初始化数据
+       for (v = 0; v < G.numVertexes; v++)
+       {
+           final[v] = 0;
+           D[v] = G.arc[v_0][v];
+           P[v] = 0;
+       }
+       D[v_0] = 0;
+       final[v_0] = 1;
+
+       for (v = 1; v < G.numVertexes; v++)
+       {
+           min = INFINITY;
+           for (w = 0; w < G.numVertexes; w++)
+           {
+               if (!final[w] && D[w] < min)
+               {
+                   k = w;
+                   min = D[w];
+               }
+           }
+
+           final[k] = 1;
+           for (w = 0; w < G.numVertexes; w++)
+           {
+               if (!final[w] && (min+G.arc[k][w] < D[w]))
+               {
+                   D[w] = min + G.arc[k][w];
+                   P[w] = k;
+               }
+           }
+       }
+   }
+   ```
+2. 弗洛伊德(Floyd)算法
 
 ### 拓补排序
 
