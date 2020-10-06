@@ -88,7 +88,7 @@ Pixabay上的自由图片 [Pixabay](https://pixabay.com/zh/photos/celler-basemen
 
 ## Free Software Movement
 
-开源许可检查 [FOSS](https://app.fossa.io/projects/git%2Bgithub.com%2FEugeny%2Fterminus/refs/branch/master/59a3c9aeb6b55fdac0f1974458234a8a6cfc8ba7)
+开源许可检查 [FOSSA](https://app.fossa.io/projects/git%2Bgithub.com%2FEugeny%2Fterminus/refs/branch/master/59a3c9aeb6b55fdac0f1974458234a8a6cfc8ba7)
 
 ## Internet
 
