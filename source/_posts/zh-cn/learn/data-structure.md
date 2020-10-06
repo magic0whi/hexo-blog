@@ -2551,54 +2551,112 @@ TODO: 补充图片
 距离就是两顶点间权值之和, 非网图可理解为所有边权值都为 1 的网图
 
 1. 迪杰斯特拉(Dijkstra)算法
+   思路
+   设起始点为 v_0, ShortPathWeight 存储 v_0 到各点的最短路径权值和, PathPrior[w] 存储 v_0 到 v_w 最短路径中 v_w 的前驱
+   从 v_0 开始, 首先找到 v_0 权值最小的邻接点 v_k, 将其纳入最短路径并接着找 v_k 的邻接点, 继而将 v_k 的邻接点到 v_0 路径的权值纳入 ShortPathWeight (别忘了同时更新 PathPrior)
+   这样一番操作之后, v_0 到 v_k 的那些邻接点的权值就不再是 ∞ 了(即被认为和 v_0 连通), 继续按照这种方式遍历剩下的和 v_0 连通的顶点和它们的邻接点, 发现权值和更小的就更新 ShortPathWeight 和 PathPrior. 直到所有顶点都被纳入最短路径
    ```C++
    #define MAXVEX 9
    #define INFINITY 65535
 
-   typedef int Patharc[MAXVEX]         // 用于存储最短路径下标的数组
-   typedef int ShortPathTable[MAXVEX]; // 用于存储到各点最短路径的权值和
+   typedef int PathPrior[MAXVEX]         // 用于存储最短路径对应顶点前驱的数组, 即 PathPrior[w] == k 代表从 v_0 到 v_w 的最短路径中, v_w 的前驱是 v_k (接着持续遍历即可得到完整的最短路径)
+   typedef int ShortPathWeight[MAXVEX]; // 用于存储到各点最短路径的权值和
 
-   // v_0 为起始点, P 为用于存储最短路径下标的数组
-   void ShortestPath_Dijkstar(MGraph G, int v_0, Patharc P, ShortPathTable D)
+   // v_0 为起始点, PathPrior 为用于存储到各个点最短路径的数组, 
+   void ShortestPath_Dijkstar(MGraph G, int v_0, PathPrior pathPrior, ShortPathWeight shortPathWeight)
    {
        int v, w, k, min;
-       int final[MAXVEX]; // final[w] = 1 表示已经求得顶点v_0到 v_w 的最短路径
+       int final[MAXVEX]; // 标记已求得最短路径的顶点, final[w] = 1 表示已经求得顶点v_0到 v_w 的最短路径
 
-       // 初始化数据
+       // 初始化这三个数组
        for (v = 0; v < G.numVertexes; v++)
        {
            final[v] = 0;
-           D[v] = G.arc[v_0][v];
-           P[v] = 0;
+           shortPathWeight[v] = G.arc[v_0][v]; // 将 v_0 到各点的权值依次赋给 shortPathWeight
+           pathPrior[v] = 0;
        }
-       D[v_0] = 0;
-       final[v_0] = 1;
+
+       final[v_0] = 1; // v_0 到 v_0 不需要路径
 
        for (v = 1; v < G.numVertexes; v++)
        {
            min = INFINITY;
+           // 遍历 v_0 当前到各个顶点的权值, 记录 v_0 权值最小的(未被记录到路径中的)邻接点
            for (w = 0; w < G.numVertexes; w++)
            {
-               if (!final[w] && D[w] < min)
+               if (!final[w] && shortPathWeight[w] < min)
                {
                    k = w;
-                   min = D[w];
+                   min = shortPathWeight[w];
                }
            }
 
-           final[k] = 1;
+           final[k] = 1; // 将此邻接点纳入最小路径
+
+           // 此时 v_k 为 v_0 附近(刚纳入最小路径)权值最小的邻接点
            for (w = 0; w < G.numVertexes; w++)
            {
-               if (!final[w] && (min+G.arc[k][w] < D[w]))
+               // 遍历 v_k 到各点(设为 v_w)的权值, 加上 v_i 到 v_k 的权值, 然后与 shortPathWeight 当前存储的到 v_w 的值比较
+               // 如果比现有记录的短, 更新到 shortPathWeight 和 pathPrior 中
+               if (!final[w] && (G.arc[k][w] + min < shortPathWeight[w]))
                {
-                   D[w] = min + G.arc[k][w];
-                   P[w] = k;
+                   shortPathWeight[w] = min + G.arc[k][w];
+                   pathPrior[w] = k;
                }
            }
        }
    }
    ```
+
+   时间复杂度分析: 从嵌套循环得到此算法的时间复杂度为 \\(O(n^2)\\)
 2. 弗洛伊德(Floyd)算法
+   ```C++
+   typedef int PathMatirx[MAXVEX][MAXVEX];
+   typedef int ShortPathWeight[MAXVEX][MAXVEX];
+
+   void ShortestPath_Floyd(MGraph G, PathMatirx *P, ShortPathWeight *D)
+   {
+       int v, w, k;
+       for (v = 0; v < G.numVertexes; v++)
+       {
+           for (w = 0; w < G.numVertexes; w++)
+           {
+               (*D)[v][w] = G.matirx[v][w];
+               (*P)[v][w] = w;
+           }
+       }
+       for (k = 0; k < G.numVertexes; k++)
+       {
+           for (v=0; v < G.numVertexes; v++)
+           {
+               if ((*D)[v][w] > (*D)[v][k] * (*D)[k][w])
+               {
+                   (*D)[v][w] = (*D)[v][k] + (*D)[k][w];
+                   (*P)[v][w] = (*P)[v][k];
+               }
+           }
+       }
+   }
+   ```
+   该算法的显示代码
+   ```C++
+   for (v = 0; v < G.numVertexes; v++)
+   {
+       for (w = v + 1; w< G.numVertexes; w++)
+       {
+           printf("v%d-v%d weight: %d", v, w, D[v][w]);
+           k = P[v][w];
+           printf(" path: %d", v);
+           while (k != w)
+           {
+               printf(" -> %d", k);
+               k = P[k][w];
+           }
+           printf(" -> %d\n", w);
+       }
+       printf("\n");
+   }
+   ```
 
 ### 拓补排序
 
