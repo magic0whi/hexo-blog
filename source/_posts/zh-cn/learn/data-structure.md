@@ -2552,18 +2552,18 @@ TODO: 补充图片
 
 1. 迪杰斯特拉(Dijkstra)算法
    思路
-   设起始点为 v_0, ShortPathWeight 存储 v_0 到各点的最短路径权值和, PathPrior[w] 存储 v_0 到 v_w 最短路径中 v_w 的前驱
-   从 v_0 开始, 首先找到 v_0 权值最小的邻接点 v_k, 将其纳入最短路径并接着找 v_k 的邻接点, 继而将 v_k 的邻接点到 v_0 路径的权值纳入 ShortPathWeight (别忘了同时更新 PathPrior)
-   这样一番操作之后, v_0 到 v_k 的那些邻接点的权值就不再是 ∞ 了(即被认为和 v_0 连通), 继续按照这种方式遍历剩下的和 v_0 连通的顶点和它们的邻接点, 发现权值和更小的就更新 ShortPathWeight 和 PathPrior. 直到所有顶点都被纳入最短路径
+   设起始点为 v_0, PathWeight 存储 v_0 到各点的最短路径权值和, PathPrior[w] 存储 v_0 到 v_w 最短路径中 v_w 的前驱
+   从 v_0 开始, 首先找到 v_0 权值最小的邻接点 v_k, 将其纳入最短路径并接着找 v_k 的邻接点, 继而将 v_k 的邻接点到 v_0 路径的权值纳入 PathWeight (别忘了同时更新 PathPrior)
+   这样一番操作之后, v_0 到 v_k 的那些邻接点的权值就不再是 ∞ 了(即被认为和 v_0 连通), 继续按照这种方式遍历剩下的和 v_0 连通的顶点和它们的邻接点, 发现权值和更小的就更新 PathWeight 和 PathPrior. 直到所有顶点都被纳入最短路径
    ```C++
    #define MAXVEX 9
    #define INFINITY 65535
 
    typedef int PathPrior[MAXVEX]         // 用于存储最短路径对应顶点前驱的数组, 即 PathPrior[w] == k 代表从 v_0 到 v_w 的最短路径中, v_w 的前驱是 v_k (接着持续遍历即可得到完整的最短路径)
-   typedef int ShortPathWeight[MAXVEX]; // 用于存储到各点最短路径的权值和
+   typedef int PathWeight[MAXVEX]; // 用于存储到各点最短路径的权值和
 
    // v_0 为起始点, PathPrior 为用于存储到各个点最短路径的数组, 
-   void ShortestPath_Dijkstar(MGraph G, int v_0, PathPrior pathPrior, ShortPathWeight shortPathWeight)
+   void ShortestPath_Dijkstar(MGraph G, int v_0, PathPrior pathPrior, PathWeight pathWeight)
    {
        int v, w, k, min;
        int final[MAXVEX]; // 标记已求得最短路径的顶点, final[w] = 1 表示已经求得顶点v_0到 v_w 的最短路径
@@ -2572,7 +2572,7 @@ TODO: 补充图片
        for (v = 0; v < G.numVertexes; v++)
        {
            final[v] = 0;
-           shortPathWeight[v] = G.arc[v_0][v]; // 将 v_0 到各点的权值依次赋给 shortPathWeight
+           pathWeight[v] = G.arc[v_0][v]; // 将 v_0 到各点的权值依次赋给 pathWeight
            pathPrior[v] = 0;
        }
 
@@ -2584,10 +2584,10 @@ TODO: 补充图片
            // 遍历 v_0 当前到各个顶点的权值, 记录 v_0 权值最小的(未被记录到路径中的)邻接点
            for (w = 0; w < G.numVertexes; w++)
            {
-               if (!final[w] && shortPathWeight[w] < min)
+               if (!final[w] && pathWeight[w] < min)
                {
                    k = w;
-                   min = shortPathWeight[w];
+                   min = pathWeight[w];
                }
            }
 
@@ -2596,11 +2596,11 @@ TODO: 补充图片
            // 此时 v_k 为 v_0 附近(刚纳入最小路径)权值最小的邻接点
            for (w = 0; w < G.numVertexes; w++)
            {
-               // 遍历 v_k 到各点(设为 v_w)的权值, 加上 v_i 到 v_k 的权值, 然后与 shortPathWeight 当前存储的到 v_w 的值比较
-               // 如果比现有记录的短, 更新到 shortPathWeight 和 pathPrior 中
-               if (!final[w] && (G.arc[k][w] + min < shortPathWeight[w]))
+               // 遍历 v_k 到各点(设为 v_w)的权值, 加上 v_i 到 v_k 的权值, 然后与 pathWeight 当前存储的到 v_w 的值比较
+               // 如果比现有记录的短, 更新到 pathWeight 和 pathPrior 中
+               if (!final[w] && (G.arc[k][w] + min < pathWeight[w]))
                {
-                   shortPathWeight[w] = min + G.arc[k][w];
+                   pathWeight[w] = min + G.arc[k][w];
                    pathPrior[w] = k;
                }
            }
@@ -2610,55 +2610,81 @@ TODO: 补充图片
 
    时间复杂度分析: 从嵌套循环得到此算法的时间复杂度为 \\(O(n^2)\\)
 2. 弗洛伊德(Floyd)算法
+   该算法可求得图中任意顶点到顶点间的最短路径, 用矩阵(二维数组) PathMatrix 和 PathWeight 存储
+   原理也很简单, 具体实现如下:
    ```C++
-   typedef int PathMatirx[MAXVEX][MAXVEX];
-   typedef int ShortPathWeight[MAXVEX][MAXVEX];
+   typedef int PathMatrix[MAXVEX][MAXVEX];
+   typedef int PathWeight[MAXVEX][MAXVEX];
 
-   void ShortestPath_Floyd(MGraph G, PathMatirx *P, ShortPathWeight *D)
+   void ShortestPath_Floyd(MGraph G, PathMatrix pathMatrix, PathWeight pathWeight)
    {
        int v, w, k;
        for (v = 0; v < G.numVertexes; v++)
        {
            for (w = 0; w < G.numVertexes; w++)
            {
-               (*D)[v][w] = G.matirx[v][w];
-               (*P)[v][w] = w;
+               pathWeight[v][w] = G.arc[v][w]; // 初始化与网图的邻接矩阵保持一致
+               pathMatrix[v][w] = w; // 初始化为 pathMatrix[v][j] == j
            }
        }
+
+       // 每次试探一个中继顶点都会将表中所有顶点间的当前路径检测一遍, 所有不用担心会有漏的. (因此嵌套顺序不能变)
        for (k = 0; k < G.numVertexes; k++)
        {
-           for (v=0; v < G.numVertexes; v++)
+           for (v = 0; v < G.numVertexes; v++)
            {
-               if ((*D)[v][w] > (*D)[v][k] * (*D)[k][w])
+               for (w = 0; w < G.numVertexes; w++)
                {
-                   (*D)[v][w] = (*D)[v][k] + (*D)[k][w];
-                   (*P)[v][w] = (*P)[v][k];
+                   // 如果从 v_v 到 v_w, 经过下标为 k 的顶点路径比当前记录的更短
+                   if (pathWeight[v][w] > pathWeight[v][k] + pathWeight[k][w])
+                   {
+                       pathWeight[v][w] = pathWeight[v][k] + pathWeight[k][w];
+                       pathMatrix[v][w] = pathMatrix[v][k]; // 路径设置经过顶点 k
+                   }
                }
+
            }
        }
    }
    ```
-   该算法的显示代码
+
+   输出弗洛伊德算法得到的最短路径:
    ```C++
    for (v = 0; v < G.numVertexes; v++)
    {
-       for (w = v + 1; w< G.numVertexes; w++)
+       for (w = v + 1; w < G.numVertexes; w++)
        {
-           printf("v%d-v%d weight: %d", v, w, D[v][w]);
-           k = P[v][w];
-           printf(" path: %d", v);
-           while (k != w)
+           printf("v%d-v%d weight: %d", v, w, pathWeight[v][w]); // 打印这条最短路径的权
+           k = pathMatrix[v][w];
+           printf(" path: %d", v); // 打印源点
+           while (k != w) // 如果路径顶点不是终点
            {
-               printf(" -> %d", k);
-               k = P[k][w];
+               printf(" -> %d", k); // 打印路径顶点
+               k = pathWeight[k][w]; // 获得下一个路径顶点
            }
-           printf(" -> %d\n", w);
+           printf(" -> %d\n", w); // 循环结束, 说明抵达终点, 打印终点
        }
        printf("\n");
    }
    ```
 
+   时间复杂度分析: 时间复杂度为 \\(O(n^3)\\)
+
 ### 拓补排序
+
+无环: 没有回路的图
+
+1. 拓扑排序介绍
+   AOV 网(ActivityOn Vertex Network): 在一个表示工程的有向图中, 用顶点表示活动, 用弧表示活动直接的优先关系. AOV 网中的弧表示活动直接存在的某种制约关系. AOV 网中不能存在回路
+
+   拓扑序列: 设 G=(V, E) 是一个具有 n 个顶点的有向图, V 中的顶点序列 \\(v_1, v_2, \dots, v_n\\) , 满足若从顶点 \\(v_i\\) 到 \\(v_j\\) 有一条路径, 则顶点 \\(v_i\\) 必在 \\(v_j\\) 之前.
+
+   拓扑排序: 对一个有向图构造拓扑序列的过程.
+   构造时会有两个结果:
+   * 如果此网的全部顶点都被输出, 说明它是不存在环(回路)的 AOV 网
+   * 如果输出顶点数少了, 说明这个网存在环(回路), 不是 AOV 网
+2. 拓扑排序算法
+   对 AOV 网进行拓扑排序的基本思路是: 从 AOV 网中旋转一个入度为 0 的顶点输出, 然后删去此顶点, 并删除以此顶点为尾的弧, 继续重复此步骤, 直到输出全部顶点或者 AOV 网中不存在入度为 0 的顶点为止
 
 ### 关键路径
 
