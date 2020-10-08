@@ -2672,21 +2672,223 @@ TODO: 补充图片
 
 ### 拓补排序
 
-无环: 没有回路的图
+
 
 1. 拓扑排序介绍
-   AOV 网(ActivityOn Vertex Network): 在一个表示工程的有向图中, 用顶点表示活动, 用弧表示活动直接的优先关系. AOV 网中的弧表示活动直接存在的某种制约关系. AOV 网中不能存在回路
+   无环: 没有回路的图
+   AOV 网(Activity On Vertex Network): 用顶点表示活动, 用弧表示活动之间的优先关系. AOV 网中不能存在回路, 属于有向无环图
 
-   拓扑序列: 设 G=(V, E) 是一个具有 n 个顶点的有向图, V 中的顶点序列 \\(v_1, v_2, \dots, v_n\\) , 满足若从顶点 \\(v_i\\) 到 \\(v_j\\) 有一条路径, 则顶点 \\(v_i\\) 必在 \\(v_j\\) 之前.
+   如图所示就是一个 AOV 网(图中省略了权值)和它的邻接表形式数据结构
+   TODO: 补充图片(在拓扑排序算法那里)
+
+   拓扑序列:
+   设 G=(V, E) 是一个具有 n 个顶点的有向图
+   满足若从顶点 \\(v_i\\) 到 \\(v_j\\) 有一条路径, 则在顶点序列 V 中 \\(v_i\\) 必在 \\(v_j\\) 之前.
+   称 V 为拓扑序列
 
    拓扑排序: 对一个有向图构造拓扑序列的过程.
    构造时会有两个结果:
-   * 如果此网的全部顶点都被输出, 说明它是不存在环(回路)的 AOV 网
-   * 如果输出顶点数少了, 说明这个网存在环(回路), 不是 AOV 网
+   * 如果此网的全部顶点都被输出, 说明这个网图不存在环(回路), 是 AOV 网
+   * 如果输出顶点数少了, 说明这个网图存在环(回路), 不是 AOV 网
 2. 拓扑排序算法
-   对 AOV 网进行拓扑排序的基本思路是: 从 AOV 网中旋转一个入度为 0 的顶点输出, 然后删去此顶点, 并删除以此顶点为尾的弧, 继续重复此步骤, 直到输出全部顶点或者 AOV 网中不存在入度为 0 的顶点为止
+   拓扑排序的基本思路是:
+   从网中选择一个入度为 0 的顶点输出, 然后删去此顶点, 并删除此顶点的出边, 继续重复此步骤, 直到输出全部顶点(是 AOV 网)或者网中不存在入度为 0 的顶点为止(不是 AOV 网)
+
+   以邻接表形式表达该网图. 考虑到算法要查找入度为 0 的顶点, 因此在原来的顶点表节点结构中, 增加一个入度域 in 以记录一个顶点的入度:
+   ```C++
+   typedef struct EdgeNode // 边表结点
+   {
+       int adjVex;
+       int weight;
+       struct EdgeNode *next;
+   } EdgeNode;
+
+   typedef struct VertexNode // 顶点表结点
+   {
+       int in; // 增加了这个入度域
+       int data;
+       EdgeNode *firstEdge;
+   } VertexNode, AdjList[MAXVEX];
+
+   typedef struct
+   {
+       AdjList adjList;
+       int numVertexes, numEdges;
+   } GraphAdjList;
+   ```
+
+   在算法中还需要栈来存储处理过程中入度为 0 的顶点, 目的是避免每次查找时都要遍历顶点表中有没有入度为 0 的顶点.
+   实现代码如下:
+   ```C++
+   int TopoLogicalSort(GraphAdjList GL)
+   {
+       EdgeNode *e;
+       int i, k, gettop; // gettop 存储当前出栈元素
+       
+       int top = -1; // 栈的 top 指针
+       int count = 0; // 用于统计输出顶点数
+       int *stack = (int*) malloc(GL->numVertexes * sizeof(int)); // 用于存储入度为 0 的顶点, 根据顶点数分配内存空间
+
+       // 遍历顶点表, 将入度为 0 的顶点入栈
+       for (i = 0; i < GL->numVertexes; i++)
+           if (GL->adjList[i].in == 0)
+               stack[++top] = i;
+
+       while (top != -1)
+       {
+           gettop = stack[top--]; // 出栈
+           count++; // 统计输出顶点数
+           printf("%d -> ", GL->adjList[gettop].data); // 打印此顶点, 可更改为其他操作
+
+           for (e = GL->adjList[gettop].firstEdge; e; e = e->next) // 遍历此顶点的出边(中的邻接点)
+           {
+               k = e->adjVex;
+               if (--GL->adjList[k].in == 0) // 若失去此顶点后邻接点的入度变为 0, 将邻接点也加入到栈中
+                   stack[++top] = k;
+           }
+       }
+       
+       if (count < GL->numVertexes) // 如果count小于顶点数, 说明存在环, 不是 AOV 网
+           return -1;
+       else
+           return OK;
+   }
+   ```
+
+   时间复杂度分析: 对于具有 n 条顶点 e 条弧的网图, 时间复杂度为 O(n+e)
 
 ### 关键路径
+
+AOE 网(Activity On Edge Network): 用顶点表示时间, 用有向边表示活动, 用边上的权值表示活动的持续时间. AOE 网是有向图
+
+AOE 网中没有入边的顶点称为始点或源点, 没有出边的顶点称为终点或汇点
+
+如图, \\(v_0\\) 是源点, 表示一个工程的开始, \\(v_9\\) 是汇点, 表示整个工程的结束, 顶点 \\(v_0, v_1, \dots, v_9\\) 分别表示事件, 弧 \\(<v_0, v_1>\\), \\(<v_0, v_2>\\), ..., \\(<v_8, v_9>\\) 都表示一个活动, 用 \\(a_0, a_1, \dots, a_12\\) 表示, 它们的值(权值)代表着活动持续的事件
+TODO: 补充图片
+
+AOV 与 AOE 的区别
+AOV 用顶点表示活动, 它只描述活动之间的制约关系;
+AOE 用边表示活动, 要建立在活动之间制约关系没有矛盾的基础之上. 用于分析完成整个工程至少需要多少时间, 或者为了缩短工程所需时间, 应当加快哪些活动等问题.
+TODO: 补充图片(2张)
+
+**关键路径: 从源点到汇点具有最大长度的路径叫关键路径**
+
+1. 关键路径算法原理
+   定义如下几个参数:
+   1. 事件最早发生时间 etv (earliest time of vertex)
+   2. 事件最晚发生时间 ltv (latest time of vertex)
+   3. 活动最早开工时间 ete (earliest time of edge)
+   4. 活动最晚开工时间 lte (latest time of edge)
+   
+   某条路径上的活动, 最早开工时间和最晚开工时间如果相等意味着该路径上的活动不可延后, 是关键活动, 该路径为关键路径
+   由 1 和 2 可以求得 3 和 4, 然后根据 ete[k] 是否与 lte[k] 相等来判断 \\(a_k\\) 是否是关键活动
+2. 关键路径算法
+   以邻接表结构表达 AOE 网, 弧链表增加了 weight 域, 用来存储弧的权
+   TODO: 补充图片
+
+   计算顶点 \\(v_k\\) 的 etv[k] 的数学定义是:
+   TODO: 补充图片
+
+   求事件最早发生事件 etv 的过程, 可放在拓扑排序算法中. 因此在求关键路径之前, 需要先调用一次拓扑排序算法来得到 etv 和拓扑序列列表.
+   秘诀: 从前面加权是最早时间, 从后面减权是最晚时间
+   实现代码如下:
+   ```C++
+   int *etv, *ltv; // 事件最早发生时间和最晚发生时间数组
+   int *stack2; // 用于存储拓扑序列的栈
+   int top2; // 用于栈 stack2 的指针
+
+   // 改进过的拓扑排序算法
+   int TopoLogicalSort(GraphAdjList GL)
+   {
+       EdgeNode *e;
+       int i, k, gettop;
+
+       int top = -1; // 栈的 top 指针
+       int count = 0; // 用于统计输出顶点个数
+       int *stack = (int*) malloc(GL->numVertexes * sizeof(int)); // 用于存储入度为 0 的顶点, 根据顶点数分配内存空间
+
+       // 遍历顶点表, 将当前入度为 0 的顶点入栈
+       for (i = 0; i < GL->numVertexes; i++)
+           if (GL->adjList[i].in == 0)
+               stack[++top] = i;
+
+       etv = (int*) malloc(GL->numVertexes * sizeof(int)); // 给 etv 分配空间
+       for (i = 0; i < GL->numVertexes; i++)
+           etv[i] = 0; // 初始化 etv 数组, 每个顶点的 etv 默认为 0
+
+       stack2 = (int*) malloc(GL->numVertexes * sizeof(int)); // 给存储拓扑序列的栈分配空间
+       top2 = -1; // 空栈的 top 指针默认为 -1
+
+       while (top != -1)
+       {
+           gettop = stack[top--]; // 将入度为 0 的顶点出栈
+           count++;
+           stack2[++top2] = gettop; // 将弹出的顶点下标压入存储拓扑序列的栈 stack2 中
+
+           // 遍历当前顶点的弧链表, 看是否有失去当前结点后入度为 0 的邻接点
+           for (e = GL->adjList[gettop].firstEdge; e; e = e->next)
+           {
+               k = e->adjVex; // k 为当前顶点的邻接点
+               if (--GL->adjList[k].in == 0) // 若 k 的入度 -1 后为 0
+                   stack[++top] = k; // 入栈
+
+               // 若当前顶点(gettop)的 etv 加上当前顶点到 k 所需的时间大于已记录的 etv[k]
+               if ((etv[gettop] + e->weight) > etv[k])
+                   etv[k] = etv[gettop] + e->weight; // 更新 etv[k], 因为 k 的前置活动(顶点 gettop)首先要完成
+           }
+       }
+
+       if (count < GL->numVertexes) // 如果 count 小于顶点数, 说明存在环
+           return -1;
+       else
+           return OK;
+   }
+
+   void CriticalPath(GraphAdjList GL)
+   {
+       EdgeNode *e;
+       int i, gettop, k, j;
+       int ete, lte; // 活动最早发生时间和最晚发生时间
+
+       TopoLogicalSort(GL); // 求拓扑序列, 得到 etv 和 stack2
+
+       ltv = (int*) malloc(GL->numVertexes * sizeof(int)); // 事件的最晚发生时间
+
+       for (i = 0; i < GL->numVertexes; i++)
+           ltv[i] = etv[GL->numVertexes - 1]; // 初始化 ltv 数组, 每个顶点的 ltv 默认为最后一个事件发生的时间
+
+       while (top2 != -1)
+       {
+           gettop = stack2[top2--]; // 拓扑序列出栈(序列从后往前遍历)
+
+           // 遍历顶点 gettop 的弧链表
+           for (e = GL->adjList[gettop].firstEdge; e; e = e->next)
+           {
+               k = e->adjVex; // 顶点 k 为顶点 gettop 的下一个事件
+
+               // 若该顶点 gettop 到下一个顶点 k 的最晚时间小于当前记录的最晚发生时间
+               if (ltv[k] - e->weight < ltv[gettop])
+                   ltv[gettop] = ltv[k] - e->weight; // 更新 ltv[gettop]
+           }
+       }
+       
+       for (j = 0; j < GL->numVertexes; j++)
+       {
+           for (e = GL->adjList[j].firstEdge; e; e = e->next)
+           {
+               k = e->adjVex;
+               ete = etv[j]; // 活动(当前的弧)最早开工时间等于(当前弧尾)最早发生时间
+               lte = ltv[k] - e->weight; // 活动(当前的弧)最晚开工时间 为 下个事件(弧头)的最晚发生事件减去当前活动所需时间
+               if (ete == lte) // 如果最早开工时间和最晚开工时间相同(开工时间无法延后), 说明当前路径为关键路径
+                   printf("<v%d, v%d> length: %d, ", GL->adjList[j].data, GL->adjList[k].data, e->weight);
+           }
+       }
+   }
+   ```
+
+   时间复杂度分析:
+   拓扑排序 \\(O(n+e)\\) + 初始化 ltv \\(O(n)\\) + 求 ltv \\(O(n+e)\\) + 检测是否关键路径 \\(O(n+e)\\)
+   所以最早时间复杂度依然是 \\(O(n+e)\\)
 
 ## 查找
 
