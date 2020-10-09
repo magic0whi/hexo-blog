@@ -2894,11 +2894,162 @@ TODO: 补充图片(2张)
 
 ### 查找概论
 
+查找(Searching)就是根据给定的值, 在查找表中确定给定值与记录的关键字相同的记录(数据元素)
+
+1. 关键字(Key): 记录中某个数据项的值, 又称键值
+   主关键字(Primary Key): 唯一地标识一个记录的关键字(用主关键字查找只会返回唯一的一条记录)
+   次关键字(Secondary Key): 多个记录共有的关键字(用次关键字查找会返回所有含有该关键字的记录)
+2. 查找表(Search Table): 由同一类型的记录构成的集合
+   * 静态查找表(Static Search Table): 只作查找操作的查找表
+   * 动态查找表(Dynamic Search Table): 可在查找过程的同时插入查找表中不存在的记录, 或者从查找表中删除已存在的某个记录
+
 ### 顺序表查找
+
+顺序查找(Sequential Search)又叫线性查找, 是最基本的查找技术
+
+1. 查找过程是:
+   1. 从表中第一个(或最后一个)记录开始, 逐个进行对给定值和记录的关键字比较
+   2. 若某个记录的关键字和给定值相等, 则查找成功, 找到所查的记录
+   3. 如果直到最后一个(或第一个)记录, 没有与给定值相等的关键字, 则表中没有所查的记录, 查找失败
+2. 顺序表查找算法:
+   ```C++
+   int Sequential_Search(int *searchTable, int length, int key)
+   {
+       int i;
+
+       for (i = 1; i <= length; i++)
+           if (searchTable[i] == key)
+               return i; // 若查找成功, 返回查找到的记录在记录表中的下标
+
+       return -1; // 查找不成功
+   }
+   ```
+3. 顺序表查找优化
+   设置一个哨兵, 可以免去 for 循环本身的比较
+   ```C++
+   // 查找表 searchTable 的第一个下标需要预留给哨兵
+   int Sequential_Search(int *searchTable, int length, int key)
+   {
+       int i;
+       searchTable[0] = key; // 设置哨兵, 它的关键字为给定值
+
+       // 循环从数组尾部开始
+       i = length - 1;
+       while (searchTable[i] != key)
+           i--;
+
+       return i; // 若返回的是哨兵的未知(下标0), 说明查找失败
+   }
+   ```
+4. 时间复杂度分析:
+   时间复杂度为 \\(O(n)\\), 顺序查找算法在 n 很大时, 查找效率极为低下.
+   优点是算法非常简单, 对静态查找表的记录没有任何要求.
+   在一些小型数据的查找时, 是可以适用的.
+   如果对表进行排序, 将查找频率高的记录放在前面, 不常用的放在后面, 效率可以大幅提高.
 
 ### 有序表查找
 
+1. 折半查找(Binary Search)技术, 又称为二分查找.
+   前提是线性表中的记录必须是关键字有序(通常从小到大有序), 且线性表必须采用顺序存储.
+
+   折半查找的思想:
+   在有序表中, 取中间记录作为比较对象,
+   若给定值与中间记录的关键字相等, 则查找成功;
+   若给定值小于中间记录的关键字, 则在中间记录的左半区继续查找;
+   若给定值大于中间记录的关键字, 则在中间记录的右半区继续查找.
+   不断重复上述过程, 直到查找成功, 或者没有所查的记录, 查找失败
+
+   实现代码如下:
+   ```C++
+   int Binary_Search(int *searchTable, int length, int key)
+   {
+       int low, high, mid;
+       low = 0;                      // 定义最低下标为查找表首位
+       high = length - 1; // 定义最高下标为查找表末尾
+
+       while (low <= high)
+       {
+           mid = (low + high) / 2; // 折半
+
+           if (key < searchTable[mid]) // 若给定值比当前中值小
+               high = mid - 1;
+           else if (key > searchTable[mid]) // 若给定值比当前中值小大
+               low = mid + 1;
+           else
+               return mid; // 若相等返回该下标
+       }
+
+       return -1; // 循环结束, 没有找到所查记录, 查找失败
+   }
+   ```
+   折半算法的时间复杂度为 \\(O(\log n)\\)
+2. 插值查找(Interpolation Search)
+   折半查找可改进为 \\(\text{mid}=\text{low}+\frac{\text{key}-\text{searchTable[low]}}{\text{searchTable[high]-searchTable[low]}}(\text{high}-\text{low})\\)
+   即通过计算 key 在当前 (high-low) 这段中的大致位置, 可以更快的跳转到目标位置.
+   在折半查找算法的代码中改动如下
+   ```diff
+   - mid = (low + high) / 2; // 折半
+   + mid = low + (key - searchTable[low]) / (searchTable[high] - searchTable[low]) * (high - low)
+   ```
+   插值查找时间复杂度同样为 \\(O(\log n)\\)
+   对于表长较大, 关键字分布又比较均匀的查找表, 插值查找算法的平均性能比折半查找要好得多
+3. 斐波那契查找
+   根据斐波那契数列的性质来二分
+   TODO: 补充图片(需要将图中-1的部分修掉)
+   ```C++
+   // Fibonacci[k] 为斐波那契数列, | 0 | 1 | 1 | 2 | 3 | 5 | 8 | 13 | 21 | 34 | 55 | 89 | 144 |
+   int Fibonacci_Search(int *searchTable, int length, int key)
+   {
+       int low, high, mid, i, k;
+       low = 0;
+       high = length - 1;
+       k = 0;
+
+       while (length > Fibonacci[k] - 1) // 取得 n 位于斐波那契数列中的位置
+           k++;
+
+       for (i = length, i < Fibonacci[k]; i++) // 数组的大小要与斐波那契查找对应值相等, 将不满的用最后一个记录的值补全
+           searchTable[i] = searchTable[length - 1];
+
+       while (low <= high)
+       {
+           mid = low + Fibonacci[k - 1];
+           if (key < searchTable[mid]) // 若查找记录小于当前分隔记录
+           {
+               high = mid - 1;
+               k--; // 斐波那契数列下标减一位
+           }
+           else if (key > searchTable[mid]) // 若查找记录大于当前分隔记录
+           {
+               low = mid + 1;
+               k -= 2; // 斐波那契数列下标减两位, 因为Fibonacci[k-2]+Fibonacci[k-1]=Fibonacci[k] 
+           }
+           else
+           {
+               if (mid <= length)
+                   return mid; // 若相等则说明 mid 即为查找到的位置
+               else
+                   return length - 1; // 若 mid > n 说明是补全数值, 返回 n
+           }
+       }
+
+       return -1;
+   }
+   ```
+   时间复杂度同样为 \\(O(\log n)\\)
+   就平均性能来说, 斐波那契查找要优于折半查找. 如果是最坏情况， 比如要查找的记录在查找表的极左侧, 则斐波那契查找效率要低于折半查找.
+
 ### 线性索引查找
+
+索引就是把一个关键字与它对应的记录相关联的过程
+一个索引由若干个索引项构成, 每个索引项至少应包含关键字和其对应的记录在存储器中的位置信息.
+
+线性索引是将索引项集合组织为线性结构, 也称为索引表
+
+1. 稠密索引
+2. 分块索引
+3. 倒排索引
+   (多个次关键字指向了同一个记录)
 
 ### 二叉排序树
 

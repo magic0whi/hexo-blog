@@ -42,7 +42,7 @@ Android APK 魔改&破解 [mobilism](https://forum.mobilism.org/search.php)
 
 ### Tools
 
-跨平台在线数学可视化 [GeoGebra](https://www.geogebra.org/) [desmos]https://www.desmos.com/calculator)
+跨平台在线数学可视化 [GeoGebra](https://www.geogebra.org/) , [desmos](https://www.desmos.com/calculator)
 
 在线求解微积分/矩阵等 [Symbolab数学求解器](https://zs.symbolab.com/solver/integral-calculator)
 
@@ -54,7 +54,7 @@ Android APK 魔改&破解 [mobilism](https://forum.mobilism.org/search.php)
 
 各大论文库 [SCI-Hub](https://tool.yovisun.com/scihub/)
 
-在线版类似ChemDraw [MolView](http://molview.org/)
+类似ChemDraw, 不过是网页版 [MolView](http://molview.org/)
 
 ### Learn
 
@@ -68,21 +68,21 @@ Crashcourts中文字幕 [Crashcourts](https://crashcourse.club/category/)
 
 ### illustration
 
-(SauceNao)[https://saucenao.com/]
+[SauceNao](https://saucenao.com/)
 
-(Yande.re)[https://yande.re/post/similar]
+[Yande.re](https://yande.re/post/similar)
 
-(Sankaku Channel)[https://chan.sankakucomplex.com/]
+[Sankaku Channel](https://chan.sankakucomplex.com/)
 
-(iqdb)[https://www.iqdb.org/]
+[iqdb](https://www.iqdb.org/)
 
-二次元壁纸 https://konachan.net/
+二次元壁纸 [konachan](https://konachan.net/)
 
 Pixabay上的自由图片 [Pixabay](https://pixabay.com/zh/photos/celler-basement-skateboarding-1246651/)
 
 ### BT
 
-动漫BT种子 [https://acg.rip/]
+动漫BT种子 (ACG.RIP)[https://acg.rip/]
 
 蓝光片源BT种子搜索 [Rarbg](https://rarbgprx.org/torrents.php)
 
@@ -130,6 +130,6 @@ Oracle 账户密码 [BugMeNot](http://bugmenot.com/view/oracle.com)
 
 ## Software
 
-最好的屏幕录制/放流工具 (OBS)[https://obsproject.com/]
+最好的屏幕录制/放流工具 [OBS](https://obsproject.com/)
 
 解压由 Inno Setup 打包成安装器的资源 [Innoextrace](http://constexpr.org/innoextract/)
