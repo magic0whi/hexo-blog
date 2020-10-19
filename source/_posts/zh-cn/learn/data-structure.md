@@ -3888,8 +3888,141 @@ TODO: 补充图片
 ### 归并排序
 
 1. 归并排序算法
+   归并: 将两个或两个以上的有序表组合成一个新的有序表
+   假设初始序列含有 n 个记录, 把它看成 n 个长度为 1 的有序子序列, 然后两两归并,
+   得到 \\(\ulcorner\frac{n}{2}\urcorner\\) (\\(\ulcorner x\urcorner\\) 表示大于 x 的最小整数)个长度为 2 或 1 的有序子序列.
+   再次两两归并, 如此重复, 直至得到一个长度为 n 的有序序列为止.
+   这种排序方法称为 2 路归并排序
+   ```C++
+   // SR 为当前分段, TR 为输出数组(SR 和 TR 两者不能为同一个), 此函数将两个有序序列 SR[i~m] 和 SR[m+1~n] 归并
+   void Merge(int SR[], int TR[], int i, int m, int n)
+   {
+       int j, k, l;
+       
+       // 将 SR 中记录由小到大归并入 TR, i 由 i~m j 由 m+1~n
+       for (k = i, j = m + 1; i <= m && j <= n; k++)
+       {
+           // 因为两个序列有序, 只需要逐个比较然后填入 TR
+           if (SR[i] < SR[j])
+               TR[k] = SR[i++];
+           else
+               TR[k] = SR[j++];
+       }
+       // 循环结束后某一边的序列会全部填入 TR
+       
+       //接下来判断是否还有剩余未填入
+       if (i <= m)
+       {
+           for (l = 0; l <= m - i; l++)
+               TR[k + l] = SR[i + l]; // 将剩余的 SR[i~m] 填入 TR
+       }
+       if (j <= n)
+       {
+           for (l = 0; l <= n - j; l++)
+               TR[k + l] = SR[j + l]; // 将剩余的 SR[j~n] 填入 TR
+       }
+   }
+
+   // SR为输入数组, TR1 为排序后的输出数组, s 为起始下标, t 为数组 SR 长度
+   // 第一次传入的 TR1 只会在递归的最后赋值, 所以 SR 和 TR1 可以是同一个地址
+   void MSort(int SR[], int TR1[], int s, int t)
+   {
+       int m;
+       int TR2[t + 1];
+
+       if (s == t) // 如果已经分到了最小
+           TR1[s] = SR[s]; // 将 SR[s] 回递给上级递归的 TR2[s] (开始调用 Merge() 归并)
+       else
+       {
+           // 将 SR 平分为 SR[s~m] 和 SR[m+1~t]
+           m = (s + t) / 2;
+           MSort(SR, TR2, s, m);
+           MSort(SR, TR2, m + 1, t);
+
+           Merge(TR2, TR1, s, m, t); // 将 SR[s~m] 和 SR[m+1~t] 归并到 TR1
+       }
+   }
+
+   void MergeSort(SqList *L)
+   {
+       MSort(L->r, L->r, 0, L->length - 1);
+   }
+   ```
+   
+   具体递归的分析:
+   ```
+   假设有数组 SR == [50 10 90 30 70], 长度为5
+   MSort(L->r, L->r, 0, 4)
+    MSort(SR, TR2, 0, 2) [50,10,90]
+     MSort(SR, TR2, 0, 1)
+      MSort(SR, TR2, 0, 0)         确定上级递归 TR2 有 SR[0] == 50
+      MSort(SR, TR2, 1, 1)         确定上级递归 TR2 有 SR[1] == 10
+      于是确定此级递归的 TR2 == [50,10,null,null,null]
+      Merge(TR2, TR1, 0, 0, 1)     TR2[50,10,null,null,null] -> 上级递归的 TR2[10,50,null,null,null]
+     MSort(SR, TR2, 2, 2)          确定上级递归 TR2 有 SR[2] == 90
+     于是确定此级递归的 TR2 == [50,10,90,null,null]
+     Merge(TR2, TR1, 0, 1, 2)      TR2[10,50,90,null,null] -> 上级递归的 TR2[10,50,90,null,null]
+    MSort(SR, TR2, 3, 4) 30 70
+     MSort(SR, TR2, 3, 3)          确定上级递归 TR2 有 SR[3] == 30
+     MSort(SR, TR2, 4, 4)          确定上级递归 TR2 有 SR[4] == 70
+     于是确定此级递归的 TR2 == [null,null,null,30,70]
+     Merge(TR2, TR1, 3, 3, 4)      TR2[null,null,null,30,70] -> 上级递归的 TR2[null,null,null,30,70]
+     (加上先前的递归, 实际为 TR2[10,50,90,30,70])
+    Merge(TR2, TR1, 0, 2, 4)       TR2[10,50,90,30,70] -> TR1[10,30,50,70,90]
+   ```
 2. 归并排序复杂度分析
+   一趟归并需要将 SR[1]~SR[n] 中相邻的有序序列进行两两归并并将结果放到 TR1 中,
+   需要将待排序序列中的所有记录扫描一遍, 耗时 \\(O(n)\\)
+   整个归并的路线可以想象成一颗完全二叉树, 由完全二叉树的深度可知, 整个归并排序需要进行 \\(\log_2 n\\) 次,
+   因此总的时间复杂度为 \\(O(n\log n)\\)
+
+   由于归并排序在归并过程中需要与原始记录序列同样数量的存储空间, 存放归并结果以及递归时深度为 \\(\log_2 n\\) 的栈空间,
+   因此空间复杂度为 \\(O(n+\log n)\\)
+
+   Merge() 函数中归并排序是两两比较, 不存在跳跃, 因此归并排序是一种稳定的排序算法
+   归并排序是一种比较占用内存，但却效率高且稳定的算法
 3. 非递归实现归并排序
+   ```C++
+   // 省略了 Merge(), Merge() 上面就有
+
+   // 将 SR 中相邻长度为 s 的子序列两两归并到TR[], n 为 SR 长度
+   void MergePass(int SR[], int TR[], int s, int n)
+   {
+       int i = 1;
+       int j;
+       
+       while (i <= n - 2 * s + 1) // 如果后面还有空间可以归并, 
+       {
+           Merge(SR, TR, i, i + s - 1, i + 2 * s - 1); // 归并 SR[i~i+(s-1)] 和 SR[i+s~i+s+(s-1)]
+           i += 2 * s; // i~i+2s-1 之间长度为 (i+s+s-1)-i+1=2s
+       }
+       
+       // 归并最后两个序列
+       if (i < n - s + 1)
+           Merge(SR, TR, i, i + s - 1, n);
+       else // 若最后只剩下单个子序列
+          for (j = i; j <= n; j++)
+              TR[j] = SR[j];
+   }
+
+   // 对顺序表L作归并非递归排序
+   void MergeSort2(SqList *L)
+   {
+       int *TR = (int*) malloc(L->length * sizeof(int));
+
+       int k = 1;
+       while (k < L->length)
+       {
+           // 在TR和L->r之间不断轮换并扩大子序列长度, 最终完成归并排序
+           MergePasss(L->r, TR, k, L->length); // 将 L->r 中相邻长度为当前 k 的子序列两两归并到 TR
+           k *= 2; // 子序列长度加倍
+           MergePass(TR, L->r, k, L->length); // 将 TR 中相邻长度为当前 k 的子序列两两归并到 L->r
+           k *= 2; // 子序列长度加倍
+       }
+   }
+   ```
+   非递归的迭代方法, 避免了递归时深度为的栈空间, 空间只是用到申请归并临时用的TR数组, 空间复杂度为 \\(O(n)\\)
+   避免递归在时间性能上也有一定的提升
 
 ### 快速排序
 
