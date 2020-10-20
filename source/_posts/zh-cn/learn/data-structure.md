@@ -3923,7 +3923,7 @@ TODO: 补充图片
        }
    }
 
-   // SR为输入数组, TR1 为排序后的输出数组, s 为起始下标, t 为数组 SR 长度
+   // SR为输入数组, TR1 为排序后的输出数组, s 为起始下标, t 为终端下标
    // 第一次传入的 TR1 只会在递归的最后赋值, 所以 SR 和 TR1 可以是同一个地址
    void MSort(int SR[], int TR1[], int s, int t)
    {
@@ -3983,25 +3983,26 @@ TODO: 补充图片
    归并排序是一种比较占用内存，但却效率高且稳定的算法
 3. 非递归实现归并排序
    ```C++
-   // 省略了 Merge(), Merge() 上面就有
+   // 省略了函数 Merge()
 
-   // 将 SR 中相邻长度为 s 的子序列两两归并到TR[], n 为 SR 长度
-   void MergePass(int SR[], int TR[], int s, int n)
+   // 将 SR[] 中相邻长度为 distance 的子序列两两归并到TR[], length 为 SR[] 长度
+   void MergePass(int SR[], int TR[], int distance, int length)
    {
-       int i = 1;
+       int i = 0;
        int j;
        
-       while (i <= n - 2 * s + 1) // 循环, 直到后面没有满足两个相邻子序列的空间
+       while (i <= length - 2 * distance) // 循环, 直到后面没有满足两个相邻子序列的空间
        {
-           Merge(SR, TR, i, i + s - 1, i + 2 * s - 1); // 归并 SR[i~i+(s-1)] 和 SR[i+s~i+s+(s-1)]
-           i += 2 * s; // i~i+2s-1 之间长度为 (i+s+s-1)-i+1=2s
+           // 归并 SR[i ~ i+(distance-1)] 和 SR[i+distance ~ i+distance+(distance-1)] (合并后就是 SR[i+distance ~ i+2×distance-1])
+           Merge(SR, TR, i, i + distance - 1, i + 2 * distance - 1); 
+           i += 2 * distance; // i ~ i+2×distance-1 之间长度为(包含两端本身) (i+2×distance-1) - i + 1 = 2×distance
        }
        
-       // 归并最后两个序列(后者序列长度不足 s)
-       if (i < n - s + 1)
-           Merge(SR, TR, i, i + s - 1, n);
-       else // 若最后只剩下(长度≤ s 的)单个子序列
-          for (j = i; j <= n; j++)
+       // 归并最后两个序列 (前者的序列长度=distance ; 0 < 后者的序列长度 < distance)
+       if (i < length - distance)
+           Merge(SR, TR, i, i + distance - 1, length - 1);
+       else // 若最后只剩下 长度 ≤ distance 的单个子序列, 直接填入TR[] (或者没有剩余, 此时循环条件不满足, 不执行)
+          for (j = i; j < length; j++)
               TR[j] = SR[j];
    }
 
@@ -4010,7 +4011,7 @@ TODO: 补充图片
    {
        int *TR = (int*) malloc(L->length * sizeof(int));
 
-       int k = 1;
+       int k = 1; // k 存储当前分割间距
        while (k < L->length)
        {
            // 在TR和L->r之间不断轮换并扩大子序列长度, 最终完成归并排序
@@ -4027,5 +4028,79 @@ TODO: 补充图片
 ### 快速排序
 
 1. 快速排序算法
+   快速排序(Quick Sort)的基本思想是
+   通过一趟排序将待排记录分割成独立的两部分, 其中一部分记录的关键字均比另一部分记录的关键字小,
+   分别对这两部分记录继续排序, 达到整个序列有序
+   ```C++
+   // 任务是选择某个记录作为枢轴, 将比它小的放左边, 比它大的放右边, 然后返回分好后枢轴的下标
+   int Partition(SqList *L, int low, int high)
+   {
+       int pivotkey = L->r[low]; // 用子表的第一个记录作枢轴
+
+       // 从表的两端交替向中间扫描, 指针 low < high 是前提条件
+       while (low < high)
+       {
+           while (low < high && L->r[high] >= pivotkey) // 如果当前 high 指向的关键字比枢轴大
+               high--; // high 指针左移
+           swap(L, low, high); // 继续交换 low 与 high 指向的记录, 如果 high 没有右移, 则代表撤回上一次的 swap() 操作
+           while (low < high && L->r[low] <= pivotkey) // 如果当前 low 指向的关键字比枢轴小
+               low++; // low 指针右移
+           swap(L, low, high); // 继续交换 low 与 high 指向的记录, 如果 low 没有右移, 则代表撤回上一次的 swap() 操作
+       }
+       // 每一次 swap() 操作, 如果在接下来的判断中满足与 pivotkey 的关系, 则移动指针 high 或 low 以继续下一步 swap(), 否则 swap() 操作会被撤回
+       // 循环中, pivotkey 不断在 low 和 high 的位置交换, 最后被递到中间(此时 low == high), 结束循环.
+
+       return low; // 循环结束后 low 等于 high 等于 pivotkey 的下标.
+   }
+
+   // 对表 L 的子序列 L->r[low~high] 作快速排序
+   void QSort(SqList *L, int low, int high)
+   {
+       int pivot;
+       if (low < high)
+       {
+           pivot = Partition(L, low, high); // 将 L->r[low~high] 一分为二, 返回枢轴的下标(枢轴左边的值都比它小, 右边的值都比它大)
+           // 对左子表(r[low ~ pivot-1])递归排序
+           QSort(L, low, pivot - 1);
+           // 对右子表(r[pivot+1 ~ high])递归排序
+           QSort(L, pivot + 1, high);
+       }
+   }
+   void QuickSort(SqList *L)
+   {
+       QSort(L, 0, L->length - 1);
+   }
+   ```
+
+   递归的推算:
+   ```
+   QSort(L, 0, 8)     [50,10,90,30,70,40,80,60,20] -> 执行完余下的递归后 [10,20,30,40,50,60,70,80,90]
+     pivot=4          [20,10,40,30,50,70,80,60,90]
+     QSort(L, 0, 3)   [20,10,40,30,...] -> 执行完余下的递归后 [10,20,30,40]
+       pivot=1        [10,20,40,30,...]
+       QSort(L, 0, 0)
+       QSort(L, 2, 3) [x,x,40,30,...]
+         pivot=2      [x,x,30,40,...]
+         QSort(2,1)
+         QSort(3,3)
+     QSort(L, 5, 8)   [...,70,80,60,90] -> 执行完余下的递归后 [...,60,70,80,90]
+       pivot=6        [...,60,70,80,90]
+       QSort(L,5,5)
+       QSort(L,7,8)   [...,80,90]
+         pivot=7
+         QSort(L,7,6)
+         QSort(8,8)
+   ```
 2. 快速排序复杂度分析
-3. 快速排序优化
+   递归的运算可以想象成一颗递归树
+   在最优情况下, Partition() 每次都划分得很均匀, 如果排序 n 个关键字，其递归树的深度为\\(log_2 n + 1\\)
+   即仅需递归 \\(\log_2 n\\) 次. 每次划分扫描耗时 \\(O(n)\\)
+   因此在最优情况下快速排序算法的时间复杂度为 \\(O(n\log n)\\)
+
+   在最坏情况下, 待排序序列为正序或者逆序, 每次划分只得到比上一次划分少一个记录的子序列.
+   如果用递归树表示就是一颗斜树. 深度为 \\(n-1\\). 第 i 次划分需要 n-i 次比较, 即 \\(\displaystyle\sum_{i=1}^{n-1} n-i=O(n)\\)
+   因此在最坏情况下快速排序算法的时间复杂度为 \\(O(n^2)\\)
+
+   平均情况为 \\(O(n\log n)\\)
+
+   由于关键字的比较和交换是跳跃进行的, 快速排序是一种不稳定的排序方法
