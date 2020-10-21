@@ -232,7 +232,7 @@ I will use GNOME as my desktop environment
 
 1. Installation
    ```console
-   # pacman -S gnome-shell gdm gnome-terminal gnome-control-center nautilus gnome-tweaks noto-fonts noto-fonts-cjk
+   # pacman -S gnome-shell gdm gnome-terminal gnome-control-center nautilus gnome-tweaks gnome-keyring noto-fonts noto-fonts-cjk
    ```
 
 ## NVIDIA & NVIDIA Optimus
@@ -335,4 +335,8 @@ I will use the method of `PRIME render offload` which was official method suppor
    libva-intel-driver
    libva-utils
    mpv
+   file-roller
+   evolution
+   seahorse
+   man
    ```
