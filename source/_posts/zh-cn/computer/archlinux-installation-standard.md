@@ -171,10 +171,13 @@ localectl set-keymap us
       #!/bin/bash
 
       git() {
-        if [[ $# -gt 1 && $1 == 'clone' ]]; then
+        if [[ $# -gt 1 && $1 == 'clone' && $2 != '-s' ]]; then
           /bin/git "$@" --depth=1
         elif [[ $# -gt 1 && $1 == 'fetch' ]]; then
           /bin/git fetch --depth=3 -p
+        elif [[ $# -gt 1 && [ $1 == 'describe' || $1 == 'rev-list' ] ]]; then
+          /bin/git fetch --unshallow -p
+          /bin/git "$@"
         else
           /bin/git "$@"
         fi
@@ -280,10 +283,26 @@ I will use the method of `PRIME render offload` which was official method suppor
    blacklist ideapad_laptop
    blacklist nouveau
    ```
+2. `go get` is slow in China
+   ```console
+   $ export GO111MODULE=on
+   $ export GOPROXY=https://goproxy.io
+   ```
 
-## Addition Packages
+## Addition
 
-1. Gnome
+1. Archlinuxcn
+   ```
+   [archlinuxcn]
+   Server = https://repo.archlinuxcn.org/$arch
+   ## or install archlinuxcn-mirrorlist-git and use the mirrorlist
+   #Include = /etc/pacman.d/archlinuxcn-mirrorlist
+   ```
+   Install archlinux-keyring
+   ```console
+   # pacman -S archlinuxcn-keyring
+   ```
+2. Gnome
    ```
    gnome-backgrounds
    gnome-clocks
