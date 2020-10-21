@@ -169,3 +169,51 @@ Enter F12 for Boot Menu when bootstrap
 
    use `lsblk -f` to show persistent block device naming
 
+## Desktop Environment
+
+I will use GNOME as my desktop environment
+
+1. Installation
+   ```console
+   # pacman -S gnome-shell gdm gnome-backgrounds gnome-clocks gnome-color-manager gnome-control-center gnome-logs gnome-menus gnome-screenshot gnome-session gnome-settings-daemon gnome-terminal gnome-themes-extra mutter nautilus sushi
+   ```
+
+## NVIDIA Optimus
+
+I will use the method of `PRIME render offload` which was official method supported by NVIDIA
+
+1. The [nvidia-prime](https://www.archlinux.org/packages/?name=nvidia-prime) package provides a script that can be used to run programs on the NVIDIA card.
+   ```console
+   # pacman -S nvidia-prime
+   ```
+   To run a program on the NVIDIA card you can use the prime-run command:
+   ```console
+   $ prime-run glxinfo | grep "OpenGL renderer"
+   $ prime-run vulkaninfo
+   ```
+2. Dynamic power management of the dGPU
+   Enable runtime power management for each PCI function
+   ```console
+   echo auto > /sys/bus/pci/devices/<Domain>:<Bus>:<Device>.<Function>/power/control
+   ```
+   ```console
+   # modprobe nvidia "NVreg_DynamicPowerManagement=0x02"
+   ```
+   
+   The automated ways to perform the manual steps mentioned above so that this feature works seamlessly after boot:
+   1. Create a file named `80-nvidia-pm.rules` in `/lib/udev/rules.d/` directory
+      ```conf /lib/udev/rules.d/80-nvidia-pm.rules
+      # Enable runtime PM for NVIDIA VGA/3D controller devices on driver bind
+      ACTION=="bind", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x030000", TEST=="power/control", ATTR{power/control}="auto"
+      ACTION=="bind", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x030200", TEST=="power/control", ATTR{power/control}="auto"
+
+      # Disable runtime PM for NVIDIA VGA/3D controller devices on driver unbind
+      ACTION=="unbind", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x030000", TEST=="power/control", ATTR{power/control}="on"
+      ACTION=="unbind", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x030200", TEST=="power/control", ATTR{power/control}="on"
+      ```
+   2. Set the driver option via the kernel module configuration files
+      ```conf /etc/modprobe.d/nvidia.conf
+      options nvidia "NVreg_DynamicPowerManagement=0x02"
+      ```
+   3. Reboot the system
+
