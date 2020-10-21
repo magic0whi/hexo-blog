@@ -10,6 +10,10 @@ toc: true
 The standard of archlinux installation & configuration for me
 
 Enter F12 for Boot Menu when bootstrap
+timedatectl set-timezone Asia/Shanghai
+localectl set-locale en_US.UTF-8
+hostnamectl set-hostname myhostname
+localectl set-keymap us
 
 <!-- more -->
 
@@ -36,7 +40,6 @@ Enter F12 for Boot Menu when bootstrap
    ```
 
    Preparing non-boot partitions
-
    ```console
    # cryptsetup -y -v luksFormat /dev/sda2
    # cryptsetup open /dev/sda2 cryptroot
@@ -44,17 +47,11 @@ Enter F12 for Boot Menu when bootstrap
    # mount /dev/mapper/cryptroot /mnt
    ```
 
-   You can set the filesystem label later by using `btrfs filesystem label /dev/mapper/cryptroot "arch_os"`
+   > You can set the filesystem label later by using `btrfs filesystem label /dev/mapper/cryptroot "arch_os"`
 
    Preparing the boot partition
-
    ```console
    # mkfs.fat -F32 /dev/sda1
-   ```
-3. Configuring mkinitcpio
-   I prefer using the sd-encrypt hook with the systemd-base initramfs.
-   ```console
-   HOOKS=(base **systemd** autodects **keyboard** **sd-vconsole** modconf block **sd-encrypt** filesystems fsck)
    ```
 
 ## Btrfs subvolumes with swap (WIP)
@@ -70,11 +67,12 @@ Enter F12 for Boot Menu when bootstrap
    Unmount the system partition at /mnt.
    ```console
    # umount /mnt
-   # cryptsetup close cryptroot
    ```
    Now mount the newly created subvolumes by using the `subvol=` mount option (with enabled compress `zstd`).
    ```
    # mount -o compress=zstd,subvol=@ /dev/mapper/cryptroot /mnt
+   # mkdir /mnt/boot && mkdir /mnt/home && mkdir /mnt/.snapshots
+   # mount /dev/sda1 /mnt/boot
    # mount -o compress=zstd,subvol=@home /dev/mapper/cryptroot /mnt/home
    # mount -o compress=zstd,subvol=@snapshots /dev/mapper/cryptroot /mnt/.snapshots
    ```
@@ -84,8 +82,9 @@ Enter F12 for Boot Menu when bootstrap
    Since the `@` subvolume is mounted at `/mnt` you will need to create a subvolume at `/mnt/var/cache/pacman/pkg` as a nested subvolume
    You may have to create any parent directories first.
    ```console
-   # mkdir -p /mnt/var/cache/pacman/pkg
+   # mkdir -p /mnt/var/cache/pacman
    # btrfs subvolume create /mnt/var/cache/pacman/pkg
+   # btrfs subvolume create /mnt/var/tmp
    ```
 4. Configuring swap
    TODO
@@ -93,10 +92,12 @@ Enter F12 for Boot Menu when bootstrap
 ## Installation
 
 1. Select the mirrors
-   sed -i '1s/^/Server = https:\/\/mirrors.huaweicloud.com\/archlinux\/\$repo\/os\/\$arch/' /etc/pacman.d/mirrorlist
+   ```console
+   # sed -i '1s/^/Server = https:\/\/mirrors.huaweicloud.com\/archlinux\/\$repo\/os\/\$arch\n/' /etc/pacman.d/mirrorlist
+   ```
 2. Install essential packages
    ```console
-   # pacstrap /mnt base base-devel linux linux-firmware btrfs-progs vim networkmanager
+   # pacstrap /mnt base base-devel linux linux-firmware btrfs-progs vim networkmanager rng-tools git tmux openssh bash-completion
    ```
 
 ## Configure the system
@@ -112,8 +113,8 @@ Enter F12 for Boot Menu when bootstrap
 3. Time zone
    ```console
    # ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
-   # hwclock --systohc
    # timedatectl set-ntp true
+   # hwclock --systohc
    ```
 4. Localization
    ```console
@@ -121,11 +122,12 @@ Enter F12 for Boot Menu when bootstrap
    # sed -i 's/#zh_CN.UTF-8 UTF-8/zh_CN.UTF-8 UTF-8/g' /etc/locale.gen
    # locale-gen
    # echo "LANG=en_US.UTF-8" >> /etc/locale.conf
+   # echo "KEYMAP=us" >> /etc/vconsole.conf
    ```
 5. Network configuration
    Create the `/etc/hostname` file:
    ```console
-   # hostnamectl set-hostname myhostname
+   # echo "myhostname" > /etc/hostname
    ```
    Add matching entries to [hosts(5)](https://jlk.fjfi.cvut.cz/arch/manpages/man/hosts.5):
    ```conf /etc/hosts
@@ -137,12 +139,64 @@ Enter F12 for Boot Menu when bootstrap
    ```console
    # systemctl enable NetworkManager.service
    ```
-
-6. Root password
+6. Random number generation
+   Enable Rng-tools
+   ```console
+   # systemctl enable rngd.service
    ```
+7. Configuring mkinitcpio
+   I prefer using the sd-encrypt hook with the systemd-base initramfs. (replace hook `udev` with hook `system` )
+   ```conf /etc/mkinitcpio.conf
+   HOOKS=(base **systemd** autodects **keyboard** **sd-vconsole** modconf block **sd-encrypt** filesystems fsck)
+   ```
+   Recreate the initramfs image
+   ```console
+   # mkinitcpio -P
+   ```
+8. Users and password
+   Create and use an unprivileged(non-root) user account(s) for most tasks
+   ```console
+   # useradd -m -s /bin/bash <Username>
+   # echo "<Username> ALL=(ALL) ALL" >> /etc/sudoers.d/<Username>
+   ```
+   Setting the new user and root user's password
+   ```
+   # passwd <Username>
    # passwd
    ```
-7. Boot loader
+9.  AUR helper
+   I use [yay](https://aur.archlinux.org/packages/yay/) as my AUR helper
+   1. Use makepkg wrapper `makepkg-shallow` to make makepkg do shallow clone
+      ```shell /usr/bin/makepkg-shallow
+      #!/bin/bash
+
+      git() {
+        if [[ $# -gt 1 && $1 == 'clone' ]]; then
+          /bin/git "$@" --depth=1
+        elif [[ $# -gt 1 && $1 == 'fetch' ]]; then
+          /bin/git fetch --depth=3 -p
+        else
+          /bin/git "$@"
+        fi
+      }
+
+      source /bin/makepkg "$@"
+      ```
+   2. Build & Install yay
+      ```console
+      # chmod 755 /usr/bin/makepkg-shallow
+      # mkdir /build
+      # chown -R <Username>:<Username> /build
+      # cd /build
+      # sudo -u <Username> git clone --depth=1 https://aur.archlinux.org/yay.git
+      # cd yay
+      # sudo -u <Username> makepkg-shallow --noconfirm -si
+      # sudo -u <Username> yay --save --cleanafter --removemake --makepkg /usr/bin/makepkg-shallow
+      # pacman -Qtdq | xargs -r pacman --noconfirm -Rcns
+      # rm -rf /home/<Username>/.cache
+      # rm -rf /build
+      ```
+12. Boot loader
    Installing the EFI boot manager
    ```console
    # bootctl install
@@ -164,7 +218,7 @@ Enter F12 for Boot Menu when bootstrap
    linux   /vmlinuz-linux
    initrd  /intel-ucode.img
    initrd  /initramfs-linux.img
-   options root="LABEL=arch_os" rw **rd.luks.name=sda2-UUID=cryptroot root=/dev/mapper/cryptroot**
+   options rd.luks.name=<sda2-UUID>=cryptroot root=/dev/mapper/cryptroot rootflags=subvol=@
    ```
 
    use `lsblk -f` to show persistent block device naming
@@ -175,16 +229,16 @@ I will use GNOME as my desktop environment
 
 1. Installation
    ```console
-   # pacman -S gnome-shell gdm gnome-backgrounds gnome-clocks gnome-color-manager gnome-control-center gnome-logs gnome-menus gnome-screenshot gnome-session gnome-settings-daemon gnome-terminal gnome-themes-extra mutter nautilus sushi
+   # pacman -S gnome-shell gdm gnome-terminal gnome-control-center nautilus gnome-tweaks
    ```
 
-## NVIDIA Optimus
+## NVIDIA & NVIDIA Optimus
 
 I will use the method of `PRIME render offload` which was official method supported by NVIDIA
 
 1. The [nvidia-prime](https://www.archlinux.org/packages/?name=nvidia-prime) package provides a script that can be used to run programs on the NVIDIA card.
    ```console
-   # pacman -S nvidia-prime
+   # pacman -S nvidia nvidia-prime
    ```
    To run a program on the NVIDIA card you can use the prime-run command:
    ```console
@@ -203,17 +257,38 @@ I will use the method of `PRIME render offload` which was official method suppor
    The automated ways to perform the manual steps mentioned above so that this feature works seamlessly after boot:
    1. Create a file named `80-nvidia-pm.rules` in `/lib/udev/rules.d/` directory
       ```conf /lib/udev/rules.d/80-nvidia-pm.rules
+      # Remove NVIDIA Audio devices, if present
+      ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x040300", ATTR{remove}="1"
+
       # Enable runtime PM for NVIDIA VGA/3D controller devices on driver bind
       ACTION=="bind", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x030000", TEST=="power/control", ATTR{power/control}="auto"
-      ACTION=="bind", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x030200", TEST=="power/control", ATTR{power/control}="auto"
 
       # Disable runtime PM for NVIDIA VGA/3D controller devices on driver unbind
       ACTION=="unbind", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x030000", TEST=="power/control", ATTR{power/control}="on"
-      ACTION=="unbind", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x030200", TEST=="power/control", ATTR{power/control}="on"
       ```
+      > You can use `udevadm info --attribute-walk --path=/sys/bus/pci/devices/<domain>\:<bus>\:<slot>.<func>` to get a PCI device's attribution
    2. Set the driver option via the kernel module configuration files
       ```conf /etc/modprobe.d/nvidia.conf
       options nvidia "NVreg_DynamicPowerManagement=0x02"
       ```
    3. Reboot the system
 
+## Troubleshot
+
+1. blacklist kernel module
+   ```conf /etc/modprobe.d/blacklist.conf
+   blacklist ideapad_laptop
+   blacklist nouveau
+   ```
+
+## Addition Packages
+
+1. Gnome
+   ```
+   gnome-backgrounds
+   gnome-clocks
+   gnome-logs
+   gnome-screenshot
+   gnome-menus
+   sushi
+   ```
