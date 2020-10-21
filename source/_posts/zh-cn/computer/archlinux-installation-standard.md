@@ -232,7 +232,7 @@ I will use GNOME as my desktop environment
 
 1. Installation
    ```console
-   # pacman -S gnome-shell gdm gnome-terminal gnome-control-center nautilus gnome-tweaks
+   # pacman -S gnome-shell gdm gnome-terminal gnome-control-center nautilus gnome-tweaks noto-fonts noto-fonts-cjk
    ```
 
 ## NVIDIA & NVIDIA Optimus
@@ -288,6 +288,10 @@ I will use the method of `PRIME render offload` which was official method suppor
    $ export GO111MODULE=on
    $ export GOPROXY=https://goproxy.io
    ```
+3. sudo: disable password prompt timeout
+   ```
+   # echo "Defaults passwd_timeout=0" > /etc/sudoers.d/notimeout
+   ```
 
 ## Addition
 
@@ -302,7 +306,7 @@ I will use the method of `PRIME render offload` which was official method suppor
    ```console
    # pacman -S archlinuxcn-keyring
    ```
-2. Gnome
+2. Additional Packages
    ```
    gnome-backgrounds
    gnome-clocks
@@ -310,4 +314,25 @@ I will use the method of `PRIME render offload` which was official method suppor
    gnome-screenshot
    gnome-menus
    sushi
+
+   mesa-demo
+   vulkan-tools
+   archlinuxcn-keyring
+   bashtop
+   qtcreator
+   visual-studio-code-bin
+   docker
+   microsoft-edge-dev
+   zerotier-one
+   htop
+   telegram-desktop
+   fcitx5-im
+   fcitx5-rime
+   fcitx5-configtool
+   gnome-shell-extensions
+   gnome-shell-extension-kimpanel-git
+   gnome-shell-extension-dash-to-dock
+   libva-intel-driver
+   libva-utils
+   mpv
    ```
