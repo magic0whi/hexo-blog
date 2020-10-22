@@ -336,7 +336,14 @@ I will use the method of `PRIME render offload` which was official method suppor
    libva-utils
    mpv
    file-roller
-   evolution
+   thunderbird
    seahorse
    man
+   cmake
+   gdb
+   noto-fonts-emoji
+   arch-install-scripts
+   debootstrap
+   ubuntu-keyring
+   pacman-contrib
    ```
