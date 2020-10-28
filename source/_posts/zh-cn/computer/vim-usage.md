@@ -11,7 +11,10 @@ tags:
 u to undo
 U to restore whole line(this action is not undo, and is undoable)
 Ctrl-R redo
-CTRL-W jump to another window.
+
+:sp[lit]  horizontally split current screen into two windows (with same filebuffer)
+:vs[plit]  vertically split current screen into two windows (with same filebuffer)
+CTRL-W + <h, j, k, l>  jump to another window.
 
 d$ delete to end
 x delete one char
@@ -29,16 +32,18 @@ y  yanks (copies) text
 p  puts (pastes) it(copied or deleted text).
 R  Replace mode until  <ESC>  is pressed.
 
-rx to replace one char with "x"
-ce change until the end of a word
-c$ change until the end of line
+rx  to replace one char with "x"
+ce  change until the end of a word
+c$  change until the end of line
 
 ctrl+g to show your location and the file status
-G to move to the bottom of the file
-501G to move to the 501 lines of the file
-gg to move to the start of the file
+G  to move to the bottom of the file
+501G  to move to the 501 lines of the file
+gg  to move to the start of the file
 
-% press % on a bracket can fast move the curser to the matching bracket
+v  (visual) select text, then you can type  d  to delete text or save to file with  :w FILENAME
+
+% press "%" on a bracket can fast move the curser to the matching bracket
 NOTE: This is very useful in debugging a program with unmatched parentheses!
 
 / typing / followed by a phrase searches FORWARD for the phrase.
@@ -73,7 +78,6 @@ command:
 
 :!xxxxx  executes an external command (such as :!ls)
 :w FILENAME  writes the current Vim file to disk with name FILENAME
-:v  (visual)select text, then you can type  d  to delete text or save to file with  :w FILENAME
 :r FILENAME  retrieves disk file FILENAME and puts it below the cursor position
 :r !xxx  read the output of the command (such as :r !ls)
 

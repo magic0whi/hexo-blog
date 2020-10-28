@@ -346,4 +346,27 @@ I will use the method of `PRIME render offload` which was official method suppor
    debootstrap
    ubuntu-keyring
    pacman-contrib
+   anki
+   gnome-shell-extension-desktop-icons
+   netease-cloud-music-gtk
+   vulkan-intel
+   steam
+   - ttf-liberation
+   - lib32-vulkan-intel
+   maya
+   - libxpm
+   materia-gtk-theme
+   gtk-engine-murrine
+   gdm3setup
+   zsh
+   - grml-zsh-config
+   - powerline
+   - zsh-autosuggestions
+   - zsh-syntax-highlighting
+   - zsh-history-substring-search
+   compsize
+   python-pip
+   python-matplotlib
+   python-pandas
+   python-seaborn
    ```
