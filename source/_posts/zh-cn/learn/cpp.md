@@ -19,7 +19,7 @@ TODO: 重新格式化这篇博文
 ## Notice
 
 1. Always pass your function parameters with const
-2. if object have pointer variable, write copy constructor
+2. if object have pointer variable inside, use copy constructor
 
 ## How C++ Works
 
@@ -820,7 +820,7 @@ f();
 
 ## Memory Initializer Lists in C++ (Constructor Initializer List)
 
-使用构造初始化列表可以避免实列化两次对象
+使用构造初始化列表可以避免使用 "=" 从而实列化两次对象
 
 ```C++
 class Example

@@ -347,7 +347,7 @@ I will use the method of `PRIME render offload` which was official method suppor
    ubuntu-keyring
    pacman-contrib
    anki
-   gnome-shell-extension-desktop-icons
+   gnome-shell-extension-desktop-icons-ng
    netease-cloud-music-gtk
    vulkan-intel
    steam
@@ -369,4 +369,25 @@ I will use the method of `PRIME render offload` which was official method suppor
    python-matplotlib
    python-pandas
    python-seaborn
+   qv2ray
+   v2ray
+   lutris
+   wine
+   lib32-giflib
+   lib32-libldap
+   lib32-gnutls
+   lib32-mpg123
+   lib32-openal
+   lib32-v4l-utils
+   lib32-libpulse
+   lib32-libxcomposite
+   lib32-libxinerama
+   lib32-libxslt
+   lib32-gst-plugins-base-libs
+   docker-compose
+   remmina
+   wireguard-tools
+   traceroute
+   gvfs-mtp
+   syncthing-gtk
    ```

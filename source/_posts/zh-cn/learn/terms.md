@@ -20,6 +20,8 @@ LIR Regional Internet registry 区域互联网注册管理机构 是管理世界
 
 CoW Copy-on-write 多个进程共享一个副本, 只有一个进程尝试修改该资源时, 系统才会执行复制
 
+RTTI Run-time Type Information  a feature of the C++ programming language that exposes information about an object's data type at runtime.
+
 ### 网络
 
 MTU Maximum transmission unit 最大传输单元; 指数据链接层上面所能通过的最大数据包大小
