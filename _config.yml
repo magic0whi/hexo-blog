@@ -102,7 +102,7 @@ theme: icarus
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: git@github.com:ndoskrnl/ndoskrnl.github.io.git
+  repo: git@github.com:magic0whi/ndoskrnl.github.io.git
   branch: master
 
 # Fix issue: halfwidth quotation marks rendered to fullwidth
