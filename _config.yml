@@ -101,7 +101,9 @@ theme: icarus
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  type: ''
+  type: git
+  repo: git@github.com:magic0whi/magic0whi.github.io.git
+  branch: master
 
 # Fix issue: halfwidth quotation marks rendered to fullwidth
 ## Reference: https://github.com/hexojs/hexo/issues/1981#issuecomment-229309844

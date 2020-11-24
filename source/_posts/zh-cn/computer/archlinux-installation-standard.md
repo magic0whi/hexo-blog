@@ -200,31 +200,31 @@ localectl set-keymap us
       # rm -rf /build
       ```
 12. Boot loader
-   Installing the EFI boot manager
-   ```console
-   # bootctl install
-   ```
-   Automatic update
-   The package [systemd-boot-pacman-hook](https://aur.archlinux.org/packages/systemd-boot-pacman-hook/) provides a Pacman hook to automate the update process.
+    Installing the EFI boot manager
+    ```console
+    # bootctl install
+    ```
+    Automatic update
+    The package [systemd-boot-pacman-hook](https://aur.archlinux.org/packages/systemd-boot-pacman-hook/) provides a Pacman hook to automate the update process.
 
-   Configuring the boot loader
-   Add the following kernel parameter to boot loader configuration
-   ```conf /boot/loader/loader.conf
-   default  arch.conf
-   timeout  4
-   console-mode max
-   editor   no
-   ```
+    Configuring the boot loader
+    Add the following kernel parameter to boot loader configuration
+    ```conf /boot/loader/loader.conf
+    default  arch.conf
+    timeout  4
+    console-mode max
+    editor   no
+    ```
 
-   ```conf /boot/loader/entries/arch.conf
-   title   Arch Linux
-   linux   /vmlinuz-linux
-   initrd  /intel-ucode.img
-   initrd  /initramfs-linux.img
-   options rd.luks.name=<sda2-UUID>=cryptroot root=/dev/mapper/cryptroot rootflags=subvol=@
-   ```
+    ```conf /boot/loader/entries/arch.conf
+    title   Arch Linux
+    linux   /vmlinuz-linux
+    initrd  /intel-ucode.img
+    initrd  /initramfs-linux.img
+    options rd.luks.name=<sda2-UUID>=cryptroot root=/dev/mapper/cryptroot rootflags=subvol=@
+    ```
 
-   use `lsblk -f` to show persistent block device naming
+    use `lsblk -f` to show persistent block device naming
 
 ## Desktop Environment
 
