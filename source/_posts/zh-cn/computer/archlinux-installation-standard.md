@@ -393,4 +393,7 @@ I will use the method of `PRIME render offload` which was official method suppor
    npm
    nodejs-hexo-cli
    iwd
+   nmap
+   v2raya
+   aosp
    ```
