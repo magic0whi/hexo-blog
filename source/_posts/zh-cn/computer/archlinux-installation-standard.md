@@ -369,7 +369,6 @@ I will use the method of `PRIME render offload` which was official method suppor
    python-matplotlib
    python-pandas
    python-seaborn
-   qv2ray
    v2ray
    lutris
    wine
@@ -390,4 +389,8 @@ I will use the method of `PRIME render offload` which was official method suppor
    traceroute
    gvfs-mtp
    syncthing-gtk
+   grsync
+   npm
+   nodejs-hexo-cli
+   iwd
    ```
