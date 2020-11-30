@@ -175,7 +175,7 @@ localectl set-keymap us
           /bin/git "$@" --depth=1
         elif [[ $# -gt 1 && $1 == 'fetch' ]]; then
           /bin/git fetch --depth=3 -p
-        elif [[ $# -gt 1 && [ $1 == 'describe' || $1 == 'rev-list' ] ]]; then
+        elif [[ $# -gt 1 && [$1 == 'describe' || $1 == 'rev-list'] ]]; then
           /bin/git fetch --unshallow -p
           /bin/git "$@"
         else
@@ -395,5 +395,5 @@ I will use the method of `PRIME render offload` which was official method suppor
    iwd
    nmap
    v2raya
-   aosp
+   picocom
    ```
