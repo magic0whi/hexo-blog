@@ -199,13 +199,9 @@ iptables -t mangle -A OUTPUT -j V2RAY_MASK # 应用规则
 [参考来源](https://guide.v2fly.org/app/tproxy.html)
 
 
-## shell相关知识
+## bash
 
-### ssh访问遇到 Access denied
-
-请检查该用户的 shell 的路径是否在 `/etc/shells` 列表中
-
-### if判断条件
+### if 判断
 
 ```
 # 用于数字判断
@@ -242,4 +238,20 @@ string1 < string2 - The less than operator returns true if the right operand is 
 -a 与
 -o 或
 ! 非
+```
+
+## 变量匹配
+
+```
+::x 正数时从左往右截取x个, 负数时从右往左截掉x个
+:x 从x开始截取后面所有内容, 负数时
+:(-x) 或者 : -x 从右往左截取所有内容
+:x:y 从x开始截取y个字符
+${food:-Cake} 如果 $food 存在否则输出 "Cake"
+
+STR="/path/to/foo.cpp"
+echo ${STR%/*}   # /path/to     % 是从后向前匹配, 单个 % 是非贪婪模式, 
+echo ${STR#*/}   # path/to/foo.cpp   # 是从前向后匹配, 单个 # 是非贪婪模式, 
+echo ${STR%.cpp} # /path/to/foo 两个 %% 是贪婪模式
+echo ${STR##*.}  # cpp          两个 ## 是贪婪模式
 ```
