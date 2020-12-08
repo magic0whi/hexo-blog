@@ -396,4 +396,8 @@ I will use the method of `PRIME render offload` which was official method suppor
    nmap
    v2raya
    picocom
+   bluez
+   bluez-utils
+   xmind-2020
+   obs-studio
    ```
