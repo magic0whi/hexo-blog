@@ -50,3 +50,14 @@ Host github.com
 ### ddclient
 
 {% asset_link ddclient.conf.example "/etc/ddclient/ddclient.conf" %}
+
+### sysctl
+
+```conf
+# BBR TCP Congestion
+net.core.default_qdisc=fq
+net.ipv4.tcp_congestion_control=bbr
+
+# Reboot after 30 minutes
+kernel.panic = 3780
+```
