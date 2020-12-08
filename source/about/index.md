@@ -9,20 +9,4 @@ I am no bird; and no net ensuares me: I am a free human being with an independen
 
 Make blog simple, make article simple, make everything simple.
 
-这个是我收藏的一首纯音乐, 拿来当序曲真的很好听啊~
-
-{% mplayer %}
-    playlist: [
-        {
-            name: 'Tayuta',
-            artist: 'FELT',
-            src: 'FELT-Tayuta.mp3',
-            poster: '3444769938584968.jpg'
-        }
-    ],
-    autoplay: false,
-    volume: 0.75,
-    playmode: "listloop",
-    big: false,
-    dark: false
-{% endmplayer %}
+这个是我收藏的一首纯音乐, 拿来当序曲真的很好听: [FELT-Tayuta](https://www.youtube.com/watch?v=RnKL3ik4kSk)

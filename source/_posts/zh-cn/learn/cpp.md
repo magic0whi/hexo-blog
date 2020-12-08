@@ -19,149 +19,15 @@ TODO: 重新格式化这篇博文
 ## Notice
 
 1. Always pass your function parameters with const
-2. if object have pointer variable inside, use copy constructor
+2. if object have pointer variable inside, write a copy constructor and use it
+3. 节约内存的小技巧
+   由于内存最小可操作单位是 byte, 而 bool 类型只需要 1 字节即可(0 和 1)，巧妙的方法是使用 1 个 byte 表示 8 个 bool 类型变量
+4. 头文件 or inline? （inline实际上就是将函数整个代码复制到调用这个函数的函数那里）
+5. 宏使用`#if`和`#endif`作为条件判断
+   `#if 1`为`true`
+6. 声明为 static 的变量和函数只在它所在的 translation unit 有效
+7. 默认的浮点数是double类型的, 如果你只用float的精度, 在数据后加上"f"如 `float a = 5.5f`
 
-## How C++ Works
-
-概念：每个cpp都会编译成一个obj,但一个cpp基本等于一个translation unit，除非这些cpp互相include组成一个大cpp文件
-
-## How the C++ Compiler Works
-
-Compile按钮(ctrl+f7)
-
-## How the C++ Linker Works
-
-工程设置->Preprocessor->Preprocess to a File以生产预处理文件（经编译器解析了宏的源码）
-编译阶段只是编译文件，外部definaion函数在link阶段，没有被调用的函数声明会被优化掉
-static基本表示该函数只为这个translation unit声明的
-宏使用`#if`和`#endif`作为条件判断
-`#if 1`为`true`
-
-**头文件函数出现重复定义的问题和`inline`的使用** （inline实际上就是将函数整个代码复制到条用这个函数的函数那里）
-
-## Variables in C++
-
-数据类型大小
-| | |
-|---| --- |
-| char | 1字节 |
-| short | 2字节 |
-| int | 4字节 | 
-| long | **通常**4字节 |
-| long long | 8字节 |
-| float | 4字节 |
-| double | 8字节 |
-
-核心思想：c++所有数据类型仅仅只是一个变量存储空间大小的规定
-
-默认的浮点数是double类型的, 所以别忘了给加上"f"如5.5f如果你只用float的精度
-
-
-节约内存的小技巧
-由于内存只能寻址到byte,而bool类型只有1字节，巧妙的方法是将8个bool存在一个byte里
-
-sizeof(数据类型)查看数据类型大小
-
-## Functions in C++
-
-函数functions与方法methods的区别仅仅在于方法是包含在类中的。当说到函数时就是明确地说某种不属于某个class的东西
-
-划分函数不要太过分，为了让我们调用一个函数，我们需要为这个函数创建一整个stack frame(栈框架)，
-也就是说我们得把参数之类的东西push到栈上，还要把一个叫做返回地址的东西放到栈上(以在函数执行完之后返回调用函数的地方)，
-所以为了执行函数指令而在内存中跳转来跳转去会消耗额外的时间，
-
-总结，函数的主要目的是防止代码重复
-通常将函数拆分为声明和定义：声明写在头文件中，定义写在translation unit中
-
-## C++ Header Files
-
-头文件：任何以#开头的都是预处理语句，
-
-#pragma once可以防止在一个translation unit中多次include一个头文件
-(遇到多次include的现象可能是头文件include另一个头文件)
-
-比#pragma once更烂的方法（clion自带）：
-Log.h中，有
-```C++
-#ifndef _LOG_H
-#define _LOG_H
-
-......
-
-#endif
-```
-
-## How to DEBUG C++ in VISUAL STUDIO
-
-调试：vs中watch界面可以指定监视的变量，memory window可以搜索&a查看变量a的地址
-未初始化的变量值默认为0xccccccc
-
-## Visual Studio Setup for C++
-
-在Solution Explorer下使用Show All Files视图
-
-默认vs把中间文件放在项目的debug文件夹下, 把最终二进制文件放在Solution文件夹下
-推荐设置Output Directory为$(SolutionDir)bin\$(Platform)\$(Configuration)\
-Intermediate Directory为$(SolutionDir)bin\intermediate\$(Platform)\$(Configuration)\
-bin前不加\因为$(SolutionDir)变量自带backslash
-
-## CONDITIONS and BRANCHES in C++
-
-基本上0代表false, 任何其他的数代表true
-
-else if = else { if(){} }
-
-## Loops in C++
-
-C++的语法是自由的, 不一定循规蹈率, 比如 for循环 可以写成这样
-
-```C++
-int i = 0;
-bool condition = true;
-for ( ; condition; )
-{
-    Log("Hello World!");
-    i++;
-    if (!(i<5))
-        condition = false;
-}
-```
-
-## POINTERS in C++
-
-指针: 指针代表的仅仅只是一个数字, 一个内存地址, 指针的数据类型一般用于标志指针对应地址上数据的数据类型.
-
-如果我们不关心数据的数据类型, just using `void*`
-
-例子, 分配一个8个char的空间的数组, memset填充00, 最后delete[]操作删除数组的内存
-
-```C++
-char* buffer = new char[8];
-memset(buffer, 0, 8);
-
-delete[] buffer;
-```
-
-指向指针的指针
-
-```C++
-... // 接上面的那个栗子
-char** ptr = &buffer;
-```
-
-解说: 若实际运行时`ptr`储存的数据为`0x00B6FED4` (也就是 `buffer` 这个变量的地址), 用VS2019自带的Memory View查看,
-**我们看到的是**指针buffer储存的数据为`f0 dd d0 00` (指针`buffer`指向的 `8个char的空间的数组` 的地址),
-由于x86的设计我们从Memory View**看到的是反转的数据**, 实际内容应该是`00 d0 dd f0` (即 0x00d0ddf0), 这个地址就是 `8个char的空间的数组` 所在地.
-
-## Reference in C++
-
-函数使用引用类型参数可以使代码**相比指针参数更简洁**(访问变量不使用需要去引用化符号 "*")
-
-## CLASSES vs STRUCTS in C++
-
-Struct和Class**无本质区别**; Struct中的变量默认是Public修饰. 同时, Class可以继承Struct(但编译器会报警)
-
-Struct更适合存储多个对象或基本数据类型
 
 @Cherno 写Class的规范:
 
@@ -198,7 +64,139 @@ Struct更适合存储多个对象或基本数据类型
    }
    ```
 
-   注意: `public:` 在类中可有多处
+## How C++ Works
+
+TODO: 优化这段的内容
+
+概念：每个cpp都会编译成一个obj
+多个 .cpp & .h 文件互相 #include 可整合成一个 translation unit
+
+Source->Compile->Linker->Executables
+
+Compile Only (Ctrl+F7)
+
+工程设置->Preprocessor->Preprocess to a File以生产预处理文件（经编译器解析了宏的源码）
+
+外部定义的函数会在link阶段被整合，没有被调用的函数声明会被优化掉
+
+## Variables in C++
+
+数据类型大小
+| | |
+|---| --- |
+| char | 1字节 |
+| short | 2字节 |
+| int | 4字节 | 
+| long | **通常为**4字节 |
+| long long | 8字节 |
+| float | 4字节 |
+| double | 8字节 |
+
+核心思想：c++ 中所有数据类型仅仅宣告开辟内存空间的大小和准备存储的数据类型
+
+使用 `sizeof(数据类型)` 查看数据类型大小
+
+## Functions in C++
+
+function 表示不在类中的函数
+method 表示在类中的函数
+
+函数的主要目的是防止代码重复
+但不要过多地将代码划分成一个个函数, 调用一个函数需要为这个函数创建一整个 stack frame (栈框架),
+也就是说我们得把参数之类的东西 push 到栈上，还要把一个叫做返回地址的东西放到栈上(以在函数执行完之后将PC寄存器返回到调用函数前的地方)，
+所以为了执行函数指令而在内存中跳转来跳转去会消耗额外的时间，
+
+通常将函数拆分为声明和定义: 声明写在头文件中，定义写在 translation unit 中
+
+## C++ Header Files
+
+`#pragma once` 可以防止在一个 translation unit 中多次 #include 一个头文件导致的问题(比如头文件a.h include了另一个头文件b.h, 而你之前已经include 了 b.h)
+
+比#pragma once更烂的方法（clion自带）：
+Log.h中，有
+```C++
+#ifndef _LOG_H
+#define _LOG_H
+
+// 一些代码
+
+#endif
+```
+
+## How to DEBUG C++ in VISUAL STUDIO
+
+调试：vs中watch界面可以指定监视的变量，memory window可以搜索&a查看变量a的地址
+未初始化的变量值默认为0xccccccc
+
+## Visual Studio Setup for C++
+
+在Solution Explorer下使用Show All Files视图
+
+默认vs把中间文件放在项目的debug文件夹下, 把最终二进制文件放在Solution文件夹下
+推荐设置Output Directory为$(SolutionDir)bin\$(Platform)\$(Configuration)\
+Intermediate Directory为$(SolutionDir)bin\intermediate\$(Platform)\$(Configuration)\
+bin前不加\因为$(SolutionDir)变量自带backslash
+
+## CONDITIONS and BRANCHES in C++
+
+0 代表 false, 任何其他的数代表 true
+
+`else if` 等价于 `else { if(){} }`
+
+## Loops in C++
+
+for 也可以写成 while 的形式
+
+```C++
+int i = 0;
+bool condition = true;
+for ( ; condition; )
+{
+    Log("Hello World!");
+    i++;
+    if (!(i<5))
+        condition = false;
+}
+```
+
+## POINTERS in C++
+
+指针: 指针代表的是一个内存地址, 指针的数据类型一般用于表示目标地址上数据的数据类型.
+
+如果我们不关心数据的数据类型, just using `void*`
+
+指向指针的指针:
+```C++
+// 分配一个有 8 个 char 的空间并填充 `00`, 最后释放这段内存空间
+char* buffer = new char[8];
+memset(buffer, 0, 8);
+delete[] buffer;
+
+// 指向指针的指针
+char** ptr = &buffer;
+```
+
+若实际运行时
+`ptr`储存的数据为`0x00B6FED4` (即 `buffer` 这个变量本身的地址),
+在 VS2019 自带的 Memory View 中
+`buffer`储存的数据为`f0 dd d0 00` (`buffer`指向8个char长度的空间地址),
+由于x86的设计,
+我们从 Memory View **看到的是反转的数据**, 实际应该是`00 d0 dd f0`(即 0x00d0ddf0), 这个地址就是那8个char长度空间的所在地.
+
+## Reference in C++
+
+函数的形式参数中
+使用引用可以使代码**相比指针更简洁**
+因为访问引用变量不使用需要去引用化符号 "*"
+
+## CLASSES vs STRUCTS in C++
+
+Struct和Class**无本质区别**
+Struct更适合存储多个变量, 侧重于表达数据结构, 而对象侧重于表达对象
+Struct中的变量默认是Public修饰.
+同时, Class可以继承Struct(但编译器会报警)
+
+`public:` 和 `private:` 在类中可有多处
 
 ## Static in C++
 
@@ -218,7 +216,7 @@ s_开头代表变量为静态 `static int s_Variable = 5;`
 
 尽量在头文件使用static变量, 因为它只是简单将内容复制到cpp文件
 
-### 局部Static类型变量
+### Local Static
 
 使变量在局部可见的同时有static的性质
 
@@ -239,7 +237,7 @@ int main()
 }
 ```
 
-### 经典的Singleton类
+### Classical Singleton
 
 Singleton类在整个程序中只有一个实例
 
@@ -391,7 +389,7 @@ class Sub_Class : Main_Class
 
 ## Virtual Function in C++
 
-为什么要有Virtual函数
+首先我们来看为什么要有Virtual函数
 
 ```C++
 class Entity
@@ -432,7 +430,6 @@ Entity
 发现问题了吗, 第二个输出本应是"Cherno"
 
 实际上当指针类型是父类Entity时, 通过该指针调用子类Player类的重载函数GetName()并没有被调用, 而是父类定义的内容, 这会导致许多问题
-
 
 
 C++11引入了Override关键字, 它不是必须的, 但能够避免发生拼写错误并能增强代码的可读性
@@ -1010,7 +1007,7 @@ int main()
 }
 ```
 
-## OOERATORS and OPERATOR OVERLOADING in C++
+## OPERATORS and OPERATOR OVERLOADING in C++
 
 In the case of operator overloading you're allowed to define or change the behavior of operator
 
@@ -2390,7 +2387,7 @@ int main()
 }
 ```
 
-## STURCTURED BINDINGS in C++
+## STRUCTURED BINDINGS in C++
 
 Only in C++17 and newer
 a better way compare to How to Deal with Multiple Return Values in C++

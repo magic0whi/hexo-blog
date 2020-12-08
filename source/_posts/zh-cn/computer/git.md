@@ -94,10 +94,12 @@ $ ssh -T git@github.com
 3. 查看commit间的修改
    ```console
    git diff HEAD HEAD~
-   ```
-4. 查看commit diffstat
-   ```console
    git diff HEAD^! --stat
+   ```
+4. 撤销对某个文件的更改
+   ```console
+   git checkout -- <file> # unstaged changes
+   git reset HEAD <file>  # staged changes
    ```
 
 ## 撤销合并（2种方法）

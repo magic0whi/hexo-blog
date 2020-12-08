@@ -10,9 +10,9 @@ tags:
 
 ## IDE
 
-(C/C++ for Visual Studio Code)[https://code.visualstudio.com/docs/languages/cpp]
+[C/C++ for Visual Studio Code](https://code.visualstudio.com/docs/languages/cpp)
 
-QT Creator 下载 (QT download)[https://download.qt.io/official_releases/]
+QT Creator 下载 [QT download](https://download.qt.io/official_releases/)
 
 ## Windows
 

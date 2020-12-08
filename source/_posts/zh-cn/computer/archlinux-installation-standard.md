@@ -175,7 +175,7 @@ localectl set-keymap us
           /bin/git "$@" --depth=1
         elif [[ $# -gt 1 && $1 == 'fetch' ]]; then
           /bin/git fetch --depth=3 -p
-        elif [[ $# -gt 1 && [ $1 == 'describe' || $1 == 'rev-list' ] ]]; then
+        elif [[ $# -gt 1 && [$1 == 'describe' || $1 == 'rev-list'] ]]; then
           /bin/git fetch --unshallow -p
           /bin/git "$@"
         else
@@ -369,7 +369,6 @@ I will use the method of `PRIME render offload` which was official method suppor
    python-matplotlib
    python-pandas
    python-seaborn
-   qv2ray
    v2ray
    lutris
    wine
@@ -390,4 +389,15 @@ I will use the method of `PRIME render offload` which was official method suppor
    traceroute
    gvfs-mtp
    syncthing-gtk
+   grsync
+   npm
+   nodejs-hexo-cli
+   iwd
+   nmap
+   v2raya
+   picocom
+   bluez
+   bluez-utils
+   xmind-2020
+   obs-studio
    ```

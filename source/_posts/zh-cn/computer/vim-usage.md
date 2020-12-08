@@ -14,7 +14,7 @@ Ctrl-R redo
 
 :sp[lit]  horizontally split current screen into two windows (with same filebuffer)
 :vs[plit]  vertically split current screen into two windows (with same filebuffer)
-CTRL-W + <h, j, k, l>  jump to another window.
+CTRL-W + \<h, j, k, l\>  jump to another window.
 
 d$ delete to end
 x delete one char
@@ -30,7 +30,8 @@ a  insert text AFTER the cursor.
 A  insert text after the end of the line.
 y  yanks (copies) text
 p  puts (pastes) it(copied or deleted text).
-R  Replace mode until  <ESC>  is pressed.
+r  replace one char
+R  Replace mode until  \<ESC\>  is pressed.
 
 rx  to replace one char with "x"
 ce  change until the end of a word
@@ -60,14 +61,14 @@ Typing ":set xxx" sets the option "xxx".  Some options are:
         'hls' 'hlsearch'        highlight all matching phrases
 Prepend "no" to switch an option off:   :set noic
 
-:help  or press <F1>  to open a help window.
+:help  or press \<F1\>  to open a help window.
 :help cmd  to find help on  cmd 
 
 :e ~/.vimrc Create a vimrc startup script to keep your preferred settings.
 Now read the example "vimrc" file contents: 
         :r $VIMRUNTIME/vimrc_example.vim
 When typing a  :  command, press CTRL-D to see possible completions.
-     Press <TAB> to use one completion.
+     Press \<TAB\> to use one completion.
 
 command:
 :s/old/new  to substitute 'new' for 'old'

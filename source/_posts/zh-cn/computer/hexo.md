@@ -98,7 +98,6 @@ hexo g
 
 ```
 hexo-symbols-count-time # 字数统计
-hexo-tag-mplayer # 音乐播放器
 hexo-filter-plantuml # UML Diagram for hexo
 hexo-deployer-git # Git 部署 (Github Pages)
 ```
