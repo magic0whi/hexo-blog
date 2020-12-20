@@ -142,11 +142,17 @@ On_ICyan="\[\e[0;106m\]"    # Cyan
 On_IWhite="\[\e[0;107m\]"   # White
 # Bash Shell coloring end
 
-# Git prompt
-source /usr/share/git/completion/git-prompt.sh
-
 function _prompt_command() {
-    PS1="${BGreen}\u${Color_Off}${BGreen}@\h${Color_Off} ${BBlue}\w${Color_Off} ${BCyan}$(__git_ps1 " (%s)")${Color_Off} ${BGreen}\$${Color_Off} "
+    # Git prompt
+    source /usr/share/git/completion/git-prompt.sh
+    PS1="${BGreen}\u${Color_Off}${BGreen}@\h${Color_Off} ${BBlue}\w${Color_Off} ${BCyan}"'$(__git_ps1 " (%s)")'"${Color_Off} ${BGreen}\$${Color_Off} " 
 }
 
-[ "${SHELL}" != "/bin/zsh" ] && _prompt_command
+[[ "${SHELL}" != "/bin/zsh" ]] && _prompt_command
+
+if ! pgrep -u "$USER" ssh-agent > /dev/null; then
+    ssh-agent > "$XDG_RUNTIME_DIR/ssh-agent.env"
+fi
+if [[ ! "$SSH_AUTH_SOCK" ]]; then
+    eval "$(<"$XDG_RUNTIME_DIR/ssh-agent.env")"
+fi
