@@ -400,4 +400,10 @@ I will use the method of `PRIME render offload` which was official method suppor
    bluez-utils
    xmind-2020
    obs-studio
+   dconf-editor
+   ```
+3. Disable media automount in GNOME
+   ```console
+   $ gsettings set org.gnome.desktop.media-handling automount false
+   $ gsettings set org.gnome.desktop.media-handling automount-open false 
    ```
