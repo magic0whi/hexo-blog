@@ -6,9 +6,7 @@ tags:
 toc: true
 ---
 
-一份我的Linux手扎
-
-命令只记录篇幅不大的
+一份我的 Linux 手扎
 
 <!-- more -->
 
@@ -16,7 +14,7 @@ toc: true
 
 ### sed
 
-从Next的Katex行内式 `$...$`迁移到Icarus的Katex行内式`\\(...\\)`
+从Next的Katex行内式 `$...$` 迁移到Icarus的Katex行内式 `\\(...\\)`
 ```console
 $ sed -i 's,\$\([^$]*\)\$,\\\\(\1\\\\),g' file.md
 ```
@@ -31,46 +29,18 @@ $ grep -iRl "your-text-to-find" ./
 
 ### rsync
 
-拷贝文件, 保留所有信息
-
-```console
-$ rsync -aXv -P $SOURCE_DIR/ $TARGET_DIR/`
-```
-
-仅复制, 不保留权限
-
-```console
-$ rsync -rlt -P --no-owner --no-group --no-perms $SOURCE_DIR/ $TARGET_DIR/
-```
-
-同步文件夹(小心, 有--delete参数, 会删光目标文件夹多余的文件)
-
-```console
-$ rsync -aXv -P --delete $SOURCE_DIR/ $TARGET_DIR/
-```
-
-#### 参数详解
-
-```
--a, --archive               archive mode; equals -rlptgoD (no -H,-A,-X)
--X, --xattrs                preserve extended attributes
--v, --verbose               increase verbosity
-
--r, --recursive             recurse into directories
--l, --links                 copy symlinks as symlinks
--p, --perms                 preserve permissions
--t, --times                 preserve modification times
--g, --group                 preserve group
--o, --owner                 preserve owner (super-user only)
--D                          same as --devices --specials
-
---delete                delete extraneous files from destination dirs
--P                          same as --partial --progress
---partial               keep partially transferred files
---progress              show progress during transfer
-
--W, --whole-file            copy files whole (without delta-xfer algorithm)
-```
+1. 拷贝文件, 保留所有信息
+   ```console
+   $ rsync -aXv -P $SOURCE_DIR/ $TARGET_DIR/`
+   ```
+2. 仅复制, 不保留权限
+   ```console
+   $ rsync -rlt -P --no-owner --no-group --no-perms $SOURCE_DIR/ $TARGET_DIR/
+   ```
+3. 同步文件夹(小心, 有--delete参数, 会删光目标文件夹多余的文件)
+   ```console
+   $ rsync -aXHAz -v -P --exclude={"filename1","path/to/filename2"} --delete $SOURCE_DIR/ $TARGET_DIR/
+   ```
 
 ### ss
 ss is a member of iproute tools set
@@ -96,14 +66,6 @@ $ ss -s
 恢复GPT分区表
 ```console
 # dd if=gpt-partition.bin of=/dev/sda bs=512 count=34
-```
-
-### 查看电池电量
-
-以我的平板举个例子
-
-```console
-$ cat /sys/class/power_supply/axp288_fuel_gauge/capacity
 ```
 
 ### 生成随机密码
@@ -134,7 +96,7 @@ Reference from [StackExchange](https://superuser.com/questions/91935/how-to-recu
 
 ```console
 # shopt -s extglob    #打开extglob模式
-# rm -fr !(file1)
+# rm -fr !(filename)
 ```
 
 ### SWAP file
@@ -145,14 +107,21 @@ Reference from [StackExchange](https://superuser.com/questions/91935/how-to-recu
 # btrfs property set /swapfile compression none
 ```
 
-### 查看主机公钥指纹
+### ssh-keygen
 
-```console
-ssh-keygen -lf /path/to/ssh/key
-
-# MD5 格式
-ssh-keygen -E md5 -lf <fileName>
-```
+1. 查看某个 key 的公钥指纹
+   ```console
+   $ ssh-keygen -l -f </path/to/ssh/key>
+   $ ssh-keygen -l -E md5 -f <Your key> # MD5 格式
+   ```
+2. 修改某个 key 的 Comment
+   ```console
+   $ ssh-keygen -c -C <Your comment> -f <Your key>
+   ```
+3. 输出某个 key 的公钥格式
+   ```console
+   $ ssh-keygen -y -f <Your key>
+   ```
 
 ### 泛域名证书
 
@@ -160,11 +129,20 @@ ssh-keygen -E md5 -lf <fileName>
 $ certbot certonly --preferred-challenges dns --manual  -d *.example.com
 ```
 
-### 获取uuid
+### Kernel interface
 
-```console
-$ cat /proc/sys/kernel/random/uuid
-```
+1. 获取uuid
+   ```console
+   $ cat /proc/sys/kernel/random/uuid
+   ```
+2. 查看熵池
+   ```console
+   cat /proc/sys/kernel/random/entropy_avail
+   ```
+3. 查看电池电量
+   ```console
+   $ cat /sys/class/power_supply/<Your battery name>/capacity
+   ```
 
 ### 透明代理(TPROXY)客户端命令
 
@@ -197,7 +175,6 @@ iptables -t mangle -A OUTPUT -j V2RAY_MASK # 应用规则
 ```
 
 [参考来源](https://guide.v2fly.org/app/tproxy.html)
-
 
 ## bash
 
@@ -240,7 +217,7 @@ string1 < string2 - The less than operator returns true if the right operand is 
 ! 非
 ```
 
-## 变量匹配
+## 字符串变量匹配
 
 ```
 ::x 正数时从左往右截取x个, 负数时从右往左截掉x个
