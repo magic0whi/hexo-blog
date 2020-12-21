@@ -359,8 +359,6 @@ I will use the method of `PRIME render offload` which was official method suppor
    gtk-engine-murrine
    gdm3setup
    zsh
-   - grml-zsh-config
-   - powerline
    - zsh-autosuggestions
    - zsh-syntax-highlighting
    - zsh-history-substring-search
@@ -401,6 +399,7 @@ I will use the method of `PRIME render offload` which was official method suppor
    xmind-2020
    obs-studio
    dconf-editor
+   tree
    ```
 3. Disable media automount in GNOME
    ```console
