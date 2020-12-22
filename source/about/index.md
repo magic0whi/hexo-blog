@@ -15,10 +15,13 @@ date: 2020-02-08 15:14:28
 你好, nihao, Hello, my friends in Cyberspace
 
 我是钱君哲, 我喜欢捣鼓自己不懂的东西
+I am chan chvn-che, I like to fiddle with things I don't understand.
 
-I am no bird; and no net ensuares me: I am a free human being with an independent will. - Jane Eyre
+Life principle: I am no bird; and no net ensuares me: I am a free human being with an independent will. - Jane Eyre
+Work principle: Make blog simple, make article simple, make everything simple.
+Current status: 只争朝夕, 不负韶华
 
-Make blog simple, make article simple, make everything simple.
-
-最喜欢的音乐是 Aiva Op.24 for Piano Four Hands
+My favourite music: Aiva Op.24 for Piano Four Hands
 最喜欢的UP主是回形针, 稚晖君, EdmundDZhang, 3B1B
+
+Major goal: to own a Scanning electron microscope
