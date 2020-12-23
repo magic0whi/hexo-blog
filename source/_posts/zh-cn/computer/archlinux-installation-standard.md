@@ -400,6 +400,9 @@ I will use the method of `PRIME render offload` which was official method suppor
    obs-studio
    dconf-editor
    tree
+   
+   qemu-user-static
+   binfmt-qemu-static-all-arch
    ```
 3. Disable media automount in GNOME
    ```console
