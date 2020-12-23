@@ -6,6 +6,8 @@ date: 2020-09-05 13:39:28
 tags:
 ---
 
+一些 vim 的笔记
+
 <!-- more -->
 
 u to undo

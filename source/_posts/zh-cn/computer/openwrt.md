@@ -9,6 +9,7 @@ toc: true
 
 记录小米路由器3G 的 Openwrt 配置
 
+<!-- more -->
 
 ## 升级Openwrt
 

@@ -8,6 +8,8 @@ tags:
 
 互联网上の资源
 
+<!-- more -->
+
 ## IDE
 
 [C/C++ for Visual Studio Code](https://code.visualstudio.com/docs/languages/cpp)
