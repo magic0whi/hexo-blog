@@ -315,10 +315,12 @@ I will use the method of `PRIME render offload` which was official method suppor
    gnome-menus
    sushi
 
+   bpytop
+
    mesa-demo
    vulkan-tools
    archlinuxcn-keyring
-   bashtop
+
    qtcreator
    visual-studio-code-bin
    docker
