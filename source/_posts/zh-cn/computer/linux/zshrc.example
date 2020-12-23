@@ -59,9 +59,11 @@ zle -N down-line-or-beginning-search
 [[ -n "${key[Up]}"   ]] && bindkey -- "${key[Up]}"   up-line-or-beginning-search
 [[ -n "${key[Down]}" ]] && bindkey -- "${key[Down]}" down-line-or-beginning-search
 
+# History settings
 HISTFILE=~/.histfile
-HISTSIZE=1000
-SAVEHIST=1000
+HISTSIZE=10000
+SAVEHIST=10000
+setopt SHARE_HISTORY
 
 # You need install zsh-syntax-highlighting zsh-autosuggestions zsh-history-substring-search
 export ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd history completion)
