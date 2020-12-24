@@ -312,6 +312,30 @@ toc: true
    我还是会继续尽力减缓这种情况, 除非我的染色体本来就有异常(因为这注定了我的失败).
    如果有人想用第三人称称呼我的话, 他/她都可以.
    现在, 她的内部代号是 ndoskrnl_origin (寓意源自所有人类胚胎的默认性别都是女性, 对应的 ndoskrnl_alpha 为其分支)
+9. 12 月 24 日 17:46, 最近两天没吃药(护肝)顶了一天的性别焦虑, 把离散数学和管理信息系统大致修正了一遍.
+   实在顶不住了, 还是吃了吧, 至少不会那么难受了.
+   啊啊啊啊啊, 这一切都是真实发生的, 我还是我, 这个病也是真实的, 我多么希望这是一场梦.
+   为什么会发展到这种地步, 我好害怕, 受 ndoskrnl_origin 的影响, 我的内心变得向小时候那样脆弱爱哭了, 我甚至开始渴望一个拥抱, 明明以前"我自己在内心给予拥抱"就能平复的.
+   我的一切经历都仿佛隔了层薄纸, 但为什么这种感觉、这种压抑是真的!
+   我好想活得轻松点, 为什么要给我如此恶心的 debuff
+   (1 minture later)
+   但我的坚强不能容忍我散布负面情绪, 我很想哭诉, 但我不会单纯地将这些发布到朋友圈, 空间, 推特, etc...
+   它们必须含有积极的一面, 也就是 21 岁的我本来的样子.
+   我大概需要心理咨询, 最好是找个能够感同身受的人.
+
+## 目前找到的相关资源
+
+[性别烦躁和易性症-精神疾病-MSD诊疗手册专业版](https://www.msdmanuals.com/zh/professional/psychiatric-disorders/%E6%80%A7%E6%B4%BB%E5%8A%A8%EF%BC%8C%E6%80%A7%E5%88%AB%E7%83%A6%E8%BA%81%E5%92%8C%E6%80%A7%E6%AC%B2%E5%80%92%E9%94%99/gender-dysphoria-and-transsexualism)
+
+[目前已知与性别认同相关的医疗资源列表](https://github.com/Kristall-WangShiwei/Transgender-lost-years/blob/master/0002_Medical/Medical_Resources/%E7%9B%AE%E5%89%8D%E4%B8%8E%E6%80%A7%E5%88%AB%E8%AE%A4%E5%90%8C%E7%9B%B8%E5%85%B3%E7%9A%84%E5%8C%BB%E7%96%97%E8%B5%84%E6%BA%90%E5%88%97%E8%A1%A8.md)
+
+[MtF指南针](https://mtf.party/)
+
+[心理学科普|关于跨性别群体-知乎](https://web.archive.org/web/20201224055706/https://zhuanlan.zhihu.com/p/151322791)
+
+[limelight](https://limelight.moe/)
+
+组织: 北京同志中心
 
 ## 关于可橙(张小乾)
 
