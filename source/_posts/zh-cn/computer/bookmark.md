@@ -14,25 +14,25 @@ tags:
 
 [C/C++ for Visual Studio Code](https://code.visualstudio.com/docs/languages/cpp)
 
-QT Creator 下载 [QT download](https://download.qt.io/official_releases/)
+QT Creator [QT download](https://download.qt.io/official_releases/)
 
 ## Windows
 
-Windows/Office等镜像 [TechBench](https://tb.rg-adguard.net/public.php)
+Windows/Office 等镜像 [TechBench](https://tb.rg-adguard.net/public.php)
 
-ESD解密 [decrypt-multi](https://rg-adguard.net/decrypt-multi-release/)
+ESD 解密 [decrypt-multi](https://rg-adguard.net/decrypt-multi-release/)
 
-UUPDL 官方源码仓库 [UUPDL](https://gitlab.com/uup-dump/uupdl)
+[UUPDL](https://gitlab.com/uup-dump/uupdl)
 
 [最新支持的 Visual C++ 下载](https://support.microsoft.com/zh-cn/help/2977003/the-latest-supported-visual-c-downloads)
 
 [Win10累积更新补丁](https://www.sysgeek.cn/windows-10-hotfix/)
 
-产品KMS密钥 [KMS client setup keys](https://docs.microsoft.com/en-us/windows-server/get-started/kmsclientkeys)
+[KMS client setup keys list](https://docs.microsoft.com/en-us/windows-server/get-started/kmsclientkeys)
 
 ## Linux
 
-[OriginCode的服务](https://repo.origincode.me/)
+[OriginCode 的服务](https://repo.origincode.me/)
 
 ## Android
 
@@ -46,7 +46,7 @@ Android APK 魔改&破解 [mobilism](https://forum.mobilism.org/search.php)
 
 跨平台在线数学可视化 [GeoGebra](https://www.geogebra.org/) , [desmos](https://www.desmos.com/calculator)
 
-在线求解微积分/矩阵等 [Symbolab数学求解器](https://zs.symbolab.com/solver/integral-calculator)
+在线求解微积分/矩阵等 [积分(反导数)计算器 - Symbolab](https://zs.symbolab.com/solver/integral-calculator)
 
 在线获取试卷 [考试酷](https://www.examcoo.com/index/ku)
 
@@ -54,17 +54,49 @@ Android APK 魔改&破解 [mobilism](https://forum.mobilism.org/search.php)
 
 学术论文一站式搜索 [GFsoso](http://xueshu.99lb.net/)
 
-各大论文库 [SCI-Hub](https://tool.yovisun.com/scihub/)
+[SCI-Hub 论文下载可用网址链接 - 实时更新](https://tool.yovisun.com/scihub/)
 
 类似ChemDraw, 不过是网页版 [MolView](http://molview.org/)
 
+[ChemDoodle WEB](https://web.chemdoodle.com/)
+
 ### Learn
 
-言简易亥的数学 [数学乐](https://www.shuxuele.com/)
+[数学乐](https://www.shuxuele.com/)
 
 平面设计/音乐音效 [doyoudo](https://www.doyoudo.com/)
 
 Crashcourts中文字幕 [Crashcourts](https://crashcourse.club/category/)
+
+[BioHack Academy](http://biohackacademy.github.io/)
+
+[BioHack Academy on Vimeo](https://vimeo.com/channels/biohackacademy)
+
+[Bio Academany](http://bio.academany.org/2018/)
+
+[GaudiLabs](http://www.gaudi.ch/GaudiLabs)
+
+[Wolfram MathWorld](https://mathworld.wolfram.com/)
+
+### Paper
+
+[The mouse Sry locus harbors a cryptic exon that is essential for male sex determination](https://science.sciencemag.org/content/370/6512/121)
+
+### Github
+
+[手撕 leetcode](https://github.com/labuladong/fucking-algorithm)
+
+[求是潮技术研发中心](https://github.com/QSCTech)
+
+[linux 超赞应用](https://github.com/alim0x/Awesome-Linux-Software-zh_CN)
+
+[trackerslist](https://github.com/ngosang/trackerslist)
+
+[Locale-Emulator](https://github.com/xupefei/Locale-Emulator)
+
+[FontMod](https://github.com/ysc3839/FontMod)
+
+[DeepCreamPy](https://github.com/deeppomf/DeepCreamPy)
 
 ## Find
 
@@ -78,23 +110,23 @@ Crashcourts中文字幕 [Crashcourts](https://crashcourse.club/category/)
 
 [iqdb](https://www.iqdb.org/)
 
-二次元壁纸 [konachan](https://konachan.net/)
+[konachan](https://konachan.net/)
 
-Pixabay上的自由图片 [Pixabay](https://pixabay.com/zh/photos/celler-basement-skateboarding-1246651/)
+版权自由图片 [Pixabay](https://pixabay.com/zh/photos/celler-basement-skateboarding-1246651/)
 
 ### BT
 
-动漫BT种子 (ACG.RIP)[https://acg.rip/]
+[ACG.RIP](https://acg.rip/)
 
-蓝光片源BT种子搜索 [Rarbg](https://rarbgprx.org/torrents.php)
+[Rarbg](https://rarbgprx.org/torrents.php)
 
 ## Free Software Movement
 
-开源许可检查 [FOSSA](https://app.fossa.io/projects/git%2Bgithub.com%2FEugeny%2Fterminus/refs/branch/master/59a3c9aeb6b55fdac0f1974458234a8a6cfc8ba7)
+开源许可检查 [FOSSA](https://fossa.com/)
 
 ## Internet
 
-域名价格 [domcomp](https://www.domcomp.com/)
+域名价格比对 [domcomp](https://www.domcomp.com/)
 
 在线传感器数据分析 [Grafana](https://grafana.com/)
 
@@ -108,8 +140,6 @@ Goldberg Steam 模拟器 [goldberg_emulator](https://gitlab.com/Mr_Goldberg/gold
 
 Oracle 账户密码 [BugMeNot](http://bugmenot.com/view/oracle.com)
 
-在线文件分享 [file.io](https://www.file.io/)
-
 油猴脚本 [Greasy Fork](https://greasyfork.org/zh-CN)
 
 [免费上网账号](https://free-ss.site/)
@@ -119,6 +149,8 @@ Oracle 账户密码 [BugMeNot](http://bugmenot.com/view/oracle.com)
 [存储 SSD/NAS/DAS 技术论坛](http://bbs.pceva.com.cn/forum-124-1.html)
 
 教你制作能打印PCB的压印机 [Diyyouware](http://www.diyouware.com/)
+
+[嘉立创SMT贴片](https://www.jlc.com/portal/newV2/smt.jsp)
 
 [图拉丁之家](https://www.g4560.cn/)
 
@@ -130,8 +162,56 @@ Oracle 账户密码 [BugMeNot](http://bugmenot.com/view/oracle.com)
 
 基站查询 [OpenCellid](https://opencellid.org/)
 
-## Software
+[萌站·次元导航](http://moe321.com/)
 
-最好的屏幕录制/放流工具 [OBS](https://obsproject.com/)
+生物实验用机器人 [Opentrons](https://opentrons.com)
 
-解压由 Inno Setup 打包成安装器的资源 [Innoextrace](http://constexpr.org/innoextract/)
+## Softwares
+
+[OBS](https://obsproject.com/)
+
+解压 Inno Setup 打包的资源 [Innoextrace](http://constexpr.org/innoextract/)
+
+## News medias
+
+[iYouPort - IYP](https://www.iyouport.org/)
+
+## Blogs
+
+[约伊兹的萌狼乡手札](https://blog.yoitsu.moe/)
+
+[Farseerfc 的小窝](http://farseerfc.me/zhs/)
+
+[木子](https://blog.502.li/)
+
+[mathor](https://wmathor.com/)
+
+[酷壳](https://coolshell.cn/)
+
+[Dreamwings - 继续踏上旅途, 在没有你的春天...](https://www.dreamwings.cn/)
+
+[斐斐のBlog](https://www.mmuaa.com/)
+
+[Sukka's Blog](https://blog.skk.moe/)
+
+[蝉时雨](https://chanshiyu.com/)
+
+[Lianm's Blog](https://ming-lian.github.io/)
+
+[星尘独奏曲](https://www.starduster.me/)
+
+[菜菜博士 - 博士在网络的家](https://microcai.org/)
+
+[柳婼のblog - 我不管, 反之我最萌~](https://www.liuchuo.net/)
+
+[雪碧 0xroot | RadioHub | IoT RF Hardware Hacking](https://cn0xroot.com/)
+
+[本地磁盘小日记ヾ(≧▽≦*)ゝ](http://ohayou.aimo.moe/)
+
+[洛灵酱的小窝](https://blog.luoling8192.top/)
+
+[冰凌胧月的小窝](https://imiku.me/)
+
+[It's me, Kiri!](https://kirikira.moe/)
+
+[萨摩的部落格 - 掉毛中...](https://i-meto.com/)
