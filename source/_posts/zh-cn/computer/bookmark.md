@@ -217,3 +217,7 @@ Oracle 账户密码 [BugMeNot](http://bugmenot.com/view/oracle.com)
 [It's me, Kiri!](https://kirikira.moe/)
 
 [萨摩的部落格 - 掉毛中...](https://i-meto.com/)
+
+[始终](https://liam.page/)
+
+[Magolor's Blog](https://magolor.cn/)
