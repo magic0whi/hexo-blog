@@ -31,12 +31,17 @@ toc: true
     1. 如果只有svchost.exe而查不到其他使用该句柄的程序, 则一般是某个uwp应用在使用该设备
     2. 也可以查看其他设备(如麦克风)
 
-## Windows 系统部署
+## 启用 Compact 压缩
 
-### 下载最新的esd镜像
+```powershell
+compact /compactos:always # 压缩所有系统文件
+compact /compactos:query # 查询系统的压缩状态。
+compact /compactos:never # 取消所有系统文件的压缩
+```
 
-请访问 [TechBench by WZT](https://tb.rg-adguard.net/public.php)
+## 清理组件存储(WinSxS )
 
-### 将esd制成可烧录的iso镜像
-
-[decrypt-multi-esd(俄语)](https://rg-adguard.net/decrypt-multi-release/)
+```powershell
+dism.exe /Online /Cleanup-Image /AnalyzeComponentStore # 查看组件存储大小
+dism.exe /online /Cleanup-Image /StartComponentCleanup # 执行组件存储清理
+```

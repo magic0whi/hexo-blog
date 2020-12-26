@@ -49,10 +49,18 @@ Task Scheduler Library
 
 ## 注册表
 
+## 服务
+
+## 禁用 Connected User Experiences and Telemetry
+
+```powershell
+Set-Service DiagTrack -StartupType Disabled
+```
+
 ### 启用UTC
 
 Open `regedit` and add a `DWORD` value for 32-bit Windows, or `QWORD` for 64-bit one, with hexadecimal value `1` to the registry:
-```
+```batch
 HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TimeZoneInformation\RealTimeIsUniversal
 ```
 
@@ -60,7 +68,7 @@ HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TimeZoneInformation\RealTime
 
 ### 禁用英特尔CPU幽灵/熔断/僵尸负载漏洞补丁
 
-```
+```batch
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v FeatureSettingsOverride /t REG_DWORD /d 3 /f
 
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v FeatureSettingsOverrideMask /t REG_DWORD /d 3 /f
@@ -70,13 +78,17 @@ reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Mem
 
 ### 启用TSX
 
-```
+```batch
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel" /v DisableTsx /t REG_DWORD /d 0 /f
 ```
 
 [微软原文](https://support.microsoft.com/en-us/help/4531006/guidance-for-disabling-intel-transactional-synchronization-extensions)
 
-## AmazingApps
+### 任务栏时间显示秒钟
+
+```batch
+reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v ShowSecondsInSystemClock /t REG_DWORD /d 1 /f
+```
 
 ### MPV
 
