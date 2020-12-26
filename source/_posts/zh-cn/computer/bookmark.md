@@ -30,6 +30,12 @@ ESD 解密 [decrypt-multi](https://rg-adguard.net/decrypt-multi-release/)
 
 [KMS client setup keys list](https://docs.microsoft.com/en-us/windows-server/get-started/kmsclientkeys)
 
+[Intel (CS)ME, CS(TXE), CS(SPS), PMC, PHY & PCHC Firmware Repositories](https://www.win-raid.com/t832f39-Intel-CS-ME-CS-TXE-CS-SPS-PMC-PHY-amp-PCHC-Firmware-Repositories.html)
+
+[Windows 10 更新补丁汇总合集](https://www.sysgeek.cn/windows-10-hotfix/)
+
+[最新支持的 Visual C 下载](https://support.microsoft.com/en-us/help/2977003/the-latest-supported-visual-c-downloads)
+
 ## Linux
 
 [OriginCode 的服务](https://repo.origincode.me/)
@@ -79,6 +85,10 @@ Crashcourts中文字幕 [Crashcourts](https://crashcourse.club/category/)
 [GaudiLabs](http://www.gaudi.ch/GaudiLabs)
 
 [Wolfram MathWorld](https://mathworld.wolfram.com/)
+
+[chemcollective](http://chemcollective.org/home)
+
+[GeeksforGeeks | A computer science portal for geeks](www.geeksforgeeks.org)
 
 ### Paper
 
@@ -168,6 +178,8 @@ Oracle 账户密码 [BugMeNot](http://bugmenot.com/view/oracle.com)
 
 生物实验用机器人 [Opentrons](https://opentrons.com)
 
+[Seebug](https://paper.seebug.org/)
+
 ## Softwares
 
 [OBS](https://obsproject.com/)
@@ -221,3 +233,17 @@ Oracle 账户密码 [BugMeNot](http://bugmenot.com/view/oracle.com)
 [始终](https://liam.page/)
 
 [Magolor's Blog](https://magolor.cn/)
+
+[為了可能的聲音](https://blog.rex-tsou.com/)
+
+[Jingjing's blog](https://angericky.github.io/)
+
+[FSpark's Starry Sky](https://www.cnblogs.com/StarSpark)
+
+[xehoth](https://blog.xehoth.cc/)
+
+[当然我在扯淡](http://www.yinwang.org/)
+
+[program-think](https://program-think.blogspot.com/)
+
+[樱花庄的白猫](https://2heng.xin/)
