@@ -71,7 +71,7 @@ localectl set-keymap us
    Now mount the newly created subvolumes by using the `subvol=` mount option (with enabled compress `zstd`).
    ```
    # mount -o compress=zstd,subvol=@ /dev/mapper/cryptroot /mnt
-   # mkdir /mnt/boot && mkdir /mnt/home && mkdir /mnt/.snapshots
+   # mkdir /mnt/{boot,home,.snapshots}
    # mount /dev/sda1 /mnt/boot
    # mount -o compress=zstd,subvol=@home /dev/mapper/cryptroot /mnt/home
    # mount -o compress=zstd,subvol=@snapshots /dev/mapper/cryptroot /mnt/.snapshots
@@ -92,12 +92,13 @@ localectl set-keymap us
 ## Installation
 
 1. Select the mirrors
+   I will use huaweicloud as main mirror
    ```console
-   # sed -i '1s/^/Server = https:\/\/mirrors.huaweicloud.com\/archlinux\/\$repo\/os\/\$arch\n/' /etc/pacman.d/mirrorlist
+   # sed -i '1aServer = https://mirrors.huaweicloud.com/archlinux/$repo/os/$arch\n' /etc/pacman.d/mirrorlist
    ```
 2. Install essential packages
    ```console
-   # pacstrap /mnt base base-devel linux linux-firmware btrfs-progs vim networkmanager rng-tools git tmux openssh bash-completion
+   # pacstrap /mnt base base-devel linux linux-firmware btrfs-progs vim rng-tools git tmux openssh bash-completion iwd
    ```
 
 ## Configure the system
@@ -135,9 +136,9 @@ localectl set-keymap us
    ::1          localhost
    127.0.1.1	myhostname.neo	myhostname
    ```
-   Enable NetworkManager:
+   Enable iNet wireless daemon:
    ```console
-   # systemctl enable NetworkManager.service
+   # systemctl enable iwd.service
    ```
 6. Random number generation
    Enable Rng-tools
@@ -165,7 +166,7 @@ localectl set-keymap us
    # passwd
    ```
 9.  AUR helper
-   I use [yay](https://aur.archlinux.org/packages/yay/) as my AUR helper
+   I will use [yay](https://aur.archlinux.org/packages/yay/) as my AUR helper
    1. Use makepkg wrapper `makepkg-shallow` to make makepkg do shallow clone
       ```shell /usr/bin/makepkg-shallow
       #!/bin/bash
@@ -283,7 +284,7 @@ I will use the method of `PRIME render offload` which was official method suppor
    blacklist ideapad_laptop
    blacklist nouveau
    ```
-2. `go get` is slow in China
+2. yay: `go get` is slow in China
    ```console
    $ export GO111MODULE=on
    $ export GOPROXY=https://goproxy.io
@@ -315,96 +316,101 @@ I will use the method of `PRIME render offload` which was official method suppor
    gnome-menus
    sushi
 
-   bpytop
-
-   mesa-demo
-   vulkan-tools
-   archlinuxcn-keyring
-
-   qtcreator
-   visual-studio-code-bin
-   docker
-   microsoft-edge-dev
-   zerotier-one
-   htop
-   telegram-desktop
-   fcitx5-im
-   fcitx5-rime
-   fcitx5-configtool
    gnome-shell-extensions
    gnome-shell-extension-kimpanel-git
    gnome-shell-extension-dash-to-dock
-   libva-intel-driver
-   libva-utils
-   mpv
-   file-roller
-   thunderbird
-   seahorse
-   man
-   cmake
-   gdb
-   noto-fonts-emoji
-   arch-install-scripts
-   debootstrap
-   ubuntu-keyring
-   pacman-contrib
-   anki
    gnome-shell-extension-desktop-icons-ng
-   netease-cloud-music-gtk
-   vulkan-intel
-   steam
-   - ttf-liberation
-   - lib32-vulkan-intel
-   maya
-   - libxpm
    materia-gtk-theme
    gtk-engine-murrine
    gdm3setup
+   dconf-editor
+
+   bpytop
+   htop
+   docker
+   docker-compose
+   zerotier-one
+   man
+   cmake
+   gdb
+   arch-install-scripts
+   pacman-contrib
+   tree
+   nmap
+   traceroute
+   compsize
+   wireguard-tools
+   bluez
+   bluez-utils
+   picocom
+   gvfs-mtp
+
    zsh
    - zsh-autosuggestions
    - zsh-syntax-highlighting
    - zsh-history-substring-search
-   compsize
+
+   fcitx5-im
+   fcitx5-rime
+   fcitx5-configtool
+   noto-fonts-emoji
+
+   npm
+   nodejs-hexo-cli
+
+   debootstrap
+   ubuntu-keyring
+
+   qemu-user-static
+   binfmt-qemu-static-all-arch
+
+   mesa-demo
+   vulkan-tools
+   vulkan-intel
+   libva-intel-driver
+   libva-utils
+
+   qtcreator
+   visual-studio-code-bin
+   microsoft-edge-dev
+   telegram-desktop
+   thunderbird
+   anki
+   netease-cloud-music-gtk
+   remmina
+   grsync
+   syncthing-gtk
+   v2ray
+   v2raya
+   xmind-2020
+   obs-studio
+   mpv
+
+   file-roller
+   seahorse
+
+   steam
+   - ttf-liberation
+   - lib32-vulkan-intel
+
    python-pip
    python-matplotlib
    python-pandas
    python-seaborn
-   v2ray
+
    lutris
    wine
-   lib32-giflib
-   lib32-libldap
-   lib32-gnutls
-   lib32-mpg123
-   lib32-openal
-   lib32-v4l-utils
-   lib32-libpulse
-   lib32-libxcomposite
-   lib32-libxinerama
-   lib32-libxslt
-   lib32-gst-plugins-base-libs
-   docker-compose
-   remmina
-   wireguard-tools
-   traceroute
-   gvfs-mtp
-   syncthing-gtk
-   grsync
-   npm
-   nodejs-hexo-cli
-   iwd
-   nmap
-   v2raya
-   picocom
-   bluez
-   bluez-utils
-   xmind-2020
-   obs-studio
-   dconf-editor
-   tree
-   
-   qemu-user-static
-   binfmt-qemu-static-all-arch
+   - lib32-giflib
+   - lib32-libldap
+   - lib32-gnutls
+   - lib32-mpg123
+   - lib32-openal
+   - lib32-v4l-utils
+   - lib32-libpulse
+   - lib32-libxcomposite
+   - lib32-libxinerama
+   - lib32-libxslt
+   - lib32-gst-plugins-base-libs
    ```
 3. Disable media automount in GNOME
    ```console
