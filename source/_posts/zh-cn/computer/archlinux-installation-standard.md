@@ -10,10 +10,6 @@ toc: true
 The standard of archlinux installation & configuration for me
 
 Enter F12 for Boot Menu when bootstrap
-timedatectl set-timezone Asia/Shanghai
-localectl set-locale en_US.UTF-8
-hostnamectl set-hostname myhostname
-localectl set-keymap us
 
 <!-- more -->
 
