@@ -90,6 +90,8 @@ Crashcourts中文字幕 [Crashcourts](https://crashcourse.club/category/)
 
 [GeeksforGeeks | A computer science portal for geeks](www.geeksforgeeks.org)
 
+[Learn X in Y Minutes](https://learnxinyminutes.com/)
+
 ### Paper
 
 [The mouse Sry locus harbors a cryptic exon that is essential for male sex determination](https://science.sciencemag.org/content/370/6512/121)
@@ -253,3 +255,7 @@ Oracle 账户密码 [BugMeNot](http://bugmenot.com/view/oracle.com)
 [Jarvis's Blog](https://www.jarvisw.com/)
 
 [Berd's Playground](https://blog.berd.moe/)
+
+[Leo's Field](https://szclsya.me/)
+
+[启示录](https://joybean.org)
