@@ -132,16 +132,31 @@ Enter F12 for Boot Menu when bootstrap
    ::1          localhost
    127.0.1.1	myhostname.neo	myhostname
    ```
-   Enable iNet wireless daemon:
+   Wireless adapter configuration
+   > Use `ip link` to show network interface names
+   ```conf /etc/systemd/network/25-wireless.network
+   [Match]
+   Name=<Your wireless interface name>
+
+   [Network]
+   DHCP=yes
+   ```
+   Enable iwd and Systemd-networkd:
    ```console
    # systemctl enable iwd.service
+   # systemctl enable systemd-networkd.service
    ```
 6. Random number generation
    Enable Rng-tools
    ```console
    # systemctl enable rngd.service
    ```
-7. Configuring mkinitcpio
+7. SSH Daemon
+   Enable sshd
+   ```console
+   # systemctl enable sshd.service
+   ```
+8. Configuring mkinitcpio
    I prefer using the sd-encrypt hook with the systemd-base initramfs. (replace hook `udev` with hook `system` )
    ```conf /etc/mkinitcpio.conf
    HOOKS=(base **systemd** autodects **keyboard** **sd-vconsole** modconf block **sd-encrypt** filesystems fsck)
@@ -150,18 +165,22 @@ Enter F12 for Boot Menu when bootstrap
    ```console
    # mkinitcpio -P
    ```
-8. Users and password
+9. Users and password
    Create and use an unprivileged(non-root) user account(s) for most tasks
    ```console
    # useradd -m -s /bin/bash <Username>
+   ```
+   sudo: add user to sudoers and disable password prompt timeout
+   ```console
    # echo "<Username> ALL=(ALL) ALL" >> /etc/sudoers.d/<Username>
+   # echo "Defaults passwd_timeout=0" > /etc/sudoers.d/notimeout
    ```
    Setting the new user and root user's password
-   ```
+   ```console
    # passwd <Username>
-   # passwd
+   # passwd root
    ```
-9.  AUR helper
+10. AUR helper
    I will use [yay](https://aur.archlinux.org/packages/yay/) as my AUR helper
    1. Use makepkg wrapper `makepkg-shallow` to make makepkg do shallow clone
       ```shell /usr/bin/makepkg-shallow
@@ -169,7 +188,7 @@ Enter F12 for Boot Menu when bootstrap
 
       git() {
         if [[ $# -gt 1 && $1 == 'clone' && $2 != '-s' ]]; then
-          /bin/git "$@" --depth=1
+          /bin/git "$@" --depth=1 --no-single-branch
         elif [[ $# -gt 1 && $1 == 'fetch' ]]; then
           /bin/git fetch --depth=3 -p
         elif [[ $# -gt 1 && [$1 == 'describe' || $1 == 'rev-list'] ]]; then
@@ -196,7 +215,7 @@ Enter F12 for Boot Menu when bootstrap
       # rm -rf /home/<Username>/.cache
       # rm -rf /build
       ```
-12. Boot loader
+11. Boot loader
     Installing the EFI boot manager
     ```console
     # bootctl install
@@ -213,15 +232,13 @@ Enter F12 for Boot Menu when bootstrap
     editor   no
     ```
 
+    > use `lsblk -f` to show persistent block device naming
     ```conf /boot/loader/entries/arch.conf
     title   Arch Linux
     linux   /vmlinuz-linux
-    initrd  /intel-ucode.img
     initrd  /initramfs-linux.img
     options rd.luks.name=<sda2-UUID>=cryptroot root=/dev/mapper/cryptroot rootflags=subvol=@
     ```
-
-    use `lsblk -f` to show persistent block device naming
 
 ## Desktop Environment
 
@@ -266,7 +283,7 @@ I will use the method of `PRIME render offload` which was official method suppor
       # Disable runtime PM for NVIDIA VGA/3D controller devices on driver unbind
       ACTION=="unbind", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x030000", TEST=="power/control", ATTR{power/control}="on"
       ```
-      > You can use `udevadm info --attribute-walk --path=/sys/bus/pci/devices/<domain>\:<bus>\:<slot>.<func>` to get a PCI device's attribution
+      > You can use `udevadm info --attribute-walk --path=/sys/bus/pci/devices/<Domain>\:<Bus>\:<Slot>.<Function>` to get a PCI device's attribution
    2. Set the driver option via the kernel module configuration files
       ```conf /etc/modprobe.d/nvidia.conf
       options nvidia "NVreg_DynamicPowerManagement=0x02"
@@ -285,12 +302,13 @@ I will use the method of `PRIME render offload` which was official method suppor
    $ export GO111MODULE=on
    $ export GOPROXY=https://goproxy.io
    ```
-3. sudo: disable password prompt timeout
-   ```
-   # echo "Defaults passwd_timeout=0" > /etc/sudoers.d/notimeout
+3. Disable media automount in GNOME
+   ```console
+   $ gsettings set org.gnome.desktop.media-handling automount false
+   $ gsettings set org.gnome.desktop.media-handling automount-open false 
    ```
 
-## Addition
+## Additions
 
 1. Archlinuxcn
    ```
@@ -407,9 +425,4 @@ I will use the method of `PRIME render offload` which was official method suppor
    - lib32-libxinerama
    - lib32-libxslt
    - lib32-gst-plugins-base-libs
-   ```
-3. Disable media automount in GNOME
-   ```console
-   $ gsettings set org.gnome.desktop.media-handling automount false
-   $ gsettings set org.gnome.desktop.media-handling automount-open false 
    ```
