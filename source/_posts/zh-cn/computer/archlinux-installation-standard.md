@@ -93,7 +93,7 @@ Enter F12 for Boot Menu when bootstrap
    ```
 2. Install essential packages
    ```console
-   # pacstrap /mnt base base-devel linux linux-firmware btrfs-progs vim rng-tools git tmux openssh bash-completion iwd systemd-swap
+   # pacstrap /mnt base base-devel linux linux-firmware btrfs-progs vim rng-tools git tmux openssh bash-completion iwd systemd-swap bluez bluez-utils
    ```
 
 ## Configure the system
@@ -249,9 +249,12 @@ Enter F12 for Boot Menu when bootstrap
     ```
     Enable systemd-swap
     ```console
-    systemctl enable systemd-swap
+    # systemctl enable systemd-swap
     ```
-
+13. (Optional) Enable bluetooth
+    ```console
+    # systemctl enable bluetooth.service
+    ```
 
 ## Desktop Environment
 
@@ -259,7 +262,14 @@ I will use GNOME as my desktop environment
 
 1. Installation
    ```console
-   # pacman -S gnome-shell gdm gnome-terminal gnome-control-center nautilus gnome-tweaks gnome-keyring noto-fonts noto-fonts-cjk
+   # yay -S gnome-shell gnome-shell-extensions gdm gdm3setup \
+   nautilus file-roller sushi seahorse \
+   noto-fonts{,-cjk,-emoji} \
+   gnome-{control-center,terminal,tweaks,keyring,backgrounds,clocks,logs,screenshot,menus} \
+   gnome-shell-extension-kimpanel-git gnome-shell-extension-dash-to-dock gnome-shell-extension-desktop-icons-ng \
+   gtk-engine-murrine materia-gtk-theme \
+   gdm3setup dconf-editor \
+   fcitx5-im fcitx5-rime fcitx5-configtool fcitx5-pinyin-{zhwiki,moegirl} fcitx5-skin-adwaita-dark
    ```
 
 ## NVIDIA & NVIDIA Optimus
@@ -336,22 +346,6 @@ I will use the method of `PRIME render offload` which was official method suppor
    ```
 2. Additional Packages
    ```
-   gnome-backgrounds
-   gnome-clocks
-   gnome-logs
-   gnome-screenshot
-   gnome-menus
-   sushi
-
-   gnome-shell-extensions
-   gnome-shell-extension-kimpanel-git
-   gnome-shell-extension-dash-to-dock
-   gnome-shell-extension-desktop-icons-ng
-   materia-gtk-theme
-   gtk-engine-murrine
-   gdm3setup
-   dconf-editor
-
    bpytop
    htop
    docker
@@ -367,20 +361,13 @@ I will use the method of `PRIME render offload` which was official method suppor
    traceroute
    compsize
    wireguard-tools
-   bluez
-   bluez-utils
    picocom
    gvfs-mtp
 
    zsh
-   - zsh-autosuggestions
-   - zsh-syntax-highlighting
-   - zsh-history-substring-search
-
-   fcitx5-im
-   fcitx5-rime
-   fcitx5-configtool
-   noto-fonts-emoji
+   zsh-autosuggestions
+   zsh-syntax-highlighting
+   zsh-history-substring-search
 
    npm
    nodejs-hexo-cli
@@ -413,9 +400,6 @@ I will use the method of `PRIME render offload` which was official method suppor
    obs-studio
    mpv
 
-   file-roller
-   seahorse
-
    steam
    - ttf-liberation
    - lib32-vulkan-intel
@@ -438,4 +422,7 @@ I will use the method of `PRIME render offload` which was official method suppor
    - lib32-libxinerama
    - lib32-libxslt
    - lib32-gst-plugins-base-libs
+
+   tealdeer
+   cppman
    ```
