@@ -50,8 +50,7 @@ Enter F12 for Boot Menu when bootstrap
    # mkfs.fat -F32 /dev/sda1
    ```
 
-## Btrfs subvolumes with swap (WIP)
-
+## Btrfs subvolumes
 
 1. Create top-level subvolumes
    ```console
@@ -94,7 +93,7 @@ Enter F12 for Boot Menu when bootstrap
    ```
 2. Install essential packages
    ```console
-   # pacstrap /mnt base base-devel linux linux-firmware btrfs-progs vim rng-tools git tmux openssh bash-completion iwd
+   # pacstrap /mnt base base-devel linux linux-firmware btrfs-progs vim rng-tools git tmux openssh bash-completion iwd systemd-swap
    ```
 
 ## Configure the system
@@ -145,18 +144,14 @@ Enter F12 for Boot Menu when bootstrap
    ```console
    # systemctl enable iwd.service
    # systemctl enable systemd-networkd.service
+   # systemctl enable systemd-resolved
    ```
 6. Random number generation
    Enable Rng-tools
    ```console
    # systemctl enable rngd.service
    ```
-7. SSH Daemon
-   Enable sshd
-   ```console
-   # systemctl enable sshd.service
-   ```
-8. Configuring mkinitcpio
+7. Configuring mkinitcpio
    I prefer using the sd-encrypt hook with the systemd-base initramfs. (replace hook `udev` with hook `system` )
    ```conf /etc/mkinitcpio.conf
    HOOKS=(base **systemd** autodects **keyboard** **sd-vconsole** modconf block **sd-encrypt** filesystems fsck)
@@ -165,7 +160,7 @@ Enter F12 for Boot Menu when bootstrap
    ```console
    # mkinitcpio -P
    ```
-9. Users and password
+8. Users and password
    Create and use an unprivileged(non-root) user account(s) for most tasks
    ```console
    # useradd -m -s /bin/bash <Username>
@@ -180,7 +175,7 @@ Enter F12 for Boot Menu when bootstrap
    # passwd <Username>
    # passwd root
    ```
-10. AUR helper
+9. AUR helper
    I will use [yay](https://aur.archlinux.org/packages/yay/) as my AUR helper
    1. Use makepkg wrapper `makepkg-shallow` to make makepkg do shallow clone
       ```shell /usr/bin/makepkg-shallow
@@ -215,7 +210,7 @@ Enter F12 for Boot Menu when bootstrap
       # rm -rf /home/<Username>/.cache
       # rm -rf /build
       ```
-11. Boot loader
+10. Boot loader
     Installing the EFI boot manager
     ```console
     # bootctl install
@@ -239,6 +234,24 @@ Enter F12 for Boot Menu when bootstrap
     initrd  /initramfs-linux.img
     options rd.luks.name=<sda2-UUID>=cryptroot root=/dev/mapper/cryptroot rootflags=subvol=@
     ```
+11. (Optional) Enable sshd
+    ```console
+    # systemctl enable sshd.service
+    ```
+12. (Optional) Enable ZRAM
+    Configuration
+    ```conf /etc/systemd/swap.conf
+    zram_enabled=1
+    zram_size=$(( RAM_SIZE / 2 ))
+    zram_count=${NCPU}
+    zram_streams=${NCPU}
+    zram_alg=zstd
+    ```
+    Enable systemd-swap
+    ```console
+    systemctl enable systemd-swap
+    ```
+
 
 ## Desktop Environment
 
