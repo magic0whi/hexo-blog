@@ -269,7 +269,7 @@ I will use GNOME as my desktop environment
    gnome-shell-extension-kimpanel-git gnome-shell-extension-dash-to-dock gnome-shell-extension-desktop-icons-ng \
    gtk-engine-murrine materia-gtk-theme \
    gdm3setup dconf-editor \
-   fcitx5-im fcitx5-rime fcitx5-configtool fcitx5-pinyin-{zhwiki,moegirl} fcitx5-skin-adwaita-dark
+   fcitx5-im fcitx5-chinese-addons fcitx5-configtool fcitx5-pinyin-{zhwiki,moegirl} fcitx5-skin-adwaita-dark
    ```
 
 ## NVIDIA & NVIDIA Optimus
