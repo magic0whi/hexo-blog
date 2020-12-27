@@ -45,3 +45,18 @@ compact /compactos:never # 取消所有系统文件的压缩
 dism.exe /Online /Cleanup-Image /AnalyzeComponentStore # 查看组件存储大小
 dism.exe /online /Cleanup-Image /StartComponentCleanup # 执行组件存储清理
 ```
+
+## Intel ME Firmware
+
+1. 查看 ME 信息
+   ```powershell
+   > MEInfoWin.exe
+   ```
+2. 备份 ME 固件
+   ```powershell
+   FWUpdLcl.exe -SAVE xxxx.bin
+   ```
+3. 刷写 ME 固件
+   ```powershell
+   FWUpdLcl64.exe -f ..\ME8_1.5M_Production.bin
+   ```

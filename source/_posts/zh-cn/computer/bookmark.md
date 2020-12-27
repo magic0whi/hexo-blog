@@ -247,3 +247,9 @@ Oracle 账户密码 [BugMeNot](http://bugmenot.com/view/oracle.com)
 [program-think](https://program-think.blogspot.com/)
 
 [樱花庄的白猫](https://2heng.xin/)
+
+[佳佳酱](https://luojia.me/)
+
+[Jarvis's Blog](https://www.jarvisw.com/)
+
+[Berd's Playground](https://blog.berd.moe/)

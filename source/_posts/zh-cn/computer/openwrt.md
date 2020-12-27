@@ -27,7 +27,6 @@ toc: true
 # opkg list-upgradable | sed -e "s/\s.*//" | while read PKG_NAME; do opkg upgrade "${PKG_NAME}"; done
 ```
 
-
 ## 安装的软件包
 
 ```
@@ -42,13 +41,3 @@ luci-app-upnp
 luci-app-wol
 luci-app-mwan3
 ```
-
-## 配置
-
-1. 使用硬解随机数生成器(需要路由器支持):
-   ```console
-   # uci set system.@rngd[0].enabled="1"
-   # uci set system.@rngd[0].device="/dev/urandom"
-   # uci commit system
-   # /etc/init.d/rngd restart
-   ```

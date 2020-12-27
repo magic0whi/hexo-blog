@@ -255,12 +255,24 @@ Enter F12 for Boot Menu when bootstrap
     ```console
     # systemctl enable bluetooth.service
     ```
+14. (Optional) Add Archlinuxcn's repository
+    ```
+    [archlinuxcn]
+    Server = https://repo.archlinuxcn.org/$arch
+    ## or install archlinuxcn-mirrorlist-git and use the mirrorlist
+    #Include = /etc/pacman.d/archlinuxcn-mirrorlist
+    ```
+    Install archlinux-keyring
+    ```console
+    # pacman -S archlinuxcn-keyring
+    ```
 
 ## Desktop Environment
 
 I will use GNOME as my desktop environment
 
 1. Installation
+   > Some packages require archlinuxcn's repository
    ```console
    # yay -S gnome-shell gnome-shell-extensions gdm gdm3setup \
    nautilus file-roller sushi seahorse \
@@ -333,18 +345,7 @@ I will use the method of `PRIME render offload` which was official method suppor
 
 ## Additions
 
-1. Archlinuxcn
-   ```
-   [archlinuxcn]
-   Server = https://repo.archlinuxcn.org/$arch
-   ## or install archlinuxcn-mirrorlist-git and use the mirrorlist
-   #Include = /etc/pacman.d/archlinuxcn-mirrorlist
-   ```
-   Install archlinux-keyring
-   ```console
-   # pacman -S archlinuxcn-keyring
-   ```
-2. Additional Packages
+1. Additional Packages
    ```
    bpytop
    htop
