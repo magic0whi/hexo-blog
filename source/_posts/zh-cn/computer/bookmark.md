@@ -259,3 +259,5 @@ Oracle 账户密码 [BugMeNot](http://bugmenot.com/view/oracle.com)
 [Leo's Field](https://szclsya.me/)
 
 [启示录](https://joybean.org)
+
+[长征部落格](https://www.cz5h.com/)
