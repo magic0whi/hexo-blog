@@ -343,10 +343,15 @@ I will use the method of `PRIME render offload` which was official method suppor
    $ gsettings set org.gnome.desktop.media-handling automount-open false 
    ```
 
-## Additions
+## Additional Packages
 
 1. Additional Packages
    ```
+   vulkan-intel
+   vulkan-tools
+   libva-intel-driver
+   libva-utils
+
    bpytop
    htop
    docker
@@ -357,6 +362,7 @@ I will use the method of `PRIME render offload` which was official method suppor
    gdb
    arch-install-scripts
    pacman-contrib
+   rsync
    tree
    nmap
    traceroute
@@ -371,33 +377,24 @@ I will use the method of `PRIME render offload` which was official method suppor
    zsh-history-substring-search
 
    npm
-   nodejs-hexo-cli
+   [AUR] nodejs-hexo-cli
 
    debootstrap
    ubuntu-keyring
 
-   qemu-user-static
-   binfmt-qemu-static-all-arch
-
-   mesa-demo
-   vulkan-tools
-   vulkan-intel
-   libva-intel-driver
-   libva-utils
+   [AUR] qemu-user-static
+   [AUR] binfmt-qemu-static-all-arch
 
    qtcreator
-   visual-studio-code-bin
-   microsoft-edge-dev
+   [AUR] visual-studio-code-bin
+   [AUR] microsoft-edge-dev
    telegram-desktop
    thunderbird
    anki
-   netease-cloud-music-gtk
    remmina
-   grsync
    syncthing-gtk
-   v2ray
-   v2raya
-   xmind-2020
+   [AUR] v2raya
+   [AUR] xmind-2020
    obs-studio
    mpv
 
@@ -413,7 +410,6 @@ I will use the method of `PRIME render offload` which was official method suppor
    lutris
    wine
    - lib32-giflib
-   - lib32-libldap
    - lib32-gnutls
    - lib32-mpg123
    - lib32-openal
@@ -424,6 +420,6 @@ I will use the method of `PRIME render offload` which was official method suppor
    - lib32-libxslt
    - lib32-gst-plugins-base-libs
 
-   tealdeer
-   cppman
+   [AUR] tealdeer
+   [AUR] cppman
    ```
