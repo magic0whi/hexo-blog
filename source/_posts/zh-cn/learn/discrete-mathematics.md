@@ -403,7 +403,7 @@ C. 苏格拉底是要死的
    D. \\(\forall x\exist y(L(x)\land(J(y)\to A(x,y)))\\)
    D 为什么是错的, D 可化为\\(\forall x(L(x)\land\exist y(J(y)\to A(x,y)))\\) , 若 \\(x\\) 不是演员结果竟然也为假, 显然不符合命题
    翻译时全称量词应和条件搭配(反之, 存在量词应和合取搭配)
-3. 已知 \\(\exist y(R(y)\lor B(y))\\) , 其中 \\(R(3)=B(4)=T\\) , \\(R(4)=B(3)=F\\) , 且论域是 \\(\\{3,4\\}\\) , 求该式的值
+3. 已知 \\(\forall y(R(y)\lor B(y))\\) , 其中 \\(R(3)=B(4)=T\\) , \\(R(4)=B(3)=F\\) , 且论域是 \\(\\{3,4\\}\\) , 求该式的值
    思路:
    \\(\forall x F(x)\iff F(a_1)\land F(a_2)\land\dots\land F(a_n)\\)
    \\(\exist x F(x)\iff F(a_1)\lor F(a_2)\lor\dots\lor F(a_n)\\)
