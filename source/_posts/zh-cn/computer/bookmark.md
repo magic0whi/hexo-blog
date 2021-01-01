@@ -182,6 +182,12 @@ Oracle 账户密码 [BugMeNot](http://bugmenot.com/view/oracle.com)
 
 [Seebug](https://paper.seebug.org/)
 
+[SJTUG - A Joyful Techie User Group](https://sjtug.org/)
+
+[OpenWeather](https://openweathermap.org/)
+
+[生信人](https://shengxin.ren/)
+
 ## Softwares
 
 [OBS](https://obsproject.com/)
@@ -261,3 +267,7 @@ Oracle 账户密码 [BugMeNot](http://bugmenot.com/view/oracle.com)
 [启示录](https://joybean.org)
 
 [长征部落格](https://www.cz5h.com/)
+
+[Sebastian Ruder](https://ruder.io/)
+
+[Lil'Log](https://lilianweng.github.io/lil-log/)
