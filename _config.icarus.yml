@@ -104,7 +104,7 @@ navbar:
         Categories: /categories
         Tags: /tags
         About: /about
-        Friends: /friends
+        Peers: /peers
     # Links to be shown on the right of the navigation bar
     links:
         Download on GitHub:

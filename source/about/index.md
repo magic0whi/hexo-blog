@@ -25,3 +25,8 @@ My favourite music: Aiva Op.24 for Piano Four Hands
 最喜欢的UP主是回形针, 稚晖君, EdmundDZhang, 3B1B
 
 Major goal: to own a Scanning electron microscope
+
+Feel free to contact me:
+- Email: lollipop.studio.cn@gmail.com
+- Twitter: [@ndoskrnl](https://twitter.com/ndoskrnl)
+- Telegram: [@ndoskrnl](https://t.me/ndoskrnl)
