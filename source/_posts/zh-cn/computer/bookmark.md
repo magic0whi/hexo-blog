@@ -63,6 +63,8 @@ Android APK 魔改&破解 [mobilism](https://forum.mobilism.org/search.php)
 
 [SCI-Hub 论文下载可用网址链接 - 实时更新](https://tool.yovisun.com/scihub/)
 
+[Z-Library](https://z-lib.org/)
+
 类似ChemDraw, 不过是网页版 [MolView](http://molview.org/)
 
 [ChemDoodle WEB](https://web.chemdoodle.com/)
