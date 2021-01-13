@@ -67,4 +67,4 @@ Note: OptiFabric conflicts with Sodium.
 
 | Mod name | Download link | Last Update |
 | -------- | ------------- | ---------- |
-| Dynmap for Fabric [Unofficial] | [dynmap-fabric-0.2.17+1.16.2](https://www.curseforge.com/minecraft/mc-mods/dynmap-for-fabric/files/all) | Aug 24, 2020 |
+| DynmapForge | [Dynmap-3.1-beta6-fabric-1.16.4.jar](https://www.curseforge.com/minecraft/mc-mods/dynmapforge/files/all) | Jan 3, 2021 |
