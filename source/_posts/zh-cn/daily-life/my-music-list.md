@@ -18,10 +18,12 @@ tags:
 1. Dragonfly Keeper - Phildel
 2. The truth that you leave - Pianoboy/高至豪
 3. 冬之韵 - 文武贝
+4. Terminal Station - GET IN THE RING
 
-## 小号
+## 東方 Project
 
-Title - 上海アリス幻樂団
+1. Title - 上海アリス幻樂団
+2. 偶像に世界を委ねて ～ Idoratrize World - 上海アリス幻樂団
 
 ## Remix
 
@@ -30,6 +32,7 @@ Title - 上海アリス幻樂団
 ## Orchestra
 
 1. cocoon - 林ゆうき
+2. Ayame No Machi To Ohimesama - 北澤伸一郎
 
 ## 不常听
 
