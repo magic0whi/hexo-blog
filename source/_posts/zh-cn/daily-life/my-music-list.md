@@ -19,6 +19,10 @@ tags:
 2. The truth that you leave - Pianoboy/高至豪
 3. 冬之韵 - 文武贝
 
+## 小号
+
+Title - 上海アリス幻樂団
+
 ## Remix
 
 1. 裏切りアリス inst ver - M-ART
@@ -34,3 +38,8 @@ tags:
 ## 钢琴
 
 1. Eutopia - Yoohsic Roomz
+
+## 人声 Voice
+
+1. 我的祖国 - 郭兰英\[中文\]
+2. 童心流転・啓夢 - Matsuko\[日文\]

@@ -8,22 +8,10 @@ tags:
 ---
 
 英语的语法是一系列的规则, 只要理清和遵循这些规则, 就能写出正确的句子
+本文的作用旨在脑中形成一个能够检查英语语法正确性的模型.
 主从复合句: 至少包含两个谓语(主句一个从句一个)的句子
 
 <!-- more -->
-
-pursue sth.=in pursuit of sth.
-
-spend (in) doing
-It takes sb. some time 
-
-hardly...when
-no sooner...than
-前面"..."
-后面"..."用过去式
-
-be + v. = of + n.
-如 be important = of importance
 
 ## 句子结构
 
@@ -815,6 +803,10 @@ have no ... but 用动名词
 
 worth 用动名词
 
+spend (in) doing
+
+it takes sb. some time to do sth.
+
 #### 动词形态
 
 ##### 时态
@@ -916,3 +908,11 @@ worth 用动名词
 想出框架结构
 中文稿子 5-7 min
 十几分钟翻译成英文
+
+## 杂项
+
+* pursue sth.=in pursuit of sth.
+* be + v. = of + n.
+  如 be important = of importance
+* hardly Verb(v3) when
+  no sooner Verb(v2) than
