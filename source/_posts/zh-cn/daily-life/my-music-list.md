@@ -9,6 +9,8 @@ tags:
 
 我的歌单, 按主要乐器分类
 
+Target: 轻雅庄重
+
 <!-- more -->
 
 ## 常听
@@ -19,6 +21,7 @@ tags:
 2. The truth that you leave - Pianoboy/高至豪
 3. 冬之韵 - 文武贝
 4. Terminal Station - GET IN THE RING
+5. Interlude ~Remains~ - 魂音泉
 
 ## 東方 Project
 
@@ -34,6 +37,10 @@ tags:
 1. cocoon - 林ゆうき
 2. Ayame No Machi To Ohimesama - 北澤伸一郎
 
+## 电子音乐
+
+1. WRLDS - Sta
+
 ## 不常听
 
 好听但不知为什么没有 like
@@ -44,5 +51,7 @@ tags:
 
 ## 人声 Voice
 
-1. 我的祖国 - 郭兰英\[中文\]
-2. 童心流転・啓夢 - Matsuko\[日文\]
+1. 我的祖国 - 郭兰英 \[中文\]
+2. 童心流転・啓夢 - Matsuko \[日文\]
+3. Sternenmeer - Frozen Starfall \[德语\]
+4. TRAGEDY:ETERNITY - MYTH & ROID \[日文\]
