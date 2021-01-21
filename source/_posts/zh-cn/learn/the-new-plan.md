@@ -5,7 +5,9 @@ date: 2020-12-14 05:17:10
 tags:
 ---
 
-正在努力
+正在努(mo)力(yu)
+
+焦点树已初步完成: {% asset_link individual-focus-tree.xmind "individual-focus-tree.xmind" %}
 
 <!-- more -->
 

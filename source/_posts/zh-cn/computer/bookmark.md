@@ -77,6 +77,8 @@ Android APK 魔改&破解 [mobilism](https://forum.mobilism.org/search.php)
 
 [CS自救指北](https://survivesjtu.gitbook.io/survivesjtumanual/fu-lu/ben-ke-sheng-zhuan-ye-jie-shao-todo/cs-zi-jiu-zhi-bei)
 
+[中科院考试大纲](https://admission.ucas.ac.cn/info/KaoshiDagang/28257ae0-ef1c-4d1e-8823-5b1b557016e0)
+
 ### Learn
 
 [数学乐](https://www.shuxuele.com/)

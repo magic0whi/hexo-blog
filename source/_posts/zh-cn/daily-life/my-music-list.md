@@ -41,15 +41,19 @@ Target: 轻雅庄重
 
 1. WRLDS - Sta
 
+## 人声
+
+1. 桜花之恋冢 ~ Flower of Life - 発熱巫女~ず
+
 ## 不常听
 
 好听但不知为什么没有 like
 
-## 钢琴
+### 钢琴
 
 1. Eutopia - Yoohsic Roomz
 
-## 人声 Voice
+### 人声 Voice
 
 1. 我的祖国 - 郭兰英 \[中文\]
 2. 童心流転・啓夢 - Matsuko \[日文\]
