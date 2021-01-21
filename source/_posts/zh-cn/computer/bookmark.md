@@ -73,6 +73,10 @@ Android APK 魔改&破解 [mobilism](https://forum.mobilism.org/search.php)
 
 [drawio](https://www.diagrams.net/) 开源的在线图表制作软件
 
+[计算机工程中缺失的一课](https://missing-semester-cn.github.io/)
+
+[CS自救指北](https://survivesjtu.gitbook.io/survivesjtumanual/fu-lu/ben-ke-sheng-zhuan-ye-jie-shao-todo/cs-zi-jiu-zhi-bei)
+
 ### Learn
 
 [数学乐](https://www.shuxuele.com/)

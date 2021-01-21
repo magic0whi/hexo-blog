@@ -8,45 +8,27 @@ toc: true
 
 术语记录表
 
-TODO: 优化格式
-
 <!-- more -->
 
-## 计算机
+| 术语 | 解释 | 标签 |
+|-|-|-|
+| KDF | (Key derivation function)密钥派生函数, 属于 hash 函数, 通常用来将短密码变成长密码 | Cryptography |
+| CoW | (Copy-on-write)多个进程共享一个副本, 只有一个进程尝试修改该资源时, 系统才会执行复制 | Btrfs |
+| RTTI | (Run-time Type Information)a feature of the C++ programming language that exposes information about an object's data type at runtime. | C++ |
+| TLDR | (Too Long; Didn't read.)太长不看, 等价于 TLDW(Too Long; Didn't Watch) |  |
+| 贝特里奇头条定律 | (Betteridge's law of headlines)指任何以问号结尾的新闻标题, 都能够用'不'来回答 |  |
+| 回音室效应 | (Echo Chamber)In news media, echo chamber is a metaphorical description of a situation in which beliefs are amplified or reinforced by communication and repetition inside a closed system. By visiting an "echo chamber", people are able to seek out information that reinforces their existing views, potentially as an unconscious exercise of confirmation bias. This may increase social and political polarization and extremism... |  |
+| 达克效应 | (D-K effect)是一种认知偏差现象, 指能力欠缺的人在自己欠考虑的决定的基础上得出错误结论, 但是无法正确认识到自身的不足, 辨别错误行为. 这些能力欠缺者们沉浸在自我营造的虚幻优势之中, 常常高估自己的能力水平, 却无法客观评价他人的能力. |  |
+| GDP | (Gross Domestic Product)国内生产总值 |  |
+| CPI | (Consumer Price Index)消费者物价指数(通货膨胀率) |  |
+| PPI | (Producer Price Index)生产者价格指数 |  |
+| PMI | (Purchasing Managers' Index)采购经理人指数(以50%作为经济强弱分界点) |  |
+| NFPA 704 | (National Fire Protection Association)美国消防协会制定危险品紧急处理系统鉴别标准 | Chemistry |
+| MTU | (Maximum Transmission Unit)最大传输单元, 指位于数据链路层上的数据包所能通过的最大大小 | Network |
+| LIR | (Regional Internet Registry)区域互联网注册管理机构, 是管理世界上某特定地区互联网资源的组织, 包括 IP 地址和 AS 号. 现在(2021年)世界上有五个正在运作的区域互联网注册管理机构 | Network |
+|  |  |  |
+|  |  |  |
+|  |  |  |
+|  |  |  |
 
-KDF Key derivation function 密钥派生函数; KDF是hash函数，通常用来将短密码变成长密码(hash)
-
-LIR Regional Internet registry 区域互联网注册管理机构 是管理世界上某特定地区Internet资源的组织。Internet资源包括IP地址（包含IPv4和IPv6）和使用在BGP路由中的自治系统号（Autonomous System number）。现在世界上有五个正在运作的区域互联网注册管理机构
-
-CoW Copy-on-write 多个进程共享一个副本, 只有一个进程尝试修改该资源时, 系统才会执行复制
-
-RTTI Run-time Type Information  a feature of the C++ programming language that exposes information about an object's data type at runtime.
-
-### 网络
-
-MTU Maximum transmission unit 最大传输单元; 指数据链接层上面所能通过的最大数据包大小
-
-## 日常交流
-
-TLDR  Too Long; Didn't read. 太长不看
-TLDW  Too Long; Didn't Watch
-
-## 心理学
-
-Echo Chamber 回音室效应 In news media, echo chamber is a metaphorical description of a situation in which beliefs are amplified or reinforced by communication and repetition inside a closed system. By visiting an "echo chamber", people are able to seek out information that reinforces their existing views, potentially as an unconscious exercise of confirmation bias. This may increase social and political polarization and extremism... 
-
-D-K effect 达克效应，全称为邓宁-克鲁格效应（Dunning-Kruger effect）。它是一种认知偏差现象，指的是能力欠缺的人在自己欠考虑的决定的基础上得出错误结论，但是无法正确认识到自身的不足，辨别错误行为。这些能力欠缺者们沉浸在自我营造的虚幻的优势之中，常常高估自己的能力水平，却无法客观评价他人的能力。
-
-## 经济学
-
-GDP gross domestic product 国内生产总值
-
-CPI Consumer Price Index 消費者物價指數(通货膨胀率)
-
-PPI Producer Price Index 生产者价格指数
-
-PMI Purchasing Managers' Index 采购经理人指数(以50%作為經濟強弱的分界點)
-
-## 化學
-
-NFPA 704 美國消防協會(National Fire Protection Association)制定的危险品紧急处理系统鉴别标准
+SICP

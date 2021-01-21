@@ -912,7 +912,7 @@ it takes sb. some time to do sth.
 ## 杂项
 
 * pursue sth.=in pursuit of sth.
-* be + v. = of + n.
-  如 be important = of importance
+* be + adj. = be + of + n.
+  如 He is an able man = He is a man of ability
 * hardly Verb(v3) when
   no sooner Verb(v2) than

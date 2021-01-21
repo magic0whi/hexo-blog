@@ -9,6 +9,8 @@ Ndoskrnl 的友人们
 * [MinatoAster](http://minatoaster.github.io)
 * [xtlsoft(徐天乐)](https://www.xtlsoft.top)
 
+**下面是单向友链**
+
 ## Computer
 
 [mathor](https://wmathor.com/) `ACM`
@@ -45,6 +47,8 @@ Ndoskrnl 的友人们
 
 [约伊兹的萌狼乡手札](https://blog.yoitsu.moe/) `Archlinux`
 
+[Sukka's Blog](https://blog.skk.moe/) `Web` `Archlinux` (顺带一提他的博客[很快](https://github.com/ppoffice/hexo-theme-icarus/issues/822))
+
 [Leo's Field](https://szclsya.me/) `AOSC OS`
 
 [Berd's Playground](https://blog.berd.moe/) `MOE Fengberd`
@@ -56,6 +60,8 @@ Ndoskrnl 的友人们
 [Lianm's Blog](https://ming-lian.github.io/) `Bioinformatics`
 
 [Lan Tian](https://lantian.pub/) `BGP` `DN42`
+
+[Alex Chi](https://www.skyzh.dev/) `CS`
 
 ## Humanities
 
@@ -71,9 +77,9 @@ Ndoskrnl 的友人们
 
 [当然我在扯淡](http://www.yinwang.org/)
 
-## Misc
+[ServalCandle](https://servalcandle.github.io/) `Cat` `Do not read it`
 
-[Sukka's Blog](https://blog.skk.moe/)
+## Misc
 
 [萨摩的部落格 - 掉毛中...](https://i-meto.com/)
 
@@ -94,3 +100,5 @@ Ndoskrnl 的友人们
 [樱花庄的白猫](https://2heng.xin/)
 
 [佳佳酱](https://luojia.me/)
+
+[Jeffrey Paul](https://sneak.berlin/)
