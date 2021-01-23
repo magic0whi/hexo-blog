@@ -43,7 +43,9 @@ Target: 轻雅庄重
 
 ## 人声
 
-1. 桜花之恋冢 ~ Flower of Life - 発熱巫女~ず
+1. 桜花之恋冢 ~ Flower of Life - 発熱巫女~ず \[日文\]
+2. TRAGEDY:ETERNITY - MYTH & ROID \[日文\]
+3. STYX HELIX - MYTH & ROID \[日文\]
 
 ## 不常听
 
@@ -58,4 +60,7 @@ Target: 轻雅庄重
 1. 我的祖国 - 郭兰英 \[中文\]
 2. 童心流転・啓夢 - Matsuko \[日文\]
 3. Sternenmeer - Frozen Starfall \[德语\]
-4. TRAGEDY:ETERNITY - MYTH & ROID \[日文\]
+
+### 尺八
+
+1. 夜明 - 佐藤康夫

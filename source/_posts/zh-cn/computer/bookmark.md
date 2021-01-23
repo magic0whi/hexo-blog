@@ -103,6 +103,8 @@ Crashcourts中文字幕 [Crashcourts](https://crashcourse.club/category/)
 
 [Learn X in Y Minutes](https://learnxinyminutes.com/)
 
+[Writing an OS in Rust](https://os.phil-opp.com/)
+
 ### Paper
 
 [The mouse Sry locus harbors a cryptic exon that is essential for male sex determination](https://science.sciencemag.org/content/370/6512/121)
