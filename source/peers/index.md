@@ -79,6 +79,8 @@ Ndoskrnl 的友人们
 
 [ServalCandle](https://servalcandle.github.io/) `Cat` `Do not read it`
 
+[LOFT IN THE IMMOBILE LIBRARY](https://librarian.mukiyu.moe/)
+
 ## Misc
 
 [萨摩的部落格 - 掉毛中...](https://i-meto.com/)

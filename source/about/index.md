@@ -20,7 +20,7 @@ date: 2020-02-08 15:14:28
 I am chan chvn-che, I like to fiddle with things I don't understand.
 In current, I am suffering from Gender dysphoria.
 
-你可以称呼我为钱桑, 我的朋友\[我的世界\]就是这么称呼我的.
+你可以称呼我为钱桑, 我的朋友在\[我的世界(Minecraft)\]中就是这么称呼我的.
 
 Life principle: I am no bird; and no net ensuares me: I am a free human being with an independent will. - Jane Eyre
 Work principle: Make blog simple, make article simple, make everything simple.
