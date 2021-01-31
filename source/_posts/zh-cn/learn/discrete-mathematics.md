@@ -1,8 +1,10 @@
 ---
 title: discrete-mathematics
-category: mathematics
+categories:
+- learn
+- mathematics
 date: 2020-10-17 14:07:40
-tags:
+tags: mathematics
 toc: true
 ---
 

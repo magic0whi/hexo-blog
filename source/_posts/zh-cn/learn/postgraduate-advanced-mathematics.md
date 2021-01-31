@@ -1,10 +1,12 @@
 ---
 title: postgraduate-advanced-mathematics
 toc: true
-category: mathematics
+categories:
+- learn
+- mathematics
 lang: zh-cn
 date: 2021-01-19 09:08:57
-tags:
+tags: mathematics
 ---
 
 同济高等数学笔记整合(上)
