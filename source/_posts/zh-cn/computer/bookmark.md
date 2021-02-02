@@ -81,6 +81,8 @@ Android APK 魔改&破解 [mobilism](https://forum.mobilism.org/search.php)
 
 ### Learn
 
+[Yifei Xiong 的数学笔记](https://bookdown.org/yifei/book/)
+
 [数学乐](https://www.shuxuele.com/)
 
 平面设计/音乐音效 [doyoudo](https://www.doyoudo.com/)
