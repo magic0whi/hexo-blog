@@ -36,16 +36,20 @@ Target: 轻雅庄重
 
 1. cocoon - 林ゆうき
 2. Ayame No Machi To Ohimesama - 北澤伸一郎
+3. 钢铁洪流进行曲 - 李旭昊
 
 ## 电子音乐
 
 1. WRLDS - Sta
+2. 天の頂 ~ Brilliant Pagoda - トリック・ノスタルジー
 
 ## 人声
 
+0. Young And Beautiful - Lana Del Rey \[英文\]
 1. 桜花之恋冢 ~ Flower of Life - 発熱巫女~ず \[日文\]
 2. TRAGEDY:ETERNITY - MYTH & ROID \[日文\]
 3. STYX HELIX - MYTH & ROID \[日文\]
+4. 不存在的夏天 \[中文\]
 
 ## 不常听
 
