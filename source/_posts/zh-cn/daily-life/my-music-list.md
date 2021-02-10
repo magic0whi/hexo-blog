@@ -22,6 +22,7 @@ Target: 轻雅庄重
 3. 冬之韵 - 文武贝
 4. Terminal Station - GET IN THE RING
 5. Interlude ~Remains~ - 魂音泉
+6. 花火のあと​.​.​. Piano Solo - Otokaze/s p a c e​.
 
 ## 東方 Project
 
@@ -34,9 +35,12 @@ Target: 轻雅庄重
 
 ## Orchestra
 
+0. 青木ヶ原の伝説 - 交響アクティブNEETs
 1. cocoon - 林ゆうき
 2. Ayame No Machi To Ohimesama - 北澤伸一郎
 3. 钢铁洪流进行曲 - 李旭昊
+4. Nuvole di Luce - Roberto Cacciapaglia
+5. 妖々夢 - 交響アクティブNEETs
 
 ## 电子音乐
 

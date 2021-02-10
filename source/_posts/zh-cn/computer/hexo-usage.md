@@ -10,39 +10,17 @@ Hexo 的一些命令和概念速记
 
 <!-- more -->
 
-## 部署教程
-
-以上假设已完成以下操作
+## 部署Git仓库
 
 ```console
-$ npm install -g hexo-cli
-$ hexo init <folder>
-$ cd <folder>
-$ npm install
-```
-
-### 部署Git仓库
-
-```console
-root@blog # useradd -m -s /bin/bash git    #创建git用户
-root@blog # passwd git    #给git用户设置密码,或者在git用户的.ssh目录的authorized_keys文件里面添加自己的公钥
-root@blog # su git    #切换到git用户
-git@blog ~$ cd /home/git
 git@blog ~$ git init --bare blog.git
-
-ndoskrnl@pc ~$ cd hexo
-ndoskrnl@pc hexo$ git init
-ndoskrnl@pc hexo$ git add .
-ndoskrnl@pc hexo$ git commit -m 'initial commit'
-ndoskrnl@pc hexo$ git remote add origin git@blog:~/blog.git    #这里的blog就是你的git服务器的ip或者域名
-ndoskrnl@pc hexo$ git push -u origin master
 ```
 
 然后就是Git Hook的配置, 见[前面](#Git-Hook)
 别忘了 chmod +x post-update
 若想使用git-shell: `usermod -s /usr/bin/git-shell git`
 
-### Nginx配置
+## Nginx配置
 
 ```console
 # mkdir -p /var/www/blog    #在服务器选择一个放置网站的目录, 假设这个目录为/var/www/blog
@@ -88,7 +66,7 @@ message: 这个是博文查看时, 密码输入框上面的描述性文字
 
 网站发布: `$ hexo generate`
 
-### 升级Hexo
+升级Hexo:
 
 ```console
 # npm update -g # 升级npm全局插件
@@ -130,28 +108,6 @@ tags:
 toc: true
 - PS3
 - Games
-```
-
-### 文章摘要
-
-设置文章摘要, 我们只需在想显示为摘要的内容之后添 <!-- more --> 即可. 像下面这样:
-
-```
----
-title: hello hexo markdown
-date: 2016-11-16 18:11:25
-tags:
-toc: true
-- hello
-- hexo
-- markdown
----
-
-我是短小精悍的文章摘要(๑•̀ㅂ•́) ✧
-
-<!-- more -->
-
-紧接着文章摘要的正文内容
 ```
 
 ### 资源引用

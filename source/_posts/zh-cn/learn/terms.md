@@ -31,4 +31,5 @@ toc: true
 | 能指和所指 | 索绪尔语言学的一对概念, 能指意为描述实体的抽象语言本身(如词形、词音), 所指指抽象语言描述的实体及其相关的属性 |  |  |
 | SICP | Structure and Interpretation of Computer Programs, 计算机程序的结构与解释, 是一本关于计算机程序设计的总体性观念的基础教科书. 书中使用程序 Lisp 语言的方言 Scheme 来解释计算机科学的核心概念, 包括抽象、递归、解释器以及元语言抽象 |  |  |
 | 洗稿 | 指通过某些手段掩盖原文章的真实来源, 以争取审查时间差或躲避著作权的行为 |  |  |
-
+| HPLC | (High-performance liquid chromatography)高效液相色谱法, 常用于生物化学和分析化学, 一种用于混合物分离、识别、量化各成分比例的技术 |  |  |
+| XRD | (X-ray diffraction analysis)X射线衍射分析, 一种在材料科学中用于确定材料晶体结构的技术 |  |  |
