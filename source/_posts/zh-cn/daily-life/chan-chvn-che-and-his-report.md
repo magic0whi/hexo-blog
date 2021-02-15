@@ -1,6 +1,6 @@
 ---
 title: chan-chvn-che-and-his-report
-category: learn
+category: daily-life
 date: 2020-12-13 07:44:44
 tags:
 toc: true
