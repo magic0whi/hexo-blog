@@ -33,3 +33,4 @@ toc: true
 | 洗稿 | 指通过某些手段掩盖原文章的真实来源, 以争取审查时间差或躲避著作权的行为 |  |  |
 | HPLC | (High-performance liquid chromatography)高效液相色谱法, 常用于生物化学和分析化学, 一种用于混合物分离、识别、量化各成分比例的技术 |  |  |
 | XRD | (X-ray diffraction analysis)X射线衍射分析, 一种在材料科学中用于确定材料晶体结构的技术 |  |  |
+| DEXA | Dual-energy X-ray absorptiometry is a means of measuring bone mineral density.

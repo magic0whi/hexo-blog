@@ -6,6 +6,8 @@ tags:
 toc: true
 ---
 
+一份目前遭遇的简短报告
+
 <!-- more -->
 
 * 下文我用"她"(ndoskrnl_origin)来指代这类无法抑制的厌恶感
