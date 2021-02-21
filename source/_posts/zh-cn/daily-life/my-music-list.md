@@ -46,6 +46,7 @@ Target: 轻雅庄重
 
 1. WRLDS - Sta
 2. 天の頂 ~ Brilliant Pagoda - トリック・ノスタルジー
+3. Remnant of the Distant Future - World Beyond
 
 ## 人声
 
