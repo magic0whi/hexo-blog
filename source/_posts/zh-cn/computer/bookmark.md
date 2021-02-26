@@ -73,13 +73,15 @@ Android APK 魔改&破解 [mobilism](https://forum.mobilism.org/search.php)
 
 [drawio](https://www.diagrams.net/) 开源的在线图表制作软件
 
+[Chemical Equations](https://chemequations.com/en/)
+
+### Learn
+
 [计算机工程中缺失的一课](https://missing-semester-cn.github.io/)
 
 [CS自救指北](https://survivesjtu.gitbook.io/survivesjtumanual/fu-lu/ben-ke-sheng-zhuan-ye-jie-shao-todo/cs-zi-jiu-zhi-bei)
 
 [中科院考试大纲](https://admission.ucas.ac.cn/info/KaoshiDagang/28257ae0-ef1c-4d1e-8823-5b1b557016e0)
-
-### Learn
 
 [Yifei Xiong 的数学笔记](https://bookdown.org/yifei/book/)
 

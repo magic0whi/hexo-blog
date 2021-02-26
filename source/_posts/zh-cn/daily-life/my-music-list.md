@@ -35,12 +35,16 @@ Target: 轻雅庄重
 
 ## Orchestra
 
-0. 青木ヶ原の伝説 - 交響アクティブNEETs
-1. cocoon - 林ゆうき
-2. Ayame No Machi To Ohimesama - 北澤伸一郎
-3. 钢铁洪流进行曲 - 李旭昊
-4. Nuvole di Luce - Roberto Cacciapaglia
-5. 妖々夢 - 交響アクティブNEETs
+1. Magia - Melodic Taste
+   <span style="color:red">Akamight...</span>
+2. 青木ヶ原の伝説 - 交響アクティブNEETs
+3. cocoon - 林ゆうき
+4. Ayame No Machi To Ohimesama - 北澤伸一郎
+5. 钢铁洪流进行曲 - 李旭昊
+6. Nuvole di Luce - Roberto Cacciapaglia
+7. 妖々夢 - 交響アクティブNEETs
+8. Destiny【BlackYearning】[RWBY Doujin remix] - Cre-sc3NT
+9. Itsuka - 澤野弘之
 
 ## 电子音乐
 
