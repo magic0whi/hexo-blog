@@ -15,13 +15,13 @@ Ndoskrnl 的友人们
 
 [mathor](https://wmathor.com/) `ACM`
 
-[xehoth](https://blog.xehoth.cc/) `C++` `Computer Graphics`
+[xehoth](https://blog.xehoth.cc/) `C++`, `Computer Graphics`
 
 [hzwer](http://hzwer.com/) `OI`
 
 [Magolor's Blog](https://magolor.cn/) `OI`
 
-[柳婼のblog - 我不管, 反之我最萌~](https://www.liuchuo.net/) `LeetCode` `PAT`
+[柳婼のblog - 我不管, 反之我最萌~](https://www.liuchuo.net/) `LeetCode`, `PAT`
 
 [斐斐のBlog](https://www.mmuaa.com/) `PAT`
 
@@ -29,17 +29,17 @@ Ndoskrnl 的友人们
 
 [miRoox](https://miroox.github.io/blog/) `Wolfram`
 
-[Lil'Log](https://lilianweng.github.io/lil-log/) `Neural Network` `Deep Learning`
+[Lil'Log](https://lilianweng.github.io/lil-log/) `Neural Network`, `Deep Learning`
 
-[Jingjing's blog](https://angericky.github.io/) `Neural Network` `Deep Learning` `Computer Vision`
+[Jingjing's blog](https://angericky.github.io/) `Neural Network`, `Deep Learning`, `Computer Vision`
 
 [Sebastian Ruder](https://ruder.io/) `Deepmind`
 
-[启示录](https://joybean.org) `Java` `Critical thinking`
+[启示录](https://joybean.org) `Java`, `Critical thinking`
 
-[Jarvis's Blog](https://www.jarvisw.com/) `IoT` `Linux`
+[Jarvis's Blog](https://www.jarvisw.com/) `IoT`, `Linux`
 
-[雪碧 0xroot](https://cn0xroot.com/) `IoT` `Radio`
+[雪碧 0xroot](https://cn0xroot.com/) `IoT`, `Radio`
 
 [為了可能的聲音](https://blog.rex-tsou.com/) `Archlinux`
 
@@ -47,7 +47,7 @@ Ndoskrnl 的友人们
 
 [约伊兹的萌狼乡手札](https://blog.yoitsu.moe/) `Archlinux`
 
-[Sukka's Blog](https://blog.skk.moe/) `Web` `Archlinux` (顺带一提他的博客[很快](https://github.com/ppoffice/hexo-theme-icarus/issues/822))
+[Sukka's Blog](https://blog.skk.moe/) `Web`, `Archlinux` (顺带一提他的博客[很快](https://github.com/ppoffice/hexo-theme-icarus/issues/822))
 
 [Leo's Field](https://szclsya.me/) `AOSC OS`
 
@@ -59,7 +59,7 @@ Ndoskrnl 的友人们
 
 [Lianm's Blog](https://ming-lian.github.io/) `Bioinformatics`
 
-[Lan Tian](https://lantian.pub/) `BGP` `DN42`
+[Lan Tian](https://lantian.pub/) `BGP`, `DN42`
 
 [Alex Chi](https://www.skyzh.dev/) `CS`
 
@@ -77,7 +77,7 @@ Ndoskrnl 的友人们
 
 [当然我在扯淡](http://www.yinwang.org/)
 
-[ServalCandle](https://servalcandle.github.io/) `Cat` `Do not read it`
+[ServalCandle](https://servalcandle.github.io/) `Cat`, `Do not read it`
 
 [LOFT IN THE IMMOBILE LIBRARY](https://librarian.mukiyu.moe/)
 
@@ -108,3 +108,9 @@ Ndoskrnl 的友人们
 [Fallenhh](https://fallen.moe/)
 
 [Desvl](https://desvl.xyz/) `Mathematics`
+
+[倚窗，听雨](https://blog.coelacanthus.moe/) `NOIP`
+
+[一叶知秋 - 秋是悲欢离合，雨是一生错过](https://blog.rain.cx/) 
+
+[Kalorona - Personal Blog](https://kalorona.com/) `NOIP`
