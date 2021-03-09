@@ -24,7 +24,7 @@ In current, I am suffering from Gender dysphoria.
 
 Life principle: I am no bird; and no net ensuares me: I am a free human being with an independent will. - Jane Eyre
 Work principle: Make blog simple, make article simple, make everything simple.
-Current status: 只争朝夕, 不负韶华. 正在对自己的精神世界进行 debug
+Current status: 只争朝夕, 不负韶华. 正在建立与社区的连接...
 Major goal: To own a Scanning Electron Microscope
 
 My favourite music: Aiva Op.24 for Piano Four Hands

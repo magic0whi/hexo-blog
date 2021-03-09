@@ -44,7 +44,9 @@ Target: 轻雅庄重
 6. Nuvole di Luce - Roberto Cacciapaglia
 7. 妖々夢 - 交響アクティブNEETs
 8. Destiny【BlackYearning】[RWBY Doujin remix] - Cre-sc3NT
-9. Itsuka - 澤野弘之
+9. Rosabel - Cre-sc3NT
+10. Itsuka - 澤野弘之
+11. 神圣的战争 - 俄罗斯军队模范亚历山德罗夫红旗歌舞团
 
 ## 电子音乐
 
