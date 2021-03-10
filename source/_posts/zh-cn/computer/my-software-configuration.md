@@ -1,14 +1,69 @@
 ---
-title: windows10
-category: computer
-date: 2020-02-08 16:42:49
-tags:
+title: my-software-configuration
 toc: true
+category: computer
+lang: zh-cn
+date: 2021-03-10 13:14:39
+tags:
 ---
 
-记录 Windows10 的设置改动
-
 <!-- more -->
+
+记录linux的配置修改
+
+## 配置文件
+
+### ssh
+
+```conf .ssh/config
+# ssh代理设置
+ServerAliveInterval 22
+ProxyCommand nc -v -x 127.0.0.1:1080 %h %p
+
+# 压缩频宽
+Compression yes
+
+# 减少重复连线的时间
+ControlMaster auto
+ControlPath /tmp/ssh-%r@%h:%p
+
+# 延长连线时间
+ControlPresist yes
+
+# github的密钥配置
+Host github.com
+    User git
+    IdentityFile ~/.ssh/id_ed25519.github
+```
+
+### ~/.bashrc
+
+{% asset_link bashrc.example "~/.bashrc" %}
+
+### ~/.zshrc
+
+{% asset_link zshrc.example "~/.zshrc" %}
+
+### aria2
+
+{% asset_link aria2.conf.example "aria2.conf" %}
+
+### ddclient
+
+{% asset_link ddclient.conf.example "/etc/ddclient/ddclient.conf" %}
+
+### sysctl
+
+```conf
+# BBR TCP Congestion
+net.core.default_qdisc=fq
+net.ipv4.tcp_congestion_control=bbr
+
+# Reboot after 30 minutes
+kernel.panic = 3780
+```
+
+记录 Windows10 的设置改动
 
 ## Settings (UWP)
 
@@ -93,3 +148,23 @@ reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Ad
 ### MPV
 
 放入 portable_config/{% asset_link mpv.conf.example "mpv.conf" %}
+
+MPV的配置
+针对上网本注释了了一些占用高的选项
+TODO: [可能的一份更好的配置](https://github.com/Argon-/mpv-config/blob/master/mpv.conf)
+
+## mpv.conf
+
+为了区别化特意用 **\#@\#** 标记出了我做的注释
+{% asset_link mpv.conf "mpv.conf" %}
+
+额外的文件:
+1. 脚本 `portable_config\scripts\auto-profiles.lua`
+2. shaders文件 `portable_config\shaders\`, 请自行取消我的注释以启用shaders
+   - `KrigBilateral.glsl`
+   - `nnedi3-nns32-win8x4.hook`
+   - `nnedi3-nns64-win8x4.hook`
+   - `SSimDownscaler.glsl`
+   - `SSimSuperRes.glsl`
+
+此配置fork于[@cczzhh的配置](http://bbs.vcb-s.com/thread-2730-1-1.html)

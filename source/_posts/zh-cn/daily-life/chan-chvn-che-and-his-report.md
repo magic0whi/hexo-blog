@@ -6,6 +6,7 @@ tags:
 toc: true
 ---
 
+Issue #1: My Gender Dysphoria just outbreak
 一份目前遭遇的简短报告
 
 <!-- more -->
