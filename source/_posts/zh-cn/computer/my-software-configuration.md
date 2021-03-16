@@ -7,6 +7,8 @@ date: 2021-03-10 13:14:39
 tags:
 ---
 
+配置文件整合
+
 <!-- more -->
 
 记录linux的配置修改
@@ -168,3 +170,37 @@ TODO: [可能的一份更好的配置](https://github.com/Argon-/mpv-config/blob
    - `SSimSuperRes.glsl`
 
 此配置fork于[@cczzhh的配置](http://bbs.vcb-s.com/thread-2730-1-1.html)
+
+记录小米路由器3G 的 Openwrt 配置
+
+## 升级Openwrt
+
+* sysupgrade方式
+```console
+# cd /tmp
+# wget https://downloads.openwrt.org/snapshots/targets/ramips/mt7621/openwrt-ramips-mt7621-mir3g-squashfs-sysupgrade.tar
+# sysupgrade /tmp/openwrt-ramips-mt7621-mir3g-squashfs-sysupgrade.tar
+```
+
+升级完后最好更新以下新版本系统的软件包
+```console
+# opkg update
+# opkg list-upgradable
+# opkg list-upgradable | sed -e "s/\s.*//" | while read PKG_NAME; do opkg upgrade "${PKG_NAME}"; done
+```
+
+## 安装的软件包
+
+```
+rng-tools
+nano
+diffutils
+htop
+openssh-sftp-server # if default ssh server dropbear cannnot connect
+luci-ssl
+luci-theme-material
+luci-app-upnp
+luci-app-wol
+luci-app-mwan3
+```
+
