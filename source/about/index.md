@@ -28,6 +28,7 @@ Major goal: To own a Scanning Electron Microscope
 
 My favourite music: Aiva Op.24 for Piano Four Hands
 最喜欢收看的 UP 主是回形针, 稚晖君, EdmundDZhang, 3B1B
+喜欢的番剧: 无职转生(我是人下人), 反叛的鲁路修, 进击的巨人, Re：从零开始的异世界生活, 动物新世代/BNA, 我的三体之章北海传, 魔法少女小圆
 
 Feel free to contact me:
 - Email: lollipop.studio.cn@gmail.com
