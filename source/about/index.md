@@ -21,10 +21,10 @@ date: 2020-02-08 15:14:28
 I am chan chvn-che, I like to fiddle with things I don't understand.
 In current, I am suffering from Gender dysphoria.
 
-Life principle: 养天地正气, 法古今完人.
-Work principle: Make blog simple, make article simple, make everything simple.
-Current status: 正在建立与社区的连接...
-Major goal: To own a Scanning Electron Microscope
+Life principle: Keep alive; Set the next goal, then start it.
+Work principle: KISS; 养天地正气, 法古今完人.
+Current status: 正在建立与社区的连接...失败! 重试中...
+Major goal: 获得行动力.
 
 My favourite music: Aiva Op.24 for Piano Four Hands
 最喜欢收看的 UP 主是回形针, 稚晖君, EdmundDZhang, 3B1B

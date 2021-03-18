@@ -75,6 +75,8 @@ Android APK 魔改&破解 [mobilism](https://forum.mobilism.org/search.php)
 
 [Chemical Equations](https://chemequations.com/en/)
 
+[Chemical Structure Search](https://www.chemspider.com/StructureSearch.aspx)
+
 ### Learn
 
 [计算机工程中缺失的一课](https://missing-semester-cn.github.io/)

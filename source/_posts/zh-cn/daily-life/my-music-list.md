@@ -13,6 +13,8 @@ Target: 轻雅庄重
 
 <!-- more -->
 
+{% asset_img jiaoxiangyue.jpeg %}
+
 ## 常听
 
 ## 钢琴
@@ -56,11 +58,12 @@ Target: 轻雅庄重
 
 ## 人声
 
-0. Young And Beautiful - Lana Del Rey \[英文\]
-1. 桜花之恋冢 ~ Flower of Life - 発熱巫女~ず \[日文\]
-2. TRAGEDY:ETERNITY - MYTH & ROID \[日文\]
-3. STYX HELIX - MYTH & ROID \[日文\]
-4. 不存在的夏天 \[中文\]
+0. Young And Beautiful - Lana Del Rey \[英\]
+1. 桜花之恋冢 ~ Flower of Life - 発熱巫女~ず \[日\]
+2. TRAGEDY:ETERNITY - MYTH & ROID \[日\]
+3. STYX HELIX - MYTH & ROID \[日\]
+4. 不存在的夏天 \[中\]
+5. End of Daylight - 坂上なち \[日\]
 
 ## 不常听
 

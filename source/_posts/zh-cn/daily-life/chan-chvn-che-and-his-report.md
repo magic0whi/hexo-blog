@@ -87,3 +87,8 @@ Issue #1: My Gender Dysphoria just outbreak
 [Transfeminine Science](https://transfemscience.org/)
 
 [LGBT:(续)19年07月北医六院性别认同障碍治疗小记](https://zhuanlan.zhihu.com/p/80062078)
+
+## 附录
+
+一个梦想执剑的男生, 一位失败的勇者; 一个喜欢栽培的女孩, 一位想当妈妈的女性.
+{% asset_img BV1nE41117Gi.jpeg %}
