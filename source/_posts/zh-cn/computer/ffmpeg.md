@@ -30,15 +30,11 @@ $ ffprobe -select_streams v:0 -show_entries stream=duration -of default=noprint_
 $ <输出流> | x265 --y4m -D 10 --preset slower --deblock -1:-1 --ctu 32 --qg-size 8 --crf 15.0 --pbratio 1.2 --cbqpoffs -2 --crqpoffs -2 --no-sao --me 3 --subme 5 --merange 38 --b-intra --limit-tu 4 --no-amp --ref 4 --weightb --keyint 360 --min-keyint 1 --bframes 6 --aq-mode 1 --aq-strength 0.8 --rd 5 --psy-rd 2.0 --psy-rdoq 1.0 --rdoq-level 2 --no-open-gop --rc-lookahead 80 --scenecut 40 --qcomp 0.65 --no-strong-intra-smoothing --output "EP01.hevc" -
 ```
 
-> 受 VCB-Studio 启发
-
 ## Windows 10 下我压游戏录像的ffmpeg参数
 
 ```cmd
 C:/> ffmpeg.exe -i input.mp4 -c:v libx265 -x265-params "y4m:depth=10:preset=slower:deblock=-1:-1:ctu=32:qg-size=8:crf=15.0:cbqpoffs=-2:crqpoffs=-2:no-sao:me=3:subme=5:merange=38:limit-tu=4:no-amp:ref=4:weightb:keyint=360:min-keyint=1:bframes=6:aq-mode=1:aq-strength=0.8:rd=5:psy-rd=2.0:psy-rdoq=1.0:rdoq-level=2:no-open-gop:rc-lookahead=80:scenecut=40:qcomp=0.65:no-strong-intra-smoothing=true" -acodec aac -strict -2 -ac 2 -ab 192k -ar 44100 output.mkv
 ```
-
-> 受 VCB-Studio 启发
 
 ## 通过VA-API压Hevc (相比软压缺少很多参数设置)
 
@@ -46,7 +42,7 @@ C:/> ffmpeg.exe -i input.mp4 -c:v libx265 -x265-params "y4m:depth=10:preset=slow
 $ ffmpeg -hwaccel vaapi -hwaccel_device /dev/dri/renderD128 -vaapi_device /dev/dri/renderD128 -ss 0 -t 4:59 -i output.mkv -vf 'format=nv12,hwupload' -c:v hevc_vaapi -crf 26 -r 24 -acodec aac -strict -2 -ac 2 -ab 192k -ar 44100 -f mp4 -y sendready4.mp4
 ```
 
-## 通过Nvidia的nvenc压HEVC (相比软压缺少很多参数设置)
+## 通过 nvenc 压 HEVC (相比软压缺少很多参数设置)
 
 只有meduim | slow | fast 三种present可选
 
@@ -65,7 +61,7 @@ $ ffmpeg -hwaccel cuvid -c:v h264_cuvid -i input.mkv -c:v h264_nvenc -preset slo
 -global_quality 50 设置全局质量, 越低质量越好
 ```
 
-### 来自 vcb-studio 的x265参数解释
+### x265 参数解释
 
 ```
 --y4m  使用yuv420p颜色空间
@@ -131,15 +127,13 @@ $ ffmpeg -hwaccel cuvid -c:v h264_cuvid -i input.mkv -c:v h264_nvenc -preset slo
 --no-strong-intra-smoothing  文档上没有解释, 减少涂抹感? (请注意用在ffmpeg上得这么写no-strong-intra-smoothing=true)
 
 --output "EP01.hevc"  输出文件名
-```
-
-### Animation only
 
 --pbratio 1.2 降低 p 帧和 b 帧间画质差距。动漫编码 b 帧数量庞大，且 pb 之间分工不明显，因此降低这个参数对全局有利。
 
 --b-intra 允许 B 帧中出现 Intra Block。动画建议
+```
 
-## 快速索引
+## 名词解释
 
 ### AQ
 
@@ -160,11 +154,9 @@ mbtree 的原理简单点说，就是在编码过程中，被大量参照的 blo
 
 ### Quantizer Compression
 
---qcomp，这个参数决定了 qp 的时域变化灵活度。越低的数值代表灵活度越高，qp
-值变动越大，效果就是高动态场景下烂的比较严重，因为 x264 会倾向于提高高动态下的 qp 值（特别是引入 mbtree
-之后）。通常认为，越是倾向于高画质编码的，--qcomp 需要给的越高，反之亦然。qcomp=0 的时候效果接近固
-定比特率，qcomp=1 的时候效果接近固定 qp 值。qcomp 的作用会受到 mbtree 的影响。这个我们下文细谈。
+`--qcomp` 决定了 qp 的时域变化灵活度. 越低的数值代表灵活度越高, qp 值变动越大, 效果就是高动态场景下烂的比较严重, 因为 x264 会倾向于提高高动态下的 qp 值(特别是引入 mbtree 之后).
+通常认为, 越是倾向于高画质编码的, `--qcomp` 需要给的越高, 反之亦然.qcomp=0 的时候效果接近固定比特率, qcomp=1 的时候效果接近固定 qp 值.qcomp 的作用会受到 mbtree 的影响.
 
-## 引用
+## 参考文献
 
 [从vcb-studio了解魔法参数(x265)](https://vcb-s.nmm-hd.org/Dark%20Shrine/%5BVCB-Studio%5D%5B%E6%95%99%E7%A8%8B10%5Dx265%202.9%E5%8F%82%E6%95%B0%E8%AE%BE%E7%BD%AE/%5BVCB-Studio%5D%5B%E6%95%99%E7%A8%8B10%5Dx265%202.9%E5%8F%82%E6%95%B0%E8%AE%BE%E7%BD%AE.pdf)
