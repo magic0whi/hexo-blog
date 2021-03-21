@@ -58,6 +58,8 @@ Issue #1: My Gender Dysphoria just outbreak
 所以是时候走出阴影了, 我想要做点什么, 而不是当一个奈亚, 无论是 GD; 还是睡眠障碍; 还是自己的懒惰--都是敌人, 解决的方式会有不同, 但无论以什么方式, 目的都是为了更好地劳动.
 3-16-2021 自从学会了[更多地去感恩而不是抱怨](https://www.bilibili.com/video/BV16J411v7Fb), 才发现家里已经给我提供了很多的帮助. 比如昨天, 在我装净水器时遇到了攻丝困难的问题, 老爸二话不说就冒雨跑去借来了电动螺丝刀.
 嗯, 我喜欢现在的自我, 我的幸福感在提高, 帮助别人使我感到开心.
+3-21-2021 嘿, 即使即使有着各种各样的问题, 对抗仍在继续, 不可以怠惰. 现在要拯救你的 Working Memory, 把你从疯狂中拉回来.
+先从保障深度睡眠开始...
 
 如果不是你的离去, 恐怕我现在也还在做着无意义的抵抗吧...
 那么, さようなら, {% asset_link Akamight_Contact.zip "Akamight" %}~
@@ -87,6 +89,8 @@ Issue #1: My Gender Dysphoria just outbreak
 [Transfeminine Science](https://transfemscience.org/)
 
 [LGBT:(续)19年07月北医六院性别认同障碍治疗小记](https://zhuanlan.zhihu.com/p/80062078)
+
+[你是怎么变自律的？ - Iris Pan的回答](https://www.zhihu.com/question/284206141/answer/598492991)
 
 ## 附录
 
