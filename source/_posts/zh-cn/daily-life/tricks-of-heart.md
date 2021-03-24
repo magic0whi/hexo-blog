@@ -1,5 +1,5 @@
 ---
-title: chan-chvn-che-and-his-report
+title: 心之里技
 category: daily-life
 date: 2020-12-13 07:44:44
 tags:
@@ -102,4 +102,7 @@ Issue #1: My Gender Dysphoria just outbreak
 ## 附录
 
 一个梦想执剑的男生, 一位失败的勇者; 一个喜欢栽培的女孩, 一位想当妈妈的女性.
+
+We thank just about everybody.
+
 {% asset_img BV1nE41117Gi.jpeg %}
