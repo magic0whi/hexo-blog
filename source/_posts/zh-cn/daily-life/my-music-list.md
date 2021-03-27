@@ -64,6 +64,7 @@ Target: 轻雅庄重
 3. STYX HELIX - MYTH & ROID \[日\]
 4. 不存在的夏天 \[中\]
 5. End of Daylight - 坂上なち \[日\]
+6. タイムパラドックス - あよ \[日\]
 
 ## 不常听
 
