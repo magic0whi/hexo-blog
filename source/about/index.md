@@ -18,7 +18,7 @@ date: 2020-02-08 15:14:28
 也可以叫我菜菜鸟钱桑, 因为这个人不仅什么都不会, 而且在本回合受到了各种debuff的牵掣而堕入黑暗时代.
 我喜欢捣鼓自己不懂的东西.
 当前正遭受性别焦虑(GD)和睡眠障碍的困扰.
-是带专生，什么都不会的计算机网络专业.
+是带专生，什么都不会的计算机网络专业. 因此, 大佬们有任何好的建议我都会去尝试
 
 I am chan chvn-che, I like to fiddle with things I don't understand.
 In current, I am suffering from Gender dysphoria.

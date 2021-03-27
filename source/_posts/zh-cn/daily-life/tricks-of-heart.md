@@ -74,6 +74,7 @@ Issue #1: My Gender Dysphoria just outbreak
 说起社团活动, 我因为害羞而没有在开学季去食堂门口看看社团的宣传活动真是亏爆了,
 我现在要抽空鼓起勇气去问问学生处的老师, 看看ta手上有没有学校的社团信息,
 BTW, 如果你知道苏大有什么例如"二次元LSP"之类的社团请务必告诉我(认真脸).
+3-27-2021 在经历了一系列尝试后, 生锈的齿轮开始继续转动... {% post_link the-new-plan 新计划 %}
 
 如果不是你的离去, 恐怕我现在也还在做着无意义的抵抗吧...
 那么, さようなら, {% asset_link Akamight_Contact.zip "Akamight" %}~

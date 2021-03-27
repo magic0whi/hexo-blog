@@ -213,6 +213,8 @@ Oracle 账户密码 [BugMeNot](http://bugmenot.com/view/oracle.com)
 
 [科创](https://www.kechuang.org/)
 
+[美卡论坛](https://forum.uscreditcardguide.com/)
+
 ## Softwares
 
 [OBS](https://obsproject.com/)
