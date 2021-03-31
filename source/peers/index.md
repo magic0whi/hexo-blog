@@ -8,6 +8,7 @@ Ndoskrnl 的友人们
 * [霜晨月](https://shuangchenyue.top)
 * [MinatoAster](http://minatoaster.github.io)
 * [xtlsoft(徐天乐)](https://www.xtlsoft.top)
+* [Makito(朵朵)](https://keep.moe/)
 
 **下面是单向友链**
 
