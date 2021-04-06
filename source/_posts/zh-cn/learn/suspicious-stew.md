@@ -59,7 +59,8 @@ tags:
 
 明日方舟标题英文字体是: NOVECENTOWIDE
 明日方舟基建英文字体是 Bender
-TNO 的主标题字体是 Tannenberg
+TNO字体: 主标题字体 Tannenberg, 旧版GUI字体 VT323, 新版GUI字体Aldrich
+
 
 ## Mechanism
 
@@ -139,3 +140,33 @@ systemProp.http.proxyPassword=xxx
    (试根法的本质是因式定理)
    如: \\(2x^3+5x^2+x-2=(x+1)(2x^2+3x-2)=(x+1)(2x-1)(x+2)\\)
    它的常数项因数(\\(\pm1\\)、\\(\pm2\\))和最高次项系数之因数(\\(\pm1\\)、\\(\pm2\\))的比值有 \\(\pm1\\)、\\(\pm2\\)、\\(\pm\frac{1}{2}\\) , 代入得其中 \\(-1\\)、\\(-2\\)、\\(\frac{1}{2}\\) 可整除原多项式
+
+## IUPAC Organic
+
+```
+(1S,3R,4R,5R)-3-{[(2E)-3-(3,4-dihydroxyphenyl)prop-2-enoyl]oxy}-1,4,5-trihydroxycyclohexanecarboxylic acid
+
+tri hydroxy cyclo hexane carboxylic
+三羟基环己烷羧酸
+
+tri- 三
+
+meth- 甲
+eth- 乙
+prop- 丙
+but- 丁
+pent- 戊
+hex- 己
+hept- 庚
+oct- 辛
+non- 壬
+dec- 癸
+
+methylp 甲基
+
+hydroxy 羟基
+phenyl 苯基
+cyclo- 环
+-ane 烷(Alkanes)
+carboxylic 羧酸
+```

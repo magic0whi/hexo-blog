@@ -9,6 +9,7 @@ Ndoskrnl 的友人们
 * [MinatoAster](http://minatoaster.github.io)
 * [xtlsoft(徐天乐)](https://www.xtlsoft.top)
 * [Makito(朵朵)](https://keep.moe/)
+* [本地磁盘小日记ヾ(≧▽≦*)ゝ](http://ohayou.aimo.moe/)
 
 **下面是单向友链**
 
@@ -91,8 +92,6 @@ Ndoskrnl 的友人们
 [蝉时雨](https://chanshiyu.com/)
 
 [酷壳](https://coolshell.cn/)
-
-[本地磁盘小日记ヾ(≧▽≦*)ゝ](http://ohayou.aimo.moe/)
 
 [洛灵酱的小窝](https://blog.luoling8192.top/)
 
