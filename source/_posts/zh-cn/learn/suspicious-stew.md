@@ -170,3 +170,18 @@ cyclo- 环
 -ane 烷(Alkanes)
 carboxylic 羧酸
 ```
+
+## 利益 Zerotier 白嫖校园网
+
+"Zerotier 打洞, 永远滴神"
+
+> 首先确定你的校园网有IPv6, 一个简单的方法是看看号称支持IPv6的手机支付宝, 能不能在只连接校园网且未登录Wifi的状态下正常使用.
+
+1. 网关机配置转发和NAT:
+   ```console
+   sudo iptables -t filter -A FORWARD -i zt+ -s <你的Zerotier网络地址段> -d 0.0.0.0/0 -j ACCEPT
+   sudo iptables -t filter -A FORWARD -i eth0 -s 0.0.0.0/0 -d <你的Zerotier网络地址段> -j ACCEPT
+   sudo iptables -t nat -A POSTROUTING -o eth0 -s <你的Zerotier网络地址段> -j SNAT --to-source <你的网关机公网地址>
+   ```
+2. 在 [ZeroTier Central](my.zerotier.com) 中添加路由: `0.0.0.0/0 via <你的网关机在Zerotier网络中的地址>`
+3. 在想要白嫖的电脑上, 启用 Zerotier 的 Allow Default Route

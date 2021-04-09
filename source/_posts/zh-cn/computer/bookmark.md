@@ -215,6 +215,8 @@ Oracle 账户密码 [BugMeNot](http://bugmenot.com/view/oracle.com)
 
 [美卡论坛](https://forum.uscreditcardguide.com/)
 
+[DeepL](https://www.deepl.com/) : 比 Google Translate 好用的在线翻译
+
 ## Softwares
 
 [OBS](https://obsproject.com/)
