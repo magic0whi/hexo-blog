@@ -55,22 +55,14 @@ date: 2016-03-30 21:18:02
 tags:
 toc: true
 password: 12345
-abstract: 是该博文的摘要
-message: 这个是博文查看时, 密码输入框上面的描述性文字
+abstract: 该博文的摘要
+message: 密码输入框的描述性文字
 ---
 ```
 
 另见[Github项目说明](https://github.com/MikeCoder/hexo-blog-encrypt/blob/master/ReadMe.zh.md)
 
-## 常用命令
-
-创建新文章: `$ hexo new [layout] <title> --lang en --category <你最好填个分类>`
-
-清除缓存(在hexo g之前做一次): `$ hexo clean`
-
-网站发布: `$ hexo generate`
-
-升级Hexo:
+## 升级Hexo
 
 ```console
 # npm update -g # 升级npm全局插件
@@ -80,28 +72,7 @@ $ npm-upgrade # 更新package.json中的插件版本
 $ npm update # 实际更新插件
 ```
 
-## 一些概念
-
-### 布局(Layout)
-
-Hexo 默认有三种布局: `post`, `page`, `draft`, 分别对应了文章的生成路径 `source/_posts/`, `source/`, `source/_drafts/`
-
-可在 `scaffolds` 文件夹内增加新的布局模板
-
-### Front-matter
-
-Front-matter是文件最上方以 `---` 分隔的区域, 用于指定个别文件的变量, 举例来说
-
-```markdown
----
-title: Hello World
-date: 2013/7/13 20:46:25
----
-```
-
-> 注意: 一般Front-matter使用的yaml语法, yaml语法需要注意空格, 如title: Hello World冒号需要有一个空格, 当然除YAML 外, 你也可以使用 JSON 来编写 Front-matter.
-
-### 分类和标签
+## 分类和标签
 
 只有文章支持分类和标签, 您可以在 Front-matter 中设置. 在其他系统中, 分类和标签听起来很接近, 但是在 Hexo 中两者有着明显的差别: **分类具有顺序性和层次性而标签没有顺序和层次**
 
@@ -132,7 +103,7 @@ Example:
 
 具体见: [标签插件](https://hexo.io/zh-cn/docs/tag-plugins.html)
 
-## 一些的技巧示例
+## 一些技巧示例
 
 1. 单个页面使用赛博朋克主题, 在 Front-matter 加入如下内容:
    ```yaml
