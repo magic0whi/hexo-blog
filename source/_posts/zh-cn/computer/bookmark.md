@@ -19,15 +19,13 @@ QT Creator [QT download](https://download.qt.io/official_releases/)
 
 ## Windows
 
-Windows/Office 等镜像 [TechBench](https://tb.rg-adguard.net/public.php)
+Windows,Office 等镜像 [TechBench](https://tb.rg-adguard.net/public.php)
 
 ESD 解密 [decrypt-multi](https://rg-adguard.net/decrypt-multi-release/)
 
 [UUPDL](https://gitlab.com/uup-dump/uupdl)
 
 [最新支持的 Visual C++ 下载](https://support.microsoft.com/zh-cn/help/2977003/the-latest-supported-visual-c-downloads)
-
-[Win10累积更新补丁](https://www.sysgeek.cn/windows-10-hotfix/)
 
 [KMS client setup keys list](https://docs.microsoft.com/en-us/windows-server/get-started/kmsclientkeys)
 
