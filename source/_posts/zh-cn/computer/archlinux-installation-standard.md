@@ -81,8 +81,6 @@ Enter F12 for Boot Menu when bootstrap
    # btrfs subvolume create /mnt/var/cache/pacman/pkg
    # btrfs subvolume create /mnt/var/tmp
    ```
-4. Configuring swap
-   TODO
 
 ## Installation
 
@@ -219,7 +217,6 @@ Enter F12 for Boot Menu when bootstrap
     The package [systemd-boot-pacman-hook](https://aur.archlinux.org/packages/systemd-boot-pacman-hook/) provides a Pacman hook to automate the update process.
 
     Configuring the boot loader
-    Add the following kernel parameter to boot loader configuration
     ```conf /boot/loader/loader.conf
     default  arch.conf
     timeout  4
@@ -234,18 +231,26 @@ Enter F12 for Boot Menu when bootstrap
     initrd  /initramfs-linux.img
     options rd.luks.name=<sda2-UUID>=cryptroot root=/dev/mapper/cryptroot rootflags=subvol=@
     ```
+    ```conf /boot/loader/entries/arch-fallback.conf
+    title Arch Linux (fallback)
+    linux /vmlinuz-linux
+    initrd /initramfs-linux-fallback.img
+    options audit=0 rd.luks.name=7fb34a50-f2ae-4799-afc1-85c064a28fcc=cryptroot root=/dev/mapper/cryptroot rootflags=subvol=@
+    ```
 11. (Optional) Enable sshd
     ```console
     # systemctl enable sshd.service
     ```
-12. (Optional) Enable ZRAM
+12. (Optional) Enable ZSWAP, ZRAM, SWAPFC
     Configuration
     ```conf /etc/systemd/swap.conf
+    ...
+    zswap_enabled=1
+    ...
     zram_enabled=1
-    zram_size=$(( RAM_SIZE / 2 ))
-    zram_count=${NCPU}
-    zram_streams=${NCPU}
-    zram_alg=zstd
+    ...
+    swapfc_enabled=1
+    ...
     ```
     Enable systemd-swap
     ```console
@@ -255,7 +260,7 @@ Enter F12 for Boot Menu when bootstrap
     ```console
     # systemctl enable bluetooth.service
     ```
-14. (Optional) Add Archlinuxcn's repository
+14. (Optional) Add Archlinuxcn repository
     ```
     [archlinuxcn]
     Server = https://repo.archlinuxcn.org/$arch
@@ -274,14 +279,13 @@ I will use GNOME as my desktop environment
 1. Installation
    > Some packages require archlinuxcn's repository
    ```console
-   # yay -S gnome-shell gnome-shell-extensions gdm gdm3setup \
+   # yay -S gnome-shell gnome-shell-extensions gdm \
    nautilus file-roller sushi seahorse \
    noto-fonts{,-cjk,-emoji} \
    gnome-{control-center,terminal,tweaks,keyring,backgrounds,clocks,logs,screenshot,menus} \
-   gnome-shell-extension-kimpanel-git gnome-shell-extension-dash-to-dock gnome-shell-extension-desktop-icons-ng \
    gtk-engine-murrine materia-gtk-theme \
-   gdm3setup dconf-editor \
-   fcitx5-im fcitx5-chinese-addons fcitx5-configtool fcitx5-pinyin-{zhwiki,moegirl} fcitx5-skin-adwaita-dark
+   dconf-editor loginized \
+   fcitx5-im fcitx5-chinese-addons fcitx5-configtool fcitx5-skin-adwaita-dark
    ```
 
 ## NVIDIA & NVIDIA Optimus
@@ -298,32 +302,30 @@ I will use the method of `PRIME render offload` which was official method suppor
    $ prime-run vulkaninfo
    ```
 2. Dynamic power management of the dGPU
-   Enable runtime power management for each PCI function
-   ```console
-   echo auto > /sys/bus/pci/devices/<Domain>:<Bus>:<Device>.<Function>/power/control
-   ```
-   ```console
-   # modprobe nvidia "NVreg_DynamicPowerManagement=0x02"
-   ```
+   * Enable runtime power management for each PCI function
+     ```console
+     # echo auto > /sys/bus/pci/devices/<Domain>:<Bus>:<Device>.<Function>/power/control
+     # modprobe nvidia "NVreg_DynamicPowerManagement=0x02"
+     ```
    
-   The automated ways to perform the manual steps mentioned above so that this feature works seamlessly after boot:
-   1. Create a file named `80-nvidia-pm.rules` in `/lib/udev/rules.d/` directory
-      ```conf /lib/udev/rules.d/80-nvidia-pm.rules
-      # Remove NVIDIA Audio devices, if present
-      ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x040300", ATTR{remove}="1"
+   * The automated ways to perform the manual steps mentioned above so that this feature works seamlessly after boot:
+     1. Create a file named `80-nvidia-pm.rules` in `/lib/udev/rules.d/` directory
+        ```conf /lib/udev/rules.d/80-nvidia-pm.rules
+        # Remove NVIDIA Audio devices, if present
+        ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x040300", ATTR{remove}="1"
 
-      # Enable runtime PM for NVIDIA VGA/3D controller devices on driver bind
-      ACTION=="bind", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x030000", TEST=="power/control", ATTR{power/control}="auto"
+        # Enable runtime PM for NVIDIA VGA/3D controller devices on driver bind
+        ACTION=="bind", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x030000", TEST=="power/control", ATTR{power/control}="auto"
 
-      # Disable runtime PM for NVIDIA VGA/3D controller devices on driver unbind
-      ACTION=="unbind", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x030000", TEST=="power/control", ATTR{power/control}="on"
-      ```
-      > You can use `udevadm info --attribute-walk --path=/sys/bus/pci/devices/<Domain>\:<Bus>\:<Slot>.<Function>` to get a PCI device's attribution
-   2. Set the driver option via the kernel module configuration files
-      ```conf /etc/modprobe.d/nvidia.conf
-      options nvidia "NVreg_DynamicPowerManagement=0x02"
-      ```
-   3. Reboot the system
+        # Disable runtime PM for NVIDIA VGA/3D controller devices on driver unbind
+        ACTION=="unbind", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x030000", TEST=="power/control", ATTR{power/control}="on"
+        ```
+        > You can use `udevadm info --attribute-walk --path=/sys/bus/pci/devices/<Domain>\:<Bus>\:<Slot>.<Function>` to get a PCI device's   attribution
+     2. Set the driver option via the kernel module configuration files
+        ```conf /etc/modprobe.d/nvidia.conf
+        options nvidia "NVreg_DynamicPowerManagement=0x02"
+        ```
+     3. Reboot the system
 
 ## Troubleshot
 
@@ -342,15 +344,29 @@ I will use the method of `PRIME render offload` which was official method suppor
    $ gsettings set org.gnome.desktop.media-handling automount false
    $ gsettings set org.gnome.desktop.media-handling automount-open false 
    ```
+4. Video Decode is disabled in Microsoft Edge
+   ```conf ~/.config/microsoft-edge-dev-flags.conf
+   --ignore-gpu-blocklist
+   --enable-features=VaapiVideoDecoder
+   --enable-accelerated-video-decode
+   ```
 
 ## Additional Packages
 
 1. Additional Packages
    ```
+   [AUR] gnome-shell-extension-appindicator-git
+   [AUR] gnome-shell-extension-kimpanel-git
+   [AUR] gnome-shell-extension-dash-to-dock
+   [AUR] gnome-shell-extension-desktop-icons-ng
+
    vulkan-intel
    vulkan-tools
-   libva-intel-driver
    libva-utils
+    ^libva-intel-driver-hybrid
+    ^[AUR] intel-media-driver
+
+   [AUR] fcitx5-pinyin-zhwiki
 
    bpytop
    htop
@@ -370,6 +386,7 @@ I will use the method of `PRIME render offload` which was official method suppor
    wireguard-tools
    picocom
    gvfs-mtp
+   [AUR] tealdeer
 
    zsh
    zsh-autosuggestions
@@ -393,7 +410,7 @@ I will use the method of `PRIME render offload` which was official method suppor
    anki
    remmina
    syncthing-gtk
-   [AUR] v2raya
+   qv2ray
    [AUR] xmind-2020
    obs-studio
    mpv
@@ -420,6 +437,7 @@ I will use the method of `PRIME render offload` which was official method suppor
    - lib32-libxslt
    - lib32-gst-plugins-base-libs
 
-   [AUR] tealdeer
    [AUR] cppman
+   [AUR] v2raya
+   [Archlinuxcn] fcitx5-pinyin-moegirl
    ```
