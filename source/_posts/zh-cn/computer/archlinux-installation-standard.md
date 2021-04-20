@@ -359,14 +359,17 @@ I will use the method of `PRIME render offload` which was official method suppor
    [AUR] gnome-shell-extension-kimpanel-git
    [AUR] gnome-shell-extension-dash-to-dock
    [AUR] gnome-shell-extension-desktop-icons-ng
+   [AUR] gnome-shell-extension-freon-git
 
+   xf86-video-intel
    vulkan-intel
    vulkan-tools
    libva-utils
-    ^libva-intel-driver-hybrid
-    ^[AUR] intel-media-driver
+   ^libva-intel-driver-hybrid
+   ^[AUR] intel-media-driver
 
    [AUR] fcitx5-pinyin-zhwiki
+   [AUR] fcitx-skin-material
 
    bpytop
    htop
@@ -387,6 +390,8 @@ I will use the method of `PRIME render offload` which was official method suppor
    picocom
    gvfs-mtp
    [AUR] tealdeer
+   ncdu
+   [AUR] cppman
 
    zsh
    zsh-autosuggestions
@@ -396,24 +401,20 @@ I will use the method of `PRIME render offload` which was official method suppor
    npm
    [AUR] nodejs-hexo-cli
 
-   debootstrap
-   ubuntu-keyring
-
-   [AUR] qemu-user-static
-   [AUR] binfmt-qemu-static-all-arch
-
    qtcreator
-   [AUR] visual-studio-code-bin
-   [AUR] microsoft-edge-dev
+   
    telegram-desktop
    thunderbird
    anki
    remmina
-   syncthing-gtk
+   [AUR] syncthing-gtk
    qv2ray
-   [AUR] xmind-2020
    obs-studio
    mpv
+   [AUR] visual-studio-code-bin
+   [AUR] microsoft-edge-dev
+   [AUR] xmind-2020
+   [AUR] netease-cloud-music-gtk
 
    steam
    - ttf-liberation
@@ -437,7 +438,19 @@ I will use the method of `PRIME render offload` which was official method suppor
    - lib32-libxslt
    - lib32-gst-plugins-base-libs
 
-   [AUR] cppman
+   debootstrap
+   ubuntu-keyring
+
+   virt-manager
+   libvirt
+   - dmidecode
+   - dnsmasq
+   - ebtables
+   - ^qemu
+     ^[AUR] qemu-user-static
+        [AUR] binfmt-qemu-static-all-arch
+
+   
    [AUR] v2raya
    [Archlinuxcn] fcitx5-pinyin-moegirl
    ```
