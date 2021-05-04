@@ -126,7 +126,7 @@ Reference from [StackExchange](https://superuser.com/questions/91935/how-to-recu
 ### 泛域名证书
 
 ```console
-$ certbot certonly --preferred-challenges dns --manual  -d *.example.com
+$ certbot certonly --preferred-challenges dns --manual -d *.example.com
 ```
 
 ### Kernel interface

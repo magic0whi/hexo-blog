@@ -280,7 +280,7 @@ I will use GNOME as my desktop environment
    > Some packages require archlinuxcn's repository
    ```console
    # yay -S gnome-shell gnome-shell-extensions gdm \
-   nautilus file-roller sushi seahorse \
+   nautilus file-roller sushi seahorse eog \
    noto-fonts{,-cjk,-emoji} \
    gnome-{control-center,terminal,tweaks,keyring,backgrounds,clocks,logs,screenshot,menus} \
    gtk-engine-murrine materia-gtk-theme \
@@ -392,6 +392,7 @@ I will use the method of `PRIME render offload` which was official method suppor
    [AUR] tealdeer
    ncdu
    [AUR] cppman
+   openbsd-netcat
 
    zsh
    zsh-autosuggestions
@@ -407,7 +408,6 @@ I will use the method of `PRIME render offload` which was official method suppor
    thunderbird
    anki
    remmina
-   [AUR] syncthing-gtk
    qv2ray
    obs-studio
    mpv
@@ -449,8 +449,9 @@ I will use the method of `PRIME render offload` which was official method suppor
    - ^qemu
      ^[AUR] qemu-user-static
         [AUR] binfmt-qemu-static-all-arch
-
+   edk2-ovmf
    
    [AUR] v2raya
    [Archlinuxcn] fcitx5-pinyin-moegirl
+   [AUR] syncthing-gtk
    ```

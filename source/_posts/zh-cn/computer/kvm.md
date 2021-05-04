@@ -12,6 +12,22 @@ This article includes:
 2. PCI passthrough via OVMF
 3. Intel's GVT-g
 
+TODO:
+virtio drivers 
+https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/stable-virtio/virtio-win.iso
+
+```conf /etc/modules-load.d/kvm.conf
+kvmgt
+#vfio-iommu-type1
+vfio-mdev
+```
+
+```conf /etc/mkinitcpio.conf
+MODULES=(vfio_pci vfio vfio_iommu_type1 vfio_virqfd)
+```
+
+
+
 <!-- more -->
 
 ## KVM + Libvirt + WebVirtCloud 安装
@@ -140,7 +156,7 @@ This article includes:
    # You can use xmllint and XPath expression to extract GVT_GUID from stdin, e.g.:
    # GVT_GUID="$(xmllint --xpath 'string(/domain/devices/hostdev[@type="mdev"][@display="on"]/source/address/@uuid)' -)"
    MDEV_TYPE=i915-GVTg_V5_4
-   DOMAIN=Archlinux-03 # Your hostname
+   DOMAIN=win10 # Your virtual machine name
    if [ $# -ge 3 ]; then
        if [ $1 = "$DOMAIN" -a $2 = "prepare" -a $3 = "begin" ]; then
            echo "$GVT_GUID" > "/sys/bus/pci/devices/$GVT_PCI/mdev_supported_types/$MDEV_TYPE/create"

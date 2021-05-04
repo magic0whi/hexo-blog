@@ -24,15 +24,6 @@ git@blog ~$ git init --bare blog.git
 别忘了 chmod +x post-update
 若想使用git-shell: `usermod -s /usr/bin/git-shell git`
 
-## Nginx配置
-
-```console
-# mkdir -p /var/www/blog    #在服务器选择一个放置网站的目录, 假设这个目录为/var/www/blog
-# chown git:git -R /var/www/blog    #设置权限
-```
-
-Nginx配置文件见: {% post_link nginx "nginx配置改动" %}
-
 ## Hexo 文章加密
 
 ```console

@@ -16,24 +16,24 @@ tags:
 ### ssh
 
 ```conf .ssh/config
-# ssh代理设置
-ServerAliveInterval 22
-ProxyCommand nc -v -x 127.0.0.1:1080 %h %p
-
-# 压缩频宽
-Compression yes
-
-# 减少重复连线的时间
-ControlMaster auto
-ControlPath /tmp/ssh-%r@%h:%p
-
-# 延长连线时间
-ControlPresist yes
+Host *
+    # 每隔 30s 向远端发送 keep-alive 包, 如果发送 5 次无回应断开连接。
+    ServerAliveInterval 30
+    ServerAliveCountMax 5
+    # ssh代理设置, 请使用 openbsd-netcat
+    ProxyCommand nc -v -x 127.0.0.1:1080 %h %p
+    # 压缩流量
+    Compression yes
+    # 多个 ssh 会话共享同一个连接, 减少重复连线的时间
+    ControlMaster auto
+    ControlPath /tmp/ssh-%r@%h:%p
+    # 延长连接有效时间
+    ControlPersist 30m
 
 # github的密钥配置
 Host github.com
     User git
-    IdentityFile ~/.ssh/id_ed25519.github
+    IdentityFile ~/.ssh/id_ed25519.key
 ```
 
 ### ~/.bashrc
@@ -86,9 +86,8 @@ kernel.panic = 3780
    Set-Service DiagTrack -StartupType Disabled
    ```
 3. 启用UTC
-   Open `regedit` and add a `DWORD` value for 32-bit Windows, or `QWORD` for 64-bit one, with hexadecimal value `1` to the registry:
    ```batch
-   HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TimeZoneInformation\RealTimeIsUniversal
+   reg add "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\TimeZoneInformation" /v RealTimeIsUniversal /d 1 /t REG_QWORD /f
    ```
    [参考 Archlinux Wiki](https://wiki.archlinux.org/index.php/System_time#UTC_in_Windows)
 4. 禁用英特尔CPU幽灵/熔断/僵尸负载漏洞补丁
