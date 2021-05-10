@@ -175,8 +175,6 @@ Oracle 账户密码 [BugMeNot](http://bugmenot.com/view/oracle.com)
 
 [免费上网账号](https://free-ss.site/)
 
-[yiff.party](https://yiff.party/)
-
 [存储 SSD/NAS/DAS 技术论坛](http://bbs.pceva.com.cn/forum-124-1.html)
 
 教你制作能打印PCB的压印机 [Diyyouware](http://www.diyouware.com/)
@@ -214,6 +212,8 @@ Oracle 账户密码 [BugMeNot](http://bugmenot.com/view/oracle.com)
 [美卡论坛](https://forum.uscreditcardguide.com/)
 
 [DeepL](https://www.deepl.com/) : 比 Google Translate 好用的在线翻译
+
+[Kemono.party](https://kemono.party/) : 心里要知道白嫖不是长久之计, 每个人的劳动都应当尊重.
 
 ## Softwares
 

@@ -31,7 +31,7 @@ $ grep -iRl "your-text-to-find" ./
 
 1. 拷贝文件, 保留所有信息
    ```console
-   $ rsync -aXv -P $SOURCE_DIR/ $TARGET_DIR/`
+   $ rsync -aXHAv -P $SOURCE_DIR/ $TARGET_DIR/`
    ```
 2. 仅复制, 不保留权限
    ```console
@@ -221,14 +221,13 @@ string1 < string2 - The less than operator returns true if the right operand is 
 
 ```
 ::x 正数时从左往右截取x个, 负数时从右往左截掉x个
-:x 从x开始截取后面所有内容, 负数时
-:(-x) 或者 : -x 从右往左截取所有内容
+:x 从x开始截取后面所有内容, 负数时 :(-x) 或者 : -x 从右往左截取所有内容
 :x:y 从x开始截取y个字符
-${food:-Cake} 如果 $food 存在否则输出 "Cake"
+${food:-Cake} 若 $food 不存在则输出 "Cake"
 
 STR="/path/to/foo.cpp"
-echo ${STR%/*}   # /path/to     % 是从后向前匹配, 单个 % 是非贪婪模式, 
-echo ${STR#*/}   # path/to/foo.cpp   # 是从前向后匹配, 单个 # 是非贪婪模式, 
+echo ${STR%/*}   # /path/to     % 是从右向左截去, 单个 % 是非贪婪模式, 
+echo ${STR#*/}   # path/to/foo.cpp   # 是从左向右截去, 单个 # 是非贪婪模式, 
 echo ${STR%.cpp} # /path/to/foo 两个 %% 是贪婪模式
 echo ${STR##*.}  # cpp          两个 ## 是贪婪模式
 ```

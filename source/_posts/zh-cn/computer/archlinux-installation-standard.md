@@ -235,7 +235,7 @@ Enter F12 for Boot Menu when bootstrap
     title Arch Linux (fallback)
     linux /vmlinuz-linux
     initrd /initramfs-linux-fallback.img
-    options audit=0 rd.luks.name=7fb34a50-f2ae-4799-afc1-85c064a28fcc=cryptroot root=/dev/mapper/cryptroot rootflags=subvol=@
+    options rd.luks.name=7fb34a50-f2ae-4799-afc1-85c064a28fcc=cryptroot root=/dev/mapper/cryptroot rootflags=subvol=@
     ```
 11. (Optional) Enable sshd
     ```console
@@ -387,7 +387,7 @@ I will use the method of `PRIME render offload` which was official method suppor
    traceroute
    compsize
    wireguard-tools
-   picocom
+   picocom  ($ picocom -b 1500000 /dev/ttyUSB0, Ctrl-a Ctrl-q to quit)
    gvfs-mtp
    [AUR] tealdeer
    ncdu
