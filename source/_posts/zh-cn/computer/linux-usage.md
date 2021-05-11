@@ -144,37 +144,63 @@ $ certbot certonly --preferred-challenges dns --manual -d *.example.com
    $ cat /sys/class/power_supply/<Your battery name>/capacity
    ```
 
-### 透明代理(TPROXY)客户端命令
+### iptables
 
-```console
-# 设置策略路由
-ip rule add fwmark 1 table 100
-ip route add local 0.0.0.0/0 dev lo table 100
+1. 透明代理(TPROXY)
+   ```console
+   # 设置策略路由
+   ip rule add fwmark 1 table 100
+   ip route add local 0.0.0.0/0 dev lo table 100
+   
+   # 代理局域网设备
+   iptables -t mangle -N V2RAY
+   iptables -t mangle -A V2RAY -d 127.0.0.1/32 -j RETURN
+   iptables -t mangle -A V2RAY -d 224.0.0.0/4 -j RETURN
+   iptables -t mangle -A V2RAY -d 255.255.255.255/32 -j RETURN
+   iptables -t mangle -A V2RAY -d 192.168.0.0/16 -p tcp -j RETURN # 直连局域网，避免 V2Ray 无法启动时无法连网关的 SSH，如果你配置的是其他网段（如 10.x.x.x 等），则修改成自己的
+   iptables -t mangle -A V2RAY -d 192.168.0.0/16 -p udp -j RETURN # 直连局域网
+   iptables -t mangle -A V2RAY -p udp -j TPROXY --on-port 12345 --tproxy-mark 1 # 给 UDP 打标记 1，转发至 12345 端口
+   iptables -t mangle -A V2RAY -p tcp -j TPROXY --on-port 12345 --tproxy-mark 1 # 给 TCP 打标记 1，转发至 12345 端口
+   iptables -t mangle -A PREROUTING -j V2RAY # 应用规则
+   
+   # 代理网关本机
+   iptables -t mangle -N V2RAY_MASK
+   iptables -t mangle -A V2RAY_MASK -d 224.0.0.0/4 -j RETURN
+   iptables -t mangle -A V2RAY_MASK -d 255.255.255.255/32 -j RETURN
+   iptables -t mangle -A V2RAY_MASK -d 192.168.0.0/16 -p tcp -j RETURN # 直连局域网
+   iptables -t mangle -A V2RAY_MASK -d 192.168.0.0/16 -p udp ! --dport 53 -j RETURN # 直连局域网，53 端口除外（因为要使用 V2Ray 的 DNS）
+   iptables -t mangle -A V2RAY_MASK -j RETURN -m mark --mark 0xff    # 直连 SO_MARK 为 0xff 的流量(0xff 是 16 进制数，数值上等同与上面V2Ray 配置的 255)，此规则目的是避免代理本机(网关)流量出现回环问题
+   iptables -t mangle -A V2RAY_MASK -p udp -j MARK --set-mark 1   # 给 UDP 打标记,重路由
+   iptables -t mangle -A V2RAY_MASK -p tcp -j MARK --set-mark 1   # 给 TCP 打标记，重路由
+   iptables -t mangle -A OUTPUT -j V2RAY_MASK # 应用规则
+   ```
+   [参考来源](https://guide.v2fly.org/app/tproxy.html)
+2. IPSET u32 匹配
+   判断一个包的 TCP Seq 的最后一个值是否等于 41 : `0>>22&0x3C@ 4 &0xFF=0x29`
+   举个例子(可以用 WireShark 抓包):
+   ```
+   Source IP: 121.41.89.52
+   = 01111001 00101001 01011001 00110100B = 79 29 59 34H = 2032752948D
+   IP Header：
+   45 00 00 3c 00 00 40 00 31 06 ef 34 **79 29 59 34** c0 a8 c7 81
+   TCP Header：
+   00 50 95 3c 8d 7f 52 ac 69 15 33 be a0 12 71 20 cd dc 00 00 02 04 05 14 04 02 08 0a 08 c8 62 fa 00 1c 30 a1 01 03 03 07
+   ```
+   `0>>22` 的含义是从 IP 报头的 0 下标取 4 字节(共 32 位, u32 默认取 4 字节), 然后按位右移 22 位, 从而得到剩余的开头 10 位.
+   如 `45 00 00 3c = 0100 0101 0000 0000 0000 0000 0011 1100` 右移 22 位
+   得到 `1 14 = 01 0001 0100`
+   
+   后面的 `&0x3C` 的含义是和 `0x3C = 0011 1100` 进行按位与运算(实际上就是过滤)
+   因此本例中 `0>>22&0x3C` 即 `01 0001 0100 & 00 0011 1100` 得到 `00 0001 0100`,
+   
+   通过这两个操作我们得到了 IP 头的第 4~7 位的值
+   记录 IP 头长度的值是 IP 头的第 4~7 位的值值再加两个 0 也就是 `01 0100` (十进制的 20)
+   `@` 的含义是根据左边的值推进指针, 本例中 `0>>22&0x3C@` 即推进 20 个字节
 
-# 代理局域网设备
-iptables -t mangle -N V2RAY
-iptables -t mangle -A V2RAY -d 127.0.0.1/32 -j RETURN
-iptables -t mangle -A V2RAY -d 224.0.0.0/4 -j RETURN
-iptables -t mangle -A V2RAY -d 255.255.255.255/32 -j RETURN
-iptables -t mangle -A V2RAY -d 192.168.0.0/16 -p tcp -j RETURN # 直连局域网，避免 V2Ray 无法启动时无法连网关的 SSH，如果你配置的是其他网段（如 10.x.x.x 等），则修改成自己的
-iptables -t mangle -A V2RAY -d 192.168.0.0/16 -p udp -j RETURN # 直连局域网
-iptables -t mangle -A V2RAY -p udp -j TPROXY --on-port 12345 --tproxy-mark 1 # 给 UDP 打标记 1，转发至 12345 端口
-iptables -t mangle -A V2RAY -p tcp -j TPROXY --on-port 12345 --tproxy-mark 1 # 给 TCP 打标记 1，转发至 12345 端口
-iptables -t mangle -A PREROUTING -j V2RAY # 应用规则
-
-# 代理网关本机
-iptables -t mangle -N V2RAY_MASK
-iptables -t mangle -A V2RAY_MASK -d 224.0.0.0/4 -j RETURN
-iptables -t mangle -A V2RAY_MASK -d 255.255.255.255/32 -j RETURN
-iptables -t mangle -A V2RAY_MASK -d 192.168.0.0/16 -p tcp -j RETURN # 直连局域网
-iptables -t mangle -A V2RAY_MASK -d 192.168.0.0/16 -p udp ! --dport 53 -j RETURN # 直连局域网，53 端口除外（因为要使用 V2Ray 的 DNS）
-iptables -t mangle -A V2RAY_MASK -j RETURN -m mark --mark 0xff    # 直连 SO_MARK 为 0xff 的流量(0xff 是 16 进制数，数值上等同与上面V2Ray 配置的 255)，此规则目的是避免代理本机(网关)流量出现回环问题
-iptables -t mangle -A V2RAY_MASK -p udp -j MARK --set-mark 1   # 给 UDP 打标记,重路由
-iptables -t mangle -A V2RAY_MASK -p tcp -j MARK --set-mark 1   # 给 TCP 打标记，重路由
-iptables -t mangle -A OUTPUT -j V2RAY_MASK # 应用规则
-```
-
-[参考来源](https://guide.v2fly.org/app/tproxy.html)
+   剩下的也没什么好说的了,
+   从 TCP 头第 4 下标处取 4 字节然后用掩码 `0xFF` 按位与取得其中的最后一个字节,
+   然后比较是否等于 `0x29 = 41D`
+   > 等号后可以说单个值也可以是一个区间, 如判断一个包的 TCP Seq 的最后一个值是否在 41~60 之间 `0>>22&0x3C@ 4 &0xFF=0x29:0x3C`
 
 ## bash
 

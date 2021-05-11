@@ -215,6 +215,8 @@ Oracle 账户密码 [BugMeNot](http://bugmenot.com/view/oracle.com)
 
 [Kemono.party](https://kemono.party/) : 心里要知道白嫖不是长久之计, 每个人的劳动都应当尊重.
 
+[DevDocs API Documentation](https://devdocs.io/) : 各种编程语言和软件的文档集合(比如 CPP reference)
+
 ## Softwares
 
 [OBS](https://obsproject.com/)

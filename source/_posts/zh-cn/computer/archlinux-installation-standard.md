@@ -23,16 +23,16 @@ Enter F12 for Boot Menu when bootstrap
 
    Partition layout:
    ```
-   +-----------------------+------------------------+-----------------------+
-   | Boot partition        | LUKS2 encrypted system | Swap partition        |
-   |                       | partition              | plain-encrypted       |
-   |                       |                        |                       |
-   | /boot                 | /                      |                       |
-   |                       |                        |                       |
-   |                       | /dev/mapper/cryptroot  | [SWAP]                |
-   |-----------------------|------------------------|-----------------------|
-   | /dev/sda1             | /dev/sda2              | /dev/sda3             |
-   +-----------------------+------------------------+-----------------------+
+   +-----------------------+------------------------+
+   | Boot partition        | LUKS2 encrypted system |
+   |                       | partition              |
+   |                       |                        |
+   | /boot                 | /                      |
+   |                       |                        |
+   |                       | /dev/mapper/cryptroot  |
+   |-----------------------|------------------------|
+   | /dev/sda1             | /dev/sda2              |
+   +-----------------------+------------------------+
    ```
 
    Preparing non-boot partitions
@@ -64,7 +64,7 @@ Enter F12 for Boot Menu when bootstrap
    # umount /mnt
    ```
    Now mount the newly created subvolumes by using the `subvol=` mount option (with enabled compress `zstd`).
-   ```
+   ```console
    # mount -o compress=zstd,subvol=@ /dev/mapper/cryptroot /mnt
    # mkdir /mnt/{boot,home,.snapshots}
    # mount /dev/sda1 /mnt/boot
@@ -284,8 +284,17 @@ I will use GNOME as my desktop environment
    noto-fonts{,-cjk,-emoji} \
    gnome-{control-center,terminal,tweaks,keyring,backgrounds,clocks,logs,screenshot,menus} \
    gtk-engine-murrine materia-gtk-theme \
-   dconf-editor loginized \
-   fcitx5-im fcitx5-chinese-addons fcitx5-configtool fcitx5-skin-adwaita-dark
+   dconf-editor loginized
+   ```
+2. (Optional) Install & Configure input method:
+   ```console
+   # pacman -S fcitx5-im fcitx5-chinese-addons fcitx5-configtool fcitx5-skin-adwaita-dark
+   # cp /usr/share/applications/org.fcitx.Fcitx5.desktop ~/.config/autostart/
+   ```
+   ```shell ~/.pam_environment
+   GTK_IM_MODULE DEFAULT=fcitx
+   QT_IM_MODULE  DEFAULT=fcitx
+   XMODIFIERS    DEFAULT=\@im=fcitx
    ```
 
 ## NVIDIA & NVIDIA Optimus

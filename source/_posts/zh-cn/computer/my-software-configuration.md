@@ -11,57 +11,40 @@ tags:
 
 <!-- more -->
 
-## 配置文件
+## linux
 
-### ssh
+1. ```conf .ssh/config
+   Host *
+       # 每隔 30s 向远端发送 keep-alive 包, 如果发送 5 次无回应断开连接。
+       ServerAliveInterval 30
+       ServerAliveCountMax 5
+       # ssh代理设置, 请使用 openbsd-netcat
+       ProxyCommand nc -v -x 127.0.0.1:1080 %h %p
+       # 压缩流量
+       Compression yes
+       # 多个 ssh 会话共享同一个连接, 减少重复连线的时间
+       ControlMaster auto
+       ControlPath /tmp/ssh-%r@%h:%p
+       # 延长连接有效时间
+       ControlPersist 30m
 
-```conf .ssh/config
-Host *
-    # 每隔 30s 向远端发送 keep-alive 包, 如果发送 5 次无回应断开连接。
-    ServerAliveInterval 30
-    ServerAliveCountMax 5
-    # ssh代理设置, 请使用 openbsd-netcat
-    ProxyCommand nc -v -x 127.0.0.1:1080 %h %p
-    # 压缩流量
-    Compression yes
-    # 多个 ssh 会话共享同一个连接, 减少重复连线的时间
-    ControlMaster auto
-    ControlPath /tmp/ssh-%r@%h:%p
-    # 延长连接有效时间
-    ControlPersist 30m
-
-# github的密钥配置
-Host github.com
-    User git
-    IdentityFile ~/.ssh/id_ed25519.key
-```
-
-### ~/.bashrc
-
-{% asset_link bashrc.example "~/.bashrc" %}
-
-### ~/.zshrc
-
-{% asset_link zshrc.example "~/.zshrc" %}
-
-### aria2
-
-{% asset_link aria2.conf.example "aria2.conf" %}
-
-### ddclient
-
-{% asset_link ddclient.conf.example "/etc/ddclient/ddclient.conf" %}
-
-### sysctl
-
-```conf
-# BBR TCP Congestion
-net.core.default_qdisc=fq
-net.ipv4.tcp_congestion_control=bbr
-
-# Reboot after 30 minutes
-kernel.panic = 3780
-```
+   # github的密钥配置
+   Host github.com
+       User git
+       IdentityFile ~/.ssh/id_ed25519.key
+   ```
+2. {% asset_link bashrc.example "~/.bashrc" %}
+   {% asset_link zshrc.example "~/.zshrc" %}
+3. {% asset_link aria2.conf.example "aria2.conf" %}
+4. sysctl
+   ```conf /etc/sysctl.d/99-sysctl.conf
+   # BBR TCP Congestion
+   net.core.default_qdisc = cake
+   net.ipv4.tcp_congestion_control = bbr
+   
+   # Kernel Panic auto reboot after 30 minutes
+   kernel.panic = 3780
+   ```
 
 ## Windows 10
 
