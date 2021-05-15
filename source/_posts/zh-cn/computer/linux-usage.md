@@ -200,7 +200,7 @@ $ certbot certonly --preferred-challenges dns --manual -d *.example.com
    剩下的也没什么好说的了,
    从 TCP 头第 4 下标处取 4 字节然后用掩码 `0xFF` 按位与取得其中的最后一个字节,
    然后比较是否等于 `0x29 = 41D`
-   > 等号后可以说单个值也可以是一个区间, 如判断一个包的 TCP Seq 的最后一个值是否在 41~60 之间 `0>>22&0x3C@ 4 &0xFF=0x29:0x3C`
+   > 等号后可以是单个值也可以是一个区间, 如判断一个包的 TCP Seq 的最后一个值是否在 41~60 之间 `0>>22&0x3C@ 4 &0xFF=0x29:0x3C`
 
 ## bash
 

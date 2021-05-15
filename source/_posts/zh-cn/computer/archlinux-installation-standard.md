@@ -285,10 +285,11 @@ I will use GNOME as my desktop environment
    gnome-{control-center,terminal,tweaks,keyring,backgrounds,clocks,logs,screenshot,menus} \
    gtk-engine-murrine materia-gtk-theme \
    dconf-editor loginized
+   # systemctl enable gdm.service
    ```
 2. (Optional) Install & Configure input method:
    ```console
-   # pacman -S fcitx5-im fcitx5-chinese-addons fcitx5-configtool fcitx5-skin-adwaita-dark
+   # pacman -S fcitx5-im fcitx5-chinese-addons fcitx5-configtool
    # cp /usr/share/applications/org.fcitx.Fcitx5.desktop ~/.config/autostart/
    ```
    ```shell ~/.pam_environment
@@ -364,7 +365,7 @@ I will use the method of `PRIME render offload` which was official method suppor
 
 1. Additional Packages
    ```
-   [AUR] gnome-shell-extension-appindicator-git
+   [AUR] gnome-shell-extension-appindicator
    [AUR] gnome-shell-extension-kimpanel-git
    [AUR] gnome-shell-extension-dash-to-dock
    [AUR] gnome-shell-extension-desktop-icons-ng
@@ -374,11 +375,11 @@ I will use the method of `PRIME render offload` which was official method suppor
    vulkan-intel
    vulkan-tools
    libva-utils
-   ^libva-intel-driver-hybrid
-   ^[AUR] intel-media-driver
+   ^[AUR] libva-intel-driver-hybrid
+   ^intel-media-driver
 
    [AUR] fcitx5-pinyin-zhwiki
-   [AUR] fcitx-skin-material
+   [AUR] fcitx5-skin-material
 
    bpytop
    htop
@@ -421,7 +422,7 @@ I will use the method of `PRIME render offload` which was official method suppor
    obs-studio
    mpv
    [AUR] visual-studio-code-bin
-   [AUR] microsoft-edge-dev
+   [AUR] microsoft-edge-dev-bin
    [AUR] xmind-2020
    [AUR] netease-cloud-music-gtk
 
@@ -460,6 +461,8 @@ I will use the method of `PRIME render offload` which was official method suppor
         [AUR] binfmt-qemu-static-all-arch
    edk2-ovmf
    
+   texlive-most
+
    [AUR] v2raya
    [Archlinuxcn] fcitx5-pinyin-moegirl
    [AUR] syncthing-gtk
