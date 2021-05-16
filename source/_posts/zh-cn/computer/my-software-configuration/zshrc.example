@@ -2,6 +2,9 @@ autoload -Uz compinit promptinit
 compinit
 promptinit
 
+# print an empty line before the PROMPT is rendered
+precmd() { print "" }
+
 zstyle ':completion:*' menu select
 setopt COMPLETE_ALIASES
 zstyle ':completion::complete:*' gain-privileges 1

@@ -8,7 +8,7 @@ toc: true
 
 Notes on Cherno C++ Tutorial
 
-TODO: 重新格式化这篇博文
+TODO: 重新格式化这篇文章
 
 <!-- more -->
 
@@ -18,8 +18,8 @@ TODO: 重新格式化这篇博文
 
 ## Notice
 
-1. Always pass your function parameters with const
-2. if object have pointer variable inside, write a copy constructor and use it
+1. Always pass your function parameters with const if possible
+2. If an object have pointer variable inside, write a copy constructor and use it
 3. 节约内存的小技巧
    由于内存最小可操作单位是 byte, 而 bool 类型只需要 1 字节即可(0 和 1)，巧妙的方法是使用 1 个 byte 表示 8 个 bool 类型变量
 4. 头文件 or inline? （inline实际上就是将函数整个代码复制到调用这个函数的函数那里）
@@ -66,87 +66,144 @@ TODO: 重新格式化这篇博文
 
 ## How C++ Works
 
-TODO: 优化这段的内容
+Concepts:
+* Every .cpp will compile to one .o/.obj file
+* multiple .cpp and .h has `#include` with each other can compose to a translation unit
+* Compile Process Path: Source->Compile->Linker->Executables
 
-概念：每个cpp都会编译成一个obj
-多个 .cpp & .h 文件互相 #include 可整合成一个 translation unit
-
-Source->Compile->Linker->Executables
-
-Compile Only (Ctrl+F7)
-
-工程设置->Preprocessor->Preprocess to a File以生产预处理文件（经编译器解析了宏的源码）
-
-外部定义的函数会在link阶段被整合，没有被调用的函数声明会被优化掉
+1. Generate Pre-process file
+   Pro-process file is the source code that the macro (such like `#include`) was parsed by the compiler.
+   * VS2015: Project Settings->Preprocessor->Preprocess to a File
+   * GCC: `cpp hello.cpp > hello.i`
+2. Compile & Assembly
+   * VS2015: Compile Only (Ctrl+F7)
+   * GCC: `g++ -S main.i; as main.s -o main.o`
+3. Linker
+   Externally defined functions will be integrated in the link phase,
+   and function declarations that never be called will be optimized away.
+   
+   The parameter of `ld` are platform specific (mainly depend on your gcc version)
+   Use `g++ -v -o hello hello.cpp` we can get the parameter of the `collect2` (which is an alias for `ld`)
+   ```console
+   $ g++ -v -o hello hello.cpp
+   ...
+   /usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/collect2 -plugin /usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/lto-wrapper -plugin-opt=-fresolution=/tmp/ccDNo0Hr.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -o main.exe /usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/../../../../lib/Scrt1.o /usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/../../../../lib/crti.o /usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/crtbeginS.o -L/usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0 -L/usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/../../../../lib -L/lib/../lib -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/../../.. /tmp/ccs86P3x.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/crtendS.o /usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/../../../../lib/crtn.o
+   ...
+   ```
+   So the `ld` command should be
+   ```console
+   $ ld
+   > -plugin-opt=/usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/lto-wrapper
+   > -plugin-opt=-fresolution=/tmp/ccHyR7Od.res
+   > -plugin-opt=-pass-through=-lgcc_s
+   > -plugin-opt=-pass-through=-lgcc
+   > -plugin-opt=-pass-through=-lc
+   > -plugin-opt=-pass-through=-lgcc_s
+   > -plugin-opt=-pass-through=-lgcc
+   > --build-id
+   > --eh-frame-hdr
+   > --hash-style=gnu
+   > -m elf_x86_64
+   > -dynamic-linker /lib64/ld-linux-x86-64.so.2
+   > -pie
+   > -o main /usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/../../../../lib/Scrt1.o
+   > /usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/../../../../lib/crti.o
+   > /usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/crtbeginS.o
+   > -L/usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0
+   > -L/usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/../../../../lib
+   > -L/lib/../lib
+   > -L/usr/lib/../lib
+   > -L/usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/../../..
+   > main.o
+   > -lstdc++
+   > -lm
+   > -lgcc_s
+   > -lgcc
+   > -lc
+   > -lgcc_s
+   > -lgcc /usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/crtendS.o
+   > /usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/../../../../lib/crtn.o
+   ```
+   You can probably significantly shorten that link line by removing some arguments. Here's the minimal set I came up with after some experimentation:
+   ```console
+   $ ld
+   > -dynamic-linker /lib64/ld-linux-x86-64.so.2
+   > -o main /usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/../../../../lib/Scrt1.o
+   > /usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/../../../../lib/crti.o
+   > /usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/crtbeginS.o
+   > -L/usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0
+   > main.o
+   > -lstdc++
+   > -lc
+   > /usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/crtendS.o
+   > /usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/../../../../lib/crtn.o
+   ```
 
 ## Variables in C++
 
-数据类型大小
+Main idea: The difference between C++ data types are simply the different allocated memory size and the declaration of the type of data to be stored
+
+Different memory allocation size for C++ Data Type:
 | | |
 |---| --- |
-| char | 1字节 |
-| short | 2字节 |
-| int | 4字节 | 
-| long | **通常为**4字节 |
-| long long | 8字节 |
-| float | 4字节 |
-| double | 8字节 |
+| char | 1 Byte |
+| short | 2 Bytes |
+| int | 4 Bytes | 
+| long | **commonly** 4 Bytes |
+| long long | 8 Bytes |
+| float | 4 Bytes |
+| double | 8 Bytes |
 
-核心思想：c++ 中所有数据类型仅仅宣告开辟内存空间的大小和准备存储的数据类型
-
-使用 `sizeof(数据类型)` 查看数据类型大小
+> You can use `sizeof()` to see the data type size.
 
 ## Functions in C++
 
-function 表示不在类中的函数
-method 表示在类中的函数
-
-函数的主要目的是防止代码重复
-但不要过多地将代码划分成一个个函数, 调用一个函数需要为这个函数创建一整个 stack frame (栈框架),
-也就是说我们得把参数之类的东西 push 到栈上，还要把一个叫做返回地址的东西放到栈上(以在函数执行完之后将PC寄存器返回到调用函数前的地方)，
-所以为了执行函数指令而在内存中跳转来跳转去会消耗额外的时间，
-
-通常将函数拆分为声明和定义: 声明写在头文件中，定义写在 translation unit 中
+* **Function** means a function that is not in a class.
+  **Method** means a function in a class.
+* The main purpose of the function is to reduce code duplication.
+  But don't frequently divide your code into functions, calling a function requires
+  creating an entire stack frame for that function.
+  This means we have to push parameters and so on into the stack, and also, put something
+  called the return address into the stack, so that after the function executed the PC register could return to the address before the function call.
+  TLDR: Jumping around in memory to execute function instructions comsumes additional time.
+* Generally we write function definitions in header files (.h) and function bodies in .cpp files.
 
 ## C++ Header Files
 
-`#pragma once` 可以防止在一个 translation unit 中多次 #include 一个头文件导致的问题(比如头文件a.h include了另一个头文件b.h, 而你之前已经include 了 b.h)
+`#pragma once` can prevent include same header file multiple times in a translation unit
+(e.g. your include header file b.h in a.cpp, but b.h includes andther header file c.h, while you have already include b.h before in a.cpp)
 
-比#pragma once更烂的方法（clion自带）：
-Log.h中，有
-```C++
+The second way do the same thing as `#pragma once` (In CLion this is the default way):
+```C++ Log.h
 #ifndef _LOG_H
 #define _LOG_H
 
-// 一些代码
+// some sentence...
 
 #endif
 ```
 
 ## How to DEBUG C++ in VISUAL STUDIO
 
-调试：vs中watch界面可以指定监视的变量，memory window可以搜索&a查看变量a的地址
-未初始化的变量值默认为0xccccccc
+* The **watch view** in VS2015 allows you to specify the veriables to be monitored,
+  In **memory window** you can search by keyword `&a` to show the address of variable `a`
+* The default value of uninitialized variables is `0xcccccccc`
 
 ## Visual Studio Setup for C++
 
-在Solution Explorer下使用Show All Files视图
-
-默认vs把中间文件放在项目的debug文件夹下, 把最终二进制文件放在Solution文件夹下
-推荐设置Output Directory为$(SolutionDir)bin\$(Platform)\$(Configuration)\
-Intermediate Directory为$(SolutionDir)bin\intermediate\$(Platform)\$(Configuration)\
-bin前不加\因为$(SolutionDir)变量自带backslash
+* Use **Show All Files** view under Solution Explorer
+* By default VS2015 put intermediate files in debug directory
+* It's recommand to set Output Directory into `$(SolutionDir)bin\$(Platform)\$(Configuration)\`
+  and set Intermediate Directory into `$(SolutionDir)bin\intermediate\$(Platform)\$(Configuration)\`
 
 ## CONDITIONS and BRANCHES in C++
 
-0 代表 false, 任何其他的数代表 true
-
-`else if` 等价于 `else { if(){} }`
+* In C++ 0 means false, any other numbers means true
+* `else if` is equivalent to `else { if(){} }`
 
 ## Loops in C++
 
-for 也可以写成 while 的形式
-
+`for` can also be written in the form of `while`:
 ```C++
 int i = 0;
 bool condition = true;
@@ -161,23 +218,20 @@ for ( ; condition; )
 
 ## POINTERS in C++
 
-指针: 指针代表的是一个内存地址, 指针的数据类型一般用于表示目标地址上数据的数据类型.
-
-如果我们不关心数据的数据类型, just using `void*`
-
-指向指针的指针:
-```C++
-// 分配一个有 8 个 char 的空间并填充 `00`, 最后释放这段内存空间
-char* buffer = new char[8];
-memset(buffer, 0, 8);
-delete[] buffer;
-
-// 指向指针的指针
-char** ptr = &buffer;
-```
-
-若实际运行时
-`ptr`储存的数据为`0x00B6FED4` (即 `buffer` 这个变量本身的地址),
+* Pointer: the pointer represents a momory address,
+  generally the data type of the pointer is used to represent the data type of the data at the target address.
+  So if we don't care the pointed data's data type, just using `void*`
+* Pointer to Pointer:
+  ```C++
+  // Allocate a space with 8 char's and fill it with zero, then finally release the memory space.
+  char* buffer = new char[8];
+  memset(buffer, 0, 8);
+  delete[] buffer;
+  
+  // pointer to pointer
+  char** ptr = &buffer;
+  ```
+  In running, `ptr` 储存的数据为 `0x00B6FED4` (即 `buffer` 作为变量本身的地址),
 在 VS2019 自带的 Memory View 中
 `buffer`储存的数据为`f0 dd d0 00` (`buffer`指向8个char长度的空间地址),
 由于x86的设计,

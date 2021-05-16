@@ -13,7 +13,8 @@ tags:
 
 ## linux
 
-1. ```conf .ssh/config
+1. SSH:
+   ```conf .ssh/config
    Host *
        # 每隔 30s 向远端发送 keep-alive 包, 如果发送 5 次无回应断开连接。
        ServerAliveInterval 30
@@ -33,9 +34,9 @@ tags:
        User git
        IdentityFile ~/.ssh/id_ed25519.key
    ```
-2. {% asset_link bashrc.example "~/.bashrc" %}
-   {% asset_link zshrc.example "~/.zshrc" %}
-3. {% asset_link aria2.conf.example "aria2.conf" %}
+2. Bash: {% asset_link bashrc.example "~/.bashrc" %}
+   Zsh: {% asset_link zshrc.example "~/.zshrc" %}
+3. Aria2: {% asset_link aria2.conf.example "aria2.conf" %}
 4. sysctl
    ```conf /etc/sysctl.d/99-sysctl.conf
    # BBR TCP Congestion
@@ -148,46 +149,46 @@ TODO: [可能的一份更好的配置](https://github.com/Argon-/mpv-config/blob
 
 ## Hexo
 
-1. hexo/_config.yml
-```yml hexo/_config.yml
-# 标签页标题
-title: Ndoskrnl's blog
-description: 'There is nothing to say now'
-author: Ndoskrnl
-# 多语言支持
-language:
-- zh-cn
-- en
-# 时区
-timezone: 'Asia/Shanghai'
-
-# Url
-url: http://blog.ndoskrnl.net
-# 文章永久链接(目录)
-permalink: :lang/:category/:year/:title/
-# 永久链接变量默认值配置
-permalink_defaults:
-  lang: en
-
-# 新文章文件目录
-new_post_name: :lang/:category/:title.md
-
-# 资源文件夹
-post_asset_folder: true
-
-# 主题
-theme: icarus
-
-# 解决半角符号渲染成全角的问题
-marked:
-  smartypants: false
-
-# 部署到 Github Pages
-deploy:
-  type: git
-  repo: git@github.com:ndoskrnl/ndoskrnl.github.io.git
-  branch: master
-```
+1. Config:
+   ```yml hexo/_config.yml
+   # 标签页标题
+   title: Ndoskrnl's blog
+   description: 'There is nothing to say now'
+   author: Ndoskrnl
+   # 多语言支持
+   language:
+   - zh-cn
+   - en
+   # 时区
+   timezone: 'Asia/Shanghai'
+   
+   # Url
+   url: http://blog.ndoskrnl.net
+   # 文章永久链接(目录)
+   permalink: :lang/:category/:year/:title/
+   # 永久链接变量默认值配置
+   permalink_defaults:
+     lang: en
+   
+   # 新文章文件目录
+   new_post_name: :lang/:category/:title.md
+   
+   # 资源文件夹
+   post_asset_folder: true
+   
+   # 主题
+   theme: icarus
+   
+   # 解决半角符号渲染成全角的问题
+   marked:
+     smartypants: false
+   
+   # 部署到 Github Pages
+   deploy:
+     type: git
+     repo: git@github.com:ndoskrnl/ndoskrnl.github.io.git
+     branch: master
+   ```
 2. Icarus 主题设置
    主题设置由于改动较多且时效性不高, 这里不作记录
    具体请见主题配置文件 `theme/icarus/_config.yml`
