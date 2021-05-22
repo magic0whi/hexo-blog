@@ -171,7 +171,7 @@ cyclo- 环
 carboxylic 羧酸
 ```
 
-## 利益 Zerotier 白嫖校园网
+## 利用 Zerotier 白嫖校园网
 
 "Zerotier 打洞, 永远滴神"
 
@@ -185,3 +185,58 @@ carboxylic 羧酸
    ```
 2. 在 [ZeroTier Central](my.zerotier.com) 中添加路由: `0.0.0.0/0 via <你的网关机在Zerotier网络中的地址>`
 3. 在想要白嫖的电脑上, 启用 Zerotier 的 Allow Default Route
+   
+## 最小二乘法求回归直线方程的推导过程
+
+回归直线方程: \\(\hat{y}=a+bx\\)
+其中: \\(\hat{b}=\frac{\sum_{i=1}^n x_iy_i-n\bar{x}\bar{y}}{\sum_{i=1}^n x_i^2-n\bar{x}^2}\\) , \\(\hat{a}=\bar{y}-\hat{b}\bar{x}\\) (\\(\bar{x}\\) 和 \\(\bar{y}\\) 为 \\(x_i\\) 和 \\(y_i\\) 的均值)
+
+证明:
+用所有离差(近似值 \\(\hat{y}\_i\\) 和观察值 \\(y\_i\\) 的差)的平方和来表示总离差: \\(\displaystyle Q=\sum\_{i=1}^n(y\_i-\hat{y}\_i)^2=\sum\_{i=1}^n(y\_i-a-bx\_i)^2\\)
+(因为离差有正有负, 直接加可能相互抵消)
+由于平方又叫二乘方, 所以这种使"离差平方和为最小的方法"称为**最小二乘法**
+
+开始变形:
+<div>
+$$
+\scriptsize
+\begin{array}{l}
+Q=\displaystyle\sum_{i=1}^n(y_i-a-bx_i)^2=(y_1-a-bx_1)^2+\dots+(y_n-a-bx_n)^2 \\
+=(y_1^2+a^2+b^2x_1^2+2abx_1-2ay_1-2bx_1y_1)+\dots+(y_n^2+a^2+b^2x_n^2+2abx_n-2ay_n-2bx_ny_n) \\
+=\displaystyle\sum_{i=1}^n y_i^2+na^2+b^2\sum_{i=1}^n x_i^2+2ab\sum_{i=1}^n x_i-2a\sum_{i=1}^n y_i-2b\sum_{i=1}^n x_iy_i \\
+=\displaystyle\sum_{i=1}^n y_i^2+na^2+b^2\sum_{i=1}^n x_i^2+2ab\cdot n\bar{x}-2a\cdot n\bar{y}-2b\sum_{i=1}^n x_iy_i \\
+=\displaystyle\sum_{i=1}^n y_i^2-2b\sum_{i=1}^n x_iy_i+b^2\sum_{i=1}^n x_i^2+na^2-2na(\bar{y}-b\bar{x}) \\
+=\displaystyle\sum_{i=1}^n y_i^2-2b\sum_{i=1}^n x_iy_i+b^2\sum_{i=1}^n x_i^2+n(a^2-2a(\bar{y}-b\bar{x})) \\
+=\displaystyle\sum_{i=1}^n y_i^2-2b\sum_{i=1}^n x_iy_i+b^2\sum_{i=1}^n x_i^2+n(a^2-2a(\bar{y}-b\bar{x})+(\bar{y}-b\bar{x})^2-(\bar{y}-b\bar{x})^2) \\
+=\displaystyle\sum_{i=1}^n y_i^2-2b\sum_{i=1}^n x_iy_i+b^2\sum_{i=1}^n x_i^2+n(a-(\bar{y}-b\bar{x}))^2-n(\bar{y}-b\bar{x})^2 \\
+=\displaystyle\sum_{i=1}^n y_i^2-2b\sum_{i=1}^n x_iy_i+b^2\sum_{i=1}^n x_i^2+n(a-(\bar{y}-b\bar{x}))^2-n\bar{y}^2+2nb\bar{x}\bar{y}-nb^2\bar{x}^2 \\
+=\displaystyle(\sum_{i=1}^n y_i^2-n\bar{y}^2)-2b(\sum_{i=1}^n x_iy_i+n\bar{x}\bar{y})+b^2(\sum_{i=1}^n x_i^2-n\bar{x}^2)+n(a-(\bar{y}-b\bar{x}))^2
+\end{array}
+$$
+</div>
+
+到此, 需要两个关键变形以继续变形:
+1. \\(\displaystyle\sum_{i=1}^n(x_i-\bar{x})^2=\sum_{i=1}^nx_i^2-n\bar{x}^2\\)
+2. \\(\displaystyle\sum_{i=1}^n(x_i-\bar{x})(y_i-\bar{y})=\sum_{i=1}^n x_iy_i-n\bar{x}\bar{y}\\)
+   
+接上面:
+<div>
+$$
+\scriptsize
+\begin{array}{rl}
+Q= & \displaystyle(\sum_{i=1}^n y_i^2-n\bar{y}^2)-2b(\sum_{i=1}^n x_iy_i+n\bar{x}\bar{y})+b^2(\sum_{i=1}^n x_i^2-n\bar{x}^2)+n(a-(\bar{y}-b\bar{x}))^2 \\
+= & \displaystyle\sum_{i=1}^n(y_i-\bar{y})^2-2b\sum_{i=1}^n(x_i-\bar{x})(y_i-\bar{y})+b^2\sum_{i=1}^n(x_i-\bar{x})^2+n(a-(\bar{y}-b\bar{x}))^2 \\
+= & \displaystyle\sum_{i=1}^n(y_i-\bar{y})^2+\sum_{i=1}^n(x_i-\bar{x})^2(b^2-2b\frac{\sum_{i=1}^n(x_i-\bar{x})(y_i-\bar{y})}{\sum_{i=1}^n(x_i-\bar{x})^2})+n(a-(\bar{y}-b\bar{x}))^2 \\
+= & \displaystyle\sum_{i=1}^n(y_i-\bar{y})^2+\sum_{i=1}^n(x_i-\bar{x})^2(b^2-2b\frac{\sum_{i=1}^n(x_i-\bar{x})(y_i-\bar{y})}{\sum_{i=1}^n(x_i-\bar{x})^2}+(\frac{\sum_{i=1}^n(x_i-\bar{x})(y_i-\bar{y})}{\sum_{i=1}^n(x_i-\bar{x})^2})^2 \\
+& \displaystyle-(\frac{\sum_{i=1}^n(x_i-\bar{x})(y_i-\bar{y})}{\sum_{i=1}^n(x_i-\bar{x})^2})^2)+n(a-(\bar{y}-b\bar{x}))^2 \\
+= & \displaystyle\sum_{i=1}^n(y_i-\bar{y})^2+\sum_{i=1}^n(x_i-\bar{x})^2(b-\frac{\sum_{i=1}^n(x_i-\bar{x})(y_i-\bar{y})}{\sum_{i=1}^n(x_i-\bar{x})^2})^2 \\
+& \displaystyle-\sum_{i=1}^n(x_i-\bar{x})^2(\frac{\sum_{i=1}^n(x_i-\bar{x})(y_i-\bar{y})}{\sum_{i=1}^n(x_i-\bar{x})^2})^2+n(a-(\bar{y}-b\bar{x}))^2 \\
+= & \displaystyle\sum_{i=1}^n(y_i-\bar{y})^2+\sum_{i=1}^n(x_i-\bar{x})^2(b-\frac{\sum_{i=1}^n(x_i-\bar{x})(y_i-\bar{y})}{\sum_{i=1}^n(x_i-\bar{x})^2})^2 \\
+& \displaystyle-\frac{[\sum_{i=1}^n(x_i-\bar{x})(y_i-\bar{y})]^2}{\sum_{i=1}^n(x_i-\bar{x})^2}+n(a-(\bar{y}-b\bar{x}))^2 \\
+\end{array}
+$$
+</div>
+
+至此, 公式变形结束.
+观察公式, 其中 \\(\scriptsize-\frac{[\sum_{i=1}^n(x_i-\bar{x})(y_i-\bar{y})]^2}{\sum_{i=1}^n(x_i-\bar{x})^2}\\) , \\(\scriptsize\sum_{i=1}^n(y_i-\bar{y})^2\\) 为常数项与 \\(a\\) , \\(b\\) 无关.
+因此只需使 \\(b=\frac{\sum_{i=1}^n(x_i-\bar{x})(y_i-\bar{y})}{\sum_{i=1}^n(x_i-\bar{x})^2}\\) ,\\(a=\bar{y}-b\bar{x}\\) 即可得到最小 \\(Q\\) 值

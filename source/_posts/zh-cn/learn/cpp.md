@@ -223,6 +223,10 @@ for ( ; condition; )
   So if we don't care the pointed data's data type, just using `void*`
 * Pointer to Pointer:
   ```C++
+  #include <cstring>
+
+  // ...
+
   // Allocate a space with 8 char's and fill it with zero, then finally release the memory space.
   char* buffer = new char[8];
   memset(buffer, 0, 8);
