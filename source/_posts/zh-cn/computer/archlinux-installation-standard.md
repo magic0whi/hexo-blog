@@ -370,6 +370,8 @@ I will use the method of `PRIME render offload` which was official method suppor
    [AUR] gnome-shell-extension-dash-to-dock
    [AUR] gnome-shell-extension-desktop-icons-ng
    [AUR] gnome-shell-extension-freon-git
+   gvfs-mtp
+   gpaste
 
    xf86-video-intel
    vulkan-intel
@@ -398,7 +400,6 @@ I will use the method of `PRIME render offload` which was official method suppor
    compsize
    wireguard-tools
    picocom  ($ picocom -b 1500000 /dev/ttyUSB0, Ctrl-a Ctrl-q to quit)
-   gvfs-mtp
    [AUR] tealdeer
    ncdu
    [AUR] cppman
@@ -418,7 +419,12 @@ I will use the method of `PRIME render offload` which was official method suppor
    thunderbird
    anki
    remmina
-   qv2ray
+   - libvncserver
+   v2ray
+   [AUR] qv2ray-dev-git
+   [AUR] v2ray-cap-git
+   [AUR] cgproxy
+
    obs-studio
    mpv
    [AUR] visual-studio-code-bin

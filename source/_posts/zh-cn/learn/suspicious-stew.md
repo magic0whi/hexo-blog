@@ -215,9 +215,37 @@ Q=\displaystyle\sum_{i=1}^n(y_i-a-bx_i)^2=(y_1-a-bx_1)^2+\dots+(y_n-a-bx_n)^2 \\
 $$
 </div>
 
-到此, 需要两个关键变形以继续变形:
+到此, 需要两个关键变形公式以继续变形:
 1. \\(\displaystyle\sum_{i=1}^n(x_i-\bar{x})^2=\sum_{i=1}^nx_i^2-n\bar{x}^2\\)
+   证明:
+   <div>
+   $$
+   \scriptsize
+   \begin{array}{ll}
+   \displaystyle\sum_{i=1}^n(x_i-\bar{x})^2 & =(x_1-\bar{x})^2+\dots+(x_n-\bar{x})^2 \\
+   & =(x_1^2-2x_1\bar{x}+\bar{x}^2)+\dots+(x_n^2-2x_n\bar{x}+\bar{x}^2) \\
+   & =(x_1^2+\dots+x_n^2)+n\bar{x}^2-2\bar{x}(x_1+\dots+x_n) \\
+   & \displaystyle=\sum_{i=1}^n x_i^2+n\bar{x}^2-2n\bar{x}\frac{(x_1+\dots+x_n)}{n} \\
+   & \displaystyle=\sum_{i=1}^n x_i^2+n\bar{x}^2-2n\bar{x}^2 \\
+   & \displaystyle=\sum_{i=1}^n x_i^2-n\bar{x}^2
+   \end{array}
+   $$
+   </div>
 2. \\(\displaystyle\sum_{i=1}^n(x_i-\bar{x})(y_i-\bar{y})=\sum_{i=1}^n x_iy_i-n\bar{x}\bar{y}\\)
+   证明:
+   <div>
+   $$
+   \scriptsize
+   \begin{array}{ll}
+   \displaystyle\sum_{i=1}^n(x_i-\bar{x})(y_i-\bar{y}) & =(x_1-\bar{x})(y_1-\bar{y})+\dots+(x_n-\bar{x})(y_n-\bar{y}) \\
+   & =(x_1y_1+\bar{x}\bar{y}-x_1\bar{y}-y_1\bar{x})+\dots+(x_ny_n+\bar{x}\bar{y}-x_n\bar{y}-y_n\bar{x}) \\
+   & =(x_1y_1+\dots+x_ny_n)+n\bar{x}\bar{y}-\bar{y}(x_1+\dots+x_n)-\bar{x}(y_1+\dots+y_n) \\
+   & \displaystyle=\sum_{i=1}^n x_iy_i+n\bar{x}\bar{y}-n\bar{y}\frac{x_1+\dots+x_n}{n}-n\bar{x}\frac{y_1+\dots+y_n}{n} \\
+   & \displaystyle=\sum_{i=1}^n x_iy_i+n\bar{x}\bar{y}-n\bar{y}\bar{x}-n\bar{x}\bar{y} \\
+   & \displaystyle=\sum_{i=1}^n x_iy_i-n\bar{x}\bar{y}
+   \end{array}
+   $$
+   </div>
    
 接上面:
 <div>
@@ -239,4 +267,4 @@ $$
 
 至此, 公式变形结束.
 观察公式, 其中 \\(\scriptsize-\frac{[\sum_{i=1}^n(x_i-\bar{x})(y_i-\bar{y})]^2}{\sum_{i=1}^n(x_i-\bar{x})^2}\\) , \\(\scriptsize\sum_{i=1}^n(y_i-\bar{y})^2\\) 为常数项与 \\(a\\) , \\(b\\) 无关.
-因此只需使 \\(b=\frac{\sum_{i=1}^n(x_i-\bar{x})(y_i-\bar{y})}{\sum_{i=1}^n(x_i-\bar{x})^2}\\) ,\\(a=\bar{y}-b\bar{x}\\) 即可得到最小 \\(Q\\) 值
+因此只需使 \\(b=\frac{\sum_{i=1}^n(x_i-\bar{x})(y_i-\bar{y})}{\sum_{i=1}^n(x_i-\bar{x})^2}\\) , \\(a=\bar{y}-b\bar{x}\\) 即可得到最小 \\(Q\\) 值
