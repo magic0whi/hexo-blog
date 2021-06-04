@@ -213,8 +213,8 @@ Enter F12 for Boot Menu when bootstrap
     ```console
     # bootctl install
     ```
-    Automatic update
-    The package [systemd-boot-pacman-hook](https://aur.archlinux.org/packages/systemd-boot-pacman-hook/) provides a Pacman hook to automate the update process.
+    > Automatic update
+      The package [systemd-boot-pacman-hook](https://aur.archlinux.org/packages/systemd-boot-pacman-hook/) provides a Pacman hook to automate the update process.
 
     Configuring the boot loader
     ```conf /boot/loader/loader.conf
@@ -229,13 +229,13 @@ Enter F12 for Boot Menu when bootstrap
     title   Arch Linux
     linux   /vmlinuz-linux
     initrd  /initramfs-linux.img
-    options rd.luks.name=<sda2-UUID>=cryptroot root=/dev/mapper/cryptroot rootflags=subvol=@
+    options rd.luks.name=<sda2-UUID>=cryptroot root=/dev/mapper/cryptroot rootflags=compress=zstd,subvol=@
     ```
     ```conf /boot/loader/entries/arch-fallback.conf
     title Arch Linux (fallback)
     linux /vmlinuz-linux
     initrd /initramfs-linux-fallback.img
-    options rd.luks.name=7fb34a50-f2ae-4799-afc1-85c064a28fcc=cryptroot root=/dev/mapper/cryptroot rootflags=subvol=@
+    options rd.luks.name=7fb34a50-f2ae-4799-afc1-85c064a28fcc=cryptroot root=/dev/mapper/cryptroot rootflags=compress=zstd,subvol=@
     ```
 11. (Optional) Enable sshd
     ```console
@@ -274,19 +274,22 @@ Enter F12 for Boot Menu when bootstrap
 
 ## Desktop Environment
 
-I will use GNOME as my desktop environment
-
 1. Installation
-   > Some packages require archlinuxcn's repository
-   ```console
-   # yay -S gnome-shell gnome-shell-extensions gdm \
-   nautilus file-roller sushi seahorse eog \
-   noto-fonts{,-cjk,-emoji} \
-   gnome-{control-center,terminal,tweaks,keyring,backgrounds,clocks,logs,screenshot,menus} \
-   gtk-engine-murrine materia-gtk-theme \
-   dconf-editor loginized
-   # systemctl enable gdm.service
-   ```
+   * KDE
+     ```console
+     # pacman plasma-meta kde-applications-meta
+     # systemctl enable sddm.service
+     ```
+   * GNOME
+     > Some packages require archlinuxcn's repository
+     ```console
+     $ yay -S gnome-shell gnome-shell-extensions gdm \
+     nautilus file-roller sushi seahorse eog \
+     gnome-{control-center,terminal,tweaks,keyring,backgrounds,clocks,logs,screenshot,menus} \
+     gtk-engine-murrine materia-gtk-theme \
+     dconf-editor loginized
+     # systemctl enable gdm.service
+     ```
 2. (Optional) Install & Configure input method:
    ```console
    # pacman -S fcitx5-im fcitx5-chinese-addons fcitx5-configtool
@@ -346,8 +349,7 @@ I will use the method of `PRIME render offload` which was official method suppor
    ```
 2. yay: `go get` is slow in China
    ```console
-   $ export GO111MODULE=on
-   $ export GOPROXY=https://goproxy.io
+   $ export GOPROXY=https://goproxy.io,direct
    ```
 3. Disable media automount in GNOME
    ```console
@@ -372,6 +374,8 @@ I will use the method of `PRIME render offload` which was official method suppor
    [AUR] gnome-shell-extension-freon-git
    gvfs-mtp
    gpaste
+
+   noto-fonts{,-cjk,-emoji}
 
    xf86-video-intel
    vulkan-intel
@@ -412,15 +416,15 @@ I will use the method of `PRIME render offload` which was official method suppor
 
    npm
    [AUR] nodejs-hexo-cli
-
-   qtcreator
    
    telegram-desktop
    thunderbird
    anki
    remmina
    - libvncserver
+   - freerdp
    v2ray
+   [AUR] bitwarden
    [AUR] qv2ray-dev-git
    [AUR] v2ray-cap-git
    [AUR] cgproxy
@@ -472,4 +476,5 @@ I will use the method of `PRIME render offload` which was official method suppor
    [AUR] v2raya
    [Archlinuxcn] fcitx5-pinyin-moegirl
    [AUR] syncthing-gtk
+   qtcreator
    ```
