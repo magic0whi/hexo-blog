@@ -229,13 +229,13 @@ Enter F12 for Boot Menu when bootstrap
     title   Arch Linux
     linux   /vmlinuz-linux
     initrd  /initramfs-linux.img
-    options rd.luks.name=<sda2-UUID>=cryptroot root=/dev/mapper/cryptroot rootflags=compress=zstd,subvol=@
+    options rd.luks.name=<sda2-UUID>=cryptroot rd.luks.options=discard root=/dev/mapper/cryptroot rootflags=compress=zstd,subvol=@
     ```
     ```conf /boot/loader/entries/arch-fallback.conf
     title Arch Linux (fallback)
     linux /vmlinuz-linux
     initrd /initramfs-linux-fallback.img
-    options rd.luks.name=7fb34a50-f2ae-4799-afc1-85c064a28fcc=cryptroot root=/dev/mapper/cryptroot rootflags=compress=zstd,subvol=@
+    options rd.luks.name=7fb34a50-f2ae-4799-afc1-85c064a28fcc=cryptroot rd.luks.options=discard root=/dev/mapper/cryptroot rootflags=compress=zstd,subvol=@
     ```
 11. (Optional) Enable sshd
     ```console
@@ -260,6 +260,12 @@ Enter F12 for Boot Menu when bootstrap
     ```console
     # systemctl enable bluetooth.service
     ```
+
+    Bluetooth auto power-on after boot:
+    ```conf /etc/bluetooth/main.conf
+    [Policy]
+    AutoEnable=true
+    ```
 14. (Optional) Add Archlinuxcn repository
     ```
     [archlinuxcn]
@@ -277,7 +283,7 @@ Enter F12 for Boot Menu when bootstrap
 1. Installation
    * KDE
      ```console
-     # pacman plasma-meta kde-system-meta kde-utilities-meta
+     # pacman plasma-meta kde-system-meta kde-utilities-meta kde-utilities-meta kde-system-meta kde-network-meta
      # systemctl enable sddm.service
      ```
    * GNOME
@@ -300,6 +306,10 @@ Enter F12 for Boot Menu when bootstrap
    QT_IM_MODULE  DEFAULT=fcitx
    XMODIFIERS    DEFAULT=\@im=fcitx
    ```
+3. (Optional|KDE) Turn off screen (DPMS) together with locking session:
+   Go to: System Settings > Notifications > Applications(The button "Configure") > Search "Screen Saver" > Configure Events:
+   Select Screen locked and check box "Run command", paste `/bin/sleep 2; /usr/bin/xset dpms force off` into it.
+
 
 ## NVIDIA & NVIDIA Optimus
 
@@ -362,6 +372,46 @@ I will use the method of `PRIME render offload` which was official method suppor
    --enable-features=VaapiVideoDecoder
    --enable-accelerated-video-decode
    ```
+5. In Surface Devices:
+   > I use KDE for more smooth experience
+   * Instal linux-surface kernel
+     ```console
+     $ curl -s https://raw.githubusercontent.com/linux-surface/linux-surface/master/pkg/keys/surface.asc \
+         | sudo pacman-key --add -
+     $ sudo pacman-key --finger 56C464BAAC421453
+     $ sudo pacman-key --lsign-key 56C464BAAC421453
+     ```
+     Add the repository:
+     ```conf /etc/pacman.conf
+     [linux-surface]
+     Server = https://pkg.surfacelinux.com/arch/
+     ```
+     Then you can install the linux-surface kernel and its dependencies. You should also enable the iptsd service for touchscreen and stylus support:
+     ```console
+     $ sudo pacman -Syu
+     $ sudo pacman -S linux-surface linux-surface-headers iptsd
+     $ sudo systemctl enable iptsd
+     ```
+     Don't forget to change the corresponding loader entries' config
+   * SDDM has problem with NetworkManager & Long loading time:
+     Use GDM as a replace, don't forget to configure KDE Wallet's PAM:
+     ```conf /etc/pam.d/gdm-password
+     ...
+     auth            optional        pam_kwallet5.so
+     session         optional        pam_kwallet5.so auto_start
+     ```
+   * Auto disable touch screen after login (X11):
+     First install `xorg-xinput`.
+     Then create a shell script:
+     ```bash disable_touch_screen.sh
+     #!/bin/bash
+     if [[ ${XDG_SESSION_TYPE} = "x11" ]]; then
+         xinput disable `xinput list | egrep -o "IPTS Touch.+id=[0-9]+" | egrep -o "[0-9]+"`
+     fi
+     ```
+     Finally go to System Settings > Startup and Shutdown > Autostart:
+     Press Add button and select Add Login Script, choose the script you just created.
+
 
 ## Additional Packages
 
@@ -424,6 +474,11 @@ I will use the method of `PRIME render offload` which was official method suppor
    - libvncserver
    - freerdp
    v2ray
+   texlive-most
+   - [AUR] tllocalmgr-git
+   libreoffice-still
+   blender
+   krita
    [AUR] bitwarden
    [AUR] qv2ray-dev-git
    [AUR] v2ray-cap-git
@@ -470,8 +525,6 @@ I will use the method of `PRIME render offload` which was official method suppor
      ^[AUR] qemu-user-static
         [AUR] binfmt-qemu-static-all-arch
    edk2-ovmf
-   
-   texlive-most
 
    [AUR] v2raya
    [Archlinuxcn] fcitx5-pinyin-moegirl
