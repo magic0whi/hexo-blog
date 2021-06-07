@@ -292,7 +292,7 @@ Enter F12 for Boot Menu when bootstrap
 1. Installation
    * KDE
      ```console
-     # pacman plasma-meta kde-system-meta kde-utilities-meta kde-utilities-meta kde-system-meta kde-network-meta
+     # pacman -S plasma-meta kde-system-meta kde-utilities-meta kde-utilities-meta kde-system-meta kde-network-meta kio-fuse
      # systemctl enable sddm.service
      ```
    * GNOME
