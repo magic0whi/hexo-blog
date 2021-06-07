@@ -91,7 +91,7 @@ Enter F12 for Boot Menu when bootstrap
    ```
 2. Install essential packages
    ```console
-   # pacstrap /mnt base base-devel linux linux-firmware btrfs-progs vim rng-tools git tmux openssh bash-completion iwd systemd-swap bluez bluez-utils
+   # pacstrap /mnt base base-devel linux linux-firmware btrfs-progs vim rng-tools git tmux openssh bash-completion systemd-swap bluez bluez-utils
    ```
 
 ## Configure the system
@@ -129,21 +129,30 @@ Enter F12 for Boot Menu when bootstrap
    ::1          localhost
    127.0.1.1	myhostname.neo	myhostname
    ```
-   Wireless adapter configuration
-   > Use `ip link` to show network interface names
-   ```conf /etc/systemd/network/25-wireless.network
-   [Match]
-   Name=<Your wireless interface name>
+   * Use NetworkManager
+     Install & Enable NetworkManager:
+     ```console
+     # pacman -S networkmanager
+     # systemctl enable NetworkManager.service
+     # systemctl enable systemd-resolved
+     ```
+   * Use iwd
+     Install iwd: `pacman -S iwd`
+     Wireless adapter configuration
+     > Use `ip link` to show network interface names
+     ```conf /etc/systemd/network/25-wireless.network
+     [Match]
+     Name=<Your wireless interface name>
 
-   [Network]
-   DHCP=yes
-   ```
-   Enable iwd and Systemd-networkd:
-   ```console
-   # systemctl enable iwd.service
-   # systemctl enable systemd-networkd.service
-   # systemctl enable systemd-resolved
-   ```
+     [Network]
+     DHCP=yes
+     ```
+     Enable iwd and Systemd-networkd:
+     ```console
+     # systemctl enable iwd.service
+     # systemctl enable systemd-networkd.service
+     # systemctl enable systemd-resolved
+     ```
 6. Random number generation
    Enable Rng-tools
    ```console
@@ -152,7 +161,7 @@ Enter F12 for Boot Menu when bootstrap
 7. Configuring mkinitcpio
    I prefer using the sd-encrypt hook with the systemd-base initramfs. (replace hook `udev` with hook `system` )
    ```conf /etc/mkinitcpio.conf
-   HOOKS=(base **systemd** autodects **keyboard** **sd-vconsole** modconf block **sd-encrypt** filesystems fsck)
+   HOOKS=(base **systemd** autodetect **keyboard** **sd-vconsole** modconf block **sd-encrypt** filesystems fsck)
    ```
    Recreate the initramfs image
    ```console
@@ -458,6 +467,7 @@ I will use the method of `PRIME render offload` which was official method suppor
    ncdu
    [AUR] cppman
    openbsd-netcat
+   bc
 
    zsh
    zsh-autosuggestions
