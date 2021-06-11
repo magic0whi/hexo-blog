@@ -292,7 +292,7 @@ Enter F12 for Boot Menu when bootstrap
 1. Installation
    * KDE
      ```console
-     # pacman -S plasma-meta kde-system-meta kde-utilities-meta kde-utilities-meta kde-system-meta kde-network-meta kio-fuse
+     # pacman -S plasma-meta kde-system-meta kde-utilities-meta kde-network-meta kde-multimedia-meta kde-graphics-meta kio-fuse
      # systemctl enable sddm.service
      ```
    * GNOME
@@ -468,6 +468,8 @@ I will use the method of `PRIME render offload` which was official method suppor
    [AUR] cppman
    openbsd-netcat
    bc
+   p7zip
+   unrar
 
    zsh
    zsh-autosuggestions
