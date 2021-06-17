@@ -4,7 +4,11 @@ toc: true
 category: medicine
 lang: zh-cn
 date: 2021-06-10 14:33:36
-tags: medicine(antibiotic)
+tags:
+- medicine
+- medicine:Rx
+- medicine:cream
+- medicine:antibiotic
 ---
 
 夫西地酸乳膏(Fusidic Acid Cream)
@@ -16,12 +20,16 @@ tags: medicine(antibiotic)
 <table><tr>
 <td>{% asset_img 1.jpg %}</td>
 </tr><tr>
-<td align="center">夫西地酸乳膏-利奥制药</td>
+<td align="center">夫西地酸乳膏-立思丁<sup>&reg;</sup></td>
 </tr></table>
 
-* 药品名称: Fucidin<sup>&reg;</sup>
+* 药品名称
+  * 通用名称: 夫西地酸乳膏 (Fusidic Acid Cream)
+  * 商品名称: 立思丁<sup>&reg;</sup> (Fucidin<sup>&reg;</sup>)
 * 规格: 15g:0.3g (\\(\ce{C31H48O6}\\))
 * 用法用量: 每日2-3次, 涂于患处, 一般疗程为7天. 治疗痤疮时可根据病情的需要延长疗程.
+* 贮藏: 密闭, 常温 (10~30&#8451;) 保存
+* 有效期: 36 个月
 * 生产企业: 爱尔兰利奥制药有限公司 (LEO Laboratories Limited)
 
 ### 成分信息
