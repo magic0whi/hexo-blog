@@ -12,29 +12,27 @@ date: 2020-02-08 15:14:28
                                          
 ```
 
-你好, nihao, Hello, my friends in Cyberspace
-
-我是钱君哲, 你可以称呼我为钱桑, 我的朋友在我的世界(Minecraft)中就是这么称呼我的.
-也可以叫我菜菜鸟钱桑, 因为这个人不仅什么都不会, 而且正遭受性别焦虑(GD)和睡眠浅的困扰,
-发现自以为强大的内心是如此地脆弱.
+你好,
+我是钱君哲, 你可以称呼我为钱桑
 我喜欢捣鼓自己不懂的东西; 想要跟上大佬的步伐, 然后跟随自己的心意, 去帮助被抛弃之人.
-是带专生，什么都不会的计算机网络专业. 因此, 大佬们有任何好的建议我都会去尝试, 请多指教.
+是带专生, 垃圾学校, 垃圾专业. 因此, 请多指教.
+目前受到{% post_link tricks-of-heart 性别焦虑 %}的影响, 属于 <font color=#5BCFFA>M</font>t<font color=#F5ABB9>F</font> 群体.
 
-生活追求: 活着
-生活准则: 做无名的劳动者
-学习准则: 有始有终
-当前状态: 去做喜欢的事情, 尝试与社区交流, 发现并纠正自己讨厌的品性
+行为准则: 完成该做的目标, 无视娱乐和无用的劳动, 可为此无视身体状态抛弃一切; 发现并及时纠正自己讨厌的品性
+
+> **褐矮星**
+> 有意义地活着真是痛苦, 但我还是决定.
+> 宁愿在奔波中结束一生, 也不愿窝囊地浪费生命...
+> SRS 不是我追求的, HRT 是也不是必要的, 可爱的外貌亦非我本愿.
+> 一切缓解措施只是想让自己不要再荒废下去, 我很痛苦, 大家都很痛苦, 要试着去改变这一切.
+> 即使这种选择不被周围人认可, 没有华丽的鼓掌, 也要迎接黑暗, 执剑守护在意之人.
+> 后人如果能在前人创造的基础上尽力发挥自己的能力, 改善生活水平, 甚至能够对不幸的人施以援手, 那可谓没有遗憾.
+> 就是这样, 我要开始去做那些我十分不喜欢但为了理想又永远绕不开的事情了, 希望您能提醒我, 不要忘了这个初衷.
+> 提醒一下, 对于钱桑你来说, 好好睡觉也是很重要的事情哦.
+
+(但是有可爱的外貌还是挺好的哈哈哈~)
 
 喜欢的音乐: Aiva Op.24 for Piano Four Hands
-喜欢收看的 UP 主是回形针, 稚晖君, EdmundDZhang, 3B1B
-喜欢的番剧: 无职转生(我是人下人), 反叛的鲁路修, 进击的巨人, Re：从零开始的异世界生活, 动物新世代/BNA, 我的三体之章北海传, 魔法少女小圆
-<del>男神是菜月昴</del>
-
-I am chan chvn-che, I like to fiddle with things I don't understand.
-In current, I am suffering from Gender dysphoria.
-
-My favourite music: Aiva Op.24 for Piano Four Hands
-Life principle: be a nameless workers
 
 Feel free to contact me:
 - Email: lollipop.studio.cn@gmail.com
@@ -44,4 +42,6 @@ Feel free to contact me:
 - Zhihu: [ndoskrnl](https://www.zhihu.com/people/logarithm-96)
 
 欢迎交换友链~
-头像施工中...
+
+补个头像?
+![](bs2_cropped.png)
