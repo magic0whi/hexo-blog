@@ -32,7 +32,9 @@ date: 2020-02-08 15:14:28
 
 (但是有可爱的外貌还是挺好的哈哈哈~)
 
-喜欢的音乐: Aiva Op.24 for Piano Four Hands
+喜欢的音乐:
+- XI - Hiroyuki Sawano
+- Aiva Op.24 for Piano Four Hands
 
 Feel free to contact me:
 - Email: lollipop.studio.cn@gmail.com

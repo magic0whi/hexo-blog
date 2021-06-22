@@ -34,6 +34,7 @@ Target: 轻雅庄重
 ## Remix
 
 1. 裏切りアリス inst ver - M-ART
+2. XI - Hiroyuki Sawano
 
 ## Orchestra
 

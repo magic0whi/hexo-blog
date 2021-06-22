@@ -1,7 +1,9 @@
 ---
 title: introduction-to-linear-algebra
 toc: true
-category: learn
+categories:
+- learn
+- mathematics
 lang: zh-cn
 date: 2021-02-24 11:53:14
 tags: mathematics
@@ -271,7 +273,7 @@ TODO: integrate the ideas in this chapter
    1. The **nullspace** \\(\bm{N}(A)\\) in \\(\bm{R}^n\\) contains all solutions \\(x\\) to \\(A\bm{x}=0\\) . This includes \\(\bm{x}=0\\)
    2. Elimination (from \\(A\\) to \\(R\\)) does not change the nullspace: \\(\bm{N}(A)=\bm{N}(U)=\bm{N}\(R\)\\)
    3. When \\(A\\) is rectangular, elimination will not stop at the uppertriangular \\(U\\) .
-      We can continue to make this matrix somplex, in two ways. These steps bring us to the best matrix -- reduced row echelon matrix \\(R\\) :
+      We can continue to make this matrix simpler, in two ways. These steps bring us to the best matrix -- reduced row echelon matrix \\(R\\) :
       1. ***Produce zeros above the pivots*.** Use pivot rows to eliminate upward in \\(\bm{R}\\) .
       2. ***Produce ones in the pivots.*** Divice the whole pivot row by its pivot
       
@@ -485,8 +487,36 @@ TODO: integrate the ideas in this chapter
 ## Eigenvalues and Eigenvectors
 
 1. Introduction to Eigenvalues
-   
+   1. \\(A\bm{x}=\lambda\bm{x}\\) says that eigenvectors \\(\bm{x}\\) keep the same direction when multiplied by \\(A\\) . It also says that \\(\operatorname{det}(A-\lambda I)=0\\) . This determines \\(n\\) eigenvalues.
+   To solve the eigenvalue problem for an \\(n\\) by \\(n\\) matrix, follow these steps:
+      1. ***Compute the \\(\operatorname{det}(A-\lambda I)=0\\)***. With \\(\lambda\\) subtracted along the diagonal, this determinant starts with \\(\lambda^n\\) or \\(-\lambda^n\\) . It is a polynomial in \\(\lambda\\) of degree \\(n\\) .
+      2. ***Find the roots of this polynominal***, by solving \\(\operatorname{det}(A-\lambda I)=0\\) . The \\(n\\) roots are the \\(n\\) eigenvalues of \\(A\\) . They make \\(A-\lambda I\\) singular.
+      3. For each eigenvalue \\(\lambda\\) , ***solve \\(A-\lambda I)\bm{x}=0\\) to find an eigenvector \\(\bm{x}\\)***.
+   2. If \\(A\bm{x}=\lambda{x}\\) then \\(A^2\bm{x}=\lambda^2\bm{x}\\) and \\(A^{-1}\bm{x}=\lambda^{-1}\bm{x}\\) and \\((A+cI)\bm{x}=(\lambda+c)\bm{x}\\)
+   3. The sum of the \\(\lambda\\)'s equals the sum down the main diagonal of \\(A\\) (*the trace*). The product of the \\(\lambda\\)'s equals the determinant of \\(A\\) :
+      \\(\lambda_1+\lambda_2+\cdots+\lambda_n=a_{11}+a_{22}+\dots+a_{nn}\\)
+      \\(\lambda_1\lambda_2\cdots\lambda_n=\operatorname{det}A\\)
+   4. Projections \\(P\\) , reflections \\(R\\) m \\(90\degree\\) rotations \\(Q\\) have special eigenvalues 1, 0, -1, \\(i\\), \\(-i\\)
+   5. \\(A\\) and \\(B\\) share the same \\(n\\) independent eigenvectors if and only if \\(AB=BA\\) , then we do have \\(AB\bm{x}=\lambda\beta\bm{x}\\) and \\(BA\bm{x}=\lambda\beta\bm{x}\\) (\\(\beta\\) is an eigenvalue of \\(B\\))
 2. Diagonalizing a Matrix
+   1. If \\(A\\) has \\(n\\) independent eigenvectors \\(x_1,\dots,x_n\\) , they go into the columns of \\(X\\)
+      **\\(\bm{A}\\) is diagonalized into eigenvalue matrix \\(\Lambda\\) by \\(\bm{X}\\)** : \\(X^{-1}AX=\Lambda\\) and \\(A=X\Lambda X^{-1}\\)
+      > \\(X^{-1}AX=\Lambda\\) and \\(A=X\Lambda X^{-1}\\) means \\(AX=X\Lambda\\)
+      > The first column of \\(AX\\) is \\(A\bm{x_1}=\lambda_1x_n\\) . Each column of \\(X\\) is multiplied by its eigenvalue:
+      > \\(AX=A\begin{bmatrix} & & \\\ \bm{x_1} & \cdots & \bm{x_n} \\\ & & \end{bmatrix}=\begin{bmatrix} & & \\\ \lambda_1\bm{x_1} & \cdots & \lambda_n\bm{x_n} \\\ & & \end{bmatrix}\\)
+      > The trick is to split this matrix \\(AX\\) into \\(X\\) times \\(\Lambda\\) :
+      > \\(\begin{bmatrix} & & \\\ \lambda_1\bm{x_1} & \cdots & \lambda_n\bm{x_n} \\\ & & \end{bmatrix}=\begin{bmatrix} & & \\\ \bm{x_1} & \cdots & \bm{x_n} \\\ & & \end{bmatrix}\begin{bmatrix} \lambda_1 & & \\\ & \ddots & \\\ & & \lambda_n \end{bmatrix}=X\Lambda\\)
+   2. The eigenvector matrix \\(X\\) also diagonalizes all powers \\(A^k\\) : \\(A^k=X\Lambda^kX^{-1}\\)
+   3. The solution to \\(\bm{u}_{k+1}=A\bm{u}_k\\) starting from \\(\bm{u}_0\\) is \\(\bm{u}_k=A^k\bm{u}_0=X\Lambda^kX^{-1}\bm{u}_0\\) :
+      \\(\bm{u}_k=c_1(\lambda_1)^k\bm{x}_1+\cdots+c_n(\lambda_n)^k\bm{x}_n\\) provided by \\(\bm{u}_0=c_1\bm{x}_1+\cdots+c_n\bm{x}_n=X\bm{c}\\)
+      That shows Steps 1, 2, 3 (\\(c\\)'s from \\(X^{-1}\bm{u}_0\\) , \\(\lambda^k\\) from \\(\Lambda^k\\) , and \\(\bm{x}\\)'s from \\(X\\))
+   4. \\(A\\) is diagonalizable if every eigenvalue has enough eigenvectors (GM = AM).
+      Always GM \\(\leqslant\\) AM **for each \\(\bm{\lambda}\\)**
+      > * **Geometric Multiplicity = GM**: Count the **independent eigenvectors** for \\(\lambda\\) . Then GM is the dimension of the nullspace of \\(A-\lambda I\\)
+      > * **Algebraic Multiplicity = AM**: Count the **repetitions of \\(\bm{\lambda}\\)** among the eigenvalues. Look at the \\(n\\) roots of \\(\operatorname{det}(A-\lambda I)=0\\)
+      >
+      > for example if \\(A\\) has \\(\lambda=4, 4, 4\\) , then that eigenvalue has \\(\text{AM}=3\\) and \\(\text{GM}=1, 2, \text{or }3\\)
+      > The shortage of eigenvectors ***when GM is below AM means that A is not diagonalizable***. 
 3. Systems of Differential Equations
 4. Symmetric Matrices
 5. Positive Definite Matrices
