@@ -6,13 +6,13 @@ categories:
 - mathematics
 lang: zh-cn
 date: 2021-01-23 15:05:53
-tags: mathematics
+tags: mathematics postgraduate
 ---
 
-同济高等数学笔记整合(下)
+同济高等数学笔记整合(下) 考研用
 基于 [wmathor/Postgraduate-Advanced-Mathematics](https://github.com/wmathor/Postgraduate-Advanced-Mathematics)
-建议先看一看线性代数的行列式
-补充了级数部分
+建议先看一看 Introduction to Linear Algebra - Determinant
+补充了级数部分的内容
 
 <!-- more -->
 
