@@ -24,13 +24,13 @@ tags: mathematics postgraduate
    若对任意 \\(x\in D\\), 总存在唯一确定的解 \\(y\\) 与 \\(x\\) 对应,
    称 \\(y\\) 为 \\(x\\) 的函数, 记作 \\(y=f(x)\\), \\(D\\) 为 \\(x\\) 的定义域
 2. 反函数:
-   \\(y=f(x)\enspace\\) (\\(x\in D\\)) 严格单调 **(单调函数必有单调反函数)**
+   \\(y=f(x)\enspace(x\in D)\\) 严格单调 **(单调函数必有单调反函数)**
    若 \\(y=f(x) \implies x=\varphi(y)\\)
    则 \\(\varphi(y)\\) 就是 \\(f(x)\\) 的反函数
 3. 基本初等函数:
    1. 幂函数 \\(x^a\\)
-   2. 指数函数 \\(a^x\\) (\\(a>0\\) 且 \\(a\ne 1\\))
-   3. 对数函数 \\(\log_a{x}\\) (\\(a>0\\) 且 \\(a\ne 1\\))
+   2. 指数函数 \\(a^x\enspace(a>0\\) 且 \\(a\neq 1)\\)
+   3. 对数函数 \\(\log_a{x}\enspace(a>0\\) 且 \\(a\neq 1)\\)
    4. 三角函数 \\(\sin x,\cos x,\tan x,\cot x,\sec x,\csc x\\)
 4. 初等函数: 由常数、基本初等函数经过四则运算、复合运算而成的式子
 
@@ -42,13 +42,13 @@ tags: mathematics postgraduate
    \\(f(-x)=-f(x)\\), 则为奇函数;
    \\(f(-x)=f(x)\\), 则为偶函数
 2. 单调性
-   设 \\(y=f(x)\enspace\\) (\\(x\in D\\))
+   设 \\(y=f(x)\enspace(x\in D)\\)
    若 \\(\exist x_1,x_2\in D\\) 且 \\(x_1<x_2\\) 时 , 有 \\(f(x_1)<f(x_2)\\), 称 \\(f(x)\\) 在 \\(D\\) 上严格单调递增;
    若 \\(\exist x_1,x_2\in D\\) 且 \\(x_1<x_2\\) 时 , 有 \\(f(x_1)>f(x_2)\\), 称 \\(f(x)\\) 在 \\(D\\) 上严格单独递减
+   
    {% asset_img 1.png %}
-
 3. 有界性
-   设 \\(y=f(x)\enspace\\) (\\(x\in D\\)) , 函数的界 \\(M\\) (即值域的区间)
+   设 \\(y=f(x)\enspace(x\in D)\\), 函数的界 \\(M\\)
    若 \\(\exist M>0\\), 对于 \\(\forall x\in D\\), 有 \\(|f(x)|\leqslant M\\), 称 \\(f(x)\\) 在 \\(D\\) 上有界
    {% asset_img 2.png %}
 
@@ -56,14 +56,14 @@ tags: mathematics postgraduate
    若 \\(\forall x\in D\\), \\(f(x)\leqslant M_2\\), 有上界
    如: \\(|f(x)|\leqslant 3\hArr\begin{cases} f(x)\geqslant -3 \\\ f(x)\leqslant 3 \end{cases}\\)
 4. 周期性
-   设 \\(y=f(x)\enspace\\) (\\(x\in D\\)) ,
-   若 \\(\exist T>0\\), 对于 \\(\forall x\in D\enspace\\) (\\(x+T\in D\\)) , 有 \\(f(x+T)=f(x)\\), 称 \\(f(x)\\) 为周期函数
+   设 \\(y=f(x)\enspace(x\in D)\\)
+   若 \\(\exist T>0\\), 对于 \\(\forall x\in D\enspace(x+T\in D)\\), 有 \\(f(x+T)=f(x)\\), 称 \\(f(x)\\) 为周期函数
 
 ### 数列极限
 
 1. 数列收敛定义 (\\(\epsilon−N\\)):
    设数列 \\(\\{a_n\\}\\), \\(A\\) 为极限值, 最大误差 \\(\varepsilon\\), 数列在元素 \\(a_N\\) 后极限有效(即之后数列元素与极限值的差值 \\(\leqslant\varepsilon\\)),
-   若 \\(\forall\varepsilon > 0 , \exist N > 0\\), 当 \\(n > N\\) 时 \\(|a_n - A| < \varepsilon\\)
+   若 \\(\forall\varepsilon>0\\), \\(\exist N>0\\), 当 \\(n>N\\) 时 \\(|a_n-A|<\varepsilon\\)
    称数列 \\(\\{a_n\\}\\) 收敛于极限 \\(A\\), 记作 \\(\lim\limits_{n\to\infty}=A\\) 或 \\(a_n\to A\enspace(n\to\infty)\\)
    例:
    设通项公式 \\(a_n=\frac{n+1}{2n}\\), 具体值为 \\(\frac{3}{4},\frac{2}{3},\frac{5}{8},\frac{3}{5},\dots\\), 观察得极限 \\(a_n\to\frac{1}{2}\\)
@@ -190,7 +190,7 @@ tags: mathematics postgraduate
 
 ### 极限的运算法则
 
-1. 四则求导法则
+1. 四则极限法则
    有 \\(\lim\limits_{x\to x_0}f(x)=A\\), \\(\lim\limits_{x\to x_0}g(x)=B\\)
    1. 加减: \\(\lim\limits_{x\to x_0}[f(x)\pm g(x)]=\lim\limits_{x\to x_0}f(x)\pm\lim\limits_{x\to x_0}g(x)=A\pm B\\)
    2. 数乘: \\(\lim\limits_{x\to x_0}kf(x)=k\lim\limits_{x\to x_0}f(x)=kA\\)
@@ -422,7 +422,7 @@ tags: mathematics postgraduate
    >    
    >    \\(\begin{array}{rl} \lim\limits_{\Delta x\to 0}\frac{\Delta\varphi}{\Delta x} & =\lim\limits_{\Delta x\to 0}\frac{\Delta u}{\Delta x}\cdot\lim\limits_{\Delta x\to 0}v(x+\Delta x)+u(x)\lim\limits_{\Delta x\to0}\frac{\Delta v}{\Delta x} \\\ & =u^\prime(x)v(x)+u(x)v^\prime(x) \end{array}\\)
    >    提示: \\(\lim\limits_{\Delta x\to0}v(x+\Delta x)=v(x)\\)
-   > 3. 令 \\(\varphi(x)=\dfrac{u(x)}{v(x)}\enspace\\) (\\(v(x)\neq 0\\))
+   > 3. 令 \\(\varphi(x)=\dfrac{u(x)}{v(x)}\enspace(v(x)\neq 0)\\)
    >    <div>
    >    $$
    >    \begin{array}{rl}
@@ -878,7 +878,7 @@ tags: mathematics postgraduate
       \\(\footnotesize\int f[\varphi(x)]\underbrace{\varphi^\prime(x)\mathrm{d}x}_{f^\prime(x)\mathrm{d}x=\mathrm{d}f(x)}=\int\underbrace{f[\varphi(x)]\mathrm{d}\varphi(x)}\_{\text{设}\varphi(x)=t}=\int f(t)\mathrm{d}t=F(t)+C=F[\varphi(x)]+C\\)
    2. 第二类换元积分法
       \\(x=\psi(t)\\) 可导且 \\(\psi^\prime(t)\neq 0\\)
-      \\(\footnotesize\int f(x)\mathrm{d}x=\int f[\psi(t)]\mathrm{d}\psi(t)=\int f[\psi(t)]\psi^\prime(t)\mathrm{d}t=\int g(t)\mathrm{d}t=G(t)+C=G[\psi^{-1}(x)]+C\enspace\\)
+      \\(\footnotesize\int f(x)\mathrm{d}x=\int f[\psi(t)]\mathrm{d}\psi(t)=\int f[\psi(t)]\psi^\prime(t)\mathrm{d}t=\int g(t)\mathrm{d}t=G(t)+C=G[\psi^{-1}(x)]+C\\)
       例: \\(\int\frac{1}{\sqrt{x}+\sqrt[3]{x}}\mathrm{d}x\\)
       解:
       令 \\(x=t^6\\)
@@ -1049,37 +1049,33 @@ tags: mathematics postgraduate
 
 1. 正常积分标准:
    1. 区间有限
-   2. \\(f(x)\\) 在区间上连续或第一类间断点(有限个)
+   2. \\(f(x)\\) 在区间上连续或有限个第一类间断点
 2. 积分区间无限
-   1. \\(f(x)\in c[a,+\infty)\\)
-      有 \\(\lim\limits_{b\to+\infty}[F(b)-F(a)]=\int_a^{+\infty} f(x)\mathrm{d}x\\)
+   1. \\(f(x)\in C[a,+\infty)\\)
+      有 \\(\int_a^{+\infty} f(x)\mathrm{d}x=\lim\limits_{b\to+\infty}[F(b)-F(a)]\\)
       1. 若 \\(\lim\limits_{b\to+\infty}[F(b)-F(a)]\\) 存在, 称 \\(\int_a^{+\infty} f(x)\mathrm{d}x\\) 收敛
-         有 \\(\lim\limits_{b\to+\infty}[F(b)-F(a)]=\int_a^{+\infty} f(x)\mathrm{d}x=A\\)
       2. 若 \\(\lim\limits_{b\to+\infty}[F(b)-F(a)]\\) 不存在, 称 \\(\int_a^{+\infty} f(x)\mathrm{d}x\\) 发散
-   2. \\(f(x)\in c(-\infty,a]\\)
+   2. \\(f(x)\in C(-\infty,a]\\)
       有 \\(\lim\limits_{b\to-\infty}[F(a)-F(b)]=\int_{-\infty}^a f(x)\mathrm{d}x\\)
       1. 若 \\(\lim\limits_{b\to-\infty}[F(a)-F(b)]\\) 存在, 称 \\(\int_{-\infty}^a f(x)\mathrm{d}x\\) 收敛
-         有 \\(\lim\limits_{b\to-\infty}[F(a)-F(b)]=\int_{-\infty}^a f(x)\mathrm{d}x=A\\)
       2. 若 \\(\lim\limits_{b\to-\infty}[F(a)-F(b)]\\) 不存在, 称 \\(\int_{-\infty}^a f(x)\mathrm{d}x\\) 发散
-   3. \\(f(x)\in c(-\infty,+\infty)\\)
+   3. \\(f(x)\in C(-\infty,+\infty)\\)
       若 \\(\int_{-\infty}^{+\infty}f(x)\mathrm{d}x\\) 收敛 \\(\hArr\int_{-\infty}^{a}f(x)\mathrm{d}x\\) 与 \\(\int_{a}^{+\infty}f(x)\mathrm{d}x\\) 收敛
       且 \\(\int_{-\infty}^{+\infty}f(x)\mathrm{d}x=\int_{-\infty}^a f(x)\mathrm{d}x+\int_a^{+\infty}f(x)\mathrm{d}x\\)
-   4. \\(\Gamma\\) 函数
-      1. 定义: \\(\Gamma(\alpha)=\int_0^{+\infty}x^{\alpha-1}\cdot e^{-x}\mathrm{d}x\\)
-      2. 特性:
-         1. \\(\Gamma(\alpha+1)=\alpha\Gamma(\alpha)\\)
-         2. \\(\Gamma(n+1)=n!\enspace\\) (\\(n\in Z\\))
-         3. \\(\Gamma(\frac{1}{2})=\sqrt{\pi}\\)
+   4. Gamma 函数 \\(\Gamma\\)
+      定义: \\(\Gamma(\alpha)=\int_0^{+\infty}x^{\alpha-1}\cdot e^{-x}\mathrm{d}x\\)
+      特性:
+      1. \\(\Gamma(\alpha+1)=\alpha\Gamma(\alpha)\\)
+      2. \\(\Gamma(n+1)=n!\enspace(n\in Z)\\)
+      3. \\(\Gamma(\frac{1}{2})=\sqrt{\pi}\\)
 3. 无界函数反常积分
    1. 左无界: \\(f(x)\in c(a,b]\\) 且 \\(f(a+0)=\infty\enspace\\) (\\(a\\) 称作瑕点)
       \\(\forall\varepsilon>0\\), \\(\lim\limits_{\varepsilon\to 0^+}[F(b)-F(a+\varepsilon)]=\int_{a+\varepsilon}^b f(x)\mathrm{d}x\\)
       1. 若 \\(\lim\limits_{\epsilon\to 0^+}[F(b)-F(a+\varepsilon)]\\) 存在, 称 \\(\int_a^b f(x)\mathrm{d}x\\) 收敛
-         若极限是有限实数, 则 \\(\lim\limits_{\varepsilon\to 0^+}[F(b)-F(a+\varepsilon)]=\int_a^b f(x)\mathrm{d}x=A\\)
       2. 若 \\(\lim\limits_{\varepsilon\to 0^+}[F(b)-F(a+\varepsilon)]\\) 不存在, 称 \\(\int_a^b f(x)\mathrm{d}x\\) 发散
    2. 右无界: \\(f(x)\in c[a,b)\\) 且 \\(f(b-0)=\infty\\)
       \\(\forall\varepsilon>0\\), \\(F(b-\varepsilon)-F(a)=\int_a^{b-\varepsilon}f(x)\mathrm{d}x\\)
       1. 若 \\(\lim\limits_{\epsilon\to 0^+}[F(b-\varepsilon)-F(a)]\\) 存在, 称 \\(\int_a^b f(x)\mathrm{d}x\\) 收敛
-         若极限是有限实数, 则 \\(\lim\limits_{\varepsilon\to 0^+}[F(b-\varepsilon)-F(a)]=\int_a^b f(x)\mathrm{d}x=A\\)
       2. 若 \\(\lim\limits_{\epsilon\to 0^+}[F(b-\varepsilon)-F(a)]\\) 不存在, 称 \\(\int_a^b f(x)\mathrm{d}x\\) 发散
    3. 中无界: \\(f(x)\in c[a,c)\cup(c,b]\\) 且 \\(\lim\limits_{x\to c}f(x)=\infty\\)
       若 \\(\int_a^b f(x)\mathrm{d}x\\) 收敛 \\(\hArr\int_a^c f(x)\mathrm{d}x\\) 与 \\(\int_c^b f(x)\mathrm{d}x\\) 收敛
@@ -1101,7 +1097,7 @@ tags: mathematics postgraduate
    1. 取 \\([x,x+\mathrm{d}x]\subset[0,R]\\)
    2. \\(\mathrm{d}A_1=\sqrt{R^2-x^2}\mathrm{d}x\\)
    3. \\(A_1=\int_0^R\sqrt{R^2-x^2}\mathrm{d}x\\)
-   4. 定积分换元积分法设 \\(x=R\sin t\\), 则有
+   4. 设 \\(x=R\sin t\\), 则有
       \\(\int_0^\frac{\pi}{2}\sqrt{R^2-R^2\sin^2t}(R\cos t)\mathrm{d}t\\)
       \\(=\int_0^\frac{\pi}{2}R^2\sqrt{1-\sin^2t}\cos t\mathrm{d}t\\)
       \\(=\int_0^\frac{\pi}{2}R^2\cos^2t\mathrm{d}t\\)
@@ -1123,7 +1119,7 @@ tags: mathematics postgraduate
          2. \\(\mathrm{d}A=[f(x)-g(x)]\mathrm{d}x\\)
          3. \\(A=\int_a^b[f(x)-g(x)]\mathrm{d}x\\)
       3. 曲边扇形面积(以下内容为弧度制)
-         \\(L:R=r(\theta)\enspace\\) (\\(\alpha\leqslant\theta\leqslant\beta\\))
+         \\(L:R=r(\theta)\enspace(\theta\in[\alpha,\beta])\\)
          {% asset_img 24.png %}
 
          1. 取 \\([\theta,\theta+\mathrm{d}\theta]\subset[\alpha,\beta]\\)
@@ -1154,18 +1150,18 @@ tags: mathematics postgraduate
    3. 弧长
       {% asset_img 29.png %}
 
-      1. \\(L:y=f(x)\enspace\\) (\\(a\leqslant x\leqslant b\\))
+      1. \\(L:y=f(x)\enspace(a\leqslant x\leqslant b)\\)
          1. 取 \\([x,x+\mathrm{d}x]\subset[a,b]\\)
          2. \\(\mathrm{d}s=\sqrt{(\mathrm{d}x)^2+(\mathrm{d}y)^2}=\sqrt{1+(\frac{\mathrm{d}y}{\mathrm{d}x})^2}\mathrm{d}x=\sqrt{1+[f^\prime(x)]^2}\mathrm{d}x\\)
          3. \\(l=\int_a^b\mathrm{d}s\mathrm{d}x=\int_a^b\sqrt{1+[f^\prime(x)]^2}\mathrm{d}x\\)
-      2. \\(L:\begin{cases} x=\varphi(t) \\\ y=\psi(t) \end{cases}\enspace\\) (\\(\alpha\leqslant t\leqslant\beta\\))
+      2. \\(L:\begin{cases} x=\varphi(t) \\\ y=\psi(t) \end{cases}\enspace(\alpha\leqslant t\leqslant\beta)\\)
          1. 取 \\([t,t+\mathrm{d}t]\subset[\alpha,\beta]\\)
          2. \\(\mathrm{d}s=\sqrt{(\mathrm{d}x)^2+(\mathrm{d}y)^2}=\sqrt{[\varphi^\prime(t)]^2+[\psi^\prime(t)]^2}\mathrm{d}t\\)
          3. \\(l=\int_\alpha^\beta\mathrm{d}s\mathrm{d}t=\int_\alpha^\beta\sqrt{[\varphi^\prime(x)]^2+[\psi^\prime(x)]^2}\mathrm{d}t\\)
 
 ## 微分方程
 
-解微分方程即根据已知微分条件求目标函数
+解微分方程的目的即根据已知微分条件求目标函数
 
 ### 微分方程的基本概念
 
@@ -1177,7 +1173,7 @@ tags: mathematics postgraduate
    已知 \\(y\\) 关于 \\(x\\) 的微分方程 \\(F(y^{(n)},y^{(n-1)},\dots,y^\prime,y,x)=0\\)
    若代入函数 \\(y=\varphi(x)\\) 能够满足 \\(F(y^{(n)},y^{(n-1)},\dots,y^\prime,y,x)=0\\)
    称 \\(y=\varphi(x)\\) 为该微分方程的解
-   1. 通解: 设 \\(F(y^{(n)},y^{(n-1)},\dots,y^\prime,y,x)=0\\) 为 \\(n\\) 阶微分方程, 若该方程的解含 \\(n\\) 个相互独立的任意常数, 称该解为通解
+   1. 通解: 设 \\(n\\) 阶微分方程 \\(F(y^{(n)},y^{(n-1)},\dots,y^\prime,y,x)=0\\), 若该方程的解含 \\(n\\) 个相互独立的任意常数, 称该解为通解
       如 \\(y=C_1e^x+C_2e^{2x}\\) 为 \\(y^{\prime\prime}-3y^\prime+2y=0\\) 的通解
    2. 特解: 不含任意常数的解
 
@@ -1186,15 +1182,15 @@ tags: mathematics postgraduate
 1. 定义: 形如 \\(\frac{\mathrm{d}y}{\mathrm{d}x}=\varphi_1(x)\varphi_2(y)\\)
 2. 解法
    \\(\frac{\mathrm{d}y}{\mathrm{d}x}=\varphi_1(x)\varphi_2(y)\rArr\frac{\mathrm{d}y}{\varphi_2(y)}=\varphi_1(x)\mathrm{d}x\\)
-   两边积分得:
-   \\(\int\frac{\mathrm{d}y}{\varphi_2(y)}=\int\varphi_1(x)\mathrm{d}x+C\\) (微分方程中自变量一端注意要加 \\(C\\))
+   两边积分:
+   \\(\int\frac{\mathrm{d}y}{\varphi_2(y)}=\int\varphi_1(x)\mathrm{d}x+C\\) (注意微分方程中自变量一端要加 \\(C\\))
 
 ### 齐次微分方程
 
 1. 定义: 形如 \\(\frac{\mathrm{d}y}{\mathrm{d}x}=\varphi(\frac{y}{x})\\)
 2. 解法
    换元法, 设 \\(u=\frac{y}{x}\\), 则 \\(y=ux\rArr y^\prime=u^\prime x+ux^\prime\rArr\frac{\mathrm{d}y}{\mathrm{d}x}=x\frac{\mathrm{d}u}{\mathrm{d}x}+u\\)
-   将 \\(u=\frac{y}{x}\\) 和 \\(\frac{\mathrm{d}y}{\mathrm{d}x}=x\frac{\mathrm{d}u}{\mathrm{d}x}+u\\) 代入方程得到 \\(x\frac{\mathrm{d}u}{\mathrm{d}x}+u=\varphi(u)\\)
+   将 \\(\frac{\mathrm{d}y}{\mathrm{d}x}=x\frac{\mathrm{d}u}{\mathrm{d}x}+u\\) 和 \\(u=\frac{y}{x}\\) 代入方程两边得到 \\(x\frac{\mathrm{d}u}{\mathrm{d}x}+u=\varphi(u)\\)
    然后就可以分离变量, 最后两边积分: 
    \\(\frac{\mathrm{d}x}{x}=\frac{\mathrm{d}u}{\varphi(u)-u}\rArr\int\frac{\mathrm{d}x}{x}=\int\frac{\mathrm{d}u}{\varphi(u)-u}+C\\)
 
@@ -1220,10 +1216,10 @@ tags: mathematics postgraduate
 2. 一阶非齐线性微分方程
    1. 定义: 形如 \\(\frac{\mathrm{d}y}{\mathrm{d}x}+P(x)y=Q(x)\\)
    2. 解法
-      通过常数易变法, 将上面齐次方程通解中的常数项换做关于 \\(x\\) 的函数 \\(C=u(x)\\), 得到 \\(y=u(x)e^{-\int P(x)\mathrm{d}x}\\) (1)
-      然后对 \\(y\\) 求导: (这里注意复合函数求导法则, 且对积分求导的结果是原函数)
-      \\(y^\prime=\frac{\mathrm{d}y}{\mathrm{d}x}=u^\prime(x)e^{-\int P(x)\mathrm{d}x}-u(x)P(x)e^{-\int P(x)\mathrm{d}x}\\) (2)
-      将 (1)、(2) 带入一阶非齐线性微分方程得:
+      通过常数易变法, 将上面齐次方程通解中的常数项换成关于 \\(x\\) 的函数 \\(C=u(x)\\), 得到 &#10112; \\(y=u(x)e^{-\int P(x)\mathrm{d}x}\\)
+      然后对 \\(y\\) 求导: (这里注意 \\(e^{-\int P(x)\mathrm{d}x}\\) 是复合函数)
+      &#10113; \\(y^\prime=\frac{\mathrm{d}y}{\mathrm{d}x}=u^\prime(x)e^{-\int P(x)\mathrm{d}x}-u(x)P(x)e^{-\int P(x)\mathrm{d}x}\\)
+      将 &#10112;、&#10113; 代入一阶非齐线性微分方程:
       \\(u^\prime(x)e^{-\int P(x)\mathrm{d}x}-u(x)P(x)e^{-\int P(x)\mathrm{d}x}+P(x)u(x)e^{-\int P(x)\mathrm{d}x}=Q(x)\\)
       \\(\rArr u^\prime(x)e^{-\int P(x)\mathrm{d}x}=Q(x)\\)
       \\(\rArr u^\prime(x)=Q(x)e^{\int P(x)\mathrm{d}x}\\)
