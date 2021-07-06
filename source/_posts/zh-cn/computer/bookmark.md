@@ -63,7 +63,7 @@ Android APK 魔改&破解 [mobilism](https://forum.mobilism.org/search.php)
 
 [Z-Library](https://z-lib.org/) 学术相关书籍/论文
 
-[Library Genesis](http://gen.lib.rus.ec/index.php) 学术相关书籍
+[Library Genesis](https://en.wikipedia.org/wiki/Library_Genesis) 学术相关书籍, 具体链接见维基
 
 类似ChemDraw, 不过是网页版 [MolView](http://molview.org/)
 

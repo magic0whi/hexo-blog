@@ -1235,7 +1235,7 @@ tags: mathematics postgraduate
    解:
    \\(y^\prime=\frac{1}{4}x^4+\frac{1}{2}e^{2x}+C_1\\)
    \\(y=\frac{1}{20}x^5+\frac{1}{4}e^{2x}+C_1x+C_2\\)
-2. \\(f(x,y^\prime,y^{\prime\prime})=0\\) (缺失 \\(y\\))
+2. (缺失 \\(y\\)) \\(f(x,y^\prime,y^{\prime\prime})=0\\)
    解法:
    令 \\(y^\prime=p\\), \\(y^{\prime\prime}=\frac{\mathrm{d}p}{\mathrm{d}x}\\) 代入得
    \\(f(x,p,\frac{\mathrm{d}p}{\mathrm{d}x})=0\rArr p=\varphi(x,C_1)\\), 即 \\(\frac{\mathrm{d}y}{\mathrm{d}x}=\varphi(x,C_1)\\)
@@ -1249,21 +1249,43 @@ tags: mathematics postgraduate
    \\(\rArr|p|=e^{-2\ln|x|+C_0}=\frac{e^{C_0}}{x^2}\\)
    \\(\rArr p=\pm\frac{e^{C_0}}{x^2}=\frac{C_1}{x^2}\\), 即 \\(y^\prime=\frac{C_1}{x^2}\\)
    \\(\therefore y=-\frac{C_1}{x}+C_2\\)
-3. \\(f(y,y^\prime,y^{\prime\prime})=0\\) (缺失 \\(x\\))
+3. (缺失 \\(x\\)) \\(f(y,y^\prime,y^{\prime\prime})=0\\)
    解法:
-   令 \\(y^\prime=p\\), \\(y^{\prime\prime}=\frac{\mathrm{d}p}{\mathrm{d}x}\rArr y^{\prime\prime}=\frac{\mathrm{d}p}{\mathrm{d}y}\cdot\frac{\mathrm{d}y}{\mathrm{d}x}=\frac{\mathrm{d}p}{\mathrm{d}y}\cdot p\\), 代入得 
-   \\(f(y,p,\frac{\mathrm{d}p}{\mathrm{d}y}\cdot p)=0\rArr p=\varphi(y,C_1)\\)
-   即 \\(\frac{\mathrm{d}y}{\mathrm{d}x}=\varphi(y,C_1)\rArr\frac{\mathrm{d}y}{\varphi(y,C_1)}=\mathrm{d}x\rArr\int\frac{\mathrm{d}y}{\varphi(y,C_1)}=\int\mathrm{d}x+C_2\\)
+   令 \\(y^\prime=p\\), \\(y^{\prime\prime}=\frac{\mathrm{d}p}{\mathrm{d}x}\rArr y^{\prime\prime}=\frac{\mathrm{d}p}{\mathrm{d}y}\cdot\frac{\mathrm{d}y}{\mathrm{d}x}=\frac{\mathrm{d}p}{\mathrm{d}y}\cdot p\\), 代入得
+   <div>
+   $$
+   \begin{array}{rl}
+   f(y,p,\frac{\mathrm{d}p}{\mathrm{d}y}\cdot p)=0 & \rArr p=\varphi(y,C_1) \\
+   & \hArr\frac{\mathrm{d}y}{\mathrm{d}x}=\varphi(y,C_1) \\
+   & \hArr\frac{\mathrm{d}y}{\varphi(y,C_1)}=\mathrm{d}x \\
+   & \rArr\int\frac{\mathrm{d}y}{\varphi(y,C_1)}=\int\mathrm{d}x+C_2
+   \end{array}
+   $$
+   </div> 
 
    例: 求 \\(yy^{\prime\prime}-y^{\prime 2}=0\\) 满足初始条件 \\(y(0)=1\\), \\(y^\prime(0)=1\\) 的特解
-   解: 令 \\(y^\prime=p\\), \\(y^{\prime\prime}=p\frac{\mathrm{d}p}{\mathrm{d}y}\\) 代入得
-   \\(yp\frac{\mathrm{d}p}{\mathrm{d}y}-p^2=0\\)
-   \\(\because p\neq 0\\)
-   \\(\therefore y\frac{\mathrm{d}p}{\mathrm{d}y}-p=0\rArr\dots\rArr p=C_1y\\)
-   即 \\(\frac{\mathrm{d}y}{\mathrm{d}x}=C_1y\rArr\frac{\mathrm{d}y}{C_1y}=\mathrm{d}x\rArr\int\frac{\mathrm{d}y}{C_1y}=\int\mathrm{d}x+C_2\rArr\ln|C_1y|=x+C_2\rArr y=\frac{C_3e^x}{C_1}\\)
+   解:
+   令 \\(y^\prime=p\\), \\(y^{\prime\prime}=p\frac{\mathrm{d}p}{\mathrm{d}y}\\), 代入得 \\(yp\frac{\mathrm{d}p}{\mathrm{d}y}-p^2=0\\)
+   <div>
+   $$
+   \begin{array}{ll}
+   \because p\neq 0 & \\
+   \therefore y\frac{\mathrm{d}p}{\mathrm{d}y}-p=0 & \hArr\frac{\mathrm{d}p}{\mathrm{d}y}-\frac{1}{y}p=0 \\
+   & \rArr p=C_0e^{-\int-\frac{1}{y}p\mathrm{d}y} (\text{\footnotesize一阶齐次线性微分方程通解})\\
+   & \hArr p=C_0e^{\ln|y|} \\
+   & \rArr p=C_1y \\
+   & \hArr\frac{\mathrm{d}y}{\mathrm{d}x}=C_1y \\
+   & \hArr\frac{\mathrm{d}y}{C_1y}=\mathrm{d}x \\
+   & \rArr\int\frac{\mathrm{d}y}{C_1y}=\int\mathrm{d}x+C_2 \\
+   & \hArr\ln|C_1y|=x+C_2 \\
+   & \rArr y=\frac{C_3e^x}{C_1} \\
+   & \rArr y=C_4e^x
+   \end{array}
+   $$
+   </div>
+
    \\(\because y(0)=1,y^\prime(0)=1\\)
-   \\(\therefore C_1=1,C_3=1\\)
-   特解为 \\(y=e^x\\)
+   \\(\therefore C_4=1\\), 特解为 \\(y=e^x\\)
 
 ### 高阶线性微分方程
 
@@ -1271,49 +1293,50 @@ tags: mathematics postgraduate
    1. 二阶齐次线性微分方程: \\(y^{\prime\prime}+a(x)y^\prime+b(x)y=0\\)
       二阶非齐线性微分方程: \\(y^{\prime\prime}+a(x)y^\prime+b(x)y=c(x)\\)
    2. \\(n\\) 阶齐次线性微分方程: \\(y^{(n)}+a_1(x)y^{(n-1)}+\dots+a_{n-1}y^\prime+a_n(x)y=0\\)
-      \\(n\\) 阶非齐线性微分方程: \\(y^{(n)}+a_1(x)y^{(n-1)}+\dots+a_{n-1}y^\prime+a_n(x)y=f(x)\\)
-   3. 设 \\(\varphi_1(x)\\), \\(\varphi_2(x)\\) 为两个函数
+      \\(n\\) 阶非齐线性微分方程: \\(\footnotesize y^{(n)}+a_1(x)y^{(n-1)}+\dots+a_{n-1}y^\prime+a_n(x)y=f(x)\\)
+   3. \\(\varphi_1(x)\\), \\(\varphi_2(x)\\) 为两个函数
       若 \\(\varphi_1(x)\\), \\(\varphi_2(x)\\) 不成比例, 称 \\(\varphi_1(x)\\), \\(\varphi_2(x)\\) 线性无关
       若 \\(\varphi_1(x)\\), \\(\varphi_2(x)\\) 成比例, 称 \\(\varphi_1(x)\\), \\(\varphi_2(x)\\) 线性相关
       
       如 \\(x^2\\) 和 \\(\sin x\\) 线性无关, \\(x^2\\) 和 \\(3x^2\\) 线性相关
 2. 性质
    设:
-   (1) \\(y^{\prime\prime}+a(x)y^\prime+b(x)y=0\\)
-   (2) \\(y^{\prime\prime}+a(x)y^\prime+b(x)y=c(x)\\)
+   &#10112; \\(y^{\prime\prime}+a(x)y^\prime+b(x)y=0\\)
+   &#10113; \\(y^{\prime\prime}+a(x)y^\prime+b(x)y=c(x)\\)
    (联立方程式代入可证)
-   1. 若 \\(\varphi_1(x)\\), \\(\varphi_2(x)\\) 为 (1) 的解, 则 \\(y=C_1\varphi_1(x)+C_2\varphi_2(x)\\) 仍为 (1) 的解(线性组合)
-   2. 若 \\(\varphi_1(x)\\), \\(\varphi_2(x)\\) 分别为 (1), (2) 的解, 则 \\(y=\varphi_1(x)+\varphi_2(x)\\) 为 (2) 的解
-   3. 若 \\(\varphi_1(x)\\), \\(\varphi_2(x)\\) 为 (2) 的解, 则 \\(y=\varphi_2(x)-\varphi_1(x)\\) 为 (1) 的解
-   4. 1. 设 \\(\varphi_1(x) , \varphi_2(x)\\) 为 (1) 的两个线性无关解
-         则 (1) 通解为 \\(y=C_1\varphi_1(x)+C_2\varphi_2(x)\\)
-      1. 设 \\(\varphi_1(x)\\), \\(\varphi_2(x)\\) 为 (1) 的两个线性无关解, \\(\varphi_0(x)\\) 为 (2) 的一个特解
-         则 (2) 的通解为 \\(y=C_1\varphi_1(x)+C_2\varphi_2(x)+\varphi_0(x)\\)
-   5. (3) \\(y^{\prime\prime}+a(x)y^\prime+b(x)y=f(x)\\)
-      若 \\(f(x)=f_1(x)+f_2(x)\\) 则
-      (3)' \\(\enspace y^{\prime\prime}+a(x)y^\prime+b(x)y=f_1(x)\\)
-      (3)'' \\(\enspace y^{\prime\prime}+a(x)y^\prime+b(x)y=f_2(x)\\)
-      若 \\(\varphi_1(x)\\), \\(\varphi_2(x)\\) 为 (3)', (3)'' 的解, 则 \\(y=\varphi_1(x)+\varphi_2(x)\\) 为 (3) 的解
-
-   * 证明:
-     1. 第三条的证明:
-        \\(\begin{cases} \varphi_1^{\prime\prime}+a(x)\varphi_1^\prime+b(x)\varphi_1=c(x) \\\ \varphi_2^{\prime\prime}+a(x)\varphi_2^\prime+b(x)\varphi_2=c(x) \end{cases}\\)
-        将 \\(y=\varphi_2(x)-\varphi_1(x)\\) 代入 (2) 得
-        \\((\varphi_2-\varphi_1)^{\prime\prime}+a(x)(\varphi_2-\varphi_1)^\prime+b(x)(\varphi_2-\varphi_1)\\)
-        \\(=(\varphi_2^{\prime\prime}+a(x)\varphi_2^\prime+b(x)\varphi_2)-(\varphi_1^{\prime\prime}+a(x)\varphi_1^\prime+b(x)\varphi_1)\\)
-        \\(=c(x)-c(x)=0\\)
-        \\(\therefore y=\varphi_2(x)-\varphi_1(x)\\) 为 (1) 的解
-     2. 第五条的证明:
-        \\(\begin{cases} \varphi_1^{\prime\prime}+a(x)\varphi_1^\prime+b(x)\varphi_1=f_1(x) \\\ \varphi_2^{\prime\prime}+a(x)\varphi_2^\prime+b(x)\varphi_2=f_2(x) \end{cases}\\)
-        将 \\(y=\varphi_1(x)+\varphi_2(x)\\) 代入 (3) 得
-        \\((\varphi_1+\varphi_2)^{\prime\prime}+a(x)(\varphi_1+\varphi_2)^\prime+b(x)(\varphi_1+\varphi_2)=f(x)\\)
-        \\(\hArr(\varphi_1^{\prime\prime}+a(x)\varphi_1^\prime+b(x)\varphi_1)+(\varphi_1^{\prime\prime}+a(x)\varphi_2^\prime+b(x)\varphi_2)=f(x)\\)
-        \\(\hArr f_1(x)+f_2(x)=f(x)\\)
-        \\(\therefore y=\varphi_1(x)+\varphi_2(x)\\) 为 (3) 的解
+   1. 若 \\(\varphi_1(x)\\), \\(\varphi_2(x)\\) 为 &#10112; 的解, 则 \\(y=C_1\varphi_1(x)+C_2\varphi_2(x)\\) 仍为 &#10112; 的解(线性组合)
+   2. 若 \\(\varphi_1(x)\\), \\(\varphi_2(x)\\) 分别为 &#10112;, &#10113; 的解, 则 \\(y=\varphi_1(x)+\varphi_2(x)\\) 为 &#10113; 的解
+   3. 若 \\(\varphi_1(x)\\), \\(\varphi_2(x)\\) 为 &#10113; 的解, 则 \\(y=\varphi_2(x)-\varphi_1(x)\\) 为 &#10112; 的解
+      > 证明:
+      > 若 \\(\varphi_1(x)\\), \\(\varphi_2(x)\\) 为 &#10113; 的解
+      > 则有 \\(\begin{cases} \varphi_1^{\prime\prime}+a(x)\varphi_1^\prime+b(x)\varphi_1=c(x) \\\ \varphi_2^{\prime\prime}+a(x)\varphi_2^\prime+b(x)\varphi_2=c(x) \end{cases}\\)
+      > 将 \\(y=\varphi_2(x)-\varphi_1(x)\\) 代入 &#10113;:
+      > \\((\varphi_2-\varphi_1)^{\prime\prime}+a(x)(\varphi_2-\varphi_1)^\prime+b(x)(\varphi_2-\varphi_1)\\)
+      > \\(=(\varphi_2^{\prime\prime}+a(x)\varphi_2^\prime+b(x)\varphi_2)-(\varphi_1^{\prime\prime}+a(x)\varphi_1^\prime+b(x)\varphi_1)\\)
+      > \\(=c(x)-c(x)=0\\)
+      > \\(\therefore y=\varphi_2(x)-\varphi_1(x)\\) 为 &#10112; 的解
+   4. 若 \\(\varphi_1(x)\\), \\(\varphi_2(x)\\) 为 &#10112; 的两个线性无关解
+      则 &#10112; 通解为 \\(y=C_1\varphi_1(x)+C_2\varphi_2(x)\\);
+      若 \\(\varphi_1(x)\\), \\(\varphi_2(x)\\) 为 &#10112; 的两个线性无关解, \\(\varphi_0(x)\\) 为 &#10113; 的一个特解
+         则 &#10113; 的通解为 \\(y=C_1\varphi_1(x)+C_2\varphi_2(x)+\varphi_0(x)\\)
+   5. &#10114; \\(y^{\prime\prime}+a(x)y^\prime+b(x)y=f(x)\\)
+      设 \\(f(x)=f_1(x)+f_2(x)\\) , 有
+      &#10114;' \\(\enspace y^{\prime\prime}+a(x)y^\prime+b(x)y=f_1(x)\\)
+      &#10114;'' \\(\enspace y^{\prime\prime}+a(x)y^\prime+b(x)y=f_2(x)\\)
+      若 \\(\varphi_1(x)\\), \\(\varphi_2(x)\\) 为 &#10114;', &#10114;'' 的解, 则 \\(y=\varphi_1(x)+\varphi_2(x)\\) 为 &#10114; 的解
+      > 证明:
+      > 若 \\(\varphi_1(x)\\), \\(\varphi_2(x)\\) 为 &#10114;', &#10114;'' 的解
+      > 则有 \\(\begin{cases} \varphi_1^{\prime\prime}+a(x)\varphi_1^\prime+b(x)\varphi_1=f_1(x) \\\ \varphi_2^{\prime\prime}+a(x)\varphi_2^\prime+b(x)\varphi_2=f_2(x) \end{cases}\\)
+      > 将 \\(y=\varphi_1(x)+\varphi_2(x)\\) 代入 &#10114;:
+      > \\((\varphi_1+\varphi_2)^{\prime\prime}+a(x)(\varphi_1+\varphi_2)^\prime+b(x)(\varphi_1+\varphi_2)=f(x)\\)
+      > \\(\hArr(\varphi_1^{\prime\prime}+a(x)\varphi_1^\prime+b(x)\varphi_1)+(\varphi_1^{\prime\prime}+a(x)\varphi_2^\prime+b(x)\varphi_2)=f(x)\\)
+      > \\(\hArr f_1(x)+f_2(x)=f(x)\\)
+      > \\(\therefore y=\varphi_1(x)+\varphi_2(x)\\) 为 &#10114; 的解
 
 ### 常系数齐次线性微分方程
 
-1. 二阶常系数齐次线性微分方程: \\(y^{\prime\prime}+py^\prime+qy=0\\), 特征方程: \\(\lambda^2+p\lambda+q=0\\)
+1. 二阶常系数齐次线性微分方程: \\(y^{\prime\prime}+py^\prime+qy=0\\)
+   它的特征方程: \\(\lambda^2+p\lambda+q=0\\)
    1. \\(\Delta>0\\), \\(y=C_1e^{\lambda_1x}+C_2e^{\lambda_2x}\\)
    2. \\(\Delta=0\\), \\(y=(C_1+C_2x)e^{\lambda_1x}\\)
    3. \\(\Delta<0\\), \\(y=e^{\alpha x}(C_1\cos\beta x+C_2\sin\beta x)\\)

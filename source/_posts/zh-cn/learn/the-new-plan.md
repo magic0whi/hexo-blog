@@ -1,12 +1,12 @@
 ---
-title: the-new-plan
+title: 笨蛋の自我修养
 category: learn
 date: 2020-12-14 05:17:10
 tags:
 ---
 
 正在努(mo)力(yu)
-目的: 尽管不知道能不能帮到后面的人, 还是将我的尝试记录下来吧.
+学习并不是想着自己成为什么大佬，而是，只要能帮到大家就好啦！希望自己不是傻看着发呆的笨蛋，而是一个给项目增加bug的笨蛋！
 
 焦点树已初步完成: {% asset_link individual-focus-tree.xmind "individual-focus-tree.xmind" %}
 都是有用的公共、专业基础课, 将在有空的时候逐一完成
@@ -92,6 +92,7 @@ tags:
 14. 清空数据结构笔记的 TODO, 还有两个我没理解的算法
 15. 将乐理学知识提升到钢琴 8 级
 16. 学会游泳
+17. Operation Canteralla: Organic Chemistry I, II, III
 
 ## 时间管理技巧
 

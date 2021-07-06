@@ -161,6 +161,8 @@ BTW, 如果你知道苏大有什么例如"二次元LSP"之类的社团请务必�
 
 [MtF Wiki](https://mtf.wiki/)
 
+[Reddit-SRS-Thailand]https://www.reddit.com/r/TransSurgeriesWiki/wiki/srs/thailand
+
 ## 幻想
 
 我就是男生, 曾经欺负过别人, 也被别人欺负, 喜欢打红警2, 虽然,
