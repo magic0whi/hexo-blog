@@ -6,7 +6,9 @@ categories:
 - mathematics
 lang: zh-cn
 date: 2021-01-23 15:05:53
-tags: mathematics postgraduate
+tags:
+- mathematics
+- postgraduate
 ---
 
 同济高等数学笔记整合(下) 考研用
@@ -1104,7 +1106,7 @@ $$
 1. 直接法
    设 \\(f(x)\\)  在 \\(x=x_0\\) 邻域内任意阶可导.
    则 \\(f(x)\\) 在 \\(x=x_0\\) 邻域内展成 \\(\displaystyle\sum_{n=0}^\infty\frac{f^{(n)}(x_0)}{n!}(x-x_0)^n\\) 的充要条件是 \\(\lim\limits_{n\to\infty} R_n(x)=0\\)
-   \\(x=0\\) 时, \\(\displaystyle\sum_{n=0}^\infty\frac{f^{(n)}(0)}{n!}(x-x_0)^n\\) 称作麦克劳灵级数
+   \\(x=0\\) 时, \\(\displaystyle\sum_{n=0}^\infty\frac{f^{(n)}(0)}{n!}(x-x_0)^n\\) 称作麦克劳林级数
    (参见泰勒级数)
 2. 间接法
    (基于直接法推导出来的已有公式进行展开)
@@ -1116,6 +1118,7 @@ $$
      5. \\(\frac{1}{1+x}=\displaystyle\sum_{n=0}^\infty (-1)^n x^n=1-x+x^2-x^3+\dots+(-1)^nx^n+\circ(x^n)\enspace\\) (\\(-1<x<1\\))
      6. \\(\ln(1+x)=\displaystyle\sum_{n=1}^\infty\frac{(-1)^{n-1}}{n}x^n=x-\frac{x^2}{2}+\frac{x^3}{3}-\frac{x^4}{4}+\dots+(-1)^{n-1}\frac{x^n}{n}+\circ(x^n)\enspace\\) (\\(-1<x\leqslant1\\))
      7. \\(-\ln(1-x)=\displaystyle\sum_{n=1}^\infty\frac{x^n}{n}=x+\frac{x^2}{2}+\frac{x^3}{3}+\frac{x^4}{4}+\dots+\frac{x^n}{n}+\circ(x^n)\enspace\\) (\\(-1\leqslant x<1\\))
+     8. 欧拉公式: \\(e^{i\theta}=\cos\theta+i\sin\theta\\)
    * 利用幂级数和函数的逐项可导、可积性
 
 ### 傅里叶级数

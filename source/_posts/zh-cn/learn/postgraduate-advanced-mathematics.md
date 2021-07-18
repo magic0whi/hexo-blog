@@ -6,7 +6,9 @@ categories:
 - mathematics
 lang: zh-cn
 date: 2021-01-19 09:08:57
-tags: mathematics postgraduate
+tags:
+- mathematics
+- postgraduate
 ---
 
 同济高等数学笔记整合(上) 考研用
@@ -1230,7 +1232,11 @@ tags: mathematics postgraduate
 ### 可降阶的高阶微分方程
 
 1. \\(y^{(n)}=f(x)\enspace(n\geqslant2)\\)
-   (解法较简单, 见例题)
+   解法: 直接积分
+   \\(y^{(n-1)}=\int f(x)\mathrm{d}x=F(x)+C\\)
+   \\(y^{(n-2)}=\int(\int(F(x)+C)\mathrm{d}x\\)
+   \\(\dots\\)
+   
    例: \\(y^{\prime\prime}=x^3+e^{2x}\\)
    解:
    \\(y^\prime=\frac{1}{4}x^4+\frac{1}{2}e^{2x}+C_1\\)
@@ -1294,16 +1300,14 @@ tags: mathematics postgraduate
       二阶非齐线性微分方程: \\(y^{\prime\prime}+a(x)y^\prime+b(x)y=c(x)\\)
    2. \\(n\\) 阶齐次线性微分方程: \\(y^{(n)}+a_1(x)y^{(n-1)}+\dots+a_{n-1}y^\prime+a_n(x)y=0\\)
       \\(n\\) 阶非齐线性微分方程: \\(\footnotesize y^{(n)}+a_1(x)y^{(n-1)}+\dots+a_{n-1}y^\prime+a_n(x)y=f(x)\\)
-   3. \\(\varphi_1(x)\\), \\(\varphi_2(x)\\) 为两个函数
-      若 \\(\varphi_1(x)\\), \\(\varphi_2(x)\\) 不成比例, 称 \\(\varphi_1(x)\\), \\(\varphi_2(x)\\) 线性无关
-      若 \\(\varphi_1(x)\\), \\(\varphi_2(x)\\) 成比例, 称 \\(\varphi_1(x)\\), \\(\varphi_2(x)\\) 线性相关
+   3. 线性相关和线性无关:
+      \\(\varphi_1(x)\\), \\(\varphi_2(x)\\) 为两个函数
+      若 \\(\frac{\varphi_1(x)}{\varphi_2(x)}\equiv k\in R\\), 称 \\(\varphi_1(x)\\), \\(\varphi_2(x)\\) 线性相关,
+      若 \\(\frac{\varphi_1(x)}{\varphi_2(x)}=u(x)\\) (两函数的比例与 \\(x\\) 相关, 不恒为某个常数), 则称线性无关.
       
       如 \\(x^2\\) 和 \\(\sin x\\) 线性无关, \\(x^2\\) 和 \\(3x^2\\) 线性相关
 2. 性质
-   设:
-   &#10112; \\(y^{\prime\prime}+a(x)y^\prime+b(x)y=0\\)
-   &#10113; \\(y^{\prime\prime}+a(x)y^\prime+b(x)y=c(x)\\)
-   (联立方程式代入可证)
+   设 \\(\begin{cases} \text{&#10112; }y^{\prime\prime}+a(x)y^\prime+b(x)y=0 \\\ \text{&#10113; }y^{\prime\prime}+a(x)y^\prime+b(x)y=c(x) \end{cases}\\)
    1. 若 \\(\varphi_1(x)\\), \\(\varphi_2(x)\\) 为 &#10112; 的解, 则 \\(y=C_1\varphi_1(x)+C_2\varphi_2(x)\\) 仍为 &#10112; 的解(线性组合)
    2. 若 \\(\varphi_1(x)\\), \\(\varphi_2(x)\\) 分别为 &#10112;, &#10113; 的解, 则 \\(y=\varphi_1(x)+\varphi_2(x)\\) 为 &#10113; 的解
    3. 若 \\(\varphi_1(x)\\), \\(\varphi_2(x)\\) 为 &#10113; 的解, 则 \\(y=\varphi_2(x)-\varphi_1(x)\\) 为 &#10112; 的解
@@ -1315,15 +1319,13 @@ tags: mathematics postgraduate
       > \\(=(\varphi_2^{\prime\prime}+a(x)\varphi_2^\prime+b(x)\varphi_2)-(\varphi_1^{\prime\prime}+a(x)\varphi_1^\prime+b(x)\varphi_1)\\)
       > \\(=c(x)-c(x)=0\\)
       > \\(\therefore y=\varphi_2(x)-\varphi_1(x)\\) 为 &#10112; 的解
-   4. 若 \\(\varphi_1(x)\\), \\(\varphi_2(x)\\) 为 &#10112; 的两个线性无关解
+   4. 若 \\(\varphi_1(x)\\), \\(\varphi_2(x)\\) 为 &#10112; 的两个线性无关的特解, \\(\varphi_0(x)\\) 为 &#10113; 的一个特解
       则 &#10112; 通解为 \\(y=C_1\varphi_1(x)+C_2\varphi_2(x)\\);
-      若 \\(\varphi_1(x)\\), \\(\varphi_2(x)\\) 为 &#10112; 的两个线性无关解, \\(\varphi_0(x)\\) 为 &#10113; 的一个特解
-         则 &#10113; 的通解为 \\(y=C_1\varphi_1(x)+C_2\varphi_2(x)+\varphi_0(x)\\)
-   5. &#10114; \\(y^{\prime\prime}+a(x)y^\prime+b(x)y=f(x)\\)
-      设 \\(f(x)=f_1(x)+f_2(x)\\) , 有
+      &#10113; 的通解为 \\(y=C_1\varphi_1(x)+C_2\varphi_2(x)+\varphi_0(x)\\)
+   5. &#10114; \\(y^{\prime\prime}+a(x)y^\prime+b(x)y=f_1(x)+f_2(x)\\)
       &#10114;' \\(\enspace y^{\prime\prime}+a(x)y^\prime+b(x)y=f_1(x)\\)
       &#10114;'' \\(\enspace y^{\prime\prime}+a(x)y^\prime+b(x)y=f_2(x)\\)
-      若 \\(\varphi_1(x)\\), \\(\varphi_2(x)\\) 为 &#10114;', &#10114;'' 的解, 则 \\(y=\varphi_1(x)+\varphi_2(x)\\) 为 &#10114; 的解
+      若 \\(\varphi_1(x)\\), \\(\varphi_2(x)\\) 分别为 &#10114;', &#10114;'' 的特解, 则 \\(y=\varphi_1(x)+\varphi_2(x)\\) 为 &#10114; 的特解
       > 证明:
       > 若 \\(\varphi_1(x)\\), \\(\varphi_2(x)\\) 为 &#10114;', &#10114;'' 的解
       > 则有 \\(\begin{cases} \varphi_1^{\prime\prime}+a(x)\varphi_1^\prime+b(x)\varphi_1=f_1(x) \\\ \varphi_2^{\prime\prime}+a(x)\varphi_2^\prime+b(x)\varphi_2=f_2(x) \end{cases}\\)
@@ -1336,45 +1338,55 @@ tags: mathematics postgraduate
 ### 常系数齐次线性微分方程
 
 1. 二阶常系数齐次线性微分方程: \\(y^{\prime\prime}+py^\prime+qy=0\\)
-   它的特征方程: \\(\lambda^2+p\lambda+q=0\\)
+   它的特征方程: \\(\lambda^2+p\lambda+q=0\\) , \\(\Delta=b^2-4q\\)
    1. \\(\Delta>0\\), \\(y=C_1e^{\lambda_1x}+C_2e^{\lambda_2x}\\)
    2. \\(\Delta=0\\), \\(y=(C_1+C_2x)e^{\lambda_1x}\\)
-   3. \\(\Delta<0\\), \\(y=e^{\alpha x}(C_1\cos\beta x+C_2\sin\beta x)\\)
-2. 解释:
-   设二阶常系数齐次线性微分方程 \\(y^{\prime}+py^\prime+qy=0\enspace\\) (\\(p\\)、\\(q\\) 为常数) (\*)
-   猜测: (\*) 解的形式? \\(\begin{cases} e^{\lambda x} \\\ \sin(\beta x)\cdot\cos(\beta x) \end{cases}\\)
-   令 \\(y=e^{\lambda x}\\) 为 (\*) 的解, 代入得
-   \\(\lambda^2e^{\lambda x}+p\lambda e^{\lambda x}+qe^{\lambda x}=0\rArr\lambda^2+p\lambda+q=0\\), 称其为 (\*) 的特征方程
+   3. \\(\Delta<0\\), \\(y=e^{\alpha x}[C_1\cos(\beta x)+C_2\sin(\beta x)]\\)
+   
+   这种根据二阶常系数齐次线性方程的特征方程的根直接确定其通解的方法称为**特征方程法**
+2. 特征方程法解释:
+   二阶常系数齐次线性微分方程 \\(y^{\prime\prime}+py^\prime+qy=0\enspace\\) (\\(p\\)、\\(q\\) 为常数) (&#8277;)
+   猜测: (&#8277;) 解的形式? \\(\begin{cases} e^{\lambda x} \\\ \sin(\beta x)\cdot\cos(\beta x) \end{cases}\\)
+   令 \\(y=e^{\lambda x}\\) 为 (&#8277;) 的解, 有
+   \\(\lambda^2e^{\lambda x}+p\lambda e^{\lambda x}+qe^{\lambda x}=0\rArr\lambda^2+p\lambda+q=0\\), 称其为 (&#8277;) 的特征方程
    * 情况1 \\(\Delta=p^2-4q>0\\)
      则 \\(\lambda^2+p\lambda+q=0\\) 有两个不同实根 \\(\lambda_1\\)、\\(\lambda_2\\)
-     因此 \\(y_1=e^{\lambda_1x}\\), \\(y_2=e^{\lambda_2x}\\) 为 (\*) 的解
-     \\(\because\lambda_1\neq\lambda_2\\), \\(\therefore y_1\\) 与 \\(y_2\\) 线性无关
-     \\(\therefore\\) (\*) 的通解为 \\(y=C_1e^{\lambda_1x}+C_2e^{\lambda_2x}\\) (高阶线性线性微分方程性质1)
+     因此 \\(y_1=e^{\lambda_1x}\\), \\(y_2=e^{\lambda_2x}\\) 为 (&#8277;) 的特解
+     \\(\because\lambda_1\neq\lambda_2\\)
+     \\(\therefore\frac{y_1}{y_2}=e^{(\lambda_1-\lambda_2)x}\\) 不恒为某个常数, \\(y_1\\) 与 \\(y_2\\) 线性无关
+     \\(\therefore\\) (&#8277;) 的通解为 \\(y=C_1e^{\lambda_1x}+C_2e^{\lambda_2x}\\) (高阶线性线性微分方程性质 4)
    * 情况2 \\(\Delta=p^2-4q=0\\)
      则 \\(\lambda^2+p\lambda+q=0\\) 有两个相等的实根 \\(\lambda_1=\lambda_2\\)
-     \\(y_1=e^{\lambda_1x}\\) 为 (\*) 的解
-     令 \\(\frac{y_2}{y_1}=u(x)(\neq C)\\) 且 \\(y_2\\) 为 (\*) 的解, 得到
-     \\(y_2=ue^{\lambda_1x}\\)
-     \\(y_2^\prime=u^\prime e^{\lambda_1x}+\lambda_1ue^{\lambda_1x}\\)
-     \\(y_2^{\prime\prime}=u^{\prime\prime}e^{\lambda_1x}+2\lambda_1u^\prime e^{\lambda_1x}+\lambda_1^2ue^{\lambda_1x}\\)
-     将以上三式代入 \\(y^{\prime\prime}+py^\prime+qy=0\\) 得
+     \\(y_1=e^{\lambda_1x}\\) 为 (&#8277;) 的一个特解, 还要找出与 \\(y_1\\) 线性无关的另一个特解 \\(y_2\\)
+     (满足 \\(\frac{y_2}{y_1}\\) 不是恒常数的 \\(y_2\\)) 
+     令 \\(\frac{y_2}{y_1}=u(x)(\neq C)\\) 且 \\(y_2\\) 为 (&#8277;) 的解, 得到
+     \\(\begin{cases} y_2=ue^{\lambda_1x} \\\ y_2^\prime=u^\prime e^{\lambda_1x}+\lambda_1ue^{\lambda_1x} \\\ y_2^{\prime\prime}=u^{\prime\prime}e^{\lambda_1x}+2\lambda_1u^\prime e^{\lambda_1x}+\lambda_1^2ue^{\lambda_1x} \end{cases}\\)
+     将以上三式代入 (&#8277;) 得
      \\(u^{\prime\prime}e^{\lambda_1x}+2\lambda_1u^\prime e^{\lambda_1x}+\lambda_1^2ue^{\lambda_1x}+pu^\prime e^{\lambda_1x}+p\lambda_1ue^{\lambda_1x}+que^{\lambda_1x}=0\\)
      \\(\rArr u^{\prime\prime}+2\lambda_1u^\prime+\lambda_1^2u+pu^\prime+p\lambda_1u+qu=0\\)
      \\(\rArr u^{\prime\prime}+(2\lambda_1+p)u^\prime+(\lambda_1^2+p\lambda_1+q)u=0\\)
-     \\(\because \begin{cases} \lambda_1^2+p\lambda_1+q=0 \\\ \lambda_1+\lambda_2=-p \rArr 2\lambda_1+p=0\enspace(\text{韦达定理}) \end{cases}\\)
+     \\(\because \begin{cases} \lambda_1^2+p\lambda_1+q=0 \\\ \lambda_1+\lambda_2=-p \rArr 2\lambda_1+p=0\enspace\footnotesize(\text{韦达定理} x_1+x_2=-\frac{b}{a}) \end{cases}\\)
       \\(\therefore u^{\prime\prime}=0\\), 取 \\(u(x)=C_1x+C_2\\)
       \\(\therefore y_2=(C_1x+C_2)e^{\lambda_1x}=C_1xe^{\lambda_1x}+C_2e^{\lambda_1x}\\)
-      则通解 \\(y=C_0e^{\lambda_1x}+C_1xe^{\lambda_1x}+C_2e^{\lambda_1x}=(C_0+C_2)e^{\lambda_1x}+C_1xe^{\lambda_1x}=(C_3+C_1x)e^{\lambda_1x}\\)
+      则通解 \\(\footnotesize y=C_0e^{\lambda_1x}+C_1xe^{\lambda_1x}+C_2e^{\lambda_1x}=(C_0+C_1x+C_2)e^{\lambda_1x}=(C_3+C_1x)e^{\lambda_1x}\\)
    * 情况3 \\(\Delta=p^2-4q<0\\)
-     则 \\(\lambda^2+p\lambda+q=0\\) 有两个虚数解 \\(\lambda_{1,2}=\alpha\pm i\beta\\)
-     \\(y_1=e^{(\alpha+\beta i)x}\\) 与 \\(y_2=e^{(\alpha-\beta i)x}\\) 为 (\*) 的解
-     \\(y_1=e^{\alpha x+\beta xi}=e^{\alpha x}\cdot e^{\beta xi}=e^{\alpha x}\cdot[\cos(\beta x)+i\sin(\beta x)]\enspace\\) (欧拉公式 \\(e^{i\theta}=\cos\theta+i\sin\theta\\))
+     则 \\(\lambda^2+p\lambda+q=0\\) 有一对共轭复根 \\(\footnotesize\lambda_{1,2}=-\frac{1}{2}p\pm\frac{1}{2}\sqrt{4q-p^2}i=\alpha\pm\beta i\\)
+     \\(y_1=e^{(\alpha+\beta i)x}\\) 与 \\(y_2=e^{(\alpha-\beta i)x}\\) 为 (&#8277;) 的复值函数形式特解
+     为了求出实值函数形式的特解, 将 \\(y_1\\) 与 \\(y_2\\) 改写为:
+     \\(y_1=e^{\alpha x+\beta xi}=e^{\alpha x}\cdot e^{\beta xi}=e^{\alpha x}\cdot\underbrace{[\cos(\beta x)+i\sin(\beta x)]}_{\text{欧拉公式 }e^{i\theta}=\cos\theta+i\sin\theta}\\)
      \\(y_2=e^{\alpha x-\beta xi}=e^{\alpha x}\cdot e^{-\beta xi}=e^{\alpha x}\cdot[\cos(\beta x)-i\sin(\beta x)]\\)
-     \\(Y_1=\frac{1}{2}y_1+\frac{1}{2}y_2=e^{\alpha x}\cos(\beta x)\\) (高阶线性线性微分方程性质1)
-     \\(Y_2=\frac{1}{2i}y_1+(-\frac{1}{2i})y_2=\frac{1}{2i}(y_1-y_2)=e^{\alpha x}\sin(\beta x)\\)
-     \\(\therefore\\) (\*) 的通解为 \\(y=C_1e^{\alpha x}\cos(\beta x)+C_2e^{\alpha x}\sin(\beta x)=e^{\alpha x}[C_1\cos(\beta x)+C_2\sin(\beta x)]\\)
-3. 高阶常系数齐次线性微分方程
-例 \\(y^{\prime\prime\prime}+py^{\prime\prime}+qy^\prime+\Gamma y=0\\), 它的特征方程 \\(\lambda^3+p\lambda^2+q\lambda+\Gamma=0\\)
+     取方程的两个特解: (高阶线性线性微分方程性质 1)
+     \\(Y_1=\frac{1}{2}(y_1+y_2)=e^{\alpha x}\cos(\beta x)\\)
+     \\(Y_2=\frac{1}{2i}(y_1-y_2)=e^{\alpha x}\sin(\beta x)\\)
+     \\(\because\frac{Y_2}{Y_1}=\tan(\beta x)\\)
+     \\(\therefore\\) \\(Y_1\\) 与 \\(Y_2\\) 线性无关, (&#8277;) 的通解为 \\(\footnotesize y=C_1e^{\alpha x}\cos(\beta x)+C_2e^{\alpha x}\sin(\beta x)=e^{\alpha x}[C_1\cos(\beta x)+C_2\sin(\beta x)]\\)
+3. \\(n\\) 阶常系数齐次线性微分方程 \\(y^{(n)}+p_1y^{(n-1)}+\cdots+p_{n-1}y^\prime+p_ny=0\\)
+   其特征方程: \\(\lambda^n+p_1\lambda^{n-1}+\cdots+p_{n-1}\lambda+p_n=0\\)
+   | 特征方程的根 | 通解中的对应项 |
+   |-|-|
+   | \\(k\\) 重根 \\(\lambda_1=\lambda_2=\cdots=\lambda_k\\) | \\(y=C_1+C_2x+\cdots+C_kx^{k-1})e^{\lambda_1x}\\) |
+   | \\(k\\) 重共轭复根 \\(\lambda_{1,\cdots,n}=\alpha\pm\beta i\\) | \\(e^{\alpha x}[(C_1+C_2x+\cdots+C_kx^{n-1})\cos(\beta x) \\\ +(D_0+D_1x+\cdots+D_kx^{k-1})\sin(\beta x)]\\) |
+   例: \\(y^{\prime\prime\prime}+py^{\prime\prime}+qy^\prime+ry=0\\), 它的特征方程 \\(\lambda^3+p\lambda^2+q\lambda+r=0\\)
    1. \\(\lambda_1\\)、\\(\lambda_2\\)、\\(\lambda_3\\) 为实数且各不相等
       \\(y=C_1e^{\lambda_1x}+C_2e^{\lambda_2x}+C_3e^{\lambda_3x}\\)
    2. \\(\lambda_1\\)、\\(\lambda_2\\)、\\(\lambda_3\\) 为实数且 \\(\lambda_1=\lambda_2\neq\lambda_3\\)
@@ -1386,39 +1398,77 @@ tags: mathematics postgraduate
 
 ### 常系数非齐次线性微分方程
 
-
-1. 通解思路:
-   \\(y^{\prime\prime}+py^\prime+qy=f(x)\\)
-   * 先求 \\(y^{\prime\prime}+py^\prime+qy=0\\) 通解
-   * 找 \\(y^{\prime\prime}+py^\prime+qy=f(x)\\) 的一个特解 \\(y_0(x)\\) (很困难, 接下来只谈两种情况)
-   
-   则有通解 \\(y=C_1e^{-x}+C_2e^{2x}+y_0(x)\\) (高阶线性微分方程性质5)
-2. \\(f(x)=P_n(x)e^{kx}\\)
-   若 \\(n=|\\{\lambda|k=\lambda_1=\dots\lambda_n\\}|\\)
-   令特解为 \\(y_0=x^n(ax+b)e^{kx}\\)
-   * 例1: 求 \\(y^{\prime\prime}-y^\prime-2y=(2x+1)e^x\\) 通解
-     解:
-     1. 特征方程: \\(\lambda^2-\lambda-2=0\rArr\lambda_1=-1\\), \\(\lambda_2=2\\)
-        \\(y^{\prime\prime}-y^\prime-2y=0\\) 通解为 \\(y=C_1e^{-x}+C_2e^{2x}\\)
-     2. 令特解 \\(y_0(x)=(ax+b)e^xx\\) 代入得 \\(a=-1\\), \\(b=-1\\)
-        即 \\(y_0(x)=-(x-1)e^x\\)
-      
-     \\(\therefore\\) 原方程通解为 \\(y=C_1e^{-x}+C_2e^{2x}-(x-1)e^x\\)
-   * 例2: 求 \\(y^{\prime\prime}-3y^\prime+2y=(2x+3)e^x\\) 通解
+1. 形如 \\(y^{\prime\prime}+py^\prime+qy=f(x)\enspace\\) (\\(p\\)、\\(q\\) 为常数, \\(f(x)\\) 称为**自由项**)
+   通解思路: (高阶线性微分方程性质 5)
+   1. 先求 \\(y^{\prime\prime}+py^\prime+qy=0\\) 通解
+   2. 找 \\(y^{\prime\prime}+py^\prime+qy=f(x)\\) 的一个特解 \\(y_0(x)\\)
+      (很困难, 接下来只谈两种使用待定系数法的情况)
+   3. 有通解 \\(y=C_1e^{-x}+C_2e^{2x}+y_0(x)\\)
+2. 自由项 \\(f(x)=P_n(x)e^{kx}\\)
+   其中 \\(P_n(x)=a_0x^n+a_1x^{n-1}+\cdots+a_{n-1}x+a_n\\)
+   令特解为 \\(y_0=x^l(ax+b)e^{kx}\\) , 其中 \\(l\\) 为与 \\(k\\) 的值相等的特征值个数
+   * 例1: 求 \\(y^{\prime\prime}-3y^\prime+2y=(2x+3)e^x\\) 通解
      解:
      1. 特征方程: \\(\lambda^2-3\lambda+2=0\rArr\lambda_1=1\\), \\(\lambda_2=2\\)
         \\(y^{\prime\prime}-3y^\prime+2y=0\\) 通解为 \\(y=C_1e^{x}+C_2e^{2x}\\)
-     2. 令特解 \\(y_0(x)=x(ax+b)e^x=(ax^2+bx)e^x\\) 代入得 \\(a=-1\\), \\(b=-5\\)
+     2. \\(k=1=\lambda_1\\), 因此令特解 \\(y_0(x)=x(ax+b)e^x=(ax^2+bx)e^x\\), 有
+        \\(\begin{array}{rl} y_0^\prime(x) & =(2ax+b)e^x+(ax^2+bx)e^x=(ax^2+2ax+bx+b)e^x \\\ y_0^{\prime\prime}(x) & =(2ax+2a+b)e^x+(ax^2+2ax+bx+b)e^x \\\ & =(ax^2+4ax+bx+2a+2b)e^x \end{array}\\)
+        代入原式, 得到:
+        <div>
+        $$
+        \begin{array}{l}
+        \footnotesize(ax^2+4ax+bx+2a+2b)e^x-3(ax^2+2ax+bx+b)e^x+2(ax^2+bx)e^x=(2x+3)e^x \\
+        \footnotesize\hArr(ax^2+4ax+bx+2a+2b)-3(ax^2+2ax+bx+b)+2(ax^2+bx)=2x+3 \\
+        \footnotesize\hArr -2ax+2a-b=2x+3 \\
+        \footnotesize\rArr\begin{cases} -2ax=2x & \hArr a=-1\\ 2a-b=3 & \hArr b=-5 \end{cases}
+        \end{array}
+        $$
+        </div>
+        
         即 \\(y_0(x)=-(x^2+5x)e^x\\)
-
+     
      \\(\therefore\\) 原方程通解为 \\(y=C_1e^x+C_2e^{2x}-(x^2+5x)e^x\\)
-3. \\(f(x)=e^{\alpha x}\\) [\\(\text{多项式}\cdot\cos(\beta x)+\text{多项式}\cdot\sin(\beta x)\\)]
-   若 \\(n=|\\{\lambda|(\alpha+i\beta)=\lambda_1=\dots\lambda_n\\}|\\)
-   特解为 \\(y_0(x)=x^ne^{\alpha x}[a\cdot\cos(\beta x)+b\cdot\sin(\beta x)]\enspace\\) (\\(a\\)、\\(b\\) 根据多项式内容决定)
-   * 例3: \\(y^{\prime\prime}-2y^\prime+2y=(x+1)e^x\cos x\\)
+   * 例2: 求 \\(y^{\prime\prime}-2y^\prime+y=(3x+2)e^x\\) 通解
      解:
-     1. 特征方程: \\(\lambda^2-2\lambda+2=0\rArr\lambda_{1,2}=1\pm i\\)
-        \\(y^{\prime\prime}-2y^\prime+2y=0\rArr y=e^x(\cos x+\sin x)\\)
-     2. \\(\alpha=1\\), \\(\beta=1\rArr\alpha+i\beta=1+i\\) 有一个 \\(\lambda\\) 值与其相等
+     1. 特征方程 \\(\lambda^2-2\lambda+1=0\rArr\lambda_1=\lambda_2=1\\)
+        \\(y^{\prime\prime}-2y^\prime+y=0\\) 通解 \\(y=(C_1+C_2x)e^x\\)
+     2. \\(k=1=\lambda_1=\lambda_2\\), 因此令特解 \\(\footnotesize y_0(x)=x^2(ax+b)e^x=(ax^3+bx^2)e^x\\)
+        \\(y_0^\prime(x)=\cdots\\), \\(y_0^{\prime\prime}(x)=\cdots\\)
+        代入原方程解得 \\(a=\frac{1}{2}\\), \\(b=1\\)
+        即 \\(y_0(x)=(\frac{1}{2}x^3+x^2)e^x\\)
+     
+     \\(\therefore\\) 原方程通解为 \\(y=(C_1+C_2x)e^x+(\frac{1}{2}x^3+x^2)e^x\\)
+   * 例3: 求 \\(y^{\prime\prime}-2y^\prime-3y=6x-1\\) 通解
+     解:
+     1. \\(\lambda^2-2\lambda-3=0\rArr\lambda_1=-1\\), \\(\lambda_2=3\\)
+        \\(y^{\prime\prime}-2y^\prime-3y=0\\) 通解为 \\(y=C_1e^{-x}+C_2e^3\\)
+     2. 自由项 \\(6x-1\\) 可视为 \\((6x-1)e^0x\\), 即 \\(k=0\\).
+        注意此题中 \\(\lambda\\) 的值没有与 \\(k=0\\) 相同的
+        因此令特解 \\(y_0(x)=ax+b\\)
+        (余下略)
+        \\(\dots\\)
+     
+     \\(\dots\\)
+3. \\(f(x)=e^{\alpha x}\\) [\\(\text{多项式}\cdot\cos(\beta x)+\text{多项式}\cdot\sin(\beta x)\\)]
+   令特解为 \\(\footnotesize y_0(x)=x^le^{\alpha x}[a\cdot\cos(\beta x)+b\cdot\sin(\beta x)]\enspace\\) (\\(a\\)、\\(b\\) 根据多项式内容决定, \\(l\\) 的值为与 \\(\alpha+i\beta\\) 的值相等的特征值个数)
+   注: \\(\alpha\\)、\\(\beta\\) 的值已经在方程中给出, 因此解对应非齐次方程通解可以直接用
+   * 例1: 求 \\(y^{\prime\prime}+4y=3\cos 2x\\) 通解
+     解:
+     1. \\(\lambda^2+4=0\rArr\lambda_{1,2}=\pm 2i\\)
+        \\(y^{\prime\prime}+4y=0\\) 通解为 \\(y=C_1\cos 2x+C_2\sin 2x\\)
+     2. \\(\alpha=0\\), \\(\beta=2\rArr\alpha+i\beta=2i=\lambda_1\\)
+        因此令特解 \\(y_0(x)=x(a\cos 2x+b\sin 2x)\enspace\\) (\\(\cos\\) 和 \\(\sin\\) 都不能少哦)
+        (余下略)
+        \\(\dots\\)
+     
+     \\(\dots\\)
+   * 例2: \\(y^{\prime\prime}-2y^\prime+2y=(x+1)e^x\cos x\\)
+     解:
+     1. \\(\lambda^2-2\lambda+2=0\rArr\lambda_{1,2}=1\pm i\\)
+        \\(y^{\prime\prime}-2y^\prime+2y=0\\) 通解为 \\(y=e^x(\cos x+\sin x)\\)
+     2. \\(\alpha=1\\), \\(\beta=1\rArr\alpha+i\beta=1+i=\lambda_1\\)
         因此令特解 \\(y_0(x)=xe^x[(ax+b)\cos x+(cx+d)\sin x]\\)
-        \\(\dots\\) (接下来解出 \\(a,b,c,d\\), 最后得出通解)
+        (余下略, 解出 \\(a,b,c,d\\), 最后得出通解)
+        \\(\dots\\)
+     
+     \\(\dots\\)

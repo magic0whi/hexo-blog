@@ -6,7 +6,9 @@ categories:
 - mathematics
 lang: zh-cn
 date: 2020-12-28 17:15:02
-tags: senior-high-schoool
+tags:
+- senior-high-schoool
+- mathematics
 ---
 
 高中数学的内容

@@ -16,7 +16,7 @@ date: 2020-02-08 15:14:28
 我是钱君哲, 你可以称呼我为钱桑
 我喜欢捣鼓自己不懂的东西;
 是个笨蛋, 带专生, 垃圾学校, 垃圾专业. 因此, 请多指教.
-目前受到{% post_link tricks-of-heart 性别焦虑 %}的影响, 属于 <font color=#5BCFFA>M</font>t<font color=#F5ABB9>F</font> 群体.
+目前受到{% post_link tricks-of-heart 性别焦虑 %}的影响, 属于 <font color=#5BCFFA>M</font>t<font color=#F5ABB9>F</font> 群体, Ta 们只是有点特别罢了, Ta 们中的多数都有着不同程度的心理创伤, 生活中要是见到要好好对待 Ta 们哦.
 
 行为准则: 完成该做的目标, 无视娱乐和无用的劳动, 可为此无视身体状态抛弃一切; 发现并及时纠正自己讨厌的品性
 
