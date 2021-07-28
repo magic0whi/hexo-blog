@@ -24,7 +24,7 @@ TODO: keep all the vector symbols have a boldface style.
    1. The "dot product" of \\(v=\begin{bmatrix} 1 \\\ 2 \end{bmatrix}\\) and \\(w=\begin{bmatrix} 4 \\\ 5 \end{bmatrix}\\) is \\(v\cdot w=1\cdot 4+2\cdot 5=4+10=14\\)
    2. The dot product is \\(v\cdot w=0\\) when \\(v\\) is perpendicular to \\(w\\)
       The zero vector is perpendicular to every vector.
-      The angle is less \\(90\degree\\) when \\(v\cdot w\\) is positive. The angle is above \\(90\degree\\) when \\(v\cdot w\\) is negative.
+      The angle is less 90&#176; when \\(v\cdot w\\) is positive. The angle is above 90&#176; when \\(v\cdot w\\) is negative.
       **Proof**: When \\(v\\) and \\(w\\) are perpendicular, they form two sides of a right triangle.
       The third side is \\(v-w\\) (the hypotenuse going across in image below). With Pythagoras Law \\(a^2+b^2+c^2\\) :
       \\[\\|v\\|^2+\\|w\\|^2=\\|v-w\\|^2\\]
@@ -140,7 +140,7 @@ TODO: integrate the ideas in this chapter
    1. The Matrix Form of One Elimination Step
       The **identity matrix** has 1's on the diagonal and otherwise 0's. Then \\(Ib=b\\) for all b.
       The **elementary matrix or elimination matrix** \\(E_{ij}\\) has the extra nonzero entry \\(-\ell_{ij}\\) in the \\(i,j\\) position. Then \\(E_{ij}\\) subtracts a multiple \\(\ell_{ij}\\) of row \\(j\\) from row \\(i\\).
-      The purpose of \\(E_{31}\\) is to product a zero in the \\((3,1)\\) position of the matrix.
+      e.g. The purpose of \\(E_{31}\\) is to product a zero in the \\((3,1)\\) position of the matrix.
    2. Matrix Multiplication
       Associative law is true: \\(A(BC)=(AB)C\\)
       Commutative law is false: \\(\text{Often}\enspace AB\neq BA\\)
@@ -275,7 +275,7 @@ TODO: integrate the ideas in this chapter
    3. When \\(A\\) is rectangular, elimination will not stop at the uppertriangular \\(U\\) .
       We can continue to make this matrix simpler, in two ways. These steps bring us to the best matrix -- reduced row echelon matrix \\(R\\) :
       1. ***Produce zeros above the pivots*.** Use pivot rows to eliminate upward in \\(\bm{R}\\) .
-      2. ***Produce ones in the pivots.*** Divice the whole pivot row by its pivot
+      2. ***Produce ones in the pivots.*** Divide the whole pivot row by its pivot
       
       The **reduced row echelon from \\(\bm{R=\textbf{rref}(A)}\\)** has all pivots \\(=1\\) , with zeros above and below.
    4. Every free column leads to a special solution.
@@ -328,27 +328,27 @@ TODO: integrate the ideas in this chapter
 
 1. Orthogonality of the Four Subspaces
    1. Orhogonal vectors have \\(\bm{v}^\mathrm{T}\bm{w}=0\\) .
-   2. Subspaces \\(\bm{V}\\) nad \\(\bm{W}\\) are orthogonal when \\(\bm{v}^\mathrm{T}\bm{w}=0\\) for every \\(\bm{v}\\) in \\(\bm{V}\\) and every \\(\bm{w}\\) in \\(\bm{W}\\) .
+   2. Subspaces \\(\bm{V}\\) and \\(\bm{W}\\) are orthogonal when \\(\bm{v}^\mathrm{T}\bm{w}=0\\) for every \\(\bm{v}\\) in \\(\bm{V}\\) and every \\(\bm{w}\\) in \\(\bm{W}\\) .
    3. \\(\bm{V}\\) and \\(\bm{W}\\) are "orthogonal complements" if \\(\bm{W}\\) contains **all** vectors perpendicular to \\(\bm{V}\\) (and vice versa). Inside \\(\bm{R}^n\\) , the dimensions of complements \\(\bm{V}\\) and \\(\bm{W}\\) add to \\(n\\) .
    4. The nullspace \\(\bm{N}(A)\\) and the row space \\(\bm{C}(A^\mathrm{T})\\) are orthogonal complements, with dimensions \\((n-r)+r=n\\) . Similarly \\(\bm{N}(A^\mathrm{T})\\) and \\(\bm{C}(A)\\) are orthogonal complements with \\((m-r)+r=m\\) .
-   5. And \\(n\\) independent vectors in \\(\bm{R}^n\\) span \\(\bm{R}^n\\) . Any \\(n\\) spanning vectors are independent.
+   5. Any \\(n\\) independent vectors in \\(\bm{R}^n\\) span \\(\bm{R}^n\\) . Any \\(n\\) spanning vectors are independent.
 2. Projections
    1. The projection of a vector \\(\bm{b}\\) onto the line through \\(\bm{a}\\) is the closest point \\(\bm{p=a\frac{a^\mathrm{T}b}{a^\mathrm{T}a}}\\)
-      > Projecting \\(\bm{b}\\) onto \\(\bm{a}\\) . The line from \\(\bm{b}\\) to \\(\bm{p}\\) is perpendicular to the vector \\(A\\) . This is the dotted line marked \\(\bm{e=b-p=b-\hat{x}a}\\) .
+      > Projecting \\(\bm{b}\\) onto \\(\bm{a}\\) . The line from \\(\bm{b}\\) to \\(\bm{p}\\) is perpendicular to the vector \\(\bm{a}\\) . This is the dotted line marked \\(\bm{e=b-p=b-\hat{x}a}\\) .
       > \\(\bm{a\cdot e=a\cdot(b-\hat{x}a)=0 \rArr a\cdot b-\hat{x}a\cdot a=0 \rArr\boxed{\hat{x}=\frac{a\cdot b}{a\cdot a}=\frac{a^\mathrm{T}b}{a^\mathrm{T}a}}}\\) 
       > Projection matrix \\(P\\) : \\(\boxed{\bm{p=a\hat{x}=a\frac{a^\mathrm{T}b}{a^\mathrm{T}a}=}P\bm{b}}\rArr\boxed{P=\bm{\frac{aa^\mathrm{T}}{a^\mathrm{T}a}}}\\)
       > {% asset_img 3.png %}
-   2. The projection of \\(\bm{b}\\) onto a subspace \\(\bm{S}\\) is the closest vector \\(\bm{p}\\) in \\(\bm{S}\\) ; \\(b-p\\) is orthogonal to \\(S\\)
+   2. The projection of \\(\bm{b}\\) onto a subspace \\(\bm{S}\\) is the closest vector \\(\bm{p}\\) in \\(\bm{S}\\), \\(\bm{b}-\bm{p}\\) is orthogonal to \\(S\\)
       The equation \\(A^\mathrm{T}A\hat{\bm{x}}=A^\mathrm{T}\bm{b}\\) leads to \\(\hat{\bm{x}}\\) and \\(\bm{p}=A\hat{\bm{x}}\\)
       > \\(n\\) vectors \\(a_1,\dots,a_n\\) in \\(\textbf{R}^m\\) are a basis of the subspace.
-      > ***The Problem is to find the combination \\(p=\hat{x_1}\bm{a}_1+\dots+\hat{x_n}\bm{a}_n\\) closest to a given vector \\(\bm{b}\\) .***
+      > ***The Problem is to find the combination \\(p=\hat{x}_1\bm{a}_1+\dots+\hat{x}_n\bm{a}_n\\) closest to a given vector \\(\bm{b}\\) .***
       > We put these basis vectors into the columns of \\(A\\) , \\(A\\) has full rank \\(n\\) , the subspace is equal to \\(\bm{C}(A)\\).
       > **The error vector \\(\bm{b-A\hat{x}}\\) is perpendicular to the subspace.** (See the Figure 4.6 above)
       > Then \\(\begin{matrix} \bm{a}_1^\mathrm{T}(\bm{b}-A\hat{\bm{x}}))=0 \\\ \vdots \\\ \bm{a}_n^\mathrm{T}(\bm{b}-A\hat{\bm{x}}))=0 \end{matrix}\rArr\begin{bmatrix} \bm{a}_1^\mathrm{T} \\\ \vdots \\\ \bm{a}_n^\mathrm{T} \end{bmatrix}(\bm{b}-A\hat{\bm{x}})=\begin{bmatrix} \\\ 0 \\\ \\\ \end{bmatrix}\rArr A^\mathrm{T}(\bm{b}-A\hat{\bm{x}})=0\\)
-      > * Find \\(\hat{\bm{x}}(n\times 1)\\) : \\(A^\mathrm{T}(\bm{b}-A\hat{\bm{x}})=0\rArr A^\mathrm{T}A\hat{\bm{x}}=A^\mathrm{T}\bm{b}\rArr\hat{\bm{x}}=(A^\mathrm{T}A)^{-1}A^\mathrm{T}\bm{b}\\)
+      > * Find \\(\hat{\bm{x}}\enspace\footnotesize(n\times 1)\\): \\(\footnotesize A^\mathrm{T}(\bm{b}-A\hat{\bm{x}})=0\rArr A^\mathrm{T}A\hat{\bm{x}}=A^\mathrm{T}\bm{b}\rArr\hat{\bm{x}}=(A^\mathrm{T}A)^{-1}A^\mathrm{T}\bm{b}\\)
       >   (The symmetric matrix \\(A^\mathrm{T}A\\) is \\(n\\) by \\(n\\) . It is invertible if the \\(\bm{a}\\)'s are independent)
-      > * Find \\(\bm{p}(m\times 1)\\) : \\(\bm{p}=A\hat{\bm{x}}=A(A^\mathrm{T}A)^{-1}A^\mathrm{T}\bm{b}=P\bm{b}\\)
-      > * Find \\(\bm{P}(m\times m)\\) : \\(\bm{p}=P\bm{b}\rArr P=A(A^\mathrm{T}A)^{-1}A^\mathrm{T}\\)
+      > * Find \\(\bm{p}\enspace\footnotesize(m\times 1)\\): \\(\footnotesize\bm{p}=A\hat{\bm{x}}=A(A^\mathrm{T}A)^{-1}A^\mathrm{T}\bm{b}=P\bm{b}\\)
+      > * Find \\(\bm{P}\enspace\footnotesize(m\times m)\\): \\(\footnotesize\bm{p}=P\bm{b}\rArr P=A(A^\mathrm{T}A)^{-1}A^\mathrm{T}\\)
    3. The projection matrix \\(P=A(A^\mathrm{T}A)^{-1}A^\mathrm{T}\\) has \\(P^2=P=P^T\\)
       (\\(P=P^2\\) because a second projection doesn't change the first projection)
 3. Least Squares Approximations
@@ -487,29 +487,34 @@ TODO: integrate the ideas in this chapter
 ## Eigenvalues and Eigenvectors
 
 1. Introduction to Eigenvalues
-   1. \\(A\bm{x}=\lambda\bm{x}\\) says that eigenvectors \\(\bm{x}\\) keep the same direction when multiplied by \\(A\\) . It also says that \\(\operatorname{det}(A-\lambda I)=0\\) . This determines \\(n\\) eigenvalues.
-   To solve the eigenvalue problem for an \\(n\\) by \\(n\\) matrix, follow these steps:
-      1. ***Compute the \\(\operatorname{det}(A-\lambda I)=0\\)***. With \\(\lambda\\) subtracted along the diagonal, this determinant starts with \\(\lambda^n\\) or \\(-\lambda^n\\) . It is a polynomial in \\(\lambda\\) of degree \\(n\\) .
-      2. ***Find the roots of this polynominal***, by solving \\(\operatorname{det}(A-\lambda I)=0\\) . The \\(n\\) roots are the \\(n\\) eigenvalues of \\(A\\) . They make \\(A-\lambda I\\) singular.
-      3. For each eigenvalue \\(\lambda\\) , ***solve \\(A-\lambda I)\bm{x}=0\\) to find an eigenvector \\(\bm{x}\\)***.
+   1. \\(A\bm{x}=\lambda\bm{x}\\) says that eigenvectors \\(\bm{x}\\) keep the same direction when multiplied by \\(A\\).
+      It also says that \\((A-\lambda I)\bm{x}=0\\) and \\(\operatorname{det}(A-\lambda I)=0\\) . This determines \\(n\\) eigenvalues (each eigenvalue \\(\lambda\\) finds an eigenvector \\(x\\)).
+      To solve the eigenvalue problem for an \\(n\\) by \\(n\\) matrix, follow these steps:
+      1. ***Compute the \\(\operatorname{det}(A-\lambda I)=0\\)***.
+         With \\(\lambda\\) subtracted along the diagonal, this determinant starts with \\(\lambda^n\\) or \\(-\lambda^n\\) . It is a polynomial in \\(\lambda\\) of degree \\(n\\) .
+      2. ***Find the roots of this polynominal***
+         by solving \\(\operatorname{det}(A-\lambda I)=0\\) . The \\(n\\) roots are the \\(n\\) eigenvalues of \\(A\\) . They make \\(A-\lambda I\\) singular.
+      3. For each eigenvalue \\(\lambda\\) , ***solve \\((A-\lambda I)\bm{x}=0\\) to find an eigenvector \\(\bm{x}\\)***.
    2. If \\(A\bm{x}=\lambda{x}\\) then \\(A^2\bm{x}=\lambda^2\bm{x}\\) and \\(A^{-1}\bm{x}=\lambda^{-1}\bm{x}\\) and \\((A+cI)\bm{x}=(\lambda+c)\bm{x}\\)
-   3. The sum of the \\(\lambda\\)'s equals the sum down the main diagonal of \\(A\\) (*the trace*). The product of the \\(\lambda\\)'s equals the determinant of \\(A\\) :
-      \\(\lambda_1+\lambda_2+\cdots+\lambda_n=a_{11}+a_{22}+\dots+a_{nn}\\)
-      \\(\lambda_1\lambda_2\cdots\lambda_n=\operatorname{det}A\\)
-   4. Projections \\(P\\) , reflections \\(R\\) m \\(90\degree\\) rotations \\(Q\\) have special eigenvalues 1, 0, -1, \\(i\\), \\(-i\\)
+   3. The sum of the \\(\lambda\\)'s equals the sum down the main diagonal of \\(A\\) (*the trace*);
+      The product of the \\(\lambda\\)'s equals the determinant of \\(A\\):
+      Check \\(\lambda\\)'s by \\(\footnotesize\operatorname{det}A=\lambda_1\lambda_2\cdots\lambda_n\\) and diagonal sum \\(\footnotesize	a_{11}+a_{22}+\dots+a_{nn}=\text{sum of }\lambda\text{'s}\\)
+   4. Projections \\(P\\), reflections \\(R\\), 90&#176; rotations \\(Q\\) have special eigenvalues
+      The projection matrix \\(\footnotesize P=\begin{bmatrix} 0.5 & 0.5 \\\ 0.5 & 0.5 \end{bmatrix}\\) has eigenvalues 1 and 0
+      The reflection matrix \\(\footnotesize R=\begin{bmatrix} 0 & 1 \\\ 1 & 0 \end{bmatrix}\\) has eigenvalues 1 and -1
+      The 90&#176; rotation \\(\footnotesize Q=\begin{bmatrix} 0 & -1 \\\ 1 & 0 \end{bmatrix}\\) has eigenvalues \\(i\\) and \\(-i\\)
    5. \\(A\\) and \\(B\\) share the same \\(n\\) independent eigenvectors if and only if \\(AB=BA\\) , then we do have \\(AB\bm{x}=\lambda\beta\bm{x}\\) and \\(BA\bm{x}=\lambda\beta\bm{x}\\) (\\(\beta\\) is an eigenvalue of \\(B\\))
 2. Diagonalizing a Matrix
    1. If \\(A\\) has \\(n\\) independent eigenvectors \\(x_1,\dots,x_n\\) , they go into the columns of \\(X\\)
       **\\(\bm{A}\\) is diagonalized into eigenvalue matrix \\(\Lambda\\) by \\(\bm{X}\\)** : \\(X^{-1}AX=\Lambda\\) and \\(A=X\Lambda X^{-1}\\)
       > \\(X^{-1}AX=\Lambda\\) and \\(A=X\Lambda X^{-1}\\) means \\(AX=X\Lambda\\)
-      > The first column of \\(AX\\) is \\(A\bm{x_1}=\lambda_1x_n\\) . Each column of \\(X\\) is multiplied by its eigenvalue:
+      > The first column of \\(AX\\) is \\(A\bm{x_1}=\lambda_1x_1\\) . Each column of \\(X\\) is multiplied by its eigenvalue:
       > \\(AX=A\begin{bmatrix} & & \\\ \bm{x_1} & \cdots & \bm{x_n} \\\ & & \end{bmatrix}=\begin{bmatrix} & & \\\ \lambda_1\bm{x_1} & \cdots & \lambda_n\bm{x_n} \\\ & & \end{bmatrix}\\)
       > The trick is to split this matrix \\(AX\\) into \\(X\\) times \\(\Lambda\\) :
       > \\(\begin{bmatrix} & & \\\ \lambda_1\bm{x_1} & \cdots & \lambda_n\bm{x_n} \\\ & & \end{bmatrix}=\begin{bmatrix} & & \\\ \bm{x_1} & \cdots & \bm{x_n} \\\ & & \end{bmatrix}\begin{bmatrix} \lambda_1 & & \\\ & \ddots & \\\ & & \lambda_n \end{bmatrix}=X\Lambda\\)
    2. The eigenvector matrix \\(X\\) also diagonalizes all powers \\(A^k\\) : \\(A^k=X\Lambda^kX^{-1}\\)
    3. The solution to \\(\bm{u}_{k+1}=A\bm{u}_k\\) starting from \\(\bm{u}_0\\) is \\(\bm{u}_k=A^k\bm{u}_0=X\Lambda^kX^{-1}\bm{u}_0\\) :
       \\(\bm{u}_k=c_1(\lambda_1)^k\bm{x}_1+\cdots+c_n(\lambda_n)^k\bm{x}_n\\) provided by \\(\bm{u}_0=c_1\bm{x}_1+\cdots+c_n\bm{x}_n=X\bm{c}\\)
-      That shows Steps 1, 2, 3 (\\(c\\)'s from \\(X^{-1}\bm{u}_0\\) , \\(\lambda^k\\) from \\(\Lambda^k\\) , and \\(\bm{x}\\)'s from \\(X\\))
    4. \\(A\\) is diagonalizable if every eigenvalue has enough eigenvectors (GM = AM).
       Always GM \\(\leqslant\\) AM **for each \\(\bm{\lambda}\\)**
       > * **Geometric Multiplicity = GM**: Count the **independent eigenvectors** for \\(\lambda\\) . Then GM is the dimension of the nullspace of \\(A-\lambda I\\)
