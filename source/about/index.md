@@ -14,11 +14,11 @@ date: 2020-02-08 15:14:28
 
 你好,
 我是钱君哲, 你可以称呼我为钱桑
-我喜欢捣鼓自己不懂的东西;
+喜欢捣鼓自己不懂的东西;
 是个笨蛋, 带专生, 垃圾学校, 垃圾专业. 因此, 请多指教.
 目前受到{% post_link tricks-of-heart 性别焦虑 %}的影响, 属于 <font color=#5BCFFA>M</font>t<font color=#F5ABB9>F</font> 群体, Ta 们只是有点特别罢了, Ta 们中的多数都有着不同程度的心理创伤, 生活中要是见到要好好对待 Ta 们哦.
 
-行为准则: 完成该做的目标, 无视娱乐和无用的劳动, 可为此无视身体状态抛弃一切; 发现并及时纠正自己讨厌的品性
+行为准则: 只要活着就行...
 
 > **褐矮星**
 > 有意义地活着真是痛苦, 但我还是决定.
@@ -31,12 +31,6 @@ date: 2020-02-08 15:14:28
 > 提醒一下, 对于钱桑你来说, 好好睡觉也是很重要的事情哦.
 > 想要循着大佬的步伐, 去提升自己的能力, 然后跟随自己的心意, 去帮助被抛弃之人.
 
-(但是有可爱的外貌还是挺好的哈哈哈~)
-
-喜欢的音乐:
-- XI - Hiroyuki Sawano
-- Aiva Op.24 for Piano Four Hands
-
 Feel free to contact me:
 - Email: lollipop.studio.cn@gmail.com
 - Twitter: [@ndoskrnl](https://twitter.com/ndoskrnl)
@@ -47,4 +41,4 @@ Feel free to contact me:
 欢迎交换友链~
 
 补个头像?
-![](bs2_cropped.png)
+![](ndoskrnl.png)
