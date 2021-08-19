@@ -3,13 +3,16 @@ title: Peers
 date: 2020-12-23 10:10:27
 ---
 
-Ndoskrnl 的友人们
+Ndoskrnlの友人们
 
-* [霜晨月](https://shuangchenyue.top)
-* [MinatoAster](http://minatoaster.github.io)
-* [xtlsoft(徐天乐)](https://www.xtlsoft.top)
-* [Makito(朵朵)](https://keep.moe/)
+按字母排序, 在我心中不分先后哦
+
 * [本地磁盘小日记ヾ(≧▽≦*)ゝ](http://ohayou.aimo.moe/)
+* [MinatoAster](http://minatoaster.github.io)
+* [Makito(朵朵)](https://keep.moe/)
+* [霜晨月](https://shuangchenyue.top)
+* [xtlsoft(徐天乐)](https://www.xtlsoft.top)
+* [clansty(凌莞)](https://c5y.moe/) `凌莞大可爱!`
 
 **下面是单向友链**
 

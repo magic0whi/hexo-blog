@@ -25,15 +25,13 @@ ESD 解密 [decrypt-multi](https://rg-adguard.net/decrypt-multi-release/)
 
 [UUPDL](https://gitlab.com/uup-dump/uupdl)
 
-[最新支持的 Visual C++ 下载](https://support.microsoft.com/zh-cn/help/2977003/the-latest-supported-visual-c-downloads)
-
 [KMS client setup keys list](https://docs.microsoft.com/en-us/windows-server/get-started/kmsclientkeys)
 
 [Intel (CS)ME, CS(TXE), CS(SPS), PMC, PHY & PCHC Firmware Repositories](https://www.win-raid.com/t832f39-Intel-CS-ME-CS-TXE-CS-SPS-PMC-PHY-amp-PCHC-Firmware-Repositories.html)
 
 [Windows 10 更新补丁汇总合集](https://www.sysgeek.cn/windows-10-hotfix/)
 
-[最新支持的 Visual C 下载](https://support.microsoft.com/en-us/help/2977003/the-latest-supported-visual-c-downloads)
+[最新支持的 Visual C++ 下载](https://support.microsoft.com/en-us/help/2977003/the-latest-supported-visual-c-downloads)
 
 ## Linux
 
