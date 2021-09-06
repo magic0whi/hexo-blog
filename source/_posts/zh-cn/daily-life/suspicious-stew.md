@@ -7,9 +7,7 @@ date: 2021-03-09 17:33:26
 tags:
 ---
 
-可疑的炖菜
-
-就是一些未整合的笔记
+可疑的炖菜: 就是一些来路不明的未整合笔记
 
 <!-- more -->
 
@@ -297,4 +295,319 @@ $$
    1. 铁皮卡即蓝山咖啡, 铁皮卡是阿拉比卡系列里血统最纯品质最高的品种. 树系高大枝叶稀疏形似野生, 新叶呈古铜色, 叶质轻薄柳长. 籽粒椭圆略长于其他品种, 颜色略微泛黄.
    2. 卡蒂姆(Catimor): 1959年, 葡萄牙人将巴西卡杜拉与提摩混血, 培育出抗病能力强的卡蒂姆/卡提摩, 目前是商用豆的重要品种.
    3. 波邦分黄波邦和波邦, 黄波邦果实呈黄色. 树形与卡蒂姆难于区分...卡蒂姆产量高于波邦. 唯有挂果期好分辨...
-   
+
+## 尺码对照表
+
+<table>
+<thead>
+  <tr>
+    <th colspan="7">上衣(女)</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>标准</td>
+    <td>国际</td>
+    <td>中国</td>
+    <td>胸围(cm)</td>
+    <td>腰围(cm)</td>
+    <td>肩宽(cm)</td>
+    <td>适合身高(cm)</td>
+  </tr>
+  <tr>
+    <td rowspan="8">尺码明细</td>
+    <td>XXXS</td>
+    <td>145/73A</td>
+    <td>74~76</td>
+    <td>58~60</td>
+    <td>34</td>
+    <td>147~150</td>
+  </tr>
+  <tr>
+    <td>XXS</td>
+    <td>150/76A</td>
+    <td>76~78</td>
+    <td>60~62</td>
+    <td>35</td>
+    <td>150~153</td>
+  </tr>
+  <tr>
+    <td>XS</td>
+    <td>155/80A</td>
+    <td>78~81</td>
+    <td>62~66</td>
+    <td>36</td>
+    <td>153~157</td>
+  </tr>
+  <tr>
+    <td>S</td>
+    <td>160/84A</td>
+    <td>82~85</td>
+    <td>67~70</td>
+    <td>38</td>
+    <td>158~162</td>
+  </tr>
+  <tr>
+    <td>M</td>
+    <td>165/88A</td>
+    <td>86~89</td>
+    <td>71~74</td>
+    <td>40</td>
+    <td>163~167</td>
+  </tr>
+  <tr>
+    <td>L</td>
+    <td>170/92A</td>
+    <td>90~93</td>
+    <td>75~79</td>
+    <td>42</td>
+    <td>168~172</td>
+  </tr>
+  <tr>
+    <td>XL</td>
+    <td>175/96A</td>
+    <td>94~97</td>
+    <td>80~84</td>
+    <td>44</td>
+    <td>173~177</td>
+  </tr>
+  <tr>
+    <td>XXL</td>
+    <td>180/100A</td>
+    <td>98~102</td>
+    <td>85~89</td>
+    <td>46</td>
+    <td>177~180</td>
+  </tr>
+</tbody>
+</table>
+
+<table>
+<thead>
+  <tr>
+    <th colspan="5">裤子(女)</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>标准</td>
+    <td>国际</td>
+    <td>中国</td>
+    <td>腰围(cm)</td>
+    <td>臀围(cm)</td>
+  </tr>
+  <tr>
+    <td rowspan="9">尺码明细</td>
+    <td>XXXS</td>
+    <td>23</td>
+    <td>55~57</td>
+    <td>77~80</td>
+  </tr>
+  <tr>
+    <td>XXS</td>
+    <td>24</td>
+    <td>57~60</td>
+    <td>80~83</td>
+  </tr>
+  <tr>
+    <td>XS</td>
+    <td>25</td>
+    <td>60</td>
+    <td>83</td>
+  </tr>
+  <tr>
+    <td>S</td>
+    <td>26</td>
+    <td>63</td>
+    <td>87</td>
+  </tr>
+  <tr>
+    <td>M</td>
+    <td>27</td>
+    <td>67</td>
+    <td>90</td>
+  </tr>
+  <tr>
+    <td>L</td>
+    <td>28</td>
+    <td>70</td>
+    <td>93</td>
+  </tr>
+  <tr>
+    <td>XL</td>
+    <td>29</td>
+    <td>73</td>
+    <td>97</td>
+  </tr>
+  <tr>
+    <td>XXL</td>
+    <td>30</td>
+    <td>77</td>
+    <td>100</td>
+  </tr>
+  <tr>
+    <td>XXXL</td>
+    <td>31</td>
+    <td>80</td>
+    <td>103</td>
+  </tr>
+</tbody>
+</table>
+
+<table>
+<thead>
+  <tr>
+    <th colspan="7">上衣(男)</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>标准</td>
+    <td>国际</td>
+    <td>中国</td>
+    <td>胸围(cm)</td>
+    <td>腰围(cm)</td>
+    <td>肩宽(cm)</td>
+    <td>适合身高(cm)</td>
+  </tr>
+  <tr>
+    <td rowspan="5">尺码明细</td>
+    <td>S</td>
+    <td>165/80A</td>
+    <td>82~85</td>
+    <td>72~75</td>
+    <td>42</td>
+    <td>163~167</td>
+  </tr>
+  <tr>
+    <td>M</td>
+    <td>170/84A</td>
+    <td>86~89</td>
+    <td>76~79</td>
+    <td>44</td>
+    <td>168~172</td>
+  </tr>
+  <tr>
+    <td>L</td>
+    <td>175/88A</td>
+    <td>90~93</td>
+    <td>80~84</td>
+    <td>46</td>
+    <td>173~177</td>
+  </tr>
+  <tr>
+    <td>XL</td>
+    <td>180/92A</td>
+    <td>94~97</td>
+    <td>85~88</td>
+    <td>48</td>
+    <td>178~182</td>
+  </tr>
+  <tr>
+    <td>XXL</td>
+    <td>185/96A</td>
+    <td>98~102</td>
+    <td>89~92</td>
+    <td>50</td>
+    <td>182~187</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>XXXL</td>
+    <td>190/100A</td>
+    <td>103~107</td>
+    <td>93~96</td>
+    <td>52</td>
+    <td>187~190</td>
+  </tr>
+</tbody>
+</table>
+
+<table>
+<thead>
+  <tr>
+    <th>裤子(男)</th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>标准</td>
+    <td>国际</td>
+    <td>中国</td>
+    <td>身高</td>
+    <td>腰围(cm)</td>
+    <td>臀围(cm)</td>
+  </tr>
+  <tr>
+    <td rowspan="9">尺码明细</td>
+    <td>XXXS</td>
+    <td>28</td>
+    <td></td>
+    <td>70</td>
+    <td>93</td>
+  </tr>
+  <tr>
+    <td>XXS</td>
+    <td>29</td>
+    <td>160/66A</td>
+    <td>73</td>
+    <td>97</td>
+  </tr>
+  <tr>
+    <td>XS</td>
+    <td>30</td>
+    <td>165/70A</td>
+    <td>77</td>
+    <td>100</td>
+  </tr>
+  <tr>
+    <td>S</td>
+    <td>31</td>
+    <td>170/74A</td>
+    <td>80</td>
+    <td>103</td>
+  </tr>
+  <tr>
+    <td>M</td>
+    <td>32</td>
+    <td>175/78A</td>
+    <td>83</td>
+    <td>107</td>
+  </tr>
+  <tr>
+    <td>L</td>
+    <td>33</td>
+    <td>180/82A</td>
+    <td>87</td>
+    <td>110</td>
+  </tr>
+  <tr>
+    <td>XL</td>
+    <td>34</td>
+    <td>185/86A</td>
+    <td>90</td>
+    <td>113</td>
+  </tr>
+  <tr>
+    <td>XXL</td>
+    <td>36</td>
+    <td>185/86A</td>
+    <td>93</td>
+    <td>117</td>
+  </tr>
+  <tr>
+    <td>XXXL</td>
+    <td>38</td>
+    <td>190/90A</td>
+    <td>97</td>
+    <td>123~127</td>
+  </tr>
+</tbody>
+</table>
+
+**上述腰围指实际腰围, 并不是裤子的尺码**
