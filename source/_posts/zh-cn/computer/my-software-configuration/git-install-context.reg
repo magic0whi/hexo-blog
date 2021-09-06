@@ -1,0 +1,23 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_CURRENT_USER\Software\Classes\*\shell\Open Git Bash]
+@="Open Git Bash"
+"Icon"="C:\\Users\\ndoskrnl\\scoop\\apps\\git\\current\\git-bash.exe"
+[HKEY_CURRENT_USER\Software\Classes\*\shell\Open Git Bash\command]
+@="\"C:\\Users\\ndoskrnl\\scoop\\apps\\git\\current\\git-bash.exe\" \"--cd=%1\""
+
+; This will make it appear when you right click ON a folder
+; The "Icon" line can be removed if you don't want the icon to appear
+[HKEY_CURRENT_USER\Software\Classes\Directory\shell\Open Git Bash]
+@="Open Git Bash"
+"Icon"="C:\\Users\\ndoskrnl\\scoop\\apps\\git\\current\\git-bash.exe"
+[HKEY_CURRENT_USER\Software\Classes\Directory\shell\Open Git Bash\command]
+@="\"C:\\Users\\ndoskrnl\\scoop\\apps\\git\\current\\git-bash.exe\" \"--cd=%1\""
+
+; This will make it appear when you right click INSIDE a folder
+; The "Icon" line can be removed if you don't want the icon to appear
+[HKEY_CURRENT_USER\Software\Classes\Directory\Background\shell\Open Git Bash]
+@="Open Git Bash"
+"Icon"="C:\\Users\\ndoskrnl\\scoop\\apps\\git\\current\\git-bash.exe"
+[HKEY_CURRENT_USER\Software\Classes\Directory\Background\shell\Open Git Bash\command]
+@="\"C:\\Users\\ndoskrnl\\scoop\\apps\\git\\current\\git-bash.exe\" \"--cd=%v.\""

@@ -47,7 +47,7 @@ tags:
    kernel.panic = 3780
    ```
 
-## Windows 10
+## Windows 10/11
 
 1. 禁用遥感
    组策略:
@@ -95,6 +95,10 @@ tags:
                -> Use English punctuations when in Chinese input mode: On
 
    ```
+7. Scoop installed git bash: "Open Git Bash" here context menu
+   * {% asset_link git-install-context.reg %}
+   * {% asset_link git-uninstall-context.reg %}
+   
 
 ## MPV
 

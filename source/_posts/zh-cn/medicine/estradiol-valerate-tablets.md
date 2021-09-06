@@ -28,7 +28,7 @@ tags:
   * 商品名称: 补佳乐<sup>&reg;</sup> (Progynova<sup>&reg;</sup>)
 * 规格: 1mg &times; 21
 * 用法用量: 口服或含服. 对于 Transfem HRT, 推荐剂量为 2mg~6mg
-* 贮藏: 30&#8451; 以下保存
+* 贮藏: 30 &#176;C 以下保存
 * 有效期: 60 个月
 * 生产企业: DELPHARM Lille S.A.S.
 
