@@ -611,3 +611,12 @@ $$
 </table>
 
 **上述腰围指实际腰围, 并不是裤子的尺码**
+
+## 读书摘录
+
+"在写作当中运用别人的语句并不就意味着模仿或抄袭, 写出来的东西并非毫无价值可言, 因为它至少
+能够说明我已经能够灵活地驾驭这些优美的文字, 能够表达我对那些优美的、富有诗意的思想的欣赏" -- *假如给我三天光明*
+
+"I tell you I must go!" I retorted, roused to something like passion. "Do you think I can stay to become nothing to you? Do you think I am an automaton?--a machine without feelings? and can bear to have my morsel of bread snatched from my lips, and my drop of living water dashed from my cup? Do you think, because I am poor, obscure, plain, and little, I am soulless and heartless? You think wrong!--I have as much soul as you,--and full as much heart! And if God had gifted me with some beauty and much wealth, I should have made it as hard for you to leave me, as it is now for me to leave you. I am not talking to you now through the medium of custom, conventionalities, nor even of mortal flesh;--it is my spirit that addresses your spirit; just as if both had passed through the grave, and we stood at God's feet, equal,--as we are!" -- *Jane Eyre*
+
+"I am no bird; and no net ensuares me: I am a free human being with an independent will, which I now exert to leave you." -- *Jane Eyre*
