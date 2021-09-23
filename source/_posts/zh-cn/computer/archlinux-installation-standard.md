@@ -244,7 +244,7 @@ Enter F12 for Boot Menu when bootstrap
     title Arch Linux (fallback)
     linux /vmlinuz-linux
     initrd /initramfs-linux-fallback.img
-    options rd.luks.name=7fb34a50-f2ae-4799-afc1-85c064a28fcc=cryptroot rd.luks.options=discard root=/dev/mapper/cryptroot rootflags=compress=zstd,subvol=@
+    options rd.luks.name=<sda2-UUID>=cryptroot rd.luks.options=discard root=/dev/mapper/cryptroot rootflags=compress=zstd,subvol=@
     ```
 11. (Optional) Enable sshd
     ```console
@@ -477,7 +477,7 @@ I will use the method of `PRIME render offload` which was official method suppor
    zsh-history-substring-search
 
    npm
-   [AUR] nodejs-hexo-cli
+   [AUR] hexo-cli
    
    telegram-desktop
    thunderbird

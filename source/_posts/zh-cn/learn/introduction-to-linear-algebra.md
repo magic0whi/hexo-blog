@@ -26,13 +26,13 @@ TODO: keep all the vector symbols have a boldface style.
       The zero vector is perpendicular to every vector.
       The angle is less 90&#176; when \\(v\cdot w\\) is positive. The angle is above 90&#176; when \\(v\cdot w\\) is negative.
       **Proof**: When \\(v\\) and \\(w\\) are perpendicular, they form two sides of a right triangle.
-      The third side is \\(v-w\\) (the hypotenuse going across in image below). With Pythagoras Law \\(a^2+b^2+c^2\\) :
+      The third side is \\(v-w\\) (the hypotenuse going across in image below). With Pythagoras Law \\(a^2+b^2=c^2\\) :
       \\[\\|v\\|^2+\\|w\\|^2=\\|v-w\\|^2\\]
       Writing out the formulas for those lengths in two dimensions, this equation is:
       \\[(v_1^2+v_2^2)+(w_1^2+w_2^2)=(v_1-w_1)^2+(v_2-w_2)^2 \\\ \rArr 0=-2v_1w_1-2v_2w_2 \\\ \rArr v_1w_1+v_2w_2=0\\]
 
       {% asset_img 2.png %}
-   3. The length squared of \\(v=\begin{bmatrix} 1 \\\ 3 \\\ 2 \end{bmatrix}\\) is \\(v\cdot v=1+9+4=14\\) . **The length is** \\(|v|=\sqrt{14}\\)
+   3. The length squared of \\(v=\begin{bmatrix} 1 \\\ 3 \\\ 2 \end{bmatrix}\\) is \\(v\cdot v=1+9+4=14\\) . **The length is** \\(\\|v\\|=\sqrt{14}\\)
    4. Divide \\(v\\) by its length \\(\\|v\\|\\) to get its unit vector: \\(u=\frac{v}{\\|v\\|}=\frac{v}{\sqrt{14}}=\frac{1}{\sqrt{14}}\begin{bmatrix} 1 \\\ 3 \\\ 2 \end{bmatrix}\\)
       \\(\begin{bmatrix} \cos\theta \\\ \sin\theta \end{bmatrix}\\) were unit vectors. These vectors reach out to the unit circle in images below. Thus \\(\cos\theta\\) and \\(\sin\theta\\) are simply the coordinates of that point at angle \\(\theta\\) on the unit circle.
       

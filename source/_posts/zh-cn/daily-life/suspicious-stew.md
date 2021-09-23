@@ -620,3 +620,7 @@ $$
 "I tell you I must go!" I retorted, roused to something like passion. "Do you think I can stay to become nothing to you? Do you think I am an automaton?--a machine without feelings? and can bear to have my morsel of bread snatched from my lips, and my drop of living water dashed from my cup? Do you think, because I am poor, obscure, plain, and little, I am soulless and heartless? You think wrong!--I have as much soul as you,--and full as much heart! And if God had gifted me with some beauty and much wealth, I should have made it as hard for you to leave me, as it is now for me to leave you. I am not talking to you now through the medium of custom, conventionalities, nor even of mortal flesh;--it is my spirit that addresses your spirit; just as if both had passed through the grave, and we stood at God's feet, equal,--as we are!" -- *Jane Eyre*
 
 "I am no bird; and no net ensuares me: I am a free human being with an independent will, which I now exert to leave you." -- *Jane Eyre*
+
+"但在绝大部分的明清通俗小说中, 尽管对于科举制度的不平、愤激、斥责俯首皆是, 但叙述时字里行间却仍然包含了对于科举的依赖和眷念, 这尤其体现为**男主人公获得进士科名往往是小说团圆大结局结局不可或缺的元素**." -- *儒林外史-导读* 叶楚炎
+
+"而与之相比, 吴敬梓对于科举社会的种种情状却有着更深的洞察力和表现力: 无论是对于科举社会中士人生存困境的呈现, 还是对于诸多弊端的反思, 以及对于儒林中人出路的探寻, 《儒林外史》都远远地超过了同题材的这些作品." -- *儒林外史-导读* 叶楚炎
