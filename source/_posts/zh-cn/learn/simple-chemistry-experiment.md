@@ -35,3 +35,8 @@ https://sites.google.com/site/miller00828/in/solvent-polarity-table
 ## Notes
 
 1. 含聚苯二甲酸酯(如饮料瓶常用的 PET)会和氢氧化钠等强碱反应, 因此不能用作存放强碱的容器. 
+2. 砂坂孔隙度:
+   (XC/EC) G1 20-30um 滤除粗沉淀即胶状沉淀物
+   (C) G2 10-15 滤除粗沉淀即气体洗涤
+   (M) G3 4.5-9um 滤除系沉淀, 过滤水银
+   (F) G4 3-4um 滤除系沉淀或极细沉淀物

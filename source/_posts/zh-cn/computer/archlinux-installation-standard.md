@@ -444,7 +444,7 @@ I will use the method of `PRIME render offload` which was official method suppor
    ^intel-media-driver
 
    [AUR] fcitx5-pinyin-zhwiki
-   [AUR] fcitx5-skin-material
+   fcitx5-material-color
 
    bpytop
    htop

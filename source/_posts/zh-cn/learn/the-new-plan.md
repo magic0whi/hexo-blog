@@ -7,18 +7,61 @@ tags:
 
 正在努(mo)力(yu)...
 
-焦点树已初步完成: {% asset_link individual-focus-tree.xmind "individual-focus-tree.xmind" %}
-都是有用的公共、专业基础课, 有空的时候可以看的
-
 <!-- more -->
 
-## 目前的主要队列
+## 关于关于出生以来钱桑的若干历史问题的决议
 
-1. 零號演習: 由于本人不想在小小的手机屏幕上阅读那么大段的英文, 因此制作 Introduction to Linear Algebra 的手抄版笔记.
-2. 寻找 Mathlab 的 python 替代(numpy, panda, matplotlib), 顺便了解下 R 语言、也许我们还可以试试 Mathematica?
-3. 完成 Gilbert Strang 的线性代数 55%
-   由于本人已把 Differential Equation 的内容忘光, 正重新复习工科的高等数学.
-4. 巴洛克行动(Operation Baroque), 会尝试阅读以下书录的前五本.
+2021 总结:
+1. 在性别焦虑失控至初步得到控制的阶段(2020-12-7~至今), 耗费了大量的时间, 技术上的发展受到严重影响.
+2. 暑期(2021-6-5~2021-8-31), 结识了更多朋友, 稍微变得开朗了一些.
+3. 22岁生日(2021-10-13), 孤独但是开心^=^.
+
+22年的人生总得来说是失败的, 即不符合自己所应达到的发展程度.
+人格方面, 至今仍在进行不断地修正, 最近由于与朋友们的交流才克服了一些内心的矛盾, 可以说是晚熟了.
+空中楼阁的学术, 理论与实践几乎完全脱轨. (编程? 快多久没敲过代码了? 一年? 写过几个项目? 0个? ACM? 门都没入)
+经济上, 完全依靠父母, 无法说服自己放弃宝贵的时间和精力去做兼职, 但反过来, 自己又无法完全解决自己的问题(睡眠障碍)去好好学习.
+
+睡眠障碍的原因可能由以下几个因素共同作用:
+* 学术上发展迟缓带来的心理压力.
+* 感官过于敏感, 需要耳塞眼罩等辅助睡眠.
+* 不合适的睡姿.
+* 睡前吸收过多蓝光影响褪黑素生成.
+* 拖延的态度导致晚睡, 洗完澡就已经很晚了.
+* 家庭矛盾, 心情难以平复.
+
+面临的困难:
+1. 睡眠困难, 晚上睡不着.
+2. 12月的英语四级.
+3. 毕业设计毫无着落.
+4. 上的课压根没在认真听.
+
+于是, 钱桑战时摸鱼体制诞生啦~~~
+
+## 钱桑战时摸鱼体制(DEFCON 2)
+
+两个必须:
+1. 必须早睡早起
+2. 状态不好也必须开始
+
+十大要求:
+1. SE的课...先拖着吧, 反正看起来难度不大, 到时候临时抱臭脚好了233.
+2. 5点40起来洗漱, 来杯咖啡(最晚10点之前喝!!!钱桑咖啡半衰期11小时!)
+3. 背单词 TOFEL、GRE.
+4. 学习新高中物理选修3的热力学, 英语专4语法.
+5. 铺路, 概率论与数理统计, 线性代数的 Problem Set.
+6. 补番: 史莱姆, 无职转生.
+7. 晚上出去走走(跑图), 找个僻静的有监控的地方练习CQC (总的时间限制在1小时内).
+8. 晚上9点之前人要躺床上.
+9. 如果睡不着, 那就幻想个男票发发情, 释放一下压力.
+10. 遇上母亲发病, 带上耳机听歌转移注意力, 不要去理会那个笨蛋.
+    心情难以压抑时就尽情的释放悲伤吧.
+
+## 其他工作
+
+总优先级: MATLAB>GTM>CS61a>ACM入门>有机化学>日语N2
+
+1. 寻找 Mathlab 的 python 替代(numpy, panda, matplotlib), 顺便了解下 R 语言、也许我们还可以试试 Mathematica?
+2. Operation Baroque, 尝试阅读以下列表的前五本:
    Undergraduate Texts in Mathematics
    - An Introduction to Difference Equations - Saber Elaydi
    - Calculus or Several Variables - Serge Lang
@@ -40,18 +83,15 @@ tags:
    - Linear Geometry - K.W. Greenberg & A. J. Weir
    - Matrix Analysis - Rajendra Bhatia
    - The Symmetric Group - Bruce E. Sagan
+3. IndyMill
+4. [漫画绘画入门](https://www.icourse163.org/course/NEU-1002922017)
+5. 清空数据结构笔记的 TODO, 还有两个我没理解的算法
+6. Operation Canteralla: Organic Chemistry I, II, III
+7. cs61a(SICP, 计算机程序构造和解释), cmu15-213(CSAPP, 深入理解计算机程序)
 
-   大概是以娱乐的心态看这些东西的...
-5. <del>永远记不住</del>的背单词, 约为 GRE 大纲总词汇量的 42%.
-6. 化学专业英语
-7. Operation Mekanism: 组一台 IndyMill
-   Setback occured, there is a broken tap stucking in a 6mm steel plate.
-   I have tried several methods and none of them worked.
-   Finally I will buy an electric drill and then drill the tap into debris on July.
-   Two months elapsed, no progess.
-8.  [漫画绘画入门](https://www.icourse163.org/course/NEU-1002922017)
-9.  清空数据结构笔记的 TODO, 还有两个我没理解的算法
-10. Operation Canteralla: Organic Chemistry I, II, III
+## 未曾设想的道路(考研)
+
+焦点树: {% asset_link individual-focus-tree.xmind "individual-focus-tree.xmind" %}
 
 ## 时间管理技巧
 

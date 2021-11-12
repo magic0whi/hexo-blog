@@ -59,6 +59,8 @@ Android APK 魔改&破解 [mobilism](https://forum.mobilism.org/search.php)
 
 [SCI-Hub 论文下载可用网址链接 - 实时更新](https://tool.yovisun.com/scihub/)
 
+[libgen 创世纪图书馆](libgen.fun)
+
 [Z-Library](https://z-lib.org/) 学术相关书籍/论文
 
 [Library Genesis](https://en.wikipedia.org/wiki/Library_Genesis) 学术相关书籍, 具体链接见维基
@@ -146,6 +148,8 @@ Crashcourts中文字幕 [Crashcourts](https://crashcourse.club/category/)
 ### BT
 
 [ACG.RIP](https://acg.rip/)
+
+[Bangumi Moe](https://bangumi.moe/)
 
 [Rarbg](https://rarbgprx.org/torrents.php)
 
