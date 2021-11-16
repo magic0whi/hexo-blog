@@ -1,8 +1,10 @@
 ---
 title: 笨蛋の自我修养
+lang: zh-cn
 category: learn
 date: 2020-12-14 05:17:10
 tags:
+toc: true
 ---
 
 正在努(mo)力(yu)...

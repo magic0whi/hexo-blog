@@ -3,14 +3,14 @@ title: Peers
 date: 2020-12-23 10:10:27
 ---
 
-Ndoskrnlの友人们
+Proteusの友人们
 
 按字母排序, 在我心中不分先后哦
 
 * [本地磁盘小日记ヾ(≧▽≦*)ゝ](http://ohayou.aimo.moe/)
 * [clansty(凌莞)](https://c5y.moe/) `凌莞大可爱!`
-* [MinatoAster](http://minatoaster.github.io)
 * [Makito(朵朵)](https://keep.moe/)
+* [MinatoAster](http://minatoaster.github.io)
 * [霜晨月](https://shuangchenyue.top)
 * [xtlsoft(徐天乐)](https://www.xtlsoft.top)
 

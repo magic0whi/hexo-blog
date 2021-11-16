@@ -13,7 +13,7 @@ date: 2020-02-08 15:14:28
 ```
 
 你好,
-我是 senn kunntetsu, 你可以称呼我为钱桑
+我的 ID 叫 Proteus, 你可以称呼我为钱桑, 很高兴认识你.
 喜欢捣鼓自己不懂的东西;
 是个笨蛋, 带专生, 垃圾学校, 垃圾专业. 因此, 请多指教.
 目前受到{% post_link tricks-of-heart 性别焦虑 %}的影响, 属于 <font color=#5BCFFA>M</font>t<font color=#F5ABB9>F</font> 群体, Ta 们只是有点特别罢了, Ta 们中的多数都有着不同程度的心理创伤, 生活中要是见到要好好对待 Ta 们哦.
@@ -32,5 +32,5 @@ Feel free to contact me:
 
 欢迎交换友链~
 
-补个头像?
-![](ndoskrnl.png)
+补张无修自拍(懒得刮胡子233)
+![祝米娜桑开心每一天!](ndoskrnl.png)

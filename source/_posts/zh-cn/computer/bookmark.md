@@ -73,7 +73,7 @@ Android APK 魔改&破解 [mobilism](https://forum.mobilism.org/search.php)
 
 [Chemical Equations](https://chemequations.com/en/)
 
-[Chemical Structure Search](https://www.chemspider.com/StructureSearch.aspx)
+[Chemical Structure Search](https://www.chemspider.com/StructureSearch.aspx) 画出结构, 找到化学物质, 感谢 @Alice_486
 
 ### Learn
 
