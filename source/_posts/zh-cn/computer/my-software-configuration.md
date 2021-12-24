@@ -99,12 +99,10 @@ tags:
    * {% asset_link git-install-context.reg %}
    * {% asset_link git-uninstall-context.reg %}
 8. Windows 11 full right-click menu
-   enable:
-   `reg add "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" /f /ve`
-   disable:
-   `reg delete "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}" /f`
-
-https://gist.github.com/nebula-moe/75c49c261d1fc9e780df8ed9d0baed97
+   enable: `reg add "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" /f /ve`
+   disable: `reg delete "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}" /f`
+   > Don't forget to reboot.
+   reference: https://gist.github.com/nebula-moe/75c49c261d1fc9e780df8ed9d0baed97
 
 ## MPV
 

@@ -1043,7 +1043,7 @@ int main()
     // 虽然上面是个很好的隐式转换的例子, 但是不建议用这种语法实例化对象
 
 
-    // You cannot do explicit conversion with explicit method anymore
+    // You cannot do implicit conversion with explicit method anymore
     // This is not allowed
     Entity b = 22;
     // Correct sentence:
