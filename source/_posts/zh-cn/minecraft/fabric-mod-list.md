@@ -50,8 +50,14 @@ Powered by [itzg's docker image](https://github.com/itzg/docker-minecraft-server
 | Roughly Enough Items (REI) | [RoughlyEnoughItems-7.1.357.jar](https://www.curseforge.com/minecraft/mc-mods/roughly-enough-items/files/all) | Dec 27, 2021 |
 | Roughly Enough Resources | [rer-2.3.0.jar](https://www.curseforge.com/minecraft/mc-mods/roughly-enough-resources/files/all) | Dec 18, 2021 |
 | FerriteCore (Fabric) | [ferritecore-4.0.0-fabric.jar](https://www.curseforge.com/minecraft/mc-mods/ferritecore-fabric/files/all) | Dec 5, 2021 |
+| Minecraft Transit Railway | [MTR-forge-1.18-3.0.0-beta-8.jar](https://www.curseforge.com/minecraft/mc-mods/minecraft-transit-railway/files/all) | Dec 21, 2021 |
+| Modern Industrialization | [Modern-Industrialization-1.0.4.jar](https://www.curseforge.com/minecraft/mc-mods/modern-industrialization/files/all) | Jan 5, 2022 |
+| CC: Restitched | [cc-restitched-1.100.0.jar](https://www.curseforge.com/minecraft/mc-mods/cc-restitched/files/all) | Jan 5, 2022 |
+| Immersive Portals | [immersive-portals-1.1.8-mc1.18.1-fabric.jar](https://www.curseforge.com/minecraft/mc-mods/immersive-portals-mod/files/all) | Jan 3, 2022 |
 
-Pending Mods: [Observable](https://www.curseforge.com/minecraft/mc-mods/observable)
+Pending Mods: [Observable](https://www.curseforge.com/minecraft/mc-mods/observable), [Culinaire](https://www.curseforge.com/minecraft/mc-mods/culinaire), [Industrial Revolution](https://www.curseforge.com/minecraft/mc-mods/industrial-revolution).
+
+Pending Mods (Management): None.
 
 ### Client-Side Mods
 
@@ -66,16 +72,29 @@ Pending Mods: [Observable](https://www.curseforge.com/minecraft/mc-mods/observab
 | Illuminations 🔥 | [illuminations-1.10.2.jar](https://www.curseforge.com/minecraft/mc-mods/illuminations/files/all) | Dec 1, 2021 |
 | OptiFabric | [optifabric-1.12.10.jar](https://www.curseforge.com/minecraft/mc-mods/optifabric/files/all) | Dec 16, 2021 |
 | Optifine | [OptiFine_1.18.1_HD_U_H4.jar](https://optifine.net/downloads) | Dec 12, 2021 |
+| Canvas Renderer (**DISABLED**) | [canvas-fabric-mc118-1.0.2281.jar](https://www.curseforge.com/minecraft/mc-mods/canvas-renderer/files/all) | Dec 27, 2021 |
 | Fabritone | [baritone-standalone-fabric-1.8.0.jar](https://github.com/cabaletta/baritone/actions?query=branch%3A1.18) | Dec 3, 2021 |
+| Mod Menu | [modmenu-3.0.1.jar](https://www.curseforge.com/minecraft/mc-mods/modmenu/files/all) | Dec 18, 2021 |
+| WorldEdit CUI (Fabric) | [WorldEditCUI-1.18.1+01-SNAPSHOT.jar](https://github.com/EngineHub/WorldEditCUI/actions?query=branch%3Amc%2F1.18) | Fan 7, 2022 |
 
-Note: OptiFabric conflicts with Sodium.
-Pending Mods: [Physics Mod](https://www.curseforge.com/minecraft/mc-mods/physics-mod), [Sodium Extra](https://www.curseforge.com/minecraft/mc-mods/sodium-extra), [Falling Leaves](https://modrinth.com/mod/fallingleaves)
+Note:
+* OptiFabric, Sodium and Canvas are conflict each other.
+* If you use Canvas Renderer there is a recommand shader [Lumi Lights](https://spiralhalo.github.io/)
+Pending Mods: [Physics Mod](https://www.curseforge.com/minecraft/mc-mods/physics-mod), [Sodium Extra](https://www.curseforge.com/minecraft/mc-mods/sodium-extra), [Falling Leaves](https://modrinth.com/mod/fallingleaves).
 
 ### Server-side Mods
 
 | Mod name | Download link | Last Update |
 | -------- | ------------- | ---------- |
 | DynmapForge | [Dynmap-3.3-beta-4-fabric-1.18.jar](https://www.curseforge.com/minecraft/mc-mods/dynmapforge/files/all) | Dec 27, 2021 |
+| WorldEdit | [worldedit-mod-7.2.8.jar](https://www.curseforge.com/minecraft/mc-mods/worldedit/files/all) | Dec 11, 2021 |
+| spark | [spark-fabric.jar](https://www.curseforge.com/minecraft/mc-mods/spark/files/all) | Jan 2, 2022 |
+| Unforgiving Void | [Unforgiving-Void-3.1.1+1.18.jar](https://www.curseforge.com/minecraft/mc-mods/unforgiving-void/files/all) | Dec 1, 2021 |
+| Fireplace Lib (dep)| [Fireplace-Lib-6.2.2+1.18.jar](https://www.curseforge.com/minecraft/mc-mods/fireplace-lib/files/all) | Dec 1, 2021 |
+| Grand Economy | [Grand-Economy-5.1.1+1.18.jar](https://www.curseforge.com/minecraft/mc-mods/grand-economy/files/all) | Dec 1, 2021 |
+| Ledger | [ledger-1.2.0.jar](https://www.curseforge.com/minecraft/mc-mods/ledger/files/all) | Dec 1, 2021 |
+
+Pending Mods: [Dynamic View\[Forge/Fabric\]](https://www.curseforge.com/minecraft/mc-mods/dynamic-view)
 
 ### Minecraft IDs
 
