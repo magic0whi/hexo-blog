@@ -20,7 +20,7 @@ A detailed list of mods in my Minecraft server
 | ----------- | ------------ | ----------------- |
 | [fabric-installer-0.10.2](https://maven.fabricmc.net/net/fabricmc/fabric-installer/0.10.2/fabric-installer-0.10.2.jar) | Dec 04, 2021 | 1.18.1 |
 
-Powered by [itzg's](https://github.com/itzg/docker-minecraft-server#server-name) docker image.
+Powered by [itzg's docker image](https://github.com/itzg/docker-minecraft-server#server-name) .
 
 ## Mods
 
@@ -46,8 +46,12 @@ Powered by [itzg's](https://github.com/itzg/docker-minecraft-server#server-name)
 | Polymorph (Fabric) | [polymorph-fabric-0.0.18-1.18.1.ja](https://www.curseforge.com/minecraft/mc-mods/polymorph-fabric/files/all) | Jan 3, 2022 |
 | Antique Atlas (**DISABLED**) | [antiqueatlas-6.1.1-fabric-mc1.17.1.jar](https://www.curseforge.com/minecraft/mc-mods/antique-atlas/files/all) | Nov 14, 2021 |
 | Oh The Biomes You'll Go \[FABRIC\] (**DISABLED**) | [byg-fabric-1.18-1.3.7.jar](https://www.curseforge.com/minecraft/mc-mods/oh-the-biomes-youll-go-fabric/files/all) | Jan 4, 2022 |
+| Architectury API (Fabric) (Dep) | [architectury-3.4.9.jar](https://www.curseforge.com/minecraft/mc-mods/architectury-fabric/files/all) | Jan 1, 2022 |
+| Roughly Enough Items (REI) | [RoughlyEnoughItems-7.1.357.jar](https://www.curseforge.com/minecraft/mc-mods/roughly-enough-items/files/all) | Dec 27, 2021 |
+| Roughly Enough Resources | [rer-2.3.0.jar](https://www.curseforge.com/minecraft/mc-mods/roughly-enough-resources/files/all) | Dec 18, 2021 |
+| FerriteCore (Fabric) | [ferritecore-4.0.0-fabric.jar](https://www.curseforge.com/minecraft/mc-mods/ferritecore-fabric/files/all) | Dec 5, 2021 |
 
-Pending Mods: [Observable](https://www.curseforge.com/minecraft/mc-mods/observable), [FerriteCore (Fabric)](https://www.curseforge.com/minecraft/mc-mods/ferritecore-fabric/files/3550048)
+Pending Mods: [Observable](https://www.curseforge.com/minecraft/mc-mods/observable)
 
 ### Client-Side Mods
 
@@ -55,11 +59,8 @@ Pending Mods: [Observable](https://www.curseforge.com/minecraft/mc-mods/observab
 | -------- | ------------- | ---------- |
 | WTHIT | [wthit-fabric-4.4.1.jar](https://www.curseforge.com/minecraft/mc-mods/wthit/files/all) | Jan 5, 2022 |
 | megane | [megane-6.2.0.jar](https://www.curseforge.com/minecraft/mc-mods/megane/files/all) | Dec 24, 2021 |
-| Roughly Enough Items (REI) | [RoughlyEnoughItems-7.1.357.jar](https://www.curseforge.com/minecraft/mc-mods/roughly-enough-items/files/all) | Dec 27, 2021 |
-| Roughly Enough Resources | [rer-2.3.0.jar](https://www.curseforge.com/minecraft/mc-mods/roughly-enough-resources/files/all) | Dec 18, 2021 |
 | Autofish | [Autofish-0.9.4-fabric-mc1.18.jar](https://www.curseforge.com/minecraft/mc-mods/autofish/files/all) | Dec 31, 2021 |
 | Xaero's Minimap | [Xaeros_Minimap_21.23.0_Fabric_1.18.jar](https://chocolateminecraft.com/minimapdownload.php) | Dec 28, 2021 |
-| Architectury API (Fabric) (Dep) | [architectury-3.4.9.jar](https://www.curseforge.com/minecraft/mc-mods/architectury-fabric/files/all) | Jan 1, 2022 |
 | Light Overlay (Rift/Forge/Fabric) | [light-overlay-6.0.4.jar](https://www.curseforge.com/minecraft/mc-mods/light-overlay/files/all) | Dec 27, 2021 |
 | Sodium | [sodium-fabric-mc1.18-0.4.0-alpha5+build.9.jar](https://www.curseforge.com/minecraft/mc-mods/sodium/files/all) | Dec 1, 2021 |
 | Illuminations 🔥 | [illuminations-1.10.2.jar](https://www.curseforge.com/minecraft/mc-mods/illuminations/files/all) | Dec 1, 2021 |
