@@ -12,13 +12,15 @@ A detailed list of mods in my Minecraft server
 
 ## Launcher
 
-[HMCL-3.3.179.jar](https://ci.huangyuhui.net/job/HMCL/) Dec 24, 2020
+[HMCL-3.5.2.216.jar](https://ci.huangyuhui.net/job/HMCL/) Jan 2, 2022
 
 ## Server
 
 | Server name | Release Date | Minecraft Version |
 | ----------- | ------------ | ----------------- |
-| [fabric-installer-0.6.1.51](https://jenkins.modmuss50.me/job/FabricMC/job/fabric-installer/job/master/) | Aug 31, 2020 | 1.16.4 |
+| [fabric-installer-0.10.2](https://maven.fabricmc.net/net/fabricmc/fabric-installer/0.10.2/fabric-installer-0.10.2.jar) | Dec 04, 2021 | 1.18.1 |
+
+Powered by [itzg's](https://github.com/itzg/docker-minecraft-server#server-name) docker image.
 
 ## Mods
 
@@ -26,45 +28,104 @@ A detailed list of mods in my Minecraft server
 
 | Mod name | Download link | Last Update |
 | -------- | ------------- | ---------- |
-| Fabric API | [fabric-api-0.29.3+1.16.jar](https://www.curseforge.com/minecraft/mc-mods/fabric-api/files/all) | Jan 5, 2021 |
-| AppleSkin | [appleskin-mc1.16-fabric-1.0.11.jar](https://www.curseforge.com/minecraft/mc-mods/appleskin/files/all?filter-game-version=) | Jun 24, 2020 |
-| Astromine: Complete | [astromine-1.11.4+fabric-1.16.3.jar](https://www.curseforge.com/minecraft/mc-mods/astromine-main/files/all) | Oct 14, 2020 |
-| Applied Energistics 2 | [appliedenergistics2-fabric-8.1.0-alpha.13.jar](https://www.curseforge.com/minecraft/mc-mods/applied-energistics-2/files/all?filter-game-version=) | Nov 21, 2020 |
-| Fabric Language Kotlin(dep) | [fabric-language-kotlin-1.4.21+build.1.jar](https://www.curseforge.com/minecraft/mc-mods/fabric-language-kotlin/files/all) | Dec 13, 2020 |
-| Deep Mob Learning: Refabricated | [deepmoblearning-refabricated-0.3.1-beta5.jar](https://www.curseforge.com/minecraft/mc-mods/deep-mob-learning-refabricated/files/all) | Oct 24, 2020 |
-| Just Another Redstone Gate Mod | [jargm-1.3.0-alpha0.jar](https://www.curseforge.com/minecraft/mc-mods/just-another-redstone-gate-mod/files/all?filter-game-version=) | Dec 9, 2020 |
-| Lithium (Fabric) | [lithium-fabric-mc1.16.4-0.6.0.jar](https://www.curseforge.com/minecraft/mc-mods/lithium/files/all?filter-game-version=) | Nov 11, 2020 |
-| Phosphor(Fabric) | [phosphor-fabric-mc1.16.3-0.7.0+build.10.jar](https://www.curseforge.com/minecraft/mc-mods/phosphor/files/all?filter-game-version=) | Dec 18, 2020 |
-| Reborn Core | [RebornCore-1.16-4.6.3+build.110.jar](https://www.curseforge.com/minecraft/mc-mods/reborncore/files/all?filter-game-version=) | Jan 4, 2021 |
-| Tech Reborn | [TechReborn-1.16-3.7.3+build.192.jar](https://www.curseforge.com/minecraft/mc-mods/techreborn/files/all?filter-game-version=) | Jan 4, 2021 |
-| VanillaDeathChest (Fabric) | [vanilladeathchest-1.16.3-1.11.0.7-fabric.jar](https://www.curseforge.com/minecraft/mc-mods/vanilladeathchest-fabric/files/all) | Sep 26, 2020 |
-| FallingTree | [FallingTree-Fabric-1.16.4-2.9.0.jar](https://www.curseforge.com/minecraft/mc-mods/falling-tree/files/all?filter-game-version=) | Jan 9, 2020 |
-| Cloth API (Fabric) | [cloth-api-1.4.9.jar](https://www.curseforge.com/minecraft/mc-mods/cloth-api/files/all) | Oct 27, 2020 |
-| Cloth Config API (Fabric) | [config-2-4.8.3.jar](https://www.curseforge.com/minecraft/mc-mods/cloth-config/files/all) | Nov 5, 2020 |
-| Polymorph (Fabric) | [polymorph-fabric-0.0.8-1.16.4.jar](https://www.curseforge.com/minecraft/mc-mods/polymorph-fabric/files) | Jan 2, 2021 |
-| Antique Atlas | [antiqueatlas-5.4.1-fabric.jar](https://www.curseforge.com/minecraft/mc-mods/antique-atlas/files/all) | Jan 9, 2021 |
-| Oh The Biomes You'll Go \[FABRIC\] | [byg-1.1.3.jar](https://www.curseforge.com/minecraft/mc-mods/oh-the-biomes-youll-go-fabric/files/all) | Nov 13, 2020 |
+| Fabric API | [fabric-api-0.45.2+1.18.jar](https://www.curseforge.com/minecraft/mc-mods/fabric-api/files/all) | Jan 5, 2022 |
+| AppleSkin | [appleskin-fabric-mc1.18-2.2.0.jar](https://www.curseforge.com/minecraft/mc-mods/appleskin/files/all) | Dec 2, 2021 |
+| Astromine (Fabric)(**DISABLED**) | [astromine-1.11.5+fabric-1.16.5.jar](https://www.curseforge.com/minecraft/mc-mods/astromine-fabric/files/all) | Jab 16, 2021 |
+| Applied Energistics 2 | [appliedenergistics2-10.0.0-beta.4.jar](https://www.curseforge.com/minecraft/mc-mods/applied-energistics-2/files/all) | Jan 5, 2022 |
+| Fabric Language Kotlin(dep) | [fabric-language-kotlin-1.7.1+kotlin.1.6.10.jar](https://www.curseforge.com/minecraft/mc-mods/fabric-language-kotlin/files/all) | Dec 20, 2021 |
+| Deep Mob Learning: Refabricated | [deepmoblearning-refabricated-0.5.0-beta2.jar](https://www.curseforge.com/minecraft/mc-mods/deep-mob-learning-refabricated/files/all) | Dec 12, 2021 |
+| Just Another Redstone Gate Mod(**DISABLED**) | [jargm-1.3.0-alpha0.jar](https://www.curseforge.com/minecraft/mc-mods/just-another-redstone-gate-mod/files/all) | Dec 9, 2020 |
+| Lithium (Fabric) | [lithium-fabric-mc1.18.1-0.7.7.jar](https://www.curseforge.com/minecraft/mc-mods/lithium/files/all) | Jan 5, 2022 |
+| Phosphor(Fabric) | [phosphor-fabric-mc1.18.x-0.8.1.jar](https://www.curseforge.com/minecraft/mc-mods/phosphor/files/all) | Dec 20, 2021 |
+| Reborn Core | [RebornCore-5.1.0-beta.4.jar](https://www.curseforge.com/minecraft/mc-mods/reborncore/files/all) | Dec 7, 2021 |
+| Tech Reborn | [TechReborn-5.1.0-beta.4.jar](https://www.curseforge.com/minecraft/mc-mods/techreborn/files/all) | Dec 7, 2021 |
+| VanillaDeathChest (Fabric)(**DISABLED**) | [vanilladeathchest-2.0.6-fabric.jar](https://www.curseforge.com/minecraft/mc-mods/vanilladeathchest-fabric/files/all) | Feb 22, 2021 |
+| FallingTree (Forge&Fabric) | [FallingTree-1.18.1-3.1.0b2.jar](https://www.curseforge.com/minecraft/mc-mods/falling-tree/files/all) | Jan 2, 2022 |
+| Cloth API (Fabric) | [cloth-api-2.0.54.jar](https://www.curseforge.com/minecraft/mc-mods/cloth-api/files/all) | Jun 3, 2021 |
+| Cloth Config API (Fabric) | [cloth-config-6.1.48-fabric.jar](https://www.curseforge.com/minecraft/mc-mods/cloth-config/files/all) | Dec 11, 2021 |
+| Polymorph (Fabric) | [polymorph-fabric-0.0.18-1.18.1.ja](https://www.curseforge.com/minecraft/mc-mods/polymorph-fabric/files/all) | Jan 3, 2022 |
+| Antique Atlas (**DISABLED**) | [antiqueatlas-6.1.1-fabric-mc1.17.1.jar](https://www.curseforge.com/minecraft/mc-mods/antique-atlas/files/all) | Nov 14, 2021 |
+| Oh The Biomes You'll Go \[FABRIC\] (**DISABLED**) | [byg-fabric-1.18-1.3.7.jar](https://www.curseforge.com/minecraft/mc-mods/oh-the-biomes-youll-go-fabric/files/all) | Jan 4, 2022 |
+
+Pending Mods: [Observable](https://www.curseforge.com/minecraft/mc-mods/observable), [FerriteCore (Fabric)](https://www.curseforge.com/minecraft/mc-mods/ferritecore-fabric/files/3550048)
 
 ### Client-Side Mods
 
 | Mod name | Download link | Last Update |
 | -------- | ------------- | ---------- |
-| Hwyla | [Hwyla-fabric-1.16.2-1.9.23-79.jar](https://www.curseforge.com/minecraft/mc-mods/hwyla/files/all?filter-game-version=) | Aug 16, 2020 |
-| Roughly Enough Items (REI) | [RoughlyEnoughItems-5.8.10.jar](https://www.curseforge.com/minecraft/mc-mods/roughly-enough-items/files/all?filter-game-version=) | Dec 18, 2020 |
-| Roughly Enough Resources | [rer-2.1.3.jar](https://www.curseforge.com/minecraft/mc-mods/roughly-enough-resources/files/all) | Dec 14, 2020 |
-| Autofish | [Autofish-0.9.1-fabric-mc1.16.4.jar](https://www.curseforge.com/minecraft/mc-mods/autofish/files/all?filter-game-version=) | Dec 20, 2020 |
-| Xaero's Minimap | [Xaeros_Minimap_21.0.0_Fabric_1.16.4.jar](https://chocolateminecraft.com/minimapdownload.php) | Jan 9, 2021 |
-| Light Overlay | [light-overlay-5.5.4.jar](https://www.curseforge.com/minecraft/mc-mods/light-overlay/files/all?filter-game-version=) | Oct 24, 2020 |
-| Sodium | [sodium-fabric-mc1.16.3-0.1.0.jar](https://www.curseforge.com/minecraft/mc-mods/sodium/files/all) | Sep 28, 2020 |
-| Illuminations 🔥 | [Illuminations-1.4.jar](https://www.curseforge.com/minecraft/mc-mods/illuminations/files/all) | Dec 27, 2020 |
-| OptiFabric | [optifabric-1.8.16.jar](https://www.curseforge.com/minecraft/mc-mods/optifabric/files/all) | Jan 7, 2020 |
-| Optifine | [OptiFine_1.16.4_HD_U_G5.jar](https://optifine.net/downloads) | Nov 6, 2020 |
-| Fabritone | [baritone-1.6.1.jar](https://gitlab.com/CDAGaming/fabritone/-/pipelines?scope=branches&page=1) | Nov 16, 2020 |
+| WTHIT | [wthit-fabric-4.4.1.jar](https://www.curseforge.com/minecraft/mc-mods/wthit/files/all) | Jan 5, 2022 |
+| megane | [megane-6.2.0.jar](https://www.curseforge.com/minecraft/mc-mods/megane/files/all) | Dec 24, 2021 |
+| Roughly Enough Items (REI) | [RoughlyEnoughItems-7.1.357.jar](https://www.curseforge.com/minecraft/mc-mods/roughly-enough-items/files/all) | Dec 27, 2021 |
+| Roughly Enough Resources | [rer-2.3.0.jar](https://www.curseforge.com/minecraft/mc-mods/roughly-enough-resources/files/all) | Dec 18, 2021 |
+| Autofish | [Autofish-0.9.4-fabric-mc1.18.jar](https://www.curseforge.com/minecraft/mc-mods/autofish/files/all) | Dec 31, 2021 |
+| Xaero's Minimap | [Xaeros_Minimap_21.23.0_Fabric_1.18.jar](https://chocolateminecraft.com/minimapdownload.php) | Dec 28, 2021 |
+| Architectury API (Fabric) (Dep) | [architectury-3.4.9.jar](https://www.curseforge.com/minecraft/mc-mods/architectury-fabric/files/all) | Jan 1, 2022 |
+| Light Overlay (Rift/Forge/Fabric) | [light-overlay-6.0.4.jar](https://www.curseforge.com/minecraft/mc-mods/light-overlay/files/all) | Dec 27, 2021 |
+| Sodium | [sodium-fabric-mc1.18-0.4.0-alpha5+build.9.jar](https://www.curseforge.com/minecraft/mc-mods/sodium/files/all) | Dec 1, 2021 |
+| Illuminations 🔥 | [illuminations-1.10.2.jar](https://www.curseforge.com/minecraft/mc-mods/illuminations/files/all) | Dec 1, 2021 |
+| OptiFabric | [optifabric-1.12.10.jar](https://www.curseforge.com/minecraft/mc-mods/optifabric/files/all) | Dec 16, 2021 |
+| Optifine | [OptiFine_1.18.1_HD_U_H4.jar](https://optifine.net/downloads) | Dec 12, 2021 |
+| Fabritone | [baritone-standalone-fabric-1.8.0.jar](https://github.com/cabaletta/baritone/actions?query=branch%3A1.18) | Dec 3, 2021 |
 
 Note: OptiFabric conflicts with Sodium.
+Pending Mods: [Physics Mod](https://www.curseforge.com/minecraft/mc-mods/physics-mod), [Sodium Extra](https://www.curseforge.com/minecraft/mc-mods/sodium-extra), [Falling Leaves](https://modrinth.com/mod/fallingleaves)
 
 ### Server-side Mods
 
 | Mod name | Download link | Last Update |
 | -------- | ------------- | ---------- |
-| DynmapForge | [Dynmap-3.1-beta6-fabric-1.16.4.jar](https://www.curseforge.com/minecraft/mc-mods/dynmapforge/files/all) | Jan 3, 2021 |
+| DynmapForge | [Dynmap-3.3-beta-4-fabric-1.18.jar](https://www.curseforge.com/minecraft/mc-mods/dynmapforge/files/all) | Dec 27, 2021 |
+
+### Minecraft IDs
+
+1. Minecraft
+   coal_ore
+   redstone_ore lit_redstone_ore
+   diamond_ore iron_ore gold_ore lapis_ore
+   下界:
+   nether_gold_ore minecraft:quartz_ore ancient_debris
+2. techreborn
+   techreborn:galena_ore techreborn:iridium_ore techreborn:ruby_ore techreborn:sapphire_ore techreborn:bauxite_ore techreborn:lead_ore techreborn:silver_ore techreborn:copper_ore techreborn:tin_ore
+   下界: techreborn:pyrite_ore techreborn:cinnabar_ore techreborn:sphalerite_ore
+   末地: techreborn:tungsten_ore techreborn:sheldonite_ore techreborn:peridot_ore techreborn:sodalite_ore
+3. appliedenergistics2
+   appliedenergistics2:quartz_ore appliedenergistics2:charged_quartz_ore
+4. IC2
+   ic2:resource:1 铜
+   ic2:resource:2 铅
+   ic2:resource:3 锡
+   ic2:resource:4 铀
+5. Forestry
+   forestry:resources:0 磷
+   forestry:resources:1 林业铜矿
+   forestry:resources:2 林业锡矿
+6. Mekanism
+   mekanism:oreblock:0锇矿
+   mekanism:oreblock:1铜矿
+   mekanism:oreblock:2锡矿
+   mekanism:saltblock
+7. Tconstruct
+   tconstruct:ore:0 钴矿
+   tconstruct:ore:0 阿迪特
+
+## Server Configurations
+
+## 启动参数
+
+```bash
+java -javaagent:/data/authlib-injector-1.1.40.jar=https://littlesk.in/api/yggdrasil -XX:+UnlockExperimentalVMOptions -XX:+UseG1GC -XX:G1NewSizePercent=20 -XX:G1ReservePercent=20 -XX:MaxGCPauseMillis=50 -XX:G1HeapRegionSize=16M -XX:-UseAdaptiveSizePolicy -XX:-OmitStackTraceInFastThrow -Xmn128m -Xmx2048m -jar Mohist-3e598b2-server.jar nogui
+```
+
+## Dynmap
+
+Due to the use of third-party services provided by [LittleSkin](https://littleskin.cn/), Dynmap needs to be configured.
+
+```yml fabric-data/dynmap/configuration.txt
+# Control loading of player faces (if set to false, skins are never fetched)
+fetchskins: true
+
+# Customize URL used for fetching player skins (%player% is macro for name)
+skin-url: "https://littleskin.cn/skin/%player%.png"
+```
+
+Worlds cleanup: Remove corresponding items in `dynmap/forgeworlds.yml`, then `/dynmap reload`

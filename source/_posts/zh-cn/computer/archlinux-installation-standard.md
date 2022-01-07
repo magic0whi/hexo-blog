@@ -134,7 +134,7 @@ Enter F12 for Boot Menu when bootstrap
      ```console
      # pacman -S networkmanager
      # systemctl enable NetworkManager.service
-     # systemctl enable systemd-resolved
+     # systemctl enable systemd-resolved.service
      ```
    * Use iwd
      Install iwd: `pacman -S iwd`
@@ -151,7 +151,7 @@ Enter F12 for Boot Menu when bootstrap
      ```console
      # systemctl enable iwd.service
      # systemctl enable systemd-networkd.service
-     # systemctl enable systemd-resolved
+     # systemctl enable systemd-resolved.service
      ```
 6. Random number generation
    Enable Rng-tools
@@ -223,7 +223,7 @@ Enter F12 for Boot Menu when bootstrap
     # bootctl install
     ```
     > Automatic update
-      The package [systemd-boot-pacman-hook](https://aur.archlinux.org/packages/systemd-boot-pacman-hook/) provides a Pacman hook to automate the update process.
+      The package [systemd-boot-pacman-hook<sup>[AUR]</sup>](https://aur.archlinux.org/packages/systemd-boot-pacman-hook/) provides a Pacman hook to automate the update process.
 
     Configuring the boot loader
     ```conf /boot/loader/loader.conf

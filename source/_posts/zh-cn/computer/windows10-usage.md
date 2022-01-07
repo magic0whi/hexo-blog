@@ -60,3 +60,61 @@ dism.exe /online /Cleanup-Image /StartComponentCleanup # 执行组件存储清�
    ```powershell
    FWUpdLcl64.exe -f ..\ME8_1.5M_Production.bin
    ```
+
+## Hyper-V Manager Troubleshoot
+
+1. 首先客户机和宿主机都要启用 WinRM
+   ```powershell
+   PS C:\Users\ndoskrnl> Enable-PSRemoting -Force
+   WinRM has been updated to receive requests.
+   WinRM service type changed successfully.
+   WinRM service started.
+   
+   Set-WSManQuickConfig : <f:WSManFault xmlns:f="http://schemas.microsoft.com/wbem/wsman/1/wsmanfault" Code="2150859113"
+   Machine="localhost"><f:Message><f:ProviderFault provider="Config provider"
+   path="%systemroot%\system32\WsmSvc.dll"><f:WSManFault xmlns:f="http://schemas.microsoft.com/wbem/wsman/1/wsmanfault"
+   Code="2150859113" Machine="DESKTOP-1KNPPCL"><f:Message>WinRM firewall exception will not work since one of the network
+   connection types on this machine is set to Public. Change the network connection type to either Domain or Private and
+   try again. </f:Message></f:WSManFault></f:ProviderFault></f:Message></f:WSManFault>
+   At line:116 char:17
+   +                 Set-WSManQuickConfig -force
+   +                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+       + CategoryInfo          : InvalidOperation: (:) [Set-WSManQuickConfig], InvalidOperationException
+       + FullyQualifiedErrorId : WsManError,Microsoft.WSMan.Management.SetWSManQuickConfigCommand
+   ```
+   遇到错误, 用 Set-NetConnectionProfile 将所有网络设置为 Private:
+   ```powershell
+   PS C:\Users\ndoskrnl> Get-NetConnectionProfile
+   Name             : Network 5
+   InterfaceAlias   : ZeroTier One [83048a06326c5a60]
+   InterfaceIndex   : 9
+   NetworkCategory  : Private
+   IPv4Connectivity : LocalNetwork
+   IPv6Connectivity : LocalNetwork
+   
+   Name             : Xiaomi_XXXX_5G
+   InterfaceAlias   : vEthernet (External Network With Adapter)
+   InterfaceIndex   : 16
+   NetworkCategory  : Private
+   IPv4Connectivity : Internet
+   IPv6Connectivity : Internet
+   PS C:\Users\ndoskrnl> Set-NetConnectionProfile -InterfaceIndex 9 -NetworkCategory Private
+   ```
+   有时候即使设置了还是会报错, 直接上参数 `-SkipNetworkProfileCheck` 吧:
+   ```powershell
+   PS C:\Users\ndoskrnl> Enable-PSRemoting -SkipNetworkProfileCheck -Force
+   ```
+2. 然后再在客户端设置 TrustedHosts
+   ```powershell
+   Set-Item WSMan:localhost\client\trustedhosts -value "DESKTOP-XXXXXXX.lan" -Force
+   ```
+   查看一下确保无错:
+   ```powershell
+   Get-Item WSMan:localhost\client\trustedhosts
+   ```
+   多个主机名可用逗号分隔
+   ```powershell
+   $curValue = (Get-Item wsman:\localhost\Client\TrustedHosts).value
+   Set-Item wsman:\localhost\Client\TrustedHosts -Value `
+   "$curValue, Server01.Domain01.Fabrikam.com"
+   ```
