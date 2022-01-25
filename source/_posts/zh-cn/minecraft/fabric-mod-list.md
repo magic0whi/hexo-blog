@@ -37,10 +37,12 @@ Powered by [itzg's docker image](https://github.com/itzg/docker-minecraft-server
 | Krypton | [krypton-0.1.6.jar](https://github.com/astei/krypton/releases) | Dec 11, 2021 |
 | Lithium (Fabric) | [lithium-fabric-mc1.18.1-0.7.7.jar](https://www.curseforge.com/minecraft/mc-mods/lithium/files/all) | Jan 2, 2022 |
 | Starlight (Fabric) | [starlight-1.0.0+fabric.d0a3220.jar](https://modrinth.com/mod/starlight/versions) | Dec 8, 2021 |
+| Alternate Current | [alternate-current-mc1.18-1.1.0.jar](https://modrinth.com/mod/alternate-current/versions) | Dec 1, 2021 |
 | Concurrent Chunk Management Engine (Fabric) | [c2me-fabric-mc1.18.1-0.2.0+alpha.6.1-all.jar](https://www.curseforge.com/minecraft/mc-mods/c2me-fabric/files/all) | Jan 6, 2022 |
 | FerriteCore (Fabric) | [ferritecore-4.0.0-fabric.jar](https://www.curseforge.com/minecraft/mc-mods/ferritecore-fabric/files/all) | Dec 5, 2021 |
 | Roughly Enough Items (REI) | [RoughlyEnoughItems-7.1.368.jar](https://www.curseforge.com/minecraft/mc-mods/roughly-enough-items/files/all) | Jan 14, 2022 |
 | Roughly Enough Resources | [rer-2.3.0.jar](https://www.curseforge.com/minecraft/mc-mods/roughly-enough-resources/files/all) | Dec 18, 2021 |
+| WTHIT | [wthit-fabric-4.4.1.jar](https://modrinth.com/mod/wthit/versions) | Jan 6, 2022 |
 | Inventorio (Fabric) | [inventorio-1.18-fabric-1.6.2.jar](https://www.curseforge.com/minecraft/mc-mods/inventorio/files/all) | Dec 7, 2021 |
 | Polymorph (Fabric) | [polymorph-fabric-0.0.19-1.18.1.jar](https://www.curseforge.com/minecraft/mc-mods/polymorph-fabric/files/all) | Jan 13, 2022 |
 | FallingTree (Forge&Fabric) | [FallingTree-1.18.1-3.2.0b1.jar](https://www.curseforge.com/minecraft/mc-mods/falling-tree/files/all) | Jan 13, 2022 |
@@ -69,7 +71,6 @@ Pending Mods (Management): None.
 
 | Mod name | Download link | Last Update |
 | -------- | ------------- | ---------- |
-| WTHIT | [wthit-fabric-4.4.1.jar](https://www.curseforge.com/minecraft/mc-mods/wthit/files/all) | Jan 6, 2022 |
 | megane | [megane-7.0.1.jar](https://www.curseforge.com/minecraft/mc-mods/megane/files/all) | Jan 15, 2022 |
 | WMITAF | [wmitaf-fabric-mc1.18.1-2.2.0.jar](https://www.curseforge.com/minecraft/mc-mods/wmitaf/files/all) | Dec 15, 2021 |
 | Not Enough Crashes (Fabric) | [notenoughcrashes-4.1.3+1.18.1-fabric.jar](https://www.curseforge.com/minecraft/mc-mods/not-enough-crashes/files/all) | Dec 24, 2021 |
@@ -102,6 +103,7 @@ Pending Mods: [Physics Mod](https://www.curseforge.com/minecraft/mc-mods/physics
 | Mod name | Download link | Last Update |
 | -------- | ------------- | ---------- |
 | LuckPerms | [LuckPerms-Fabric-5.3.98.jar](https://ci.lucko.me/job/LuckPerms/) | Jan 2, 2022 |
+| Minecraft Command Permissions Fabric | [minecraft-command-permissions-1.5.0.jar](https://github.com/lucko/minecraft-command-permissions-fabric/releases) | Dec 2, 2021 |
 | BlueMap | [BlueMap-1.7.2-fabric-1.18.jar](https://github.com/BlueMap-Minecraft/BlueMap/releases) | Dec 1, 2021 |
 | WorldEdit | [worldedit-mod-7.2.8.jar](https://www.curseforge.com/minecraft/mc-mods/worldedit/files/all) | Dec 11, 2021 |
 | spark | [spark-fabric.jar](https://www.curseforge.com/minecraft/mc-mods/spark/files/all) | Jan 2, 2022 |
@@ -166,3 +168,22 @@ skin-url: "https://littleskin.cn/skin/%player%.png"
 ```
 
 Worlds cleanup: Remove corresponding items in `dynmap/forgeworlds.yml`, then `/dynmap reload`
+
+## LuckPerms
+
+1. Enable auto-op on fabric server (used as a "pssudo" root wildcard, as many mods support the operator system over permissions):
+   All users will be de-opped unless they have the permission node `luckperms.autoop`
+   ```conf serverroot/config/luckperms/luckperms.conf
+   # Enables or disables a special permission based system in LuckPerms for controlling OP status.
+   #
+   # - If set to true, any user with the permission "luckperms.autoop" will automatically be granted
+   #   server operator status. This permission can be inherited, or set on specific servers/worlds,
+   #   temporarily, etc.
+   # - Additionally, setting this to true will force the "enable-ops" option above to false. All users
+   #   will be de-opped unless they have the permission node, and the op/deop commands will be
+   #   disabled.
+   # - It is recommended that you use this option instead of assigning a single '*' permission.
+   # - However, on Fabric this setting can be used as a "pseudo" root wildcard, as many mods support
+   #   the operator system over permissions.
+   auto-op = true
+   ```
