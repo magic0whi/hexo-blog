@@ -43,6 +43,7 @@ Powered by [itzg's docker image](https://github.com/itzg/docker-minecraft-server
 | Roughly Enough Items (REI) | [RoughlyEnoughItems-7.1.368.jar](https://www.curseforge.com/minecraft/mc-mods/roughly-enough-items/files/all) | Jan 14, 2022 |
 | Roughly Enough Resources | [rer-2.3.0.jar](https://www.curseforge.com/minecraft/mc-mods/roughly-enough-resources/files/all) | Dec 18, 2021 |
 | WTHIT | [wthit-fabric-4.4.1.jar](https://modrinth.com/mod/wthit/versions) | Jan 6, 2022 |
+| megane | [megane-7.0.1.jar](https://www.curseforge.com/minecraft/mc-mods/megane/files/all) | Jan 15, 2022 |
 | Inventorio (Fabric) | [inventorio-1.18-fabric-1.6.2.jar](https://www.curseforge.com/minecraft/mc-mods/inventorio/files/all) | Dec 7, 2021 |
 | Polymorph (Fabric) | [polymorph-fabric-0.0.19-1.18.1.jar](https://www.curseforge.com/minecraft/mc-mods/polymorph-fabric/files/all) | Jan 13, 2022 |
 | FallingTree (Forge&Fabric) | [FallingTree-1.18.1-3.2.0b1.jar](https://www.curseforge.com/minecraft/mc-mods/falling-tree/files/all) | Jan 13, 2022 |
@@ -63,7 +64,7 @@ Powered by [itzg's docker image](https://github.com/itzg/docker-minecraft-server
 | Oh The Biomes You'll Go \[FABRIC\] (**DISABLED**) | [byg-fabric-1.18-1.3.7.jar](https://www.curseforge.com/minecraft/mc-mods/oh-the-biomes-youll-go-fabric/files/all) | Jan 4, 2022 |
 | Phosphor(Fabric) (**DISABLED**) | [phosphor-fabric-mc1.18.x-0.8.1.jar](https://www.curseforge.com/minecraft/mc-mods/phosphor/files/all) | Dec 20, 2021 |
 
-Pending Mods: [Observable](https://www.curseforge.com/minecraft/mc-mods/observable), [Culinaire](https://www.curseforge.com/minecraft/mc-mods/culinaire), [Industrial Revolution](https://www.curseforge.com/minecraft/mc-mods/industrial-revolution).
+Pending Mods: [Observable](https://www.curseforge.com/minecraft/mc-mods/observable), [Culinaire](https://www.curseforge.com/minecraft/mc-mods/culinaire), [Industrial Revolution](https://www.curseforge.com/minecraft/mc-mods/industrial-revolution), [Deep Mob Learning: Simulacrum](https://www.curseforge.com/minecraft/mc-mods/deep-mob-learning-simulacrum).
 
 Pending Mods (Management): None.
 
@@ -71,8 +72,7 @@ Pending Mods (Management): None.
 
 | Mod name | Download link | Last Update |
 | -------- | ------------- | ---------- |
-| megane | [megane-7.0.1.jar](https://www.curseforge.com/minecraft/mc-mods/megane/files/all) | Jan 15, 2022 |
-| WMITAF | [wmitaf-fabric-mc1.18.1-2.2.0.jar](https://www.curseforge.com/minecraft/mc-mods/wmitaf/files/all) | Dec 15, 2021 |
+| WMITAF | [wmitaf-fabric-mc1.18.1-2.2.0.jar](https://modrinth.com/mod/wmitaf/versions) | Dec 15, 2021 |
 | Not Enough Crashes (Fabric) | [notenoughcrashes-4.1.3+1.18.1-fabric.jar](https://www.curseforge.com/minecraft/mc-mods/not-enough-crashes/files/all) | Dec 24, 2021 |
 | Autofish | [Autofish-0.9.4-fabric-mc1.18.jar](https://www.curseforge.com/minecraft/mc-mods/autofish/files/all) | Dec 31, 2021 |
 | Xaero's Minimap | [Xaeros_Minimap_21.23.1_Fabric_1.18.jar](https://chocolateminecraft.com/minimapdownload.php) | Jan 9, 2022 |
