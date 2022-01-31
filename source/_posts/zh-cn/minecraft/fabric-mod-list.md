@@ -29,17 +29,18 @@ Powered by [itzg's docker image](https://github.com/itzg/docker-minecraft-server
 | Mod name | Download link | Last Update |
 | -------- | ------------- | ---------- |
 | Fabric API | [fabric-api-0.46.1+1.18.jar](https://modrinth.com/mod/fabric-api/versions) | Jan 17, 2022 |
-| Architectury API (Fabric) | [architectury-3.4.9.jar](https://www.curseforge.com/minecraft/mc-mods/architectury-fabric/files/all) | Jan 1, 2022 |
+| Architectury API (Fabric) | [architectury-3.5.12.jar](https://www.curseforge.com/minecraft/mc-mods/architectury-fabric/files/all) | Jan 1, 2022 |
 | Cloth API (Fabric) | [cloth-api-3.1.61.jar](https://www.curseforge.com/minecraft/mc-mods/cloth-api/files/all) | Jan 10, 2022 |
-| Cloth Config API (Fabric) | [cloth-config-6.1.48-fabric.jar](https://www.curseforge.com/minecraft/mc-mods/cloth-config/files/all) | Dec 11, 2021 |
+| Cloth Config API (Fabric) | [cloth-config-6.1.48-fabric.jar](https://www.curseforge.com/minecraft/mc-mods/cloth-config/files/all) | Jan 16, 2022 |
 | Fabric Language Kotlin | [fabric-language-kotlin-1.7.1+kotlin.1.6.10.jar](https://modrinth.com/mod/fabric-language-kotlin/versions) | Dec 20, 2021 |
+| Patchouli | [Patchouli-1.18.1-65-FABRIC.jar](https://modrinth.com/mod/patchouli/versions) | Jan 31, 2022 |
 | Not Enough Crashes (Fabric) | [notenoughcrashes-4.1.4+1.18.1-fabric.jar](https://modrinth.com/mod/notenoughcrashes/versions) | Jan 15, 2022 |
 | LazyDFU | [lazydfu-0.1.2.jar](https://modrinth.com/mod/lazydfu/versions) | Feb 2, 2021 |
 | Krypton | [krypton-0.1.6.jar](https://modrinth.com/mod/krypton/versions) | Dec 11, 2021 |
 | Lithium (Fabric) | [lithium-fabric-mc1.18.1-0.7.7.jar](https://modrinth.com/mod/lithium/versions) | Jan 2, 2022 |
 | Starlight (Fabric) | [starlight-1.0.0+fabric.d0a3220.jar](https://modrinth.com/mod/starlight/versions) | Dec 8, 2021 |
 | Alternate Current | [alternate-current-mc1.18-1.1.0.jar](https://modrinth.com/mod/alternate-current/versions) | Dec 1, 2021 |
-| Concurrent Chunk Management Engine (Fabric) | [c2me-fabric-mc1.18.1-0.2.0+alpha.6.1-all.jar](https://modrinth.com/mod/c2me-fabric/versions) | Jan 20, 2022 |
+| Concurrent Chunk Management Engine (Fabric) | [c2me-fabric-mc1.18.1-0.2.0+alpha.6.25-all.jar](https://modrinth.com/mod/c2me-fabric/versions) | Jan 20, 2022 |
 | FerriteCore (Fabric) | [ferritecore-4.0.0-fabric.jar](https://modrinth.com/mod/ferrite-core/versions) | Dec 5, 2021 |
 | Observable | [observable-1.2.3-fabric.jar](https://modrinth.com/mod/observable/versions) | Jan 28, 2022 |
 | Roughly Enough Items (REI) | [RoughlyEnoughItems-7.2.416.jar](https://www.curseforge.com/minecraft/mc-mods/roughly-enough-items/files/all) | Jan 29, 2022 |
@@ -125,43 +126,36 @@ Pending Mods: [Dynamic View\[Forge/Fabric\]](https://www.curseforge.com/minecraf
 
 ### Minecraft IDs
 
+Using for mining by baritone :)
+
 1. Minecraft
    coal_ore
-   redstone_ore lit_redstone_ore
+   iron_ore deepslate_iron_ore
+   redstone_ore deepslate_redstone_ore
    diamond_ore iron_ore gold_ore lapis_ore
-   下界:
-   nether_gold_ore minecraft:quartz_ore ancient_debris
+   
+   The nether:
+   nether_gold_ore nether_quartz_ore ancient_debris
 2. techreborn
-   techreborn:galena_ore techreborn:iridium_ore techreborn:ruby_ore techreborn:sapphire_ore techreborn:bauxite_ore techreborn:lead_ore techreborn:silver_ore techreborn:copper_ore techreborn:tin_ore
-   下界: techreborn:pyrite_ore techreborn:cinnabar_ore techreborn:sphalerite_ore
-   末地: techreborn:tungsten_ore techreborn:sheldonite_ore techreborn:peridot_ore techreborn:sodalite_ore
+   techreborn:tin_ore techreborn:deepslate_tin_ore
+   techreborn:lead_ore techreborn:deepslate_lead_ore
+   techreborn:bauxite_ore techreborn:deepslate_bauxite_ore
+   techreborn:galena_ore techreborn:iridium_ore techreborn:ruby_ore techreborn:sapphire_ore  techreborn:silver_ore techreborn:copper_ore
+   
+   The nether:
+   techreborn:pyrite_ore techreborn:cinnabar_ore techreborn:sphalerite_ore
+   
+   The end:
+   techreborn:tungsten_ore techreborn:sheldonite_ore techreborn:peridot_ore techreborn:sodalite_ore
 3. appliedenergistics2
    appliedenergistics2:quartz_ore appliedenergistics2:charged_quartz_ore
-4. IC2
-   ic2:resource:1 铜
-   ic2:resource:2 铅
-   ic2:resource:3 锡
-   ic2:resource:4 铀
-5. Forestry
-   forestry:resources:0 磷
-   forestry:resources:1 林业铜矿
-   forestry:resources:2 林业锡矿
-6. Mekanism
-   mekanism:oreblock:0锇矿
-   mekanism:oreblock:1铜矿
-   mekanism:oreblock:2锡矿
-   mekanism:saltblock
-7. Tconstruct
-   tconstruct:ore:0 钴矿
-   tconstruct:ore:0 阿迪特
-
-## Server Configurations
-
-## 启动参数
-
-```bash
-java -javaagent:/data/authlib-injector-1.1.40.jar=https://littlesk.in/api/yggdrasil -XX:+UnlockExperimentalVMOptions -XX:+UseG1GC -XX:G1NewSizePercent=20 -XX:G1ReservePercent=20 -XX:MaxGCPauseMillis=50 -XX:G1HeapRegionSize=16M -XX:-UseAdaptiveSizePolicy -XX:-OmitStackTraceInFastThrow -Xmn128m -Xmx2048m -jar Mohist-3e598b2-server.jar nogui
-```
+4. Modern Industrialization:
+   modern_industrialization:tin_ore modern_industrialization:deepslate_tin_ore
+   modern_industrialization:nickel_ore modern_industrialization:deepslate_nickel_ore
+   modern_industrialization:lead_ore modern_industrialization:deepslate_lead_ore
+   modern_industrialization:quartz_ore
+   modern_industrialization:bauxite_ore modern_industrialization:deepslate_bauxite_ore
+   modern_industrialization:antimony_ore modern_industrialization:deepslate_antimony_ore
 
 ## Dynmap
 
@@ -194,4 +188,12 @@ Worlds cleanup: Remove corresponding items in `dynmap/forgeworlds.yml`, then `/d
    # - However, on Fabric this setting can be used as a "pseudo" root wildcard, as many mods support
    #   the operator system over permissions.
    auto-op = true
+   ```
+
+## C2ME
+
+1. Disable no-tick view distance due to mysterious ae2's cable disconnect:
+   ```conf serverroot/config/c2me.toml
+   [noTickViewDistance]
+   enabled = false
    ```
