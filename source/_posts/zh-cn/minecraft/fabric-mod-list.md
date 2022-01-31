@@ -28,48 +28,43 @@ Powered by [itzg's docker image](https://github.com/itzg/docker-minecraft-server
 
 | Mod name | Download link | Last Update |
 | -------- | ------------- | ---------- |
-| Fabric API | [fabric-api-0.46.0+1.18.jar](https://modrinth.com/mod/fabric-api/versions) | Jan 17, 2022 |
+| Fabric API | [fabric-api-0.46.1+1.18.jar](https://modrinth.com/mod/fabric-api/versions) | Jan 17, 2022 |
 | Architectury API (Fabric) | [architectury-3.4.9.jar](https://www.curseforge.com/minecraft/mc-mods/architectury-fabric/files/all) | Jan 1, 2022 |
-| Cloth API (Fabric) | [cloth-api-3.0.55.jar](https://www.curseforge.com/minecraft/mc-mods/cloth-api/files/all) | Jan 10, 2022 |
+| Cloth API (Fabric) | [cloth-api-3.1.61.jar](https://www.curseforge.com/minecraft/mc-mods/cloth-api/files/all) | Jan 10, 2022 |
 | Cloth Config API (Fabric) | [cloth-config-6.1.48-fabric.jar](https://www.curseforge.com/minecraft/mc-mods/cloth-config/files/all) | Dec 11, 2021 |
-| Fabric Language Kotlin | [fabric-language-kotlin-1.7.1+kotlin.1.6.10.jar](https://www.curseforge.com/minecraft/mc-mods/fabric-language-kotlin/files/all) | Dec 20, 2021 |
-| Not Enough Crashes (Fabric) | [notenoughcrashes-4.1.3+1.18.1-fabric.jar](https://www.curseforge.com/minecraft/mc-mods/not-enough-crashes/files/all) | Dec 24, 2021 |
+| Fabric Language Kotlin | [fabric-language-kotlin-1.7.1+kotlin.1.6.10.jar](https://modrinth.com/mod/fabric-language-kotlin/versions) | Dec 20, 2021 |
+| Not Enough Crashes (Fabric) | [notenoughcrashes-4.1.4+1.18.1-fabric.jar](https://modrinth.com/mod/notenoughcrashes/versions) | Jan 15, 2022 |
 | LazyDFU | [lazydfu-0.1.2.jar](https://modrinth.com/mod/lazydfu/versions) | Feb 2, 2021 |
-| Krypton | [krypton-0.1.6.jar](https://github.com/astei/krypton/releases) | Dec 11, 2021 |
-| Lithium (Fabric) | [lithium-fabric-mc1.18.1-0.7.7.jar](https://www.curseforge.com/minecraft/mc-mods/lithium/files/all) | Jan 2, 2022 |
+| Krypton | [krypton-0.1.6.jar](https://modrinth.com/mod/krypton/versions) | Dec 11, 2021 |
+| Lithium (Fabric) | [lithium-fabric-mc1.18.1-0.7.7.jar](https://modrinth.com/mod/lithium/versions) | Jan 2, 2022 |
 | Starlight (Fabric) | [starlight-1.0.0+fabric.d0a3220.jar](https://modrinth.com/mod/starlight/versions) | Dec 8, 2021 |
 | Alternate Current | [alternate-current-mc1.18-1.1.0.jar](https://modrinth.com/mod/alternate-current/versions) | Dec 1, 2021 |
-| Concurrent Chunk Management Engine (Fabric) | [c2me-fabric-mc1.18.1-0.2.0+alpha.6.1-all.jar](https://www.curseforge.com/minecraft/mc-mods/c2me-fabric/files/all) | Jan 6, 2022 |
-| FerriteCore (Fabric) | [ferritecore-4.0.0-fabric.jar](https://www.curseforge.com/minecraft/mc-mods/ferritecore-fabric/files/all) | Dec 5, 2021 |
-| Observable | [observable-1.2.3-fabric.jar](https://www.curseforge.com/minecraft/mc-mods/observable) | Jan 28, 2022 |
-| Roughly Enough Items (REI) | [RoughlyEnoughItems-7.2.409.jar](https://www.curseforge.com/minecraft/mc-mods/roughly-enough-items/files/all) | Jan 14, 2022 |
+| Concurrent Chunk Management Engine (Fabric) | [c2me-fabric-mc1.18.1-0.2.0+alpha.6.1-all.jar](https://modrinth.com/mod/c2me-fabric/versions) | Jan 20, 2022 |
+| FerriteCore (Fabric) | [ferritecore-4.0.0-fabric.jar](https://modrinth.com/mod/ferrite-core/versions) | Dec 5, 2021 |
+| Observable | [observable-1.2.3-fabric.jar](https://modrinth.com/mod/observable/versions) | Jan 28, 2022 |
+| Roughly Enough Items (REI) | [RoughlyEnoughItems-7.2.416.jar](https://www.curseforge.com/minecraft/mc-mods/roughly-enough-items/files/all) | Jan 29, 2022 |
 | Roughly Enough Resources | [rer-2.3.0.jar](https://www.curseforge.com/minecraft/mc-mods/roughly-enough-resources/files/all) | Dec 18, 2021 |
 | WTHIT | [wthit-fabric-4.4.1.jar](https://modrinth.com/mod/wthit/versions) | Jan 6, 2022 |
-| megane | [megane-7.0.1.jar](https://www.curseforge.com/minecraft/mc-mods/megane/files/all) | Jan 15, 2022 |
+| megane | [megane-7.0.2.jar](https://www.curseforge.com/minecraft/mc-mods/megane/files/all) | Jan 28, 2022 |
 | Inventorio (Fabric) | [inventorio-1.18-fabric-1.6.2.jar](https://www.curseforge.com/minecraft/mc-mods/inventorio/files/all) | Dec 7, 2021 |
-| Trinkets | [trinkets-3.1.0.jar](https://modrinth.com/mod/trinkets/versions) | Dec 1, 2021 |
-| Polymorph (Fabric) | [polymorph-fabric-0.0.19-1.18.1.jar](https://www.curseforge.com/minecraft/mc-mods/polymorph-fabric/files/all) | Jan 13, 2022 |
-| FallingTree (Forge&Fabric) | [FallingTree-1.18.1-3.2.0b1.jar](https://www.curseforge.com/minecraft/mc-mods/falling-tree/files/all) | Jan 13, 2022 |
-| Universal Graves | [graves-2.0.0-beta.3+1.18.jar](https://www.curseforge.com/minecraft/mc-mods/universal-graves/files/all) | Dec 28, 2021 |
-| AppleSkin | [appleskin-fabric-mc1.18-2.2.0.jar](https://www.curseforge.com/minecraft/mc-mods/appleskin/files/all) | Dec 2, 2021 |
+| Polymorph (Fabric) | [polymorph-fabric-0.0.19-1.18.1.jar](https://www.curseforge.com/minecraft/mc-mods/polymorph-fabric/files/all) | Jan 14, 2022 |
+| FallingTree (Forge&Fabric) | [FallingTree-1.18.1-3.2.0b2.jar](https://modrinth.com/mod/fallingtree/versions) | Jan 26, 2022 |
+| Universal Graves | [graves-2.0.0-beta.4.2+1.18.1.jar](https://modrinth.com/mod/universal-graves/versions) | Jan 26, 2022 |
+| AppleSkin | [appleskin-fabric-mc1.18.1-2.3.0.jar](https://modrinth.com/mod/appleskin/versions) | Jan 28, 2022 |
 | Applied Energistics 2 | [appliedenergistics2-10.0.0.jar](https://modrinth.com/mod/ae2/versions) | Jan 17, 2022 |
-| Applied Energistics 2 Wireless Terminals | [AE2WTLib-10.0.0-release.jar](https://modrinth.com/mod/applied-energistics-2-wireless-terminals/versions) | Jan 17, 2022 |
+| Applied Energistics 2 Wireless Terminals | [AE2WTLib-10.0.1-release.jar](https://modrinth.com/mod/applied-energistics-2-wireless-terminals/versions) | Jan 26, 2022 |
 | Deep Mob Learning: Refabricated | [deepmoblearning-refabricated-0.5.0-beta2.jar](https://www.curseforge.com/minecraft/mc-mods/deep-mob-learning-refabricated/files/all) | Dec 12, 2021 |
-| Reborn Core | [RebornCore-5.1.0-beta.5.jar](https://www.curseforge.com/minecraft/mc-mods/reborncore/files/all) | Jan 7, 2022 |
-| Tech Reborn | [TechReborn-5.1.0-beta.5.jar](https://www.curseforge.com/minecraft/mc-mods/techreborn/files/all) | Jan 7, 2022 |
-| Minecraft Transit Railway | [MTR-1.18.1-3.0.0-beta-8.jar](https://www.curseforge.com/minecraft/mc-mods/minecraft-transit-railway/files/all) | Dec 11, 2021 |
-| Modern Industrialization | [Modern-Industrialization-1.0.4.jar](https://www.curseforge.com/minecraft/mc-mods/modern-industrialization/files/all) | Jan 5, 2022 |
-| Space Dimensions (Fabric) | [agape_space_18_1-0.5.0.jar](https://www.curseforge.com/minecraft/mc-mods/moon-and-space-dimensions-fabric/files/all) | Jan 14, 2022 |
-| CC: Restitched | [cc-restitched-1.100.0.jar](https://www.curseforge.com/minecraft/mc-mods/cc-restitched/files/all) | Jan 5, 2022 |
-| Prefab | [prefab-fabric-3.0.2.jar](https://modrinth.com/mod/prefab/versions) | Jan 28, 2022 |
+| Reborn Core | [RebornCore-5.1.0-beta.7.jar](https://www.curseforge.com/minecraft/mc-mods/reborncore/files/all) | Jan 28, 2022 |
+| Tech Reborn | [TechReborn-5.1.0-beta.7.jar](https://www.curseforge.com/minecraft/mc-mods/techreborn/files/all) | Jan 28, 2022 |
+| Minecraft Transit Railway | [MTR-1.18.1-3.0.0-beta-8.jar](https://modrinth.com/mod/minecraft-transit-railway/versions) | Dec 11, 2021 |
+| Modern Industrialization | [Modern-Industrialization-1.0.4.jar](https://modrinth.com/mod/modern-industrialization/versions) | Jan 6, 2022 |
+| Space Dimensions (Fabric) | [agape_space_18_1-0.5.0.jar](https://www.curseforge.com/minecraft/mc-mods/moon-and-space-dimensions-fabric/files/all) | Jan 15, 2022 |
+| CC: Restitched | [cc-restitched-1.100.1.jar](https://modrinth.com/mod/cc-restitched/versions) | Jan 25, 2022 |
+| Prefab | [prefab-fabric-3.0.3.jar](https://modrinth.com/mod/prefab/versions) | Jan 30, 2022 |
 | Tax Free Levels | [TaxFreeLevels-1.3.jar](https://modrinth.com/mod/tax-free-levels/versions) | Dec 8, 2021 |
-| Immersive Portals (**DISABLED**) | [immersive-portals-1.1.8-mc1.18.1-fabric.jar](https://www.curseforge.com/minecraft/mc-mods/immersive-portals-mod/files/all) | Jan 3, 2022 |
-| Astromine (Fabric)(**DISABLED**) | [astromine-1.11.5+fabric-1.16.5.jar](https://www.curseforge.com/minecraft/mc-mods/astromine-fabric/files/all) | Jab 16, 2021 |
-| Just Another Redstone Gate Mod(**DISABLED**) | [jargm-1.3.0-alpha0.jar](https://www.curseforge.com/minecraft/mc-mods/just-another-redstone-gate-mod/files/all) | Dec 9, 2020 |
-| Oh The Biomes You'll Go \[FABRIC\] (**DISABLED**) | [byg-fabric-1.18-1.3.7.jar](https://www.curseforge.com/minecraft/mc-mods/oh-the-biomes-youll-go-fabric/files/all) | Jan 4, 2022 |
-| Phosphor(Fabric) (**DISABLED**) | [phosphor-fabric-mc1.18.x-0.8.1.jar](https://www.curseforge.com/minecraft/mc-mods/phosphor/files/all) | Dec 20, 2021 |
+| Immersive Portals (**DISABLED**) | [immersive-portals-1.2.5-mc1.18.1-fabric.jar](https://modrinth.com/mod/immersiveportals/versions) | Jan 25, 2022 |
 
-Pending Mods: [Culinaire](https://www.curseforge.com/minecraft/mc-mods/culinaire), [Industrial Revolution](https://www.curseforge.com/minecraft/mc-mods/industrial-revolution), [Deep Mob Learning: Simulacrum](https://www.curseforge.com/minecraft/mc-mods/deep-mob-learning-simulacrum), [BlockTuner](https://modrinth.com/mod/blocktuner), [IC2](https://jenkins.ic2.player.to/job/IC2/job/1.18/), [Mob Buckets (Fabric)](https://www.curseforge.com/minecraft/mc-mods/mob-buckets-fabric).
+Pending Mods: [Culinaire](https://modrinth.com/mod/culinaire), [Industrial Revolution](https://www.curseforge.com/minecraft/mc-mods/industrial-revolution), [Deep Mob Learning: Simulacrum](https://www.curseforge.com/minecraft/mc-mods/deep-mob-learning-simulacrum), [BlockTuner](https://modrinth.com/mod/blocktuner), [IC2](https://jenkins.ic2.player.to/job/IC2/job/1.18/), [Mob Buckets (Fabric)](https://www.curseforge.com/minecraft/mc-mods/mob-buckets-fabric).
 
 Pending Mods (Management): None.
 
@@ -83,28 +78,29 @@ Pending Mods (Management): None.
 | Autofish | [Autofish-0.9.4-fabric-mc1.18.jar](https://www.curseforge.com/minecraft/mc-mods/autofish/files/all) | Dec 31, 2021 |
 | Xaero's Minimap | [Xaeros_Minimap_22.1.1_Fabric_1.18.jar](https://chocolateminecraft.com/minimapdownload.php) | Jan 28, 2022 |
 | Better Ping Display | [BetterPingDisplay-Fabric-1.18.1-1.1.1.jar](https://www.curseforge.com/minecraft/mc-mods/better-ping-display-fabric/files/all) | Dec 14, 2021 |
-| FPS - Display | [fpsdisplay-1.4.2+1.18.jar](https://modrinth.com/mod/fpsdisplay/versions) | Dec 1, 2021 |
 | Light Overlay (Rift/Forge/Fabric) | [light-overlay-6.0.4.jar](https://www.curseforge.com/minecraft/mc-mods/light-overlay/files/all) | Dec 27, 2021 |
  Jan 14, 2022 |
 | Trajectory preview \[Fabric\] | [Trajectory Preview-1.0-1.18.1.jar](https://www.curseforge.com/minecraft/mc-mods/trajectory-preview-fabric/files/all) | Dec 21, 2021 |
-| Mod Menu | [modmenu-3.0.1.jar](https://www.curseforge.com/minecraft/mc-mods/modmenu/files/all) | Dec 18, 2021 |
+| Mod Menu | [modmenu-3.0.1.jar](https://modrinth.com/mod/modmenu/versions) | Dec 18, 2021 |
 | Baritone | [baritone-standalone-fabric-1.8.0.jar](https://github.com/cabaletta/baritone/actions?query=branch%3A1.18) | Dec 3, 2021 |
 | Advanced XRay (Fabric Edition) | [advanced-xray-fabric-1.18-0.7.0-build.10.jar](https://www.curseforge.com/minecraft/mc-mods/advanced-xray-fabric-edition/files/all) | Dec 3, 2021 |
-| WorldEdit CUI (Fabric) | [WorldEditCUI-1.18.1+01-SNAPSHOT.jar](https://github.com/EngineHub/WorldEditCUI/actions?query=branch%3Amc%2F1.18) | Fan 7, 2022 |
-| Dynamic FPS | [dynamic-fps-2.1.0.jar](https://github.com/juliand665/Dynamic-FPS/releases) | Jan 15, 2022 |
-| Enhanced Block Entities (Reduce FPS lag with block entities) | [enhancedblockentities-0.5+1.18.jar](https://modrinth.com/mod/ebe/versions) | Dec 10, 2021 |
+| Dynamic FPS | [dynamic-fps-2.1.0.jar](https://modrinth.com/mod/dynamic-fps/versions) | Jan 15, 2022 |
+| Enhanced Block Entities | [enhancedblockentities-0.5+1.18.jar](https://modrinth.com/mod/ebe/versions) | Dec 10, 2021 |
 | Cull Leaves | [cullleaves-2.3.2.jar](https://modrinth.com/mod/cull-leaves/versions) | Oct 30, 2021 |
 | Entity Culling Fabric/Forge | [EntityCulling-Fabric-1.3.3.jar](https://www.curseforge.com/minecraft/mc-mods/entityculling/files/all) | 
 | Cull Particles Fabric | [cullparticles-2.0.jar](https://www.curseforge.com/minecraft/mc-mods/cull-particles-fabric/files/all) | Jan 4, 2021 |
-| Sodium | [sodium-fabric-mc1.18.1-0.4.0-alpha6+build.14.jar](https://www.curseforge.com/minecraft/mc-mods/sodium/files/all) | Jan 13, 2022 |
+| Sodium | [sodium-fabric-mc1.18.1-0.4.0-alpha6+build.14.jar](https://modrinth.com/mod/sodium/versions) | Jan 14, 2022 |
+| Sodium Extra | [sodium-extra-mc1.18.1-0.3.9.jar](https://modrinth.com/mod/sodium-extra/versions) | Jan 28, 2022 |
 | Indium (Fix MI broken textures with Sodium) | [indium-1.0.2-alpha2+mc1.18.1.jar](https://modrinth.com/mod/indium/versions) | Jan 15, 2022 |
-| Canvas Renderer (**DISABLED**) | [canvas-fabric-mc118-1.0.2281.jar](https://www.curseforge.com/minecraft/mc-mods/canvas-renderer/files/all) | Dec 27, 2021 |
-| OptiFabric (**DISABLED**) | [optifabric-1.12.10.jar](https://www.curseforge.com/minecraft/mc-mods/optifabric/files/all) | Dec 16, 2021 |
-| Optifine (**DISABLED**) | [OptiFine_1.18.1_HD_U_H4.jar](https://optifine.net/downloads) | Dec 12, 2021 |
+| Canvas Renderer (**DISABLED**) | [canvas-fabric-mc118-1.0.2282.jar](https://modrinth.com/mod/canvas/versions) | Jab 11, 2021 |
+| WorldEdit CUI (Fabric) (**DISABLED**) | [WorldEditCUI-1.18.1+01-SNAPSHOT.jar](https://github.com/EngineHub/WorldEditCUI/actions?query=branch%3Amc%2F1.18) | Fan 7, 2022 |
+
+Pending mod: [Watson](https://modrinth.com/mod/watson)
 
 Note:
-* OptiFabric, Sodium and Canvas are conflict each other.
 * Baritone conflicts with Immersive Portals.
+* OptiFabric, Sodium and Canvas are conflict each other.
+* Canvas Renderer recommands 4GiBs to run.
 * If you use Canvas Renderer there is a recommand shader [Lumi Lights](https://spiralhalo.github.io/)
 Pending Mods: [Physics Mod](https://www.curseforge.com/minecraft/mc-mods/physics-mod), [Sodium Extra](https://www.curseforge.com/minecraft/mc-mods/sodium-extra), [Falling Leaves](https://modrinth.com/mod/fallingleaves).
 
@@ -114,17 +110,16 @@ Pending Mods: [Physics Mod](https://www.curseforge.com/minecraft/mc-mods/physics
 | -------- | ------------- | ---------- |
 | LuckPerms | [LuckPerms-Fabric-5.3.98.jar](https://ci.lucko.me/job/LuckPerms/) | Jan 2, 2022 |
 | Minecraft Command Permissions Fabric | [minecraft-command-permissions-1.5.0.jar](https://github.com/lucko/minecraft-command-permissions-fabric/releases) | Dec 2, 2021 |
-| BlueMap | [BlueMap-1.7.2-fabric-1.18.jar](https://github.com/BlueMap-Minecraft/BlueMap/releases) | Dec 1, 2021 |
-| WorldEdit | [worldedit-mod-7.2.8.jar](https://www.curseforge.com/minecraft/mc-mods/worldedit/files/all) | Dec 11, 2021 |
-| spark | [spark-fabric.jar](https://www.curseforge.com/minecraft/mc-mods/spark/files/all) | Jan 2, 2022 |
-| Unforgiving Void | [Unforgiving-Void-3.1.1+1.18.jar](https://www.curseforge.com/minecraft/mc-mods/unforgiving-void/files/all) | Dec 1, 2021 |
-| Ledger | [ledger-1.2.0.jar](https://www.curseforge.com/minecraft/mc-mods/ledger/files/all) | Dec 1, 2021 |
+| spark | [spark-fabric.jar](https://modrinth.com/mod/spark/versions) | Jan 3, 2022 |
+| Fireplace Lib | [Fireplace-Lib-6.2.2+1.18.jar](https://modrinth.com/mod/fireplace-lib/versions) | Dec 1, 2021 |
+| Unforgiving Void | [Unforgiving-Void-3.1.1+1.18.jar](https://modrinth.com/mod/unforgiving-void/versions) | Dec 1, 2021 |
+| Ledger | [ledger-1.2.0.jar](https://modrinth.com/mod/ledger/versions) | Dec 1, 2021 |
 | Dynmap-Forge/Fabric | [Dynmap-3.3-fabric-1.18.jar](https://www.curseforge.com/minecraft/mc-mods/dynmapforge/files/all) | Jan 30, 2022 |
-| Gunpowder | [gunpowder-base-1.1.1.1+1.18.1.jar](https://www.curseforge.com/minecraft/mc-mods/gunpowder-mc/files/all) | Dec 29, 2021 |
-| Gunpowder Currency | [gunpowder-currency-1.0.8+gunpowder.1.1.1.1.mc.1.18.1.jar](https://www.curseforge.com/minecraft/mc-mods/gunpowder-currency/files/all) | Dec 30, 2021 |
-| Gunpowder Market | [gunpowder-market-1.0.7+gunpowder.1.1.1.1.mc.1.18.1.jar](https://www.curseforge.com/minecraft/mc-mods/gunpowder-market/files/all) | Dec 30, 2021 |
-| Fireplace Lib (**DISABLED**) | [Fireplace-Lib-6.2.2+1.18.jar](https://www.curseforge.com/minecraft/mc-mods/fireplace-lib/files/all) | Dec 1, 2021 |
+| Gunpowder (**DISABLED**) | [gunpowder-base-1.1.1.1+1.18.1.jar](https://www.curseforge.com/minecraft/mc-mods/gunpowder-mc/files/all) | Dec 29, 2021 |
+| Gunpowder Currency (**DISABLED**) | [gunpowder-currency-1.0.8+gunpowder.1.1.1.1.mc.1.18.1.jar](https://www.curseforge.com/minecraft/mc-mods/gunpowder-currency/files/all) | Dec 30, 2021 |
+| Gunpowder Market (**DISABLED**) | [gunpowder-market-1.0.7+gunpowder.1.1.1.1.mc.1.18.1.jar](https://www.curseforge.com/minecraft/mc-mods/gunpowder-market/files/all) | Dec 30, 2021 |
 | Grand Economy (**DISABLED**) | [Grand-Economy-5.1.1+1.18.jar](https://www.curseforge.com/minecraft/mc-mods/grand-economy/files/all) | Dec 1, 2021 |
+| WorldEdit (**DISABLED**) | [worldedit-mod-7.2.8.jar](https://www.curseforge.com/minecraft/mc-mods/worldedit/files/all) | Dec 11, 2021 |
 
 Pending Mods: [Dynamic View\[Forge/Fabric\]](https://www.curseforge.com/minecraft/mc-mods/dynamic-view), [Flan](https://www.curseforge.com/minecraft/mc-mods/flan)
 
