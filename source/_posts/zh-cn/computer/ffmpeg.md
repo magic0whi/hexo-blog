@@ -28,12 +28,51 @@ toc: true
    ```
 2. HEVC 格式压动漫 (VCB组的参数, 用了 x265)
    ```console
-   $ <输出流> | x265 --y4m -D 10 --preset slower --deblock -1:-1 --ctu 32 --qg-size 8 --crf 15.0 --pbratio 1.2 --cbqpoffs -2 --crqpoffs -2 --no-sao --me 3 --subme 5 --merange 38 --b-intra --limit-tu 4 --no-amp --ref 4 --weightb --keyint 360 --min-keyint 1 --bframes 6 --aq-mode 1 --aq-strength 0.8 --rd 5 --psy-rd 2.0 --psy-rdoq 1.0 --rdoq-level 2 --no-open-gop --rc-lookahead 80 --scenecut 40 --qcomp 0.65 --no-strong-intra-smoothing --output "output.hevc" -
+   $ <stdout> | x265 --y4m -D 10 --preset slower --deblock -1:-1 --ctu 32 --qg-size 8 --crf 15.0 --pbratio 1.2 --cbqpoffs -2 --crqpoffs -2 --no-sao --me 3 --subme 5 --merange 38 --b-intra --limit-tu 4 --no-amp --ref 4 --weightb --keyint 360 --min-keyint 1 --bframes 6 --aq-mode 1 --aq-strength 0.8 --rd 5 --psy-rd 2.0 --psy-rdoq 1.0 --rdoq-level 2 --no-open-gop --rc-lookahead 80 --scenecut 40 --qcomp 0.65 --no-strong-intra-smoothing --output "output.hevc" -
    ```
-3. HEVC 格式压动漫 (我自己用这个)
+3. HEVC 格式压各种东西 (我自己用这个)
    ```console
-   $ ffmpeg -i example.mp4 -c:v libx265 -x265-params "y4m:depth=10:preset=slower:deblock=-1:-1:ctu=32:qg-size=8:crf=15.0:cbqpoffs=-2:crqpoffs=-2:no-sao:me=3:subme=5:merange=38:limit-tu=4:no-amp:ref=4:weightb:keyint=360:min-keyint=1:bframes=6:aq-mode=1:aq-strength=0.8:rd=5:psy-rd=2.0:psy-rdoq=1.0:rdoq-level=2:no-open-gop:rc-lookahead=80:scenecut=40:qcomp=0.65:no-strong-intra-smoothing=true" -acodec aac -strict -2 -ac 2 -ab 192k -ar 44100 output.mkv
+   $ ffmpeg -i example.mp4 \
+    -c:v libx265 \
+    -x265-params \
+   "y4m=true \
+   :depth=10 \
+   :preset=slower \
+   :deblock=-1,-1 \
+   :ctu=32 \
+   :qg-size=8 \
+   :crf=28.0 \
+   :cbqpoffs=-2 \
+   :crqpoffs=-2 \
+   :no-sao=true \
+   :me=3 \
+   :subme=5 \
+   :merange=38 \
+   :limit-tu=4 \
+   :no-amp=true \
+   :ref=4 \
+   :weightb=true \
+   :keyint=360 \
+   :min-keyint=1 \
+   :bframes=6 \
+   :aq-mode=1 \
+   :aq-strength=0.8 \
+   :rd=5 \
+   :psy-rd=2.0 \
+   :psy-rdoq=1.0 \
+   :rdoq-level=2 \
+   :no-open-gop=true \
+   :rc-lookahead=80 \
+   :scenecut=40 \
+   :qcomp=0.65 \
+   :no-strong-intra-smoothing=true" \
+    -acodec aac \
+    -ac 2 \
+    -ab 79k \
+    -ar 48000 \
+    output.mp4
    ```
+   Windows 平台下 ffmpeg 的 libx265 貌似没有 `y4m`、`depth`、`preset` 等参数, 此时可用 ffmpeg 参数 `-pix_fmt yuv420p` (10bit 为 `yuv420p10le`)、`-preset slower` 来解决.
 4. 通过 VA-API 压 HEVC (相比软压缺少很多参数设置)
    ```console
    $ ffmpeg -hwaccel vaapi -hwaccel_device /dev/dri/renderD128 -vaapi_device /dev/dri/renderD128 -ss 0 -t 4:59 -i example.mkv -vf 'format=nv12,hwupload' -c:v hevc_vaapi -crf 26 -r 24 -acodec aac -strict -2 -ac 2 -ab 192k -ar 44100 -f mp4 -y output.mp4
@@ -46,10 +85,9 @@ toc: true
 ## 选项解释
 
 ```
--qp Quantization Parameter, 使用这个时-b:v等限制固定比特率和文件大小的选项会无效, 建议不要用于流式传输
--crf 即Constant Rate Factor, 同"-cq", 使用这个时-b:v等限制固定比特率和文件大小的选项会无效, 建议不要用于流式传输
--qp与-crf区别在于-crf允许在运动较多的帧中gp增加，而在静止帧中下降，从而在保留压缩效率的同时，视频画质一样。
-所以建议使用-crf
+-qp Quantization Parameter, 使用这个时 -b:v 等限制固定比特率和文件大小的选项会无效, 建议不要用于流式传输
+-crf 即Constant Rate Factor, 同 "-cq", 使用这个时 -b:v 等限制固定比特率和文件大小的选项会无效, 建议不要用于流式传输
+-qp 与 -crf 区别在于 -crf 允许在运动较多的帧中 gp 增加，而在静止帧中下降，从而在保留压缩效率的同时，视频画质一样. 所以建议使用 -crf
 
 -global_quality 50 设置全局质量, 越低质量越好
 ```

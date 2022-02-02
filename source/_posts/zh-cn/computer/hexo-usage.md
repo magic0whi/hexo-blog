@@ -252,3 +252,40 @@ document.addEventListener('DOMContentLoaded', () => {
   })
 })
 </script>
+
+## KaTeX
+
+1. div 标签中 DisplayMode (用 "\\\\[,\\\\]" 包裹) 的 KaTeX 会莫名地有条滚动条, 通过内联 css 隐藏它:
+   ```css
+   <style type="text/css" rel="stylesheet">
+   .katex-html {
+     overflow-x: hidden;
+   }
+   ```
+2. 通过内联 JS 脚本实现 KaTex 参数自定义:
+   ```html
+   <div id="katex-1">
+   </div>
+   <script>
+   window.onload = () => {
+       var html = katex.renderToString(`
+       \\begin{equation}
+       \\begin{split}
+         a &=b+c \\\\
+         &=e+f
+       \\end{split}
+       \\end{equation} \\\\
+       \\htmlStyle{color: red;}{x} \\\\
+       \\href{https://katex.org/}{\KaTeX} \\\\
+       \\includegraphics[height=0.8em, totalheight=0.9em, width=0.9em, alt=KA logo]{https://katex.org/img/khan-academy.png}`
+       , {
+       displayMode: true,
+       trust: (context) => ['\\includegraphics', '\\href', '\\htmlStyle'].includes(context.command)
+       });
+       document.getElementById('katex-1').insertAdjacentHTML(
+       'afterend',
+       html
+       );
+   };
+   </script>
+   ```
