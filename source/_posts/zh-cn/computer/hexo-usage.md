@@ -252,6 +252,18 @@ document.addEventListener('DOMContentLoaded', () => {
   })
 })
 </script>
+3. 使用内联 CSS 管理行首缩进. (虽然我更喜欢用在段落前加 `&emsp\;` 这种方式)
+   ```html
+   <span class=sentence>凌晨 1 时, 大多数人已睡了三小时, 进入易醒的浅睡阶段, 对疼痛特别敏感.</span>
+   
+   <style type="text/css" rel="stylesheet">
+   .sentence {
+         /* padding:.3em .5em .1em 2em; */
+         padding-left: 2em;
+       	background: pink;
+       }
+   </style>
+   ```
 
 ## KaTeX
 
@@ -261,6 +273,7 @@ document.addEventListener('DOMContentLoaded', () => {
    .katex-html {
      overflow-x: hidden;
    }
+   </style>
    ```
 2. 通过内联 JS 脚本实现 KaTex 参数自定义:
    ```html

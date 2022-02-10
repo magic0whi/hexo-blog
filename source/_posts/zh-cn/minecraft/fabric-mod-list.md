@@ -28,7 +28,7 @@ Powered by [itzg's docker image](https://github.com/itzg/docker-minecraft-server
 
 | Mod name | Download link | Last Update |
 | -------- | ------------- | ---------- |
-| Fabric API | [fabric-api-0.46.3+1.18.jar](https://modrinth.com/mod/fabric-api/versions) | Jan 31, 2022 |
+| Fabric API | [fabric-api-0.46.4+1.18.jar](https://modrinth.com/mod/fabric-api/versions) | Feb 3, 2022 |
 | Architectury API (Fabric) | [architectury-3.5.12.jar](https://www.curseforge.com/minecraft/mc-mods/architectury-fabric/files/all) | Jan 1, 2022 |
 | Cloth Config API (Fabric) | [cloth-config-6.1.48-fabric.jar](https://www.curseforge.com/minecraft/mc-mods/cloth-config/files/all) | Jan 16, 2022 |
 | Fabric Language Kotlin | [fabric-language-kotlin-1.7.1+kotlin.1.6.10.jar](https://modrinth.com/mod/fabric-language-kotlin/versions) | Dec 20, 2021 |
@@ -165,6 +165,7 @@ Using for mining by baritone :)
    modern_industrialization:quartz_ore
    modern_industrialization:bauxite_ore modern_industrialization:deepslate_bauxite_ore
    modern_industrialization:antimony_ore modern_industrialization:deepslate_antimony_ore
+   modern_industrialization:mozanite_ore modern_industrialization:deepslate_mozanite_ore
 
 ## Dynmap
 

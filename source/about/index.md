@@ -28,3 +28,8 @@ Feel free to contact me:
 
 补张无修自拍(懒得刮胡子233)
 ![祝米娜桑开心每一天!](ndoskrnl.heic)
+
+<audio controls autoplay>
+  <source src="Do you like what you see Van Darkholme.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio> 
