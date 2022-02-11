@@ -21,11 +21,36 @@ toc: true
   ```console
   $ <stdout> | x265 --y4m -D 10 --preset slower --deblock -1:-1 --ctu 32 --qg-size 8 --crf 15.0 --pbratio 1.2 --cbqpoffs -2 --crqpoffs -2 --no-sao --me 3 --subme 5 --merange 38 --b-intra --limit-tu 4 --no-amp --ref 4 --weightb --keyint 360 --min-keyint 1 --bframes 6 --aq-mode 1 --aq-strength 0.8 --rd 5 --psy-rd 2.0 --psy-rdoq 1.0 --rdoq-level 2 --no-open-gop --rc-lookahead 80 --scenecut 40 --qcomp 0.65 --no-strong-intra-smoothing --output "output.hevc" -
   ```
-2. 钱桑の常用参数
-   ```console
-   $ ffmpeg -i example.mp4 \
-    -c:v libx265 \
-    -x265-params \
+* 钱桑の常用参数 x264
+  ```console
+  ffmpeg -i example.mp4 \
+   -c:v libx264 \
+   -preset slow \
+   -pix_fmt yuv420p \
+   -x264-params \
+  "crf=28 \
+  :threads=4 \
+  :deblock=-1,-1 \
+  :keyint=600 \
+  :min-keyint=1 \
+  :bframes=8 \
+  :ref=4 \
+  :qcomp=0.55 \
+  :rc-lookahead=70 \
+  :aq-mode=1 \
+  :aq-strength=0.8 \
+  :me=umh \
+  :subme=7 \
+  :me_range=16 \
+  :psy-rd=1.3,0.15" \
+   -c:a copy \
+   output.mp4
+  ```
+* 钱桑の常用参数 x265
+  ```console
+  ffmpeg -i example.mp4 \
+   -c:v libx265 \
+   -x265-params \
    "y4m=true \
    :depth=10 \
    :preset=slower \
@@ -35,34 +60,31 @@ toc: true
    :crf=28.0 \
    :cbqpoffs=-2 \
    :crqpoffs=-2 \
-   :no-sao=true \
    :me=3 \
-   :subme=5 \
-   :merange=38 \
+   :subme=3 \
+   :merange=20 \
    :limit-tu=4 \
    :no-amp=true \
    :ref=4 \
    :weightb=true \
-   :keyint=360 \
+   :keyint=600 \
    :min-keyint=1 \
    :bframes=6 \
    :aq-mode=1 \
    :aq-strength=0.8 \
    :rd=5 \
-   :psy-rd=2.0 \
+   :psy-rd=1.5 \
    :psy-rdoq=1.0 \
-   :rdoq-level=2 \
-   :no-open-gop=true \
-   :rc-lookahead=80 \
+   :rdoq-level=1 \
+   :rc-lookahead=60 \
    :scenecut=40 \
-   :qcomp=0.65 \
-   :no-strong-intra-smoothing=true" \
+   :qcomp=0.65" \
     -acodec aac \
     -ac 2 \
     -ab 79k \
     -ar 48000 \
-    output.mp4
-   ```
+   output.mp4
+  ```
    Windows 平台下 ffmpeg 的 libx265 貌似没有 `y4m`、`depth`、`preset` 等参数, 此时可用 ffmpeg 参数 `-pix_fmt yuv420p` (10bit 为 `yuv420p10le`)、`-preset slower` 来解决.
 * 通过 VA-API 压 HEVC (相比软压缺少很多参数)
   ```console
@@ -115,7 +137,8 @@ toc: true
   In HEVC standard, if something is called xxxUnit, it indicates a coding logical unit which is in turn encoded into an HEVC bit stream. On the other hand, if something is called xxxBlock, it indicates a portion of video frame buffer where a process is target to.
   
   Coding Tree Unit is therefore a logical unit. It usually consists of three blocks, namely luma (Y) and two chroma samples (Cb and Cr), and associated syntax elements. Each block is called CTB (Coding Tree Block). CTB can be split into CBs<sup id="cite_ref-1"><a href="#cite_note-1">[1]</a></sup>
-* `--qg-size`&emsp;表示用于调整 QP 值的 CU (Coding Unit) 的最小单位, 越低 x265 调整一帧内 QP 值的灵活度越高. 推荐设置为最小值 8.
+  
+  `--qg-size`&emsp;表示用于调整 QP 值的 CU (Coding Unit) 的最小单位, 越低 x265 调整一帧内 QP 值的灵活度越高. 推荐设置为最小值 8.
   A coding tree unit can be divided into coding units. CU consists of three CBs (Y, Cb, and Cr) and associated syntax elements. <sup id="cite_ref-1"><a href="#cite_note-1">[1]</a></sup>
 * `--cbqpoffs`&emsp;x264 会根据 Psy 强度自动调整 Chroma 平面的码率分配, x265 无此机制所以经常出现 Chroma 欠码导致的色彩纹理削弱. 给 -2 左右的 offset 可以较好的缓解问题.
   `--crqpoffs`&emsp;同上, 建议 -2.
@@ -225,7 +248,7 @@ toc: true
   在 x264 中, 它有两个参数, 第一个是Psy-rd Strength, 心理学优化强度. 
   一般压制动漫选择 0.4-1.0，压制真人选择 0.7-1.3.越是高质量的编码, 可以开的越高. 但是在 CRF 模式下, 开高了 psy-rd 也会提高码率.
   第二个参数是 Psy Trellis, 在 psy-rd 的基础上, 微调保留的噪点之类的微小细节的保留度.
-  一般开 MB-tree 时候, psy-trellis 可以给 0.1 左右. 关闭 MB-tree 时建议关闭. psy-trellis 的值越高, 会相应的调低 `--chroma-qp-offset` 以求让 Chroma 平面的细节得以保留. 所以在关闭 MB-tree 的时候, 一方面将 `--psy-trellis` 设置为 0，一方面将 `--chroma-qp-offset` 往下调 1 左右.
+  一般开 MB-tree 时候, psy-trellis 可以给 0.1 左右. 关闭 MB-tree 时建议关闭.psy-trellis 的值越高, 会相应的调低 `--chroma-qp-offset` 以求让 Chroma 平面的细节得以保留. 所以在关闭 MB-tree 的时候, 一方面将 `--psy-trellis` 设置为 0，一方面将 `--chroma-qp-offset` 往下调 1 左右.
   对于 x264 推荐设置为 `0.6:0.15`.
   
   对于 x265, Psy 是目前调节锐利度和细节保留的重要工具, 低了会糊高了会出现动态瑕疵. 默认的 2.0 其实是个不错的数值. 如果中低码率编码，可以考虑降低到 1.5 左右.
