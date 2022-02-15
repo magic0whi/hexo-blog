@@ -91,7 +91,7 @@ Enter F12 for Boot Menu when bootstrap
    ```
 2. Install essential packages
    ```console
-   # pacstrap /mnt base base-devel linux linux-firmware btrfs-progs vim rng-tools git tmux openssh bash-completion systemd-swap bluez bluez-utils
+   # pacstrap /mnt base base-devel linux linux-firmware btrfs-progs vim rng-tools git tmux openssh bash-completion zram-generator bluez bluez-utils
    ```
 
 ## Configure the system
@@ -250,20 +250,18 @@ Enter F12 for Boot Menu when bootstrap
     ```console
     # systemctl enable sshd.service
     ```
-12. (Optional) Enable ZSWAP, ZRAM, SWAPFC
+12. (Optional) Configurate zram-generator
     Configuration
-    ```conf /etc/systemd/swap.conf
+    ```conf /etc/systemd/zram-generator.conf
     ...
-    zswap_enabled=1
-    ...
-    zram_enabled=1
-    ...
-    swapfc_enabled=1
-    ...
+    [zram0]
+    zram-size = min(min(ram, 4096) + max(ram - 4096, 0) / 2, 32 * 1024)
+    compression-algorithm = zstd
     ```
-    Enable systemd-swap
+    Applying config changes
     ```console
-    # systemctl enable systemd-swap
+    # systemctl daemon-reload
+    # systemctl restart systemd-zram-setup@zram0
     ```
 13. (Optional) Enable bluetooth
     ```console

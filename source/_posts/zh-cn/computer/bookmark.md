@@ -107,6 +107,10 @@ Crashcourts中文字幕 [Crashcourts](https://crashcourse.club/category/)
 
 [Writing an OS in Rust](https://os.phil-opp.com/)
 
+[Full stack open 2021](https://fullstackopen.com/en/)
+
+[CS自学指南](http://csdiy.wiki/)
+
 ### Paper
 
 [The mouse Sry locus harbors a cryptic exon that is essential for male sex determination](https://science.sciencemag.org/content/370/6512/121)
@@ -222,6 +226,8 @@ Oracle 账户密码 [BugMeNot](http://bugmenot.com/view/oracle.com)
 [OBS](https://obsproject.com/)
 
 解压 Inno Setup 打包的资源 [Innoextrace](http://constexpr.org/innoextract/)
+
+[OpenBuilds Software - FREE Software for CNC Control](https://software.openbuilds.com/)
 
 ## News medias
 
