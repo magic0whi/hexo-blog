@@ -66,12 +66,12 @@ Enter F12 for Boot Menu when bootstrap
    ```
    Now mount the newly created subvolumes by using the `subvol=` mount option (with enabled compress `zstd`).
    ```console
-   # mount -o compress=zstd,subvol=@ /dev/mapper/cryptroot /mnt
-   # mkdir -p /mnt/{boot,home,.snapshots,var/log }
-   # mount /dev/sda1 /mnt/boot
-   # mount -o compress=zstd,subvol=@home /dev/mapper/cryptroot /mnt/home
-   # mount -o compress=zstd,subvol=@snapshots /dev/mapper/cryptroot /mnt/.snapshots
-   # mount -o compress=zstd,subvol=@var_log /dev/mapper/cryptroot /mnt/var/log
+   # mount -o compress=zstd,subvol=@,discard /dev/mapper/cryptroot /mnt
+   # mkdir -p /mnt/{boot,home,.snapshots,var/log}
+   # mount -o discard /dev/sda1 /mnt/boot
+   # mount -o compress=zstd,subvol=@home,discard /dev/mapper/cryptroot /mnt/home
+   # mount -o compress=zstd,subvol=@snapshots,discard /dev/mapper/cryptroot /mnt/.snapshots
+   # mount -o compress=zstd,subvol=@var_log,discard /dev/mapper/cryptroot /mnt/var/log
    ```
 3. Create nested subvolumes
    Create any nested subvolumes you do **not** want to have snapshots of when taking a snapshot of `/`.
@@ -127,9 +127,9 @@ Enter F12 for Boot Menu when bootstrap
    ```
    Add matching entries to [hosts(5)](https://jlk.fjfi.cvut.cz/arch/manpages/man/hosts.5):
    ```conf /etc/hosts
-   127.0.0.1	localhost
-   ::1          localhost
-   127.0.1.1	myhostname.neo	myhostname
+   127.0.0.1   localhost
+   ::1         localhost
+   127.0.1.1   myhostname.neo	myhostname
    ```
    * Use NetworkManager
      Install & Enable NetworkManager:
@@ -161,10 +161,21 @@ Enter F12 for Boot Menu when bootstrap
    # systemctl enable rngd.service
    ```
 7. Configuring mkinitcpio
-   Using the `sd-encrypt` hook with the systemd-base initramfs. (replace hook `udev` with hook `system` )
-   ```conf /etc/mkinitcpio.conf
-   HOOKS=(base **systemd** autodetect **keyboard** **sd-vconsole** modconf block **sd-encrypt** filesystems fsck)
-   ```
+   Using the `sd-encrypt` hook with the systemd-base initramfs. (replace hook `udev` with hook `system`)
+   <figure class="highlight plaintext">
+     <figcaption><span>/etc/mkinitcpio.conf</span></figcaption>
+     <table>
+       <tr>
+         <td class="gutter">
+           <pre><span class="line">1</span><br></pre>
+         </td>
+         <td class="code">
+           <pre><span class="line">HOOKS=(base <b>systemd</b> autodetect <b>keyboard</b> <b>sd-vconsole</b> modconf block <b>sd-encrypt</b> filesystems fsck)</span><br></pre>
+         </td>
+      </tr>
+     </table>
+   </figure>
+   
    Configure `/etc/crypttab.initramfs` (As `/etc/crypttab` but in initramfs; Here I enabled Discard/TRIM support for SSD):
    ```conf /etc/crypttab.initramfs
    cryptroot       UUID=UUID_OF_SDA2       -       discard
