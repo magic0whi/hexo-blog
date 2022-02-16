@@ -37,7 +37,7 @@ Enter F12 for Boot Menu when bootstrap
 
    Preparing non-boot partitions
    ```console
-   # cryptsetup -y -v luksFormat /dev/sda2
+   # cryptsetup -y -v --pbkdf-memory=114514 luksFormat /dev/sda2
    # cryptsetup open /dev/sda2 cryptroot
    # mkfs.btrfs -L arch_os /dev/mapper/cryptroot
    # mount /dev/mapper/cryptroot /mnt
@@ -57,6 +57,7 @@ Enter F12 for Boot Menu when bootstrap
    # btrfs subvolume create /mnt/@
    # btrfs subvolume create /mnt/@snapshots
    # btrfs subvolume create /mnt/@home
+   # btrfs subvolume create /mnt/@var_log
    ```
 2. Mount top-level subvolumes
    Unmount the system partition at /mnt.
@@ -66,10 +67,11 @@ Enter F12 for Boot Menu when bootstrap
    Now mount the newly created subvolumes by using the `subvol=` mount option (with enabled compress `zstd`).
    ```console
    # mount -o compress=zstd,subvol=@ /dev/mapper/cryptroot /mnt
-   # mkdir /mnt/{boot,home,.snapshots}
+   # mkdir -p /mnt/{boot,home,.snapshots,var/log }
    # mount /dev/sda1 /mnt/boot
    # mount -o compress=zstd,subvol=@home /dev/mapper/cryptroot /mnt/home
    # mount -o compress=zstd,subvol=@snapshots /dev/mapper/cryptroot /mnt/.snapshots
+   # mount -o compress=zstd,subvol=@var_log /dev/mapper/cryptroot /mnt/var/log
    ```
 3. Create nested subvolumes
    Create any nested subvolumes you do **not** want to have snapshots of when taking a snapshot of `/`.
@@ -91,7 +93,7 @@ Enter F12 for Boot Menu when bootstrap
    ```
 2. Install essential packages
    ```console
-   # pacstrap /mnt base base-devel linux linux-firmware btrfs-progs vim rng-tools git tmux openssh bash-completion zram-generator bluez bluez-utils
+   # pacstrap /mnt base base-devel linux linux-firmware btrfs-progs vim rng-tools git tmux openssh bash-completion zram-generator bluez bluez-utils snapper
    ```
 
 ## Configure the system
@@ -159,9 +161,13 @@ Enter F12 for Boot Menu when bootstrap
    # systemctl enable rngd.service
    ```
 7. Configuring mkinitcpio
-   I prefer using the sd-encrypt hook with the systemd-base initramfs. (replace hook `udev` with hook `system` )
+   Using the `sd-encrypt` hook with the systemd-base initramfs. (replace hook `udev` with hook `system` )
    ```conf /etc/mkinitcpio.conf
    HOOKS=(base **systemd** autodetect **keyboard** **sd-vconsole** modconf block **sd-encrypt** filesystems fsck)
+   ```
+   Configure `/etc/crypttab.initramfs` (As `/etc/crypttab` but in initramfs; Here I enabled Discard/TRIM support for SSD):
+   ```conf /etc/crypttab.initramfs
+   cryptroot       UUID=UUID_OF_SDA2       -       discard
    ```
    Recreate the initramfs image
    ```console
@@ -183,8 +189,8 @@ Enter F12 for Boot Menu when bootstrap
    # passwd root
    ```
 9. AUR helper
-   I will use [yay](https://aur.archlinux.org/packages/yay/) as my AUR helper
-   1. Use makepkg wrapper `makepkg-shallow` to make makepkg do shallow clone
+   Using [paru](https://aur.archlinux.org/packages/paru/) as AUR helper
+   1. Create makepkg wrapper `makepkg-shallow` to make makepkg do shallow clone
       ```shell /usr/bin/makepkg-shallow
       #!/bin/bash
 
@@ -203,16 +209,16 @@ Enter F12 for Boot Menu when bootstrap
 
       source /bin/makepkg "$@"
       ```
-   2. Build & Install yay
+   2. Build & Install paru
       ```console
       # chmod 755 /usr/bin/makepkg-shallow
       # mkdir /build
       # chown -R <Username>:<Username> /build
       # cd /build
-      # sudo -u <Username> git clone --depth=1 https://aur.archlinux.org/yay.git
-      # cd yay
+      # sudo -u <Username> git clone --depth=1 https://aur.archlinux.org/paru.git
+      # cd paru
       # sudo -u <Username> makepkg-shallow --noconfirm -si
-      # sudo -u <Username> yay --save --cleanafter --removemake --makepkg /usr/bin/makepkg-shallow
+      # sudo -u <Username> paru --save --cleanafter --removemake --makepkg /usr/bin/makepkg-shallow
       # pacman -Qtdq | xargs -r pacman --noconfirm -Rcns
       # rm -rf /home/<Username>/.cache
       # rm -rf /build
@@ -238,13 +244,13 @@ Enter F12 for Boot Menu when bootstrap
     title   Arch Linux
     linux   /vmlinuz-linux
     initrd  /initramfs-linux.img
-    options rd.luks.name=<sda2-UUID>=cryptroot rd.luks.options=discard root=/dev/mapper/cryptroot rootflags=compress=zstd,subvol=@
+    options root=/dev/mapper/cryptroot rootflags=compress=zstd,subvol=@
     ```
     ```conf /boot/loader/entries/arch-fallback.conf
     title Arch Linux (fallback)
     linux /vmlinuz-linux
     initrd /initramfs-linux-fallback.img
-    options rd.luks.name=<sda2-UUID>=cryptroot rd.luks.options=discard root=/dev/mapper/cryptroot rootflags=compress=zstd,subvol=@
+    options root=/dev/mapper/cryptroot rootflags=compress=zstd,subvol=@
     ```
 11. (Optional) Enable sshd
     ```console
@@ -284,6 +290,53 @@ Enter F12 for Boot Menu when bootstrap
     ```console
     # pacman -S archlinuxcn-keyring
     ```
+15. (Optional) Configuration of snapper
+    Ensure `/.snapshots` is not mounted and does not exist as folder:
+    ```console
+    # umount /.snapshots
+    # rm -r /.snapshots
+    ```
+    Then create a new configuration for `/`. Snapper create-config automatically creates a subvolume `.snapshots` with the root subvolume `@` as its parent, that is not needed for current filesystem layout, and can be deleted.
+    ```console
+    # snapper -c root create-config /
+    # btrfs subvolume delete /.snapshots
+    # mkdir /.snapshots
+    ```
+    Now mount `@snapshots` to `/.snapshots`:
+    ```console
+    # mount -o subvol=@snapshots /dev/sda2 /.snapshots
+    ```
+16. (Optional) Unlocking encrypted root filesystem using a TPM.
+    list your installed TPMs and the driver in use: 
+    ```console
+    $ systemd-cryptenroll --tpm2-device=list
+    ```
+    A key may be enrolled in both the TPM and the LUKS volume using only one command. The following example binds the key to PCRs 0 and 7 (the system firmware and Secure Boot state): 
+    ```console
+    # systemd-cryptenroll --tpm2-device=/path/to/tpm2_device --tpm2-pcrs=0+7 /dev/sda2
+    ```
+    > Tip: If your computer has only one TPM installed, which is usually the case, you may instead specify `--tpm2-device=auto` to automatically select the only available TPM.
+    
+    Specifying the root volume using the `/etc/crypttab.initramfs`:
+    ```conf /etc/crypttab.initramfs
+    cryptroot       UUID=UUID_OF_SDA2       -       tpm2-device=auto,discard
+    ```
+    Regenerate the initramfs:
+    ```console
+    # mkinitcpio -P
+    ```
+
+    To remove a key enrolled using this method, run:
+    ```console
+    # systemd-cryptenroll /dev/sdX --wipe-slot=slot_number
+    ```
+    where `slot_number` is the numeric LUKS slot number in which your TPM key is stored.
+    Alternatively, run:
+    ```console
+    # systemd-cryptenroll /dev/sdX --wipe-slot=tpm2
+    ```
+    to remove all TPM-associated keys from your LUKS volume. 
+
 
 ## Desktop Environment
 
@@ -296,7 +349,7 @@ Enter F12 for Boot Menu when bootstrap
    * GNOME
      > Some packages require archlinuxcn's repository
      ```console
-     $ yay -S gnome-shell gnome-shell-extensions gdm \
+     $ paru -S gnome-shell gnome-shell-extensions gdm \
      nautilus file-roller sushi seahorse eog \
      gnome-{control-center,terminal,tweaks,keyring,backgrounds,clocks,logs,screenshot,menus} \
      gtk-engine-murrine materia-gtk-theme \
@@ -316,7 +369,6 @@ Enter F12 for Boot Menu when bootstrap
 3. (Optional|KDE) Turn off screen (DPMS) together with locking session:
    Go to: System Settings > Notifications > Applications(The button "Configure") > Search "Screen Saver" > Configure Events:
    Select Screen locked and check box "Run command", paste `/bin/sleep 2; /usr/bin/xset dpms force off` into it.
-
 
 ## NVIDIA & NVIDIA Optimus
 
@@ -364,22 +416,18 @@ I will use the method of `PRIME render offload` which was official method suppor
    blacklist ideapad_laptop
    blacklist nouveau
    ```
-2. yay: `go get` is slow in China
-   ```console
-   $ export GOPROXY=https://goproxy.io,direct
-   ```
-3. Disable media automount in GNOME
+2. Disable media automount in GNOME
    ```console
    $ gsettings set org.gnome.desktop.media-handling automount false
    $ gsettings set org.gnome.desktop.media-handling automount-open false 
    ```
-4. Video Decode is disabled in Microsoft Edge
+3. Video Decode is disabled in Microsoft Edge
    ```conf ~/.config/microsoft-edge-dev-flags.conf
    --ignore-gpu-blocklist
    --enable-features=VaapiVideoDecoder
    --enable-accelerated-video-decode
    ```
-5. In Surface Devices:
+4. In Surface Devices:
    > I use KDE for more smooth experience
    * Instal linux-surface kernel
      ```console
@@ -431,6 +479,8 @@ I will use the method of `PRIME render offload` which was official method suppor
    [AUR] gnome-shell-extension-freon-git
    gvfs-mtp
    gpaste
+
+   snap-pac
 
    noto-fonts{,-cjk,-emoji}
 
