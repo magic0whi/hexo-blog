@@ -105,7 +105,7 @@ GT2-16
 
 设置代理:
 
-```conf gradle.properties
+```properties gradle.properties
 ...
 systemProp.http.proxyHost=hostname
 systemProp.http.proxyPort=8080

@@ -14,7 +14,7 @@ tags:
 ## linux
 
 1. SSH:
-   ```conf .ssh/config
+   ```properties .ssh/config
    Host *
        # 每隔 30s 向远端发送 keep-alive 包, 如果发送 5 次无回应断开连接。
        ServerAliveInterval 30
@@ -38,7 +38,7 @@ tags:
    Zsh: {% asset_link zshrc.example "~/.zshrc" %}
 3. Aria2: {% asset_link aria2.conf.example "aria2.conf" %}
 4. sysctl
-   ```conf /etc/sysctl.d/99-sysctl.conf
+   ```properties /etc/sysctl.d/99-sysctl.conf
    # BBR TCP Congestion
    net.core.default_qdisc = cake
    net.ipv4.tcp_congestion_control = bbr

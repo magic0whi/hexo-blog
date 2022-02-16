@@ -126,7 +126,7 @@ Enter F12 for Boot Menu when bootstrap
    # echo "myhostname" > /etc/hostname
    ```
    Add matching entries to [hosts(5)](https://jlk.fjfi.cvut.cz/arch/manpages/man/hosts.5):
-   ```conf /etc/hosts
+   ```properties /etc/hosts
    127.0.0.1   localhost
    ::1         localhost
    127.0.1.1   myhostname.neo	myhostname
@@ -142,7 +142,7 @@ Enter F12 for Boot Menu when bootstrap
      Install iwd: `pacman -S iwd`
      Wireless adapter configuration
      > Use `ip link` to show network interface names
-     ```conf /etc/systemd/network/25-wireless.network
+     ```properties /etc/systemd/network/25-wireless.network
      [Match]
      Name=<Your wireless interface name>
 
@@ -162,7 +162,7 @@ Enter F12 for Boot Menu when bootstrap
    ```
 7. Configuring mkinitcpio
    Using the `sd-encrypt` hook with the systemd-base initramfs. (replace hook `udev` with hook `system`)
-   <figure class="highlight plaintext">
+   <figure class="highlight properties">
      <figcaption><span>/etc/mkinitcpio.conf</span></figcaption>
      <table>
        <tr>
@@ -175,9 +175,9 @@ Enter F12 for Boot Menu when bootstrap
       </tr>
      </table>
    </figure>
-   
+
    Configure `/etc/crypttab.initramfs` (As `/etc/crypttab` but in initramfs; Here I enabled Discard/TRIM support for SSD):
-   ```conf /etc/crypttab.initramfs
+   ```properties /etc/crypttab.initramfs
    cryptroot       UUID=UUID_OF_SDA2       -       discard
    ```
    Recreate the initramfs image
@@ -243,7 +243,7 @@ Enter F12 for Boot Menu when bootstrap
       The package [systemd-boot-pacman-hook<sup>[AUR]</sup>](https://aur.archlinux.org/packages/systemd-boot-pacman-hook/) provides a Pacman hook to automate the update process.
 
     Configuring the boot loader
-    ```conf /boot/loader/loader.conf
+    ```properties /boot/loader/loader.conf
     default  arch.conf
     timeout  4
     console-mode max
@@ -251,13 +251,13 @@ Enter F12 for Boot Menu when bootstrap
     ```
 
     > use `lsblk -f` to show persistent block device naming
-    ```conf /boot/loader/entries/arch.conf
+    ```properties /boot/loader/entries/arch.conf
     title   Arch Linux
     linux   /vmlinuz-linux
     initrd  /initramfs-linux.img
     options root=/dev/mapper/cryptroot rootflags=compress=zstd,subvol=@
     ```
-    ```conf /boot/loader/entries/arch-fallback.conf
+    ```properties /boot/loader/entries/arch-fallback.conf
     title Arch Linux (fallback)
     linux /vmlinuz-linux
     initrd /initramfs-linux-fallback.img
@@ -269,7 +269,7 @@ Enter F12 for Boot Menu when bootstrap
     ```
 12. (Optional) Configurate zram-generator
     Configuration
-    ```conf /etc/systemd/zram-generator.conf
+    ```properties /etc/systemd/zram-generator.conf
     ...
     [zram0]
     zram-size = min(min(ram, 4096) + max(ram - 4096, 0) / 2, 32 * 1024)
@@ -286,7 +286,7 @@ Enter F12 for Boot Menu when bootstrap
     ```
 
     Bluetooth auto power-on after boot:
-    ```conf /etc/bluetooth/main.conf
+    ```properties /etc/bluetooth/main.conf
     [Policy]
     AutoEnable=true
     ```
@@ -329,7 +329,7 @@ Enter F12 for Boot Menu when bootstrap
     > Tip: If your computer has only one TPM installed, which is usually the case, you may instead specify `--tpm2-device=auto` to automatically select the only available TPM.
     
     Specifying the root volume using the `/etc/crypttab.initramfs`:
-    ```conf /etc/crypttab.initramfs
+    ```properties /etc/crypttab.initramfs
     cryptroot       UUID=UUID_OF_SDA2       -       tpm2-device=auto,discard
     ```
     Regenerate the initramfs:
@@ -403,7 +403,7 @@ I will use the method of `PRIME render offload` which was official method suppor
    
    * The automated ways to perform the manual steps mentioned above so that this feature works seamlessly after boot:
      1. Create a file named `80-nvidia-pm.rules` in `/lib/udev/rules.d/` directory
-        ```conf /lib/udev/rules.d/80-nvidia-pm.rules
+        ```properties /lib/udev/rules.d/80-nvidia-pm.rules
         # Remove NVIDIA Audio devices, if present
         ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x040300", ATTR{remove}="1"
 
@@ -415,7 +415,7 @@ I will use the method of `PRIME render offload` which was official method suppor
         ```
         > You can use `udevadm info --attribute-walk --path=/sys/bus/pci/devices/<Domain>\:<Bus>\:<Slot>.<Function>` to get a PCI device's   attribution
      2. Set the driver option via the kernel module configuration files
-        ```conf /etc/modprobe.d/nvidia.conf
+        ```properties /etc/modprobe.d/nvidia.conf
         options nvidia "NVreg_DynamicPowerManagement=0x02"
         ```
      3. Reboot the system
@@ -423,7 +423,7 @@ I will use the method of `PRIME render offload` which was official method suppor
 ## Troubleshot
 
 1. blacklist kernel module
-   ```conf /etc/modprobe.d/blacklist.conf
+   ```properties /etc/modprobe.d/blacklist.conf
    blacklist ideapad_laptop
    blacklist nouveau
    ```
@@ -433,7 +433,7 @@ I will use the method of `PRIME render offload` which was official method suppor
    $ gsettings set org.gnome.desktop.media-handling automount-open false 
    ```
 3. Video Decode is disabled in Microsoft Edge
-   ```conf ~/.config/microsoft-edge-dev-flags.conf
+   ```properties ~/.config/microsoft-edge-dev-flags.conf
    --ignore-gpu-blocklist
    --enable-features=VaapiVideoDecoder
    --enable-accelerated-video-decode
@@ -448,7 +448,7 @@ I will use the method of `PRIME render offload` which was official method suppor
      $ sudo pacman-key --lsign-key 56C464BAAC421453
      ```
      Add the repository:
-     ```conf /etc/pacman.conf
+     ```properties /etc/pacman.conf
      [linux-surface]
      Server = https://pkg.surfacelinux.com/arch/
      ```
@@ -461,7 +461,7 @@ I will use the method of `PRIME render offload` which was official method suppor
      Don't forget to change the corresponding loader entries' config
    * SDDM has problem with NetworkManager & Long loading time:
      Use GDM as a replace, don't forget to configure KDE Wallet's PAM:
-     ```conf /etc/pam.d/gdm-password
+     ```properties /etc/pam.d/gdm-password
      ...
      auth            optional        pam_kwallet5.so
      session         optional        pam_kwallet5.so auto_start

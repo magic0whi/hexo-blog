@@ -63,7 +63,7 @@ Will be merged when the first release IC2 1.18 was published.
 
 与工业2橡胶树的兼容
 
-```conf config/treecapitator.cfg
+```properties config/treecapitator.cfg
         ic2_rubber_tree {
             S:logs=IC2:rubber_wood
             S:leaves=IC2:leaves
@@ -74,7 +74,7 @@ Will be merged when the first release IC2 1.18 was published.
 
 1. (检查当工业2的采矿镭射枪nbt数据, 充能大于0时触发ban物品)
 
-   ```conf config/epicbanitem/banitem.conf
+   ```properties config/epicbanitem/banitem.conf
        "ic2:mining_laser"=[
            {
                name=ban-mining-laser-in-ic2

@@ -185,7 +185,7 @@ Worlds cleanup: Remove corresponding items in `dynmap/forgeworlds.yml`, then `/d
 
 1. Enable auto-op on fabric server (used as a "pssudo" root wildcard, as many mods support the operator system over permissions):
    All users will be de-opped unless they have the permission node `luckperms.autoop`
-   ```conf serverroot/config/luckperms/luckperms.conf
+   ```properties serverroot/config/luckperms/luckperms.conf
    # Enables or disables a special permission based system in LuckPerms for controlling OP status.
    #
    # - If set to true, any user with the permission "luckperms.autoop" will automatically be granted
@@ -203,7 +203,7 @@ Worlds cleanup: Remove corresponding items in `dynmap/forgeworlds.yml`, then `/d
 ## C2ME
 
 1. Disable no-tick view distance due to mysterious ae2's cable disconnect:
-   ```conf serverroot/config/c2me.toml
+   ```properties serverroot/config/c2me.toml
    [noTickViewDistance]
    enabled = false
    ```

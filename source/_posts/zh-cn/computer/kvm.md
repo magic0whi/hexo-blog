@@ -16,13 +16,13 @@ TODO:
 virtio drivers 
 https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/stable-virtio/virtio-win.iso
 
-```conf /etc/modules-load.d/kvm.conf
+```properties /etc/modules-load.d/kvm.conf
 kvmgt
 #vfio-iommu-type1
 vfio-mdev
 ```
 
-```conf /etc/mkinitcpio.conf
+```properties /etc/mkinitcpio.conf
 MODULES=(vfio_pci vfio vfio_iommu_type1 vfio_virqfd)
 ```
 
@@ -67,7 +67,7 @@ MODULES=(vfio_pci vfio vfio_iommu_type1 vfio_virqfd)
    [kernel parameter](https://wiki.archlinux.org/index.php/Kernel_parameter) 加上 `vfio-pci.ids=10de:13c2,10de:0fbb`
    > If, as noted in [#Plugging your guest GPU in an unisolated CPU-based PCIe slot](https://wiki.archlinux.org/index.php/PCI_passthrough_via_OVMF#Plugging_your_guest_GPU_in_an_unisolated_CPU-based_PCIe_slot), your pci root port is part of your IOMMU group, you **must not** pass its ID to `vfio-pci`, as it needs to remain attached to the host to function properly. Any other device within that group, however, should be left for `vfio-pci` to bind with.
 3. Loading vfio-pci early
-   ```conf /etc/mkinitcpio.conf
+   ```properties /etc/mkinitcpio.conf
    MODULES=(... vfio_pci vfio vfio_iommu_type1 vfio_virqfd ...)
    ...
    HOOKS=(... modconf ...)
