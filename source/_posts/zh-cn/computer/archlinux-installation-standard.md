@@ -178,7 +178,7 @@ Enter F12 for Boot Menu when bootstrap
 
    Configure `/etc/crypttab.initramfs` (As `/etc/crypttab` but in initramfs; Here I enabled Discard/TRIM support for SSD):
    ```properties /etc/crypttab.initramfs
-   cryptroot       UUID=UUID_OF_SDA2       -       discard
+   cryptroot       UUID=<UUID_OF_ROOTFS>       -       discard
    ```
    Recreate the initramfs image
    ```console
@@ -229,7 +229,6 @@ Enter F12 for Boot Menu when bootstrap
       # sudo -u <Username> git clone --depth=1 https://aur.archlinux.org/paru.git
       # cd paru
       # sudo -u <Username> makepkg-shallow --noconfirm -si
-      # sudo -u <Username> paru --save --cleanafter --removemake --makepkg /usr/bin/makepkg-shallow
       # pacman -Qtdq | xargs -r pacman --noconfirm -Rcns
       # rm -rf /home/<Username>/.cache
       # rm -rf /build
@@ -255,13 +254,13 @@ Enter F12 for Boot Menu when bootstrap
     title   Arch Linux
     linux   /vmlinuz-linux
     initrd  /initramfs-linux.img
-    options root=/dev/mapper/cryptroot rootflags=compress=zstd,subvol=@
+    options root=/dev/mapper/cryptroot rootflags=compress=zstd,subvol=@,discard
     ```
     ```properties /boot/loader/entries/arch-fallback.conf
     title Arch Linux (fallback)
     linux /vmlinuz-linux
     initrd /initramfs-linux-fallback.img
-    options root=/dev/mapper/cryptroot rootflags=compress=zstd,subvol=@
+    options root=/dev/mapper/cryptroot rootflags=compress=zstd,subvol=@,discard
     ```
 11. (Optional) Enable sshd
     ```console
@@ -270,7 +269,6 @@ Enter F12 for Boot Menu when bootstrap
 12. (Optional) Configurate zram-generator
     Configuration
     ```properties /etc/systemd/zram-generator.conf
-    ...
     [zram0]
     zram-size = min(min(ram, 4096) + max(ram - 4096, 0) / 2, 32 * 1024)
     compression-algorithm = zstd
@@ -315,13 +313,14 @@ Enter F12 for Boot Menu when bootstrap
     ```
     Now mount `@snapshots` to `/.snapshots`:
     ```console
-    # mount -o subvol=@snapshots /dev/sda2 /.snapshots
+    # mount -o compress=zstd,subvol=@snapshots,discard /dev/mapper/cryptroot /.snapshots
     ```
-16. (Optional) Unlocking encrypted root filesystem using a TPM.
+16. (Optional) Unlocking encrypted root filesystem by using a TPM.
     list your installed TPMs and the driver in use: 
     ```console
     $ systemd-cryptenroll --tpm2-device=list
     ```
+    > If you encounter such message "<span style="color:#FF0000;">TPM2 support is not installed</span>" then try to install `tpm2-tools`
     A key may be enrolled in both the TPM and the LUKS volume using only one command. The following example binds the key to PCRs 0 and 7 (the system firmware and Secure Boot state): 
     ```console
     # systemd-cryptenroll --tpm2-device=/path/to/tpm2_device --tpm2-pcrs=0+7 /dev/sda2
@@ -330,7 +329,7 @@ Enter F12 for Boot Menu when bootstrap
     
     Specifying the root volume using the `/etc/crypttab.initramfs`:
     ```properties /etc/crypttab.initramfs
-    cryptroot       UUID=UUID_OF_SDA2       -       tpm2-device=auto,discard
+    cryptroot       UUID=<UUID_OF_ROOTFS>       -       tpm2-device=auto,discard
     ```
     Regenerate the initramfs:
     ```console
@@ -347,14 +346,89 @@ Enter F12 for Boot Menu when bootstrap
     # systemd-cryptenroll /dev/sdX --wipe-slot=tpm2
     ```
     to remove all TPM-associated keys from your LUKS volume. 
+17. Secure Boot Using a signed boot loader (shim)
+    Install `shim-signed`<sup>[AUR]</sup>, `sbsigntools` and `efibootmgr`
+    ```console
+    # paru -S shim-signed sbsigntools efibootmgr
+    ```
+    As shim tries to launch `grubx64.efi`, rename systemd boot loader to it.
+    ```console
+    # cp /boot/EFI/systemd/systemd-bootx64.efi /boot/EFI/BOOT/grubx64.efi
+    ```
+    Copy shim and MokManager to boot loader directory:
+    ```console
+    # cp /usr/share/shim-signed/shimx64.efi /boot/EFI/BOOT/BOOTx64.EFI
+    # cp /usr/share/shim-signed/mmx64.efi /boot/EFI/BOOT/
+    ```
+    (Optional) create a new NVRAM entry to boot `BOOTx64.EFI`:
+    ```console
+    # efibootmgr --verbose --disk /dev/sda --part 1 --create --label "Shim" --loader /EFI/BOOT/BOOTx64.EFI
+    ```
+    Create a Machine Owner Key:
+    ```console
+    $ openssl req -newkey rsa:4096 -nodes -keyout MOK.key -new -x509 -sha256 -days 3650 -subj "/CN=my Machine Owner Key/" -out MOK.crt
+    $ openssl x509 -outform DER -in MOK.crt -out MOK.cer
+    ```
+    Sign boot loader (named `grubx64.efi`) and kernel:
+    ```console
+    # sbsign --key MOK.key --cert MOK.crt --output /boot/vmlinuz-linux /boot/vmlinuz-linux
+    # sbsign --key MOK.key --cert MOK.crt --output /boot/EFI/BOOT/grubx64.efi /boot/EFI/BOOT/grubx64.efi
+    ```
+    We can automate the kernel signing with a pacman hook:
+    ```properties /etc/pacman.d/hooks/999-sign_kernel_for_secureboot.hook
+    [Trigger]
+    Operation = Install
+    Operation = Upgrade
+    Type = Package
+    Target = linux
+    Target = linux-lts
+    Target = linux-hardened
+    Target = linux-zen
+    
+    [Action]
+    Description = Signing kernel with Machine Owner Key for Secure Boot
+    When = PostTransaction
+    Exec = /usr/bin/find /boot/ -maxdepth 1 -name 'vmlinuz-*' -exec /usr/bin/sh -c 'if ! /usr/bin/sbverify --list {} 2>/dev/null | /usr/bin/grep -q "signature certificates"; then /usr/bin/sbsign --key /etc/pacman.d/hooks/MOK.key --cert /etc/pacman.d/hooks/MOK.crt --output {} {}; fi' ;
+    Depends = sbsigntools
+    Depends = findutils
+    Depends = grep
+    ```
+    Also, there is a pacman hook for systemd-boot upgrades:
+    ```properties /etc/pacman.d/hooks/100-systemd-boot.hook
+    [Trigger]
+    Type = Package
+    Operation = Upgrade
+    Target = systemd
+    
+    [Action]
+    Description = Gracefully upgrading systemd-boot...
+    When = PostTransaction
+    Exec = /bin/sh -c '/usr/bin/systemctl restart systemd-boot-update.service && cp /boot/EFI/systemd/systemd-bootx64.efi /boot/EFI/BOOT/grubx64.efi && cp /usr/share/shim-signed/shimx64.efi /boot/EFI/BOOT/BOOTx64.EFI && sbsign --key /etc/pacman.d/hooks/MOK.key --cert /etc/pacman.d/hooks/MOK.crt --output /boot/EFI/BOOT/grubx64.efi /boot/EFI/BOOT/grubx64.efi'
+    Depends = shim-signed
+    Depends = sbsigntools
+    ```
 
+    Then copy `Mok.key` and `MOK.crt` to the path which is specified above:
+    ```console
+    # cp MOK.key MOK.crt /etc/pacman.d/hooks/
+    ```
+    > Create pacman's default hooks directory if it doesn's exist:
+    > ```console
+    > # mkdir /etc/pacman.d/hooks
+    > ```
+    Copy `MOK.cer` to a FAT formatted file system (you can use EFI system partition).
+    ```console
+    # cp MOK.cer /boot/
+    ```
+    Reboot and enable Secure Boot. If shim does not find the certificate `grubx64.efi` is signed with in MokList it will launch MokManager (`mmx64.efi`).
+    In MokManager select Enroll key from disk, find `MOK.cer` and add it to MokList. When done select Continue boot and your boot loader will launch and it will be capable launching any binary signed with your Machine Owner Key.
 
 ## Desktop Environment
 
 1. Installation
    * KDE
      ```console
-     # pacman -S plasma-meta kde-system-meta kde-utilities-meta kde-network-meta kde-multimedia-meta kde-graphics-meta kio-fuse
+     # pacman -S plasma-meta konsole dolphin kio-fuse
      # systemctl enable sddm.service
      ```
    * GNOME
@@ -369,7 +443,7 @@ Enter F12 for Boot Menu when bootstrap
      ```
 2. (Optional) Install & Configure input method:
    ```console
-   # pacman -S fcitx5-im fcitx5-chinese-addons fcitx5-configtool
+   # pacman -S fcitx5-im fcitx5-chinese-addons
    # cp /usr/share/applications/org.fcitx.Fcitx5.desktop ~/.config/autostart/
    ```
    ```shell ~/.pam_environment
