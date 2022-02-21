@@ -154,6 +154,20 @@ systemProp.http.proxyPassword=xxx
 tri hydroxy cyclo hexane carboxylic
 三羟基环己烷羧酸
 
+Latinate series Ordinal numeral
+primary
+secondary
+tertiary
+quaternary, quartary
+quinary
+senary
+septenary
+octonary
+nonary
+decenary
+undenary
+duodenary
+
 tri- 三
 
 meth- 甲
@@ -1009,3 +1023,60 @@ $$
          > 智力: \\(h(x)=\sin(\frac{2\pi}{33}x)\\)
          > 这里放一张本人第 8155 天 (22 岁 118 天) 时的三节律情况:
          > {% asset_img 5.png %}
+
+## The World of English
+
+我所知道的康桥 徐志摩
+&emsp;&emsp;康桥的灵性全在一条河上; 康河, 我敢说, 是全世界最秀丽的一条水. 河的名字是葛兰大 (Granta), 也有叫康河 (River Cam) 的, 许有上下流的区别, 我不甚清楚. 河身多的是曲折, 上游是有名的拜伦谭 ("Byron's pool"), 当年拜伦常在那里玩的; 有一个老村子叫格兰骞斯德, 有一个果园, 你可以躺在累累的桃李树荫下吃茶, 花果会掉入你的茶杯, 小雀子会到你桌上来啄食, 那真是别有一番天地. 这是上游; 下游是从骞斯德顿下去, 河面展开, 那是春夏间竟舟的场所. 上下河分界处有一个坝筑, 水流急的很, 在星光下听水声, 听近村晚钟声, 听河畔倦牛刍草声, 是我康桥经验中最神秘的一种: 大自然的优美, 宁静, 调谐在这星光与波光的默契中不期然的淹入了你的性灵.
+&emsp;&emsp;但康河的精华是在它的中杈著名的 "Backs", 这两岸是几个最蜚声的学院的建筑. 从上面下来是 Pembroke, St. Katherine's, King's, Clare, Trinity, St. John's, 最令人留连的一节是克莱亚与王家学院的毗连处, 克莱亚的秀丽紧邻着王家教堂 (King's Chapel) 的闳伟. 别的地方尽有更美更庄严的建筑, 例如巴黎赛因河的罗浮宫一带, 威尼斯的利阿尔多大桥的两岸, 翡冷翠维基鸟大桥的周遭; 但康桥的 "Backs" 自有它的特长, 这不容易用一二个状词来概括, 它那脱尽尘埃气的一种清激秀逸的意境可以说是超出了画图而化生了音乐的神味. 再没有比这一群建筑更调谐更匀称的了! 论画, 可比的许只有柯罗 (Corot) 的田野; 论音乐, 可比的许只有萧班 (Chopin) 的夜曲. 就这也不能给你依稀的印象, 它给你的美感简直是神灵性的一种.
+&emsp;&emsp;假如你站在王家学院桥边的那颗大椈树荫下眺望, 右侧面, 隔着一大方浅草坪, 是我们的校友居 (Fellows Building), 那年代并不早, 但它的妩媚也是不可掩的, 它那苍白的石壁上春夏间满缀着艳色的蔷薇在和风中摇头. 更移左是那教堂, 森林似的尖阁不可浼的永远直指着天空; 更左是克莱亚, 阿! 那不可信的玲珑的方庭, 谁说这不是圣克莱亚 (St. Clare) 的化身, 哪一块石上不闪耀着她当年圣洁的精神? 在克莱亚后背隐约可辨的是康桥最华贵最骄纵的三清学院 (Trinity), 它那临河的图书楼上坐镇着拜伦神采惊人的雕像.
+&emsp;&emsp;但这时你的主意早已叫克莱亚的三环洞桥魔术似的摄住. 你见过西湖白堤上的西冷断桥不是 (可怜它们早已叫代表近代丑恶精神的汽车公司给踩平了, 现在它们跟着苍凉的雷峰永远辞别了人间)? 你忘不了那桥上斑驳的苍苔, 木栅的古色, 与那桥拱下泄露的湖光与山色不是? 克莱亚并没有那样体面的衬托, 它也不比庐山栖贤寺旁的观音桥, 上瞰五老奇峰, 下临深潭与飞瀑; 它只是祛怜怜的一座三环洞的小桥,它那桥洞间也只掩映着细纹的波鳞与婆娑的树影, 它那桥上栉比的小穿阑与阑节顶上双双的白石球, 也只是春姑子头上不夸张的香草与野花一类的装饰; 但你凝神的看着, 更凝神的看着, 你再反省你的心境. 看还有一丝屑的俗念沾滞不? 只要你审美的本能不曾汨灭时, 这是你的机会实现纯粹美感的神奇!
+&emsp;&emsp;但你还得选你赏鉴的时辰. 英国的天时与气候是走极端的. 冬天是荒谬的坏. 逢着连绵的雾盲天你一定不迟疑的甘愿进地狱本身去试试; 春天 (英国是几乎没有夏天的) 是更荒谬的可爱, 尤其是它那四五月间最渐暖最艳丽的黄昏, 那才真是寸寸黄金. 在康河边上过一个黄昏是一服灵魂的补剂. 阿! 我那时蜜甜的单独, 那时蜜甜的闲暇. 一晚又一晚的, 只见我出神似的倚在桥阑上向西天凝望: &#x2E3A;
+&emsp;&emsp;看一回凝静的桥影,
+&emsp;&emsp;数一数螺细的波纹:
+&emsp;&emsp;我倚暖了石阑的青苔,
+&emsp;&emsp;青苔凉透了我的心坎; &ctdot;&ctdot;
+&emsp;&emsp;还有几句更笨重的怎能仿佛那游丝似轻妙的情景:
+&emsp;&emsp;难忘七月的黄昏, 远树凝寂,
+&emsp;&emsp;像墨泼的山形, 衬出轻柔暝色,
+&emsp;&emsp;密稠稠, 七分鹅黄, 三分橘绿,
+&emsp;&emsp;那妙意只可去梦边缘捕捉; &ctdot;&ctdot;
+
+Cambridge As I Knew It<sup id="note_ref-1"><a href="#note-1">1</a></sup> [An Excerpt] Translted fomr the Chinese by Wang Jiao-sheng
+&emsp;&emsp;The very soul of Cambridge is in a river. The River Cam, I dare say, is the most beautiful stream in the world. Its name is Granta, but some call it the River Cam, maybe to indicate, I am not quite clear, the difference between the upper and lower reaches. The river meanders with many bends. The upper reach boasts the famous Byron's Pool, where the poet used to roam for pleasure. Here lies an ancient village called Glancester, which has an orchard where you can recline sipping tea in the shade of peach and plum trees laden with fruit. You let some of the fruit drop into your cup, and little sparrows would come down to your table to peck something to eat, so that you have the sensation of being in quite another world. This is the upper reach. The lower reach runs from Chesterton down to where the river broadens to afford an ideal spot for boat-racing between spring and summer. A dam separates the two reaches at a point where the current becomes very swift. To listen under starlight to the sound of the water, the chimes of evening bells wafted from a neighbouring village, and worn-out cows grazing at the river's edge: these are some of my most mysterious experiences at Cambridge. Here the beauty of Nature, its tranquility, its harmony, flood your soul in spite of yourself, with the starlight and the shimmering waves looking on, as it were, in acquiescence.
+&emsp;&emsp;But the essence of the River Cam is in its center, the famous Backs, where the river is lined on either bank with buildings of some of the best-known collages. Going from the upper to the lower end, you pass in succession Pembroke, St. Katherine's, King's, Clare, Trinkty, St. John's. The juncture of Clare and King's is where you are most tempted to linger: the enchanting gracefulness of Clare being in close vicinity to the grandeur of King's Chapel. There may be constructions more beautiful and dignified elsewhere, such as the precincts of the Louvre on the river Seine in Paris, the banks of the great Rialto Bridge in Venice, the environs of the ancient Pont Vecchio in Florence. But the Backs of Cambridge has characteristics all its own that defy summing up with a few epithets. Its lucid, delicate artistic conception, free from all mundane polution, may be said to be beyond the bounds of painting, and transformed into the magic flavour of music. There is nothing more harmonious, more symmetrical, than this group of structures. Comparable to it, perhaps, is only Corot's "Farmland" in painting, and Chopin's "Nocturne" in music. Yet even these cannot give you an impression quite so ethreal. The sense of beauty in inspires is \*nothing short of<sup id="note_ref-2"><a href="#note-2">2</a></sup> divine.
+&emsp;&emsp;Imageine yourself standing in the shade of that big cedar tree by King's College bridge and looking into the distance. To your right, beyond a spacious square of new-mown lawn, is our Fellows Building, which, though of no very ancient date, yet possesses a charm that cannot be concealed. Between spring and summer, on its pallid stone walls, roses sway in the soft breeze in a riot of colour. To the left is the Chapel, with its forest of pinnacles perpetually pointing skyward, not to be sullied. Still further left is St. Clare. Ah, that square court of incredibly exquisite workmanship &mdash; who can dispute its being the personification of St. Clare herself? And which of its stones but is glittering with her spirit of holy purity in bygone years? Faintly discernible behind Clare is Cambridge's most magnificent, most prestigious Trinity College, on top of whose library building, overlooking the river, sits on guard the Sculpture of Byron, his features brimming over with astonishing vitality.
+&emsp;&emsp;However, at the moment your attention has been arrested, as by magic, by Clare's Three-Arched Bridge. You have seen the Breakoff Bridge at Xi Ling on West Lake's Bai Causeway, (unfortunately it and its like have long since been trampled down by the Bus Companym, representative of the sordidness of all modernity; they have gone the way of the melancholy Lei Feng Pagoda, and taken leave \*for good<sup id="note_ref-3"><a href="#note-3">3</a></sup> of the world of mortals) haven't you? Surely you cannot forget the mottled green moss on the bridge, the ancient look of its wooden paling, the beautiful tints of lake and hill stealing from under its arches. St. Clare's bridge is not so daintily set off as all that. Nor is it comparable to the bridge of the Goddess of Mercy nestling against the Temple of the Virtuous on Mount Lushan, commanding a view of the miraculus Five-Old-Men Peak overhead and the deep pools and cascading waterfalls below. It is no more than a diffidant-looking little bridge with its three arches set of by rippled waves and the whirling shadows of trees. The rows of small railing on the bridge and pairs of white stone balls on top of them are but like the unpretentious herbs and wild flowers country girls deck their hair with. But gaze intently, gaze intently again. Then look in retrospect at the mood you are in and see if it is still tainted with a streak of vulgar thought. This is a wonderful occasion for you to capture a sense of sheer beauty if only your instinctive capacity for the appreciation of beauty has not entirely left you.
+&emsp;&emsp;Still you have to choose a moment opportune for such enjoyment. In England the climate and weather go to extremes. In winter it is beastly even to absurdity. After days of blinding mist, surely you would rather wish to have a taste of Hell itself \*without further ado<sup id="note_ref-4"><a href="#note-4">4</a></sup>. On the other hand, spring  (in England there is almost no summer) is absurdly lovable, especially between the months of April and May when the evenings are at their loveliest as they get warmer and warmer, and every moment becomes golden. It is a veritable tonic for the soul to pass an evening on the bank of the River Cam. Ah! The days I enjoyed being all by myself and having long hours of leisure, sweet with all the sweetness of honey. How evening after evening found me leaning against the balustrade of the bridge, losing myself in reverie as I gazed toward the western sky.
+&emsp;&emsp;Glance at the bridge's tranquil shadow,
+&emsp;&emsp;Count fine mother-of-pearl on rippling waves;
+&emsp;&emsp;I nestle up to the stone railing to warm the green moss,
+&emsp;&emsp;Warm the green moss till it cools me
+&emsp;&emsp;To the depth of my heart.
+&emsp;&emsp;Other scenes too cumbersome to merit comparison
+&emsp;&emsp;With the airiness of gossamer;
+&emsp;&emsp;A July evening unforgettable,
+&emsp;&emsp;Trees buried in far-off stillness;
+&emsp;&emsp;Shape of hills ink-spalashed
+&emsp;&emsp;Silhouetted<sup id="note_ref-5"><a href="#note-5">5</a></sup> against the tenderness of dust &mdash;
+&emsp;&emsp;Close-woven, seven-tenths goose-yellow, three-tenths orange-green;
+&emsp;&emsp;A subtle charm there's no recapturing
+&emsp;&emsp;Save at the edge of an autumn dream...
+
+<ol>
+  <li id="note-1">
+    <b><a href="#note_ref-1">^</a></b> 此题有二种译法: (1) <em>Cambridge As I Knew It</em> 一般写作者对过去在剑桥时的回忆. (2) <em>The Cambridge I knew</em> 侧重于写回忆过去, 对比现在的剑桥. 例如可以说: The Cambridge I know was quite difference from the Cambridge of today. 本文写于 1926 年 1 月, 时作者已阔别康桥二年, 康桥即英国的剑桥大学 (Cambridge University).
+  </li>
+  <li id="note-2">
+    <b><a href="#note_ref-2">^</a></b> 简直可以说 (nothing 也可用 little). You use nothing short of or little short of to emphasize how great or extreme something is.
+  </li>
+  <li id="note-3">
+    <b><a href="#note_ref-3">^</a></b> 永久地. If something changes or disappears for good, it never changes back or comes back as it was before.
+  </li>
+  <li id="note-4">
+    <b><a href="#note_ref-4">^</a></b> 干脆. If you do something without further ado or without more ado, you do it at once and do not discuss or delay it any longer. 
+  </li>
+  <li id="note-5">
+    <b><a href="#note_ref-5">^</a></b> 轮廓. 可做动词或名词. (1) A silhouette is the solid dark shape that you see when someone or something has a bright light or pale background behind them. (2) The silhouette of something is the outline that it has, which often helps you to recognize it. 
+  </li>
+</ol>

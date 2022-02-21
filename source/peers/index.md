@@ -18,6 +18,8 @@ Proteusの友人们
 
 ## Computer
 
+[Yuuta Liang](https://yuuta.moe/) `BGP`
+
 [mathor](https://wmathor.com/) `ACM`
 
 [xehoth](https://blog.xehoth.cc/) `C++`, `Computer Graphics`

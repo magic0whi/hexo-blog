@@ -428,7 +428,7 @@ Enter F12 for Boot Menu when bootstrap
 1. Installation
    * KDE
      ```console
-     # pacman -S plasma-meta konsole dolphin kio-fuse
+     # pacman -S plasma-meta konsole dolphin ark kio-fuse
      # systemctl enable sddm.service
      ```
    * GNOME
