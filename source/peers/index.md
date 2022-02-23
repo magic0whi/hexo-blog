@@ -9,16 +9,16 @@ Proteusの友人们
 
 * [本地磁盘小日记ヾ(≧▽≦*)ゝ](http://ohayou.aimo.moe/)
 * [clansty(凌莞)](https://c5y.moe/) `凌莞大可爱!`
-* [Makito(朵朵)](https://keep.moe/)
+* [Makito(朵朵)](https://keep.moe/) `Full-Stack`
 * [MinatoAster](http://minatoaster.github.io)
-* [霜晨月](https://shuangchenyue.top)
+* [霜晨月](https://datasickle.gitee.io/)
 * [xtlsoft(徐天乐)](https://www.xtlsoft.top)
 
 **下面是单向友链**
 
 ## Computer
 
-[Yuuta Liang](https://yuuta.moe/) `BGP`
+[Yuuta Liang](https://yuuta.moe/)  `BGP`, `Clearnet ASN`, `DN42`
 
 [mathor](https://wmathor.com/) `ACM`
 
@@ -84,7 +84,7 @@ Proteusの友人们
 
 [当然我在扯淡](http://www.yinwang.org/)
 
-[ServalCandle](https://servalcandle.github.io/) `Cat`, `Do not read it`
+[ServalCandle](https://servalcandle.github.io/) `Cat`, `dOnOTrEADiT`
 
 [LOFT IN THE IMMOBILE LIBRARY](https://librarian.mukiyu.moe/)
 
@@ -94,7 +94,7 @@ Proteusの友人们
 
 [It's me, Kiri!](https://kirikira.moe/)
 
-[蝉时雨](https://chanshiyu.com/)
+[蝉时雨](https://chanshiyu.com/) `Frontend`
 
 [酷壳](https://coolshell.cn/)
 
@@ -119,3 +119,7 @@ Proteusの友人们
 [一叶知秋 - 秋是悲欢离合，雨是一生错过](https://blog.rain.cx/) 
 
 [Kalorona - Personal Blog](https://kalorona.com/) `NOIP`
+
+[Estela (Promotana)](https://estela.moe/) `Dialect:Wu`, `Español`, `MtF-Wiki`
+
+[septs](https://septs.blog/) `Frontend` `TC39`

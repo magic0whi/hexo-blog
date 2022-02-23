@@ -26,10 +26,9 @@ Feel free to contact me:
 - QQ: 2113952182
 - Zhihu: [ndoskrnl](https://www.zhihu.com/people/logarithm-96)
 
-补张无修自拍(懒得刮胡子233)
-![祝米娜桑开心每一天!](ndoskrnl.heic)
+![祝米娜桑开心每一天!](/img/The_Map_Of_Mathematics.png)
 
-<audio controls autoplay>
+<audio controls>
   <source src="Do you like what you see Van Darkholme.mp3" type="audio/mpeg">
   Your browser does not support the audio element.
 </audio> 

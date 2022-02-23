@@ -1,8 +1,8 @@
 version: 5.0.0
 variant: default
-logo: /img/logo.svg
+logo: /img/Comet_symbol.svg
 head:
-    favicon: /img/favicon.svg
+    favicon: /img/logo.jpg
     manifest:
         name: 
         short_name: 

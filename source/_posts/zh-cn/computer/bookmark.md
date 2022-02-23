@@ -37,6 +37,8 @@ ESD 解密 [decrypt-multi](https://rg-adguard.net/decrypt-multi-release/)
 
 [OriginCode 的服务](https://repo.origincode.me/)
 
+[Clansty's Archlinux Repository](https://pacman.ltd)
+
 ## Android
 
 [Google Camera Ports](https://www.celsoazevedo.com/files/android/google-camera/)
@@ -116,6 +118,8 @@ Crashcourts中文字幕 [Crashcourts](https://crashcourse.club/category/)
 [The mouse Sry locus harbors a cryptic exon that is essential for male sex determination](https://science.sciencemag.org/content/370/6512/121)
 
 ### Github
+
+> This chapter has benn deprecated and now I useing Github star as a substitution.
 
 [手撕 leetcode](https://github.com/labuladong/fucking-algorithm)
 
@@ -220,6 +224,8 @@ Oracle 账户密码 [BugMeNot](http://bugmenot.com/view/oracle.com)
 [Kemono.party](https://kemono.party/) : 心里要知道白嫖不是长久之计, 每个人的劳动都应当尊重.
 
 [DevDocs API Documentation](https://devdocs.io/) : 各种编程语言和软件的文档集合(比如 CPP reference)
+
+[科学网-博客](https://blog.sciencenet.cn)
 
 ## Softwares
 
