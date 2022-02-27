@@ -131,14 +131,9 @@ Enter F12 for Boot Menu when bootstrap
    ::1         localhost
    127.0.1.1   myhostname.neo	myhostname
    ```
-   * Use NetworkManager
-     Install & Enable NetworkManager:
-     ```console
-     # pacman -S networkmanager
-     # systemctl enable NetworkManager.service
-     # systemctl enable systemd-resolved.service
-     ```
-   * Use iwd
+   
+   Choose one of the following methods:
+   * Using systemd-networkd & systemd-resolved & iwd
      Install iwd: `pacman -S iwd`
      Wireless adapter configuration
      > Use `ip link` to show network interface names
@@ -149,11 +144,18 @@ Enter F12 for Boot Menu when bootstrap
      [Network]
      DHCP=yes
      ```
-     Enable iwd and Systemd-networkd:
+     Enable daemons and systemd-resolved stub mode:
      ```console
      # systemctl enable iwd.service
      # systemctl enable systemd-networkd.service
      # systemctl enable systemd-resolved.service
+     # ln -rsf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
+     ```
+   * Using NetworkManager
+     Install & Enable NetworkManager:
+     ```console
+     # pacman -S networkmanager
+     # systemctl enable NetworkManager.service
      ```
 6. Random number generation
    Enable Rng-tools
@@ -240,6 +242,7 @@ Enter F12 for Boot Menu when bootstrap
     ```
     > Automatic update
       The package [systemd-boot-pacman-hook<sup>[AUR]</sup>](https://aur.archlinux.org/packages/systemd-boot-pacman-hook/) provides a Pacman hook to automate the update process.
+    > Please be aware that the description of configure Secure Boot below overrides the hook in this package.
 
     Configuring the boot loader
     ```properties /boot/loader/loader.conf
@@ -299,129 +302,134 @@ Enter F12 for Boot Menu when bootstrap
     ```console
     # pacman -S archlinuxcn-keyring
     ```
-15. (Optional) Configuration of snapper
-    Ensure `/.snapshots` is not mounted and does not exist as folder:
-    ```console
-    # umount /.snapshots
-    # rm -r /.snapshots
-    ```
-    Then create a new configuration for `/`. Snapper create-config automatically creates a subvolume `.snapshots` with the root subvolume `@` as its parent, that is not needed for current filesystem layout, and can be deleted.
-    ```console
-    # snapper -c root create-config /
-    # btrfs subvolume delete /.snapshots
-    # mkdir /.snapshots
-    ```
-    Now mount `@snapshots` to `/.snapshots`:
-    ```console
-    # mount -o compress=zstd,subvol=@snapshots,discard /dev/mapper/cryptroot /.snapshots
-    ```
-16. (Optional) Unlocking encrypted root filesystem by using a TPM.
-    list your installed TPMs and the driver in use: 
-    ```console
-    $ systemd-cryptenroll --tpm2-device=list
-    ```
-    > If you encounter such message "<span style="color:#FF0000;">TPM2 support is not installed</span>" then try to install `tpm2-tools`
-    A key may be enrolled in both the TPM and the LUKS volume using only one command. The following example binds the key to PCRs 0 and 7 (the system firmware and Secure Boot state): 
-    ```console
-    # systemd-cryptenroll --tpm2-device=/path/to/tpm2_device --tpm2-pcrs=0+7 /dev/sda2
-    ```
-    > Tip: If your computer has only one TPM installed, which is usually the case, you may instead specify `--tpm2-device=auto` to automatically select the only available TPM.
-    
-    Specifying the root volume using the `/etc/crypttab.initramfs`:
-    ```properties /etc/crypttab.initramfs
-    cryptroot       UUID=<UUID_OF_ROOTFS>       -       tpm2-device=auto,discard
-    ```
-    Regenerate the initramfs:
-    ```console
-    # mkinitcpio -P
-    ```
 
-    To remove a key enrolled using this method, run:
-    ```console
-    # systemd-cryptenroll /dev/sdX --wipe-slot=slot_number
-    ```
-    where `slot_number` is the numeric LUKS slot number in which your TPM key is stored.
-    Alternatively, run:
-    ```console
-    # systemd-cryptenroll /dev/sdX --wipe-slot=tpm2
-    ```
-    to remove all TPM-associated keys from your LUKS volume. 
-17. Secure Boot Using a signed boot loader (shim)
-    Install `shim-signed`<sup>[AUR]</sup>, `sbsigntools` and `efibootmgr`
-    ```console
-    # paru -S shim-signed sbsigntools efibootmgr
-    ```
-    As shim tries to launch `grubx64.efi`, rename systemd boot loader to it.
-    ```console
-    # cp /boot/EFI/systemd/systemd-bootx64.efi /boot/EFI/BOOT/grubx64.efi
-    ```
-    Copy shim and MokManager to boot loader directory:
-    ```console
-    # cp /usr/share/shim-signed/shimx64.efi /boot/EFI/BOOT/BOOTx64.EFI
-    # cp /usr/share/shim-signed/mmx64.efi /boot/EFI/BOOT/
-    ```
-    (Optional) create a new NVRAM entry to boot `BOOTx64.EFI`:
-    ```console
-    # efibootmgr --verbose --disk /dev/sda --part 1 --create --label "Shim" --loader /EFI/BOOT/BOOTx64.EFI
-    ```
-    Create a Machine Owner Key:
-    ```console
-    $ openssl req -newkey rsa:4096 -nodes -keyout MOK.key -new -x509 -sha256 -days 3650 -subj "/CN=my Machine Owner Key/" -out MOK.crt
-    $ openssl x509 -outform DER -in MOK.crt -out MOK.cer
-    ```
-    Sign boot loader (named `grubx64.efi`) and kernel:
-    ```console
-    # sbsign --key MOK.key --cert MOK.crt --output /boot/vmlinuz-linux /boot/vmlinuz-linux
-    # sbsign --key MOK.key --cert MOK.crt --output /boot/EFI/BOOT/grubx64.efi /boot/EFI/BOOT/grubx64.efi
-    ```
-    We can automate the kernel signing with a pacman hook:
-    ```properties /etc/pacman.d/hooks/999-sign_kernel_for_secureboot.hook
-    [Trigger]
-    Operation = Install
-    Operation = Upgrade
-    Type = Package
-    Target = linux
-    Target = linux-lts
-    Target = linux-hardened
-    Target = linux-zen
-    
-    [Action]
-    Description = Signing kernel with Machine Owner Key for Secure Boot
-    When = PostTransaction
-    Exec = /usr/bin/find /boot/ -maxdepth 1 -name 'vmlinuz-*' -exec /usr/bin/sh -c 'if ! /usr/bin/sbverify --list {} 2>/dev/null | /usr/bin/grep -q "signature certificates"; then /usr/bin/sbsign --key /etc/pacman.d/hooks/MOK.key --cert /etc/pacman.d/hooks/MOK.crt --output {} {}; fi' ;
-    Depends = sbsigntools
-    Depends = findutils
-    Depends = grep
-    ```
-    Also, there is a pacman hook for systemd-boot upgrades:
-    ```properties /etc/pacman.d/hooks/100-systemd-boot.hook
-    [Trigger]
-    Type = Package
-    Operation = Upgrade
-    Target = systemd
-    
-    [Action]
-    Description = Gracefully upgrading systemd-boot...
-    When = PostTransaction
-    Exec = /bin/sh -c '/usr/bin/systemctl restart systemd-boot-update.service && cp /boot/EFI/systemd/systemd-bootx64.efi /boot/EFI/BOOT/grubx64.efi && cp /usr/share/shim-signed/shimx64.efi /boot/EFI/BOOT/BOOTx64.EFI && sbsign --key /etc/pacman.d/hooks/MOK.key --cert /etc/pacman.d/hooks/MOK.crt --output /boot/EFI/BOOT/grubx64.efi /boot/EFI/BOOT/grubx64.efi'
-    Depends = shim-signed
-    Depends = sbsigntools
-    ```
+## Post-installation
 
-    Then copy `Mok.key` and `MOK.crt` to the path which is specified above:
-    ```console
-    # cp MOK.key MOK.crt /etc/pacman.d/hooks/
-    ```
-    > Create pacman's default hooks directory if it doesn's exist:
-    > ```console
-    > # mkdir /etc/pacman.d/hooks
-    > ```
-    Copy `MOK.cer` to a FAT formatted file system (you can use EFI system partition).
-    ```console
-    # cp MOK.cer /boot/
-    ```
-    Reboot and enable Secure Boot. If shim does not find the certificate `grubx64.efi` is signed with in MokList it will launch MokManager (`mmx64.efi`).
-    In MokManager select Enroll key from disk, find `MOK.cer` and add it to MokList. When done select Continue boot and your boot loader will launch and it will be capable launching any binary signed with your Machine Owner Key.
+> Rebooting to installed system and ensure that systemd is running.
+
+1. (Optional) Configuration of snapper
+   Ensure `/.snapshots` is not mounted and does not exist as folder:
+   ```console
+   # umount /.snapshots
+   # rm -r /.snapshots
+   ```
+   Then create a new configuration for `/`. Snapper create-config automatically creates a subvolume `.snapshots` with the root subvolume `@` as its parent, that is not needed for current filesystem layout, and can be deleted.
+   ```console
+   # snapper -c root create-config /
+   # btrfs subvolume delete /.snapshots
+   # mkdir /.snapshots
+   ```
+   Now mount `@snapshots` to `/.snapshots`:
+   ```console
+   # mount -o compress=zstd,subvol=@snapshots,discard /dev/mapper/cryptroot /.snapshots
+   ```
+2. (Optional) Unlocking encrypted root filesystem by using a TPM.
+   list your installed TPMs and the driver in use: 
+   ```console
+   $ systemd-cryptenroll --tpm2-device=list
+   ```
+   > If you encounter such message "<span style="color:#FF0000;">TPM2 support is not installed</span>" then try to install `tpm2-tools`
+   A key may be enrolled in both the TPM and the LUKS volume using only one command. The following example binds the key to PCRs 0 and 7 (the system firmware and Secure Boot state): 
+   ```console
+   # systemd-cryptenroll --tpm2-device=/path/to/tpm2_device --tpm2-pcrs=0+7 /dev/sda2
+   ```
+   > Tip: If your computer has only one TPM installed, which is usually the case, you may instead specify `--tpm2-device=auto` to automatically select the only available TPM.
+   
+   Specifying the root volume using the `/etc/crypttab.initramfs`:
+   ```properties /etc/crypttab.initramfs
+   cryptroot       UUID=<UUID_OF_ROOTFS>       -       tpm2-device=auto,discard
+   ```
+   Regenerate the initramfs:
+   ```console
+   # mkinitcpio -P
+   ```
+   > To remove a key enrolled using this method, run:
+   > ```console
+   > # systemd-cryptenroll /dev/sdX --wipe-slot=slot_number
+   > ```
+   > where `slot_number` is the numeric LUKS slot number in which your TPM key is stored.
+   > Alternatively, run:
+   > ```console
+   > # systemd-cryptenroll /dev/sdX --wipe-slot=tpm2
+   > ```
+   > to remove all TPM-associated keys from your LUKS volume. 
+3. Secure Boot by using a signed boot loader (shim)
+   Install `shim-signed`<sup>[AUR]</sup>, `sbsigntools` and `efibootmgr`
+   ```console
+   # paru -S shim-signed sbsigntools efibootmgr
+   ```
+   As shim tries to launch `grubx64.efi`, rename systemd boot loader to it.
+   ```console
+   # cp /boot/EFI/systemd/systemd-bootx64.efi /boot/EFI/BOOT/grubx64.efi
+   ```
+   Copy shim and MokManager to boot loader directory:
+   ```console
+   # cp /usr/share/shim-signed/shimx64.efi /boot/EFI/BOOT/BOOTx64.EFI
+   # cp /usr/share/shim-signed/mmx64.efi /boot/EFI/BOOT/
+   ```
+   (Optional) create a new NVRAM entry to boot `BOOTx64.EFI`:
+   ```console
+   # efibootmgr --verbose --disk /dev/sda --part 1 --create --label "Shim" --loader /EFI/BOOT/BOOTx64.EFI
+   ```
+   Create a Machine Owner Key:
+   ```console
+   $ openssl req -newkey rsa:4096 -nodes -keyout MOK.key -new -x509 -sha256 -days 3650 -subj "/CN=my Machine Owner Key/" -out MOK.crt
+   $ openssl x509 -outform DER -in MOK.crt -out MOK.cer
+   ```
+   Sign boot loader (named `grubx64.efi`) and kernel:
+   ```console
+   # sbsign --key MOK.key --cert MOK.crt --output /boot/vmlinuz-linux /boot/vmlinuz-linux
+   # sbsign --key MOK.key --cert MOK.crt --output /boot/EFI/BOOT/grubx64.efi /boot/EFI/BOOT/grubx64.efi
+   ```
+   We can automate the kernel signing with a pacman hook:
+   > Create pacman's default hooks directory if it doesn's exist:
+   > ```console
+   > # mkdir /etc/pacman.d/hooks
+   > ```
+
+   ```properties /etc/pacman.d/hooks/999-sign_kernel_for_secureboot.hook
+   [Trigger]
+   Operation = Install
+   Operation = Upgrade
+   Type = Package
+   Target = linux
+   Target = linux-lts
+   Target = linux-hardened
+   Target = linux-zen
+   
+   [Action]
+   Description = Signing kernel with Machine Owner Key for Secure Boot
+   When = PostTransaction
+   Exec = /usr/bin/find /boot/ -maxdepth 1 -name 'vmlinuz-*' -exec /usr/bin/sh -c 'if ! /usr/bin/sbverify --list {} 2>/dev/null | /usr/bin/grep -q "signature certificates"; then /usr/bin/sbsign --key /etc/pacman.d/hooks/MOK.key --cert /etc/pacman.d/hooks/MOK.crt --output {} {}; fi' ;
+   Depends = sbsigntools
+   Depends = findutils
+   Depends = grep
+   ```
+   Also, there is a pacman hook for systemd-boot upgrades:
+   ```properties /etc/pacman.d/hooks/100-systemd-boot.hook
+   [Trigger]
+   Type = Package
+   Operation = Upgrade
+   Target = systemd
+   
+   [Action]
+   Description = Gracefully upgrading systemd-boot...
+   When = PostTransaction
+   Exec = /bin/sh -c '/usr/bin/systemctl restart systemd-boot-update.service && cp /boot/EFI/systemd/systemd-bootx64.efi /boot/EFI/BOOT/grubx64.efi && cp /usr/share/shim-signed/shimx64.efi /boot/EFI/BOOT/BOOTx64.EFI && sbsign --key /etc/pacman.d/hooks/MOK.key --cert /etc/pacman.d/hooks/MOK.crt --output /boot/EFI/BOOT/grubx64.efi /boot/EFI/BOOT/grubx64.efi'
+   Depends = shim-signed
+   Depends = sbsigntools
+   ```
+
+   Then copy `Mok.key` and `MOK.crt` to the path which is specified above:
+   ```console
+   # cp MOK.key MOK.crt /etc/pacman.d/hooks/
+   ```
+   Copy `MOK.cer` to a FAT formatted file system (you can use EFI system partition).
+   ```console
+   # cp MOK.cer /boot/
+   ```
+   Reboot and enable Secure Boot. If shim does not find the certificate `grubx64.efi` is signed with in MokList it will launch MokManager (`mmx64.efi`).
+   In MokManager select Enroll key from disk, find `MOK.cer` and add it to MokList. When done select Continue boot and your boot loader will launch and it will be capable launching any binary signed with your Machine Owner Key.
 
 ## Desktop Environment
 

@@ -633,6 +633,15 @@ $$
 
 **上述腰围指实际腰围, 并不是裤子的尺码**
 
+## 维修
+
+1. BGA推荐风枪温度:
+   拆卸(原厂高温锡) 424&#176;C
+   植锡/焊盘清理 334&#176;C
+2. 烙铁推荐温度:
+   原厂高温锡 300-350&#176;C
+   其他 280-320&#176;C
+
 ## 读书摘录
 
 "I tell you I must go!" I retorted, roused to something like passion. "Do you think I can stay to become nothing to you? Do you think I am an automaton? &mdash; a machine without feelings? and can bear to have my morsel of bread snatched from my lips, and my drop of living water dashed from my cup? Do you think, because I am poor, obscure, plain, and little, I am soulless and heartless? You think wrong! &mdash; I have as much soul as you, &mdash; and full as much heart! And if God had gifted me with some beauty and much wealth, I should have made it as hard for you to leave me, as it is now for me to leave you. I am not talking to you now through the medium of custom, conventionalities, nor even of mortal flesh; &mdash; it is my spirit that addresses your spirit; just as if both had passed through the grave, and we stood at God's feet, equal, &mdash; as we are!" &mdash; *Jane Eyre*

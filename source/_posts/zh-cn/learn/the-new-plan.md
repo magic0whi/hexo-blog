@@ -60,7 +60,7 @@ toc: true
 
 ## 其他工作
 
-总优先级: MATLAB>GTM>CS61a>ACM入门>有机化学>日语N2
+总优先级: MATLAB>GTM>CS61a>ACM入门>有机化学>德语>日语N2
 
 1. 寻找 Mathlab 的 python 替代(numpy, panda, matplotlib), 顺便了解下 R 语言、也许我们还可以试试 Mathematica?
 2. Operation Baroque, 尝试阅读以下列表的前五本:

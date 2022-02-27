@@ -26,6 +26,8 @@ Feel free to contact me:
 - QQ: 2113952182
 - Zhihu: [ndoskrnl](https://www.zhihu.com/people/logarithm-96)
 
+Features: Retiring
+
 ![祝米娜桑开心每一天!](/img/The_Map_Of_Mathematics.png)
 
 <audio controls>
