@@ -8,12 +8,12 @@ toc: true
 ---
 
 This article includes:
-1. KVM + Libvirt + WebVirtCloud (TODO)
+1. KVM + Libvirt 
 2. PCI passthrough via OVMF
 3. Intel's GVT-g
 
 TODO:
-virtio drivers 
+virtio drivers
 https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/stable-virtio/virtio-win.iso
 
 ```properties /etc/modules-load.d/kvm.conf
@@ -26,16 +26,20 @@ vfio-mdev
 MODULES=(vfio_pci vfio vfio_iommu_type1 vfio_virqfd)
 ```
 
-
-
 <!-- more -->
 
-## KVM + Libvirt + WebVirtCloud 安装
+libvirt iptables-nft dnsmasq dmidecode bridge-utils openbsd-netcat
 
-先安装这个[webvirtcloud](https://github.com/magic0whi/aur-webvirtcloud-git)
-然后执行 `/srv/webvirtcloud/configuration-install.sh`
-最后启动服务 `systemctl start nginx supersivord libvirtd-tcp.socket`
-基本就完事了
+the easiest way to ensure your user has access to libvirt daemon is to add member to libvirt user group.
+
+If you want to use polkit as authentication:
+Arch defaults to consider anybody in the wheel group as an administrator: this is defined in /usr/share/polkit-1/rules.d/50-default.rules (see Polkit#Administrator identities). Therefore there is no need to create a new group and rule file
+
+systemctl enable --now libvirtd.service
+
+Access virtual machines using their hostnames
+
+for tpm support install swtpm
 
 ## Isolating the GPU
 

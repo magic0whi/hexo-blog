@@ -8,6 +8,8 @@ toc: true
 
 一份我的 Linux 手扎
 
+A paper of my Linux gists
+
 <!-- more -->
 
 ## linux命令
@@ -376,4 +378,13 @@ $ git am 0001-xxxx.patch
 $ git config --global pack.windowMemory "100m"
 $ git config --global pack.packSizeLimit "100m"
 $ git config --global pack.threads "1"
+```
+
+## X11vnc startup
+
+With SDDM and SSH Tunnel.
+Please be aware that this command need to be executed on client-side.
+
+```console
+ssh -t -L 5900:localhost:5900 <REMOTE HOST> 'sudo x11vnc -localhost -display :0 -auth $(find /var/run/sddm/ -type f)'
 ```

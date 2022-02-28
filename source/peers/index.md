@@ -70,6 +70,8 @@ Proteusの友人们
 
 [Alex Chi](https://www.skyzh.dev/) `CS`
 
+[木子](https://blog.k8s.li)
+
 ## Humanities
 
 [长征部落格](https://www.cz5h.com/) `Patriotism`
@@ -77,8 +79,6 @@ Proteusの友人们
 [菜菜博士 - 博士在网络的家](https://microcai.org/) `Internet`
 
 [Dreamwings - 继续踏上旅途, 在没有你的春天...](https://www.dreamwings.cn/)
-
-[木子](https://blog.502.li/)
 
 [program-think](https://program-think.blogspot.com/)
 
