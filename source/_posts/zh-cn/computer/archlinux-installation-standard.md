@@ -7,9 +7,9 @@ tags:
 toc: true
 ---
 
-The standard of archlinux installation & configuration for me
+The standard of archlinux installation & configurations for me
 
-Enter F12 for Boot Menu when bootstrap
+For Lenovo user, Enter F12 for Boot Menu when on bootstrap stage
 
 <!-- more -->
 
@@ -371,7 +371,7 @@ Enter F12 for Boot Menu when bootstrap
    ```console
    # efibootmgr --verbose --disk /dev/sda --part 1 --create --label "Shim" --loader /EFI/BOOT/BOOTx64.EFI
    ```
-   Create a Machine Owner Key:
+   Generate a Machine Owner Key:
    ```console
    $ openssl req -newkey rsa:4096 -nodes -keyout MOK.key -new -x509 -sha256 -days 3650 -subj "/CN=my Machine Owner Key/" -out MOK.crt
    $ openssl x509 -outform DER -in MOK.crt -out MOK.cer
