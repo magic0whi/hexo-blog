@@ -163,7 +163,7 @@ For Lenovo user, Enter F12 for Boot Menu when on bootstrap stage
    # systemctl enable rngd.service
    ```
 7. Configuring mkinitcpio
-   Using the `sd-encrypt` hook with the systemd-base initramfs. (replace hook `udev` with hook `system`)
+   Using the `sd-encrypt` hook with the systemd-base initramfs. (replace hook `udev` with `systemd`)
    <figure class="highlight properties">
      <figcaption><span>/etc/mkinitcpio.conf</span></figcaption>
      <table>
@@ -305,7 +305,7 @@ For Lenovo user, Enter F12 for Boot Menu when on bootstrap stage
 
 ## Post-installation
 
-> Rebooting to installed system and ensure that systemd is running.
+> Rebooting to installed system to ensure that systemd is running.
 
 1. (Optional) Configuration of snapper
    Ensure `/.snapshots` is not mounted and does not exist as folder:
@@ -329,6 +329,7 @@ For Lenovo user, Enter F12 for Boot Menu when on bootstrap stage
    $ systemd-cryptenroll --tpm2-device=list
    ```
    > If you encounter such message "<span style="color:#FF0000;">TPM2 support is not installed</span>" then try to install `tpm2-tools`
+   
    A key may be enrolled in both the TPM and the LUKS volume using only one command. The following example binds the key to PCRs 0 and 7 (the system firmware and Secure Boot state): 
    ```console
    # systemd-cryptenroll --tpm2-device=/path/to/tpm2_device --tpm2-pcrs=0+7 /dev/sda2
