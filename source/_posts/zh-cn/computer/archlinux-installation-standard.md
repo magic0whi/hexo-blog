@@ -9,7 +9,7 @@ toc: true
 
 The standard of archlinux installation & configurations for me
 
-For Lenovo user, Enter F12 for Boot Menu when on bootstrap stage
+For Lenovo user, Enter `F12` for Boot Menu when on bootstrap stage
 
 <!-- more -->
 

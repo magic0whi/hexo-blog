@@ -6,7 +6,7 @@ date: 2021-11-02 21:52:02
 tags: electronic-and-information-engineering
 ---
 
-进度 Pass 1/2, Stage 11/38
+进度 Pass 1/2, Stage 12/38
 
 <!-- more -->
 
@@ -32,6 +32,8 @@ tags: electronic-and-information-engineering
   在移动过程中, 按 `X`、`Y` 可按对应的轴镜像.
 * `Ctrl+W` 放置导线 (<u>P</u>lace-><u>W</u>ire).
   退格键可撤回确定的点, 导线和绘制线都可用.
+
+  <u>P</u>lace-><u>N</u>et　Label　放置网络标签
 
 1. 原理图绘制步骤:
    1. 先不连线, 把各个模块对应的元件大致摆放好.

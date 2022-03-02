@@ -229,6 +229,8 @@ Oracle 账户密码 [BugMeNot](http://bugmenot.com/view/oracle.com)
 
 [科学网-博客](https://blog.sciencenet.cn)
 
+[Mathpix Snip](https://mathpix.com/) : 图片转 Tex
+
 ## Softwares
 
 [OBS](https://obsproject.com/)

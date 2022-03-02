@@ -252,7 +252,7 @@ tags:
 2. 复数的四则运算
    复数的乘法运算 \\((a+bi)(c+di)=ac+adi+bci+bdi^2=(ac-bd)+(ad+bc)i\\)
    复数的除法运算 \\((a+bi)\div(c+di)=\frac{a+bi}{c+di}=\frac{(a+bi)(c-di)}{(c+di)(c-di)}=\frac{ac+bd}{c^2-d^2}+\frac{bc-ad}{c^2-d^2}i\\)
-3. 复数的模: 设复数 \\(Z=a+bi\enspace\\) (\\(a,b\in R\\)) 对应复平面上的点 \\(Z\\) , 则\\(Z\\) 的模 \\(|Z|=|\vec{OZ}|=\sqrt{a^2+b^2}\\) (即点 \\(Z(a, b)\\) 到原点的距离) 
+3. 复数的模: 设复数 \\(Z=a+bi\enspace\\) (\\(a,b\in R\\)) 对应复平面上的点 \\(Z\\) , 则\\(Z\\) 的模 \\(|Z|=\\|\vec{OZ}\\|=\sqrt{a^2+b^2}\\) (即点 \\(Z(a, b)\\) 到原点的距离) 
 
 ## 逻辑
 
@@ -408,10 +408,10 @@ tags:
       \\(|ax+b|\leqslant c\hArr -c\leqslant ax+b\leqslant c\\)
       \\(|ax+b|\geqslant c\hArr ax+b\leqslant -c\\) 或 \\(ax+b\geqslant c\\)
       
-      三角不等式: \\(||a|-|b||\leqslant|a\pm b|\leqslant|a|+|b|\\)
-   1. 柯西不等式
+      三角不等式: \\(|(|a|-|b|)|\leqslant|a\pm b|\leqslant|a|+|b|\\)
+   1. 柯西不等式 (Cauchy–Schwarz inequality)
       1. 代数形式: 设 \\(a,b,c\in R\\) , 则 \\((a^2+b^2)(c^2+d^2)\geqslant(ac+bd)^2\enspace\\) (当且仅当 \\(ad=bc\\) 时等号成立)
-      2. 向量形式: 设 \\(\alpha\\)、\\(\beta\\) 为平面上的两个向量, 则 \\(|\alpha|\cdot|\beta|\geqslant|\alpha\cdot\beta|\enspace\\) (当且仅当 \\(\alpha\\)、\\(\beta\\) 共线时等号成立)
+      2. 向量形式: 设 \\(\alpha\\)、\\(\beta\\) 为平面上的两个向量, 则 \\(\\|\alpha\\|\cdot\\|\beta\\|\geqslant|\alpha\cdot\beta|\enspace\\) (当且仅当 \\(\alpha\\)、\\(\beta\\) 共线时等号成立)
       3. 三角形不等式: 设 \\(x_1,y_2;x_2,y_2;x_3,y_3\in R\\) , 则
          \\(\sqrt{(x_1-x_2)^2+(y_1-y_2)^2}+\sqrt{(x_2-x_3)^2-(y_2-y_3)^2}\geqslant\sqrt{(x_1-x_3)^2+(y_1-y_3)^2}\\)
          (几何意义为两边之长大于第三边)
@@ -857,16 +857,16 @@ tags:
         设 \\(\vec{a}=(x_1,y_1)\\) , \\(\vec{b}=(x_2,y_2)\\)
         若 \\(\vec{a}\parallel\vec{b}\enspace\\) (\\(\vec{b}\neq\vec{0}\\)) \\(\hArr\frac{x_1}{x_2}=\frac{y_1}{y_2}\hArr x_1y_2-x_2y_1=0\\) (内项积等于外项积)
         若 \\(\vec{a}\perp\vec{b}\hArr\vec{a}\cdot\vec{b}=0\hArr x_1x_2+y_1y_2=0\\)
-   3. 数量积(向量点乘)
-      \\(\vec{a}\cdot\vec{b}=|\vec{a}||\vec{b}|\cos{\theta}\\) , 其中 \\(\theta\\) 是 \\(\vec{a}\\) 与 \\(\vec{b}\\) 的夹角
+   3. 数量积 (向量点乘)
+      \\(\vec{a}\cdot\vec{b}=\\|\vec{a}\\|\\|\vec{b}\\|\cos{\theta}\\) , 其中 \\(\theta\\) 是 \\(\vec{a}\\) 与 \\(\vec{b}\\) 的夹角
       性质:
       * 交换律 \\(\vec{a}\cdot\vec{b}=\vec{b}\cdot\vec{a}\\)
-      * 当 \\(\vec{a}\\) 与 \\(\vec{b}\\) 同向时, \\(\vec{a}\cdot\vec{b}=|\vec{a}||\vec{b}|\\)
-        当 \\(\vec{a}\\) 与 \\(\vec{b}\\) 反向时, \\(\vec{a}\cdot\vec{b}=-|\vec{a}||\vec{b}|\\)
-      * \\(\vec{a}\cdot\vec{a}=|\vec{a}|^2\hArr |\vec{a}|=\sqrt{\vec{a}\cdot\vec{a}}\\)
-      * \\(|\vec{a}\cdot\vec{b}\leqslant|\vec{a}|\cdot|\vec{b}|\\)
+      * 当 \\(\vec{a}\\) 与 \\(\vec{b}\\) 同向时, \\(\vec{a}\cdot\vec{b}=\\|\vec{a}\\|\\|\vec{b}\\|\\)
+        当 \\(\vec{a}\\) 与 \\(\vec{b}\\) 反向时, \\(\vec{a}\cdot\vec{b}=-\\|\vec{a}\\|\\|\vec{b}\\|\\)
+      * 向量模长的平方 \\(\\|\vec{a}\\|^2=\vec{a}\cdot\vec{a}\hArr\\|\vec{a}\\|=\sqrt{\vec{a}\cdot\vec{a}}\\)
+      * \\(|\vec{a}\cdot\vec{b}|\leqslant\\|\vec{a}\\|\cdot\\|\vec{b}\\|\\)
       * 若 \\(\vec{a}=(x_1,y_1)\\) , \\(\vec{b}=(x_2,y_2)\\) , 则 \\(\vec{a}\cdot\vec{b}=x_1x_2+y_1y_2\\)
-        \\(\cos\theta=\frac{\vec{a}\cdot\vec{b}}{|\vec{a}||\vec{b}|}=\frac{x_1x_2+y_1y_2}{\sqrt{x_1^2+y_1^2}\sqrt{x_2^2+y_2^2}}\\)
+        \\(\cos\theta=\frac{\vec{a}\cdot\vec{b}}{\\|\vec{a}\\|\\|\vec{b}\\|}=\frac{x_1x_2+y_1y_2}{\sqrt{x_1^2+y_1^2}\sqrt{x_2^2+y_2^2}}\\)
 2. 空间向量
    1. 空间向量及其运算
       向量共线定理推论: 若 \\(A\\)、\\(B\\)、\\(C\\) 三点共线. 对空间任意一点 \\(P\\) , 都有 \\(\vec{PC}=\vec{PA}+\lambda\vec{AB}=\lambda\vec{PB}+(1-\lambda)\vec{PA}\\)
@@ -881,9 +881,9 @@ tags:
       如果三个变量不共面, 那么对空间任一向量 \\(\vec{p}\\) , 存在有序实数组 \\(\\{x,y,z\\}\\) 使得 \\(\vec{p}=x\vec{a}+y\vec{b}+z\vec{c}\\) .
       其中集合 \\(\\{\vec{a},\vec{b},\vec{c}\\}\\) 称为空间的一个基底, \\(\vec{a},\vec{b},\vec{c}\\) 称为基向量
       
-      空间向量的模长: 若 \\(\vec{a}=(x,y,z)\\) , 则 \\(|\vec{a}|=\sqrt{x^2+y^2+z^2}\\)
+      空间向量的模长: 若 \\(\vec{a}=(x,y,z)\\) , 则 \\(\\|\vec{a}\\|=\sqrt{x^2+y^2+z^2}\\)
       空间向量的数量积:
-      若 \\(\vec{a}=(x_1,y_1,z_1)\\)、\\(\vec{b}=(x_2,y_2,z_2)\\) , 则 \\(\cos<\vec{a},\vec{b}>=\frac{\vec{a}\cdot\vec{b}}{|\vec{a}||\vec{b}|}=\frac{x_1x_2+y_1y_2+z_1z_2}{\sqrt{x_1^2+y_1^2+z_1^2}+\sqrt{x_2^2+y_2^2+z_2^2}}\\)
+      若 \\(\vec{a}=(x_1,y_1,z_1)\\)、\\(\vec{b}=(x_2,y_2,z_2)\\) , 则 \\(\cos\text{\textless}\vec{a},\vec{b}\text{\textgreater}=\frac{\vec{a}\cdot\vec{b}}{\\|\vec{a}\\|\\|\vec{b}\\|}=\frac{x_1x_2+y_1y_2+z_1z_2}{\sqrt{x_1^2+y_1^2+z_1^2}+\sqrt{x_2^2+y_2^2+z_2^2}}\\)
    2. 空间向量的应用
       1. 直线的方向向量
          设 \\(\vec{a}\\)、\\(\vec{b}\\) 分别是直线 \\(l\\)、\\(m\\) 的方向向量
@@ -894,7 +894,7 @@ tags:
          应用:
          * 点面距离向量公式
            {% asset_img 2.png %}
-           设 \\(\vec{n}\\) 是平面 \\(\alpha\\) 的法向量, \\(PA\\) 是 \\(\alpha\\) 的斜线, 则点 \\(P\\) 到 \\(\alpha\\) 的距离 \\(d=\frac{|\vec{n}\cdot\vec{PA}|}{|\vec{n}|}\\)
+           \\(\vec{n}\\) 是平面 \\(\alpha\\) 的法向量, \\(PA\\) 是 \\(\alpha\\) 的斜线, 则点 \\(P\\) 到 \\(\alpha\\) 的距离 \\(d=\frac{|\vec{n}\cdot\vec{PA}|}{\\|\vec{n}\\|}\\)
          * 直线与平面
            设 \\(\vec{a}\\) 是 \\(l\\) 的方向向量, \\(\vec{n}\\) 是 \\(\alpha\\) 的法向量
            1. \\(\vec{a}=\lambda\vec{n}\hArr\vec{a}\parallel\vec{n}\hArr l\perp\alpha\\)
@@ -913,18 +913,18 @@ tags:
            符号语言: \\(PO\perp\alpha\\) , \\(l<\alpha\\) , \\(OA\\) 是 \\(PA\\) 在 \\(\alpha\\) 内的摄影. 则 \\(l\perp PA\rArr l\perp OA\\)
       5. 空间角的求法:
          1. 异面直线所成的角 \\((0\degree,90\degree]\\)
-            设异面直线 \\(a\\) 与 \\(b\\) 所成角为 \\(\theta\\) . 且 \\(\vec{a}\\)、\\(\vec{b}\\) 分别 \\(a\\)、\\(b\\) 的方向向量
-            则 \\(\cos\theta=|\cos<\vec{a},\vec{b}>|=\frac{|\vec{a}\cdot\vec{b}|}{|\vec{a}||\vec{b}|}\\)
+            异面直线 \\(a\\) 与 \\(b\\) 所成角为 \\(\theta\\) . 且 \\(\vec{a}\\)、\\(\vec{b}\\) 分别 \\(a\\)、\\(b\\) 的方向向量
+            则 \\(\cos\theta=|\cos\text{\textless}\vec{a},\vec{b}\text{\textgreater}|=\frac{|\vec{a}\cdot\vec{b}|}{\\|\vec{a}\\|\\|\vec{b}\\|}\\)
          2. 二面角 \\((0\degree,180\degree)\\)
-            设二面角 \\(\theta\\) , \\(\vec{u}\\)、\\(\vec{v}\\) 分别是平面 \\(\alpha\\)、\\(\beta\\) 的法向量
-            则 \\(\cos\theta=\cos<\vec{a},\vec{b}>=\frac{\vec{u}\cdot\vec{v}}{|\vec{u}||\vec{v}|}\\) (锐二面角)
-            或 \\(\cos\theta=-\cos<\vec{u},\vec{v}>=-\frac{\vec{u}\cdot\vec{v}}{|\vec{u}||\vec{v}|}\\) (钝二面角)
+            二面角 \\(\theta\\) , \\(\vec{u}\\)、\\(\vec{v}\\) 分别是平面 \\(\alpha\\)、\\(\beta\\) 的法向量
+            则 \\(\cos\theta=\cos\text{\textless}\vec{a},\vec{b}\text{\textgreater}=\frac{\vec{u}\cdot\vec{v}}{\\|\vec{u}\\|\\|\vec{v}\\|}\\) (锐二面角)
+            或 \\(\cos\theta=-\cos\text{\textless}\vec{u},\vec{v}\text{\textgreater}=-\frac{\vec{u}\cdot\vec{v}}{\\|\vec{u}\\|\\|\vec{v}\\|}\\) (钝二面角)
          3. 直线与平面所成角 \\((0\degree,90\degree]\\)
-            设斜线 \\(PA\\) 与平面 \\(\alpha\\) 所成角为 \\(\theta\\) , \\(\vec{n}\\) 为 \\(\alpha\\) 的法向量, \\(\vec{PA}\\) 是斜线 \\(PA\\) 的方向向量
-            则 \\(\sin\theta=|\cos<\vec{PA},\vec{n}>|=\frac{|\vec{PA}\cdot\vec{n}|}{|\vec{PA}||\vec{n}|}\\)
+            斜线 \\(PA\\) 与平面 \\(\alpha\\) 所成角为 \\(\theta\\) , \\(\vec{n}\\) 为 \\(\alpha\\) 的法向量, \\(\vec{PA}\\) 是斜线 \\(PA\\) 的方向向量
+            则 \\(\sin\theta=|\cos\text{\textless}\vec{PA},\vec{n}\text{\textgreater}|=\frac{|\vec{PA}\cdot\vec{n}|}{\\|\vec{PA}\\|\\|\vec{n}\\|}\\)
       6. 点到直线距离(向量法):
          例: 已知直线 \\(l\\) 过点 \\(P(0,0,0)\\) , 其方向向量 \\(\vec{a}=(1,1,1)\\) , 则点 \\(Q(3,4,5)\\) 到直线的距离为?
-         解: 点 \\(Q\\) 到直线 \\(l\\) 的距离为 \\(\sqrt{PQ^2-(\frac{\vec{a}\cdot\vec{PQ}}{|\vec{a}|})^2}=\sqrt{2}\\) (勾股定理)
+         解: 点 \\(Q\\) 到直线 \\(l\\) 的距离为 \\(\sqrt{PQ^2-(\frac{\vec{a}\cdot\vec{PQ}}{\\|\vec{a}\\|})^2}=\sqrt{2}\\) (勾股定理)
          {% asset_img 3.png %}
 
 ## 坐标系与参数方程
