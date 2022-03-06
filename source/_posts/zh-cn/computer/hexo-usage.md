@@ -116,9 +116,7 @@ Example:
 
    <article class="message message-immersive is-warning">
    <div class="message-body">
-   <i class="fas fa-question-circle mr-2"></i>Something wrong with this article? 
-   Click <a href="https://github.com/ppoffice/hexo-theme-icarus/edit/site/source/_posts/en/Getting-Started.md">here</a> 
-   to submit your revision.
+   <i class="fas fa-question-circle mr-2"></i>Something wrong with this article? Click <a href="https://github.com/ppoffice/hexo-theme-icarus/edit/site/source/_posts/en/Getting-Started.md">here</a> to submit your revision.
    </div>
    </article>
 
@@ -180,28 +178,29 @@ to submit your revision.
    <!-- 最好加条横线以和下文内容区分 -->
    <hr>
    
+   <!-- 在页面底部添加 JS 脚本 -->
    <script>
-   document.addEventListener('DOMContentLoaded', () => {
-     const tabs = document.querySelectorAll('.tabs li')
-     if (tabs === undefined) return
-   
-     tabs.forEach((tab) => {
-       tab.addEventListener('click', (e) => {
-         // event.currentTarget refers to element on which
-         // the event listener was attached
-         const currentTab = document.querySelector('.tabs li.is-active')
-         const currentContent = document.getElementById(currentTab.querySelector('a').getAttribute('href').substring(1))
-         const newTab = e.currentTarget
-         const newTabContent = document.getElementById(e.currentTarget.querySelector('a').getAttribute('href').substring(1))
-   
-         currentTab.classList.remove('is-active')
-         currentContent.classList.add('is-hidden')
-   
-         newTab.classList.add('is-active')
-         newTabContent.classList.remove('is-hidden')
-       })
-     })
-   })
+   window.addEventListener('DOMContentLoaded', () => {
+       Array
+           .from(document.querySelectorAll('.tabs li'))
+           .forEach((tab) => {
+               tab.addEventListener('click', (e) => {
+                   e.preventDefault();
+                   const currentTab = document.querySelector('.tabs li.is-active');
+                   currentTab.classList.remove('is-active');
+                   document
+                       .getElementById(currentTab.querySelector('a').getAttribute('href').substring(1))
+                       .classList.add('is-hidden');
+                   
+                   const newTab = e.currentTarget;
+                   newTab.classList.add('is-active');
+                   document
+                       .getElementById(e.currentTarget.querySelector('a').getAttribute('href').substring(1))
+                       .classList.remove('is-hidden');
+                   
+               });
+           });
+   });
    </script>
    ```
    <div class="tabs is-boxed my-3">
@@ -229,30 +228,8 @@ to submit your revision.
      woooooooooo!
    </div>
 
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  const tabs = document.querySelectorAll('.tabs li')
-  if (tabs === undefined) return
 
-  tabs.forEach((tab) => {
-    tab.addEventListener('click', (e) => {
-      // event.currentTarget refers to element on which
-      // the event listener was attached
-      const currentTab = document.querySelector('.tabs li.is-active')
-      const currentContent = document.getElementById(currentTab.querySelector('a').getAttribute('href').substring(1))
-      const newTab = e.currentTarget
-      const newTabContent = document.getElementById(e.currentTarget.querySelector('a').getAttribute('href').substring(1))
-
-      currentTab.classList.remove('is-active')
-      currentContent.classList.add('is-hidden')
-
-      newTab.classList.add('is-active')
-      newTabContent.classList.remove('is-hidden')
-    })
-  })
-})
-</script>
-3. 使用内联 CSS 管理行首缩进. (虽然我更喜欢用在段落前加 `&emsp\;` 这种方式)
+1. 使用内联 CSS 管理行首缩进. (虽然我更喜欢用在段落前加 `&emsp\;` 这种方式)
    ```html
    <span class=sentence>凌晨 1 时, 大多数人已睡了三小时, 进入易醒的浅睡阶段, 对疼痛特别敏感.</span>
    
