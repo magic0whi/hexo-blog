@@ -189,3 +189,41 @@ TODO: draw figure of svg format by using tikz
   </ol>
 </details>
 
+### Matrices
+
+1. \\(A=\begin{bmatrix} 1 & 2 \\\ 3 & 4 \\\ 5 & 6 \end{bmatrix}\\) is a 3 by 2 matrix: \\(m=3\\) rows and \\(n=2\\) columns.
+2. \\(A\bm{x}=\begin{bmatrix} 1 & 2 \\\ 3 & 4 \\\ 5 & 6 \end{bmatrix}\begin{bmatrix} x_1 \\\ x_2 \end{bmatrix}\\) is **a combination of the columns**&emsp;\\(A\bm{x}=x_1\begin{bmatrix} 1 \\\ 3 \\\ 5 \end{bmatrix}+x_2\begin{bmatrix} 2 \\\ 4 \\\ 6 \end{bmatrix}\\).
+3. The 3 components of \\(A\bm{x}\\) are dot products of the 3 rows of \\(A\\) with the vector \\(\bm{x}\\):
+   <div>
+   $$
+   \textbf{Row at a time}
+   \qquad
+   \begin{bmatrix} 1 & 2 \\ 3 & 4 \\ 5 & 6 \end{bmatrix}\begin{bmatrix} 7 \\ 8 \end{bmatrix}=\begin{bmatrix} 1\cdot 7+2\cdot 8 \\ 3\cdot 7+4\cdot 8 \\ 5\cdot 7+6\cdot 8 \end{bmatrix}=\begin{bmatrix} 23 \\ 53 \\ 83 \end{bmatrix}\text{.}
+   $$
+   </div>
+4. Equations in matrix form \\(A\bm{x}=\bm{b}\\): \\(\begin{bmatrix} 2 & 5 \\\ 3 & 7 \end{bmatrix}\begin{bmatrix} x_1 \\\ x_2 \end{bmatrix}=\begin{bmatrix} b_1 \\\ b_2 \end{bmatrix}\\) replaces \\(\begin{array}{l} 2x_1+5x_2=b_1 \\\ 3x_1+7x_2=b_2 \end{array}\\).
+5. The solution to \\(A\bm{x}=\bm{b}\\) can be written as \\(\bm{x}=A^{-1}\bm{b}\\). But some matrices don't allow \\(A^{-1}\\)
+
+<!-- <details>
+  <summary><span class="list-summary">&dagger; WORKED EXAMPLES &dagger;</span></summary> -->
+  <ol class="worked-examples">
+    <li>
+      <span class="list-num">1.3 A</span>&emsp;Change the southwest entry \(a_{31}\) of \(A\) (row 3, column 1) to \(a_{31}=1\):
+      $$
+      A\bm{x}=\bm{b}\qquad\left[\begin{array}{rrr} 1 & 0 & 0 \\ -1 & 1 & 0 \\ \bm{1} & -1 & 1 \end{array}\right]\begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix}=\left[\begin{alignedat}{1} & x_1 \\ - & x_1+x_2 \\  & \bm{x_1}-x_2+x_3 \end{alignedat}\right]=\begin{bmatrix} b_1 \\ b_2 \\ b_3 \end{bmatrix}\text{.}
+      $$
+      <strong>Find the solution \(\bm{x}\) for any \(\bm{b}\). From \(\bm{x}=A^{-1}\bm{b}\) read off the inverse matrix \(A^{-1}\).</strong>
+      <br><br>
+      <span class="list-num">Solution</span>&emsp;Solve the (Linear triangular) system \(A\bm{x}=\bm{b}\) from top to bottom:
+      $$
+      \begin{alignedat}{3}
+      & \text{first}\quad && x_1=b_1 && \\
+      & \text{then}\quad && x_2=b_1+ && b_2 \\
+      & \text{then}\quad && x_3= && b_2+b_3
+      \end{alignedat}
+      \text{This says that }\bm{x}=A^{-1}\bm{b}=\begin{bmatrix} 1 & 0 & 0 \\ 1 & 1 & 0 \\ 0 & 1 & 1 \end{bmatrix}\begin{bmatrix} b_1 \\ b_2 \\ b_3 \end{bmatrix}
+      $$
+      This is good practice to see the columns of the inverse matrix multiplying \(b_1\), \(b_2\), and \(b_3\). The first column of \(A^{-1}\)
+    </li>
+  </ol>
+<!-- </details> -->
