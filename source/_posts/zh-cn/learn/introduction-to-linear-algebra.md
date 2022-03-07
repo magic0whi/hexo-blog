@@ -40,6 +40,8 @@ article.article .content {
 
 This is a copy of both brief summary and worked examples of each section in the Introduction to Linear Algebra (Fifth Edition) by Gilbert Strang
 
+TODO: draw figure of svg format by using tikz
+
 <!-- more -->
 
 ## Chapter 1
@@ -52,6 +54,80 @@ This is a copy of both brief summary and worked examples of each section in the 
 4. The combinations \\(c\begin{bmatrix} 1 \\\ 1 \end{bmatrix}+d\begin{bmatrix} 2 \\\ 3 \end{bmatrix}\\) fill the whole \\(xy\\) place. They produce every \\(\begin{bmatrix} x \\\ y \end{bmatrix}\\)
 5. The combinations \\(c\begin{bmatrix} 1 \\\ 1 \\\ 1 \end{bmatrix}+d\begin{bmatrix} 2 \\\ 3 \\\ 4 \end{bmatrix}\\) fill a **plane** in \\(xyz\\) space. Same plane for \\(\begin{bmatrix} 1 \\\ 1 \\\ 1 \end{bmatrix}\\), \\(\begin{bmatrix} 3 \\\ 4 \\\ 5 \end{bmatrix}\\).
 6. But \\(\begin{array}{l} c+2d=1 \\\ c+3d=0 \\\ c+4d=0 \end{array}\\) has no solution because its right side \\(\begin{bmatrix} 1 \\\ 0 \\\ 0 \end{bmatrix}\\) is not on that plane.
+
+<details>
+  <summary><span class="list-summary">&dagger; WORKED EXAMPLES &dagger;</span></summary>
+  <ol class="worked-examples">
+    <li>
+      <span class="list-num">1.1 A</span>&emsp;The linear combinations of \(\bm{v}=(1,1,0)\) and \(\bm{w}=(0,1,1)\) fill a plane in \(\mathbf{R}^3\). <em>Describe that plane</em>. Find a vector that is <em>not</em> a combination of \(\bm{v}\) and \(\bm{w}\)&mdash;not on the plane.
+      <br><br>
+      <span class="list-num">Solution</span>&emsp;The plane of \(\bm{v}\) and \(\bm{w}\) contains all combinations \(c\bm{v}+d\bm{w}\). The vectors in that plane allow any \(c\) and \(d\). The plane of Figure 1.3 fills in between the two lines.
+      <details>
+        <summary>&dagger; Figure 1.3 &dagger;</summary>
+        {% asset_img Figure1.3.png %}
+      </details>
+      <br>
+      $$
+      \text{Combinations}\qquad c\bm{v}+d\bm{w}=c\begin{bmatrix} 1 \\ 1 \\ 0 \end{bmatrix}+d\begin{bmatrix} 0 \\ 1 \\ 1 \end{bmatrix}=\begin{bmatrix} c \\ c+d \\ d \end{bmatrix}\text{fill a plane.}
+      $$
+      Four vectors in that plane are \((0,0,0)\) and \((2,3,1)\) and \((5,7,2)\) and \((\pi,2\pi,\pi)\). The second component \(c+d\) is always the sum of the first and third components. Like most vectors, \((1,2,3)\) <em>is <strong>not</strong> in the plane, because</em> \(2\neq 1+3\).
+      <br>
+      &emsp;&ensp;Another description of this plane through \((0,0,0)\) is to know that \(\bm{n}=(1,-1,1)\) is <strong>perpendicular</strong> to the plane. Section 1.2 will confirm that \(90\degree\) angle by testing dot products: \(\bm{v}\cdot\bm{m}=0\) and \(\bm{w}\cdot\bm{n}=0\). Perpendicular vectors have zero dot products.
+    </li>
+    <li>
+      <span class="list-num">1.1 B</span>&emsp;For \(\bm{v}=(1,0)\) and \(\bm{w}=(0,1)\), describe all points \(c\bm{v}\) with (<b>1</b>) <em>whole numbers \(c\)</em> (<b>2</b>) <em>nonnegative numbers \(c\geq 0\)</em>. Then add all vectors \(d\bm{w}\) and describe all \(c\bm{v}+d\bm{w}\)
+      <br><br>
+      <span class="list-num">Solution</span>
+      <br>
+      &ensp;(<b>1</b>)&ensp;The vectors \(c\bm{v}=(c,0)\) with whole numbers \(c\) are <strong>equally spaced points</strong> along the \(x\) axis (the direction of \(\bm{v}\)). They include \((-2,0)\), \((-1,0)\), \((0,0)\), \((1,0)\), \((2,0)\).
+      <br>
+      &ensp;(<b>2</b>)&ensp;The vectors \(c\bm{v}\) with \(c\geq 0\) fill a <strong>half-line</strong>. It is the positive \(x\) axis. This half-line starts at \((0,0)\) where \(c=0\). It includes \((100,0)\) and \((\pi,0)\) but not \((-100,0)\).
+      <br>
+      &ensp;(<b>1&#x2B9;</b>)&ensp;Adding all vectors \(d\bm{w}=(0,d)\) puts a vertical line through those equally spaced \(c\bm{v}\). We have infinitely many <em><strong>parallel lines</strong></em> from (<em>whole number \(c\), any number \(d\)</em>).
+      <br>
+      &ensp;(<b>2&#x2B9;</b>)&ensp;Adding all vectors \(d\bm{w}\) puts a vertical line through every \(c\bm{v}\) on the half-line. Now we have <em><strong>half-plane</strong></em>. The right half of the \(xy\) plane has any \(x\geq 0\) and any \(y\).
+    </li>
+    <li>
+      <span class="list-num">1.1 C</span>&emsp;Find two equations for \(c\) and \(d\) so that <strong>the linear combination \(c\bm{v}+d\bm{w}\) equals \(\bm{b}\)</strong>:
+      $$
+      \bm{v}=\begin{bmatrix} 2 \\ -1 \end{bmatrix}\qquad\bm{w}=\begin{bmatrix} -1 \\ 2 \end{bmatrix}\qquad\bm{b}=\begin{bmatrix} 1 \\ 0 \end{bmatrix}
+      $$
+      <span class="list-num">Solution</span>&emsp;In applying mathematics, many problems have two parts:
+      <br>
+      &emsp;<b>1</b>&ensp;<em>Modeling part</em>&emsp;Express the problem by a set of equations.
+      <br>
+      &emsp;<b>2</b>&ensp;<em>Computational part</em>&emsp;Solve those equations by a fast and accurate algorithm.
+      <br>
+      Here we are only asked for the first part (the equations). Chapter 2 is devoted to the second part (the solution). Our example fits into fundamental model for linear algebra:
+      $$
+      \text{Find $n$ numbers }c_1,\ldots,c_n\text{ so that }c_1\bm{v}_1+\cdots+c_n\bm{v}_n=\bm{b}
+      $$
+      For \(n=2\) we will find a formula for the \(c\)'s. The "elimination method" in Chapter 2 succeeds far beyond \(n=1000\). For \(n\) greater than 1 billion, see Chapter 11. Here \(n=2\):
+      $$
+      \colorbox{e8f1fe}{$\begin{array}{l} \textbf{Vector equation} \\ c\bm{v}+d\bm{w}=\bm{b} \end{array}\qquad c\left[\begin{array}{r} 2 \\ -1 \end{array}\right]+d\left[\begin{array}{r} -1 \\ 2 \end{array}\right]=\begin{bmatrix} 1 \\ 0 \end{bmatrix}$}
+      $$
+      The required equations for \(c\) and \(d\) just come from the two components separately:
+      $$
+      \textcolor{RoyalBlue}{\textbf{Two ordinary equations}}
+      \qquad
+      \begin{alignedat}{2.5} % 0.5 per column, columms align are col1=right, col2=left, col3=right...
+        && 2c- && d=1 \\
+        - && c+ && 2d=0
+      \end{alignedat}
+      $$
+      Each equation produces a line. The two lines cross at the solution \(c=\dfrac{2}{3}\), \(d=\dfrac{1}{3}\). Why not see this also as a <strong>matrix equation</strong>, since that is where we are going:
+      $$
+      \textbf{2 by 2 matrix}
+      \qquad
+      \left[\begin{array}{rr}
+        \bm{2} & \bm{-1} \\
+        \bm{-1} & \bm{2}
+      \end{array}\right]
+      \begin{bmatrix} c \\ d \end{bmatrix}=\begin{bmatrix} 1 \\ 0 \end{bmatrix}
+      $$
+    </li>
+  </ol>
+</details>
 
 ### Lengths and Dot Products
 
@@ -67,7 +143,7 @@ This is a copy of both brief summary and worked examples of each section in the 
   <summary><span class="list-summary">&dagger; WORKED EXAMPLES &dagger;</span></summary>
   <ol class="worked-examples">
     <li>
-      <span class="list-num">1.2 A</span>&emsp;For the vectors \(\bm{v}=(3,4)\) and \(\bm{w}=(4,3)\) test the Schwarz inqeuality on \(\bm{v}\cdot\bm{w}\) and the triangle inqeuality on \(\|\bm{v}+\bm{w}\|\). Find \(\cos\theta\) for the angle between \(\bm{v}\) and \(\bm{w}\). Which \(\bm{v}\) and \(\bm{w}\) give <i>equality</i> \(\|\bm{v}\cdot\bm{w}\|=\|\bm{v}\|\|\bm{w}\|\) and \(\|\bm{v}+\bm{w}\|=\|\bm{w}\|+\|\bm{w}\|\)?
+      <span class="list-num">1.2 A</span>&emsp;For the vectors \(\bm{v}=(3,4)\) and \(\bm{w}=(4,3)\) test the Schwarz inqeuality on \(\bm{v}\cdot\bm{w}\) and the triangle inqeuality on \(\|\bm{v}+\bm{w}\|\). Find \(\cos\theta\) for the angle between \(\bm{v}\) and \(\bm{w}\). Which \(\bm{v}\) and \(\bm{w}\) give <em>equality</em> \(\|\bm{v}\cdot\bm{w}\|=\|\bm{v}\|\|\bm{w}\|\) and \(\|\bm{v}+\bm{w}\|=\|\bm{w}\|+\|\bm{w}\|\)?
       <br><br>
       <span class="list-num">Solution</span>&emsp;The dot product is \(\bm{v}\cdot\bm{w}=(3)(4)+(4)(3)=24\). The length of \(\bm{v}\) is \(\|\bm{v}\|=\sqrt{9+16}=5\) and also \(\|\bm{w}\|=5\). The sum \(\bm{v}+\bm{w}=(7,7)\) has length \(7\sqrt{2}<10\).
       $$
@@ -77,11 +153,12 @@ This is a copy of both brief summary and worked examples of each section in the 
         \textbf{Cosine of angle} & \cos\theta=\frac{24}{25}\quad\text{Thin angle from }\bm{v}=(3,4)\text{ to }\bm{w}=(4,3)
       \end{array}
       $$
-      <i>Equality</i>: One vector is a multiple of the other as in \(\bm{w}=c\bm{v}\). Then the angle is \(0\degree\) or \(180\degree\). In this case \(|\cos\theta|=1\) and \(|\bm{v}\cdot\bm{w}|\) <i>equals</i> \(\|\bm{v}\|\|\bm{w}\|\). If the angle is \(0\degree\), as in \(\bm{w}=2\bm{v}\), then \(\|\bm{v}+\bm{w}\|=\|\bm{v}\|+\|\bm{w}\|\) (both sides give \(3\|\bm{v}\|\)). This \(\bm{v}\), \(2\bm{v}\), \(3\bm{v}\) triangle is flat!
+      <em>Equality</em>: One vector is a multiple of the other as in \(\bm{w}=c\bm{v}\). Then the angle is \(0\degree\) or \(180\degree\). In this case \(|\cos\theta|=1\) and \(|\bm{v}\cdot\bm{w}|\) <em>equals</em> \(\|\bm{v}\|\|\bm{w}\|\). If the angle is \(0\degree\), as in \(\bm{w}=2\bm{v}\), then \(\|\bm{v}+\bm{w}\|=\|\bm{v}\|+\|\bm{w}\|\) (both sides give \(3\|\bm{v}\|\)). This \(\bm{v}\), \(2\bm{v}\), \(3\bm{v}\) triangle is flat!
     </li>
     <li>
-      <span class="list-num">1.2 B</span>&emsp;Find a unit vector \(\bm{u}\) in the direction of \(\bm{v}=(3,4)\). Find a unit vector \(\bm{U}\) that is perpendicular to \(\bm{u}\). How many possibilities for \(\bm{U}\)?<br><br>
-      <span class="list-num">Solution</span>&emsp;For a unit vector \(\bm{u}\), divide \(\bm{v}\) by its length \(\|\bm{v}\|=5\). For a perpendicular vector \(\bm{V}\) we can choose \((-4,3)\) since the dot product \(\bm{v}\cdot\bm{V}\) is \((3)(-4)+(4)(3)=0\). For a <i>unit</i> vector perpendicular to \(\bm{u}\), divide \(\bm{V}\) by its length \(\|\bm{V}\|\):
+      <span class="list-num">1.2 B</span>&emsp;Find a unit vector \(\bm{u}\) in the direction of \(\bm{v}=(3,4)\). Find a unit vector \(\bm{U}\) that is perpendicular to \(\bm{u}\). How many possibilities for \(\bm{U}\)?
+      <br><br>
+      <span class="list-num">Solution</span>&emsp;For a unit vector \(\bm{u}\), divide \(\bm{v}\) by its length \(\|\bm{v}\|=5\). For a perpendicular vector \(\bm{V}\) we can choose \((-4,3)\) since the dot product \(\bm{v}\cdot\bm{V}\) is \((3)(-4)+(4)(3)=0\). For a <em>unit</em> vector perpendicular to \(\bm{u}\), divide \(\bm{V}\) by its length \(\|\bm{V}\|\):
       $$
         \bm{u}=\frac{\bm{v}}{\|\bm{v}\|}=\left(\frac{3}{5},\frac{4}{5}\right)
         \qquad
@@ -96,14 +173,17 @@ This is a copy of both brief summary and worked examples of each section in the 
       <br><br>
       <span class="list-num">Solution</span>&emsp;Those two dot products give linear equations for \(c\) and \(d\). Then \(\bm{x}=(c,d)\).
       $$
-      \begin{alignedat}{3} % 0.5 per column, columms align are col1=right, col2=left, col3=right...
+      \begin{alignedat}{3}
         \bm{x}\cdot\bm{r}=1\qquad\text{is}\qquad &  & 2c- && d=1\qquad & \textbf{The same equations as}  \\
         \bm{x}\cdot\bm{s}=0\qquad\text{is}\qquad & - & c+ && 2d=0\qquad & \textbf{in Worked Example 1.1 C}
       \end{alignedat}
       $$
-      &emsp;&ensp;<i>Comment on n equations for \(x=(x_1,\ldots,x_n)\) in n-dimensional space</i><br>
-      Section 1.1 would start with columns \(\bm{v}_j\). The goal is to produce \(x_1\bm{v}_1+\cdots+x_n\bm{v}_n=\bm{b}\).<br>
-      This section would start from rows \(\bm{r}_i\). Now the goal is to find \(\bm{x}\) with \(\bm{x}\cdot\bm{r}_i=b_i\).<br>
+      &emsp;&ensp;<em>Comment on n equations for \(x=(x_1,\ldots,x_n)\) in n-dimensional space</em>
+      <br>
+      Section 1.1 would start with columns \(\bm{v}_j\). The goal is to produce \(x_1\bm{v}_1+\cdots+x_n\bm{v}_n=\bm{b}\).
+      <br>
+      This section would start from rows \(\bm{r}_i\). Now the goal is to find \(\bm{x}\) with \(\bm{x}\cdot\bm{r}_i=b_i\).
+      <br>
       &emsp;&ensp;Soon the \(\bm{v}\)'s will be columns of a matrix \(A\), and the \(\bm{r}\)'s will be the rows of \(A\). Then the (one and only) problem will be to solve \(A\bm{x}=\bm{b}\).
     </li>
   </ol>
