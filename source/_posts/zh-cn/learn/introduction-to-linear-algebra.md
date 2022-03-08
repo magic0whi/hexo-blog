@@ -19,6 +19,9 @@ article.article .content {
 .katex .base {
     font-size: 0.8em;
 }
+.katex-display {
+    overflow-x: hidden;
+}
 .content ol.worked-examples {
     list-style-type: none;
     margin-left: 0em;
@@ -104,13 +107,13 @@ TODO: draw figure of svg format by using tikz
       $$
       For \(n=2\) we will find a formula for the \(c\)'s. The "elimination method" in Chapter 2 succeeds far beyond \(n=1000\). For \(n\) greater than 1 billion, see Chapter 11. Here \(n=2\):
       $$
-      \colorbox{e8f1fe}{$\begin{array}{l} \textbf{Vector equation} \\ c\bm{v}+d\bm{w}=\bm{b} \end{array}\qquad c\left[\begin{array}{r} 2 \\ -1 \end{array}\right]+d\left[\begin{array}{r} -1 \\ 2 \end{array}\right]=\begin{bmatrix} 1 \\ 0 \end{bmatrix}$}
+      \colorbox{e8f1fe}{$\begin{array}{l} \textbf{Vector equation} \\ c\bm{v}+d\bm{w}=\bm{b} \end{array}\qquad c\begin{bmatrix*}[r] 2 \\ -1 \end{bmatrix*}+d\begin{bmatrix*}[r] -1 \\ 2 \end{bmatrix*}=\begin{bmatrix} 1 \\ 0 \end{bmatrix}$}
       $$
       The required equations for \(c\) and \(d\) just come from the two components separately:
       $$
       \textcolor{RoyalBlue}{\textbf{Two ordinary equations}}
       \qquad
-      \begin{alignedat}{2.5} % 0.5 per column, columms align are col1=right, col2=left, col3=right...
+      \begin{alignedat}{2.5} % Using alignedat for no space between columns. For parameter there is +0.5 per column (pair of rl columns), columms align are col1=right, col2=left, col3=right...
         && 2c- && d=1 \\
         - && c+ && 2d=0
       \end{alignedat}
@@ -119,10 +122,7 @@ TODO: draw figure of svg format by using tikz
       $$
       \textbf{2 by 2 matrix}
       \qquad
-      \left[\begin{array}{rr}
-        \bm{2} & \bm{-1} \\
-        \bm{-1} & \bm{2}
-      \end{array}\right]
+      \begin{bmatrix*}[r] \bm{2} & \bm{-1} \\ \bm{-1} & \bm{2} \end{bmatrix*}
       \begin{bmatrix} c \\ d \end{bmatrix}=\begin{bmatrix} 1 \\ 0 \end{bmatrix}
       $$
     </li>
@@ -132,7 +132,7 @@ TODO: draw figure of svg format by using tikz
 ### Lengths and Dot Products
 
 1. The "dot product" of \\(\bm{v}=\begin{bmatrix} 1 \\\ 2 \end{bmatrix}\\) and \\(\bm{w}=\begin{bmatrix} 4 \\\ 5 \end{bmatrix}\\) is \\(\bm{v}\cdot\bm{w}=(1)(4)+(2)(5)=4+10=\bm{14}\\)
-2. \\(\bm{v}=\begin{bmatrix} 1 \\\ 3 \\\ 2 \end{bmatrix}\\) and \\(\bm{w}=\left[\begin{array}{r} 4 \\\ -4 \\\ 4 \end{array}\right]\\) are perpendicular because \\(\bm{v}\cdot\bm{w}\\) is zero: \\((1)(4)+(3)(-4)+(2)(4)=\bm{0}\\)
+2. \\(\bm{v}=\begin{bmatrix} 1 \\\ 3 \\\ 2 \end{bmatrix}\\) and \\(\bm{w}=\begin{bmatrix*}[r] 4 \\\ -4 \\\ 4 \end{bmatrix*}\\) are perpendicular because \\(\bm{v}\cdot\bm{w}\\) is zero: \\((1)(4)+(3)(-4)+(2)(4)=\bm{0}\\)
 3. The length squared of \\(\bm{v}=\begin{bmatrix} 1 \\\ 3 \\\ 2 \end{bmatrix}\\) is \\(\bm{v}\cdot\bm{v}=1+9+4=14\\). **The length is** \\(\\|\bm{v}\\|=\sqrt{\bm{14}}\\).
 4. Then \\(\bm{u}=\dfrac{\bm{v}}{\\|\bm{v}\\|}=\dfrac{\bm{v}}{\sqrt{14}}=\dfrac{1}{\sqrt{14}}\begin{bmatrix} 1 \\\ 3 \\\ 2 \end{bmatrix}\\) has length \\(\\|\bm{u}\\|=\bm{1}\\). Check \\(\dfrac{1}{\underline{14}}+\dfrac{9}{\underline{14}}+\dfrac{4}{\underline{14}}=1\\).
 5. The angle \\(\theta\\) between \\(\bm{v}\\) and \\(\bm{w}\\) has \\(\cos\theta=\dfrac{\bm{v}\cdot\bm{w}}{\\|\bm{v}\\|\\|\bm{w}\\|}\\)
@@ -191,9 +191,9 @@ TODO: draw figure of svg format by using tikz
 
 ### Matrices
 
-1. \\(A=\begin{bmatrix} 1 & 2 \\\ 3 & 4 \\\ 5 & 6 \end{bmatrix}\\) is a 3 by 2 matrix: \\(m=3\\) rows and \\(n=2\\) columns.
+1. \\(A=\begin{bmatrix} 1 & 2 \\\ 3 & 4 \\\ 5 & 6 \end{bmatrix}\\) is a 3 by 2 matrix : \\(m=3\\) rows and \\(n=2\\) columns.
 2. \\(A\bm{x}=\begin{bmatrix} 1 & 2 \\\ 3 & 4 \\\ 5 & 6 \end{bmatrix}\begin{bmatrix} x_1 \\\ x_2 \end{bmatrix}\\) is **a combination of the columns**&emsp;\\(A\bm{x}=x_1\begin{bmatrix} 1 \\\ 3 \\\ 5 \end{bmatrix}+x_2\begin{bmatrix} 2 \\\ 4 \\\ 6 \end{bmatrix}\\).
-3. The 3 components of \\(A\bm{x}\\) are dot products of the 3 rows of \\(A\\) with the vector \\(\bm{x}\\):
+3. The 3 components of \\(A\bm{x}\\) are dot products of the 3 rows of \\(A\\) with the vector \\(\bm{x}\\) :
    <div>
    $$
    \textbf{Row at a time}
@@ -201,16 +201,16 @@ TODO: draw figure of svg format by using tikz
    \begin{bmatrix} 1 & 2 \\ 3 & 4 \\ 5 & 6 \end{bmatrix}\begin{bmatrix} 7 \\ 8 \end{bmatrix}=\begin{bmatrix} 1\cdot 7+2\cdot 8 \\ 3\cdot 7+4\cdot 8 \\ 5\cdot 7+6\cdot 8 \end{bmatrix}=\begin{bmatrix} 23 \\ 53 \\ 83 \end{bmatrix}\text{.}
    $$
    </div>
-4. Equations in matrix form \\(A\bm{x}=\bm{b}\\): \\(\begin{bmatrix} 2 & 5 \\\ 3 & 7 \end{bmatrix}\begin{bmatrix} x_1 \\\ x_2 \end{bmatrix}=\begin{bmatrix} b_1 \\\ b_2 \end{bmatrix}\\) replaces \\(\begin{array}{l} 2x_1+5x_2=b_1 \\\ 3x_1+7x_2=b_2 \end{array}\\).
+4. Equations in matrix form \\(A\bm{x}=\bm{b}\\) : \\(\begin{bmatrix} 2 & 5 \\\ 3 & 7 \end{bmatrix}\begin{bmatrix} x_1 \\\ x_2 \end{bmatrix}=\begin{bmatrix} b_1 \\\ b_2 \end{bmatrix}\\) replaces \\(\begin{array}{l} 2x_1+5x_2=b_1 \\\ 3x_1+7x_2=b_2 \end{array}\\).
 5. The solution to \\(A\bm{x}=\bm{b}\\) can be written as \\(\bm{x}=A^{-1}\bm{b}\\). But some matrices don't allow \\(A^{-1}\\)
 
-<!-- <details>
-  <summary><span class="list-summary">&dagger; WORKED EXAMPLES &dagger;</span></summary> -->
+<details>
+  <summary><span class="list-summary">&dagger; WORKED EXAMPLES &dagger;</span></summary>
   <ol class="worked-examples">
     <li>
       <span class="list-num">1.3 A</span>&emsp;Change the southwest entry \(a_{31}\) of \(A\) (row 3, column 1) to \(a_{31}=1\):
       $$
-      A\bm{x}=\bm{b}\qquad\left[\begin{array}{rrr} 1 & 0 & 0 \\ -1 & 1 & 0 \\ \bm{1} & -1 & 1 \end{array}\right]\begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix}=\left[\begin{alignedat}{1} & x_1 \\ - & x_1+x_2 \\  & \bm{x_1}-x_2+x_3 \end{alignedat}\right]=\begin{bmatrix} b_1 \\ b_2 \\ b_3 \end{bmatrix}\text{.}
+      A\bm{x}=\bm{b}\qquad\begin{bmatrix*}[r] 1 & 0 & 0 \\ -1 & 1 & 0 \\ \bm{1} & -1 & 1 \end{bmatrix*}\begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix}=\left[\begin{alignedat}{1} & x_1 \\ - & x_1+x_2 \\  & \bm{x_1}-x_2+x_3 \end{alignedat}\right]=\begin{bmatrix} b_1 \\ b_2 \\ b_3 \end{bmatrix}\text{.}
       $$
       <strong>Find the solution \(\bm{x}\) for any \(\bm{b}\). From \(\bm{x}=A^{-1}\bm{b}\) read off the inverse matrix \(A^{-1}\).</strong>
       <br><br>
@@ -223,7 +223,43 @@ TODO: draw figure of svg format by using tikz
       \end{alignedat}
       \text{This says that }\bm{x}=A^{-1}\bm{b}=\begin{bmatrix} 1 & 0 & 0 \\ 1 & 1 & 0 \\ 0 & 1 & 1 \end{bmatrix}\begin{bmatrix} b_1 \\ b_2 \\ b_3 \end{bmatrix}
       $$
-      This is good practice to see the columns of the inverse matrix multiplying \(b_1\), \(b_2\), and \(b_3\). The first column of \(A^{-1}\)
+      This is good practice to see the columns of the inverse matrix multiplying \(b_1\), \(b_2\), and \(b_3\). The first column of \(A^{-1}\) is the solution for \(\bm{b}=(1,0,0)\). The second column is the solution for \(\bm{b}=(0,1,0)\). The third column \(\bm{x}\) of \(A^{-1}\) is the solution for \(A\bm{x}=\bm{x}=(0,0,1)\).
+      <br>
+      &emsp;&ensp;The three columns of \(A\) are still independent. They don't lie in a plane. The combinations of those three columns, using the right weights \(x_1\), \(x_2\), \(x_3\), can produce any three-dimensional vector \(\bm{b}=(b_1,b_2,b_3)\). Those weights come from \(\bm{x}=A^{-1}\bm{b}\).
+    </li>
+    <li>
+      <span class="list-num">1.3 B</span>&emsp;This \(E\) is an <strong>elimination matrix</strong>. \(E\) has a subtraction and \(E^{-1}\) has an addition.
+      $$ % Sorry for the type, will reformat as soon as KaTex support multicolumn.
+      \bm{b}=E\bm{x}\qquad\begin{bmatrix} b_1 \\ b_2 \end{bmatrix}=\begin{bmatrix} x_1 \\ x_2-\ell x_1 \end{bmatrix}=\begin{bmatrix*}[r] \bm{1} & 0 \\ -\bm{\ell} & \bm{1} \end{bmatrix*}\begin{bmatrix} x_1 \\ x_2 \end{bmatrix}\qquad E=\begin{bmatrix*}[r] \bm{1} & 0 \\ -\bm{\ell} & \bm{1} \end{bmatrix*}
+      $$
+      The first equation is \(x_1=b_1\). The second equation is \(x_2-\ell x_1=b_2\). The inverse will <en>add</em> \(\ell b_1\) to \(b_1\), because the elimination matrix <em>subtracted</em> :
+      $$
+      \bm{x}=E^{-1}\bm{b}\qquad\begin{bmatrix} x_1 \\ x_2 \end{bmatrix}=\left[\begin{alignedat}{1} & b_1 \\ \ell & b_1+b_2 \end{alignedat}\right]=\begin{bmatrix} \bm{1} & 0 \\ \bm{\ell}  & \bm{1} \end{bmatrix}\begin{bmatrix} b_1 \\ b_2 \end{bmatrix}\qquad E^{-1}=\begin{bmatrix} \bm{1} & 0 \\ \bm{\ell}  & \bm{1} \end{bmatrix}
+      $$
+    </li>
+    <li>
+      <span class="list-num">1.3 C</span>&emsp;Change \(C\) from a cyclic difference to a <strong>centered difference</strong> producing \(x_3-x_1\) :
+      $$
+      \begin{equation}
+        C\bm{x}=\bm{b}\qquad\begin{bmatrix*}[r] 0 & 1 & 0 \\ -1 & 0 & 1 \\ 0 & -1 & 0 \end{bmatrix*}\begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix}=\left[\begin{alignedat}{1} x_2 & -0 \\ x_3 & -x_1 \\ 0 & -x_2 \end{alignedat}\right]=\begin{bmatrix} b_1 \\ b_2 \\ b_3 \end{bmatrix}\text{.}
+      \end{equation}
+      $$
+      \(C\bm{x}=\bm{b}\) can only be solved when \(b_1+b_3=x_2-x_2=0\). That is a plane of vectors \(\bm{b}\) in three -dimensional space. Each column of \(C\) is in the plane, the matrix has no inverse. So this plane conatins all combinations of those columns (which are all the vectors \(C\bm{x}\))
+      <br>
+      &emsp;&ensp;I included the zeros so you could see that this \(C\) produces "centered differences". Row \(i\) of \(C\bm{x}\) is \(x_{i+1}\) (<em>right of center</em>) minus \(x_{i-1}\) (<em>left of center</em>). Here is 4 by 4 :
+      $$
+      \begin{equation}
+        \begin{array}{l} C\bm{x}=\bm{b} \\ \textbf{Centered} \\ \textbf{differences} \end{array}
+        \begin{bmatrix*}[r]
+         0 & 1 & 0 & 0 \\
+         -1 & 0 & 1 & 0 \\
+         0 & -1 & 0 & 1 \\
+         0 & 0 & -1 & 0
+       \end{bmatrix*}
+       \begin{bmatrix} x_1 \\ x_2 \\ x_3 \\ x_4 \end{bmatrix}=\left[\begin{alignedat}{1} x_2 & -0 \\ x_3 & -x_1 \\ x_4 & -x_2 \\ 0 & -x_3 \end{alignedat}\right]=\begin{bmatrix} b_1 \\ b_2 \\ b_3 \\ b_4 \end{bmatrix}
+      \end{equation}
+      $$
+      Surprisingly this matrix is now invertible! The first and last rows tell you \(x_2\) and \(x_3\). Then the middle rows give \(x_1\) and \(x_4\). It is possible to write down the inverse matrix \(C^{-1}\). But 5 by 5 will be singular (<em>not invertible</em>) again...
     </li>
   </ol>
-<!-- </details> -->
+</details>
