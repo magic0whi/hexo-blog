@@ -19,9 +19,9 @@ article.article .content {
 .katex .base {
     font-size: 0.8em;
 }
-.katex-display {
+/* .katex-display {
     overflow-x: hidden;
-}
+} */
 .content ol.worked-examples {
     list-style-type: none;
     margin-left: 0em;
@@ -47,7 +47,7 @@ TODO: draw figure of svg format by using tikz
 
 <!-- more -->
 
-## Chapter 1
+## Chapter 1 Introduction to Vectors
 
 ### Vectors and Linear Combinations
 
@@ -105,7 +105,7 @@ TODO: draw figure of svg format by using tikz
       $$
       \text{Find $n$ numbers }c_1,\ldots,c_n\text{ so that }c_1\bm{v}_1+\cdots+c_n\bm{v}_n=\bm{b}
       $$
-      For \(n=2\) we will find a formula for the \(c\)'s. The "elimination method" in Chapter 2 succeeds far beyond \(n=1000\). For \(n\) greater than 1 billion, see Chapter 11. Here \(n=2\):
+      For \(n=2\) we will find a formula for the \(c\)'s. The &ldquo;elimination method&rdquo; in Chapter 2 succeeds far beyond \(n=1000\). For \(n\) greater than 1 billion, see Chapter 11. Here \(n=2\):
       $$
       \colorbox{e8f1fe}{$\begin{array}{l} \textbf{Vector equation} \\ c\bm{v}+d\bm{w}=\bm{b} \end{array}\qquad c\begin{bmatrix*}[r] 2 \\ -1 \end{bmatrix*}+d\begin{bmatrix*}[r] -1 \\ 2 \end{bmatrix*}=\begin{bmatrix} 1 \\ 0 \end{bmatrix}$}
       $$
@@ -246,7 +246,7 @@ TODO: draw figure of svg format by using tikz
       $$
       \(C\bm{x}=\bm{b}\) can only be solved when \(b_1+b_3=x_2-x_2=0\). That is a plane of vectors \(\bm{b}\) in three -dimensional space. Each column of \(C\) is in the plane, the matrix has no inverse. So this plane conatins all combinations of those columns (which are all the vectors \(C\bm{x}\))
       <br>
-      &emsp;&ensp;I included the zeros so you could see that this \(C\) produces "centered differences". Row \(i\) of \(C\bm{x}\) is \(x_{i+1}\) (<em>right of center</em>) minus \(x_{i-1}\) (<em>left of center</em>). Here is 4 by 4 :
+      &emsp;&ensp;I included the zeros so you could see that this \(C\) produces &ldquo;centered differences&rdquo;. Row \(i\) of \(C\bm{x}\) is \(x_{i+1}\) (<em>right of center</em>) minus \(x_{i-1}\) (<em>left of center</em>). Here is 4 by 4 :
       $$
       \begin{equation}
         \begin{array}{l} C\bm{x}=\bm{b} \\ \textbf{Centered} \\ \textbf{differences} \end{array}
@@ -260,6 +260,58 @@ TODO: draw figure of svg format by using tikz
       \end{equation}
       $$
       Surprisingly this matrix is now invertible! The first and last rows tell you \(x_2\) and \(x_3\). Then the middle rows give \(x_1\) and \(x_4\). It is possible to write down the inverse matrix \(C^{-1}\). But 5 by 5 will be singular (<em>not invertible</em>) again...
+    </li>
+  </ol>
+</details>
+
+## Chapter 2 Solving Linear Equations
+
+1. **The column picture of** \\(A\bm{x}=\bm{b}\\) : a combination of \\(n\\) columns of \\(A\\) produces the vector \\(\bm{b}\\).
+2. This is a vector equation \\(A\bm{x}=x_1\bm{a}_1+\cdots+x_n\bm{a}_n=\bm{b}\\) : the columns of \\(A\\) are \\(\bm{a}_1,\bm{a}_2,\ldots,\bm{a}_n\\).
+3. When \\(\bm{b}=\bm{0}\\), a combination \\(A\bm{x}\\) of the columns is *zero* : one possibility is \\(\bm{x}=(0,\ldots,0)\\).
+4. The **row picture of** \\(A\bm{x}=\bm{b}\\) : \\(m\\) equations from \\(m\\) rows give \\(m\\) planes meeting at \\(\bm{x}\\).
+5. A dot product gives the equation of each plane : \\((\textbf{row 1})\cdot\bm{x}=b_1,\ldots,(\textbf{row }\bm{m})\cdot\bm{x}=b_m\\)
+6. When \\(\bm{b}=\bm{0}\\), all the planes \\((\textbf{row }\bm{i})\cdot\bm{x}=0\\) go through the center point \\(\bm{x}=(0,0,\ldots,0)\\).
+
+<details>
+  <summary><span class="list-summary">&dagger; WORKED EXAMPLES &dagger;</span></summary>
+  <ol class="worked-examples">
+    <li>
+      <span class="list-num">2.1 A</span>&emsp;Describe the column picture of these three equations \(A\bm{x}=\bm{b}\). Solve by careful inspection of the columns (instead of elimination):
+      $$
+      \begin{array}{r} x+3y+2z=-3 \\ 2x+2y+2z=-2 \\ 3x+5y+6z=-5 \end{array}\qquad\text{which is}\qquad\begin{bmatrix} 1 & \bm{3} & 2 \\ 2 & \bm{2} & 2 \\ 3 & \bm{5} & 6 \end{bmatrix}\begin{bmatrix} x \\ y \\ z \end{bmatrix}=\begin{bmatrix*}[r] -3 \\ -2 \\ -5 \end{bmatrix*}
+      $$
+      <span class="list-num">Solution</span>&emsp;The column picture asks for a linear combination that produces \(\bm{b}\) from the three columns of \(A\). In this example \(\bm{b}\) is <em>minus the second column</em>. So the solution is \(x=0\), \(y=-1\), \(z=0\). To show that \((0,-1,0)\) is the <em>only</em> solution we have to know that &ldquo;\(A\) is invertible&rdquo; and &ldquo;the columns are independent&rdquo; and &ldquo;the determinant isn't zero.&rdquo;
+      <br>
+      &emsp;&ensp;Those words are not yet defined but the test comes from elimination: We need (and for this matrix we find) a full set of three nonzero pivots.
+      <br>
+      &emsp;&ensp;Suppose the right side changes to \(\bm{b}=(4,4,8)=\) sum of the first two columns. Then the good combination has \(x=1\), \(y=1\), \(z=0\). The solution becomes \(\bm{x}=(1,1,0)\).
+    </li>
+    <li>
+      <span class="list-num">2.1 B</span>&emsp;This system has <em>no solution</em>. The planes in the row picture don't meet at a point.
+      $$
+      \textcolor{RoyalBlue}{\textit{\textbf{No combination of the three columns produces b. How to show this?}}} \\
+      \begin{array}{r} x+3y+5z=4 \\ x+2y-3z=5 \\ 2x+5y+2z=8 \end{array}\qquad\begin{bmatrix*}[r] 1 & 3 & 5 \\ 1 & 2 & -3 \\ 2 & 5 & 2 \end{bmatrix*}\begin{bmatrix} x \\ y \\ z \end{bmatrix}=\begin{bmatrix} 4 \\ 5 \\ 8 \end{bmatrix}=\bm{b}
+      $$
+      <em>Idea</em>&emsp;Add \((\text{equation 1})+(\text{equation 2})-(\text{equation 3})\). The result is \(\bm{0}=\bm{1}\). This system cannot have a solution. We could say: The vector \((1,1,-1)\) is orthogonal to all three columns of \(A\) but <em>not</em> orthogonal to \(\bm{b}\).
+      <br>
+      &ensp;(<b>1</b>)&ensp;Are any two of the three planes parallel? What are the equations of planes parallel to \(x+3y+5z=4\)?
+      <br>
+      &ensp;(<b>2</b>)&ensp;Take the dot product of each column of \(A\) (and also \(\bm{b}\)) with \(\bm{y}=(1,1,-1)\). How do those dot products show that no combination of columns equals \(\bm{b}\)?
+      &ensp;(<b>3</b>)&ensp;Find three different right side vectors \(\bm{b}^{*}\) and \(\bm{b}^{**}\) and \(\bm{b}^{***}\) that *do* allow solutions.
+      <br>
+      <span class="list-num">Solution</span>&emsp;
+      <br>
+      &ensp;(<b>1</b>)&ensp;The planes don't meet at a point, even though no two planes are parallel. For a plane parallel to \(x+3y+5z=4\). Change the &ldquo;4&rdquo;. The parallel plane \(x+3y+5z=0\) goes through the origin \((0,0,0)\). And the equation multiplied by any nonzero constant still gives the same plane, as in \(2x+6y+10z=8\).
+      <br>
+      &ensp;(<b>2</b>)&ensp;The dot product of each column of \(A\) with \(\bm{y}=(1,1,-1)\) is <em>zero</em>. On the right side, \(\bm{y}\cdot\bm{b}=(1,1,-1)\cdot(4,5,8)=\bm{1}\) is <em>not zero</em>. \(A\bm{x}=\bm{b}\) led to \(0=1\): <strong>no solution</strong>.
+      <br>
+      &ensp;(<b>3</b>)&ensp;There is a solution when \(\bm{b}\) is a combination of the columns. These three choices of \(\bm{b}\) have solutions including \(\bm{x}^{*}=(1,0,0)\) and \(\bm{x}^{**}=(1,1,1)\) and \(\bm{x}^{***}=(0,0,0)\):
+      $$
+      \bm{b}^{*}=\begin{bmatrix} 1 \\ 1 \\ 2 \end{bmatrix}=\text{first column}\qquad\bm{b}^{**}=\begin{bmatrix} 9 \\ 0 \\ 9 \end{bmatrix}=\text{sum of columns}\qquad\bm{b}^{***}=\begin{bmatrix} 0 \\ 0 \\ 0 \end{bmatrix}
+      $$
+    </li>
+    <li>
     </li>
   </ol>
 </details>
