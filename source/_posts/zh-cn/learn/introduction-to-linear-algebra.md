@@ -43,7 +43,7 @@ article.article .content {
 
 This is a copy of both brief summary and worked examples of each section in the Introduction to Linear Algebra (Fifth Edition) by Gilbert Strang
 
-TODO: draw figure of svg format by using tikz
+TODO: draw svg format figure by using tikz
 
 <!-- more -->
 
@@ -266,6 +266,8 @@ TODO: draw figure of svg format by using tikz
 
 ## Chapter 2 Solving Linear Equations
 
+### Vectors and Linear Equations
+
 1. **The column picture of** \\(A\bm{x}=\bm{b}\\) : a combination of \\(n\\) columns of \\(A\\) produces the vector \\(\bm{b}\\).
 2. This is a vector equation \\(A\bm{x}=x_1\bm{a}_1+\cdots+x_n\bm{a}_n=\bm{b}\\) : the columns of \\(A\\) are \\(\bm{a}_1,\bm{a}_2,\ldots,\bm{a}_n\\).
 3. When \\(\bm{b}=\bm{0}\\), a combination \\(A\bm{x}\\) of the columns is *zero* : one possibility is \\(\bm{x}=(0,\ldots,0)\\).
@@ -311,7 +313,81 @@ TODO: draw figure of svg format by using tikz
       \bm{b}^{*}=\begin{bmatrix} 1 \\ 1 \\ 2 \end{bmatrix}=\text{first column}\qquad\bm{b}^{**}=\begin{bmatrix} 9 \\ 0 \\ 9 \end{bmatrix}=\text{sum of columns}\qquad\bm{b}^{***}=\begin{bmatrix} 0 \\ 0 \\ 0 \end{bmatrix}
       $$
     </li>
+  </ol>
+</details>
+
+### The Idea of Elimination
+
+1. For \\(\bm{m}=\bm{n}=3\\), there are three equations \\(A\bm{x}=\bm{b}\\) and three unknowns \\(x_1\\), \\(x_2\\), \\(x_3\\).
+2. The first two equations are \\(a_{11}x_1+\cdots=b_1\\) and \\(a_{21}x_1+\cdots=b_2\\)
+3. Multiply the first equation by \\(a_{21}/a_{11}\\) and subtract from the second : then \\(x_1\\) **is eliminated**.
+4. The corner entry \\(a_{11}\\) is the first "pivot" and the ratio \\(a_{21}/a_{11}\\) is the first "multiplier."
+5. Eliminate \\(x_1\\) from every remaining equation \\(i\\) by subtracting \\(a_{i1}/a_{11}\\) times the first equation.
+6. Now the last \\(n-1\\) equations contain \\(n-1\\) unknowns \\(x_2,\ldots,x_n\\). *Repeat to eliminate* \\(x_2\\).
+7. Elimination breaks down if zero appears in the pivot. Exchanging two equations may save it.
+
+<details>
+  <summary><span class="list-summary">&dagger; WORKED EXAMPLES &dagger;</span></summary>
+  <ol class="worked-examples">
     <li>
+      <span class="list-num">2.2 A</span>&emsp;When elimination is applied to this matrix \(A\), what are the first and second pivots? What is the multiplier \(\ell_{21}\) in the first step (\(\ell_{21}\) times row 1 is <em>subtracted</em> from row 2)?
+      $$
+      A=\begin{bmatrix} 1 & 1 & 0 \\ 1 & 2 & 1 \\ 0 & 1 & 2 \end{bmatrix}\longrightarrow\begin{bmatrix} 1 & 1 & 0 \\ 0 & 1 & 1 \\ 0 & 1 & 2 \end{bmatrix}\longrightarrow\begin{bmatrix} 1 & 1 & 0 \\ 0 & 1 & 1 \\ 0 & 0 & 1 \end{bmatrix}=U
+      $$
+      What entry in the 2,2 position (instead of 2) would force an exchange of rows 2 and 3? Why is the lower left multiplier \(\ell_{31}=0\), subtracting zero times row 1 from row 3?
+      <br>
+      <em><strong>If you change the corner entry from \(a_{33}=2\) to \(a_{33}=1\), why does elimination fail?</strong></em>
+      <br><br>
+      <span class="list-num">Solution</span>&emsp;The first pivot is 1. The multiplier \(\ell_{21}\) is 1,1. When 1 times row 1 is subtracted from row 2, the second pivot is revealed as another 1. If the original middle entry had been 1 instead of 2, that would have forced a row exchange.
+      &emsp;&ensp;The multiplier \(\ell_{31}\) is zero because \(a_{31}=0\). A zero at the start of a row needs no elimination. This \(A\) is a "<em>band matrix</em>". Everything stays zero outside the band.
+      <br>
+      &emsp;&ensp;The last pivot is also 1. So if the original corner \(a_{33}=2\) reduced by 1, elimination would produce 0. <strong>No third pivot, elimination fails.</strong>
+    </li>
+    <li>
+      <span class="list-num">2.2 B</span>&emsp;Suppose \(A\) is already a <em><strong>triangular matrix</strong></em> (upper triangular or lower triangular). <em>Where do you see its pivots?</em> When does \(A\bm{x}=\bm{b}\) have exactly one solution for every \(\bm{b}\)?
+      <br><br>
+      <span class="list-num">Solution</span>&emsp;The pivots of a triangular matrix are already set along the main diagonal. <em>Elimination succeeds when all those numbers are nonzero.</em> Use <em><strong>back</strong></em> substitution when \(A\) is upper triangular, go <em><strong>forward</strong></em> when \(A\) is lower triangular.
+    </li>
+    <li>
+      <span class="list-num">2.2 C</span>&emsp;Use elimination to reach upper triangular matrices \(U\). Solve by back substitution or explain why this is impossible. What are the pivots (never zero)? Exchange equations when necessary. The only difference is the \(-x\) in the last equation.
+      $$
+      \begin{array}{rrrr}
+        \textbf{Success}\quad & x+y+z=7 & \qquad\textbf{Failure}\quad & x+y+z=7 \\
+        & x+y-z=5 & & x+y-z=5 \\
+        & x-y+z=3 & & -x-y+z=3
+      \end{array}
+      $$
+      <span class="list-num">Solution</span>&emsp; For the first system, subtract equation 1 from equations 2 and 3 (the multipliers are \(\ell_{21}=1\) and \(\ell_{31}=1\)). The 2,2 entry becomes zero, so exchange equations 2 and 3 :
+      $$
+      \textbf{Success}\qquad
+      \begin{alignedat}{3.5}
+        x+ && y+ && z= && 7 \\
+        && \bm{0}y- && 2z= && -2 \\
+        -&& 2y+ && 0z= && -4
+      \end{alignedat}
+      \qquad\text{exchanges into}\qquad
+      \begin{alignedat}{3.5}
+        x+ && y+ && z= && 7 \\
+        \bm{-} && \bm{2}y+ && 0z= && -4 \\
+        && - && 2z= && -2
+      \end{alignedat}
+      $$
+      Then back substitution gives \(z=1\) and \(y=2\) and \(x=4\). The pivots are 1, &minus;2, &minus;2.
+      <br>
+      &emsp;&ensp;For the second system, subtract equation 1 from equation 2 as before. Add equation 1 to equation 3. This leaves zero in the 2,2 entry <em>and also below</em> :
+      $$
+      \textbf{Failure}\qquad
+      \begin{alignedat}{4}
+        x+ && y+ && z= && 7 & \qquad\text{There is \textbf{no pivot in column 2} (it was \textemdash\space column 1)} \\
+        && \bm{0}y- && 2z= && -2 & \qquad\text{A further elimination step gives $\bm{0z=8}$} \\
+        && \bm{0}y+ && 2z= && 10 & \qquad\text{The three planes \textbf{don't meet}}
+      \end{alignedat}
+      $$
+      Plane 1 meets plane 2 in a line. Plane 1 meets plane 3 in a parallel line. <em>No solution.</em>
+      <br>
+      &emsp;&ensp;If we change the &ldquo;3&rdquo; in the original third equation to &ldquo;&minus;5&rdquo; then elimination would lead to \(0=0\). There are infinitely many solutions! <em>The three planes now meet along a whole line.</em>
+      <br>
+      &emsp;&ensp;Changing 3 to &minus;5 moved the third plane to meet the other two. The second equation gives \(z=1\). Then the first equation leaves \(x+y=6\). <strong>No pivot in column 2 makes \(\bm{y}\) free</strong> (free variables can have any value). Then \(x=6-y\).
     </li>
   </ol>
 </details>
