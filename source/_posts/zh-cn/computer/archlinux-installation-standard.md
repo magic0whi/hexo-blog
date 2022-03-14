@@ -585,6 +585,8 @@ I will use the method of `PRIME render offload` which was official method suppor
    ^[AUR] libva-intel-driver-hybrid
    ^intel-media-driver
 
+   pulseaudio-bluetooth
+
    [AUR] fcitx5-pinyin-zhwiki
    fcitx5-material-color
 

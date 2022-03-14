@@ -357,7 +357,7 @@ TODO: draw svg format figure by using tikz
         & x-y+z=3 & & -x-y+z=3
       \end{array}
       $$
-      <span class="list-num">Solution</span>&emsp; For the first system, subtract equation 1 from equations 2 and 3 (the multipliers are \(\ell_{21}=1\) and \(\ell_{31}=1\)). The 2,2 entry becomes zero, so exchange equations 2 and 3 :
+      <span class="list-num">Solution</span>&emsp;For the first system, subtract equation 1 from equations 2 and 3 (the multipliers are \(\ell_{21}=1\) and \(\ell_{31}=1\)). The 2,2 entry becomes zero, so exchange equations 2 and 3 :
       $$
       \textbf{Success}\qquad
       \begin{alignedat}{3.5}
@@ -388,6 +388,119 @@ TODO: draw svg format figure by using tikz
       &emsp;&ensp;If we change the &ldquo;3&rdquo; in the original third equation to &ldquo;&minus;5&rdquo; then elimination would lead to \(0=0\). There are infinitely many solutions! <em>The three planes now meet along a whole line.</em>
       <br>
       &emsp;&ensp;Changing 3 to &minus;5 moved the third plane to meet the other two. The second equation gives \(z=1\). Then the first equation leaves \(x+y=6\). <strong>No pivot in column 2 makes \(\bm{y}\) free</strong> (free variables can have any value). Then \(x=6-y\).
+    </li>
+  </ol>
+</details>
+
+### Elimination Using Matrices
+
+1. The first step multiplies the equations \\(A\bm{x}=\bm{b}\\) by a matrix \\(E_{21}\\) to produce \\(E_{21}A\bm{x}=E_{21}\bm{b}\\).
+2. That matrix \\(E_{21}A\\) has a zero in row 2, column 1 because \\(x_1\\) is eliminated from equation 2.
+3. \\(E_{21}\\) is the **identity matrix** (diagonal of 1's) minus the multiplier \\(a_{21}/a_{11}\\) in row 2, column.
+4. Matrix-matrix multiplication is \\(n\\) matrix-vector multiplications: \\(\bm{EA}=\begin{bmatrix} \bm{Ea_1} & \ldots & \bm{Ea_n} \end{bmatrix}\\)
+5. We must also multiply \\(E\bm{b}\\)! So \\(E\\) is multiplying the **augmented matrix** \\(\begin{bmatrix} A & \bm{b} \end{bmatrix}=\begin{bmatrix} \bm{a}_1 & \ldots & \bm{a}_n & \bm{b} \end{bmatrix}\\).
+6. Elimination multiplies \\(A\bm{x}=\bm{b}\\) by \\(E_{21}\\), \\(E_{31}\\), \\(\ldots\\), \\(E_{n1}\\), then \\(E_{32}\\), \\(E_{42}\\), \\(\ldots\\), \\(E_{n2}\\), and onward.
+7. The **row exchange matrix** is not \\(E_{ij}\\) but \\(P_{ij}\\). To find \\(P_{ij}\\), exchange rows \\(i\\) and \\(j\\) of \\(I\\).
+
+<details>
+  <summary><span class="list-summary">&dagger; WORKED EXAMPLES &dagger;</span></summary>
+  <ol class="worked-examples">
+    <li>
+      <span class="list-num">2.3 A</span>&emsp;What 3 by 3 matrix \(E_{21}\) subtracts 4 times row 1 from row 2? What matrix \(P_{32}\) exchanges row 2 and row 3? If you multiply \(A\) on the <em>right</em> instead of the left, describe the results \(AE_{21}\) and \(AP_{32}\).
+      <br><br>
+      <span class="list-num">Solution</span>&emsp;By doing those operations on the identity matrix \(I\), we find
+      $$
+      E_{21}=\begin{bmatrix*}[r] 1 & 0 & 0 \\ -4 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix*}
+      \qquad\text{and}\qquad
+      P_{32}=\begin{bmatrix} 1 & 0 & 0 \\ 0 & 0 & 1 \\ 0 & 1 & 0 \end{bmatrix}
+      $$
+      Multiplying by \(E_{21}\) on the right side will subtract 4 times <strong>column 2</strong> from <strong>column 1</strong>. Multiplying by \(P_{32}\) on the right will exchange <strong>columns 2</strong> and <strong>3</strong>.
+    </li>
+    <li>
+      <span class="list-num">2.3 B</span>&emsp;Write down the augmented matrix \(\begin{bmatrix} A & \bm{b} \end{bmatrix}\) with an extra column:
+      $$
+      \begin{array}{r}
+        x+2y+2z=1 \\
+        4x+8y+9z=3 \\
+        3y+2z=1
+      \end{array}
+      $$
+      Apply \(E_{21}\) and then \(P_{32}\) to reach a triangular system. Solve by back substitution. What combined matrix \(P_{32}E_{21}\) will do both steps at once?
+      <br><br>
+      <span class="list-num">Solution</span>&emsp;\(E_{21}\) removes the 4 in column 1. But zero also appears in column 2:
+      $$
+      \begin{bmatrix} A & \bm{b} \end{bmatrix}=
+      \begin{bmatrix}
+        1 & 2 & 2 & 1 \\
+        \bm{4} & 8 & 9 & 3 \\
+        0 & 3 & 2 & 1
+      \end{bmatrix}
+      \qquad\text{and}\qquad
+      E_{21}\begin{bmatrix} A & \bm{b} \end{bmatrix}=
+      \begin{bmatrix*}[r]
+        1 & 2 & 2 & 1 \\
+        \bm{0} & \bm{0} & 1 & -1 \\
+        0 & 3 & 2 & 1
+      \end{bmatrix*}
+      $$
+      Now \(P_{32}\) exchanges rows 2 and 3. Back substitution produces \(z\) then \(y\) and \(x\).
+      $$
+      P_{32}E_{21}\begin{bmatrix} A & \bm{b} \end{bmatrix}=
+      \begin{bmatrix*}[r]
+        1 & 2 & 2 & 1 \\
+        0 & 3 & 2 & 1 \\
+        0 & 0 & 1 & -1
+      \end{bmatrix*}
+      \qquad\text{and}\qquad
+      \begin{bmatrix} x \\ y \\ z \end{bmatrix}=\begin{bmatrix*}[r] 1 \\ 1 \\ -1 \end{bmatrix*}
+      $$
+      For the matrix \(P_{32}E_{21}\) that does both steps at once, <em>apply \(P_{32}\) to \(E_{21}\)</em>.
+      $$
+      \begin{array}{l}
+       \textbf{One matrix} \\ 
+       \textbf{Both steps}
+      \end{array}
+      \qquad
+      P_{32}E_{21}=\text{exchange the rows of }E_{21}=\begin{bmatrix*} 1 & 0 & 0 \\ 0 & 0 & 1 \\ -4 & 1 & 0 \end{bmatrix*}\text{.}
+      $$
+    </li>
+    <li>
+      <span class="list-num">2.3 C</span>&emsp;Multiply these matrices in two ways. First, rows of \(A\) times columns of \(B\). Second, <em><strong>columns of \(\bm{A}\) times rows of \(\bm{B}\)</strong></em>. That unusual way produces two matrices that add to \(AB\). How many separate ordinary multiplications are needed?
+      $$
+      \textbf{Both ways}\qquad
+      AB=\begin{bmatrix} 3 & 4 \\ 1 & 5 \\ 2 & 0 \end{bmatrix}\begin{bmatrix} 2 & 4 \\ 1 & 1 \end{bmatrix}=\begin{bmatrix*}[r] \bm{10} & \bm{16} \\ \bm{7} & \bm{9} \\ \bm{4} & \bm{8} \end{bmatrix*}
+      $$
+      <span class="list-num">Solution</span>&emsp;Rows of \(A\) times columns of \(B\) are dot products of vectors:
+      $$
+      \begin{alignedat}{1.5}
+        (\text{row 1})\cdot(\text{column 1})=
+        \begin{matrix} \begin{bmatrix} 3 & 4 \end{bmatrix} \\ \\ \text{} \end{matrix}
+        \begin{bmatrix} 2 \\ 1 \end{bmatrix}
+        =
+      &&
+        \bm{10}\qquad\text{is the (1,1) entry of $AB$}
+      \\
+      \\
+        (\text{row 2})\cdot(\text{column 1})=
+        \begin{bmatrix} 1 & 5 \end{bmatrix}\begin{bmatrix} 2 \\ 1 \end{bmatrix}
+        =
+      &&
+        \bm{7}\qquad\text{is the (2,1) entry of $AB$}
+      \end{alignedat}
+      $$
+      We need 6 dot products, 2 multiplications each, 12 in all (3 &sdot; 2 &sdot; 2). The same \(AB\) comes from <em>columns of \(A\) times rows of \(B\)</em>. A column times a row is a matrix.
+      $$
+      AB=
+      \begin{bmatrix} 3 \\ 1 \\ 2 \end{bmatrix}
+      \begin{matrix} \begin{bmatrix} 2 & 4 \end{bmatrix} \\ \text{} \end{matrix}
+      +
+      \begin{bmatrix} 4 \\ 5 \\ 0 \end{bmatrix}
+      \begin{matrix} \\ \begin{bmatrix} 1 & 1 \end{bmatrix} \end{matrix}
+      =
+      \begin{bmatrix*}[r] \bm{6} & \bm{12} \\ \bm{2} & \bm{4} \\ \bm{4} & \bm{8} \end{bmatrix*}
+      +
+      \begin{bmatrix} \bm{4} & \bm{4} \\ \bm{5} & \bm{5} \\ \bm{0} & \bm{0} \end{bmatrix}
+      $$
     </li>
   </ol>
 </details>
