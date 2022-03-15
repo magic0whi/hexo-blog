@@ -504,3 +504,73 @@ TODO: draw svg format figure by using tikz
     </li>
   </ol>
 </details>
+
+### Rules for Matrix Operations
+
+1. Matrices \\(A\\) with \\(n\\) columns multiply matrices \\(B\\) with \\(n\\) rows : \\(\boxed{A_{\bm{m}\times\bm{n}}B_{\bm{n}\times\bm{p}}=C_{\bm{m}\times\bm{p}}}\\).
+2. Each entry in \\(AB=C\\) is a dot product : \\(C_{ij}=(\text{row $i$ of $A$})\cdot(\text{column $j$ of $B$})\\).
+3. This rule is chosen so that <strong>\\(\bm{AB}\\) times \\(C\\) equals \\(A\\) times \\(BC\\)</strong>. And \\((AB)\bm{x}=A(B\bm{x})\\)
+4. More ways to compute \\(AB\\) : \\((\text{$A$ times columns of $B$})\\), \\((\text{rows of $A$ times $B$})\\), \\((\textit{columns times rows})\\).
+5. It is not usually true that \\(AB=BA\\). In most cases \\(A\\) <em>doesn't commute with</em> \\(B\\).
+6. Matrices can be multiplied by <em>blocks</em> : \\(A=\begin{bmatrix} A_1 & A_2 \end{bmatrix}\\) times \\(B=\begin{bmatrix} B_1 \\\ B_2 \end{bmatrix}\\) is \\(A_1B_1+A2B_2\\).
+
+<details>
+  <summary><span class="list-summary">&dagger; WORKED EXAMPLES &dagger;</span></summary>
+  <ol class="worked-examples">
+    <li>
+      <span class="list-num">2.4 A</span>&emsp;A graph or a network has \(n\) nodes. Its <strong>adjacency matrix</strong> \(S\) is \(n\) by \(n\). This is a 0&ndash;1 matrix with \(s_{ij}=1\) when nodes \(i\) and \(j\) are connected by an edge.
+      {% asset_img Screenshot_20220315_150242.png %}
+      The matrix \(S^2\) has a useful interpretation. <strong>\(\bm{(S^2)_{ij}}\) counts the walks of length 2</strong> between node \(i\) and node \(j\). Between nodes 2 and 3 the graph has two walks: go via 1 or go via 4. From node 1 to node 1, there are also two walks: 1&ndash;2&ndash;1 and 1&ndash;3&ndash;1.
+      $$
+      S^2=
+      \begin{bmatrix}
+        \bm{2} & 1 & 1 & 2 \\
+        1 & 3 & \bm{2} & 1 \\
+        1 & 2 & 3 & 1 \\
+        2 & 1 & 1 & 2
+      \end{bmatrix}
+      \qquad
+      S^3=
+      \begin{bmatrix}
+        2 & \bm{5} & 5 & 2 \\
+        5 & 4 & 5 & 5 \\
+        5 & 5 & 4 & 5 \\
+        2 & 5 & 5 & 2
+      \end{bmatrix}
+      $$
+      Can you find 5 walks of length 3 between nodes 1 and 2?
+      <br>
+      &emsp;&ensp;The real question is why \(S^N\) counts all the \(N\)-step paths between pairs of nodes. Start with \(S^2\) and look at matrix multiplication by dot products:
+      $$
+      \begin{equation}
+        (S^2)_{ij}=(\text{row $i$ of $S$})\cdot(\text{column $j$ of $S$})=s_{i1}s_{1j}+s_{i2}s_{2j}+s_{i3}s_{3j}+s_{i4}s_{4j}
+      \end{equation}
+      $$
+      If there is a 2-step path \(i\rarr 1\rarr j\), the first multiplication gives \(s_{i1}s_{1j}=(1)(1)=1\). If \(i\rarr 1\rarr j\) is <em>not</em> a path, then either \(i\rarr 1\) is missing or \(1\rarr j\) is missing. So the multiplication gives \(s_{i1}s_{1j}=0\) in that case.
+      <br>
+      &emsp;&ensp;\((S^2)_{ij}\) is adding up 1's for all the 2-step paths \(i\rarr k\rarr j\). So it counts those paths. In the same way \(S^{N-1}S\) will count \(N\)-step paths, because those are \((N-1)\)-step paths from \(i\) to \(k\) followed by one step from \(k\) to \(j\). Matrix multiplication is exactly suited to counting paths on a graph&mdash;channels of communcation between employees in a company.
+    </li>
+    <li>
+      <span class="list-num">2.4 B</span>&emsp;For these matrices, when does \(AB=BA\)? When does \(BC=CB\)? When does \(A\) times \(BC\) equal \(AB\) times \(C\)? Give the conditions on their entries \(p\), \(q\), \(r\), \(z\) :
+      $$
+      A=\begin{bmatrix} p & 0 \\ q & r \end{bmatrix}
+      \qquad
+      B=\begin{bmatrix} 1 & 1 \\ 0 & 1 \end{bmatrix}
+      \qquad
+      C=\begin{bmatrix} 0 & z \\ 0 & 0 \end{bmatrix}
+      $$
+      If \(p\), \(q\), \(r\), \(1\), \(z\) are 4 by 4 blocks instead of numbers, do the answers change?
+      <br><br>
+      <span class="list-num">Solution</span>&emsp;First of all, \(A\) times \(BC\) <em>always</em> equals \(AB\) times \(C\). Parentheses are not needed in \(A(BC)=(AB)C=ABC\). But we must keep the matrices in this order :
+      $$
+      \begin{array}{l}
+        \textbf{Usually }\bm{AB\neq BA}\qquad AB=\begin{bmatrix} p & p \\ q & q+r \end{bmatrix}\qquad BA=\begin{bmatrix} p+q & r \\ q & r \end{bmatrix}\text{.}
+      \\
+      \\
+        \textbf{By chance }\bm{BC=CB}\qquad BC=\begin{bmatrix} 0 & z \\ 0 & 0 \end{bmatrix}\qquad CB=\begin{bmatrix} 0 & z \\ 0 & 0 \end{bmatrix}\text{.}
+      \end{array}
+      $$
+      \(B\) and \(C\) happen to commute. Part of the explanation is that the diagonal of \(B\) is \(I\), which commutes with all 2 by 2 matrices. When \(p\), \(q\), \(r\), \(z\) are 4 by 4 blocks and 1 changes to \(I\), all these products remain correct. So the answers are the same.
+    </li>
+  </ol>
+</details>
