@@ -328,7 +328,7 @@ For Lenovo user, Enter `F12` for Boot Menu when on bootstrap stage
    ```console
    $ systemd-cryptenroll --tpm2-device=list
    ```
-   > If you encounter such message "<span style="color:#FF0000;">TPM2 support is not installed</span>" then try to install `tpm2-tools`
+   > If you encounter such message "<span style="color:#FF0000;">TPM2 support is not installed</span>" then try to install `tpm2-tss`
    
    A key may be enrolled in both the TPM and the LUKS volume using only one command. The following example binds the key to PCRs 0 and 7 (the system firmware and Secure Boot state): 
    ```console
