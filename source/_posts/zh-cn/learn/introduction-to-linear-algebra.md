@@ -574,3 +574,155 @@ TODO: draw svg format figure by using tikz
     </li>
   </ol>
 </details>
+
+### Inverse Matrices
+
+1. If the square matrix \\(A\\) has an inverse, then both \\(A^{-1}A=I\\) and \\(AA^{-1}=I\\)
+2. The <em>algorithm</em> to test invertibility is elimination : \\(A\\) must have \\(n\\) (nonzero) pivots.
+3. The <em>algebra</em> test for invertibility is the determinant of \\(A\\) : \\(\det A\\) must not zero.
+4. The <em>equation</em> that tests for invertibility is \\(A\bm{x}=\bm{0}\\) : <strong>\\(\bm{x=0}\\) must be the only solution.</strong>
+5. If \\(A\\) and \\(B\\) (same size) are invertible then so is \\(AB\\) : \\(\boxed{(AB)^{-1}=B^{-1}A^{-1}}\\) .
+6. \\(AA^{-1}=I\\) is \\(n\\) equations for \\(n\\) columns of \\(A^{-1}\\). Gauss-Jordan eliminates \\(\begin{bmatrix} A & I \end{bmatrix}\\) to \\(\begin{bmatrix} I & A^{-1} \end{bmatrix}\\).
+7. [The last section of this page](#LINEAR-ALGEBRA-IN-A-NUTSHELL) gives 14 equivalent conditions for a square \\(A\\) to be invertible.
+
+<details>
+  <summary><span class="list-summary">&dagger; WORKED EXAMPLES &dagger;</span></summary>
+  <ol class="worked-examples">
+    <li>
+      <span class="list-num">2.5 A</span>&emsp;The inverse of a triangular <strong>difference matrix</strong> \(A\) is a triangular <strong>sum matrix</strong> \(S\) :
+      $$
+      \begin{alignedat}{1}
+      \begin{bmatrix} A & I \end{bmatrix}
+      & =
+        \left[\begin{array}{rrr|rrr}
+         1 & 0 & 0 & 1 & 0 & 0 \\
+         -1 & 1 & 0 & 0 & 1 & 0 \\
+         0 & -1 & 1 & 0 & 0 & 1 
+        \end{array}\right]
+        \rarr
+        \left[\begin{array}{rrr|rrr}
+          1 & 0 & 0 & 1 & 0 & 0 \\
+          0 & 1 & 0 & 1 & 1 & 0 \\
+          0 & -1 & 1 & 0 & 0 & 1
+        \end{array}\right]
+      \\
+      & \rarr
+        \left[\begin{array}{rrr|rrr}
+          1 & 0 & 0 & 1 & 0 & 0 \\
+          0 & 1 & 0 & 1 & 1 & 0 \\
+          0 & 0 & 1 & 1 & 1 & 1
+        \end{array}\right]
+        =\begin{bmatrix} I & A^{-1} \end{bmatrix}
+        =\begin{bmatrix} I & \textit{sum matrix} \end{bmatrix}
+      \end{alignedat}
+      $$
+      It I change \(a_{13}\) to \(-1\), then all rows of \(A\) add to zero. The equation \(A\bm{x}=0\) will now have the nonzero solution \(\bm{x}=(1,1,1)\). A clear signal : <em><strong>This new \(A\) can't be inverted.</strong></em>
+    </li>
+    <li>
+      <span class="list-num">2.5 B</span>&emsp;Three of these matrices are invertible, and three are singular. Find the inverse when it exists. Give reasons for noninvertibility (zero determinant, too few pivots, nonzero solution to \(A\bm{x}=\bm{0}\)) for the other three. The matrices are in the order \(A\), \(B\), \(C\), \(D\), \(S\), \(E\) :
+      $$
+      \begin{bmatrix} 4 & 3 \\ 8 & 6 \end{bmatrix}
+      \qquad
+      \begin{bmatrix} 4 & 3 \\ 8 & 7 \end{bmatrix}
+      \qquad
+      \begin{bmatrix} 6 & 6 \\ 6 & 0 \end{bmatrix}
+      \qquad
+      \begin{bmatrix} 6 & 6 \\ 6 & 6 \end{bmatrix}
+      \qquad
+      \begin{bmatrix} 1 & 0 & 0 \\ 1 & 1 & 0 \\ 1 & 1 & 1 \end{bmatrix}
+      \qquad
+      \begin{bmatrix} 1 & 1 & 1 \\ 1 & 1 & 0 \\ 1 & 1 & 1 \end{bmatrix}
+      $$
+      <span class="list-num">Solution</span>
+      $$
+      B^{-1}=\frac{1}{4}\begin{bmatrix*}[r] 7 & -3 \\ -8 & 4 \end{bmatrix*}
+      \qquad
+      C^{-1}=\frac{1}{36}\begin{bmatrix*}[r] 0 & 6 \\ 6 & -6 \end{bmatrix*}
+      \qquad
+      S^{-1}=\begin{bmatrix*} 1 & 0 & 0 \\ -1 & 1 & 0 \\ 0 & -1 & 1 \end{bmatrix*}
+      $$
+      \(A\) is not invertible because its determinant is \(4\cdot 6-3\cdot 8=24-24=0\). \(D\) is not invertible because there is only one pivot; the second row becomes zero when the first row is subtracted. \(E\) has two equal rows (and the second column minus the first column is zero). In other words \(E\bm{x}=\bm{0}\) has the solution \(\bm{x}=(-1,1,0)\).
+      <br>
+      &emsp;&ensp;Of course all three reasons for noninvertibility would apply to each of \(A\), \(D\), \(E\).
+    </li>
+    <li>
+      <span class="list-num">2.5 C</span>&emsp;Apply the Gauss-Jordan method to invert this triangular &ldquo;Pascal matrix&rdquo; \(L\). You see <strong>Pascal's triangle</strong>&mdash;adding each entry to the entry on its left gives the entry below. The entries of \(L\) are &ldquo;binomial coefficients&rdquo;. The next row would be \(1, 4, 6, 4, 1\).
+      $$
+      \textbf{Triangular Pascal matrix}\qquad
+      \bm{L}=
+      \begin{bmatrix}
+        \bm{1} & 0 & 0 & 0 \\
+        \bm{1} & \bm{1} & 0 & 0 \\
+        \bm{1} & \bm{2} & \bm{1} & 0 \\
+        \bm{1} & \bm{3} & \bm{3} & \bm{1}
+      \end{bmatrix}
+      =\texttt{abs}(\texttt{pascal}(4,1))
+      $$
+      <span class="list-num">Solution</span>&emsp;Gausss-Jordan starts with \(\begin{bmatrix} L & I \end{bmatrix}\) and produces zeros by subtracting row 1:
+      $$
+      \begin{bmatrix} \bm{L} & \bm{I} \end{bmatrix}
+      =
+      \left[\begin{array}{cccc|cccc}
+        \bm{1} & 0 & 0 & 0 & 1 & 0 & 0 & 0 \\
+        \bm{1} & \bm{1} & 0 & 0 & 0 & 1 & 0 & 0 \\
+        \bm{1} & \bm{2} & \bm{1} & 0 & 0 & 0 & 1 & 0 \\
+        \bm{1} & \bm{3} & \bm{3} & \bm{1} & 0 & 0 & 0 & 1
+      \end{array}\right]
+      \rarr
+      \left[\begin{array}{rrrr|rrrr}
+        1 & 0 & 0 & 0 & 1 & 0 & 0 & 0 \\
+        \bm{0} & 1 & 0 & 0 & \bm{-1} & 1 & 0 & 0 \\
+        \bm{0} & 2 & 1 & 0 & \bm{-1} & 0 & 1 & 0 \\
+        \bm{0} & 3 & 3 & 1 & \bm{-1} & 0 & 0 & 1
+      \end{array}\right]
+      \text{.}
+      $$
+      The next stage creates zeros below the second pivot, using multipliers 2 and 3. Then the last stage subtracts 3 times the new row 3 from the new row 4:
+      $$
+      \rarr
+      \left[\begin{array}{rrrr|rrrr}
+        1 & 0 & 0 & 0 & 1 & 0 & 0 & 0 \\
+        0 & 1 & 0 & 0 & -1 & 1 & 0 & 0 \\
+        0 & \bm{0} & 1 & 0 & \bm{1} & \bm{-2} & 1 & 0 \\
+        0 & \bm{0} & 3 & 1 & \bm{2} & \bm{-3} & 0 & 1
+      \end{array}\right]
+      \rarr
+      \left[\begin{array}{rrrr|rrrr}
+        1 & 0 & 0 & 0 & \bm{1} & 0 & 0 & 0 \\
+        0 & 1 & 0 & 0 & \bm{-1} & \bm{1} & 0 & 0 \\
+        0 & 0 & 1 & 0 & \bm{1} & \bm{-2} & \bm{1} & 0 \\
+        0 & 0 & 0 & 1 & \bm{-1} & \bm{3} & \bm{-3} & \bm{1}
+      \end{array}\right]
+      =
+      \begin{bmatrix} \bm{I} & \bm{L^{-1}} \end{bmatrix}
+      $$
+      All the pivots were 1! So we didn't need to divide rows by pivots to get \(I\). The inverse matrix \(L^{-1}\) look like \(L\) itself, except odd-numbered diagonals have minus signs.
+      <br>
+      &emsp;&ensp;The same pattern continues to \(n\) by \(n\) Pascal matrices. \(L^{-1}\) has &ldquo;alternating diagonals&rdquo;
+    </li>
+</details>
+
+## LINEAR ALGEBRA IN A NUTSHELL
+
+<div style="text-align:center"><strong>((<em>The matrix \(A\) is \(n\) by \(n\)</em>))</strong></div>
+<div>
+$$
+\begin{array}{ll}
+\textcolor{RoyalBlue}{\textbf{Nonsingular}} & \textcolor{RoyalBlue}{\textbf{Singular}} \\
+A\text{ is invertible} & A\text{ is not invertible} \\
+\text{The columns are independent} & \text{The columns are dependent} \\
+\text{The rows are independent} & \text{The rows are dependent} \\
+\text{The determinant is not zero} & \text{The determinant is zero} \\
+A\bm{x}=\bm{0}\text{ has one solution }\bm{x}=\bm{0} & A\bm{x}=\bm{0}\text{ has infinitely many solutions} \\
+A\bm{x}=\bm{b}\text{ has one solution }\bm{x}=A^{-1}\bm{b} & A\bm{x}=\bm{b}\text{ has no solution or infinitely many} \\
+A\text{ has $n$ (nonzero) pivots} & A\text{ has $r\lt n$ pivots} \\
+A\text{ has full rank }r=n & A\text{ has rank }r\lt n \\
+\text{The reduced row echelon form is }R=I\qquad & R\text{ has at least one zero row} \\
+\text{The column space is all of }\mathbf{R}^n & \text{The column space has dimension }r\lt n \\
+\text{The row space is all of }\mathbf{R}^n & \text{The row space has dimension }r\lt n \\
+\text{All eigenvalues are nonzero} & \text{Zero is an eigenvalue of }A \\
+A^TA\text{ is symmetric positive definite} & A^TA\text{ is only semidefinite} \\
+A\text{ has $n$ (positive) singular values} & A\text{ has $r\lt n$ singular values}
+\end{array}
+$$
+</div>
