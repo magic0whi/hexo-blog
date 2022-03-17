@@ -43,6 +43,8 @@ article.article .content {
 
 This is a copy of both brief summary and worked examples of each section in the Introduction to Linear Algebra (Fifth Edition) by Gilbert Strang
 
+https://github.com/mitmath/1806/
+
 TODO: draw svg format figure by using tikz
 
 <!-- more -->
@@ -701,6 +703,138 @@ TODO: draw svg format figure by using tikz
       &emsp;&ensp;The same pattern continues to \(n\) by \(n\) Pascal matrices. \(L^{-1}\) has &ldquo;alternating diagonals&rdquo;
     </li>
 </details>
+
+### Elimination <math xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mo>=</mo></mrow></math> Factorization: <math xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>A</mi><mo>=</mo><mi>L</mi><mi>U</mi></mrow></math>
+
+1. Each elimination step \\(E_{ij}\\) is inverted by \\(L_{ij}\\). Off the main diagonal change \\(-\ell_{ij}\\) to \\(+\ell_{ij}\\).
+2. The whole forward elimination process (with no row exchanges) is inverted by \\(\bm{L}\\) :
+   <div>
+   $$
+   \bm{L}=(L_{21}L_{31}\ldots L_{n1})(L_{32}\ldots L_{n2})(L_{43}\ldots L_{n3})\ldots(L_{n\space n-1})\text{.}
+   $$
+   <div>
+3. That product matrix \\(\bm{L}\\) is still lower triangular. **Every multiplier \\(\bm{\ell_{ij}}\\) is in row \\(\bm{i}\\), column \\(\bm{j}\\).**
+4. The original \\(A\\) is recovered from \\(U\\) by \\(\bm{A}=\bm{LU}=(\text{lower triangular})(\text{upper triangular})\\).
+5. Elimination on \\(A\bm{x}=\bm{b}\\) reaches \\(U\bm{x}=\bm{c}\\). Then back-substitution solves \\(U\bm{x}=\bm{c}\\)
+6. Solving a triangular system takes \\(n^2/2\\) multiply-subtracts. Elimination to find \\(U\\) takes \\(n^3/3\\).
+
+<!-- <details> -->
+  <!-- <summary><span class="list-summary">&dagger; WORKED EXAMPLES &dagger;</span></summary> -->
+  <ol class="worked-examples">
+    <li>
+      <span class="list-num">2.6 A</span>&emsp;The lower triangular Pascal matrix \(L\) contains the famous <em>&ldquo;Pascal triangle&rdquo;</em>. Gauss-Jordan inverted \(L\) in the worked example <span class="list-num">2.5 C</span>. Here we factor Pascal.
+      <br>
+      &emsp;&ensp;<strong>The symmetric Pascal matrix \(\bm{P}\) is a product of triangular Pascal matrices \(L\) and \(U\).</strong> The symmetric \(P\) has Pascal's triangle tilted, so each entry is the sum of entry above and the entry to the left. The \(n\) by \(n\) symmetric \(P\) is \(\texttt{pascal}(n)\) in \(\textsf{MATLAB}\).
+      <br>
+      <strong>Problem:</strong> <em>Establish the amazing lower-upper factorization \(P=LU\).</em>
+      $$
+      \texttt{pascal}(4)=
+      \begin{bmatrix}
+        \bm{1} & \bm{1} & \bm{1} & \bm{1} \\
+        \bm{1} & \bm{2} & \bm{3} & 4 \\
+        \bm{1} & \bm{3} & 6 & 10 \\
+        \bm{1} & 4 & 10 & 20
+      \end{bmatrix}
+      =
+      \begin{bmatrix}
+        \bm{1} & 0 & 0 & 0 \\
+        \bm{1} & \bm{1} & 0 & 0 \\
+        \bm{1} & \bm{2} & \bm{1} & 0 \\
+        \bm{1} & \bm{3} & \bm{3} & \bm{1}
+      \end{bmatrix}
+      \begin{bmatrix}
+        \bm{1} & \bm{1} & \bm{1} & \bm{1} \\
+        0 & \bm{1} & \bm{2} & \bm{3} \\
+        0 & 0 & \bm{1} & \bm{3} \\
+        0 & 0 & 0 & \bm{1}
+      \end{bmatrix}
+      =LU\text{.}
+      $$
+      Then predict and check the next row and column for 5 by 5 Pascal matrices.
+      <span class="list-num">Solution</span>&emsp;You could multiply \(LU\) to get \(P\). Better to start with the symmetric \(P\) and reach the upper triangular \(U\) by elimination :
+      $$
+      P=
+      \begin{bmatrix}
+        1 & 1 & 1 & 1 \\
+        1 & 2 & 3 & 4 \\
+        1 & 3 & 6 & 10 \\
+        1 & 4 & 10 & 20
+      \end{bmatrix}
+      \rarr
+      \begin{bmatrix}
+        1 & 1 & 1 & 1 \\
+        0 & 1 & 2 & 3 \\
+        0 & 2 & 5 & 9 \\
+        0 & 3 & 9 & 19
+      \end{bmatrix}
+      \rarr
+      \begin{bmatrix}
+        1 & 1 & 1 & 1 \\
+        0 & 1 & 2 & 3 \\
+        0 & 0 & 1 & 3 \\
+        0 & 0 & 3 & 10 \\
+      \end{bmatrix}
+      \rarr
+      \begin{bmatrix}
+        1 & 1 & 1 & 1 \\
+        0 & 1 & 2 & 3 \\
+        0 & 0 & 1 & 3 \\
+        0 & 0 & 0 & 1
+      \end{bmatrix}
+      =U
+      $$
+      The multipliers \(\ell_{ij}\) that entered these steps go perfectly into \(L\). Then \(P=LU\) is a paticularly neat example. <em>Notice that every pivot is \(1\) on the diagonal of \(U\).</em>
+      <br>
+      &emsp;&ensp;The next section will show how symmetry produces a special relationship between the triangular \(L\) and \(U\). For Pascal, \(U\) is the <strong>&ldquo;transpose&rdquo;</strong> of \(\bm{L}\).
+      <br>
+      &emsp;&ensp;You might expect the \(\textsf{MATLAB}\) command \(\texttt{lu}(\texttt{pascal}(4))\) to produce these \(L\) and \(U\). That doesn't happen because \(\textbf{\textsf{lu}}\) subroutine chooses the largest available pivot in each column. The second pivot will change from 1 to 3. But a &ldquo;Cholesky factorization&rdquo; does no row exchanges: \(U=\texttt{chol}(\texttt{pascal}(4))\)
+      <br>
+      &emsp;&ensp;The full proof of \(P=LU\) for all Pascal sizes is quite fascinating. The paper &ldquo;Pascal Matrices&rdquo; is on the course web page <strong>web.mit.edu/18.06</strong> which is also available through MIT's <em>OpenCourseWare</em> at <strong>ocw.mit.edu</strong>. These Pascal matrices have so many remarkable properties&mdash;we will see them again.
+    </li>
+    <li>
+      <span class="list-num">2.6 B</span>&emsp;The problem is: <em>Solve \(P\bm{x}=\bm{b}=(1,0,0,0)\).</em> This right side = column of \(I\) means that \(\bm{x}\) will be the first column of \(P^{-1}\). That is Gauss-Jordan, matching the columns of \(PP^{-1}=I\). We already know the Pascal matrices \(L\) and \(U\) as factors of \(P\):
+      $$
+      \textbf{Two triangular systems}\qquad L\bm{c}=\bm{b}\text{ (forward)}\qquad U\bm{x}=\bm{c}\text{ (back).}
+      $$
+      <span class="list-num">Solution</span>&emsp;The lower triangular system \(L\bm{c}=\bm{b}\) is solved <em>top to bottum</em>:
+      $$
+      \begin{alignedat}{3.5}
+        c_1 &   &      &   &      && =1 \\
+        c_1 & + & c_2  &   &      && =0 \\
+        c_1 & + & 2c_2 & + & c_3  && =0 \\
+        c_1 & + & 3c_2 & + & 3c_3 && +c_4=0
+      \end{alignedat}
+      \qquad
+      \text{gives}
+      \qquad
+      \begin{alignedat}{0.5}
+        c_1=+1 \\
+        c_2=-1 \\
+        c_3=+1 \\
+        c_4=-1
+      \end{alignedat}
+      $$
+      Forward elimination is multiplication by \(L^{-1}\). It produces the upper triangular system \(U\bm{x}=\bm{c}\). The solution \(\bm{x}\) comes as always by back substitution, <em>bottom to top:</em>
+      $$
+      \begin{alignedat}{3.5}
+        x_1+x_2+ &&  x_3+ &&  x_4= &&  1 \\
+            x_2+ && 2x_3+ && 3x_4= && -1 \\
+                 &&  x_3+ && 3x_4= &&  1 \\
+                 &&       &&  x_4= && -1
+      \end{alignedat}
+      \qquad
+      \text{gives}
+      \qquad
+      \begin{alignedat}{0.5}
+        x_1=\bm{+4} \\
+        x_2=\bm{-6} \\
+        x_3=\bm{+4} \\
+        x_4=\bm{-1}
+      \end{alignedat}
+      $$
+      I see a pattern in that \(\bm{x}\), but I don't know where it comes from. Try \(\texttt{inv}(\texttt{pascal}(4))\).
+    </li>
+<!-- </details> -->
 
 ## LINEAR ALGEBRA IN A NUTSHELL
 
