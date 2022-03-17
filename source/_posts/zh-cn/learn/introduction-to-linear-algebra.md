@@ -702,6 +702,7 @@ TODO: draw svg format figure by using tikz
       <br>
       &emsp;&ensp;The same pattern continues to \(n\) by \(n\) Pascal matrices. \(L^{-1}\) has &ldquo;alternating diagonals&rdquo;
     </li>
+  </ol>
 </details>
 
 ### Elimination <math xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mo>=</mo></mrow></math> Factorization: <math xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>A</mi><mo>=</mo><mi>L</mi><mi>U</mi></mrow></math>
@@ -835,6 +836,7 @@ TODO: draw svg format figure by using tikz
       $$
       I see a pattern in that \(\bm{x}\), but I don't know where it comes from. Try \(\texttt{inv}(\texttt{pascal}(4))\).
     </li>
+  </ol>
 </details>
 
 ## LINEAR ALGEBRA IN A NUTSHELL
