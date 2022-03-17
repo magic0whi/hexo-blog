@@ -718,8 +718,8 @@ TODO: draw svg format figure by using tikz
 5. Elimination on \\(A\bm{x}=\bm{b}\\) reaches \\(U\bm{x}=\bm{c}\\). Then back-substitution solves \\(U\bm{x}=\bm{c}\\)
 6. Solving a triangular system takes \\(n^2/2\\) multiply-subtracts. Elimination to find \\(U\\) takes \\(n^3/3\\).
 
-<!-- <details> -->
-  <!-- <summary><span class="list-summary">&dagger; WORKED EXAMPLES &dagger;</span></summary> -->
+<details>
+  <summary><span class="list-summary">&dagger; WORKED EXAMPLES &dagger;</span></summary>
   <ol class="worked-examples">
     <li>
       <span class="list-num">2.6 A</span>&emsp;The lower triangular Pascal matrix \(L\) contains the famous <em>&ldquo;Pascal triangle&rdquo;</em>. Gauss-Jordan inverted \(L\) in the worked example <span class="list-num">2.5 C</span>. Here we factor Pascal.
@@ -751,6 +751,7 @@ TODO: draw svg format figure by using tikz
       =LU\text{.}
       $$
       Then predict and check the next row and column for 5 by 5 Pascal matrices.
+      <br>
       <span class="list-num">Solution</span>&emsp;You could multiply \(LU\) to get \(P\). Better to start with the symmetric \(P\) and reach the upper triangular \(U\) by elimination :
       $$
       P=
@@ -792,7 +793,7 @@ TODO: draw svg format figure by using tikz
       &emsp;&ensp;The full proof of \(P=LU\) for all Pascal sizes is quite fascinating. The paper &ldquo;Pascal Matrices&rdquo; is on the course web page <strong>web.mit.edu/18.06</strong> which is also available through MIT's <em>OpenCourseWare</em> at <strong>ocw.mit.edu</strong>. These Pascal matrices have so many remarkable properties&mdash;we will see them again.
     </li>
     <li>
-      <span class="list-num">2.6 B</span>&emsp;The problem is: <em>Solve \(P\bm{x}=\bm{b}=(1,0,0,0)\).</em> This right side = column of \(I\) means that \(\bm{x}\) will be the first column of \(P^{-1}\). That is Gauss-Jordan, matching the columns of \(PP^{-1}=I\). We already know the Pascal matrices \(L\) and \(U\) as factors of \(P\):
+      <span class="list-num">2.6 B</span>&emsp;The problem is: <em>Solve \(P\bm{x}=\bm{b}=(1,0,0,0)\).</em> This right side \(=\) column of \(I\) means that \(\bm{x}\) will be the first column of \(P^{-1}\). That is Gauss-Jordan, matching the columns of \(PP^{-1}=I\). We already know the Pascal matrices \(L\) and \(U\) as factors of \(P\):
       $$
       \textbf{Two triangular systems}\qquad L\bm{c}=\bm{b}\text{ (forward)}\qquad U\bm{x}=\bm{c}\text{ (back).}
       $$
@@ -834,7 +835,7 @@ TODO: draw svg format figure by using tikz
       $$
       I see a pattern in that \(\bm{x}\), but I don't know where it comes from. Try \(\texttt{inv}(\texttt{pascal}(4))\).
     </li>
-<!-- </details> -->
+</details>
 
 ## LINEAR ALGEBRA IN A NUTSHELL
 
