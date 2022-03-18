@@ -839,6 +839,122 @@ TODO: draw svg format figure by using tikz
   </ol>
 </details>
 
+### Transposes and Permutations
+
+1. The transposes of \\(A\bm{x}\\) and \\(AB\\) and \\(A^{-1}\\) are \\(\bm{x}^\mathrm{T}A^\mathrm{T}\\) and \\(B^\mathrm{T}A^\mathrm{T}\\) and \\((A^\mathrm{T})^{-1}\\).
+2. The dot product (inner product) is \\(\bm{x}\cdot\bm{y}=\bm{x}^\mathrm{T}\bm{y}\\). This is \\((1\times n)(n\times 1)=(1\times 1)\\).
+   The outer product is \\(\bm{xy^\mathrm{T}}=\text{column times row}=(n\times 1)(1\times n)=n\times n\text{ matrix}\\).
+3. The idea behind \\(A^\mathrm{T}\\) is that \\(A\bm{x}\cdot\bm{y}\\) equals \\(\bm{x}\cdot A^\mathrm{T}\bm{y}\\) because \\((A\bm{x})^\mathrm{T}\bm{y}=\bm{x}^\mathrm{T}A^\mathrm{T}\bm{y}=\bm{x}^\mathrm{T}(A^\mathrm{T}\bm{y})\\).
+4. A <strong>symmetric matrix</strong> has \\(\bm{S^\mathrm{T}=S}\\) (and the product \\(A^\mathrm{T}A\\) is always symmetric).
+5. An <strong>orthogonal matrix</strong> has \\(\bm{Q^\mathrm{T}=Q^{-1}}\\). The columns of \\(Q\\) are orthogonal unit vectors.
+6. A <strong>permutation matrix \\(\bm{P}\\)</strong> has the same rows as \\(I\\) (in any order). There are \\(\bm{n!}\\) different orders.
+7. Then \\(P\bm{x}\\) puts the components \\(x_1\\), \\(x_2\\), \\(\ldots\\), \\(x_n\\) in that new order. And \\(P^\mathrm{T}\\) equals \\(P^{-1}\\).
+
+<!-- <details>
+  <summary><span class="list-summary">&dagger; WORKED EXAMPLES &dagger;</span></summary> -->
+  <ol class="worked-examples">
+    <li>
+      <span class="list-num">2.7 A</span>&emsp;Applying the permutation \(P\) to the rows of \(S\) destorys its symmetry:
+      $$
+      P=\begin{bmatrix} 0 & 1 & 0 \\ 0 & 0 & 1 \\ 1 & 0 & 0 \end{bmatrix}
+      \qquad
+      S=\begin{bmatrix} 1 & 4 & 5 \\ 4 & \bm{2} & 6 \\ 5 & 6 & \bm{3} \end{bmatrix}
+      \qquad
+      PS=\begin{bmatrix} 4 & \bm{2} & 6 \\ 5 & 6 & \bm{3} \\ 1 & 4 & 5 \end{bmatrix}
+      $$
+      What permutation \(Q\) applied to the <em>columns</em> of \(PS\) will recover symmetry in \(PSQ\)? The numbers \(1\), \(2\), \(3\) must come back to the main diagonal (not necessarily in order). Show that \(Q\) is \(P^\mathrm{T}\), so that <strong>symmetry is saved by</strong> \(PSP^\mathrm{T}\).
+      <br><br>
+      <span class="list-num">Solution</span>&emsp;To recover symmetry and put &ldquo;2&rdquo; back on the diagonal, column 2 of \(PS\) must move to column 1. Column 3 of \(PS\) (containing &ldquo;3&rdquo;) must move to column 2. Then the &ldquo;1&rdquo; moves to the 3,3 position. The matrix that permutes columns is \(Q\):
+      $$
+      PS=\begin{bmatrix} 4 & \bm{2} & 6 \\ 5 & 6 & \bm{3} \\ 1 & 4 & 5 \end{bmatrix}
+      \qquad
+      Q=\begin{bmatrix} 0 & 0 & 1 \\ 1 & 0 & 0 \\ 0 & 1 & 0 \end{bmatrix}
+      \qquad
+      PSQ=\begin{bmatrix} \bm{2} & 6 & 4 \\ 6 & \bm{3} & 5 \\ 4 & 5 & 1 \end{bmatrix}
+      \text{is symmetric.}
+      $$
+      <em><strong>The matrix \(\bm{Q}\) is \(\bm{P^\textbf{\textrm{T}}}\).</strong></em> This choice always recovers symmetry, because \(PSP^\mathrm{T}\) is guaranteed to be symmetric. (Its transpose is again \(PSP^\mathrm{T}\).) <em>The matrix \(Q\) is also \(P^{-1}\), because the inverse of every permutation matrix is its transpose.</em>
+      <br>
+      If \(D\) is a diagonal matrix, we are finding that \(PDP^\mathrm{T}\) is also diagonal. When \(P\) moves row 1 down to row 3, \(P^\mathrm{T}\) on the right will move column 1 to column 3. The (1,1) entry moves down to (3,1) and over to (3,3).
+    </li>
+    <li>
+      <span class="list-num">2.7 B</span>&emsp;Find the symmetric factorization \(S=LDL^\mathrm{T}\) for the matrix \(S\) above.
+      $$
+      S=
+      \begin{bmatrix} 1 & 4 & 5 \\ 4 & 2 & 6 \\ 5 & 6 & 3 \end{bmatrix}
+      \longrightarrow
+      \begin{bmatrix} 1 & 4 & 5 \\ 0 & -14 & -14 \\ 0 & -14 & -22 \end{bmatrix}
+      \longrightarrow
+      \begin{bmatrix} 1 & 4 & 5 \\ 0 & -14 & -14 \\ 0 & 0 & -8 \end{bmatrix}
+      =U
+      $$
+      The multipliers were \(\ell_{21}=4\) and \(\ell_{31}=5\) and \(\ell_{32}=1\). <strong>The pivots 1, &minus;14, &minus;8 go into \(\bm{D}\).</strong> When we divide the rows of \(U\) by those pivots, \(L^T\) should appear:
+      $$
+      \begin{array}{l}
+        \textbf{Symmetric} \\
+        \textbf{factorization} \\
+        \textbf{when $\bm{S=S^\textrm{T}}$}
+      \end{array}
+      \qquad
+      \bm{S}=\bm{LDL^\mathrm{T}}=
+      \begin{bmatrix} 1 & 0 & 0 \\ 4 & 1 & 0 \\ 5 & 1 & 1 \end{bmatrix}
+      \begin{bmatrix} 1 & & \\ & -14 & \\ & & -8 \end{bmatrix}
+      \begin{bmatrix} 1 & 4 & 5 \\ 0 & 1 & 1 \\ 0 & 0 & 1 \end{bmatrix}
+      \text{.}
+      $$
+      This matrix \(S\) is invertible because <em>it has three pivots</em>. Its inverse is \((L^\mathrm{T})^{-1}D^{-1}L^{-1}\) and \(S^{-1}\) is also symmetric. The numbers 14 and 8 will turn up in the denominators of \(S^{-1}\). The &ldquo;determinant&rdquo; of \(S\) is the product of the pivots \((1)(-14)(-8)=122\).
+    </li>
+    <li>
+      <span class="list-num">2.7 C</span>&emsp;For a rectangular \(A\), this <em><strong>saddle-point matrix \(\bm{S}\)</strong></em> is symmetric and important:
+      $$
+      \begin{array}{l}
+        \textbf{Block matrix} \\
+        \textbf{from least squares}
+      \end{array}
+      \qquad
+      \bm{S}=\begin{bmatrix} \bm{I} & \bm{A} \\ \bm{A^\textbf{\textrm{T}}} & \bm{0} \end{bmatrix}=\bm{S^\textbf{\textrm{T}}}
+      \text{ has size $m+n$.}
+      $$
+      Applying block elimination to find a <strong>block factorization</strong> \(S=LDL^\mathrm{T}\). Then test invertibility:
+      $$
+      \textcolor{RoyalBlue}{
+        \bm{S}\textit{\textbf{ is invertible}}\quad\Longleftrightarrow\quad\bm{A^\textbf{\textrm{T}}A}\textit{\textbf{ is invertible $\quad\Longleftrightarrow\quad\bm{Ax\neq 0}$ whenever $\bm{x\neq 0}$}}
+      }
+      $$
+      <span class="list-num">Solution</span>&emsp;The first block pivot is \(I\). Subtract \(A^\mathrm{T}\) times row 1 from row 2:
+      $$
+      \textbf{Block elimination}\quad
+      S=\begin{bmatrix} I & A \\ A^\mathrm{T} & 0 \end{bmatrix}
+      \quad\text{goes to}\quad
+      \begin{bmatrix} I & A \\ 0 & \bm{-A^\textbf{\textrm{T}}A} \end{bmatrix}
+      \text{.\quad This is $U$.}
+      $$
+      The block pivot matrix \(D\) contains \(I\) and \(-A^\mathrm{T}A\). Then \(L\) and \(L^\mathrm{T}\) contain \(A^T\) and \(A\):
+      $$
+      \boxed{
+        \qquad
+        \textbf{Block factorization}\quad
+        S=LDL^\mathrm{T}=
+        \begin{bmatrix} I & 0 \\ A^\mathrm{T} & I \end{bmatrix}
+        \begin{bmatrix} I & 0 \\ 0 & -A^\mathrm{T}A \end{bmatrix}
+        \begin{bmatrix} I & A \\ 0 & I \end{bmatrix}
+        \text{.}
+        \qquad
+      }
+      $$
+      \(L\) is certainly invertible, with diagonal 1's. The inverse of the middle matrix involves \((A^\mathrm{T}A)^{-1}\). Section 4.2 answers a key question about the matrix \(A^\mathrm{T}A\).
+      $$
+      \textcolor{RoyalBlue}{
+        \begin{array}{l}
+          \textbf{When is $\bm{A^\textrm{T}A}$ invertible?}\textit{ Answer: $A$ must have independent columns.} \\
+          \textbf{Then $A\bm{x}=\bm{0}$ only if $\bm{x}=\bm{0}$. Otherwise $A\bm{x}=\bm{0}$ will lead to $A^\mathrm{T}A\bm{x}=0$.}
+        \end{array}
+      }
+      $$
+    </li>
+  </ol>
+<!-- </details> -->
+
 ## LINEAR ALGEBRA IN A NUTSHELL
 
 <div style="text-align:center"><strong>((<em>The matrix \(A\) is \(n\) by \(n\)</em>))</strong></div>
@@ -858,7 +974,7 @@ A\text{ has full rank }r=n & A\text{ has rank }r\lt n \\
 \text{The column space is all of }\mathbf{R}^n & \text{The column space has dimension }r\lt n \\
 \text{The row space is all of }\mathbf{R}^n & \text{The row space has dimension }r\lt n \\
 \text{All eigenvalues are nonzero} & \text{Zero is an eigenvalue of }A \\
-A^TA\text{ is symmetric positive definite} & A^TA\text{ is only semidefinite} \\
+A^\mathrm{T}A\text{ is symmetric positive definite} & A^\mathrm{T}A\text{ is only semidefinite} \\
 A\text{ has $n$ (positive) singular values} & A\text{ has $r\lt n$ singular values}
 \end{array}
 $$
