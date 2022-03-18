@@ -850,8 +850,8 @@ TODO: draw svg format figure by using tikz
 6. A <strong>permutation matrix \\(\bm{P}\\)</strong> has the same rows as \\(I\\) (in any order). There are \\(\bm{n!}\\) different orders.
 7. Then \\(P\bm{x}\\) puts the components \\(x_1\\), \\(x_2\\), \\(\ldots\\), \\(x_n\\) in that new order. And \\(P^\mathrm{T}\\) equals \\(P^{-1}\\).
 
-<!-- <details>
-  <summary><span class="list-summary">&dagger; WORKED EXAMPLES &dagger;</span></summary> -->
+<details>
+  <summary><span class="list-summary">&dagger; WORKED EXAMPLES &dagger;</span></summary>
   <ol class="worked-examples">
     <li>
       <span class="list-num">2.7 A</span>&emsp;Applying the permutation \(P\) to the rows of \(S\) destorys its symmetry:
@@ -879,6 +879,7 @@ TODO: draw svg format figure by using tikz
     </li>
     <li>
       <span class="list-num">2.7 B</span>&emsp;Find the symmetric factorization \(S=LDL^\mathrm{T}\) for the matrix \(S\) above.
+      <span class="list-num">Solution</span>&emsp;To factor \(S\) into \(LDL^{-1}\) we eliminate as usual to reach \(U\):
       $$
       S=
       \begin{bmatrix} 1 & 4 & 5 \\ 4 & 2 & 6 \\ 5 & 6 & 3 \end{bmatrix}
@@ -953,7 +954,7 @@ TODO: draw svg format figure by using tikz
       $$
     </li>
   </ol>
-<!-- </details> -->
+</details>
 
 ## LINEAR ALGEBRA IN A NUTSHELL
 
