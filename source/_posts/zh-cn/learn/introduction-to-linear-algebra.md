@@ -29,7 +29,7 @@ article.article .content {
 .content ol.worked-examples > li {
     margin-bottom: 1.5em;
 }
-.content ol.worked-examples > li > span.list-num {
+.content ol.worked-examples > li > span.list-head {
     font-family: Ubuntu, Roboto, 'Open Sans';
     font-weight: bold;
 }
@@ -49,6 +49,12 @@ TODO: draw svg format figure by using tikz
 
 <!-- more -->
 
+<!-- <div>
+$$
+\newcommand\d[1]{\operatorname{d}\!{\\#1}}
+$$
+</div> -->
+
 ## Chapter 1 Introduction to Vectors
 
 ### Vectors and Linear Combinations
@@ -64,9 +70,9 @@ TODO: draw svg format figure by using tikz
   <summary><span class="list-summary">&dagger; WORKED EXAMPLES &dagger;</span></summary>
   <ol class="worked-examples">
     <li>
-      <span class="list-num">1.1 A</span>&emsp;The linear combinations of \(\bm{v}=(1,1,0)\) and \(\bm{w}=(0,1,1)\) fill a plane in \(\mathbf{R}^3\). <em>Describe that plane</em>. Find a vector that is <em>not</em> a combination of \(\bm{v}\) and \(\bm{w}\)&mdash;not on the plane.
+      <span class="list-head">1.1 A</span>&emsp;The linear combinations of \(\bm{v}=(1,1,0)\) and \(\bm{w}=(0,1,1)\) fill a plane in \(\mathbf{R}^3\). <em>Describe that plane</em>. Find a vector that is <em>not</em> a combination of \(\bm{v}\) and \(\bm{w}\)&mdash;not on the plane.
       <br><br>
-      <span class="list-num">Solution</span>&emsp;The plane of \(\bm{v}\) and \(\bm{w}\) contains all combinations \(c\bm{v}+d\bm{w}\). The vectors in that plane allow any \(c\) and \(d\). The plane of Figure 1.3 fills in between the two lines.
+      <span class="list-head">Solution</span>&emsp;The plane of \(\bm{v}\) and \(\bm{w}\) contains all combinations \(c\bm{v}+d\bm{w}\). The vectors in that plane allow any \(c\) and \(d\). The plane of Figure 1.3 fills in between the two lines.
       <details>
         <summary>&dagger; Figure 1.3 &dagger;</summary>
         {% asset_img Figure1.3.png %}
@@ -80,9 +86,9 @@ TODO: draw svg format figure by using tikz
       &emsp;&ensp;Another description of this plane through \((0,0,0)\) is to know that \(\bm{n}=(1,-1,1)\) is <strong>perpendicular</strong> to the plane. Section 1.2 will confirm that \(90\degree\) angle by testing dot products: \(\bm{v}\cdot\bm{m}=0\) and \(\bm{w}\cdot\bm{n}=0\). Perpendicular vectors have zero dot products.
     </li>
     <li>
-      <span class="list-num">1.1 B</span>&emsp;For \(\bm{v}=(1,0)\) and \(\bm{w}=(0,1)\), describe all points \(c\bm{v}\) with (<b>1</b>) <em>whole numbers \(c\)</em> (<b>2</b>) <em>nonnegative numbers \(c\geq 0\)</em>. Then add all vectors \(d\bm{w}\) and describe all \(c\bm{v}+d\bm{w}\)
+      <span class="list-head">1.1 B</span>&emsp;For \(\bm{v}=(1,0)\) and \(\bm{w}=(0,1)\), describe all points \(c\bm{v}\) with (<b>1</b>) <em>whole numbers \(c\)</em> (<b>2</b>) <em>nonnegative numbers \(c\geq 0\)</em>. Then add all vectors \(d\bm{w}\) and describe all \(c\bm{v}+d\bm{w}\)
       <br><br>
-      <span class="list-num">Solution</span>
+      <span class="list-head">Solution</span>
       <br>
       &ensp;(<b>1</b>)&ensp;The vectors \(c\bm{v}=(c,0)\) with whole numbers \(c\) are <strong>equally spaced points</strong> along the \(x\) axis (the direction of \(\bm{v}\)). They include \((-2,0)\), \((-1,0)\), \((0,0)\), \((1,0)\), \((2,0)\).
       <br>
@@ -93,11 +99,11 @@ TODO: draw svg format figure by using tikz
       &ensp;(<b>2&#x2B9;</b>)&ensp;Adding all vectors \(d\bm{w}\) puts a vertical line through every \(c\bm{v}\) on the half-line. Now we have <em><strong>half-plane</strong></em>. The right half of the \(xy\) plane has any \(x\geq 0\) and any \(y\).
     </li>
     <li>
-      <span class="list-num">1.1 C</span>&emsp;Find two equations for \(c\) and \(d\) so that <strong>the linear combination \(c\bm{v}+d\bm{w}\) equals \(\bm{b}\)</strong>:
+      <span class="list-head">1.1 C</span>&emsp;Find two equations for \(c\) and \(d\) so that <strong>the linear combination \(c\bm{v}+d\bm{w}\) equals \(\bm{b}\)</strong>:
       $$
       \bm{v}=\begin{bmatrix} 2 \\ -1 \end{bmatrix}\qquad\bm{w}=\begin{bmatrix} -1 \\ 2 \end{bmatrix}\qquad\bm{b}=\begin{bmatrix} 1 \\ 0 \end{bmatrix}
       $$
-      <span class="list-num">Solution</span>&emsp;In applying mathematics, many problems have two parts:
+      <span class="list-head">Solution</span>&emsp;In applying mathematics, many problems have two parts:
       <br>
       &emsp;<b>1</b>&ensp;<em>Modeling part</em>&emsp;Express the problem by a set of equations.
       <br>
@@ -145,9 +151,9 @@ TODO: draw svg format figure by using tikz
   <summary><span class="list-summary">&dagger; WORKED EXAMPLES &dagger;</span></summary>
   <ol class="worked-examples">
     <li>
-      <span class="list-num">1.2 A</span>&emsp;For the vectors \(\bm{v}=(3,4)\) and \(\bm{w}=(4,3)\) test the Schwarz inqeuality on \(\bm{v}\cdot\bm{w}\) and the triangle inqeuality on \(\|\bm{v}+\bm{w}\|\). Find \(\cos\theta\) for the angle between \(\bm{v}\) and \(\bm{w}\). Which \(\bm{v}\) and \(\bm{w}\) give <em>equality</em> \(\|\bm{v}\cdot\bm{w}\|=\|\bm{v}\|\|\bm{w}\|\) and \(\|\bm{v}+\bm{w}\|=\|\bm{w}\|+\|\bm{w}\|\)?
+      <span class="list-head">1.2 A</span>&emsp;For the vectors \(\bm{v}=(3,4)\) and \(\bm{w}=(4,3)\) test the Schwarz inqeuality on \(\bm{v}\cdot\bm{w}\) and the triangle inqeuality on \(\|\bm{v}+\bm{w}\|\). Find \(\cos\theta\) for the angle between \(\bm{v}\) and \(\bm{w}\). Which \(\bm{v}\) and \(\bm{w}\) give <em>equality</em> \(\|\bm{v}\cdot\bm{w}\|=\|\bm{v}\|\|\bm{w}\|\) and \(\|\bm{v}+\bm{w}\|=\|\bm{w}\|+\|\bm{w}\|\)?
       <br><br>
-      <span class="list-num">Solution</span>&emsp;The dot product is \(\bm{v}\cdot\bm{w}=(3)(4)+(4)(3)=24\). The length of \(\bm{v}\) is \(\|\bm{v}\|=\sqrt{9+16}=5\) and also \(\|\bm{w}\|=5\). The sum \(\bm{v}+\bm{w}=(7,7)\) has length \(7\sqrt{2}<10\).
+      <span class="list-head">Solution</span>&emsp;The dot product is \(\bm{v}\cdot\bm{w}=(3)(4)+(4)(3)=24\). The length of \(\bm{v}\) is \(\|\bm{v}\|=\sqrt{9+16}=5\) and also \(\|\bm{w}\|=5\). The sum \(\bm{v}+\bm{w}=(7,7)\) has length \(7\sqrt{2}<10\).
       $$
       \begin{array}{ll}
         \textbf{Schwarz inequality} & |\bm{v}\cdot\bm{w}|\leq\|\bm{v}\|\|\bm{w}\|\quad\text{is}\quad 24<25 \\
@@ -158,9 +164,9 @@ TODO: draw svg format figure by using tikz
       <em>Equality</em>: One vector is a multiple of the other as in \(\bm{w}=c\bm{v}\). Then the angle is \(0\degree\) or \(180\degree\). In this case \(|\cos\theta|=1\) and \(|\bm{v}\cdot\bm{w}|\) <em>equals</em> \(\|\bm{v}\|\|\bm{w}\|\). If the angle is \(0\degree\), as in \(\bm{w}=2\bm{v}\), then \(\|\bm{v}+\bm{w}\|=\|\bm{v}\|+\|\bm{w}\|\) (both sides give \(3\|\bm{v}\|\)). This \(\bm{v}\), \(2\bm{v}\), \(3\bm{v}\) triangle is flat!
     </li>
     <li>
-      <span class="list-num">1.2 B</span>&emsp;Find a unit vector \(\bm{u}\) in the direction of \(\bm{v}=(3,4)\). Find a unit vector \(\bm{U}\) that is perpendicular to \(\bm{u}\). How many possibilities for \(\bm{U}\)?
+      <span class="list-head">1.2 B</span>&emsp;Find a unit vector \(\bm{u}\) in the direction of \(\bm{v}=(3,4)\). Find a unit vector \(\bm{U}\) that is perpendicular to \(\bm{u}\). How many possibilities for \(\bm{U}\)?
       <br><br>
-      <span class="list-num">Solution</span>&emsp;For a unit vector \(\bm{u}\), divide \(\bm{v}\) by its length \(\|\bm{v}\|=5\). For a perpendicular vector \(\bm{V}\) we can choose \((-4,3)\) since the dot product \(\bm{v}\cdot\bm{V}\) is \((3)(-4)+(4)(3)=0\). For a <em>unit</em> vector perpendicular to \(\bm{u}\), divide \(\bm{V}\) by its length \(\|\bm{V}\|\):
+      <span class="list-head">Solution</span>&emsp;For a unit vector \(\bm{u}\), divide \(\bm{v}\) by its length \(\|\bm{v}\|=5\). For a perpendicular vector \(\bm{V}\) we can choose \((-4,3)\) since the dot product \(\bm{v}\cdot\bm{V}\) is \((3)(-4)+(4)(3)=0\). For a <em>unit</em> vector perpendicular to \(\bm{u}\), divide \(\bm{V}\) by its length \(\|\bm{V}\|\):
       $$
         \bm{u}=\frac{\bm{v}}{\|\bm{v}\|}=\left(\frac{3}{5},\frac{4}{5}\right)
         \qquad
@@ -171,9 +177,9 @@ TODO: draw svg format figure by using tikz
       The only other perpendicular unit vector would be \(-\bm{U}=(\frac{4}{5},-\frac{3}{5})\)
     </li>
     <li>
-      <span class="list-num">1.2 C</span>&emsp;Find a vector \(\bm{x}=(c,d)\) that has dot products \(\bm{x}\cdot\bm{r}=1\) and \(\bm{x}\cdot\bm{s}=0\) with two given vectors \(\bm{r}=(2,-1)\) and \(\bm{s}=(-1,2)\).
+      <span class="list-head">1.2 C</span>&emsp;Find a vector \(\bm{x}=(c,d)\) that has dot products \(\bm{x}\cdot\bm{r}=1\) and \(\bm{x}\cdot\bm{s}=0\) with two given vectors \(\bm{r}=(2,-1)\) and \(\bm{s}=(-1,2)\).
       <br><br>
-      <span class="list-num">Solution</span>&emsp;Those two dot products give linear equations for \(c\) and \(d\). Then \(\bm{x}=(c,d)\).
+      <span class="list-head">Solution</span>&emsp;Those two dot products give linear equations for \(c\) and \(d\). Then \(\bm{x}=(c,d)\).
       $$
       \begin{alignedat}{3}
         \bm{x}\cdot\bm{r}=1\qquad\text{is}\qquad &  & 2c- && d=1\qquad & \textbf{The same equations as}  \\
@@ -210,13 +216,13 @@ TODO: draw svg format figure by using tikz
   <summary><span class="list-summary">&dagger; WORKED EXAMPLES &dagger;</span></summary>
   <ol class="worked-examples">
     <li>
-      <span class="list-num">1.3 A</span>&emsp;Change the southwest entry \(a_{31}\) of \(A\) (row 3, column 1) to \(a_{31}=1\):
+      <span class="list-head">1.3 A</span>&emsp;Change the southwest entry \(a_{31}\) of \(A\) (row 3, column 1) to \(a_{31}=1\):
       $$
       A\bm{x}=\bm{b}\qquad\begin{bmatrix*}[r] 1 & 0 & 0 \\ -1 & 1 & 0 \\ \bm{1} & -1 & 1 \end{bmatrix*}\begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix}=\left[\begin{alignedat}{1} & x_1 \\ - & x_1+x_2 \\  & \bm{x_1}-x_2+x_3 \end{alignedat}\right]=\begin{bmatrix} b_1 \\ b_2 \\ b_3 \end{bmatrix}\text{.}
       $$
       <strong>Find the solution \(\bm{x}\) for any \(\bm{b}\). From \(\bm{x}=A^{-1}\bm{b}\) read off the inverse matrix \(A^{-1}\).</strong>
       <br><br>
-      <span class="list-num">Solution</span>&emsp;Solve the (Linear triangular) system \(A\bm{x}=\bm{b}\) from top to bottom:
+      <span class="list-head">Solution</span>&emsp;Solve the (Linear triangular) system \(A\bm{x}=\bm{b}\) from top to bottom:
       $$
       \begin{alignedat}{3}
       & \text{first}\quad && x_1=b_1 && \\
@@ -230,7 +236,7 @@ TODO: draw svg format figure by using tikz
       &emsp;&ensp;The three columns of \(A\) are still independent. They don't lie in a plane. The combinations of those three columns, using the right weights \(x_1\), \(x_2\), \(x_3\), can produce any three-dimensional vector \(\bm{b}=(b_1,b_2,b_3)\). Those weights come from \(\bm{x}=A^{-1}\bm{b}\).
     </li>
     <li>
-      <span class="list-num">1.3 B</span>&emsp;This \(E\) is an <strong>elimination matrix</strong>. \(E\) has a subtraction and \(E^{-1}\) has an addition.
+      <span class="list-head">1.3 B</span>&emsp;This \(E\) is an <strong>elimination matrix</strong>. \(E\) has a subtraction and \(E^{-1}\) has an addition.
       $$ % Sorry for the type, will reformat as soon as KaTex support multicolumn.
       \bm{b}=E\bm{x}\qquad\begin{bmatrix} b_1 \\ b_2 \end{bmatrix}=\begin{bmatrix} x_1 \\ x_2-\ell x_1 \end{bmatrix}=\begin{bmatrix*}[r] \bm{1} & 0 \\ -\bm{\ell} & \bm{1} \end{bmatrix*}\begin{bmatrix} x_1 \\ x_2 \end{bmatrix}\qquad E=\begin{bmatrix*}[r] \bm{1} & 0 \\ -\bm{\ell} & \bm{1} \end{bmatrix*}
       $$
@@ -240,13 +246,13 @@ TODO: draw svg format figure by using tikz
       $$
     </li>
     <li>
-      <span class="list-num">1.3 C</span>&emsp;Change \(C\) from a cyclic difference to a <strong>centered difference</strong> producing \(x_3-x_1\) :
+      <span class="list-head">1.3 C</span>&emsp;Change \(C\) from a cyclic difference to a <strong>centered difference</strong> producing \(x_3-x_1\) :
       $$
       \begin{equation}
         C\bm{x}=\bm{b}\qquad\begin{bmatrix*}[r] 0 & 1 & 0 \\ -1 & 0 & 1 \\ 0 & -1 & 0 \end{bmatrix*}\begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix}=\left[\begin{alignedat}{1} x_2 & -0 \\ x_3 & -x_1 \\ 0 & -x_2 \end{alignedat}\right]=\begin{bmatrix} b_1 \\ b_2 \\ b_3 \end{bmatrix}\text{.}
       \end{equation}
       $$
-      \(C\bm{x}=\bm{b}\) can only be solved when \(b_1+b_3=x_2-x_2=0\). That is a plane of vectors \(\bm{b}\) in three -dimensional space. Each column of \(C\) is in the plane, the matrix has no inverse. So this plane conatins all combinations of those columns (which are all the vectors \(C\bm{x}\))
+      \(C\bm{x}=\bm{b}\) can only be solved when \(b_1+b_3=x_2-x_2=0\). That is a plane of vectors \(\bm{b}\) in three-dimensional space. Each column of \(C\) is in the plane, the matrix has no inverse. So this plane conatins all combinations of those columns (which are all the vectors \(C\bm{x}\))
       <br>
       &emsp;&ensp;I included the zeros so you could see that this \(C\) produces &ldquo;centered differences&rdquo;. Row \(i\) of \(C\bm{x}\) is \(x_{i+1}\) (<em>right of center</em>) minus \(x_{i-1}\) (<em>left of center</em>). Here is 4 by 4 :
       $$
@@ -281,18 +287,18 @@ TODO: draw svg format figure by using tikz
   <summary><span class="list-summary">&dagger; WORKED EXAMPLES &dagger;</span></summary>
   <ol class="worked-examples">
     <li>
-      <span class="list-num">2.1 A</span>&emsp;Describe the column picture of these three equations \(A\bm{x}=\bm{b}\). Solve by careful inspection of the columns (instead of elimination):
+      <span class="list-head">2.1 A</span>&emsp;Describe the column picture of these three equations \(A\bm{x}=\bm{b}\). Solve by careful inspection of the columns (instead of elimination):
       $$
       \begin{array}{r} x+3y+2z=-3 \\ 2x+2y+2z=-2 \\ 3x+5y+6z=-5 \end{array}\qquad\text{which is}\qquad\begin{bmatrix} 1 & \bm{3} & 2 \\ 2 & \bm{2} & 2 \\ 3 & \bm{5} & 6 \end{bmatrix}\begin{bmatrix} x \\ y \\ z \end{bmatrix}=\begin{bmatrix*}[r] -3 \\ -2 \\ -5 \end{bmatrix*}
       $$
-      <span class="list-num">Solution</span>&emsp;The column picture asks for a linear combination that produces \(\bm{b}\) from the three columns of \(A\). In this example \(\bm{b}\) is <em>minus the second column</em>. So the solution is \(x=0\), \(y=-1\), \(z=0\). To show that \((0,-1,0)\) is the <em>only</em> solution we have to know that &ldquo;\(A\) is invertible&rdquo; and &ldquo;the columns are independent&rdquo; and &ldquo;the determinant isn't zero.&rdquo;
+      <span class="list-head">Solution</span>&emsp;The column picture asks for a linear combination that produces \(\bm{b}\) from the three columns of \(A\). In this example \(\bm{b}\) is <em>minus the second column</em>. So the solution is \(x=0\), \(y=-1\), \(z=0\). To show that \((0,-1,0)\) is the <em>only</em> solution we have to know that &ldquo;\(A\) is invertible&rdquo; and &ldquo;the columns are independent&rdquo; and &ldquo;the determinant isn't zero.&rdquo;
       <br>
       &emsp;&ensp;Those words are not yet defined but the test comes from elimination: We need (and for this matrix we find) a full set of three nonzero pivots.
       <br>
       &emsp;&ensp;Suppose the right side changes to \(\bm{b}=(4,4,8)=\) sum of the first two columns. Then the good combination has \(x=1\), \(y=1\), \(z=0\). The solution becomes \(\bm{x}=(1,1,0)\).
     </li>
     <li>
-      <span class="list-num">2.1 B</span>&emsp;This system has <em>no solution</em>. The planes in the row picture don't meet at a point.
+      <span class="list-head">2.1 B</span>&emsp;This system has <em>no solution</em>. The planes in the row picture don't meet at a point.
       $$
       \textcolor{RoyalBlue}{\textit{\textbf{No combination of the three columns produces b. How to show this?}}} \\
       \begin{array}{r} x+3y+5z=4 \\ x+2y-3z=5 \\ 2x+5y+2z=8 \end{array}\qquad\begin{bmatrix*}[r] 1 & 3 & 5 \\ 1 & 2 & -3 \\ 2 & 5 & 2 \end{bmatrix*}\begin{bmatrix} x \\ y \\ z \end{bmatrix}=\begin{bmatrix} 4 \\ 5 \\ 8 \end{bmatrix}=\bm{b}
@@ -304,7 +310,7 @@ TODO: draw svg format figure by using tikz
       &ensp;(<b>2</b>)&ensp;Take the dot product of each column of \(A\) (and also \(\bm{b}\)) with \(\bm{y}=(1,1,-1)\). How do those dot products show that no combination of columns equals \(\bm{b}\)?
       &ensp;(<b>3</b>)&ensp;Find three different right side vectors \(\bm{b}^{*}\) and \(\bm{b}^{**}\) and \(\bm{b}^{***}\) that *do* allow solutions.
       <br>
-      <span class="list-num">Solution</span>&emsp;
+      <span class="list-head">Solution</span>&emsp;
       <br>
       &ensp;(<b>1</b>)&ensp;The planes don't meet at a point, even though no two planes are parallel. For a plane parallel to \(x+3y+5z=4\). Change the &ldquo;4&rdquo;. The parallel plane \(x+3y+5z=0\) goes through the origin \((0,0,0)\). And the equation multiplied by any nonzero constant still gives the same plane, as in \(2x+6y+10z=8\).
       <br>
@@ -332,7 +338,7 @@ TODO: draw svg format figure by using tikz
   <summary><span class="list-summary">&dagger; WORKED EXAMPLES &dagger;</span></summary>
   <ol class="worked-examples">
     <li>
-      <span class="list-num">2.2 A</span>&emsp;When elimination is applied to this matrix \(A\), what are the first and second pivots? What is the multiplier \(\ell_{21}\) in the first step (\(\ell_{21}\) times row 1 is <em>subtracted</em> from row 2)?
+      <span class="list-head">2.2 A</span>&emsp;When elimination is applied to this matrix \(A\), what are the first and second pivots? What is the multiplier \(\ell_{21}\) in the first step (\(\ell_{21}\) times row 1 is <em>subtracted</em> from row 2)?
       $$
       A=\begin{bmatrix} 1 & 1 & 0 \\ 1 & 2 & 1 \\ 0 & 1 & 2 \end{bmatrix}\longrightarrow\begin{bmatrix} 1 & 1 & 0 \\ 0 & 1 & 1 \\ 0 & 1 & 2 \end{bmatrix}\longrightarrow\begin{bmatrix} 1 & 1 & 0 \\ 0 & 1 & 1 \\ 0 & 0 & 1 \end{bmatrix}=U
       $$
@@ -340,18 +346,18 @@ TODO: draw svg format figure by using tikz
       <br>
       <em><strong>If you change the corner entry from \(a_{33}=2\) to \(a_{33}=1\), why does elimination fail?</strong></em>
       <br><br>
-      <span class="list-num">Solution</span>&emsp;The first pivot is 1. The multiplier \(\ell_{21}\) is 1,1. When 1 times row 1 is subtracted from row 2, the second pivot is revealed as another 1. If the original middle entry had been 1 instead of 2, that would have forced a row exchange.
+      <span class="list-head">Solution</span>&emsp;The first pivot is 1. The multiplier \(\ell_{21}\) is 1,1. When 1 times row 1 is subtracted from row 2, the second pivot is revealed as another 1. If the original middle entry had been 1 instead of 2, that would have forced a row exchange.
       &emsp;&ensp;The multiplier \(\ell_{31}\) is zero because \(a_{31}=0\). A zero at the start of a row needs no elimination. This \(A\) is a "<em>band matrix</em>". Everything stays zero outside the band.
       <br>
       &emsp;&ensp;The last pivot is also 1. So if the original corner \(a_{33}=2\) reduced by 1, elimination would produce 0. <strong>No third pivot, elimination fails.</strong>
     </li>
     <li>
-      <span class="list-num">2.2 B</span>&emsp;Suppose \(A\) is already a <em><strong>triangular matrix</strong></em> (upper triangular or lower triangular). <em>Where do you see its pivots?</em> When does \(A\bm{x}=\bm{b}\) have exactly one solution for every \(\bm{b}\)?
+      <span class="list-head">2.2 B</span>&emsp;Suppose \(A\) is already a <em><strong>triangular matrix</strong></em> (upper triangular or lower triangular). <em>Where do you see its pivots?</em> When does \(A\bm{x}=\bm{b}\) have exactly one solution for every \(\bm{b}\)?
       <br><br>
-      <span class="list-num">Solution</span>&emsp;The pivots of a triangular matrix are already set along the main diagonal. <em>Elimination succeeds when all those numbers are nonzero.</em> Use <em><strong>back</strong></em> substitution when \(A\) is upper triangular, go <em><strong>forward</strong></em> when \(A\) is lower triangular.
+      <span class="list-head">Solution</span>&emsp;The pivots of a triangular matrix are already set along the main diagonal. <em>Elimination succeeds when all those numbers are nonzero.</em> Use <em><strong>back</strong></em> substitution when \(A\) is upper triangular, go <em><strong>forward</strong></em> when \(A\) is lower triangular.
     </li>
     <li>
-      <span class="list-num">2.2 C</span>&emsp;Use elimination to reach upper triangular matrices \(U\). Solve by back substitution or explain why this is impossible. What are the pivots (never zero)? Exchange equations when necessary. The only difference is the \(-x\) in the last equation.
+      <span class="list-head">2.2 C</span>&emsp;Use elimination to reach upper triangular matrices \(U\). Solve by back substitution or explain why this is impossible. What are the pivots (never zero)? Exchange equations when necessary. The only difference is the \(-x\) in the last equation.
       $$
       \begin{array}{rrrr}
         \textbf{Success}\quad & x+y+z=7 & \qquad\textbf{Failure}\quad & x+y+z=7 \\
@@ -359,7 +365,7 @@ TODO: draw svg format figure by using tikz
         & x-y+z=3 & & -x-y+z=3
       \end{array}
       $$
-      <span class="list-num">Solution</span>&emsp;For the first system, subtract equation 1 from equations 2 and 3 (the multipliers are \(\ell_{21}=1\) and \(\ell_{31}=1\)). The 2,2 entry becomes zero, so exchange equations 2 and 3 :
+      <span class="list-head">Solution</span>&emsp;For the first system, subtract equation 1 from equations 2 and 3 (the multipliers are \(\ell_{21}=1\) and \(\ell_{31}=1\)). The 2,2 entry becomes zero, so exchange equations 2 and 3 :
       $$
       \textbf{Success}\qquad
       \begin{alignedat}{3.5}
@@ -408,9 +414,9 @@ TODO: draw svg format figure by using tikz
   <summary><span class="list-summary">&dagger; WORKED EXAMPLES &dagger;</span></summary>
   <ol class="worked-examples">
     <li>
-      <span class="list-num">2.3 A</span>&emsp;What 3 by 3 matrix \(E_{21}\) subtracts 4 times row 1 from row 2? What matrix \(P_{32}\) exchanges row 2 and row 3? If you multiply \(A\) on the <em>right</em> instead of the left, describe the results \(AE_{21}\) and \(AP_{32}\).
+      <span class="list-head">2.3 A</span>&emsp;What 3 by 3 matrix \(E_{21}\) subtracts 4 times row 1 from row 2? What matrix \(P_{32}\) exchanges row 2 and row 3? If you multiply \(A\) on the <em>right</em> instead of the left, describe the results \(AE_{21}\) and \(AP_{32}\).
       <br><br>
-      <span class="list-num">Solution</span>&emsp;By doing those operations on the identity matrix \(I\), we find
+      <span class="list-head">Solution</span>&emsp;By doing those operations on the identity matrix \(I\), we find
       $$
       E_{21}=\begin{bmatrix*}[r] 1 & 0 & 0 \\ -4 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix*}
       \qquad\text{and}\qquad
@@ -419,7 +425,7 @@ TODO: draw svg format figure by using tikz
       Multiplying by \(E_{21}\) on the right side will subtract 4 times <strong>column 2</strong> from <strong>column 1</strong>. Multiplying by \(P_{32}\) on the right will exchange <strong>columns 2</strong> and <strong>3</strong>.
     </li>
     <li>
-      <span class="list-num">2.3 B</span>&emsp;Write down the augmented matrix \(\begin{bmatrix} A & \bm{b} \end{bmatrix}\) with an extra column:
+      <span class="list-head">2.3 B</span>&emsp;Write down the augmented matrix \(\begin{bmatrix} A & \bm{b} \end{bmatrix}\) with an extra column:
       $$
       \begin{array}{r}
         x+2y+2z=1 \\
@@ -429,7 +435,7 @@ TODO: draw svg format figure by using tikz
       $$
       Apply \(E_{21}\) and then \(P_{32}\) to reach a triangular system. Solve by back substitution. What combined matrix \(P_{32}E_{21}\) will do both steps at once?
       <br><br>
-      <span class="list-num">Solution</span>&emsp;\(E_{21}\) removes the 4 in column 1. But zero also appears in column 2:
+      <span class="list-head">Solution</span>&emsp;\(E_{21}\) removes the 4 in column 1. But zero also appears in column 2:
       $$
       \begin{bmatrix} A & \bm{b} \end{bmatrix}=
       \begin{bmatrix}
@@ -467,12 +473,12 @@ TODO: draw svg format figure by using tikz
       $$
     </li>
     <li>
-      <span class="list-num">2.3 C</span>&emsp;Multiply these matrices in two ways. First, rows of \(A\) times columns of \(B\). Second, <em><strong>columns of \(\bm{A}\) times rows of \(\bm{B}\)</strong></em>. That unusual way produces two matrices that add to \(AB\). How many separate ordinary multiplications are needed?
+      <span class="list-head">2.3 C</span>&emsp;Multiply these matrices in two ways. First, rows of \(A\) times columns of \(B\). Second, <em><strong>columns of \(\bm{A}\) times rows of \(\bm{B}\)</strong></em>. That unusual way produces two matrices that add to \(AB\). How many separate ordinary multiplications are needed?
       $$
       \textbf{Both ways}\qquad
       AB=\begin{bmatrix} 3 & 4 \\ 1 & 5 \\ 2 & 0 \end{bmatrix}\begin{bmatrix} 2 & 4 \\ 1 & 1 \end{bmatrix}=\begin{bmatrix*}[r] \bm{10} & \bm{16} \\ \bm{7} & \bm{9} \\ \bm{4} & \bm{8} \end{bmatrix*}
       $$
-      <span class="list-num">Solution</span>&emsp;Rows of \(A\) times columns of \(B\) are dot products of vectors:
+      <span class="list-head">Solution</span>&emsp;Rows of \(A\) times columns of \(B\) are dot products of vectors:
       $$
       \begin{alignedat}{1.5}
         (\text{row 1})\cdot(\text{column 1})=
@@ -520,7 +526,7 @@ TODO: draw svg format figure by using tikz
   <summary><span class="list-summary">&dagger; WORKED EXAMPLES &dagger;</span></summary>
   <ol class="worked-examples">
     <li>
-      <span class="list-num">2.4 A</span>&emsp;A graph or a network has \(n\) nodes. Its <strong>adjacency matrix</strong> \(S\) is \(n\) by \(n\). This is a 0&ndash;1 matrix with \(s_{ij}=1\) when nodes \(i\) and \(j\) are connected by an edge.
+      <span class="list-head">2.4 A</span>&emsp;A graph or a network has \(n\) nodes. Its <strong>adjacency matrix</strong> \(S\) is \(n\) by \(n\). This is a 0&ndash;1 matrix with \(s_{ij}=1\) when nodes \(i\) and \(j\) are connected by an edge.
       {% asset_img Screenshot_20220315_150242.png %}
       The matrix \(S^2\) has a useful interpretation. <strong>\(\bm{(S^2)_{ij}}\) counts the walks of length 2</strong> between node \(i\) and node \(j\). Between nodes 2 and 3 the graph has two walks: go via 1 or go via 4. From node 1 to node 1, there are also two walks: 1&ndash;2&ndash;1 and 1&ndash;3&ndash;1.
       $$
@@ -553,7 +559,7 @@ TODO: draw svg format figure by using tikz
       &emsp;&ensp;\((S^2)_{ij}\) is adding up 1's for all the 2-step paths \(i\rarr k\rarr j\). So it counts those paths. In the same way \(S^{N-1}S\) will count \(N\)-step paths, because those are \((N-1)\)-step paths from \(i\) to \(k\) followed by one step from \(k\) to \(j\). Matrix multiplication is exactly suited to counting paths on a graph&mdash;channels of communcation between employees in a company.
     </li>
     <li>
-      <span class="list-num">2.4 B</span>&emsp;For these matrices, when does \(AB=BA\)? When does \(BC=CB\)? When does \(A\) times \(BC\) equal \(AB\) times \(C\)? Give the conditions on their entries \(p\), \(q\), \(r\), \(z\) :
+      <span class="list-head">2.4 B</span>&emsp;For these matrices, when does \(AB=BA\)? When does \(BC=CB\)? When does \(A\) times \(BC\) equal \(AB\) times \(C\)? Give the conditions on their entries \(p\), \(q\), \(r\), \(z\) :
       $$
       A=\begin{bmatrix} p & 0 \\ q & r \end{bmatrix}
       \qquad
@@ -563,7 +569,7 @@ TODO: draw svg format figure by using tikz
       $$
       If \(p\), \(q\), \(r\), \(1\), \(z\) are 4 by 4 blocks instead of numbers, do the answers change?
       <br><br>
-      <span class="list-num">Solution</span>&emsp;First of all, \(A\) times \(BC\) <em>always</em> equals \(AB\) times \(C\). Parentheses are not needed in \(A(BC)=(AB)C=ABC\). But we must keep the matrices in this order :
+      <span class="list-head">Solution</span>&emsp;First of all, \(A\) times \(BC\) <em>always</em> equals \(AB\) times \(C\). Parentheses are not needed in \(A(BC)=(AB)C=ABC\). But we must keep the matrices in this order :
       $$
       \begin{array}{l}
         \textbf{Usually }\bm{AB\neq BA}\qquad AB=\begin{bmatrix} p & p \\ q & q+r \end{bmatrix}\qquad BA=\begin{bmatrix} p+q & r \\ q & r \end{bmatrix}\text{.}
@@ -591,7 +597,7 @@ TODO: draw svg format figure by using tikz
   <summary><span class="list-summary">&dagger; WORKED EXAMPLES &dagger;</span></summary>
   <ol class="worked-examples">
     <li>
-      <span class="list-num">2.5 A</span>&emsp;The inverse of a triangular <strong>difference matrix</strong> \(A\) is a triangular <strong>sum matrix</strong> \(S\) :
+      <span class="list-head">2.5 A</span>&emsp;The inverse of a triangular <strong>difference matrix</strong> \(A\) is a triangular <strong>sum matrix</strong> \(S\) :
       $$
       \begin{alignedat}{1}
       \begin{bmatrix} A & I \end{bmatrix}
@@ -621,7 +627,7 @@ TODO: draw svg format figure by using tikz
       It I change \(a_{13}\) to \(-1\), then all rows of \(A\) add to zero. The equation \(A\bm{x}=0\) will now have the nonzero solution \(\bm{x}=(1,1,1)\). A clear signal : <em><strong>This new \(A\) can't be inverted.</strong></em>
     </li>
     <li>
-      <span class="list-num">2.5 B</span>&emsp;Three of these matrices are invertible, and three are singular. Find the inverse when it exists. Give reasons for noninvertibility (zero determinant, too few pivots, nonzero solution to \(A\bm{x}=\bm{0}\)) for the other three. The matrices are in the order \(A\), \(B\), \(C\), \(D\), \(S\), \(E\) :
+      <span class="list-head">2.5 B</span>&emsp;Three of these matrices are invertible, and three are singular. Find the inverse when it exists. Give reasons for noninvertibility (zero determinant, too few pivots, nonzero solution to \(A\bm{x}=\bm{0}\)) for the other three. The matrices are in the order \(A\), \(B\), \(C\), \(D\), \(S\), \(E\) :
       $$
       \begin{bmatrix} 4 & 3 \\ 8 & 6 \end{bmatrix}
       \qquad
@@ -635,7 +641,7 @@ TODO: draw svg format figure by using tikz
       \qquad
       \begin{bmatrix} 1 & 1 & 1 \\ 1 & 1 & 0 \\ 1 & 1 & 1 \end{bmatrix}
       $$
-      <span class="list-num">Solution</span>
+      <span class="list-head">Solution</span>
       $$
       B^{-1}=\frac{1}{4}\begin{bmatrix*}[r] 7 & -3 \\ -8 & 4 \end{bmatrix*}
       \qquad
@@ -648,7 +654,7 @@ TODO: draw svg format figure by using tikz
       &emsp;&ensp;Of course all three reasons for noninvertibility would apply to each of \(A\), \(D\), \(E\).
     </li>
     <li>
-      <span class="list-num">2.5 C</span>&emsp;Apply the Gauss-Jordan method to invert this triangular &ldquo;Pascal matrix&rdquo; \(L\). You see <strong>Pascal's triangle</strong>&mdash;adding each entry to the entry on its left gives the entry below. The entries of \(L\) are &ldquo;binomial coefficients&rdquo;. The next row would be \(1, 4, 6, 4, 1\).
+      <span class="list-head">2.5 C</span>&emsp;Apply the Gauss-Jordan method to invert this triangular &ldquo;Pascal matrix&rdquo; \(L\). You see <strong>Pascal's triangle</strong>&mdash;adding each entry to the entry on its left gives the entry below. The entries of \(L\) are &ldquo;binomial coefficients&rdquo;. The next row would be \(1, 4, 6, 4, 1\).
       $$
       \textbf{Triangular Pascal matrix}\qquad
       \bm{L}=
@@ -660,7 +666,7 @@ TODO: draw svg format figure by using tikz
       \end{bmatrix}
       =\texttt{abs}(\texttt{pascal}(4,1))
       $$
-      <span class="list-num">Solution</span>&emsp;Gausss-Jordan starts with \(\begin{bmatrix} L & I \end{bmatrix}\) and produces zeros by subtracting row 1:
+      <span class="list-head">Solution</span>&emsp;Gausss-Jordan starts with \(\begin{bmatrix} L & I \end{bmatrix}\) and produces zeros by subtracting row 1:
       $$
       \begin{bmatrix} \bm{L} & \bm{I} \end{bmatrix}
       =
@@ -723,7 +729,7 @@ TODO: draw svg format figure by using tikz
   <summary><span class="list-summary">&dagger; WORKED EXAMPLES &dagger;</span></summary>
   <ol class="worked-examples">
     <li>
-      <span class="list-num">2.6 A</span>&emsp;The lower triangular Pascal matrix \(L\) contains the famous <em>&ldquo;Pascal triangle&rdquo;</em>. Gauss-Jordan inverted \(L\) in the worked example <span class="list-num">2.5 C</span>. Here we factor Pascal.
+      <span class="list-head">2.6 A</span>&emsp;The lower triangular Pascal matrix \(L\) contains the famous <em>&ldquo;Pascal triangle&rdquo;</em>. Gauss-Jordan inverted \(L\) in the worked example <span class="list-head">2.5 C</span>. Here we factor Pascal.
       <br>
       &emsp;&ensp;<strong>The symmetric Pascal matrix \(\bm{P}\) is a product of triangular Pascal matrices \(L\) and \(U\).</strong> The symmetric \(P\) has Pascal's triangle tilted, so each entry is the sum of entry above and the entry to the left. The \(n\) by \(n\) symmetric \(P\) is \(\texttt{pascal}(n)\) in \(\textsf{MATLAB}\).
       <br>
@@ -753,7 +759,7 @@ TODO: draw svg format figure by using tikz
       $$
       Then predict and check the next row and column for 5 by 5 Pascal matrices.
       <br>
-      <span class="list-num">Solution</span>&emsp;You could multiply \(LU\) to get \(P\). Better to start with the symmetric \(P\) and reach the upper triangular \(U\) by elimination :
+      <span class="list-head">Solution</span>&emsp;You could multiply \(LU\) to get \(P\). Better to start with the symmetric \(P\) and reach the upper triangular \(U\) by elimination :
       $$
       P=
       \begin{bmatrix}
@@ -794,11 +800,11 @@ TODO: draw svg format figure by using tikz
       &emsp;&ensp;The full proof of \(P=LU\) for all Pascal sizes is quite fascinating. The paper &ldquo;Pascal Matrices&rdquo; is on the course web page <strong>web.mit.edu/18.06</strong> which is also available through MIT's <em>OpenCourseWare</em> at <strong>ocw.mit.edu</strong>. These Pascal matrices have so many remarkable properties&mdash;we will see them again.
     </li>
     <li>
-      <span class="list-num">2.6 B</span>&emsp;The problem is: <em>Solve \(P\bm{x}=\bm{b}=(1,0,0,0)\).</em> This right side \(=\) column of \(I\) means that \(\bm{x}\) will be the first column of \(P^{-1}\). That is Gauss-Jordan, matching the columns of \(PP^{-1}=I\). We already know the Pascal matrices \(L\) and \(U\) as factors of \(P\):
+      <span class="list-head">2.6 B</span>&emsp;The problem is: <em>Solve \(P\bm{x}=\bm{b}=(1,0,0,0)\).</em> This right side \(=\) column of \(I\) means that \(\bm{x}\) will be the first column of \(P^{-1}\). That is Gauss-Jordan, matching the columns of \(PP^{-1}=I\). We already know the Pascal matrices \(L\) and \(U\) as factors of \(P\):
       $$
       \textbf{Two triangular systems}\qquad L\bm{c}=\bm{b}\text{ (forward)}\qquad U\bm{x}=\bm{c}\text{ (back).}
       $$
-      <span class="list-num">Solution</span>&emsp;The lower triangular system \(L\bm{c}=\bm{b}\) is solved <em>top to bottum</em>:
+      <span class="list-head">Solution</span>&emsp;The lower triangular system \(L\bm{c}=\bm{b}\) is solved <em>top to bottum</em>:
       $$
       \begin{alignedat}{3.5}
         c_1 &   &      &   &      && =1 \\
@@ -854,7 +860,7 @@ TODO: draw svg format figure by using tikz
   <summary><span class="list-summary">&dagger; WORKED EXAMPLES &dagger;</span></summary>
   <ol class="worked-examples">
     <li>
-      <span class="list-num">2.7 A</span>&emsp;Applying the permutation \(P\) to the rows of \(S\) destorys its symmetry:
+      <span class="list-head">2.7 A</span>&emsp;Applying the permutation \(P\) to the rows of \(S\) destorys its symmetry:
       $$
       P=\begin{bmatrix} 0 & 1 & 0 \\ 0 & 0 & 1 \\ 1 & 0 & 0 \end{bmatrix}
       \qquad
@@ -864,7 +870,7 @@ TODO: draw svg format figure by using tikz
       $$
       What permutation \(Q\) applied to the <em>columns</em> of \(PS\) will recover symmetry in \(PSQ\)? The numbers \(1\), \(2\), \(3\) must come back to the main diagonal (not necessarily in order). Show that \(Q\) is \(P^\mathrm{T}\), so that <strong>symmetry is saved by</strong> \(PSP^\mathrm{T}\).
       <br><br>
-      <span class="list-num">Solution</span>&emsp;To recover symmetry and put &ldquo;2&rdquo; back on the diagonal, column 2 of \(PS\) must move to column 1. Column 3 of \(PS\) (containing &ldquo;3&rdquo;) must move to column 2. Then the &ldquo;1&rdquo; moves to the 3,3 position. The matrix that permutes columns is \(Q\):
+      <span class="list-head">Solution</span>&emsp;To recover symmetry and put &ldquo;2&rdquo; back on the diagonal, column 2 of \(PS\) must move to column 1. Column 3 of \(PS\) (containing &ldquo;3&rdquo;) must move to column 2. Then the &ldquo;1&rdquo; moves to the 3,3 position. The matrix that permutes columns is \(Q\):
       $$
       PS=\begin{bmatrix} 4 & \bm{2} & 6 \\ 5 & 6 & \bm{3} \\ 1 & 4 & 5 \end{bmatrix}
       \qquad
@@ -878,8 +884,8 @@ TODO: draw svg format figure by using tikz
       If \(D\) is a diagonal matrix, we are finding that \(PDP^\mathrm{T}\) is also diagonal. When \(P\) moves row 1 down to row 3, \(P^\mathrm{T}\) on the right will move column 1 to column 3. The (1,1) entry moves down to (3,1) and over to (3,3).
     </li>
     <li>
-      <span class="list-num">2.7 B</span>&emsp;Find the symmetric factorization \(S=LDL^\mathrm{T}\) for the matrix \(S\) above.
-      <span class="list-num">Solution</span>&emsp;To factor \(S\) into \(LDL^{-1}\) we eliminate as usual to reach \(U\):
+      <span class="list-head">2.7 B</span>&emsp;Find the symmetric factorization \(S=LDL^\mathrm{T}\) for the matrix \(S\) above.
+      <span class="list-head">Solution</span>&emsp;To factor \(S\) into \(LDL^{-1}\) we eliminate as usual to reach \(U\):
       $$
       S=
       \begin{bmatrix} 1 & 4 & 5 \\ 4 & 2 & 6 \\ 5 & 6 & 3 \end{bmatrix}
@@ -906,7 +912,7 @@ TODO: draw svg format figure by using tikz
       This matrix \(S\) is invertible because <em>it has three pivots</em>. Its inverse is \((L^\mathrm{T})^{-1}D^{-1}L^{-1}\) and \(S^{-1}\) is also symmetric. The numbers 14 and 8 will turn up in the denominators of \(S^{-1}\). The &ldquo;determinant&rdquo; of \(S\) is the product of the pivots \((1)(-14)(-8)=122\).
     </li>
     <li>
-      <span class="list-num">2.7 C</span>&emsp;For a rectangular \(A\), this <em><strong>saddle-point matrix \(\bm{S}\)</strong></em> is symmetric and important:
+      <span class="list-head">2.7 C</span>&emsp;For a rectangular \(A\), this <em><strong>saddle-point matrix \(\bm{S}\)</strong></em> is symmetric and important:
       $$
       \begin{array}{l}
         \textbf{Block matrix} \\
@@ -922,7 +928,7 @@ TODO: draw svg format figure by using tikz
         \bm{S}\textit{\textbf{ is invertible}}\quad\Longleftrightarrow\quad\bm{A^\textbf{\textrm{T}}A}\textit{\textbf{ is invertible $\quad\Longleftrightarrow\quad\bm{Ax\neq 0}$ whenever $\bm{x\neq 0}$}}
       }
       $$
-      <span class="list-num">Solution</span>&emsp;The first block pivot is \(I\). Subtract \(A^\mathrm{T}\) times row 1 from row 2:
+      <span class="list-head">Solution</span>&emsp;The first block pivot is \(I\). Subtract \(A^\mathrm{T}\) times row 1 from row 2:
       $$
       \textbf{Block elimination}\quad
       S=\begin{bmatrix} I & A \\ A^\mathrm{T} & 0 \end{bmatrix}
@@ -951,6 +957,67 @@ TODO: draw svg format figure by using tikz
           \textbf{Then $A\bm{x}=\bm{0}$ only if $\bm{x}=\bm{0}$. Otherwise $A\bm{x}=\bm{0}$ will lead to $A^\mathrm{T}A\bm{x}=0$.}
         \end{array}
       }
+      $$
+    </li>
+  </ol>
+</details>
+
+## Chapter 3 Vector Spaces and Subspaces
+
+### Spaces of Vectors
+
+1. The standard \\(n\\)-dimensional space \\(\mathbf{R}^n\\) contains all real column vectors with \\(n\\) components.
+2. If \\(\bm{v}\\) and \\(\bm{w}\\) are in a **vector space** \\(\bm{S}\\), every combination \\(c\bm{v}+d\bm{w}\\) must be in \\(\bm{S}\\).
+3. The "vectors" in \\(\bm{S}\\) can be matrices or functions of \\(x\\). The 1-point space \\(\bm{Z}\\) consists of \\(\bm{x}=\bm{0}\\).
+4. A **subspace** of \\(\mathbf{R}^n\\) is a vector space inside \\(\mathbf{R}^n\\). *Example*: The line \\(y=3x\\) inside \\(\mathbf{R}^2\\).
+5. The **column space** of \\(A\\) contains all combinations of the columns of \\(A\\) : a subspace of \\(\mathbf{R}^m\\).
+6. The column space contains all the vectors \\(A\bm{x}\\). So \\(A\bm{x}=\bm{b}\\) is solvable when \\(\bm{b}\\) is in \\(\bm{C}(A)\\).
+
+<details>
+  <summary><span class="list-summary">&dagger; WORKED EXAMPLES &dagger;</span></summary>
+  <ol class="worked-examples">
+    <li>
+      <span class="list-head">3.1 A</span>&emsp;We are given three different vectors \(\bm{b}_1\), \(\bm{b}_2\), \(\bm{b}_3\). Construct a matrix so that the equations \(A\bm{x}=\bm{b}_1\) and \(A\bm{x}=\bm{b}_2\) are solvable, but \(A\bm{x}=\bm{b}_3\) is not solvable. How can you decide if this is possible? How could you construct \(A\)?
+      <span class="list-head">Solution</span>&emsp; We want to have \(b_1\) and \(b_2\) in the column space of \(A\). Then \(A\bm{x}=\bm{b}_1\) and \(A\bm{x}=\bm{b}_2\) will be solvable. <em>The quickest way is to make \(\bm{b}_1\) and \(\bm{b}_2\) the two columns of \(A\).</em> Then the solutions are \(\bm{x}=(1,0)\) and \(\bm{x}=(0,1)\).
+      <br>
+      &emsp;&ensp;Also, we don't want \(A\bm{x}=\bm{b}_3\) to be solvable. So don't make the column space any larger! Keeping only the columns \(\bm{b}_1\) and \(\bm{b}_2\), the question is:
+      $$
+      \text{Is $A\bm{x}=\begin{bmatrix} & \\ \bm{b}_1 & \bm{b}_2 \\ & \end{bmatrix}\begin{bmatrix} x_1 \\ x_2 \end{bmatrix}=\bm{b}_3$ solvable?}
+      \qquad
+      \text{Is $\bm{b}_3$ a combination of $\bm{b}_1$ and $\bm{b}_2$?}
+      $$
+      If the answer is <em>no</em>, we have the desired matrix \(A\). If the answer is <em>yes</em>, then it is <em>not possible</em> to construct \(A\). When the column space contains \(\bm{b}_1\) and \(\bm{b}_2\), it will have to contain all their linear combinations. So \(\bm{b}_3\) would necessarily be in that column space and \(A\bm{x}=\bm{b}_3\) would necessarily be solvable.
+    </li>
+    <li>
+      <span class="list-head">3.1 B</span>&emsp;Describe a subspace \(\mathbf{S}\) of each vector space \(\mathbf{V}\), and then a subspace \(\mathbf{SS}\) of \(\mathbf{S}\).
+      $$
+      \begin{array}{l}
+        \mathbf{V}_1=\text{all combinations of $(1,1,0,0)$ and $(1,1,1,0)$ and $(1,1,1,1)$} \\
+        \mathbf{V}_2=\text{all vectors perpendicular to $\bm{u}=(1,2,1)$, so $\bm{u}\cdot\bm{v}=0$} \\
+        \mathbf{V}_3=\text{all symmetric 2 by 2 matrices (a subspace of $\mathbf{M}$)} \\
+        \mathbf{V}_4=\text{all solutions to the equation $\mathrm{d}^4y/\mathrm{d}x^4=0$ (a subspace of $\mathbf{F}$)}
+      \end{array}
+      $$
+      Describe each \(\mathbf{V}\) two ways: &ldquo;<em>All combinations of</em>&mldr;&rdquo; &ldquo;<em>All solutions of the equations</em>&mldr;&rdquo;
+      <br>
+      <span class="list-head">Solution</span>&emsp;\(\mathbf{V}_1\) starts with three vectors. A subspace \(\mathbf{S}\) comes from all combinations of the first two vectors \((1,1,0,0)\) and \((1,1,1,0)\). A subspace \(\mathbf{SS}\) of \(\mathbf{S}\) comes from all multiples \((c,c,0,0)\) of the first vector. So many possibilities.
+      <br>
+      &emsp;&ensp;A subspace \(\mathbf{S}\) of \(\mathbf{V}_2\) is the line through \((1,-1,1)\). This line is perpendicular to \(\bm{u}\). The vector \(\bm{x}=(0,0,0)\) is in \(\bm{S}\) and all its multiples \(c\bm{x}\) give the smallest subspace \(\mathbf{SS}=\mathbf{Z}\).
+      <br>
+      &emsp;&ensp;The diagonal matrices are a subspace \(\mathbf{S}\) of the symmetric matrices. The multiples \(cI\) are a subspace \(\mathbf{SS}\) of the diagonal matrices.
+      <br>
+      &emsp;&ensp;\(\mathbf{V}_4\) contains all cubic polynomials \(y=a+bx+cx^2+dx^3\), with \(\mathrm{d}^4y/\mathrm{d}x^4=0\). The quadratic polynomials give a subspace \(\mathbf{S}\). The linear polynomials are one choice of \(\mathbf{SS}\). The constants could be \(\mathbf{SSS}\).
+      <br>
+      &emsp;&ensp;In all four parts we could take \(\mathbf{S}=\mathbf{V}\) itself, and \(\mathbf{SS}=\) the zero subspace \(Z\).
+      <br>
+      &emsp;&ensp;Each \(\mathbf{V}\) can be described as <em>all combinations of</em>&mldr; and as <em>all solutions of</em>&mldr;:
+      $$
+      \begin{array}{ll}
+        \mathbf{V}_1=\text{all combinations of the 3 vectors} & \mathbf{V}_1=\text{all solutions of }v_1-v_2=0 \\
+        \mathbf{V}_2=\text{all combinations of $(1,0,-1)$ and $(1,-1,1)$} & \mathbf{V}_2=\text{all solutions of }\bm{u}\cdot\bm{v}=0 \\
+        \mathbf{V}_3=\text{all combinations of }\left[\begin{smallmatrix} 1 & 0 \\ 0 & 0 \end{smallmatrix}\right],\left[\begin{smallmatrix} 0 & 1 \\ 1 & 0 \end{smallmatrix}\right],\left[\begin{smallmatrix} 0 & 0 \\ 0 & 1 \end{smallmatrix}\right] & \mathbf{V}_3=\text{all solutions $\left[\begin{smallmatrix} a & b \\ c & d \end{smallmatrix}\right]$ of }b=c \\
+        \mathbf{V}_4=\text{all combinations of }1,x,x^2,x^3 & \mathbf{V}_4=\text{all solutions to }\mathrm{d}^4y/\mathrm{d}x^4=0
+      \end{array}
       $$
     </li>
   </ol>
