@@ -29,7 +29,7 @@ article.article .content {
 .content ol.worked-examples > li {
     margin-bottom: 1.5em;
 }
-.content ol.worked-examples > li > span.list-head {
+.content ol.worked-examples > li > span.list-head, span.list-head {
     font-family: Ubuntu, Roboto, 'Open Sans';
     font-weight: bold;
 }
@@ -41,11 +41,11 @@ article.article .content {
 </style>
 
 
-This is a copy of both brief summary and worked examples of each section in the Introduction to Linear Algebra (Fifth Edition) by Gilbert Strang
+This is an excerpt of both brief summary and worked examples of each section in the Introduction to Linear Algebra (Fifth Edition) by Gilbert Strang
 
 https://github.com/mitmath/1806/
 
-TODO: draw svg format figure by using tikz
+TODO: draw svg format figure by using tikz; Using `gather*` or `align*` or `array` while there is a line break in display mode LaTex.
 
 <!-- more -->
 
@@ -664,7 +664,7 @@ $$
         \bm{1} & \bm{2} & \bm{1} & 0 \\
         \bm{1} & \bm{3} & \bm{3} & \bm{1}
       \end{bmatrix}
-      =\texttt{abs}(\texttt{pascal}(4,1))
+      =\textsf{abs}(\textsf{pascal}(4,1))
       $$
       <span class="list-head">Solution</span>&emsp;Gausss-Jordan starts with \(\begin{bmatrix} L & I \end{bmatrix}\) and produces zeros by subtracting row 1:
       $$
@@ -731,11 +731,11 @@ $$
     <li>
       <span class="list-head">2.6 A</span>&emsp;The lower triangular Pascal matrix \(L\) contains the famous <em>&ldquo;Pascal triangle&rdquo;</em>. Gauss-Jordan inverted \(L\) in the worked example <span class="list-head">2.5 C</span>. Here we factor Pascal.
       <br>
-      &emsp;&ensp;<strong>The symmetric Pascal matrix \(\bm{P}\) is a product of triangular Pascal matrices \(L\) and \(U\).</strong> The symmetric \(P\) has Pascal's triangle tilted, so each entry is the sum of entry above and the entry to the left. The \(n\) by \(n\) symmetric \(P\) is \(\texttt{pascal}(n)\) in \(\textsf{MATLAB}\).
+      &emsp;&ensp;<strong>The symmetric Pascal matrix \(\bm{P}\) is a product of triangular Pascal matrices \(L\) and \(U\).</strong> The symmetric \(P\) has Pascal's triangle tilted, so each entry is the sum of entry above and the entry to the left. The \(n\) by \(n\) symmetric \(P\) is \(\textsf{pascal}(n)\) in \(\textsf{MATLAB}\).
       <br>
       <strong>Problem:</strong> <em>Establish the amazing lower-upper factorization \(P=LU\).</em>
       $$
-      \texttt{pascal}(4)=
+      \textsf{pascal}(4)=
       \begin{bmatrix}
         \bm{1} & \bm{1} & \bm{1} & \bm{1} \\
         \bm{1} & \bm{2} & \bm{3} & 4 \\
@@ -795,7 +795,7 @@ $$
       <br>
       &emsp;&ensp;The next section will show how symmetry produces a special relationship between the triangular \(L\) and \(U\). For Pascal, \(U\) is the <strong>&ldquo;transpose&rdquo;</strong> of \(\bm{L}\).
       <br>
-      &emsp;&ensp;You might expect the \(\textsf{MATLAB}\) command \(\texttt{lu}(\texttt{pascal}(4))\) to produce these \(L\) and \(U\). That doesn't happen because \(\textbf{\textsf{lu}}\) subroutine chooses the largest available pivot in each column. The second pivot will change from 1 to 3. But a &ldquo;Cholesky factorization&rdquo; does no row exchanges: \(U=\texttt{chol}(\texttt{pascal}(4))\)
+      &emsp;&ensp;You might expect the \(\textsf{MATLAB}\) command \(\textsf{lu}(\textsf{pascal}(4))\) to produce these \(L\) and \(U\). That doesn't happen because \(\textbf{\textsf{lu}}\) subroutine chooses the largest available pivot in each column. The second pivot will change from 1 to 3. But a &ldquo;Cholesky factorization&rdquo; does no row exchanges: \(U=\textsf{chol}(\textsf{pascal}(4))\)
       <br>
       &emsp;&ensp;The full proof of \(P=LU\) for all Pascal sizes is quite fascinating. The paper &ldquo;Pascal Matrices&rdquo; is on the course web page <strong>web.mit.edu/18.06</strong> which is also available through MIT's <em>OpenCourseWare</em> at <strong>ocw.mit.edu</strong>. These Pascal matrices have so many remarkable properties&mdash;we will see them again.
     </li>
@@ -840,7 +840,7 @@ $$
         x_4=\bm{-1}
       \end{alignedat}
       $$
-      I see a pattern in that \(\bm{x}\), but I don't know where it comes from. Try \(\texttt{inv}(\texttt{pascal}(4))\).
+      I see a pattern in that \(\bm{x}\), but I don't know where it comes from. Try \(\textsf{inv}(\textsf{pascal}(4))\).
     </li>
   </ol>
 </details>
@@ -1018,6 +1018,116 @@ $$
         \mathbf{V}_3=\text{all combinations of }\left[\begin{smallmatrix} 1 & 0 \\ 0 & 0 \end{smallmatrix}\right],\left[\begin{smallmatrix} 0 & 1 \\ 1 & 0 \end{smallmatrix}\right],\left[\begin{smallmatrix} 0 & 0 \\ 0 & 1 \end{smallmatrix}\right] & \mathbf{V}_3=\text{all solutions $\left[\begin{smallmatrix} a & b \\ c & d \end{smallmatrix}\right]$ of }b=c \\
         \mathbf{V}_4=\text{all combinations of }1,x,x^2,x^3 & \mathbf{V}_4=\text{all solutions to }\mathrm{d}^4y/\mathrm{d}x^4=0
       \end{array}
+      $$
+    </li>
+  </ol>
+</details>
+
+### The Nullspace of <math xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>A</mi></mrow></math>: Solving <math xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>A</mi><mi mathvariant="bold-italic">x</mi><mo>=</mo><mi mathvariant="bold">0</mi></mrow></math> and <math xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>R</mi><mi mathvariant="bold-italic">x</mi><mo>=</mo><mi mathvariant="bold">0</mi></mrow></math>
+
+1. The **nullspace** \\(\bm{N}(A)\\) in \\(\mathbf{R}^n\\) contains all solutions \\(\bm{x}\\) to \\(A\bm{x}=\bm{0}\\). This includes \\(\bm{x}=\bm{0}\\)
+2. Elimination (from \\(A\\) to \\(U\\) to \\(R\\)) does not change the nullspace: \\(\bm{N}(A)=\bm{N}(U)=\bm{N}(R)\\).
+3. The **reduced row echelon form** \\(\bm{R=\textbf{\textsf{rref}}(A)}\\) has all pivots \(=1\), with zeros above and below.
+4. If column \\(j\\) of \\(R\\) is free (no pivot), there is a "*special solution*" to \\(A\bm{x}=\bm{0}\\) with \\(x_j=1\\).
+5. Number of pivots = number of nonzero rows in \\(R=\textbf{rank }\bm{r}\\). There are \\(n-r\\) free columns.
+6. Every matrix with \\(m\lt n\\) has nonzero solution to \\(A\bm{x}=\bm{0}\\) in its nullspace.
+
+<details>
+  <summary><span class="list-summary">&dagger; WORKED EXAMPLES &dagger;</span></summary>
+  <ol class="worked-examples">
+    <li>
+      <span class="list-head">3.2 A</span>&emsp;Why do \(A\) and \(R\) have the same nullspace if \(EA=R\) and \(E\) is invertible?
+      <br><br>
+      <table cellspacing="0" cellpadding="0" style="width: 100%;">
+        <tr>
+          <td style="text-align:left;vertical-align:top;padding:0;width:1%;"><span class="list-head">Solution</span>&emsp;</td>
+          <td style="text-align:left;vertical-align:top;padding:0;">
+            If \(A\bm{x}=\bm{0}\) then \(R\bm{x}=EA\bm{x}=E\bm{0}=\bm{0}\)
+            <br>
+            If \(R\bm{x}=\bm{0}\) then \(A\bm{x}=E^{-1}R\bm{x}=E^{-1}\bm{0}=\bm{0}\)
+            <br>
+            \(A\) and \(R\) also have the same row space and the same rank.
+          </td>
+        </tr>
+      </table>
+    </li>
+    <li>
+      <span class="list-head">3.2 B</span>&emsp;Create a 3 by 4 matrix \(R\) whose special solutions to \(R\bm{x}=\bm{0}\) are \(\bm{s}_1\) and \(\bm{s}_2\):
+      $$
+      \bm{s_1}=\begin{bmatrix*}[r] -3 \\ 1 \\ 0 \\ 0 \end{bmatrix*}
+      \quad\text{and}\quad
+      \bm{s_2}=\begin{bmatrix*}[r] -2 \\ 0 \\ -6 \\ 1 \end{bmatrix*}
+      \qquad
+      \begin{array}{l}
+        \text{pivot columns 1 and 3} \\
+        \text{free varibales $x_2$ and $x_4$}
+      \end{array}
+      $$
+      Describe all possible matrices \(A\) with this nullspace \(\bm{N}(A)=\) all combinations of \(\bm{s}_1\) and \(\bm{s}_2\).
+      <br>
+      <span class="list-head">Solution</span>&emsp; The reduced matrix \(R\) have pivots \(=1\) in columns 1 and 3. There is no third pivot, so row 3 of \(R\) is all zeros. The free columns 2 and 4 will be combinations of the pivot columns: 3, 0, 2, 6 in \(R\) come from -3, -0, -2, -6 in \(s_1\) and \(s_2\). <strong>Every \(\bm{A=ER}\).</strong>
+      <br>
+      &emsp;&ensp;Every 3 by 4 matrix has at least one special solution. <em>These matrices have two.</em>
+      $$
+      R=
+      \begin{bmatrix}
+        \bm{1} & \bm{3} & 0 & \bm{2} \\
+        0 & \bm{0} & \bm{1} & \bm{6} \\
+        0 & 0 & 0 & 0
+      \end{bmatrix}
+      \quad\text{has}\quad
+      R\bm{s}_1=\bm{0}
+      \quad\text{and}\quad
+      R\bm{s}_2=\bm{0}
+      \text{.}
+      $$
+    </li>
+    <li>
+      <span class="list-head">3.2 C</span>&emsp;Find the row reduced form \(R\) and the rank \(r\) of \(A\) and \(B\) (<em>those depend on \(c\)</em>). Which are the pivot coumns of \(A\)? What are the special solutions?
+      $$
+      \textbf{Find special solutions}\qquad
+      A=
+      \begin{bmatrix}
+        1 & 2 & 1 \\
+        3 & 6 & 3 \\
+        4 & 8 & c
+      \end{bmatrix}
+      \quad\text{and}\quad
+      B=
+      \begin{bmatrix}
+       c & c \\
+       c & c
+      \end{bmatrix}
+      \text{.}
+      $$
+      <span class="list-head">Solution</span>&emsp;The matrix \(A\) has \(\text{row 2}=3(\text{row 1})\). The rank of \(A\) is \(r=2\) <em><strong>except if</strong></em> \(\bm{c=4}\). \(\text{Row 4}-4(\text{row 1})\) ends in \(c-4\). The pivots are in columns 1 and 3. The second variable \(x_2\) is free. Notice the form of \(R\): Row 3 has moved up into row 2.
+      $$
+      \bm{c\neq 4}\quad R=
+      \begin{bmatrix}
+        \bm{1} & 2 & 0 \\
+        0 & 0 & \bm{1} \\
+        0 & 0 & 0
+      \end{bmatrix}
+      \qquad
+      \bm{c=4}\qquad R=
+      \begin{bmatrix}
+        \bm{1} & 2 & 1 \\
+        0 & 0 & 0 \\
+        0 & 0 & 0
+      \end{bmatrix}
+      \text{.}
+      $$
+      Two pivots leave one free variable \(x_2\). But when \(c=4\), the only pivot is in column 1 (rank one). The second and third variables are free, producing two special solutions:
+      $$
+      c\neq 4\quad\text{Special solution $(-2,1,0)$}
+      \qquad
+      c=4\quad\text{Another special solution $(-1, 0, 1)$.}
+      $$
+      &emsp;&ensp;The 2 by 2 matrix \(B=\left[\begin{smallmatrix} c & c \\ c & c \end{smallmatrix}\right]\) has rank \(r=1\) <em><strong>except if</strong></em> \(\bm{c=0}\), when the rank is zero!
+      $$
+      \bm{c\neq 0}\quad R=\begin{bmatrix} 1 & 1 \\ 0 & 0 \end{bmatrix}
+      \qquad
+      \bm{c=0}\quad R=\begin{bmatrix} 0 & 0 \\ 0 & 0 \end{bmatrix}\quad\text{all nullspace$=\mathbf{R}^2$.}
       $$
     </li>
   </ol>
