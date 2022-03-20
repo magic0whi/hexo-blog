@@ -38,6 +38,23 @@ article.article .content {
     font-weight: bold;
     color: RoyalBlue;
 }
+.list-table {
+    border-collapse: collapse;
+    width:100%;
+}
+.list-table tr > td:nth-child(1) {
+    text-align: right;
+    vertical-align: top;
+    border: none;
+    padding: 0;
+    width: 1%;
+}
+.list-table tr > td:nth-child(2) {
+    text-align: left;
+    vertical-align: top;
+    border: none;
+    padding: 0;
+}
 </style>
 
 
@@ -60,9 +77,9 @@ $$
 ### Vectors and Linear Combinations
 
 1. \\(3\bm{v}+5\bm{w}\\) is a typical **linear combination** \\(c\bm{v}+d\bm{w}\\) of the vectors \\(\bm{v}\\) and \\(\bm{w}\\)
-2. For \\(\bm{v}=\begin{bmatrix} 1 \\\ 1 \end{bmatrix}\\) and \\(\bm{w}=\begin{bmatrix} 2 \\\ 3 \end{bmatrix}\\)
+2. For \\(\bm{v}=\begin{bmatrix} 1 \\\ 1 \end{bmatrix}\\) and \\(\bm{w}=\begin{bmatrix} 2 \\\ 3 \end{bmatrix}\\) that combination is \\(3\begin{bmatrix} 1 \\\ 1 \end{bmatrix}+5\begin{bmatrix} 2 \\\ 3 \end{bmatrix}=\begin{bmatrix} 3+10 \\\ 3+15 \end{bmatrix}=\begin{bmatrix} 13 \\ 18 \end{bmatrix}\\)
 3. The vector \\(\begin{bmatrix} 2 \\\ 3 \end{bmatrix}=\begin{bmatrix} 2 \\\ 0 \end{bmatrix}+\begin{bmatrix} 0 \\\ 3 \end{bmatrix}\\) goes across to \\(x=2\\) and up to \\(y=3\\) in the \\(xy\\) plane.
-4. The combinations \\(c\begin{bmatrix} 1 \\\ 1 \end{bmatrix}+d\begin{bmatrix} 2 \\\ 3 \end{bmatrix}\\) fill the whole \\(xy\\) place. They produce every \\(\begin{bmatrix} x \\\ y \end{bmatrix}\\)
+4. The combinations \\(c\begin{bmatrix} 1 \\\ 1 \end{bmatrix}+d\begin{bmatrix} 2 \\\ 3 \end{bmatrix}\\) fill the whole \\(xy\\) place. They produce every \\(\begin{bmatrix} x \\\ y \end{bmatrix}\\).
 5. The combinations \\(c\begin{bmatrix} 1 \\\ 1 \\\ 1 \end{bmatrix}+d\begin{bmatrix} 2 \\\ 3 \\\ 4 \end{bmatrix}\\) fill a **plane** in \\(xyz\\) space. Same plane for \\(\begin{bmatrix} 1 \\\ 1 \\\ 1 \end{bmatrix}\\), \\(\begin{bmatrix} 3 \\\ 4 \\\ 5 \end{bmatrix}\\).
 6. But \\(\begin{array}{l} c+2d=1 \\\ c+3d=0 \\\ c+4d=0 \end{array}\\) has no solution because its right side \\(\begin{bmatrix} 1 \\\ 0 \\\ 0 \end{bmatrix}\\) is not on that plane.
 
@@ -79,29 +96,55 @@ $$
       </details>
       <br>
       $$
-      \text{Combinations}\qquad c\bm{v}+d\bm{w}=c\begin{bmatrix} 1 \\ 1 \\ 0 \end{bmatrix}+d\begin{bmatrix} 0 \\ 1 \\ 1 \end{bmatrix}=\begin{bmatrix} c \\ c+d \\ d \end{bmatrix}\text{fill a plane.}
+      \text{Combinations}\quad
+      c\bm{v}+d\bm{w}=c\begin{bmatrix} 1 \\ 1 \\ 0 \end{bmatrix}+d\begin{bmatrix} 0 \\ 1 \\ 1 \end{bmatrix}=\begin{bmatrix} c \\ c+d \\ d \end{bmatrix}
+      \text{fill a plane.}
       $$
-      Four vectors in that plane are \((0,0,0)\) and \((2,3,1)\) and \((5,7,2)\) and \((\pi,2\pi,\pi)\). The second component \(c+d\) is always the sum of the first and third components. Like most vectors, \((1,2,3)\) <em>is <strong>not</strong> in the plane, because</em> \(2\neq 1+3\).
+      Four vectors in that plane are \((0,0,0)\) and \((2,3,1)\) and \((5,7,2)\) and \((\pi,2\pi,\pi)\). The second component \(c+d\) is always the sum of the first and third components. Like most vectors, <em>\((1,2,3)\) is <strong>not</strong> in the plane, because \(2\neq 1+3\).</em>
       <br>
-      &emsp;&ensp;Another description of this plane through \((0,0,0)\) is to know that \(\bm{n}=(1,-1,1)\) is <strong>perpendicular</strong> to the plane. Section 1.2 will confirm that \(90\degree\) angle by testing dot products: \(\bm{v}\cdot\bm{m}=0\) and \(\bm{w}\cdot\bm{n}=0\). Perpendicular vectors have zero dot products.
+      &emsp;&ensp;Another description of this plane through \((0,0,0)\) is to know that \(\bm{n}=(1,-1,1)\) is <strong>perpendicular</strong> to the plane. Section 1.2 will confirm that 90&deg; angle by testing dot products: \(\bm{v}\cdot\bm{n}=0\) and \(\bm{w}\cdot\bm{n}=0\). Perpendicular vectors have zero dot products.
     </li>
     <li>
-      <span class="list-head">1.1 B</span>&emsp;For \(\bm{v}=(1,0)\) and \(\bm{w}=(0,1)\), describe all points \(c\bm{v}\) with (<b>1</b>) <em>whole numbers \(c\)</em> (<b>2</b>) <em>nonnegative numbers \(c\geq 0\)</em>. Then add all vectors \(d\bm{w}\) and describe all \(c\bm{v}+d\bm{w}\)
+      <span class="list-head">1.1 B</span>&emsp;For \(\bm{v}=(1,0)\) and \(\bm{w}=(0,1)\), describe all points \(c\bm{v}\) with (<b>1</b>) <em>whole numbers</em> \(c\) (<b>2</b>) <em>nonnegative numbers</em> \(c\geq 0\). Then add all vectors \(d\bm{w}\) and describe all \(c\bm{v}+d\bm{w}\).
       <br><br>
       <span class="list-head">Solution</span>
       <br>
-      &ensp;(<b>1</b>)&ensp;The vectors \(c\bm{v}=(c,0)\) with whole numbers \(c\) are <strong>equally spaced points</strong> along the \(x\) axis (the direction of \(\bm{v}\)). They include \((-2,0)\), \((-1,0)\), \((0,0)\), \((1,0)\), \((2,0)\).
-      <br>
-      &ensp;(<b>2</b>)&ensp;The vectors \(c\bm{v}\) with \(c\geq 0\) fill a <strong>half-line</strong>. It is the positive \(x\) axis. This half-line starts at \((0,0)\) where \(c=0\). It includes \((100,0)\) and \((\pi,0)\) but not \((-100,0)\).
-      <br>
-      &ensp;(<b>1&#x2B9;</b>)&ensp;Adding all vectors \(d\bm{w}=(0,d)\) puts a vertical line through those equally spaced \(c\bm{v}\). We have infinitely many <em><strong>parallel lines</strong></em> from (<em>whole number \(c\), any number \(d\)</em>).
-      <br>
-      &ensp;(<b>2&#x2B9;</b>)&ensp;Adding all vectors \(d\bm{w}\) puts a vertical line through every \(c\bm{v}\) on the half-line. Now we have <em><strong>half-plane</strong></em>. The right half of the \(xy\) plane has any \(x\geq 0\) and any \(y\).
+      <table class="list-table">
+        <tr>
+          <td>(<b>1</b>)&ensp;</td>
+          <td>
+            The vectors \(c\bm{v}=(c,0)\) with whole numbers \(c\) are <strong>equally spaced points</strong> along the \(x\) axis (the direction of \(\bm{v}\)). They include \((-2,0)\), \((-1,0)\), \((0,0)\), \((1,0)\), \((2,0)\).
+          </td>
+        </tr>
+        <tr>
+          <td>(<b>2</b>)&ensp;</td>
+          <td>
+            The vectors \(c\bm{v}\) with \(c\geq 0\) fill a <em><strong>half-line</strong></em>. It is the positive \(x\) axis. This half-line starts at \((0,0)\) where \(c=0\). It includes \((100,0)\) and \((\pi,0)\) but not \((-100,0)\).
+          </td>
+        </tr>
+        <tr>
+          <td>(<b>1&#x2B9;</b>)&ensp;</td>
+          <td>
+            Adding all vectors \(d\bm{w}=(0,d)\) puts a vertical line through those equally spaced \(c\bm{v}\). We have infinitely many <em><strong>parallel lines</strong></em> from (<em>whole number \(c\), any number \(d\)</em>).
+          </td>
+        </tr>
+        <tr>
+          <td>(<b>2&#x2B9;</b>)&ensp;</td>
+          <td>
+            Adding all vectors \(d\bm{w}\) puts a vertical line through every \(c\bm{v}\) on the half-line. Now we have a <em><strong>half-plane</strong></em>. The right half of the \(xy\) plane has any \(x\geq 0\) and any \(y\).
+          </td>
+        </tr>
+      </table>
     </li>
     <li>
       <span class="list-head">1.1 C</span>&emsp;Find two equations for \(c\) and \(d\) so that <strong>the linear combination \(c\bm{v}+d\bm{w}\) equals \(\bm{b}\)</strong>:
       $$
-      \bm{v}=\begin{bmatrix} 2 \\ -1 \end{bmatrix}\qquad\bm{w}=\begin{bmatrix} -1 \\ 2 \end{bmatrix}\qquad\bm{b}=\begin{bmatrix} 1 \\ 0 \end{bmatrix}
+      \bm{v}=\begin{bmatrix*}[r] 2 \\ -1 \end{bmatrix*}
+      \qquad
+      \bm{w}=\begin{bmatrix*}[r] -1 \\ 2 \end{bmatrix*}
+      \qquad
+      \bm{b}=\begin{bmatrix} 1 \\ 0 \end{bmatrix}
+      \text{.}
       $$
       <span class="list-head">Solution</span>&emsp;In applying mathematics, many problems have two parts:
       <br>
@@ -111,11 +154,18 @@ $$
       <br>
       Here we are only asked for the first part (the equations). Chapter 2 is devoted to the second part (the solution). Our example fits into fundamental model for linear algebra:
       $$
-      \text{Find $n$ numbers }c_1,\ldots,c_n\text{ so that }c_1\bm{v}_1+\cdots+c_n\bm{v}_n=\bm{b}
+      \text{Find $n$ numbers $c_1,\ldots,c_n$ so that $c_1\bm{v}_1+\cdots+c_n\bm{v}_n=\bm{b}$.}
       $$
-      For \(n=2\) we will find a formula for the \(c\)'s. The &ldquo;elimination method&rdquo; in Chapter 2 succeeds far beyond \(n=1000\). For \(n\) greater than 1 billion, see Chapter 11. Here \(n=2\):
+      For \(n=2\) we will find a formula for the \(\bm{c}\)'s. The &ldquo;elimination method&rdquo; in Chapter 2 succeeds far beyond \(n=1000\). For \(n\) greater than 1 billion, see Chapter 11. Here \(n=2\):
       $$
-      \colorbox{e8f1fe}{$\begin{array}{l} \textbf{Vector equation} \\ c\bm{v}+d\bm{w}=\bm{b} \end{array}\qquad c\begin{bmatrix*}[r] 2 \\ -1 \end{bmatrix*}+d\begin{bmatrix*}[r] -1 \\ 2 \end{bmatrix*}=\begin{bmatrix} 1 \\ 0 \end{bmatrix}$}
+      \colorbox{e8f1fe}{$
+        \begin{array}{l}
+          \textbf{Vector equation} \\
+          c\bm{v}+d\bm{w}=\bm{b}
+        \end{array}
+        \qquad
+        c\begin{bmatrix*}[r] 2 \\ -1 \end{bmatrix*}+d\begin{bmatrix*}[r] -1 \\ 2 \end{bmatrix*}=\begin{bmatrix} 1 \\ 0 \end{bmatrix}
+      $}
       $$
       The required equations for \(c\) and \(d\) just come from the two components separately:
       $$
@@ -132,6 +182,7 @@ $$
       \qquad
       \begin{bmatrix*}[r] \bm{2} & \bm{-1} \\ \bm{-1} & \bm{2} \end{bmatrix*}
       \begin{bmatrix} c \\ d \end{bmatrix}=\begin{bmatrix} 1 \\ 0 \end{bmatrix}
+      \text{.}
       $$
     </li>
   </ol>
@@ -1038,10 +1089,10 @@ $$
     <li>
       <span class="list-head">3.2 A</span>&emsp;Why do \(A\) and \(R\) have the same nullspace if \(EA=R\) and \(E\) is invertible?
       <br><br>
-      <table cellspacing="0" cellpadding="0" style="width: 100%;">
+      <table class="list-table">
         <tr>
-          <td style="text-align:left;vertical-align:top;padding:0;width:1%;"><span class="list-head">Solution</span>&emsp;</td>
-          <td style="text-align:left;vertical-align:top;padding:0;">
+          <td><span class="list-head">Solution</span>&emsp;</td>
+          <td>
             If \(A\bm{x}=\bm{0}\) then \(R\bm{x}=EA\bm{x}=E\bm{0}=\bm{0}\)
             <br>
             If \(R\bm{x}=\bm{0}\) then \(A\bm{x}=E^{-1}R\bm{x}=E^{-1}\bm{0}=\bm{0}\)
