@@ -76,8 +76,8 @@ $$
 
 ### Vectors and Linear Combinations
 
-1. \\(3\bm{v}+5\bm{w}\\) is a typical **linear combination** \\(c\bm{v}+d\bm{w}\\) of the vectors \\(\bm{v}\\) and \\(\bm{w}\\)
-2. For \\(\bm{v}=\begin{bmatrix} 1 \\\ 1 \end{bmatrix}\\) and \\(\bm{w}=\begin{bmatrix} 2 \\\ 3 \end{bmatrix}\\) that combination is \\(3\begin{bmatrix} 1 \\\ 1 \end{bmatrix}+5\begin{bmatrix} 2 \\\ 3 \end{bmatrix}=\begin{bmatrix} 3+10 \\\ 3+15 \end{bmatrix}=\begin{bmatrix} 13 \\ 18 \end{bmatrix}\\)
+1. \\(3\bm{v}+5\bm{w}\\) is a typical **linear combination** \\(c\bm{v}+d\bm{w}\\) of the vectors \\(\bm{v}\\) and \\(\bm{w}\\).
+2. For \\(\bm{v}=\begin{bmatrix} 1 \\\ 1 \end{bmatrix}\\) and \\(\bm{w}=\begin{bmatrix} 2 \\\ 3 \end{bmatrix}\\) that combination is \\(3\begin{bmatrix} 1 \\\ 1 \end{bmatrix}+5\begin{bmatrix} 2 \\\ 3 \end{bmatrix}=\begin{bmatrix} 3+10 \\\ 3+15 \end{bmatrix}=\begin{bmatrix} 13 \\ 18 \end{bmatrix}\\).
 3. The vector \\(\begin{bmatrix} 2 \\\ 3 \end{bmatrix}=\begin{bmatrix} 2 \\\ 0 \end{bmatrix}+\begin{bmatrix} 0 \\\ 3 \end{bmatrix}\\) goes across to \\(x=2\\) and up to \\(y=3\\) in the \\(xy\\) plane.
 4. The combinations \\(c\begin{bmatrix} 1 \\\ 1 \end{bmatrix}+d\begin{bmatrix} 2 \\\ 3 \end{bmatrix}\\) fill the whole \\(xy\\) place. They produce every \\(\begin{bmatrix} x \\\ y \end{bmatrix}\\).
 5. The combinations \\(c\begin{bmatrix} 1 \\\ 1 \\\ 1 \end{bmatrix}+d\begin{bmatrix} 2 \\\ 3 \\\ 4 \end{bmatrix}\\) fill a **plane** in \\(xyz\\) space. Same plane for \\(\begin{bmatrix} 1 \\\ 1 \\\ 1 \end{bmatrix}\\), \\(\begin{bmatrix} 3 \\\ 4 \\\ 5 \end{bmatrix}\\).
@@ -139,10 +139,8 @@ $$
     <li>
       <span class="list-head">1.1 C</span>&emsp;Find two equations for \(c\) and \(d\) so that <strong>the linear combination \(c\bm{v}+d\bm{w}\) equals \(\bm{b}\)</strong>:
       $$
-      \bm{v}=\begin{bmatrix*}[r] 2 \\ -1 \end{bmatrix*}
-      \qquad
-      \bm{w}=\begin{bmatrix*}[r] -1 \\ 2 \end{bmatrix*}
-      \qquad
+      \bm{v}=\begin{bmatrix*}[r] 2 \\ -1 \end{bmatrix*}\qquad
+      \bm{w}=\begin{bmatrix*}[r] -1 \\ 2 \end{bmatrix*}\qquad
       \bm{b}=\begin{bmatrix} 1 \\ 0 \end{bmatrix}
       \text{.}
       $$
@@ -169,8 +167,7 @@ $$
       $$
       The required equations for \(c\) and \(d\) just come from the two components separately:
       $$
-      \textcolor{RoyalBlue}{\textbf{Two ordinary equations}}
-      \qquad
+      \textcolor{RoyalBlue}{\textbf{Two ordinary equations}}\qquad
       \begin{alignedat}{2.5} % Using alignedat for no space between columns. For parameter there is +0.5 per column (pair of rl columns), columms align are col1=right, col2=left, col3=right...
         && 2c- && d=1 \\
         - && c+ && 2d=0
@@ -178,8 +175,7 @@ $$
       $$
       Each equation produces a line. The two lines cross at the solution \(c=\dfrac{2}{3}\), \(d=\dfrac{1}{3}\). Why not see this also as a <strong>matrix equation</strong>, since that is where we are going:
       $$
-      \textbf{2 by 2 matrix}
-      \qquad
+      \textbf{2 by 2 matrix}\qquad
       \begin{bmatrix*}[r] \bm{2} & \bm{-1} \\ \bm{-1} & \bm{2} \end{bmatrix*}
       \begin{bmatrix} c \\ d \end{bmatrix}=\begin{bmatrix} 1 \\ 0 \end{bmatrix}
       \text{.}
@@ -190,12 +186,12 @@ $$
 
 ### Lengths and Dot Products
 
-1. The "dot product" of \\(\bm{v}=\begin{bmatrix} 1 \\\ 2 \end{bmatrix}\\) and \\(\bm{w}=\begin{bmatrix} 4 \\\ 5 \end{bmatrix}\\) is \\(\bm{v}\cdot\bm{w}=(1)(4)+(2)(5)=4+10=\bm{14}\\)
-2. \\(\bm{v}=\begin{bmatrix} 1 \\\ 3 \\\ 2 \end{bmatrix}\\) and \\(\bm{w}=\begin{bmatrix*}[r] 4 \\\ -4 \\\ 4 \end{bmatrix*}\\) are perpendicular because \\(\bm{v}\cdot\bm{w}\\) is zero: \\((1)(4)+(3)(-4)+(2)(4)=\bm{0}\\)
+1. The "dot product" of \\(\bm{v}=\begin{bmatrix} 1 \\\ 2 \end{bmatrix}\\) and \\(\bm{w}=\begin{bmatrix} 4 \\\ 5 \end{bmatrix}\\) is \\(\bm{v}\cdot\bm{w}=(1)(4)+(2)(5)=4+10=\bm{14}\\).
+2. \\(\bm{v}=\begin{bmatrix} 1 \\\ 3 \\\ 2 \end{bmatrix}\\) and \\(\bm{w}=\begin{bmatrix*}[r] 4 \\\ -4 \\\ 4 \end{bmatrix*}\\) are perpendicular because \\(\bm{v}\cdot\bm{w}\\) is zero: \\((1)(4)+(3)(-4)+(2)(4)=\bm{0}\\).
 3. The length squared of \\(\bm{v}=\begin{bmatrix} 1 \\\ 3 \\\ 2 \end{bmatrix}\\) is \\(\bm{v}\cdot\bm{v}=1+9+4=14\\). **The length is** \\(\\|\bm{v}\\|=\sqrt{\bm{14}}\\).
-4. Then \\(\bm{u}=\dfrac{\bm{v}}{\\|\bm{v}\\|}=\dfrac{\bm{v}}{\sqrt{14}}=\dfrac{1}{\sqrt{14}}\begin{bmatrix} 1 \\\ 3 \\\ 2 \end{bmatrix}\\) has length \\(\\|\bm{u}\\|=\bm{1}\\). Check \\(\dfrac{1}{\underline{14}}+\dfrac{9}{\underline{14}}+\dfrac{4}{\underline{14}}=1\\).
-5. The angle \\(\theta\\) between \\(\bm{v}\\) and \\(\bm{w}\\) has \\(\cos\theta=\dfrac{\bm{v}\cdot\bm{w}}{\\|\bm{v}\\|\\|\bm{w}\\|}\\)
-6. The angle between \\(\begin{bmatrix} 1 \\\ 0 \end{bmatrix}\\) and \\(\begin{bmatrix} 1 \\\ 1\end{bmatrix}\\) has \\(\cos\theta=\dfrac{1}{(1)(\sqrt{2})}\\). That angle is \\(\theta=45\degree\\)
+4. Then \\(\bm{u}=\dfrac{\bm{v}}{\\|\bm{v}\\|}=\dfrac{\bm{v}}{\sqrt{14}}=\dfrac{1}{\sqrt{14}}\begin{bmatrix} 1 \\\ 3 \\\ 2 \end{bmatrix}\\) has length \\(\\|\bm{u}\\|=\bm{1}\\). Check \\(\dfrac{1}{14}+\dfrac{9}{14}+\dfrac{4}{14}=1\\).
+5. The angle \\(\theta\\) between \\(\bm{v}\\) and \\(\bm{w}\\) has \\(\cos\theta=\dfrac{\bm{v}\cdot\bm{w}}{\\|\bm{v}\\|\\|\bm{w}\\|}\\).
+6. The angle between \\(\begin{bmatrix} 1 \\\ 0 \end{bmatrix}\\) and \\(\begin{bmatrix} 1 \\\ 1\end{bmatrix}\\) has \\(\cos\theta=\dfrac{1}{(1)(\sqrt{2})}\\). That angle is \\(\theta=45\degree\\).
 7. All angles have \\(|\cos\theta|\leq 1\\). So all vectors have \\(\boxed{|\bm{v}\cdot\bm{w}|\leq\\|\bm{v}\\|\\|\bm{w}\\|}\\).
 
 <details>
@@ -204,28 +200,26 @@ $$
     <li>
       <span class="list-head">1.2 A</span>&emsp;For the vectors \(\bm{v}=(3,4)\) and \(\bm{w}=(4,3)\) test the Schwarz inqeuality on \(\bm{v}\cdot\bm{w}\) and the triangle inqeuality on \(\|\bm{v}+\bm{w}\|\). Find \(\cos\theta\) for the angle between \(\bm{v}\) and \(\bm{w}\). Which \(\bm{v}\) and \(\bm{w}\) give <em>equality</em> \(\|\bm{v}\cdot\bm{w}\|=\|\bm{v}\|\|\bm{w}\|\) and \(\|\bm{v}+\bm{w}\|=\|\bm{w}\|+\|\bm{w}\|\)?
       <br><br>
-      <span class="list-head">Solution</span>&emsp;The dot product is \(\bm{v}\cdot\bm{w}=(3)(4)+(4)(3)=24\). The length of \(\bm{v}\) is \(\|\bm{v}\|=\sqrt{9+16}=5\) and also \(\|\bm{w}\|=5\). The sum \(\bm{v}+\bm{w}=(7,7)\) has length \(7\sqrt{2}<10\).
+      <span class="list-head">Solution</span>&emsp;The dot product is \(\bm{v}\cdot\bm{w}=(3)(4)+(4)(3)=24\). The length of \(\bm{v}\) is \(\|\bm{v}\|=\sqrt{9+16}=5\) and also \(\|\bm{w}\|=5\). The sum \(\bm{v}+\bm{w}=(7,7)\) has length \(7\sqrt{2}\lt 10\).
       $$
       \begin{array}{ll}
-        \textbf{Schwarz inequality} & |\bm{v}\cdot\bm{w}|\leq\|\bm{v}\|\|\bm{w}\|\quad\text{is}\quad 24<25 \\
-        \textbf{Triangle inequality} & \|\bm{v}+\bm{w}\|\leq\|\bm{v}\|+\|\bm{w}\|\quad\text{is}\quad 7\sqrt{2}<5+5 \\
-        \textbf{Cosine of angle} & \cos\theta=\frac{24}{25}\quad\text{Thin angle from }\bm{v}=(3,4)\text{ to }\bm{w}=(4,3)
+        \textbf{Schwarz inequality} & \text{$|\bm{v}\cdot\bm{w}|\leq\|\bm{v}\|\|\bm{w}\|$\quad is\quad$24\lt 25$.} \\
+        \textbf{Triangle inequality} & \text{$\|\bm{v}+\bm{w}\|\leq\|\bm{v}\|+\|\bm{w}\|$\quad is\quad$7\sqrt{2}\lt 5+5$.} \\
+        \textbf{Cosine of angle} & \text{$\cos\theta=\frac{24}{25}$\quad Thin angle from $\bm{v}=(3,4)$ to $\bm{w}=(4,3)$.}
       \end{array}
       $$
-      <em>Equality</em>: One vector is a multiple of the other as in \(\bm{w}=c\bm{v}\). Then the angle is \(0\degree\) or \(180\degree\). In this case \(|\cos\theta|=1\) and \(|\bm{v}\cdot\bm{w}|\) <em>equals</em> \(\|\bm{v}\|\|\bm{w}\|\). If the angle is \(0\degree\), as in \(\bm{w}=2\bm{v}\), then \(\|\bm{v}+\bm{w}\|=\|\bm{v}\|+\|\bm{w}\|\) (both sides give \(3\|\bm{v}\|\)). This \(\bm{v}\), \(2\bm{v}\), \(3\bm{v}\) triangle is flat!
+      <em>Equality:</em> One vector is a multiple of the other as in \(\bm{w}=c\bm{v}\). Then the angle is 0&deg; or 180&deg;. In this case \(|\cos\theta|=1\) and \(|\bm{v}\cdot\bm{w}|\) <em>equals</em> \(\|\bm{v}\|\|\bm{w}\|\). If the angle is 0&deg;, as in \(\bm{w}=2\bm{v}\), then \(\|\bm{v}+\bm{w}\|=\|\bm{v}\|+\|\bm{w}\|\) (both sides give \(3\|\bm{v}\|\)). This \(\bm{v}\), \(2\bm{v}\), \(3\bm{v}\) triangle is flat!
     </li>
     <li>
       <span class="list-head">1.2 B</span>&emsp;Find a unit vector \(\bm{u}\) in the direction of \(\bm{v}=(3,4)\). Find a unit vector \(\bm{U}\) that is perpendicular to \(\bm{u}\). How many possibilities for \(\bm{U}\)?
       <br><br>
       <span class="list-head">Solution</span>&emsp;For a unit vector \(\bm{u}\), divide \(\bm{v}\) by its length \(\|\bm{v}\|=5\). For a perpendicular vector \(\bm{V}\) we can choose \((-4,3)\) since the dot product \(\bm{v}\cdot\bm{V}\) is \((3)(-4)+(4)(3)=0\). For a <em>unit</em> vector perpendicular to \(\bm{u}\), divide \(\bm{V}\) by its length \(\|\bm{V}\|\):
       $$
-        \bm{u}=\frac{\bm{v}}{\|\bm{v}\|}=\left(\frac{3}{5},\frac{4}{5}\right)
-        \qquad
-        \bm{U}=\frac{\bm{V}}{\|\bm{V}\|}=\left(-\frac{4}{5},\frac{3}{5}\right)
-        \qquad
+        \bm{u}=\frac{\bm{v}}{\|\bm{v}\|}=\left(\frac{3}{5},\frac{4}{5}\right)\qquad
+        \bm{U}=\frac{\bm{V}}{\|\bm{V}\|}=\left(-\frac{4}{5},\frac{3}{5}\right)\qquad
         \bm{u}\cdot\bm{U}=0
       $$
-      The only other perpendicular unit vector would be \(-\bm{U}=(\frac{4}{5},-\frac{3}{5})\)
+      The only other perpendicular unit vector would be \(-\bm{U}=(\frac{4}{5},-\frac{3}{5})\).
     </li>
     <li>
       <span class="list-head">1.2 C</span>&emsp;Find a vector \(\bm{x}=(c,d)\) that has dot products \(\bm{x}\cdot\bm{r}=1\) and \(\bm{x}\cdot\bm{s}=0\) with two given vectors \(\bm{r}=(2,-1)\) and \(\bm{s}=(-1,2)\).
@@ -239,9 +233,7 @@ $$
       $$
       &emsp;&ensp;<em>Comment on n equations for \(x=(x_1,\ldots,x_n)\) in n-dimensional space</em>
       <br>
-      Section 1.1 would start with columns \(\bm{v}_j\). The goal is to produce \(x_1\bm{v}_1+\cdots+x_n\bm{v}_n=\bm{b}\).
-      <br>
-      This section would start from rows \(\bm{r}_i\). Now the goal is to find \(\bm{x}\) with \(\bm{x}\cdot\bm{r}_i=b_i\).
+      Section 1.1 would start with columns \(\bm{v}_j\). The goal is to produce \(x_1\bm{v}_1+\cdots+x_n\bm{v}_n=\bm{b}\). This section would start from rows \(\bm{r}_i\). Now the goal is to find \(\bm{x}\) with \(\bm{x}\cdot\bm{r}_i=b_i\).
       <br>
       &emsp;&ensp;Soon the \(\bm{v}\)'s will be columns of a matrix \(A\), and the \(\bm{r}\)'s will be the rows of \(A\). Then the (one and only) problem will be to solve \(A\bm{x}=\bm{b}\).
     </li>
@@ -252,73 +244,129 @@ $$
 
 1. \\(A=\begin{bmatrix} 1 & 2 \\\ 3 & 4 \\\ 5 & 6 \end{bmatrix}\\) is a 3 by 2 matrix : \\(m=3\\) rows and \\(n=2\\) columns.
 2. \\(A\bm{x}=\begin{bmatrix} 1 & 2 \\\ 3 & 4 \\\ 5 & 6 \end{bmatrix}\begin{bmatrix} x_1 \\\ x_2 \end{bmatrix}\\) is **a combination of the columns**&emsp;\\(A\bm{x}=x_1\begin{bmatrix} 1 \\\ 3 \\\ 5 \end{bmatrix}+x_2\begin{bmatrix} 2 \\\ 4 \\\ 6 \end{bmatrix}\\).
-3. The 3 components of \\(A\bm{x}\\) are dot products of the 3 rows of \\(A\\) with the vector \\(\bm{x}\\) :
+3. The 3 components of \\(A\bm{x}\\) are dot products of the 3 rows of \\(A\\) with the vector \\(\bm{x}\\):
    <div>
    $$
-   \textbf{Row at a time}
-   \qquad
-   \begin{bmatrix} 1 & 2 \\ 3 & 4 \\ 5 & 6 \end{bmatrix}\begin{bmatrix} 7 \\ 8 \end{bmatrix}=\begin{bmatrix} 1\cdot 7+2\cdot 8 \\ 3\cdot 7+4\cdot 8 \\ 5\cdot 7+6\cdot 8 \end{bmatrix}=\begin{bmatrix} 23 \\ 53 \\ 83 \end{bmatrix}\text{.}
+   \textbf{Row at a time}\qquad
+   \begin{bmatrix} 1 & 2 \\ 3 & 4 \\ 5 & 6 \end{bmatrix}\begin{bmatrix} 7 \\ 8 \end{bmatrix}
+   =
+   \begin{bmatrix} 1\cdot 7+2\cdot 8 \\ 3\cdot 7+4\cdot 8 \\ 5\cdot 7+6\cdot 8 \end{bmatrix}
+   =
+   \begin{bmatrix} 23 \\ 53 \\ 83 \end{bmatrix}
+   \text{.}
    $$
    </div>
-4. Equations in matrix form \\(A\bm{x}=\bm{b}\\) : \\(\begin{bmatrix} 2 & 5 \\\ 3 & 7 \end{bmatrix}\begin{bmatrix} x_1 \\\ x_2 \end{bmatrix}=\begin{bmatrix} b_1 \\\ b_2 \end{bmatrix}\\) replaces \\(\begin{array}{l} 2x_1+5x_2=b_1 \\\ 3x_1+7x_2=b_2 \end{array}\\).
-5. The solution to \\(A\bm{x}=\bm{b}\\) can be written as \\(\bm{x}=A^{-1}\bm{b}\\). But some matrices don't allow \\(A^{-1}\\)
+4. Equations in matrix form \\(A\bm{x}=\bm{b}\\): \\(\begin{bmatrix} 2 & 5 \\\ 3 & 7 \end{bmatrix}\begin{bmatrix} x_1 \\\ x_2 \end{bmatrix}=\begin{bmatrix} b_1 \\\ b_2 \end{bmatrix}\\) replaces \\(\begin{array}{l} 2x_1+5x_2=b_1 \\\ 3x_1+7x_2=b_2 \end{array}\\).
+5. The solution to \\(A\bm{x}=\bm{b}\\) can be written as \\(\bm{x}=A^{-1}\bm{b}\\). But some matrices don't allow \\(A^{-1}\\).
 
 <details>
   <summary><span class="list-summary">&dagger; WORKED EXAMPLES &dagger;</span></summary>
   <ol class="worked-examples">
     <li>
-      <span class="list-head">1.3 A</span>&emsp;Change the southwest entry \(a_{31}\) of \(A\) (row 3, column 1) to \(a_{31}=1\):
+      <span class="list-head">1.3 A</span>&emsp;Change the southwest entry \(a_{31}\) of \(A\) (row 3, column 1) to \(a_{31}=\bm{1}\):
       $$
-      A\bm{x}=\bm{b}\qquad\begin{bmatrix*}[r] 1 & 0 & 0 \\ -1 & 1 & 0 \\ \bm{1} & -1 & 1 \end{bmatrix*}\begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix}=\left[\begin{alignedat}{1} & x_1 \\ - & x_1+x_2 \\  & \bm{x_1}-x_2+x_3 \end{alignedat}\right]=\begin{bmatrix} b_1 \\ b_2 \\ b_3 \end{bmatrix}\text{.}
+      A\bm{x}=\bm{b}\qquad
+      \begin{bmatrix*}[r] 1 & 0 & 0 \\ -1 & 1 & 0 \\ \bm{1} & -1 & 1 \end{bmatrix*}\begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix}
+      =
+      \left[\begin{alignedat}{1}
+          & x_1 \\
+        - & x_1+x_2 \\
+          & \bm{x_1}-x_2+x_3
+      \end{alignedat}\right]
+      =
+      \begin{bmatrix} b_1 \\ b_2 \\ b_3 \end{bmatrix}
+      \text{.}
       $$
       <strong>Find the solution \(\bm{x}\) for any \(\bm{b}\). From \(\bm{x}=A^{-1}\bm{b}\) read off the inverse matrix \(A^{-1}\).</strong>
       <br><br>
-      <span class="list-head">Solution</span>&emsp;Solve the (Linear triangular) system \(A\bm{x}=\bm{b}\) from top to bottom:
+      <span class="list-head">Solution</span>&emsp;Solve the (linear triangular) system \(A\bm{x}=\bm{b}\) from top to bottom:
       $$
       \begin{alignedat}{3}
-      & \text{first}\quad && x_1=b_1 && \\
-      & \text{then}\quad && x_2=b_1+ && b_2 \\
-      & \text{then}\quad && x_3= && b_2+b_3
+        & \text{first}\quad && x_1=b_1  && \\
+        & \text{then}\quad  && x_2=b_1+ && b_2 \\
+        & \text{then}\quad  && x_3=     && b_2+b_3
       \end{alignedat}
-      \text{This says that }\bm{x}=A^{-1}\bm{b}=\begin{bmatrix} 1 & 0 & 0 \\ 1 & 1 & 0 \\ 0 & 1 & 1 \end{bmatrix}\begin{bmatrix} b_1 \\ b_2 \\ b_3 \end{bmatrix}
+      \text{
+        This says that $\bm{x}=A^{-1}\bm{b}=
+        \begin{bmatrix} 1 & 0 & 0 \\ 1 & 1 & 0 \\ 0 & 1 & 1 \end{bmatrix}\begin{bmatrix} b_1 \\ b_2 \\ b_3 \end{bmatrix}$
+        .
+      }
       $$
-      This is good practice to see the columns of the inverse matrix multiplying \(b_1\), \(b_2\), and \(b_3\). The first column of \(A^{-1}\) is the solution for \(\bm{b}=(1,0,0)\). The second column is the solution for \(\bm{b}=(0,1,0)\). The third column \(\bm{x}\) of \(A^{-1}\) is the solution for \(A\bm{x}=\bm{x}=(0,0,1)\).
+      This is good practice to see the columns of the inverse matrix multiplying \(b_1\), \(b_2\), and \(b_3\). The first column of \(A^{-1}\) is the solution for \(\bm{b}=(1,0,0)\). The second column is the solution for \(\bm{b}=(0,1,0)\). The third column \(\bm{x}\) of \(A^{-1}\) is the solution for \(A\bm{x}=\bm{b}=(0,0,1)\).
       <br>
       &emsp;&ensp;The three columns of \(A\) are still independent. They don't lie in a plane. The combinations of those three columns, using the right weights \(x_1\), \(x_2\), \(x_3\), can produce any three-dimensional vector \(\bm{b}=(b_1,b_2,b_3)\). Those weights come from \(\bm{x}=A^{-1}\bm{b}\).
     </li>
     <li>
       <span class="list-head">1.3 B</span>&emsp;This \(E\) is an <strong>elimination matrix</strong>. \(E\) has a subtraction and \(E^{-1}\) has an addition.
       $$ % Sorry for the type, will reformat as soon as KaTex support multicolumn.
-      \bm{b}=E\bm{x}\qquad\begin{bmatrix} b_1 \\ b_2 \end{bmatrix}=\begin{bmatrix} x_1 \\ x_2-\ell x_1 \end{bmatrix}=\begin{bmatrix*}[r] \bm{1} & 0 \\ -\bm{\ell} & \bm{1} \end{bmatrix*}\begin{bmatrix} x_1 \\ x_2 \end{bmatrix}\qquad E=\begin{bmatrix*}[r] \bm{1} & 0 \\ -\bm{\ell} & \bm{1} \end{bmatrix*}
+      \bm{b}=E\bm{x}\qquad
+      \begin{bmatrix} b_1 \\ b_2 \end{bmatrix}
+      =
+      \begin{bmatrix} x_1 \\ x_2-\ell x_1 \end{bmatrix}
+      =
+      \begin{bmatrix*}[r] \bm{1} & 0 \\ -\bm{\ell} & \bm{1} \end{bmatrix*}\begin{bmatrix} x_1 \\ x_2 \end{bmatrix}\qquad
+      E=\begin{bmatrix*}[r] \bm{1} & 0 \\ -\bm{\ell} & \bm{1} \end{bmatrix*}
       $$
-      The first equation is \(x_1=b_1\). The second equation is \(x_2-\ell x_1=b_2\). The inverse will <en>add</em> \(\ell b_1\) to \(b_1\), because the elimination matrix <em>subtracted</em> :
+      The first equation is \(x_1=b_1\). The second equation is \(x_2-\ell x_1=b_2\). The inverse will <en>add</em> \(\ell b_1\) to \(b_2\), because the elimination matrix <em>subtracted</em> :
       $$
-      \bm{x}=E^{-1}\bm{b}\qquad\begin{bmatrix} x_1 \\ x_2 \end{bmatrix}=\left[\begin{alignedat}{1} & b_1 \\ \ell & b_1+b_2 \end{alignedat}\right]=\begin{bmatrix} \bm{1} & 0 \\ \bm{\ell}  & \bm{1} \end{bmatrix}\begin{bmatrix} b_1 \\ b_2 \end{bmatrix}\qquad E^{-1}=\begin{bmatrix} \bm{1} & 0 \\ \bm{\ell}  & \bm{1} \end{bmatrix}
+      \bm{x}=E^{-1}\bm{b}\qquad
+      \begin{bmatrix} x_1 \\ x_2 \end{bmatrix}
+      =
+      \left[\begin{alignedat}{1}
+             & b_1 \\
+        \ell & b_1+b_2
+      \end{alignedat}\right]
+      =
+      \begin{bmatrix} \bm{1} & 0 \\ \bm{\ell}  & \bm{1} \end{bmatrix}\begin{bmatrix} b_1 \\ b_2 \end{bmatrix}\qquad
+      E^{-1}=\begin{bmatrix} \bm{1} & 0 \\ \bm{\ell}  & \bm{1} \end{bmatrix}
       $$
     </li>
     <li>
-      <span class="list-head">1.3 C</span>&emsp;Change \(C\) from a cyclic difference to a <strong>centered difference</strong> producing \(x_3-x_1\) :
+      <span class="list-head">1.3 C</span>&emsp;Change \(C\) from a cyclic difference to a <strong>centered difference</strong> producing \(x_3-x_1\):
       $$
       \begin{equation}
-        C\bm{x}=\bm{b}\qquad\begin{bmatrix*}[r] 0 & 1 & 0 \\ -1 & 0 & 1 \\ 0 & -1 & 0 \end{bmatrix*}\begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix}=\left[\begin{alignedat}{1} x_2 & -0 \\ x_3 & -x_1 \\ 0 & -x_2 \end{alignedat}\right]=\begin{bmatrix} b_1 \\ b_2 \\ b_3 \end{bmatrix}\text{.}
+        C\bm{x}=\bm{b}\qquad
+        \begin{bmatrix*}[r] 0 & 1 & 0 \\ -1 & 0 & 1 \\ 0 & -1 & 0 \end{bmatrix*}\begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix}
+        =
+        \left[\begin{alignedat}{1}
+          x_2 & -0 \\
+          x_3 & -x_1 \\
+          0   & -x_2
+        \end{alignedat}\right]
+        =
+        \begin{bmatrix} b_1 \\ b_2 \\ b_3 \end{bmatrix}
+        \text{.}
       \end{equation}
       $$
-      \(C\bm{x}=\bm{b}\) can only be solved when \(b_1+b_3=x_2-x_2=0\). That is a plane of vectors \(\bm{b}\) in three-dimensional space. Each column of \(C\) is in the plane, the matrix has no inverse. So this plane conatins all combinations of those columns (which are all the vectors \(C\bm{x}\))
+      \(C\bm{x}=\bm{b}\) can only be solved when \(b_1+b_3=x_2-x_2=0\). That is a plane of vectors \(\bm{b}\) in three-dimensional space. Each column of \(C\) is in the plane, the matrix has no inverse. So this plane conatins all combinations of those columns (which are all the vectors \(C\bm{x}\)).
       <br>
-      &emsp;&ensp;I included the zeros so you could see that this \(C\) produces &ldquo;centered differences&rdquo;. Row \(i\) of \(C\bm{x}\) is \(x_{i+1}\) (<em>right of center</em>) minus \(x_{i-1}\) (<em>left of center</em>). Here is 4 by 4 :
+      &emsp;&ensp;I included the zeros so you could see that this \(C\) produces &ldquo;centered differences&rdquo;. Row \(i\) of \(C\bm{x}\) is \(x_{i+1}\) (<em>right of center</em>) minus \(x_{i-1}\) (<em>left of center</em>). Here is 4 by 4:
       $$
       \begin{equation}
-        \begin{array}{l} C\bm{x}=\bm{b} \\ \textbf{Centered} \\ \textbf{differences} \end{array}
+        \begin{array}{l}
+          C\bm{x}=\bm{b} \\
+          \textbf{Centered} \\
+          \textbf{differences}
+        \end{array}\qquad
         \begin{bmatrix*}[r]
          0 & 1 & 0 & 0 \\
          -1 & 0 & 1 & 0 \\
          0 & -1 & 0 & 1 \\
          0 & 0 & -1 & 0
        \end{bmatrix*}
-       \begin{bmatrix} x_1 \\ x_2 \\ x_3 \\ x_4 \end{bmatrix}=\left[\begin{alignedat}{1} x_2 & -0 \\ x_3 & -x_1 \\ x_4 & -x_2 \\ 0 & -x_3 \end{alignedat}\right]=\begin{bmatrix} b_1 \\ b_2 \\ b_3 \\ b_4 \end{bmatrix}
+       \begin{bmatrix} x_1 \\ x_2 \\ x_3 \\ x_4 \end{bmatrix}
+       =
+       \left[\begin{alignedat}{1}
+         x_2 & -0 \\
+         x_3 & -x_1 \\
+         x_4 & -x_2 \\
+         0   & -x_3
+       \end{alignedat}\right]
+       =
+       \begin{bmatrix} b_1 \\ b_2 \\ b_3 \\ b_4 \end{bmatrix}
       \end{equation}
       $$
-      Surprisingly this matrix is now invertible! The first and last rows tell you \(x_2\) and \(x_3\). Then the middle rows give \(x_1\) and \(x_4\). It is possible to write down the inverse matrix \(C^{-1}\). But 5 by 5 will be singular (<em>not invertible</em>) again...
+      Surprisingly this matrix is now invertible! The first and last rows tell you \(x_2\) and \(x_3\). Then the middle rows give \(x_1\) and \(x_4\). It is possible to write down the inverse matrix \(C^{-1}\). But 5 by 5 will be singular (<em>not invertible</em>) again&mldr;
     </li>
   </ol>
 </details>
@@ -705,9 +753,9 @@ $$
       &emsp;&ensp;Of course all three reasons for noninvertibility would apply to each of \(A\), \(D\), \(E\).
     </li>
     <li>
-      <span class="list-head">2.5 C</span>&emsp;Apply the Gauss-Jordan method to invert this triangular &ldquo;Pascal matrix&rdquo; \(L\). You see <strong>Pascal's triangle</strong>&mdash;adding each entry to the entry on its left gives the entry below. The entries of \(L\) are &ldquo;binomial coefficients&rdquo;. The next row would be \(1, 4, 6, 4, 1\).
+      <span class="list-head">2.5 C</span>&emsp;Apply the Gauss-Jordan method to invert this triangular &ldquo;Pascal matrix&rdquo; \(L\). You see <strong>Pascal's triangle</strong>&mdash;adding each entry to the entry on its left gives the entry below. The entries of \(L\) are &ldquo;binomial coefficients&rdquo;. The next row would be \(1,4,6,4,1\).
       $$
-      \textbf{Triangular Pascal matrix}\qquad
+      \textbf{Triangular Pascal matrix}\quad
       \bm{L}=
       \begin{bmatrix}
         \bm{1} & 0 & 0 & 0 \\
@@ -754,10 +802,11 @@ $$
       \end{array}\right]
       =
       \begin{bmatrix} \bm{I} & \bm{L^{-1}} \end{bmatrix}
+      \text{.}
       $$
       All the pivots were 1! So we didn't need to divide rows by pivots to get \(I\). The inverse matrix \(L^{-1}\) look like \(L\) itself, except odd-numbered diagonals have minus signs.
       <br>
-      &emsp;&ensp;The same pattern continues to \(n\) by \(n\) Pascal matrices. \(L^{-1}\) has &ldquo;alternating diagonals&rdquo;
+      &emsp;&ensp;The same pattern continues to \(n\) by \(n\) Pascal matrices. \(L^{-1}\) has &ldquo;alternating diagonals&rdquo;.
     </li>
   </ol>
 </details>
