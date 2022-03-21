@@ -43,6 +43,7 @@ article.article .content {
     width:100%;
 }
 .list-table tr > td:nth-child(1) {
+    white-space: nowrap;
     text-align: right;
     vertical-align: top;
     border: none;
@@ -1229,6 +1230,292 @@ $$
       \qquad
       \bm{c=0}\quad R=\begin{bmatrix} 0 & 0 \\ 0 & 0 \end{bmatrix}\quad\text{all nullspace$=\mathbf{R}^2$.}
       $$
+    </li>
+  </ol>
+</details>
+
+### The Complete Solution to <math xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>A</mi><mi mathvariant="bold-italic">x</mi><mo>=</mo><mi mathvariant="bold-italic">b</mi></mrow></math>
+
+1. **Complete solution** to \\(A\bm{x}=\bm{b}\\): \\(\bm{x}=(\text{one particular solution $\bm{x}_p$})+(\text{any $\bm{x}_n$ in the nullspace})\\).
+2. Elimination on \\(\begin{bmatrix} A & \bm{b} \end{bmatrix}\\) leads to \\(\begin{bmatrix} R & \bm{d} \end{bmatrix}\\). Then \\(A\bm{x}=\bm{b}\\) is equivalent to \\(R\bm{x}=\bm{d}\\).
+3. \\(A\bm{x}=\bm{b}\\) and \\(R\bm{x}=\bm{d}\\) are solvable only when all zero rows of \\(R\\) have zeros in \\(\bm{d}\\).
+4. When \\(R\bm{x}=\bm{d}\\) is solvable, one very particular solution \\(\bm{x}_p\\) has all free variables equal to zero.
+5. \\(A\\) has **full column rank** \\(\bm{r=n}\\) when its nullspace \\(\bm{N}(A)=\text{zero vector}\\): *no free variables*.
+6. \\(A\\) has **full row rank** \\(\bm{r=m}\\) when its column space \\(\bm{C}(A)\\) is \\(\mathbf{R}^m\\): \\(A\bm{x}=\bm{b}\\) is always solvable.
+7. The four cases are \\(r=m=n\\) (\\(A\\) is invertible) and \\(r=m\lt n\\) (every \\(A\bm{x}=\bm{b}\\) is solvable) and \\(r=n\lt m\\) (\\(A\bm{x}=\bm{b}\\) has 1 or 0 solutions) and \\(r\lt m\\), \\(r\lt n\\) (0 or &infin; solutions).
+
+<details>
+  <summary><span class="list-summary">&dagger; WORKED EXAMPLES &dagger;</span></summary>
+  <ol class="worked-examples">
+    <li>
+      <span class="list-head">3.3 A</span>&emsp;This question connects elimination (<strong>pivot columns and back substitution</strong>) to <strong>column space-nullspace-rank-solvability</strong>. \(A\) has rank 2:
+      $$
+      A\bm{x}=\bm{b}
+      \quad\text{is}\quad
+      \begin{alignedat}{1.5}
+        x_1+2x_2+3x_3+ && 5x_4=b_1 \\
+        2x_1+4x_2+8x_3+ && 12x_4=b_2 \\
+        3x_1+6x_2+7x_3+ && 13x_4=b_3
+      \end{alignedat}
+      $$
+      <table class="list-table">
+        <tr>
+          <td>&emsp;&ensp;<b>1.</b>&ensp;</td>
+          <td>
+            Reduce \(\begin{bmatrix} A & \bm{b} \end{bmatrix}\) to \(\begin{bmatrix} U & \bm{c} \end{bmatrix}\), so that \(A\bm{x}=\bm{b}\) becomes a triangular system \(U\bm{x}=\bm{c}\).
+          </td>
+        </tr>
+        <tr>
+          <td>&emsp;&ensp;<b>2.</b>&ensp;</td>
+          <td>
+            Find the condition on \(b_1\), \(b_2\), \(b_3\) for \(A\bm{x}=\bm{b}\) to have a solution.
+          </td>
+        </tr>
+        <tr>
+          <td>&emsp;&ensp;<b>3.</b>&ensp;</td>
+          <td>
+            Describe the column space of \(A\). Which plane in \(\mathbf{R}^3\)?
+          </td>
+        </tr>
+        <tr>
+          <td>&emsp;&ensp;<b>4.</b>&ensp;</td>
+          <td>
+            Describe the nullspace of \(A\). Which special solutions in \(\mathbf{R}^4\)?
+          </td>
+        </tr>
+        <tr>
+          <td>&emsp;&ensp;<b>5.</b>&ensp;</td>
+          <td>
+            Reduce \(\begin{bmatrix} U & \bm{c} \end{bmatrix}\) to \(\begin{bmatrix} R & \bm{d} \end{bmatrix}\): Special solutions from \(R\), particular solution from \(\bm{d}\).
+          </td>
+        </tr>
+        <tr>
+          <td>&emsp;&ensp;<b>6.</b>&ensp;</td>
+          <td>
+            Find a particular solution to \(A\bm{x}=(0,6,-6)\) and then the complete solution.
+          </td>
+        </tr>
+      </table>
+      <span class="list-head">Solution</span>
+      <table class="list-table">
+        <tr>
+          <td>&emsp;&ensp;<b>1.</b>&ensp;</td>
+          <td>
+            The multipliers in elimination are 2 and 3 and -1. They take \(\begin{bmatrix} A & \bm{b} \end{bmatrix}\) to \(\begin{bmatrix} U & \bm{c} \end{bmatrix}\).
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            $$
+            \begin{bmatrix*}[r]
+              1 & 2 & 3 & 5 & \mathbf{b_1} \\
+              2 & 4 & 8 & 12 & \mathbf{b_2} \\
+              3 & 6 & 7 & 13 & \mathbf{b_3}
+            \end{bmatrix*}
+            \rarr
+            \left[\begin{array}{rrrr|l}
+              1 & 2 & 3 & 5 & \mathbf{b_1} \\
+              0 & 0 & 2 & 2 & \mathbf{b_2-2b_1} \\
+              0 & 0 & -2 & -2 & \mathbf{b_3-3b_1}
+            \end{array}\right]
+            \rarr
+            \left[\begin{array}{cccc|l}
+              1 & 2 & 3 & 5 & \mathbf{b_1} \\
+              0 & 0 & 2 & 2 & \mathbf{b_2-2b_1} \\
+              0 & 0 & 0 & 0 & \mathbf{b_3+b_2-5b_1}
+            \end{array}\right]
+            $$
+          </td>
+        </tr>
+        <tr>
+          <td>&emsp;&ensp;<b>2.</b>&ensp;</td>
+          <td>
+            The last equation shows the solvability condition \(b_3+b_2-5b_1=0\). Then \(0=0\).
+          </td>
+        </tr>
+        <tr>
+          <td>&emsp;&ensp;<b>3.</b>&ensp;</td>
+          <td>
+            <strong>First description:</strong> The column space is the plane containing all combinations of the pivot columns \((1,2,3)\) and \((3,8,7)\). The pivots are in columns 1 and 3. <strong>Second description:</strong> The column space contains all vectors with \(b_3+b_2-5b_1=0\). That makes \(A\bm{x}=\bm{b}\) solvable, so \(\bm{b}\) is in the column space. <em>All columns of \(A\) pass this test \(b_3+b_2-5b_1=0\). This is the equation for the plane in the first description!</em>
+          </td>
+        </tr>
+        <tr>
+          <td>&emsp;&ensp;<b>4.</b>&ensp;</td>
+          <td>
+            The special solutions have free variables \(x_2=1\), \(x_4=0\) and then \(x_2=0\), \(x_4=1\):
+            $$
+            \begin{array}{l}
+              \textbf{Special solutions to }A\bm{x}=\bm{0} \\
+              \textbf{Back substitution in }U\bm{x}=\bm{0} \\
+              \textbf{or change signs of 2, 2, 1 in }\bm{R}
+            \end{array}
+            \qquad
+            s_1=\begin{bmatrix*}[r] -2 \\ 1 \\ 0 \\ 0 \end{bmatrix*}
+            \qquad
+            s_2=\begin{bmatrix*}[r] -2 \\ 0 \\ -1 \\ 1 \end{bmatrix*}
+            $$
+            The nullspace \(\bm{N}(A)\) in \(\mathbf{R}^4\) contains all \(\bm{x}_n=c_1\bm{s}_1+c_2\bm{s}_2\).
+          </td>
+        </tr>
+        <tr>
+          <td>&emsp;&ensp;<b>5.</b>&ensp;</td>
+          <td>
+            In the reduced form \(R\), the third column changes from \((3,2,0)\) in \(U\) to \((0,1,0)\).
+            The right side \(\bm{c}=(0,6,0)\) becomes \(\bm{d}=(-9,3,0)\) showing &minus;9 and 3 in \(\bm{x}_p\):
+            $$
+            \begin{bmatrix} U & \bm{c} \end{bmatrix}=
+            \begin{bmatrix}
+              1 & 2 & 3 & 5 & \bm{0} \\
+              0 & 0 & 2 & 2 & \bm{6} \\
+              0 & 0 & 0 & 0 & \bm{0}
+            \end{bmatrix}
+            \rarr
+            \begin{bmatrix} R & \bm{d} \end{bmatrix}=
+            \begin{bmatrix*}[r]
+              1 & 2 & 0 & 2 & \bm{-9} \\
+              0 & 0 & 1 & 1 & \bm{3} \\
+              0 & 0 & 0 & 0 & \bm{0}
+            \end{bmatrix*}
+            $$
+          </td>
+        </tr>
+        <tr>
+          <td>&emsp;&ensp;<b>6.</b>&ensp;</td>
+          <td>
+            One particular solution \(\bm{x}_p\) has free variables = zero. Back substitute in \(U\bm{x}=\bm{c}\):
+            $$
+            \begin{array}{l}
+              \textbf{Particular solution to }A\bm{x}_p=\bm{b} \\
+              \textbf{Bring $\mathord{-}9$ and $3$ from the vector }\bm{d} \\
+              \textbf{Free variables $x_2$ and $x_4$ are zero}
+            \end{array}
+            \quad
+            \bm{x}_p=\begin{bmatrix*}[r] -9 \\ 0 \\ 3 \\ 0 \end{bmatrix*}
+            $$
+            The complete solution to \(A\bm{x}=(0,6,-6)\) is \(\bm{x}=\bm{x}_p+\bm{x}_n=x_p+c_1\bm{s}_1+c_2\bm{s}_2\).
+          </td>
+        </tr>
+      </table>
+    </li>
+    <li>
+      <span class="list-head">3.3 B</span>&emsp;Suppose you have this information about the solutions to \(A\bm{x}=\bm{b}\) for a specific \(\bm{b}\). What does that tell you about \(m\) and \(n\) and \(r\) (and \(A\) itself)? And possibly about \(\bm{b}\).
+      <table class="list-table">
+        <tr>
+          <td>&emsp;&ensp;<b>1.</b>&ensp;</td>
+          <td>
+            There is exactly one solution.
+          </td>
+        </tr>
+        <tr>
+          <td>&emsp;&ensp;<b>2.</b>&ensp;</td>
+          <td>
+            All solutions to \(A\bm{x}=\bm{b}\) have the form \(\bm{x}=\left[\begin{smallmatrix} 2 \\ 1 \end{smallmatrix}\right]+c\left[\begin{smallmatrix} 1 \\ 1 \end{smallmatrix}\right]\).
+          </td>
+        </tr>
+        <tr>
+          <td>&emsp;&ensp;<b>3.</b>&ensp;</td>
+          <td>
+            There are no solutions.
+          </td>
+        </tr>
+        <tr>
+          <td>&emsp;&ensp;<b>4.</b>&ensp;</td>
+          <td>
+            All solutions to \(A\bm{x}=\bm{b}\) have the form \(\bm{x}=\left[\begin{smallmatrix} 1 \\ 1 \\ 0 \end{smallmatrix}\right]+c\left[\begin{smallmatrix} 1 \\ 0 \\ 1 \end{smallmatrix}\right]\).
+          </td>
+        </tr>
+        <tr>
+          <td>&emsp;&ensp;<b>5.</b>&ensp;</td>
+          <td>
+            There are infinitely many solutions.
+          </td>
+        </tr>
+      </table>
+      <span class="list-head">Solution</span>&emsp;In case <b>1</b>, with exactly one solution, \(A\) must have full column rank \(r=n\). The nullspace of \(A\) contains only the zero vector. Necessarily \(m\geq n\).
+      <br>
+      &emsp;&ensp;In case <b>2</b>, \(A\) must have \(n=2\) columns (and \(m\) is arbitrary). With \(\left[\begin{smallmatrix} 1 \\ 1 \end{smallmatrix}\right]\) in the nullspace of \(A\), column 2 is the <em>negative</em> of column 1. Also \(A\neq 0\): the rank is 1. With \(\bm{x}=\left[\begin{smallmatrix} 2 \\ 1 \end{smallmatrix}\right]\) as a solution, \(\bm{b}=2(\text{column 1})+(\text{column 2})\). My choice for \(\bm{x}_p\) would be \((1,0)\).
+      <br>
+      &emsp;&ensp;In case <b>3</b> we only know that \(\bm{b}\) is not in the column space of \(A\). The rank of \(A\) must be less than \(m\). I guess we know \(\bm{b}\neq\bm{0}\), otherwise \(\bm{x}=\bm{0}\) would be a solution.
+      <br>
+      &emsp;&ensp;In case <b>4</b>, \(A\) must have \(n=3\) columns. With \((1,0,1)\) in the nullspace of \(A\), column 3 is the negative of column 1. Column 2 must <em>not</em> be a multiple of column 1, or the nullspace would contain another special solution. So the rank of \(A\) is \(3-1=2\). Necessarily \(A\) has \(m\geq 2\) rows. The right side \(\bm{b}\) is \(\text{column 1}+\text{column 2}\).
+      <br>
+      &emsp;&ensp;In case <b>5</b> with infinitely many solutions, the nullspace must contain nonzero vectors. The rank \(r\) must be less than \(n\) (no full column rank), and \(\bm{b}\) must be in the column space of \(A\). We don't know if <em>every</em> \(\bm{b}\) is in the column space, so we don't know if \(r=m\).
+    </li>
+    <li>
+      <span class="list-head">3.3 C</span>&emsp;Find the complete solution \(\bm{x}=\bm{x}_p+\bm{x}_n\) by forward elimination on \(\begin{bmatrix} A & \bm{b} \end{bmatrix}\):
+      $$
+      \begin{bmatrix}
+        1 & 2 & 1 & 0 \\
+        2 & 4 & 4 & 8 \\
+        4 & 8 & 6 & 8
+      \end{bmatrix}
+      \begin{bmatrix} x_1 \\ x_2 \\ x_3 \\ x_4 \end{bmatrix}
+      =
+      \begin{bmatrix*}[r] 4 \\ 2 \\ 10 \end{bmatrix*}
+      \text{.}
+      $$
+      Find numbers \(y_1\), \(y_2\), \(y_3\) so that \(y_1(\text{row 1})+y_2(\text{row 2})+y_3(\text{row 3})=\textit{\textbf{zero row}}\). Check that \(\bm{b}=(4,2,10)\) satisfies the condition \(y_1b_1+y_2b_2+y_3b_3=0\). Why is this the condition for the equations to be solvable and \(\bm{b}\) to be in the column space?
+      <br>
+      <span class="list-head">Solution</span>&emsp;Forward elimination on \(\begin{bmatrix} A & \bm{b} \end{bmatrix}\) produces a zero row in \(\begin{bmatrix} U & \bm{c} \end{bmatrix}\). The third equation becomes \(0=0\) and the equations are consistent (and solvable):
+      $$
+      \begin{bmatrix*}[r]
+        1 & 2 & 1 & 0 & \bm{4} \\
+        2 & 4 & 4 & 8 & \bm{2} \\
+        4 & 8 & 6 & 8 & \bm{10}
+      \end{bmatrix*}
+      \rarr
+      \begin{bmatrix*}[r]
+        1 & 2 & 1 & 0 & \bm{4} \\
+        0 & 0 & 2 & 8 & \bm{-6} \\
+        0 & 0 & 2 & 8 & \bm{-6}
+      \end{bmatrix*}
+      \rarr
+      \begin{bmatrix*}[r]
+        1 & 2 & 1 & 0 & \bm{4} \\
+        0 & 0 & 2 & 8 & \bm{-6} \\
+        0 & 0 & 0 & 0 & \bm{0}
+      \end{bmatrix*}
+      \text{.}
+      $$
+      Columns 1 and 3 contain pivots. The variables \(x_2\) and \(x_4\) are free. If we set those to zero we can solve (back substitution) for the particular solution or we continue to \(R\).
+      <br>
+      &emsp;&ensp;\(R\bm{x}=\bm{d}\) shows that the particular solution with \(\text{free variables}=0\) is \(\bm{x}_p=(7,0,-3,0\).
+      $$
+      \begin{bmatrix*}[r]
+        1 & 2 & 1 & 0 & \bm{4} \\
+        0 & 0 & 2 & 8 & \bm{-6} \\
+        0 & 0 & 0 & 0 & \bm{0}
+      \end{bmatrix*}
+      \rarr
+      \begin{bmatrix*}[r]
+        1 & 2 & 1 & 0 & \bm{4} \\
+        0 & 0 & 1 & 4 & \bm{-3} \\
+        0 & 0 & 0 & 0 & \bm{0}
+      \end{bmatrix*}
+      \rarr
+      \begin{bmatrix*}[r]
+        1 & 2 & 0 & -4 & \bm{7} \\
+        0 & 0 & 1 & 4 & \bm{-3} \\
+        0 & 0 & 0 & 0 & \bm{0}
+      \end{bmatrix*}
+      .
+      $$
+      For the nullspace part \(\bm{x}_n\) with \(\bm{b}=\bm{0}\), set the free variables \(x_2\), \(x_4\), to \(1,0\) and also \(0,1\):
+      $$
+      \textbf{Special solutions}\qquad
+      \bm{s}_1=(-2,1,0,0)
+      \quad\text{and}\quad
+      \bm{s}_2=(4,0,-4,1)
+      $$
+      Then the complete solution to \(A\bm{x}=\bm{b}\) (and \(R\bm{x}=\bm{d}\)) is \(\bm{x}_\text{complete}=\bm{x}_p+c_1\bm{s}_1+c_2\bm{s}_2\).
+      <br>
+      &emsp;&ensp;The rows of \(A\) produced the zero row from \(2(\text{row 1})+(\text{row 2})-(\text{row 3})=(0,0,0,0)\). Thus \(\bm{y}=(2,1,-1)\). The same combination for \(\bm{b}=(4,2,10)\) gives \(2(4)+(2)-1(10)=0\).
+      <br>
+      &emsp;&ensp;If a combination of the rows (on the left side) gives the zero row, then the same combination must give zero on the right side. Of course! <em>Otherwise no solution.</em>
+      <br>
+      &emsp;&ensp;Later we will say this again in different words: If every column of \(A\) is perpendicular to \(\bm{y}=(2,1,-1)\), then any combination \(\bm{b}\) of those columns must also be perpendicular to \(\bm{y}\). Otherwise \(\bm{b}\) is not in the column space and \(A\bm{x}=\bm{b}\) is not solvable.
+      <br>
+      &emsp;&ensp;And again: If \(\bm{y}\) is in the nullspace of \(A^\mathrm{T}\) then \(\bm{y}\) must be perpendicular to every \(\bm{b}\) in the column space of \(A\). Just looking ahead&mldr;
     </li>
   </ol>
 </details>
