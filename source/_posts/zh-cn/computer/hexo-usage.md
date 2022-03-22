@@ -56,11 +56,10 @@ message: 密码输入框的描述性文字
 ## 升级Hexo
 
 ```console
-# npm update -g # 升级npm全局插件
-# npm install npm-check npm-upgrade -g # 针对package.json的操作, 前者只是检查有更新的插件, 后者应用改动
+# npm install npm-check-updates # 或者 npm-check, npm-upgrade
 $ cd /path/to/your/blog
-$ npm-upgrade # 更新package.json中的插件版本
-$ npm update # 实际更新插件
+$ ncu # 更新 package.json
+$ npm update # 更新插件
 ```
 
 ## 分类和标签
