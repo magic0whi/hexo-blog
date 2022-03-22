@@ -1520,6 +1520,106 @@ $$
   </ol>
 </details>
 
+### Independence, Basis and Dimension
+
+1. **Independent columns** of \\(A\\): The only solution to \\(A\bm{x}=\bm{0}\\) is \\(\bm{x}=\bm{0}\\). The nullspace is \\(\bm{Z}\\).
+2. Independent vectors: The only zero combination \\(c_1\bm{v}_1+\cdots+c_k\bm{v}_k=\bm{0}\\) has all \\(c\text{'s}=0\\).
+3. A matrix with \\(m\lt n\\) has **dependent columns**: At least \\(n-m\\) free variables/special solutions.
+4. The vectors \\(\bm{v}_1,\ldots,\bm{v}_k\\) **span the space** \\(\bm{S}\\) if \\(\bm{S}=\text{all combinations of the $\bm{v}$'s}\\).
+5. The vectors \\(\bm{v}_1,\ldots,\bm{v}_k\\) are a **basis for** \\(S\\) if they are independent and they span \\(\bm{S}\\).
+6. The **dimension of a space** \\(\bm{S}\\) is the number of vectors in every basis for \\(\bm{S}\\).
+7. If \\(A\\) is 4 by 4 and invertible, its columns are a basis for \\(\mathbf{R}^4\\). The dimension of \\(\mathbf{R}^4\\) is 4.
+
+<details>
+  <summary><span class="list-summary">&dagger; WORKED EXAMPLES &dagger;</span></summary>
+  <ol class="worked-examples">
+    <li>
+      <span class="list-head">3.4 A</span>&emsp;Start with the vectors \(\bm{v}_1=(1,2,0)\) and \(\bm{v}_2=(2,3,0)\).&emsp;<b>(a)</b> Are they linearly independent?&emsp;<b>(b)</b> Are they a basis for any space?&emsp;<b>(c)</b> What space \(\mathbf{V}\) do they span?&emsp;<b>(d)</b> What is the dimension of \(\mathbf{V}\)?&emsp;<b>(e)</b> Which matrices \(A\) have \(\mathbf{V}\) as their column space?&emsp;(f) Which matrices have \(\mathbf{V}\) as their nullspace?&emsp;<b>(g)</b> Describe all vectors \(\bm{v}_3\) that complete a basis \(\bm{v}_1\), \(\bm{v}_2\), \(\bm{v}_3\) for \(\mathbf{R}^3\).
+      <br><br>
+      <span class="list-head">Solution</span>
+      <table class="list-table">
+        <tr>
+          <td>&emsp;&ensp;<b>(a)</b>&ensp;</td>
+          <td>
+            \(\bm{v}_1\) and \(\bm{v}_2\) are independent&mdash;the only combination to give \(\bm{0}\) is \(0\bm{v}_1+0\bm{v}_2\).
+          </td>
+        </tr>
+        <tr>
+          <td>&emsp;&ensp;<b>(b)</b>&ensp;</td>
+          <td>
+            Yes, they are a basis for the space they span.
+          </td>
+        </tr>
+        <tr>
+          <td>&emsp;&ensp;<b>(c)</b>&ensp;</td>
+          <td>
+            That space \(\mathbf{V}\) contains all vectors \((x,y,0)\). It is the \(xy\) plane in \(\mathbf{R}^3\).
+          </td>
+        </tr>
+        <tr>
+          <td>&emsp;&ensp;<b>(d)</b>&ensp;</td>
+          <td>
+            The dimension of \(\mathbf{V}\) is 2 since the basis contains two vectors.
+          </td>
+        </tr>
+        <tr>
+          <td>&emsp;&ensp;<b>(e)</b>&ensp;</td>
+          <td>
+            This \(\mathbf{V}\) is the column space of any 3 by \(n\) matrix \(A\) of rank 2, if every column is a combination of \(\bm{v}_1\) and \(\bm{v}_2\). In particular \(A\) could just have columns \(\bm{v}_1\) and \(\bm{v}_2\).
+          </td>
+        </tr>
+        <tr>
+          <td>&emsp;&ensp;<b>(f)</b>&ensp;</td>
+          <td>
+            This \(\mathbf{V}\) is the nullspace of any \(m\) by 3 matrix \(B\) of rank 1, if every row is a multiple of \((0,0,1)\). In particular take \(B=\begin{bmatrix} 0 & 0 & 1\end{bmatrix}\). Then \(B\bm{v}_1=\bm{0}\) and \(B\bm{v}_2=\bm{0}\).
+          </td>
+        </tr>
+        <tr>
+          <td>&emsp;&ensp;<b>(g)</b>&ensp;</td>
+          <td>
+            Any third vector \(\bm{v}_3=(a,b,c)\) will complete a basis for \(\mathbf{R}^3\) provided \(c\neq 0\).
+          </td>
+        </tr>
+      </table>
+    </li>
+    <li>
+      <span class="list-head">3.4 B</span>&emsp;Start with three independent vectors \(\bm{w}_1\), \(\bm{w}_2\), \(\bm{w}_3\). Take combinations of those vectors to produce \(\bm{v}_1\), \(\bm{v}_2\), \(\bm{v}_3\). Write the combinations in matrix form as \(V=WB\):
+      $$
+      \begin{alignedat}{2.5}
+        & \bm{v}_1=\bm{w}_1+ &  \bm{w}_2 &   &\\
+        & \bm{v}_2=\bm{w}_1+ & 2\bm{w}_2 & + & \bm{w}_3 \\
+        & \bm{v}_3=          &  \bm{w}_2 & + & c\bm{w}_3
+      \end{alignedat}
+      \quad\text{which is}\quad
+      \begin{bmatrix} & &  \\ \bm{v}_1 & \bm{v}_2 & \bm{v}_3 \\ & & \end{bmatrix}
+      =
+      \begin{bmatrix} & & \\ \bm{w}_1 & \bm{w}_2 & \bm{w}_3 \\ & & \end{bmatrix}
+      \begin{bmatrix} 1 & 1 & 0 \\ 1 & 2 & 1 \\ 0 & 1 & c \end{bmatrix}
+      $$
+      What is the test on \(B\) to see if \(V=WB\) has independent columns? If \(c\neq 1\) show that \(\bm{v}_1\), \(\bm{v}_2\), \(\bm{v}_3\) are linearly independent. If \(c=1\) show that the \(\bm{v}\)'s are linearly <em>dependent</em>.
+      <br><br>
+      <span class="list-head">Solution</span>&emsp;The test on \(V\) for independence of its columns was in our first definition: <em>The nullspace of \(V\) must contain only the zero vector.</em> Then \(\bm{x}=(0,0,0)\) is the only combination of the columns that gives \(V\bm{x}=\text{zero vector}\).
+      <br>
+      &emsp;&ensp;If \(c=1\) in our problem, we can see <em>dependence</em> in two ways. First, \(\bm{v}_1+\bm{v}_3\) will be the same as \(\bm{v}_2\). (If you add \(\bm{w}_1+\bm{w}_2\) to \(\bm{w}_2+\bm{w}_3\) you get \(\bm{w}_1+2\bm{w}_2+\bm{w}_3\) which is \(\bm{v}_2\).) In other words \(\bm{v}_1-\bm{v}_2+\bm{v}_3=\bm{0}\)&mdash;which says that the \(\bm{v}\)'s are not independent.
+      <br>
+      &emsp;&ensp;The other way is to look at the nullspace of \(B\). If \(c=1\), the vector \(\bm{x}=(1,-1,1)\) is in that nullspace, and \(B\bm{x}=\bm{0}\). Then certainly \(WB\bm{x}=\bm{0}\) which is the same as \(V\bm{x}=\bm{0}\). So the \(\bm{v}\)'s are dependent. This specific \(\bm{x}=(1,-1,1)\) from the nullspace tells us again that \(\bm{v}_1-\bm{v}_2+\bm{v}_3=\bm{0}\).
+      <br>
+      &emsp;&ensp;Now suppose \(c\neq 1\). Then the matrix \(B\) is invertible. So if \(\bm{x}\) is <em>any nonzero vector</em> we know that \(B\bm{x}\) is nonzero. Since the \(\bm{w}\)'s are given as independent, we further know that \(WB\bm{x}\) is nonzero. Since \(V=WB\), this says that \(\bm{x}\) is <em>not</em> in the nullspace of \(V\). In other words \(\bm{v}_1\), \(\bm{v}_2\), \(\bm{v}_3\) are independent.
+      <br>
+      &emsp;&ensp;The general rule is &ldquo;independent \(\bm{v}\)'s from independent \(\bm{w}\)'s when \(B\) is invertible&rdquo;. And if these vectors are in \(\mathbf{R}^3\), they are not only independent&mdash; they are a basis for \(\mathbf{R}^3\). <em><strong>&ldquo;Basis of \(\bm{v}\)'s from basis of \(\bm{w}\)'s when the change of basis matrix \(B\) is invertible.&rdquo;</strong></em>
+    </li>
+    <li>
+      <span class="list-head">3.4 C</span>&emsp;(<strong>Important example</strong>) Suppose \(\bm{v}_1,\ldots,\bm{v}_n\) is a basis for \(\mathbf{R}^n\) and the \(n\) by \(n\) matrix \(A\) is invertible. Show that \(A\bm{v}_1,\ldots,A\bm{v}_n\) is also a basis for \(\mathbf{R}^n\).
+      <br><br>
+      <span class="list-head">Solution</span>&emsp;In <em>matrix language</em>: Put the basis vectors \(\bm{v}_1,\ldots,\bm{v}_n\) in the columns of an invertible(!) matrix \(V\). Then \(A\bm{v}_1,\ldots,A\bm{v}_n\) are the columns of \(AV\). Since \(A\) is invertible, so is \(AV\) and its columns give a basis.
+      <br>
+      &emsp;&ensp;In <em>vector language</em>: Suppose \(c_1A\bm{v}_1+\cdots+c_nA\bm{v}_n=\bm{0}\). This is \(A\bm{v}=\bm{0}\) with \(\bm{v}=c_1\bm{v}_1+\cdots+c_n\bm{v}_n\). Multiply by \(A^{-1}\) to reach \(\bm{v}=\bm{0}\). By linear independence of the \(\bm{v}\)'s, all \(c_i=0\). This shows that the \(A\bm{v}\)'s are independent.
+      <br>
+      &emsp;&ensp;To show that the \(A\bm{v}\)'s span \(\mathbf{R}^n\), solve \(c_1A\bm{v}_1+\cdots+c_nA\bm{v}_n=\bm{b}\) which is the same as \(c_1\bm{v}_1+\cdots+c_n\bm{v}_n=A^{-1}\bm{b}\). Since the \(\bm{v}\)'s are a basis, this must be solvable.
+    </li>
+  </ol>
+</details>
+
 ## LINEAR ALGEBRA IN A NUTSHELL
 
 <div style="text-align:center"><strong>((<em>The matrix \(A\) is \(n\) by \(n\)</em>))</strong></div>
