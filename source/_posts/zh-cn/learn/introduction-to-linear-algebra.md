@@ -1127,7 +1127,7 @@ $$
 ### The Nullspace of <math xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>A</mi></mrow></math>: Solving <math xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>A</mi><mi mathvariant="bold-italic">x</mi><mo>=</mo><mi mathvariant="bold">0</mi></mrow></math> and <math xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>R</mi><mi mathvariant="bold-italic">x</mi><mo>=</mo><mi mathvariant="bold">0</mi></mrow></math>
 
 1. The **nullspace** \\(\bm{N}(A)\\) in \\(\mathbf{R}^n\\) contains all solutions \\(\bm{x}\\) to \\(A\bm{x}=\bm{0}\\). This includes \\(\bm{x}=\bm{0}\\)
-2. Elimination (from \\(A\\) to \\(U\\) to \\(R\\)) does not change the nullspace: \\(\bm{N}(A)=\bm{N}(U)=\bm{N}(R)\\).
+2. Elimination (from \\(A\\) to \\(U\\) to \\(R\\)) does not change the nullspace: \\(\bm{N}(A)=\bm{N}(U)=\bm{N}\(R\)\\).
 3. The **reduced row echelon form** \\(\bm{R=\textbf{\textsf{rref}}(A)}\\) has all pivots \(=1\), with zeros above and below.
 4. If column \\(j\\) of \\(R\\) is free (no pivot), there is a "*special solution*" to \\(A\bm{x}=\bm{0}\\) with \\(x_j=1\\).
 5. Number of pivots = number of nonzero rows in \\(R=\textbf{rank }\bm{r}\\). There are \\(n-r\\) free columns.
