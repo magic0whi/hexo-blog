@@ -1752,6 +1752,65 @@ $$
 
 ### Projections
 
+1. The projection of a vector \\(\bm{b}\\) onto the line through \\(\bm{a}\\) is the closest point \\(\bm{p}=\bm{a}(\bm{a^\mathrm{T}b}/\bm{a^\mathrm{T}a})\\).
+2. The error \\(\bm{e}=\bm{b}-\bm{p}\\) is perpendicular to \\(\bm{a}\\): Right triangle \\(\bm{b\space p\space e}\\) has \\(\\|\bm{p}\\|^2+\\|\bm{e}\\|^2=\\|\bm{b}\\|^2\\)
+3. The **projection** of \\(\bm{b}\\) onto a subspace \\(\bm{S}\\) is the closest vector \\(\bm{p}\\) in \\(\bm{S}\\); \\(\bm{b}-\bm{p}\\) is orthogonal to \\(\bm{S}\\).
+4. \\(A^\mathrm{T}A\\) is invertible (and symmetric) only if \\(A\\) has independent columns: \\(\bm{N}(A^\mathrm{T}A)=\bm{N}(A)\\).
+5. Then the projection of \\(\bm{b}\\) onto the column space of \\(A\\) is the vector \\(\bm{p}=A(A^\mathrm{T}A)^{-1}A^\mathrm{T}\bm{b}\\).
+6. The projection matrix onto \\(\bm{C}(A)\\) is \\(\boxed{P=A(A^\mathrm{T}A)^{-1}A^\mathrm{T}}\\). It has \\(\bm{p}=P\bm{b}\\) and \\(P^2=P=P^\mathrm{T}\\).
+
+<details>
+  <summary><span class="list-summary">&dagger; WORKED EXAMPLES &dagger;</span></summary>
+  <ol class="worked-examples">
+    <li>
+      <span class="list-head">4.2 A</span>&emsp;Project the vector \(\bm{b}=(3,4,4)\) onto the line through \(\bm{a}=(2,2,1)\) and then onto the plane that also contains \(\bm{a}^*=(1,0,0)\). Check that the first error vector \(\bm{b}-\bm{p}\) is perpendicular to \(\bm{a}\), and the second error vector \(\bm{e}^*=\bm{b}-\bm{p}^*\) is also perpendicular to \(\bm{a}^*\).
+      <br>
+      &emsp;&ensp;Find the 3 by 3 projection matrix \(P\) onto that plane of \(\bm{a}\) and \(\bm{a}^*\). Find a vector whose <em>projection onto the plane is the zero vector</em>. Why is it exactly the error \(\bm{e}^*\)?
+      <br><br>
+      <span class="list-head">Solution</span>&emsp;The projection of \(\bm{b}=(3,4,4)\) onto the line through \(\bm{a}=(2,2,1)\) is \(\bm{p}=2\bm{a}\).
+      $$
+      \textbf{Onto a line}\qquad
+      \bm{p}=\frac{\bm{a^\mathrm{T}b}}{\bm{a^\mathrm{T}a}}\bm{a}=\frac{18}{9}(2,2,1)=(4,4,2)=2\bm{a}.
+      $$
+      The error vector \(\bm{e}=\bm{b}-\bm{p}=(-1,0,2)\) is perpendicular to \(\bm{a}=(2,2,1)\). So \(\bm{p}\) is correct.
+      <br>
+      &emsp;&ensp;The plane of \(\bm{a}=(2,2,1)\) and \(\bm{a}^*=(1,0,0)\) is the column space of \(A=\begin{bmatrix} \bm{a} & \bm{a}^* \end{bmatrix}\):
+      $$
+      A=\begin{bmatrix} 2 & 1 \\ 2 & 0 \\ 1 & 0 \end{bmatrix}\quad
+      A^\mathrm{T}A=\begin{bmatrix} 9 & 2 \\ 2 & 1 \end{bmatrix}\quad
+      (A^\mathrm{T}A)^{-1}=\frac{1}{5}\begin{bmatrix*}[r] 1 & -2 \\ -2 & 9 \end{bmatrix*}\quad
+      P=\begin{bmatrix} 1 & 0 & 0 \\ 0 & .8 & .4 \\ 0 & .4 & .2 \end{bmatrix}
+      $$
+      Now \(\bm{p}^*=P\bm{b}=(3,4.8,2.4\). The error \(\bm{e}^*=\bm{b}-\bm{p}^*=(0,-.8,1.6\) is perpendicular to \(\bm{a}\) and \(\bm{a}^*\). This \(\bm{e}^*\) is in the nullspace of \(P\) and <em>its projection is zero</em>! Note \(P^2=P=P^\mathrm{T}\).
+    </li>
+    <li>
+      <span class="list-head">4.2 B</span>&emsp;Suppose your pulse is measured at \(x=70\) beats per minute, then at \(x=80\), then at \(x=120\). Those three equations \(A\bm{x}=\bm{b}\) in one unknown have \(A^\mathrm{T}=\begin{bmatrix} 1 & 1 & 1 \end{bmatrix}\) and \(\bm{b}=(70,80,120)\). <em><strong>The best \(\widehat{\bm{x}}\) is the ____ of \(\bm{70,80,120}\).</strong></em> Use calculus and projection:
+      <ol>
+        <li>
+          Minimize \(E=(x-70)^2+(x-80)^2+(x-120)^2\) by solving \(\mathrm{d}E/\mathrm{d}x=0\).
+        </li>
+        <li>
+          Project \(\bm{b}=(70,80,120)\) onto \(\bm{a}=(1,1,1)\) to find \(\widehat{x}=\bm{a}^\mathrm{T}\bm{b}/\bm{a}^\mathrm{T}\bm{a}\).
+        </li>
+      </ol>
+      <span class="list-head">Solution</span>&emsp;The colsest horizontal line to the heights 70, 80 120 is the <em>average</em> \(\widehat{x}=90\):
+      $$
+      \begin{array}{l}
+        \dfrac{\mathrm{d}E}{\mathrm{d}x}=2(x-70)+2(x-80)+2(x-120)=0
+        \quad\text{gives}\quad
+        \widehat{x}=\dfrac{70+80+120}{3}=90
+        .
+      \\
+        \textbf{Also by projection:}\qquad
+        \widehat{x}=\dfrac{\bm{a^\mathrm{T}b}}{\bm{a^\mathrm{T}a}}=\dfrac{(1,1,1)^\mathrm{T}(70,80,120)}{(1,1,1)^\mathrm{T}(1,1,1)}=\dfrac{70+80+120}{3}=90
+        .
+      \end{array}
+      $$
+      In <em>recursive</em> least squares, a fourth measurement 130 changes the average \(\widehat{x}_\text{old}=90\) to \(\widehat{x}_\text{new}=100\). Verify the <em>updage formula</em> \(\widehat{x}_\text{new}=\widehat{x}_\text{old}+\frac{1}{4}(130-\widehat{x}_\text{old})\). When a new measurement arrives, we don't have to average all the old measurements again!
+    </li>
+  </ol>
+</details>
+
 ## LINEAR ALGEBRA IN A NUTSHELL
 
 <div style="text-align:center"><strong>((<em>The matrix \(A\) is \(n\) by \(n\)</em>))</strong></div>
