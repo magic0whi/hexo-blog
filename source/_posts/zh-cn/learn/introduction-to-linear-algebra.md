@@ -700,7 +700,7 @@ $$
       <span class="list-head">2.5 A</span>&emsp;The inverse of a triangular <strong>difference matrix</strong> \(A\) is a triangular <strong>sum matrix</strong> \(S\) :
       $$
       \begin{alignedat}{1}
-      \begin{bmatrix} A & I \end{bmatrix}
+        \begin{bmatrix} A & I \end{bmatrix}
       & =
         \left[\begin{array}{rrr|rrr}
          1 & 0 & 0 & 1 & 0 & 0 \\
@@ -825,6 +825,23 @@ $$
 4. The original \\(A\\) is recovered from \\(U\\) by \\(\bm{A}=\bm{LU}=(\text{lower triangular})(\text{upper triangular})\\).
 5. Elimination on \\(A\bm{x}=\bm{b}\\) reaches \\(U\bm{x}=\bm{c}\\). Then back-substitution solves \\(U\bm{x}=\bm{c}\\)
 6. Solving a triangular system takes \\(n^2/2\\) multiply-subtracts. Elimination to find \\(U\\) takes \\(n^3/3\\).
+   <details>
+     <summary><span class="list-summary">&dagger; WHY &dagger;</span></summary>
+       In elimination, to find new entries below the first pivot row requires \(n^2-n\) multiplications and subtractions. Here we using \(n^2\) and for simplicity ignore that the row 1 is actually does not change (In CS this is the usual case&mdash;focus on most affected factors in time complexicity). The next stage will has \((n-1)^n\) multiplications and subtractions. The matrices are getting smaller as elimination goes forward. The rough count to reach \(U\) is the sum of squares:
+       $$
+       n^2+(n-1)^2+\cdots+2^2+1^2=\frac{1}{3}n(n+\frac{1}{2})(n+1)\approx\frac{1}{3}n^3
+       $$
+       (When \(n\) is large, the \(\frac{1}{2}\) and the \(1\) are not important).
+       <br>
+       &emsp;&ensp;For solving a triangular system, in back substitution, the routh count of the multiplications:
+       $$
+         1+2+\cdots+n=\frac{(1+n)n}{2}\approx\frac{n^2}{2}
+       $$
+       and the routh count of the subtractions:
+       $$
+         0+1+\cdots+(n-1)=\frac{(n-1)n}{2}\approx\frac{n^2}{2}
+       $$
+   </details>
 
 <details>
   <summary><span class="list-summary">&dagger; WORKED EXAMPLES &dagger;</span></summary>
@@ -949,6 +966,57 @@ $$
 ### Transposes and Permutations
 
 1. The transposes of \\(A\bm{x}\\) and \\(AB\\) and \\(A^{-1}\\) are \\(\bm{x}^\mathrm{T}A^\mathrm{T}\\) and \\(B^\mathrm{T}A^\mathrm{T}\\) and \\((A^\mathrm{T})^{-1}\\).
+   <details>
+     <summary><span class="list-summary">&dagger; WHY &dagger;</span></summary>
+       To understand \((AB)^\mathrm{T}=B^\mathrm{T}A^\mathrm{T}\), start with \((A\bm{x})^\mathrm{T})=\bm{x}^\mathrm{T}A^\mathrm{T}\) when \(B\) is just a vector:
+       $$
+       \textcolor{RoyalBlue}{
+         \textit{\textbf{$A\bm{x}$ combines the columns of $A$ while $\bm{x}^\mathrm{T}A^\mathrm{T}$ combines the rows of $A^\mathrm{T}$}}
+       }
+       $$
+       In algebra language, this is:
+       $$
+       \begin{alignedat}{1}
+         (A\bm{x})^\mathrm{T}
+       & =
+         \left(
+           \begin{bmatrix} \bm{a}_1 & \bm{a}_2 & \cdots & \bm{a}_n \end{bmatrix}
+           \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \end{bmatrix}
+         \right)^\mathrm{T}
+       \\
+       & =(x_1\bm{a}_1+x_2\bm{a}_2+\cdots+x_n\bm{a}_n)^\mathrm{T}
+       \\
+       & =x_1\bm{a}_1^\mathrm{T}+x_2\bm{a}_2^\mathrm{T}+\cdots+x_n\bm{a}_n^\mathrm{T}
+       \\
+         \bm{x}^\mathrm{T}A^\mathrm{T}
+       & =
+         \begin{bmatrix} x_1 & x_2 & \cdots & x_n \end{bmatrix}
+         \begin{bmatrix} \bm{a}_1^\mathrm{T} \\ \bm{a}_2^\mathrm{T} \\ \vdots \\ \bm{a}_n^\mathrm{T} \end{bmatrix}
+       \\
+       & =x_1\bm{a}_1^\mathrm{T}+x_2\bm{a}_2^\mathrm{T}+\cdots+x_n\bm{a}_n^\mathrm{T}
+       \\
+       & \therefore (A\bm{x})^\mathrm{T}=\bm{x}^\mathrm{T}A^\mathrm{T}
+       \end{alignedat}
+       $$
+       Now we can prove the formula \((AB)^\mathrm{T}=B^\mathrm{T}A^\mathrm{T}\), let \(B=\begin{bmatrix} \bm{b}_1 & \bm{b}_2 & \bm{b}_n \end{bmatrix}\):
+       $$
+       (AB)^\mathrm{T}=
+       \left(\begin{bmatrix} A\bm{b}_1 & A\bm{b}_2 & \cdots & A\bm{b}_n \end{bmatrix}\right)^\mathrm{T}
+       =
+       \begin{bmatrix} \bm{b}_1^\mathrm{T}A^\mathrm{T} \\ \bm{b}_2^\mathrm{T}A^\mathrm{T} \\ \vdots \\ \bm{b}_n^\mathrm{T}A^\mathrm{T} \end{bmatrix}
+       =
+       \begin{bmatrix} \bm{b}_1^\mathrm{T} \\ \bm{b}_2^\mathrm{T} \\ \vdots \\ \bm{b}_n^\mathrm{T} \end{bmatrix}A^\mathrm{T}
+       =B^\mathrm{T}A^\mathrm{T}
+       $$
+       Apply this rule by transposing both sides of \(A^\mathrm{-1}A=I\):
+       $$
+       (A^{-1}A)^\mathrm{T}=I^\mathrm{T}
+       \harr
+       A^\mathrm{T}(A^{-1})^\mathrm{T}=I
+       \harr
+       (A^{-1})^\mathrm{T}=(A^\mathrm{T})^{-1}
+       $$
+   </details>
 2. The dot product (inner product) is \\(\bm{x}\cdot\bm{y}=\bm{x}^\mathrm{T}\bm{y}\\). This is \\((1\times n)(n\times 1)=(1\times 1)\\).
    The outer product is \\(\bm{xy^\mathrm{T}}=\text{column times row}=(n\times 1)(1\times n)=n\times n\text{ matrix}\\).
 3. The idea behind \\(A^\mathrm{T}\\) is that \\(A\bm{x}\cdot\bm{y}\\) equals \\(\bm{x}\cdot A^\mathrm{T}\bm{y}\\) because \\((A\bm{x})^\mathrm{T}\bm{y}=\bm{x}^\mathrm{T}A^\mathrm{T}\bm{y}=\bm{x}^\mathrm{T}(A^\mathrm{T}\bm{y})\\).
