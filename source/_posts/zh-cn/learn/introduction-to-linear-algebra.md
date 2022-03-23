@@ -1620,6 +1620,38 @@ $$
   </ol>
 </details>
 
+### Dimensions of the Four Subspaces
+
+1. The column space \\(\bm{C}(A)\\) and the row space \\(\bm{C}(A^\mathrm{T})\\) both have *dimension* \\(r\\) (the rank of \\(A\\)).
+2. The nullspace \\(\bm{N}(A)\\) has *dimension* \\(n-r\\). The left nullspace \\(\bm{N}(A)\\) has *dimension* \\(m-r\\).
+3. Elimination produces bases for the row space and nullspace of \\(A\\): They are the same as for \\(R\\).
+4. Elimination often changes the column space and left nullspace (but dimensions don't change).
+5. **Rank one matrices**: \\(A=\bm{uv}^\mathrm{T}=\text{column times row}\\): \\(\bm{C}(A)\\) has basis \\(\bm{u}\\), \\(\bm{C}(A^\mathrm{T})\\) has basis \\(\bm{v}\\).
+
+<details>
+  <summary><span class="list-summary">&dagger; WORKED EXAMPLES &dagger;</span></summary>
+  <ol class="worked-examples">
+    <li>
+      <span class="list-head">3.5 A</span>&emsp;Put four 1's into a 5 by 6 matrix of zeros, keeping the dimension of its <em>row space</em> as small as possible. Describe all the ways to make the dimension of its <em>column space</em> as small as possible. How to make the <em>sum of the dimensions of all four subspaces small</em> ?
+      <br><br>
+      <span class="list-head">Solution</span>&emsp;The rank is 1 if the four 1's go into the same row, or into the same column. They can also go into <em>two rows and two columns</em> (so \(a_{ii}=a_{ij}=a_{ji}=a_{jj}=1\)). Since the column space and row space always have the same dimensions, this answers the first two questions: Dimension 1.
+      <br>
+      &emsp;&ensp;The nullspace has its smallest possible dimension \(6-4=1\) when the rank is \(r=4\). To achieve rank 4, the 1's must go into four different rows and four different columns.
+      <br>
+      &emsp;&ensp;<strong>You can't do anything about the sum \(r+(n-r)+r+(m-r)=\bm{n+m}\).</strong> It will be \(6+5=11\) no matter how the 1's are placed. The sum is 11 even if there aren't any 1's&mldr;
+      <br>
+      &emsp;&ensp;If all the orhter entries of \(A\) are 2's instead of 0's, how do these answers change?
+    </li>
+    <li>
+      <span class="list-head">3.5 B</span>&emsp;Fact: All the rows of \(AB\) are combinations of the rows of \(B\). So the row space of \(AB\) is contained in (possibly equal to) the row space of \(B\). \(\textbf{Rank($\bm{AB}$)$\bm{\leq}$rank($\bm{B}$)}\).
+      <br>
+      &emsp;&ensp;All columns of \(AB\) are combinations of the columns of \(A\). So the column space of \(AB\) is contained in (possibly equal to) the column space of \(A\). \(\textbf{Rank($\bm{AB}$)$\bm{\leq}$rank($\bm{A}$)}\).
+      <br>
+      &emsp;&ensp;If we multiply by an <em>invertible</em> matrix, the rank will not change. The rank can't drop, because when we multiply by the inverse matrix the rank can't jump back.
+    </li>
+  </ol>
+</details>
+
 ## LINEAR ALGEBRA IN A NUTSHELL
 
 <div style="text-align:center"><strong>((<em>The matrix \(A\) is \(n\) by \(n\)</em>))</strong></div>
