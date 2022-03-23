@@ -1652,6 +1652,106 @@ $$
   </ol>
 </details>
 
+## Orthogonality
+
+### Orthogonality of the Four Subspaces
+
+1. Orthogonal vectors have \\(\bm{v}^\mathrm{T}\bm{w}=0\\). Then \\(\\|\bm{v}\\|^2+\\|\bm{w}\\|^2=\\|\bm{v}+\bm{w}\\|^2=\\|\bm{v}-\bm{w}\\|^2\\).
+2. Subspaces \\(\bm{V}\\) and \\(\bm{W}\\) are orthogonal when \\(\bm{v}^\mathrm{T}\bm{w}=0\\) for every \\(\bm{v}\\) in \\(\bm{V}\\) and every \\(\bm{w}\\) in \\(\bm{W}\\).
+3. The row space of \\(A\\) is orthogonal to the nullspace. The column space is orthogonal to \\(\bm{N}(A^\mathrm{T}\\).
+4. One pair of dimensions adds to \\(r+(n-r)=n\\). The other pair has \\(r+(m-r)-m\\).
+5. Row space and nullspace are orthogonal *complements*: Every \\(\bm{x}\\) in \\(\mathbf{R}^n\\) splits into \\(\bm{x}\_\textbf{row}+\bm{x}_\textbf{null}\\).
+6. Suppose a space \\(\bm{S}\\) has dimension \\(d\\). Then every basis for \\(bm{S}\\) consists of \\(d\\) vectors.
+7. If \\(d\\) vectors in \\(\bm{S}\\) are independent, they span \\(\bm{S}\\). If \\(d\\) vectors span \\(\bm{S}\\), they are independent.
+
+<details>
+  <summary><span class="list-summary">&dagger; WORKED EXAMPLES &dagger;</span></summary>
+  <ol class="worked-examples">
+    <li>
+      <span class="list-head">4.1 A</span>&emsp;Suppose \(\bm{S}\) is a six-dimensional subspace of nine-dimensional space \(\mathbf{R}^n\)
+      <table class="list-table">
+        <tr>
+          <td>&emsp;&ensp;(a)&ensp;</td>
+          <td>
+            What are the possible dimensions of subspaces orthogonal to \(\bm{S}\)?
+          </td>
+        </tr>
+        <tr>
+          <td>&emsp;&ensp;(b)&ensp;</td>
+          <td>
+            What are the possible dimensions of the orthogonal complement \(\bm{S}^\perp\) of \(\bm{S}\)?
+          </td>
+        </tr>
+        <tr>
+          <td>&emsp;&ensp;(c)&ensp;</td>
+          <td>
+            What is the smallest possible size of a matrix \(A\) that has row space \(\bm{S}\)?
+          </td>
+        </tr>
+        <tr>
+          <td>&emsp;&ensp;(d)&ensp;</td>
+          <td>
+            What is the smallest possible size of a matrix \(B\) that has nullspace \(\bm{S}^\perp\)?
+          </td>
+        </tr>
+      </table>
+      <span class="list-head">Solution</span>
+      <table class="list-table">
+        <tr>
+          <td>&emsp;&ensp;(a)&ensp;</td>
+          <td>
+           If \(\bm{S}\) is six-dimensional in \(\mathbf{R}^9\), subspaces orthogonal to \(\bm{S}\) can have dimensions 0, 1, 2, 3.
+          </td>
+        </tr>
+        <tr>
+          <td>&emsp;&ensp;(b)&ensp;</td>
+          <td>
+            The complement \(\bm{S}^\perp\) is the largest orthogonal subspace, with dimension 3.
+          </td>
+        </tr>
+        <tr>
+          <td>&emsp;&ensp;(c)&ensp;</td>
+          <td>
+            The smallest matrix \(A\) is 6 by 9 (its six rows will be a basis for \(\bm{S}\))
+          </td>
+        </tr>
+        <tr>
+          <td>&emsp;&ensp;(d)&ensp;</td>
+          <td>
+            This is the same as question (c)!
+          </td>
+        </tr>
+      </table>
+      &emsp;&ensp;If a new row 7 of \(B\) is a combination of the six rows of \(A\), then \(B\) has the same row space as \(A\). It also has the same nullspace. The special solutions \(\bm{s}_1\), \(\bm{s}_2\), \(\bm{s}_3\) to \(A\bm{x}=\bm{0}\), will be the same for \(B\bm{x}=0\). Elimination will change row 7 of \(B\) to all zeros.
+    </li>
+    <li>
+      <span class="list-head">4.1 B</span>&emsp;The equation \(x-3y-4z=0\) describes a plane \(\bm{P}\) in \(\mathbf{R}^3\) (actually a subspace).
+      <table class="list-table">
+        <tr>
+          <td>&emsp;&ensp;(a)&ensp;</td>
+          <td>
+            The plane \(\bm{P}\) is the nullspace \(\bm{N}(A)\) of what 1 by 3 matrix \(A\)? <em>Ans:</em> \(A=\begin{bmatrix} 1 & -3 & -4 \end{bmatrix}\).
+          </td>
+        </tr>
+        <tr>
+          <td>&emsp;&ensp;(b)&ensp;</td>
+          <td>
+            Find a basis \(\bm{s}_1\), \(\bm{s}_2\) of special solutions of \(x-3y-4z=0\) (these would be the columns of the nullspace matrix \(N\)). <em>Answer:</em> \(\bm{s}_1=(3,1,0)\) and \(\bm{s}_2=(4,0,1)\).
+          </td>
+        </tr>
+        <tr>
+          <td>&emsp;&ensp;(c)&ensp;</td>
+          <td>
+            Find a basis for the line \(\bm{P}^\perp\) that is perpendicular to \(\bm{P}\). <em>Answer:</em> \((1,-3,-4)\)!
+          </td>
+        </tr>
+      </table>
+    </li>
+  </ol>
+</details>
+
+### Projections
+
 ## LINEAR ALGEBRA IN A NUTSHELL
 
 <div style="text-align:center"><strong>((<em>The matrix \(A\) is \(n\) by \(n\)</em>))</strong></div>
