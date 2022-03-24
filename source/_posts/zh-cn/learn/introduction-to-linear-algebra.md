@@ -1930,6 +1930,78 @@ $$
   </ol>
 </details>
 
+### Least Squares Approximations
+
+1. Solving \\(\boxed{A^\mathrm{T}A\widehat{\bm{x}}=A^\mathrm{T}\bm{b}}\\) gives the projection \\(\bm{p}=A\widehat{\bm{x}}\\) of \\(\bm{b}\\) onto the column space of \\(A\\).
+2. When \\(A\bm{x}=\bm{b}\\) has no solution, \\(\widehat{\bm{x}}\\) is the "leqst-squares solution": \\(\\|\bm{b}-A\widehat{\bm{x}}\\|^2=\text{minimum}\\).
+3. Setting partial derivatives of \\(E=\\|A\bm{x}-\bm{b}\\|^2\\) to zero \\(\left(\dfrac{\partial E}{\partial x_i}=0\right)\\) also produces \\(A^\mathrm{T}A\widehat{\bm{x}}=A^\mathrm{T}\bm{b}\\).
+   <details>
+     <summary><span class="list-summary">&dagger; WHY &dagger;</span></summary>
+       Treat the error vector \(A\bm{x}-\bm{b}\) as a function by using its length squares \(E=\|A\bm{x}-\bm{b}\|^2\). Most functions are minimized by calculus! The graph bottoms out and the derivative in every direction is zero.
+       <br>
+       &emsp;&ensp;For example:
+       $$
+       \begin{array}{c}
+         A=\begin{bmatrix} 1 & 0 \\ 1 & 1 \\ 1 & 2 \end{bmatrix}
+         \qquad
+         \bm{x}=\begin{bmatrix} C \\ D \end{bmatrix}
+         \qquad
+         \bm{b}=\begin{bmatrix} 6 \\ 0 \\ 0 \end{bmatrix}
+       \\\\
+         E=\|A\bm{x}-\bm{b}\|^2=(C+D\cdot 0-6)^2+(C+D\cdot 1)^2+(C+D\cdot 2)^2
+       \end{array}
+       $$
+       Here the function \(E\) to be minized is a <em>sum of squares</em> \(e_1^2+e_2^2+e_3^2\) (the square of the error in each equation).
+       <br>
+       &emsp;&ensp;The unknowns are \(C\) and \(D\). With two unknowns there are <em>two derivatives</em>&mdash;both zero at the minimum. They are &ldquo;partial derivatives&rdquo; because \(\partial E/\partial D\) treats \(D\) as constant and \(\partial E/\partial D\) treats \(C\) as constant:
+       $$
+       \begin{alignedat}{3.5}
+         & \partial E/\partial C=2(C+D\cdot 0-6)         && +2(C+D\cdot 1)         && +2(C+D\cdot 2)         & =0 \\
+         & \partial E/\partial D=2(C+D\cdot 0-6)(\bm{0}) && +2(C+D\cdot 1)(\bm{1}) && +2(C+D\cdot 2)(\bm{2}) & =0
+       \end{alignedat}
+       $$
+       \(\partial E/\partial D\) contains the extra factors \(\bm{0}\), \(\bm{1}\), \(\bm{2}\) from the chain rule. Those factors are just \(\bm{1}\), \(\bm{1}\), \(\bm{1}\) in \(\partial E/\partial C\)
+       <br>
+       &emsp;&ensp;It is no accident that those factors \(\bm{1}\), \(\bm{1}\), \(\bm{1}\) and \(\bm{0}\), \(\bm{1}\), \(\bm{2}\) in the derivatives of \(\|A\bm{x}-\bm{b}\|^2\) are the columns of \(A\). Now cancel 2 from every term and collect all \(C\)'s and \(D\)'s:
+       $$
+       \begin{array}{l}
+         \text{The $C$ derivative is zero:}\quad 3C+3D=6 \\
+         \text{The $D$ derivative is zero:}\quad 3C+5D=0
+       \end{array}
+       \quad
+       \textbf{This matrix $\begin{bmatrix} 3 & 3 \\ 5 & 5 \end{bmatrix}$ is $A^\mathrm{T}A$}
+       $$
+       <em><strong>These equations are identical with</strong></em> \(A^\mathrm{T}A\widehat{\bm{x}}=A^\mathrm{T}\bm{b}\). The best \(C\) and \(D\) are the components of \(\widehat{\bm{x}}\). The equations from calculus are the same as the &ldquo;normal equations&rdquo; from linear algebra.
+   </details>
+4. To fit points \\((t_1,b_1),\ldots,(t_m,b_m)\\) by a straight line, \\(A\\) has columns \\(1,\ldots,1\\) and \\(t_1,\ldots,t_m\\).
+5. In that case \\(A^\mathrm{T}A\\) is the 2 by 2 matrix \\(\begin{bmatrix} m & \bm{\Sigma}t_i \\\ \bm{\Sigma}t_i & \bm{\Sigma}t_i^2 \end{bmatrix}\\) and \\(A^\mathrm{T}\bm{b}\\) is the vector \\(\begin{bmatrix*}[l] \bm{\Sigma}b_i \\\ \bm{\Sigma}t_ib_i \end{bmatrix*}\\).
+
+<!-- <details>
+  <summary><span class="list-summary">&dagger; WORKED EXAMPLES &dagger;</span></summary> -->
+  <ol class="worked-examples">
+    <li>
+      <span class="list-head">4.3 A</span>&emsp;Start with nine measurements \(b_1\) to \(b_9\), <em>all zero,</em> at time \(t=1,\ldots,9\). The tenth measurement \(b_{10}=40\) is an outlier. Find the best horizontal line \(\bm{y=C}\) to fit the ten points \((1,0)\), \((2,0)\), &mldr;, \((9,0)\), \((10,40)\) using three options for the error \(E\):
+      <br>
+      <b>(1)</b>&ensp;Least <em>squares</em> \(E_2=e_1^2+\cdots+e_{10}^2\) (then the normal equation for \(C\) is linear).
+      <br>
+      <b>(2)</b>&ensp;Least <em>maximum</em> error \(E_\infty=|e_text{max}\).
+      <br>
+      <b>(3)</b>&ensp;Least <em>sum</em> of errors \(E_1=|e_1|+\cdots+|e_{10}|\).
+      <br>
+      <span class="list-head">Solution</span>&emsp;<b>(1)</b>&ensp;The least squares fit to \(0,0,\ldots,0,40\) by a horizontal line is \(\bm{C=4}\):
+      $$
+      A=\text{column of 1's}\quad
+      A^\mathrm{T}A=10\quad
+      A^\mathrm{T}\bm{b}=\text{sum of $b_i=40$.\quad So $10C=40$.}
+      $$
+      <b>(2)</b>The least maximum error requires \(\bm{C=20}\), halfway between 0 amd 40.
+      <br>
+      <b>(3)</b>The least sum requires \(\bm{C=0}\) (!!). The sum of errors \(9|C|+|40-C|\) would increase if \(C\) moves up from zero.
+      TODO
+    </li>
+  </ol>
+<!-- </details> -->
+
 ## LINEAR ALGEBRA IN A NUTSHELL
 
 <div style="text-align:center"><strong>((<em>The matrix \(A\) is \(n\) by \(n\)</em>))</strong></div>
