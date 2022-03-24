@@ -1691,7 +1691,7 @@ $$
 ### Dimensions of the Four Subspaces
 
 1. The column space \\(\bm{C}(A)\\) and the row space \\(\bm{C}(A^\mathrm{T})\\) both have *dimension* \\(r\\) (the rank of \\(A\\)).
-2. The nullspace \\(\bm{N}(A)\\) has *dimension* \\(n-r\\). The left nullspace \\(\bm{N}(A)\\) has *dimension* \\(m-r\\).
+2. The nullspace \\(\bm{N}(A)\\) has *dimension* \\(n-r\\). The left nullspace \\(\bm{N}(A^\mathrm{T})\\) has *dimension* \\(m-r\\).
 3. Elimination produces bases for the row space and nullspace of \\(A\\): They are the same as for \\(R\\).
 4. Elimination often changes the column space and left nullspace (but dimensions don't change).
 5. **Rank one matrices**: \\(A=\bm{uv}^\mathrm{T}=\text{column times row}\\): \\(\bm{C}(A)\\) has basis \\(\bm{u}\\), \\(\bm{C}(A^\mathrm{T})\\) has basis \\(\bm{v}\\).
@@ -1821,10 +1821,61 @@ $$
 ### Projections
 
 1. The projection of a vector \\(\bm{b}\\) onto the line through \\(\bm{a}\\) is the closest point \\(\bm{p}=\bm{a}(\bm{a^\mathrm{T}b}/\bm{a^\mathrm{T}a})\\).
+   <details>
+     <summary><span class="list-summary">&dagger; WHY &dagger;</span></summary>
+     {% asset_img Figure4.6.png %}
+     When projection onto a line, the projection \(\bm{p}\) will be some multiple of \(\bm{a}\). Call it \(\bm{p}=\widehat{x}\bm{a}=\text{\textquotedblleft$x$ hat\textquotedblright\space times $\bm{a}$}\).
+     <br>
+     &emsp;&ensp;The dotted line from \(\bm{b}\) to \(\bm{p}\) is perpendicular to \(\bm{a}\), which is called the "error": \(\bm{e}=\bm{b}-\bm{p}=\bm{b}-\widehat{x}\bm{a}\). Use the fact that \(\bm{a}\cdot\bm{e}=0\):
+     $$
+     \bm{a}^\mathrm{T}\bm{e}=0
+     \harr
+     \bm{a}^\mathrm{T}(\bm{b}-\widehat{x}\bm{a})=0
+     \harr
+     \bm{a}^\mathrm{T}\bm{b}-\widehat{x}\bm{a}^\mathrm{T}\bm{a}=0
+     \harr
+     \widehat{x}=\frac{\bm{a}^\mathrm{T}\bm{b}}{\bm{a}^\mathrm{T}\bm{a}}
+     $$
+     Then \(\bm{p}=\widehat{x}\bm{a}=\frac{\bm{a}^\mathrm{T}\bm{b}}{\bm{a}^\mathrm{T}\bm{a}}\bm{a}\).
+   </details>
 2. The error \\(\bm{e}=\bm{b}-\bm{p}\\) is perpendicular to \\(\bm{a}\\): Right triangle \\(\bm{b\space p\space e}\\) has \\(\\|\bm{p}\\|^2+\\|\bm{e}\\|^2=\\|\bm{b}\\|^2\\)
 3. The **projection** of \\(\bm{b}\\) onto a subspace \\(\bm{S}\\) is the closest vector \\(\bm{p}\\) in \\(\bm{S}\\); \\(\bm{b}-\bm{p}\\) is orthogonal to \\(\bm{S}\\).
 4. \\(A^\mathrm{T}A\\) is invertible (and symmetric) only if \\(A\\) has independent columns: \\(\bm{N}(A^\mathrm{T}A)=\bm{N}(A)\\).
 5. Then the projection of \\(\bm{b}\\) onto the column space of \\(A\\) is the vector \\(\bm{p}=A(A^\mathrm{T}A)^{-1}A^\mathrm{T}\bm{b}\\).
+   <details>
+     <summary><span class="list-summary">&dagger; WHY &dagger;</span></summary>
+     {% asset_img Figure4.6.png %}
+     As we know a subspace can be described as the column space of a matrix \(A\), when projection onto a subspace, we are actually looking for the combination of the columns of \(A\) that is closest to a given vector \(\bm{b}\):
+     $$
+     \bm{p}=\widehat{x}_1\bm{a}_1+\cdots+\widehat{x}_n\bm{a}_n=A\widehat{\bm{x}}
+     \qquad
+     \text{Here $\widehat{\bm{x}}$ comes a vector}
+     $$
+     The error vector \(\bm{b}-A\widehat{\bm{x}}\) is perpendicular to the subspace, which means every columns of \(A\) times \(\bm{e}\) is zero:
+     $$
+     \begin{bmatrix}
+       \bm{a}_1^\mathrm{T} \\
+       \vdots \\
+       \bm{a}_n^\mathrm{T}
+     \end{bmatrix}
+     \begin{bmatrix}
+       \bm{b}-A\widehat{\bm{x}}
+     \end{bmatrix}
+     =
+     \bm{0}
+     \harr
+     A^\mathrm{T}(\bm{b}-A\widehat{\bm{x}})=\bm{0}
+     \harr
+     A^\mathrm{T}A\widehat{\bm{x}}=A^\mathrm{T}\bm{b}
+     $$
+     Here \(A^\mathrm{T}A\) is a \(n\) by \(n\) symmetric matrix. It is invertible if the \(\bm{a}\)'s are independent. (Be aware \(A\) might not invertible as it may not a square matrix.) Solve this system we find \(\widehat{\bm{x}}\) and then \(p=A\widehat{\bm{x}}=A(A^\mathrm{T}A)^{-1}A^\mathrm{T}\bm{b}\).
+     <br>
+     &emsp;&ensp;From <a href="https://math.stackexchange.com/questions/1840801/why-is-ata-invertible-if-a-has-independent-columns">Math StackExchange</a>. To prove \(A^\mathrm{T}A\) is invertible we can work on the statement &ldquo;\(A^\mathrm{T}A\bm{x}=\bm{0}\) has only one solution \(\bm{x}=\bm{0}\)&rdquo;. Because \(A^\mathrm{T}\bm{y}=\bm{0}\) may have solutions \(\bm{y}\neq\bm{0}\), we must prove that \(\bm{y}=\bm{0}\) while \(\bm{y}=A\bm{x}\):
+     <br>
+     &emsp;&ensp;\(A\bm{x}\) is a combination in \(\bm{C}(A)\) which is also in \(\bm{N}(A^\mathrm{T})\). However \(\bm{N}(A^\mathrm{T})\) and \(\bm{C}(A)\) are orthogonal complements, the only vector that can be in both a subspace and the orthogonal complement of its subspace is the zero vector, so \(A\bm{x}\) must produce zero vector.
+     <br>
+     &emsp;&ensp;For \(A\bm{x}=\bm{0}\) there is obviously only one solution \(\bm{x}=\bm{0}\). Then \(A^\mathrm{T}A\bm{x}=\bm{0}\harr\bm{x}=\bm{0}\) if \(A\) has independent columns.
+   </details>
 6. The projection matrix onto \\(\bm{C}(A)\\) is \\(\boxed{P=A(A^\mathrm{T}A)^{-1}A^\mathrm{T}}\\). It has \\(\bm{p}=P\bm{b}\\) and \\(P^2=P=P^\mathrm{T}\\).
 
 <details>
