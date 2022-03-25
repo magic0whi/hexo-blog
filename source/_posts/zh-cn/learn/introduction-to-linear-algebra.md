@@ -1720,7 +1720,7 @@ $$
   </ol>
 </details>
 
-## Orthogonality
+## Chapter 4 Orthogonality
 
 ### Orthogonality of the Four Subspaces
 
@@ -1729,7 +1729,7 @@ $$
 3. The row space of \\(A\\) is orthogonal to the nullspace. The column space is orthogonal to \\(\bm{N}(A^\mathrm{T}\\).
 4. One pair of dimensions adds to \\(r+(n-r)=n\\). The other pair has \\(r+(m-r)-m\\).
 5. Row space and nullspace are orthogonal *complements*: Every \\(\bm{x}\\) in \\(\mathbf{R}^n\\) splits into \\(\bm{x}\_\textbf{row}+\bm{x}_\textbf{null}\\).
-6. Suppose a space \\(\bm{S}\\) has dimension \\(d\\). Then every basis for \\(bm{S}\\) consists of \\(d\\) vectors.
+6. Suppose a space \\(\bm{S}\\) has dimension \\(d\\). Then every basis for \\(\bm{S}\\) consists of \\(d\\) vectors.
 7. If \\(d\\) vectors in \\(\bm{S}\\) are independent, they span \\(\bm{S}\\). If \\(d\\) vectors span \\(\bm{S}\\), they are independent.
 
 <details>
@@ -1937,7 +1937,7 @@ $$
 3. Setting partial derivatives of \\(E=\\|A\bm{x}-\bm{b}\\|^2\\) to zero \\(\left(\dfrac{\partial E}{\partial x_i}=0\right)\\) also produces \\(A^\mathrm{T}A\widehat{\bm{x}}=A^\mathrm{T}\bm{b}\\).
    <details>
      <summary><span class="list-summary">&dagger; WHY &dagger;</span></summary>
-       Treat the error vector \(A\bm{x}-\bm{b}\) as a function by using its length squares \(E=\|A\bm{x}-\bm{b}\|^2\). Most functions are minimized by calculus! The graph bottoms out and the derivative in every direction is zero.
+       Treat \(E=\|A\bm{x}-\bm{b}\|^2\) as a error function. Most functions are minimized by calculus! The graph bottoms out and the derivative in every direction is zero.
        <br>
        &emsp;&ensp;For example:
        $$
@@ -1951,7 +1951,7 @@ $$
          E=\|A\bm{x}-\bm{b}\|^2=(C+D\cdot 0-6)^2+(C+D\cdot 1)^2+(C+D\cdot 2)^2
        \end{array}
        $$
-       Here the function \(E\) to be minized is a <em>sum of squares</em> \(e_1^2+e_2^2+e_3^2\) (the square of the error in each equation).
+       Here the function \(E\) to be minimized is a <em>sum of squares</em> \(e_1^2+e_2^2+e_3^2\) (the square of the error in each equation).
        <br>
        &emsp;&ensp;The unknowns are \(C\) and \(D\). With two unknowns there are <em>two derivatives</em>&mdash;both zero at the minimum. They are &ldquo;partial derivatives&rdquo; because \(\partial E/\partial D\) treats \(D\) as constant and \(\partial E/\partial D\) treats \(C\) as constant:
        $$
@@ -1976,15 +1976,15 @@ $$
 4. To fit points \\((t_1,b_1),\ldots,(t_m,b_m)\\) by a straight line, \\(A\\) has columns \\(1,\ldots,1\\) and \\(t_1,\ldots,t_m\\).
 5. In that case \\(A^\mathrm{T}A\\) is the 2 by 2 matrix \\(\begin{bmatrix} m & \bm{\Sigma}t_i \\\ \bm{\Sigma}t_i & \bm{\Sigma}t_i^2 \end{bmatrix}\\) and \\(A^\mathrm{T}\bm{b}\\) is the vector \\(\begin{bmatrix*}[l] \bm{\Sigma}b_i \\\ \bm{\Sigma}t_ib_i \end{bmatrix*}\\).
 
-<!-- <details>
-  <summary><span class="list-summary">&dagger; WORKED EXAMPLES &dagger;</span></summary> -->
+<details>
+  <summary><span class="list-summary">&dagger; WORKED EXAMPLES &dagger;</span></summary>
   <ol class="worked-examples">
     <li>
       <span class="list-head">4.3 A</span>&emsp;Start with nine measurements \(b_1\) to \(b_9\), <em>all zero,</em> at time \(t=1,\ldots,9\). The tenth measurement \(b_{10}=40\) is an outlier. Find the best horizontal line \(\bm{y=C}\) to fit the ten points \((1,0)\), \((2,0)\), &mldr;, \((9,0)\), \((10,40)\) using three options for the error \(E\):
       <br>
       <b>(1)</b>&ensp;Least <em>squares</em> \(E_2=e_1^2+\cdots+e_{10}^2\) (then the normal equation for \(C\) is linear).
       <br>
-      <b>(2)</b>&ensp;Least <em>maximum</em> error \(E_\infty=|e_text{max}\).
+      <b>(2)</b>&ensp;Least <em>maximum</em> error \(E_\infty=|e_\text{max}|\).
       <br>
       <b>(3)</b>&ensp;Least <em>sum</em> of errors \(E_1=|e_1|+\cdots+|e_{10}|\).
       <br>
@@ -1994,13 +1994,85 @@ $$
       A^\mathrm{T}A=10\quad
       A^\mathrm{T}\bm{b}=\text{sum of $b_i=40$.\quad So $10C=40$.}
       $$
-      <b>(2)</b>The least maximum error requires \(\bm{C=20}\), halfway between 0 amd 40.
+      <b>(2)</b>&ensp;The least maximum error requires \(\bm{C=20}\), halfway between 0 amd 40.
       <br>
-      <b>(3)</b>The least sum requires \(\bm{C=0}\) (!!). The sum of errors \(9|C|+|40-C|\) would increase if \(C\) moves up from zero.
-      TODO
+      <b>(3)</b>&ensp;The least sum requires \(\bm{C=0}\) (!!). The sum of errors \(9|C|+|40-C|\) would increase if \(C\) moves up from zero.
+      <br>
+      &emsp;&ensp;The least sum comes from the <em>median</em> measurement (the median of \(0,\ldots,0,40\) is zero). Many statisticians feel that the least squares solution is too heavily influenced by outliers like \(b_{10}=40\), and they prefer least sum. But the equations become <em>nonlinear</em>.
+      <br>
+      &emsp;&ensp;Now find the least squares line \(C+D\bm{t}\) through those ten points \((1,0)\) to \((10,40)\):
+      $$
+      A^\mathrm{T}A=
+      \begin{bmatrix} 10 & \sum t_i  \\ \sum t_i & \sum t_i^2  \end{bmatrix}
+      =
+      \begin{bmatrix} 10 & 55 \\ 55 & 385 \end{bmatrix}
+      \qquad
+      A^\mathrm{T}\bm{b}=
+      \begin{bmatrix} \sum b_i \\ \sum t_ib_i \end{bmatrix}
+      =
+      \begin{bmatrix} 40 \\ 400 \end{bmatrix}
+      $$
+      Those come from equation (8). Then \(A^\mathrm{T}A\widehat{\bm{x}}=A^\mathrm{T}\bm{b}\) gives \(C=-8\) and \(D=24/11\).
+      <details>
+        <summary><span class="list-summary">&dagger; Equation (8) &dagger;</span></summary>
+        The line \(C+D\bm{t}\) minimizes \(e_1^2+\cdots+e_m^2=\|A\bm{x}+\bm{b}\|^2\) when \(A^\mathrm{T}A\widehat{\bm{x}}=A^\mathrm{T}\bm{b}\):
+        $$
+        \begin{equation}\tag{8}
+          A^\mathrm{T}A\widehat{\bm{x}}=A^\mathrm{T}\bm{b}\qquad
+          \begin{bmatrix} m & \sum t_i \\ \sum t_i & \sum t_i^2 \end{bmatrix}
+          \begin{bmatrix} C \\ D \end{bmatrix}
+          =
+          \begin{bmatrix} \sum b_i \\ \sum t_ib_i \end{bmatrix}
+          .
+        \end{equation}
+        $$
+      </details>
+      &emsp;&ensp;What happens to \(C\) and \(D\) if you multiply \(\bm{b}=(0,0,\ldots,40)\) by 3 and then add 30 to get \(\bm{b}_\text{new}=(30,30,\ldots,150)\)? Linearity allows us to rescale \(\bm{b}\). Multiplying \(\bm{b}\) by 3 will multiply \(C\) and \(D\) by 3. Adding 30 to all \(b_i\) will add 30 to \(C\).
+    </li>
+    <li>
+      <span class="list-head">4.3 B</span>&emsp;Find the parabola \(C+Dt+Et^2\) that comes closest (least squares error) to the values \(\bm{b}=(0,0,1,0,0)\) at the times \(t=-2,-1,0,1,2\). First write down the five equations \(A\bm{x}=\bm{b}\) in three unknowns \(\bm{x}=(C,D,E)\) for a parabola to go through the five points. No solution because no such parabola exists. Solve \(A^\mathrm{T}A\widehat{\bm{x}}=A^\mathrm{T}\bm{b}\).
+      <br>
+      &emsp;&ensp;I would predict \(D=0\). Why should the best parabola be symmetric around \(t=0\)? In \(A^\mathrm{T}A\widehat{\bm{x}}=A^\mathrm{T}\bm{b}\), equation 2 for \(D\) should uncouple from equations 1 and 3.
+      <br>
+      <span class="list-head">Solution</span>&emsp;The five equations \(A\bm{x}=\bm{b}\) have a rectangular <em>Vandermonde matrix</em> \(A\):
+      $$
+      \begin{alignedat}{3.5}
+        C+D && (-2)+E && (-2)^2=0 \\
+        C+D && (-1)+E && (-1)^2=0 \\
+        C+D &&  (0)+E && (0)^2=1 \\
+        C+D &&  (1)+E && (1)^2=0 \\
+        C+D &&  (2)+E && (2)^2=0 \\
+      \end{alignedat}
+      \quad
+      A=
+      \begin{bmatrix*}[r]
+        1 & -2 & 4 \\
+        1 & -1 & 1 \\
+        1 & 0 & 0 \\
+        1 & 1 & 1 \\
+        1 & 2 & 4
+      \end{bmatrix*}
+      \quad
+      A^\mathrm{T}A=\begin{bmatrix} 5 & \bm{0} & 10 \\ \bm{0} & 10 & \bm{0} \\ 10 & \bm{0} & 34 \end{bmatrix}
+      $$
+      Those zeros in \(A^\mathrm{T}A\) mean that column 2 of \(A\) is orthogonal to columns 1 and 3. We see this directly in \(A\) (the times \(-2,-1,0,1,2\) are symmetric). The best \(C\), \(D\), \(E\) in the parabola \(C+Dt+Et^2\) come from \(A^\mathrm{T}A\widehat{\bm{x}}=A^\mathrm{T}\bm{b}\), and \(D\) is uncoupled from \(C\) and \(E\):
+      $$
+      \begin{bmatrix} 5 & 0 & 10 \\ 0 & 10 & 0 \\ 10 & 0 & 34 \end{bmatrix}
+      \begin{bmatrix} C \\ D \\ E \end{bmatrix}
+      =
+      \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}
+      \quad\text{leads to}\quad
+      \begin{array}{l}
+        C=34/70 \\
+        D=0\text{ as predicted} \\
+        E=-10/70
+      \end{array}
+      $$
     </li>
   </ol>
-<!-- </details> -->
+</details>
+
+### Orthonormal Bases and Gram-Schmidt
 
 ## LINEAR ALGEBRA IN A NUTSHELL
 
