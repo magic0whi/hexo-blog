@@ -1064,7 +1064,7 @@ $$
       \begin{bmatrix} 1 & 4 & 5 \\ 0 & -14 & -14 \\ 0 & 0 & -8 \end{bmatrix}
       =U
       $$
-      The multipliers were \(\ell_{21}=4\) and \(\ell_{31}=5\) and \(\ell_{32}=1\). <strong>The pivots 1, &minus;14, &minus;8 go into \(\bm{D}\).</strong> When we divide the rows of \(U\) by those pivots, \(L^T\) should appear:
+      The multipliers were \(\ell_{21}=4\) and \(\ell_{31}=5\) and \(\ell_{32}=1\). <strong>The pivots 1, &minus;14, &minus;8 go into \(\bm{D}\).</strong> When we divide the rows of \(U\) by those pivots, \(L^\mathrm{T}\) should appear:
       $$
       \begin{array}{l}
         \textbf{Symmetric} \\
@@ -1105,7 +1105,7 @@ $$
       \begin{bmatrix} I & A \\ 0 & \bm{-A^\textbf{\textrm{T}}A} \end{bmatrix}
       \text{.\quad This is $U$.}
       $$
-      The block pivot matrix \(D\) contains \(I\) and \(-A^\mathrm{T}A\). Then \(L\) and \(L^\mathrm{T}\) contain \(A^T\) and \(A\):
+      The block pivot matrix \(D\) contains \(I\) and \(-A^\mathrm{T}A\). Then \(L\) and \(L^\mathrm{T}\) contain \(A^\mathrm{T}\) and \(A\):
       $$
       \boxed{
         \qquad
@@ -2073,6 +2073,108 @@ $$
 </details>
 
 ### Orthonormal Bases and Gram-Schmidt
+
+1. The columns \\(\bm{q}_1,\ldots,\bm{q}_n\\) are orthonormal if \\(\bm{q}_i^\mathrm{T}\bm{q}_j=\left\\{\begin{array}{l} \text{0 for $i\neq j$} \\\ \text{1 for $i=j$} \end{array}\right\\}\\). Then \\(\boxed{Q^\mathrm{T}Q=I}\\).
+2. If \\(Q\\) is also square, then \\(QQ^\mathrm{T}=I\\) and \\(\boxed{Q^\mathrm{T}=Q^{-1}}\\). \\(Q\\) is an "orthogonal matrix".
+3. The least squares solution to \\(Q\bm{x}=\bm{b}\\) is \\(\widehat{\bm{x}}=Q^\mathrm{T}\bm{b}\\). Projection of \\(\bm{b}\\): \\(\bm{p}=QQ^\mathrm{T}\bm{b}=P\bm{b}\\).
+4. The **Gram-Schmidt** process takes independent \\(\bm{a}_i\\) to orthonormal \\(\bm{q}_i\\). Start with \\(\bm{q}_1=\bm{a}_1/\\|\bm{a}_1\\|\\).
+5. \\(\bm{q}_i\\) is \\((\bm{a}_i-\text{projection }\bm{p}_i)/\\|\bm{a}_i-\bm{p}_i\\|\\); projection \\(\bm{p}\_i=(\bm{a}\_i^\mathrm{T}\bm{q}\_1)\bm{q}\_1+\cdots+(\bm{a}\_i^\mathrm{T}\bm{q}\_{i-1})\bm{q}\_{i-1}\\).
+   <details>
+     <summary><span class="list-summary">&dagger; WHY &dagger;</span></summary>
+     The one and only idea of the Gram-Schmidt process is that <em><strong>subtract from every new vector its projections in the directions already set</strong></em>.
+     <br>
+     &emsp;&ensp;Begin by choosing \(\bm{\alpha}=\bm{a}\), the first direction is accepted as it comes. Then (at the end may be easiest) divide its length to get \(\bm{q}_i=\bm{\alpha}_i/\|\bm{\alpha}_i\|\). Start with \(\bm{a}_2\) subtract its projection along \(\bm{a}_1\). This leaves the perpendicular part, which is the orthogonal vector \(\bm{\alpha}_2\):
+     $$
+     \textbf{First Gram-Schmidt step}\quad
+     \begin{alignedat}{1}
+       \bm{\alpha}_2
+     & =
+       \bm{a}_2-\bm{\alpha}_1(\cfrac{\bm{\alpha}_1^\mathrm{T}\bm{a}_2}{\bm{\alpha}_1^\mathrm{T}\bm{\alpha}_1})
+     \\
+     & =
+       \bm{a}_2-\cfrac{\bm{\alpha}_1(\bm{\alpha}_1^\mathrm{T}\bm{a}_2)}{\|\bm{\alpha}_1\|^2}
+     \\
+     & =
+       \bm{a}_2-\bm{q}_1(\bm{q}_1^\mathrm{T}\bm{a}_2)
+     \end{alignedat}
+     $$
+     The third direction starts with \(\bm{a}_3\). Subtract off its components in those two directions to get a perpendicular direction \(\bm{\alpha}_3\):
+     $$
+     \textbf{Next Gram-Schmidt step}\quad
+     \begin{alignedat}{1}
+       \bm{\alpha}_3
+     & =
+       \bm{a}_3-\bm{\alpha}_1(\cfrac{\bm{\alpha}_1^\mathrm{T}\bm{a}_3}{\bm{\alpha}_1^\mathrm{T}\bm{\alpha}_1})-\bm{\alpha}_2(\cfrac{\bm{\alpha}_2^\mathrm{T}\bm{a}_3}{\bm{\alpha}_2^\mathrm{T}\bm{\alpha}_2})
+     \\
+     & =
+       \bm{a}_3-\bm{q}_1(\bm{q}_1^\mathrm{T}\bm{a}_3)-\bm{q}_2(\bm{q}_2^\mathrm{T}\bm{a}_3)
+     \end{alignedat}
+     $$
+   </details>
+6. Each \\(\bm{a}_i\\) will be a combination of \\(\bm{q}_1\\) and \\(\bm{q}_i\\). Then \\(\bm{A=QR}\\): orthogonal \\(Q\\) and triangular \\(R\\).
+
+<details>
+  <summary><span class="list-summary">&dagger; WORKED EXAMPLES &dagger;</span></summary>
+  <ol class="worked-examples">
+    <li>
+      <span class="list-head">4.4 A</span>&emsp;Add two more columns with all entries 1 or &minus;1, so the columns of this 4 by 4 &ldquo;Hadamard matrix&rdquo; are orthogonal. How do you turn \(H_4\) into an <em>orthogonal matrix</em> \(Q\)?
+      $$
+      H_2=\begin{bmatrix*}[r] 1 & 1 \\ 1 & -1 \end{bmatrix*}
+      \quad
+      H_4=
+      \begin{bmatrix*}[r]
+        1 & 1 & x & x \\
+        1 & -1 & x & x \\
+        1 & 1 & x & x \\
+        1 & -1 & x & x
+      \end{bmatrix*}
+      \quad\text{and}\quad
+      Q_4=
+      \begin{bmatrix}
+        & & & \\
+        & & & \\
+        & & & \\
+        & & &
+      \end{bmatrix}
+      $$
+      The block matrix \(H_8=\begin{bmatrix*}[r] H_4 & H_4 \\ H_4 & -H_4 \end{bmatrix*}\quad\begin{array}{l} \text{is the next Hadamard matrix with 1's and $\mathord{-}1$'s.} \\ \text{What is the product $H_8^\mathrm{T}H_8$?} \end{array}\)
+      <br>
+      The projection of \(\bm{b}=(6,0,0,2)\) onto the first column of \(H_4\) is \(\bm{p}_1=(2,2,2,2)\). The projection onto the second column is \(\bm{p}_2=(1,-1,1,-1)\). What is the projection \(\bm{p}_{1,2}\) of \(\bm{b}\) onto the 2-dimensional space spanned by the first two columns?
+      <span class="list-head">Solution</span>&emsp;\(H_4\) can be built from \(H_2\) just as \(H_8\) is built from \(H_4\):
+      $$
+      H_4=
+      \begin{bmatrix*}[r] H_2 & H_2 \\ H_2 & -H_2 \end{bmatrix*}
+      =
+      \begin{bmatrix*}[r]
+        1 & 1 & 1 & 1 \\
+        1 & -1 & 1 & -1 \\
+        1 & 1 & -1 & -1 \\
+        1 & -1 & -1 & 1
+      \end{bmatrix*}
+      \quad
+      \text{has orthogonal columns.}
+      $$
+      Then \(Q=H/2\) has orthonormal columns. Dividing by 2 gives unit vectors in \(Q\). A 5 by 5 Hadamard matrix is impossible because the dot product of columns would have five 1's and/or &minus;1's and could not add to zero. \(H_8\) has orthogonal columns of length \(\sqrt{8}\).
+      $$
+      H_8^\mathrm{T}H_8=
+      \begin{bmatrix*}[r] H^\mathrm{T} & H^\mathrm{T} \\ H^\mathrm{T} & -H^\mathrm{T} \end{bmatrix*}
+      \begin{bmatrix*}[r] H & H \\ H & -H \end{bmatrix*}
+      =
+      \begin{bmatrix} 2H^\mathrm{T}H & 0 \\ 0 & 2H^\mathrm{T}H \end{bmatrix}
+      =
+      \begin{bmatrix} 8I & 0 \\ 0 & 8I \end{bmatrix}
+      .\space
+      Q_8=\frac{H_8}{\sqrt{8}}
+      $$
+    </li>
+    <li>
+      <span class="list-head">4.4 B</span>&emsp;<strong>What is the key point of orthogonal columns?</strong> Answer: \(A^\mathrm{T}A\) is diagonal and easy to invert. <strong>We can project onto lines and just add.</strong> The axes are orthogonal.
+      $$
+      \textbf{Add $\bm{p}$'s}\quad\text{Projection $\bm{p}_{1,2}$ onto a plane equals $\bm{p}_1+\bm{p}_2$ onto orthogonal lines.}
+      $$
+    </li>
+  </ol>
+</details>
 
 ## LINEAR ALGEBRA IN A NUTSHELL
 
