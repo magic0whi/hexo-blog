@@ -2176,6 +2176,134 @@ $$
   </ol>
 </details>
 
+## Determinants
+
+### The properties of Determinants
+
+1. The **determinant** of \\(A=\begin{bmatrix} a & b \\\ c & d \end{bmatrix}\\) is \\(\bm{ad-bc}\\). Singular matrix \\(A=\begin{bmatrix} a & xa \\\ c & xc \end{bmatrix}\\) has \\(\bm{\det=0}\\)
+2. \\(\begin{array}{l} \textbf{Row exchange} \\\ \textbf{reverses signs} \end{array} PA=\begin{bmatrix} 0 & 1 \\\ 1 & 0 \end{bmatrix}\begin{bmatrix} a & b \\\ c & d \end{bmatrix}=\begin{bmatrix} c & d \\\ a & b \end{bmatrix}\quad\text{has }\det PA=bc-ad=\bm{-\det A}\\).
+3. The determinant of \\(\begin{bmatrix} xa+yA & xb+yB \\\ c & d \end{bmatrix}\\) is \\(x(ad-bc)+y(Ad-Bc)\\). \\(\begin{array}{l} \textbf{Det is linear in} \\ \textbf{row 1 by itself.} \end{array}\\)
+   <figure class="highlight diff">
+     <table>
+       <tr>
+         <td class="gutter">
+           <span class="line">1</span>
+         </td>
+         <td class="code">
+           <span class="line">
+             <span class="deletion">
+               &minus; The determinant of \(\begin{bmatrix} xa+yA & xb+yB \\ c & d \end{bmatrix}\) is \(x(ad-bc)+y(Ad-Bc)\). \(\begin{array}{l} \textbf{Det is linear in} \\ \textbf{row 1 by itself.} \end{array}\)
+             </span>
+           </span>
+         </td>
+       </tr>
+       <tr>
+         <td class="gutter">
+           <span class="line">2</span>
+         </td>
+         <td class="code">
+           <span class="line">
+             <span class="addition">
+               + <em>The determinant is a linear function of each row separately</em> (all other rows stay fixed), see in example 5.1 A
+             </span>
+           </span>
+         </td>
+       <tr>
+     </table>
+   </figure>
+4. **Elimination** \\(EA=\begin{bmatrix} a & b \\\ 0 & d-\dfrac{c}{a}b \end{bmatrix}\quad\bm{\det EA}=a(d-\dfrac{c}{a}b)=\textbf{product of pivots}=\bm{\det A}\\).
+5. If \\(A\\) is \\(n\\) by \\(n\\) then the four statements above remain true: \\(\bm{\det=0}\\) when \\(A\\) is singular, **det reverses sign** when row are exchanged, **det is linear in row 1 by itself,** \\(\det=\textbf{product of the pivots}\\). Always \\(\bm{\det BA=(\det B)(\det A)}\\) and \\(\bm{\det A^\textbf{\textrm{T}}=\det A}\\). This is an amazing number.
+
+<!-- <details>
+  <summary><span class="list-summary">&dagger; WORKED EXAMPLES &dagger;</span></summary> -->
+  <ol class="worked-examples">
+    <li>
+      <span class="list-head">4.5 A</span>&emsp;Apply these operations to \(A\) and find the determinants of \(M_1\), \(M_2\), \(M_3\), \(M_4\):
+      <br>
+      &emsp;In \(M_1\), multiplying each \(a_{ij}\) by \((-1)^{i+j}\) gives a checker board sign pattern.
+      <br>
+      &emsp;In \(M_2\), rows 1, 2, 3 of \(A\) are <em>subtracted</em> from rows 2, 3, 1.
+      <br>
+      &emsp;In \(M_3\), rows 1, 2, 3 of \(A\) are <em>added</em> to rows 2, 3, 1.
+      <br>
+      <em>How are the determinants of \(M_1\), \(M_2\), \(M_3\) related to the determinant of \(A\)?</em>
+      $$
+      \begin{bmatrix*}[r]
+        a_{11} & -a_{12} & a_{13} \\
+        -a_{21} & a_{22} & -a_{23} \\
+        a_{31} & -a_{32} & a_{33}
+      \end{bmatrix*}
+      \quad
+      \begin{bmatrix}
+        \text{row 1 $-$ row 3} \\
+        \text{row 2 $-$ row 1} \\
+        \text{row 3 $-$ row 2}
+      \end{bmatrix}
+      \quad
+      \begin{bmatrix}
+        \text{row 1 $+$ row 3} \\
+        \text{row 2 $+$ row 1} \\
+        \text{row 3 $+$ row 2}
+      \end{bmatrix}
+      $$
+      <span class="list-head">Solution</span>&emsp;The three determinanats are \(\det A\), \(0\), and \(2\det A\). Here are reasons:
+      \(M_1=\begin{bmatrix} 1 & & \\ & -1 & \\ & & 1 \end{bmatrix}\begin{bmatrix} a_{11} & a_{12} & a_{13} \\ a_{21} & a_{22} & a_{23} \\ a_{31} & a_{32} & a_{33} \end{bmatrix}\begin{bmatrix} 1 & & \\ & -1 & \\ & & 1 \end{bmatrix}\quad\text{so $\det M_1=(-1)(\det A)(-1)$.}\)
+      <br>
+      \(M_2\) is singular because its rows add to the zero row. Its determinant is zero.
+      <br>
+      \(M_3\) can be split into <em>eight matrices</em> by Rule 3 (linearity in each row separately):
+      $$
+      \begin{bmatrix}
+        \text{row 1 $+$ row 3} \\
+        \text{row 2 $+$ row 1} \\
+        \text{row 3 $+$ row 2}
+      \end{bmatrix}
+      =
+      \begin{bmatrix}
+        \text{row 1} \\
+        \text{row 2} \\
+        \text{row 3}
+      \end{bmatrix}
+      +
+      \begin{bmatrix}
+        \text{row 3} \\
+        \text{row 2} \\
+        \text{row 3}
+      \end{bmatrix}
+      +
+      \begin{bmatrix}
+        \text{row 1} \\
+        \text{row 1} \\
+        \text{row 3}
+      \end{bmatrix}
+      +\cdots+
+      \begin{bmatrix}
+        \text{row 3} \\
+        \text{row 1} \\
+        \text{row 2}
+      \end{bmatrix}
+      .
+      $$
+      All but the first and last have repeated rows and zero determinant. The first is \(A\) and the last has <em>two</em> row exchanges. So \(\det M_3=\det A+\det A\). (Try \(A=I\).)
+    </li>
+    <li>
+      <span class="list-head">4.5 B</span>&emsp;Explain how to reach this determinant by row operations:
+      $$
+      \det\begin{bmatrix} 1-a & 1 & 1 \\ 1 & 1-a & 1 \\ 1 & 1 & 1-a \end{bmatrix}=a^2(3-a)
+      .
+      $$
+      <span class="list-head">Solution</span>&emsp;Subtract row 3 from row 1 and then from row 2. This leaves
+      $$
+      \det\begin{bmatrix} -a & 0 & a \\ 0 & -a & a \\ 1 & 1 & 1-a \end{bmatrix}
+      .
+      $$
+      Now add column 1 to column 3, and also column 2 to column 3. This leaves a lower triangular matrix with \(-a\), \(-a\), \(3-a\) on the diagonal: \(\det=(-a)(-a)(3-a)\).
+      <br>
+      &emsp;&ensp;The determinant is zero if \(a=0\) or \(a=3\). For \(a=0\) we have the <em>all-ones matrix</em>&mdash;certainly singular. For \(a=3\), each row adds to zero&mdash;again singular. Those numbers 0 and 3 are the <strong>eigenvalues</strong> of the all-ones matrix. This example is revealing and important, leading toward Chapter 6.
+    </li>
+  </ol>
+<!-- </details> -->
+
 ## LINEAR ALGEBRA IN A NUTSHELL
 
 <div style="text-align:center"><strong>((<em>The matrix \(A\) is \(n\) by \(n\)</em>))</strong></div>
