@@ -11,10 +11,10 @@ tags: mathematics
 
 <style>
 .content {
-	font-family: KaTeX_Main, 'FZYaSongS-R-GB';
+    font-family: KaTeX_Main, 'FZYaSongS-R-GB';
 }
 article.article .content {
-	font-size: 1.3em;
+    font-size: 1.3em;
 }
 .katex .base {
     font-size: 0.8em;
@@ -58,10 +58,9 @@ article.article .content {
 }
 </style>
 
-
 This is an excerpt of both brief summary and worked examples of each section in the Introduction to Linear Algebra (Fifth Edition) by Gilbert Strang
 
-https://github.com/mitmath/1806/
+[MIT Course 18.06, Spring 2022](https://github.com/mitmath/1806/)
 
 TODO: draw svg format figure by using tikz; Using `gather*` or `align*` or `array` while there is a line break in display mode LaTex.
 
@@ -308,7 +307,7 @@ $$
       \begin{bmatrix*}[r] \bm{1} & 0 \\ -\bm{\ell} & \bm{1} \end{bmatrix*}\begin{bmatrix} x_1 \\ x_2 \end{bmatrix}\qquad
       E=\begin{bmatrix*}[r] \bm{1} & 0 \\ -\bm{\ell} & \bm{1} \end{bmatrix*}
       $$
-      The first equation is \(x_1=b_1\). The second equation is \(x_2-\ell x_1=b_2\). The inverse will <en>add</em> \(\ell b_1\) to \(b_2\), because the elimination matrix <em>subtracted</em> :
+      The first equation is \(x_1=b_1\). The second equation is \(x_2-\ell x_1=b_2\). The inverse will <em>add</em> \(\ell b_1\) to \(b_2\), because the elimination matrix <em>subtracted</em> :
       $$
       \bm{x}=E^{-1}\bm{b}\qquad
       \begin{bmatrix} x_1 \\ x_2 \end{bmatrix}
@@ -565,7 +564,7 @@ $$
       For the matrix \(P_{32}E_{21}\) that does both steps at once, <em>apply \(P_{32}\) to \(E_{21}\)</em>.
       $$
       \begin{array}{l}
-       \textbf{One matrix} \\ 
+       \textbf{One matrix} \\
        \textbf{Both steps}
       \end{array}
       \qquad
@@ -705,7 +704,7 @@ $$
         \left[\begin{array}{rrr|rrr}
          1 & 0 & 0 & 1 & 0 & 0 \\
          -1 & 1 & 0 & 0 & 1 & 0 \\
-         0 & -1 & 1 & 0 & 0 & 1 
+         0 & -1 & 1 & 0 & 0 & 1
         \end{array}\right]
         \rarr
         \left[\begin{array}{rrr|rrr}
@@ -2312,11 +2311,11 @@ $$
 4. The six terms include \\(+a_{11}a_{22}a_{33}-a_{11}a_{23}a_{32}=a_{11}(\bm{a_{22}a_{33}-a_{23}a_{32}})=a_{11}(\textbf{cofactor }\bm{C_{11}})\\).
 5. Always \\(\det A=a_{11}C_{11}+a_{12}C_{12}+\cdots+a_{1n}C_{1n}\\). Cofactors are determinants of size \\(n-1\\).
 
-<!-- <details>
-  <summary><span class="list-summary">&dagger; WORKED EXAMPLES &dagger;</span></summary> -->
+<details>
+  <summary><span class="list-summary">&dagger; WORKED EXAMPLES &dagger;</span></summary>
   <ol class="worked-examples">
     <li>
-      <span class="list-head">5.2 A</span>&emsp;A <en>Hessenberg matrix</em> is a triangular matrix with one extra diagonal. Use cofactors of row 1 to show that the 4 by 4 determinant satisfies Fibonacci's rule \(|H_4|=|H_3|+|H_2|\). The same rule will continue for all sizes, \(|H_n|=|H_{n-1}|+|H_{n-2}|\). Which Fibonacci number is \(|H_n|\)?
+      <span class="list-head">5.2 A</span>&emsp;A <em>Hessenberg matrix</em> is a triangular matrix with one extra diagonal. Use cofactors of row 1 to show that the 4 by 4 determinant satisfies Fibonacci's rule \(|H_4|=|H_3|+|H_2|\). The same rule will continue for all sizes, \(|H_n|=|H_{n-1}|+|H_{n-2}|\). Which Fibonacci number is \(|H_n|\)?
       $$
       H_2=\begin{bmatrix} 2 & 1 \\ 1 & 2 \end{bmatrix}
       \qquad
@@ -2413,7 +2412,7 @@ $$
       &emsp;&ensp;Another approach to Question <b>3</b>: We are multiplying the matrix \(A\) by the diagonal matrix \(D=\textbf{\textsf{diag}}(1 : n)\) when row \(i\) is multiplied by \(i\). And we are postmultiplying by \(D^{-1}\) when column \(j\) is divided by \(j\). The determinant of \(DAD^{-1}\) is the same as \(\det A\) by the product rule.
     </li>
   </ol>
-<!-- </details> -->
+</details>
 
 ## LINEAR ALGEBRA IN A NUTSHELL
 
