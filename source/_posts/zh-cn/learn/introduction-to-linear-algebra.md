@@ -2214,11 +2214,11 @@ $$
 4. **Elimination** \\(EA=\begin{bmatrix} a & b \\\ 0 & d-\dfrac{c}{a}b \end{bmatrix}\quad\bm{\det EA}=a(d-\dfrac{c}{a}b)=\textbf{product of pivots}=\bm{\det A}\\).
 5. If \\(A\\) is \\(n\\) by \\(n\\) then the four statements above remain true: \\(\bm{\det=0}\\) when \\(A\\) is singular, **det reverses sign** when row are exchanged, **det is linear in row 1 by itself,** \\(\det=\textbf{product of the pivots}\\). Always \\(\bm{\det BA=(\det B)(\det A)}\\) and \\(\bm{\det A^\textbf{\textrm{T}}=\det A}\\). This is an amazing number.
 
-<!-- <details>
-  <summary><span class="list-summary">&dagger; WORKED EXAMPLES &dagger;</span></summary> -->
+<details>
+  <summary><span class="list-summary">&dagger; WORKED EXAMPLES &dagger;</span></summary>
   <ol class="worked-examples">
     <li>
-      <span class="list-head">4.5 A</span>&emsp;Apply these operations to \(A\) and find the determinants of \(M_1\), \(M_2\), \(M_3\), \(M_4\):
+      <span class="list-head">5.1 A</span>&emsp;Apply these operations to \(A\) and find the determinants of \(M_1\), \(M_2\), \(M_3\), \(M_4\):
       <br>
       &emsp;In \(M_1\), multiplying each \(a_{ij}\) by \((-1)^{i+j}\) gives a checker board sign pattern.
       <br>
@@ -2253,41 +2253,41 @@ $$
       <br>
       \(M_3\) can be split into <em>eight matrices</em> by Rule 3 (linearity in each row separately):
       $$
-      \begin{bmatrix}
+      \begin{vmatrix}
         \text{row 1 $+$ row 3} \\
         \text{row 2 $+$ row 1} \\
         \text{row 3 $+$ row 2}
-      \end{bmatrix}
+      \end{vmatrix}
       =
-      \begin{bmatrix}
+      \begin{vmatrix}
         \text{row 1} \\
         \text{row 2} \\
         \text{row 3}
-      \end{bmatrix}
+      \end{vmatrix}
       +
-      \begin{bmatrix}
+      \begin{vmatrix}
         \text{row 3} \\
         \text{row 2} \\
         \text{row 3}
-      \end{bmatrix}
+      \end{vmatrix}
       +
-      \begin{bmatrix}
+      \begin{vmatrix}
         \text{row 1} \\
         \text{row 1} \\
         \text{row 3}
-      \end{bmatrix}
+      \end{vmatrix}
       +\cdots+
-      \begin{bmatrix}
+      \begin{vmatrix}
         \text{row 3} \\
         \text{row 1} \\
         \text{row 2}
-      \end{bmatrix}
+      \end{vmatrix}
       .
       $$
       All but the first and last have repeated rows and zero determinant. The first is \(A\) and the last has <em>two</em> row exchanges. So \(\det M_3=\det A+\det A\). (Try \(A=I\).)
     </li>
     <li>
-      <span class="list-head">4.5 B</span>&emsp;Explain how to reach this determinant by row operations:
+      <span class="list-head">5.1 B</span>&emsp;Explain how to reach this determinant by row operations:
       $$
       \det\begin{bmatrix} 1-a & 1 & 1 \\ 1 & 1-a & 1 \\ 1 & 1 & 1-a \end{bmatrix}=a^2(3-a)
       .
@@ -2300,6 +2300,117 @@ $$
       Now add column 1 to column 3, and also column 2 to column 3. This leaves a lower triangular matrix with \(-a\), \(-a\), \(3-a\) on the diagonal: \(\det=(-a)(-a)(3-a)\).
       <br>
       &emsp;&ensp;The determinant is zero if \(a=0\) or \(a=3\). For \(a=0\) we have the <em>all-ones matrix</em>&mdash;certainly singular. For \(a=3\), each row adds to zero&mdash;again singular. Those numbers 0 and 3 are the <strong>eigenvalues</strong> of the all-ones matrix. This example is revealing and important, leading toward Chapter 6.
+    </li>
+  </ol>
+</details>
+
+### Permutations and Cofactors
+
+1. **2 by 2**: \\(ad-bc\\) has \\(2!\\) terms with \\(\pm\\) signs. **\\(\bm{n}\\) by \\(\bm{n}\\): \\(\bm{\det A}\\) adds \\(\bm{n!}\\) with \\(\bm{\pm}\\) signs.**
+2. For \\(n=3\\), \\(\det A\\) adds \\(3!=6\\) terms. Two terms are \\(+a_{12}a_{23}a_{31}\\) and \\(-a_{13}a_{22}a_{31}\\).
+3. That minus sign came because the column order 3, 2, 1 needs one exchange to recover 1, 2, 3.
+4. The six terms include \\(+a_{11}a_{22}a_{33}-a_{11}a_{23}a_{32}=a_{11}(\bm{a_{22}a_{33}-a_{23}a_{32}})=a_{11}(\textbf{cofactor }\bm{C_{11}})\\).
+5. Always \\(\det A=a_{11}C_{11}+a_{12}C_{12}+\cdots+a_{1n}C_{1n}\\). Cofactors are determinants of size \\(n-1\\).
+
+<!-- <details>
+  <summary><span class="list-summary">&dagger; WORKED EXAMPLES &dagger;</span></summary> -->
+  <ol class="worked-examples">
+    <li>
+      <span class="list-head">5.2 A</span>&emsp;A <en>Hessenberg matrix</em> is a triangular matrix with one extra diagonal. Use cofactors of row 1 to show that the 4 by 4 determinant satisfies Fibonacci's rule \(|H_4|=|H_3|+|H_2|\). The same rule will continue for all sizes, \(|H_n|=|H_{n-1}|+|H_{n-2}|\). Which Fibonacci number is \(|H_n|\)?
+      $$
+      H_2=\begin{bmatrix} 2 & 1 \\ 1 & 2 \end{bmatrix}
+      \qquad
+      H_3=\begin{bmatrix} 2 & 1 & \\ 1 & 2 & 1 \\ 1 & 1 & 2 \end{bmatrix}
+      \qquad
+      H_4=
+      \begin{bmatrix}
+        2 & 1 & & \\
+        \bm{1} & 2 & \bm{1} & \\
+        \bm{1} & 1 & \bm{2} & \bm{1} \\
+        \bm{1} & 1 & \bm{1} & \bm{2}
+      \end{bmatrix}
+      $$
+      <span class="list-head">Solution</span>&emsp;The cofactor \(C_{11}\) for \(H_4\) is the determinant \(|H_3|\). We also need \(C_{12}\) (in boldface):
+      $$
+      C_{12}=-
+      \begin{vmatrix}
+        \bm{1} & \bm{1} & \bm{0} \\
+        \bm{1} & \bm{2} & \bm{1} \\
+        \bm{1} & \bm{1} & \bm{2}
+      \end{vmatrix}
+      =-
+      \begin{vmatrix}
+        2 & 1 & 0 \\
+        1 & 2 & 1 \\
+        1 & 1 & 2
+      \end{vmatrix}
+      +
+      \begin{vmatrix}
+        1 & 0 & 0 \\
+        1 & 2 & 1 \\
+        1 & 1 & 2
+      \end{vmatrix}
+      $$
+      Rows 2 and 3 stayed the same and we used linearity in row 1. The two determinants on the right are \(-|H_3|\) and \(+|H_2|\). Then the 4 by 4 determinant is
+      $$
+      |H_4|=2C_{11}+1C_{12}=2|H_3|-|H_3|+|H_2|=|H_3|+|H_2|.
+      $$
+      The actual numbers are \(|H_2|=3\) and \(|H_3|=5\) (and of course \(|H_1|=2\)). Since \(|H_n|=2,3,5,8,\ldots\) follows Fibonacci's rule \(|H_{n-1}|+|H_{n-2}|\), it must be \(|H_n|=F_{n+2}\).
+    </li>
+    <li>
+      <span class="list-head">5.2 B</span>&emsp;These questions use the \(\pm\) signs (even and odd \(P\)'s) in the big formula for \(\det A\):
+      <table class="list-table">
+        <tr>
+          <td>&emsp;&ensp;<b>1.</b>&ensp;</td>
+          <td>
+            If \(A\) is 10 by 10 all-ones matrix, how does the big formula give \(\det A=0\)?
+          </td>
+        </tr>
+        <tr>
+          <td>&emsp;&ensp;<b>2.</b>&ensp;</td>
+          <td>
+            If you multiply all \(n!\) permutations together into a single \(P\), is \(P\) odd or even?
+          </td>
+        </tr>
+        <tr>
+          <td>&emsp;&ensp;<b>3.</b>&ensp;</td>
+          <td>
+            If you multiply each \(a_{ij}\) by the fraction \(i/j\), why is \(\det A\) unchanged?
+          </td>
+        </tr>
+      </table>
+      <span class="list-head">Solution</span>&emsp;In Question <b>1</b>, with all \(a_{ij}=1\), all the products in the big formula (8) will be 1. Half of them come with a plus sign, and half with minus. So they cancel to leave \(\det A=0\). (Of course the all-ones matrix is singular. I am assuming \(n\gt 1\).)
+      <details>
+        <summary><span class="list-summary">&dagger; BIG FORMULA &dagger;</span></summary>
+        $$
+        \tag{8}
+        \begin{alignedat}{1}
+          \det A & =\text{sum over all $\bm{n}!$ column permutations $P=(\alpha,\beta,\ldots,\omega)$} \\
+                 & = \sum(\det P)a_{1\alpha}a_{2\beta}\cdots a_{n\omega}=\textbf{BIG FORMULA}.
+        \end{alignedat}
+        $$
+        e.g. 3 by 3 matrix \(A=\):
+        $$
+        \begin{alignedat}{1}
+          \det A=
+        &
+          a_{11}a_{22}a_{33}\begin{bmatrix} 1 & & \\ & 1 & \\ & & 1 \end{bmatrix}
+          +a_{12}a_{23}a_{31}\begin{bmatrix} & 1 & \\ & & 1 \\ 1 & & \end{bmatrix}
+          +a_{13}a_{21}a_{32}\begin{bmatrix} & & 1 \\ 1 & & \\ & 1 & \end{bmatrix}
+        \\
+        &
+        +a_{11}a_{23}a_{32}\begin{bmatrix} 1 & & \\ & & 1 \\ & 1 & \end{bmatrix}
+        +a_{12}a_{21}a_{33}\begin{bmatrix} & 1 & \\ 1 & & \\ & & 1 \end{bmatrix}
+        +a_{13}a_{22}a_{31}\begin{bmatrix} & & 1 \\ & 1 & \\ 1 & & \end{bmatrix}
+        .
+        \end{alignedat}
+        $$
+      </details>
+      &emsp;&ensp;In Question <b>2</b>, multiplying \(\left[\begin{smallmatrix} 1 & 0 \\ 0 & 1 \end{smallmatrix}\right]\left[\begin{smallmatrix} 0 & 1 \\ 1 & 0 \end{smallmatrix}\right]\) gives an odd permutation. Also for 3 by 3, the three odd permutations multiply (in any order) to give <em>odd</em>. But for \(n\gt 3\) the product of all permutations will be <em>even</em>. There are \(n!/2\) odd permutations and that is an even number as soon as \(n!\) includes the factor 4.
+      <br>
+      &emsp;&ensp;In Question <b>3</b>, each \(a_{ij}\) is multiplied by \(i/j\). So each product \(a_{1\alpha}a_{2\beta}\cdots a_{n\omega}\) in the big formula is multiplied by all the row numbers \(i=1,2,\ldots,n\) and divided by all the column numbers \(j=1,2,\ldots,n\). (The columns come in some permuted order!) Then each product is unchanged and \(\det A\) stays the same.
+      <br>
+      &emsp;&ensp;Another approach to Question <b>3</b>: We are multiplying the matrix \(A\) by the diagonal matrix \(D=\textbf{\textsf{diag}}(1 : n)\) when row \(i\) is multiplied by \(i\). And we are postmultiplying by \(D^{-1}\) when column \(j\) is divided by \(j\). The determinant of \(DAD^{-1}\) is the same as \(\det A\) by the product rule.
     </li>
   </ol>
 <!-- </details> -->
