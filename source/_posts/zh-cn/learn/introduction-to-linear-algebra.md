@@ -2207,7 +2207,7 @@ $$
              </span>
            </span>
          </td>
-       <tr>
+       </tr>
      </table>
    </figure>
 4. **Elimination** \\(EA=\begin{bmatrix} a & b \\\ 0 & d-\dfrac{c}{a}b \end{bmatrix}\quad\bm{\det EA}=a(d-\dfrac{c}{a}b)=\textbf{product of pivots}=\bm{\det A}\\).
@@ -2310,6 +2310,36 @@ $$
 3. That minus sign came because the column order 3, 2, 1 needs one exchange to recover 1, 2, 3.
 4. The six terms include \\(+a_{11}a_{22}a_{33}-a_{11}a_{23}a_{32}=a_{11}(\bm{a_{22}a_{33}-a_{23}a_{32}})=a_{11}(\textbf{cofactor }\bm{C_{11}})\\).
 5. Always \\(\det A=a_{11}C_{11}+a_{12}C_{12}+\cdots+a_{1n}C_{1n}\\). Cofactors are determinants of size \\(n-1\\).
+   <figure class="highlight diff">
+     <table>
+       <tr>
+         <td class="gutter">
+           <span class="line">1</span>
+         </td>
+         <td class="code">
+           <span class="line">
+             <span class="addition">
+               + Each cofactor includes its correct sign, the submatrix \(M_{ij}\) throws out row \(i\) and column \(j\):
+             </span>
+           </span>
+         </td>
+       </tr>
+       <tr>
+         <td class="gutter">
+           <span class="line">2</span>
+         </td>
+         <td class="code">
+           <span class="line">
+             <span class="addition">
+               $$
+               C_{ij}=(-1)^{i+j}\det M_{ij}
+               $$
+             </span>
+           </span>
+         </td>
+       </tr>
+     </table>
+   </figure>
 
 <details>
   <summary><span class="list-summary">&dagger; WORKED EXAMPLES &dagger;</span></summary>
@@ -2430,7 +2460,7 @@ $$
            \rarr
            (A^{-1})_{11}=x_1=\dfrac{C_{11}}{\det A}
          \\ \\
-           B_2=\begin{vmatrix} a_{11} & \bm{1} & a_{13} \\ a_{21} & \bm{0} & a_{23} \\ a_{31} & \bm{0} & a_{33} \end{vmatrix}=a_{21}a_{33}-a_{23}a_{31}=C_{12}
+           B_2=\begin{vmatrix} a_{11} & \bm{1} & a_{13} \\ a_{21} & \bm{0} & a_{23} \\ a_{31} & \bm{0} & a_{33} \end{vmatrix}=a_{23}a_{31}-a_{21}a_{33}=C_{12}
            \rarr
            (A^{-1})_{21}=x_2=\dfrac{C_{12}}{\det A}
          \\ \\
@@ -2502,6 +2532,71 @@ $$
 3. **Area of parallelogram** \\(=|ad-bc|\\) if the four corners are \\((0,0)\\), \\((a,b)\\), \\((c,d)\\), and \\((a+c,b+d)\\).
 4. **Volume of box** \\(=|\det A|\\) if the rows of \\(A\\) (or the columns of \\(A\\)) give the sides of the box.
 5. The **cross product** \\(\bm{w}=\bm{u}\times\bm{v}\\) is \\(\det\begin{bmatrix} \bm{i} & \bm{j} & \bm{k} \\\ u_1 & u_2 & u_3 \\\ v_1 & v_2 & v_3 \end{bmatrix}\\). \\(\begin{array}{l} \text{Notice $\bm{v}\times\bm{u}=-(\bm{u}\times\bm{v})$.} \\\ \text{$w_1$, $w_2$, $w_3$ are cofactors of row 1.} \\\ \text{Notice $\bm{w}^\mathrm{T}\bm{u}=0$ and $\bm{w}^\mathrm{T}\bm{v}=0$.} \end{array}\\)
+
+<details>
+  <summary><span class="list-summary">&dagger; WORKED EXAMPLES &dagger;</span></summary>
+  <ol class="worked-examples">
+    <li>
+      <span class="list-head">5.3 A</span>&emsp;If \(A\) is singular,  the equation \(AC^\mathrm{T}=(\det A)I\) becomes \(\bm{AC^\mathrm{T}}=\textbf{zero matrix}\). <em>Then each column of \(C^\mathrm{T}\) is in the nullspace of \(A\).</em> Those columns contain cofactors along rows of \(A\). So the cofactors quickly find the nullspace for a 3 by 3 matrix of rank 2. My apologies that this comes so late!
+      <br>
+      &emsp;&ensp;Solve \(A\bm{x}=\bm{0}\) by \(\bm{x}=\text{cofactors along the row}\), for these singular matrices of rank 2:
+      $$
+      \begin{array}{c}
+        \textbf{Cofactors} \\
+        \textbf{give} \\
+        \textbf{nullspace}
+      \end{array}
+      \qquad
+      A=\begin{bmatrix} 1 & 4 & 7 \\ 2 & 3 & 9 \\ 2 & 2 & 8 \end{bmatrix}
+      \qquad
+      A=\begin{bmatrix} 1 & 1 & 2 \\ 1 & 1 & 1 \\ 1 & 1 & 1 \end{bmatrix}
+      $$
+      <span class="list-head">Solution</span>&emsp;The first matrix has these cofactors along its top row (note each minus sign):
+      $$
+      \begin{vmatrix} 3 & 9 \\ 2 & 8 \end{vmatrix}=6\qquad
+      -\begin{vmatrix} 2 & 9 \\ 2 & 8 \end{vmatrix}=2\qquad
+      \begin{vmatrix} 2 & 3 \\ 2 & 2 \end{vmatrix}=-2
+      $$
+      Then \(\bm{x}=(6,2,-2\) solves \(A\bm{x}=\bm{0}\). The cofactors along the second row are \((-18,-6,6)\) which is just \(-3\bm{x}\). This is also in the one-dimensional nullspace of \(A\).
+      <br>
+      &emsp;&ensp;The second matrix has <em>zero cofactors</em> along its first row. The nullvector \(\bm{x}=(0,0,0)\) is not interesting. The cofactors of row 2 give \(\bm{x}=(1,-1,0)\) which solves \(A\bm{x}=\bm{0}\).
+      <br>
+      &emsp;&ensp;Every \(n\) by \(n\) matrix of rank \(n-1\) has at least one nonzero cofactor by Problem 3.3.12. But for rank \(n-2\), all cofactors are zero and we only find \(\bm{x}=\bm{0}\).
+    </li>
+    <li>
+      <span class="list-head">5.3 B</span>&emsp;Use Cramer's Rule with ratios \(\det B_j/\det A\) to solve \(A\bm{x}=\bm{b}\). Also find the inverse matrix \(A^{-1}=C^\mathrm{T}/\det A\). For this \(\bm{b}=(0,0,1\) the solution \(\bm{x}\) is column 3 of \(A^{-1}\)! Which cofactors are involved in computing that column \(\bm{x}=(x,y,z)\)?
+      $$
+      \textbf{Column 3 of $A^{-1}$}\qquad
+      \begin{bmatrix} 2 & 6 & 2 \\ 1 & 4 & 2 \\ 5 & 9 & 0 \end{bmatrix}
+      \begin{bmatrix} x \\ y \\ z \end{bmatrix}
+      =
+      \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix}
+      .
+      $$
+      Find the volumes of two boxes: edges are <em>columns</em> of \(A\) and edges are rows of \(A^{-1}\).
+      <br>
+      <span class="list-head">Solution</span>&emsp;The determinants of the \(B_j\) (with right side \(\bm{b}\)) placed in column \(j\)) are
+      $$
+      |B_1|=\begin{vmatrix} \bm{0} & 6 & 2 \\ \bm{0} & 4 & 2 \\ \bm{1} & 9 & 0 \end{vmatrix}=4\qquad
+      |B_2|=\begin{vmatrix} 2 & \bm{0} & 2 \\ 1 & \bm{0} & 2 \\ 5 & \bm{1} & 0 \end{vmatrix}=-2\qquad
+      |B_3|=\begin{vmatrix} 2 & 6 & \bm{0} \\ 1 & 4 & \bm{0} \\ 5 & 9 & \bm{1} \end{vmatrix}=2
+      .
+      $$
+      Those are cofactors \(C_{31}\), \(C_{32}\), \(C_{33}\) of row 3. Their dot product with row 3 is \(\det A=2\):
+      $$
+      \det A=a_{31}C_{31}+a_{32}C_{32}+a_{33}C_{33}=(5,9,0)\cdot(4,-2,2)=2.
+      $$
+      The three ratios \(\det B_j/\det A\) give the three components of \(\bm{x}=(2,-1,1)\). This \(\bm{x}\) is the third column of \(A^{-1}\) because \(\bm{b}=(0,0,1)\) is the third column of \(I\).
+      <br>
+      The cofactors along the other <em>rows</em> of \(A\), divided by \(\det A\), give the other <em>columns</em> of \(A^{-1}\):
+      $$
+      A^{-1}=\frac{C^\mathrm{T}}{\det A}=\frac{1}{2}\begin{bmatrix*}[r] -18 & 18 & 4 \\ 10 & -10 & -2 \\ -11 & 12 & 2 \end{bmatrix*}
+      \text{. Multiply to check }AA^{-1}=I
+      $$
+      The box from the columns of \(A\) has \(\text{volume}=\det A=2\). The box from the rows also has volume 2, since \(|A^{T}|=|A|\). The box from the rows of \(A^{-1}\) has volume \(1/|A|=\frac{1}{2}\).
+    </li>
+  </ol>
+</details>
 
 ## LINEAR ALGEBRA IN A NUTSHELL
 
