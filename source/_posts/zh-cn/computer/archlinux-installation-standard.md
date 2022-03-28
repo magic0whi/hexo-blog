@@ -22,7 +22,7 @@ For Lenovo user, Enter `F12` for Boot Menu when on bootstrap stage
 2. Preparing the partitions
 
    Partition layout:
-   ```
+   ```plaintext
    +-----------------------+------------------------+
    | Boot partition        | LUKS2 encrypted system |
    |                       | partition              |
@@ -129,9 +129,9 @@ For Lenovo user, Enter `F12` for Boot Menu when on bootstrap stage
    ```properties /etc/hosts
    127.0.0.1   localhost
    ::1         localhost
-   127.0.1.1   myhostname.neo	myhostname
+   127.0.1.1   myhostname.neo    myhostname
    ```
-   
+
    Choose one of the following methods:
    * Using systemd-networkd & systemd-resolved & iwd
      Install iwd: `pacman -S iwd`
@@ -157,12 +157,7 @@ For Lenovo user, Enter `F12` for Boot Menu when on bootstrap stage
      # pacman -S networkmanager
      # systemctl enable NetworkManager.service
      ```
-6. Random number generation
-   Enable Rng-tools
-   ```console
-   # systemctl enable rngd.service
-   ```
-7. Configuring mkinitcpio
+6. Configuring mkinitcpio
    Using the `sd-encrypt` hook with the systemd-base initramfs. (replace hook `udev` with `systemd`)
    <figure class="highlight properties">
      <figcaption><span>/etc/mkinitcpio.conf</span></figcaption>
@@ -186,7 +181,7 @@ For Lenovo user, Enter `F12` for Boot Menu when on bootstrap stage
    ```console
    # mkinitcpio -P
    ```
-8. Users and password
+7. Users and password
    Create and use an unprivileged(non-root) user account(s) for most tasks
    ```console
    # useradd -m -s /bin/bash <Username>
@@ -201,41 +196,7 @@ For Lenovo user, Enter `F12` for Boot Menu when on bootstrap stage
    # passwd <Username>
    # passwd root
    ```
-9. AUR helper
-   Using [paru](https://aur.archlinux.org/packages/paru/) as AUR helper
-   1. Create makepkg wrapper `makepkg-shallow` to make makepkg do shallow clone
-      ```shell /usr/bin/makepkg-shallow
-      #!/bin/bash
-
-      git() {
-        if [[ $# -gt 1 && $1 == 'clone' && $2 != '-s' ]]; then
-          /bin/git "$@" --depth=1 --no-single-branch
-        elif [[ $# -gt 1 && $1 == 'fetch' ]]; then
-          /bin/git fetch --depth=3 -p
-        elif [[ $# -gt 1 && [$1 == 'describe' || $1 == 'rev-list'] ]]; then
-          /bin/git fetch --unshallow -p
-          /bin/git "$@"
-        else
-          /bin/git "$@"
-        fi
-      }
-
-      source /bin/makepkg "$@"
-      ```
-   2. Build & Install paru
-      ```console
-      # chmod 755 /usr/bin/makepkg-shallow
-      # mkdir /build
-      # chown -R <Username>:<Username> /build
-      # cd /build
-      # sudo -u <Username> git clone --depth=1 https://aur.archlinux.org/paru.git
-      # cd paru
-      # sudo -u <Username> makepkg-shallow --noconfirm -si
-      # pacman -Qtdq | xargs -r pacman --noconfirm -Rcns
-      # rm -rf /home/<Username>/.cache
-      # rm -rf /build
-      ```
-10. Boot loader
+8. Boot loader
     Installing the EFI boot manager
     ```console
     # bootctl install
@@ -265,172 +226,287 @@ For Lenovo user, Enter `F12` for Boot Menu when on bootstrap stage
     initrd /initramfs-linux-fallback.img
     options root=/dev/mapper/cryptroot rootflags=compress=zstd,subvol=@,discard
     ```
-11. (Optional) Enable sshd
-    ```console
-    # systemctl enable sshd.service
-    ```
-12. (Optional) Configurate zram-generator
-    Configuration
-    ```properties /etc/systemd/zram-generator.conf
-    [zram0]
-    zram-size = min(min(ram, 4096) + max(ram - 4096, 0) / 2, 32 * 1024)
-    compression-algorithm = zstd
-    ```
-    Applying config changes
-    ```console
-    # systemctl daemon-reload
-    # systemctl restart systemd-zram-setup@zram0
-    ```
-13. (Optional) Enable bluetooth
-    ```console
-    # systemctl enable bluetooth.service
-    ```
-
-    Bluetooth auto power-on after boot:
-    ```properties /etc/bluetooth/main.conf
-    [Policy]
-    AutoEnable=true
-    ```
-14. (Optional) Add Archlinuxcn repository
-    ```
-    [archlinuxcn]
-    Server = https://repo.archlinuxcn.org/$arch
-    ## or install archlinuxcn-mirrorlist-git and use the mirrorlist
-    #Include = /etc/pacman.d/archlinuxcn-mirrorlist
-    ```
-    Install archlinux-keyring
-    ```console
-    # pacman -S archlinuxcn-keyring
-    ```
 
 ## Post-installation
 
+1. Random number generation
+   Enable Rng-tools
+   ```console
+   # systemctl enable rngd.service
+   ```
+2. Enable sshd
+   ```console
+   # systemctl enable sshd.service
+   ```
+3. Configurate zram-generator
+   Configuration
+   ```properties /etc/systemd/zram-generator.conf
+   [zram0]
+   zram-size = min(min(ram, 4096) + max(ram - 4096, 0) / 2, 32 * 1024)
+   compression-algorithm = zstd
+   ```
+   Applying changes
+   ```console
+   # systemctl daemon-reload
+   # systemctl restart systemd-zram-setup@zram0
+   ```
+4. Enable bluetooth
+   ```console
+   # systemctl enable bluetooth.service
+   ```
+
+   Bluetooth auto power-on after boot:
+   ```properties /etc/bluetooth/main.conf
+   [Policy]
+   AutoEnable=true
+   ```
+5. Archlinuxcn's repository
+   ```properties /etc/pacman.conf
+   [archlinuxcn]
+   Server = https://repo.archlinuxcn.org/$arch
+   ## or install archlinuxcn-mirrorlist-git and use the mirrorlist
+   #Include = /etc/pacman.d/archlinuxcn-mirrorlist
+   ```
+   Install archlinux-keyring
+   ```console
+   # pacman -S archlinuxcn-keyring
+   ```
+
+### Swapfile in a btrfs filesystem within dm-crypt and hibernation support
+
+1. Swap file creation
+   Create a zero length file, set the `No_COW` attribute on it with `chattr`, and make sure compression is disabled, then using `dd` to allocate a swap file:
+   ```console
+   # truncate -s 0 /swapfile
+   # chattr +C /swapfile
+   # btrfs property set /swapfile compression none
+   # dd if=/dev/zero of=/swapfile bs=1M count=4096 status=progress
+   # chmod 600 /swapfile
+   # mkswap /swapfile
+   # swapon /swapfile
+   ```
+   Adding the appropriate entry in `fstab`:
+   ```properties /etc/fstab
+   ...
+   /swapfile none swap defaults 0 0
+   ```
+2. Setting the required kernel parameters
+   The `resume_offset` number can be computed using the tool [btrfs_map_physical.c](https://github.com/osandov/osandov-linux/blob/master/scripts/btrfs_map_physical.c). Do not try to use the `filefrag` tool, on Btrfs the "physical" offset you get from `filefrag` is not the real physical offset on disk
+   <figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">curl https://raw.githubusercontent.com/osandov/osandov-linux/master/scripts/btrfs_map_physical.c &gt; btrfs_map_physical.c</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">gcc -O2 -o btrfs_map_physical btrfs_map_physical.c</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">./btrfs_map_physical /swapfile</span></span><br><span class="line">FILE OFFSET     FILE SIZE       EXTENT OFFSET   EXTENT TYPE     LOGICAL SIZE    LOGICAL OFFSET  PHYSICAL SIZE   DEVID   PHYSICAL OFFSET</span><br><span class="line">0       134217728       0       regular 134217728       21358571520     134217728       1       <b>22440701952</b></span><br><span class="line">134217728       134217728       0       regular 134217728       21642440704     134217728       1       22724571136</span><br><span class="line">268435456       134217728       0       regular 134217728       22067875840     134217728       1       23150006272</span><br><span class="line">...</span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">getconf PAGESIZE</span></span><br><span class="line">4096</span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">echo</span> $((<span class="number">22440701952</span>/<span class="number">4096</span>))</span></span><br><span class="line">5478687</span><br></pre></td></tr></table></figure>
+
+   Note the the first physical offset returned by this tool. In this example, we use `22440701952`. Also note the pagesize that can be found with `getconf PAGESIZE`.
+   To compute the `resume_offset` value, divide the physical offset by the pagesize. In this example, it is `22440701952 / 4096 = 5478687`.
+
+   Finally, edit the boot loader's configuration:
+   <figure class="highlight properties"><figcaption><span>/boot/loader/entries/arch.conf</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">title</span>   <span class="string">Arch Linux</span></span><br><span class="line"><span class="attr">linux</span>   <span class="string">/vmlinuz-linux</span></span><br><span class="line"><span class="attr">initrd</span>  <span class="string">/initramfs-linux.img</span></span><br><span class="line"><span class="attr">options</span> <span class="string">... <b>resume=/dev/mapper/cryptroot resume_offset=5478687</b></span></span><br></pre></td></tr></table></figure>
+
+### AUR helper
+
+Here I Using [paru](https://aur.archlinux.org/packages/paru/) as AUR helper.
+
+1. Create makepkg wrapper `makepkg-shallow` to make makepkg do shallow clone
+   ```shell /usr/bin/makepkg-shallow
+   #!/bin/bash
+
+   git() {
+     if [[ $# -gt 1 && $1 == 'clone' && $2 != '-s' ]]; then
+       /bin/git "$@" --depth=1 --no-single-branch
+     elif [[ $# -gt 1 && $1 == 'fetch' ]]; then
+       /bin/git fetch --depth=3 -p
+     elif [[ $# -gt 1 && [$1 == 'describe' || $1 == 'rev-list'] ]]; then
+       /bin/git fetch --unshallow -p
+       /bin/git "$@"
+     else
+       /bin/git "$@"
+     fi
+   }
+
+   source /bin/makepkg "$@"
+   ```
+2. Build & Install paru
+   ```console
+   # chmod 755 /usr/bin/makepkg-shallow
+   # mkdir /build
+   # chown -R <Username>:<Username> /build
+   # cd /build
+   # sudo -u <Username> git clone --depth=1 https://aur.archlinux.org/paru.git
+   # cd paru
+   # sudo -u <Username> makepkg-shallow --noconfirm -si
+   # pacman -Qtdq | xargs -r pacman --noconfirm -Rcns
+   # rm -rf /home/<Username>/.cache
+   # rm -rf /build
+   ```
+
 > Rebooting to installed system to ensure that systemd is running.
 
-1. (Optional) Configuration of snapper
-   Ensure `/.snapshots` is not mounted and does not exist as folder:
-   ```console
-   # umount /.snapshots
-   # rm -r /.snapshots
-   ```
-   Then create a new configuration for `/`. Snapper create-config automatically creates a subvolume `.snapshots` with the root subvolume `@` as its parent, that is not needed for current filesystem layout, and can be deleted.
-   ```console
-   # snapper -c root create-config /
-   # btrfs subvolume delete /.snapshots
-   # mkdir /.snapshots
-   ```
-   Now mount `@snapshots` to `/.snapshots`:
-   ```console
-   # mount -o compress=zstd,subvol=@snapshots,discard /dev/mapper/cryptroot /.snapshots
-   ```
-2. (Optional) Unlocking encrypted root filesystem by using a TPM.
-   list your installed TPMs and the driver in use: 
-   ```console
-   $ systemd-cryptenroll --tpm2-device=list
-   ```
-   > If you encounter such message "<span style="color:#FF0000;">TPM2 support is not installed</span>" then try to install `tpm2-tss`
-   
-   A key may be enrolled in both the TPM and the LUKS volume using only one command. The following example binds the key to PCRs 0 and 7 (the system firmware and Secure Boot state): 
-   ```console
-   # systemd-cryptenroll --tpm2-device=/path/to/tpm2_device --tpm2-pcrs=0+7 /dev/sda2
-   ```
-   > Tip: If your computer has only one TPM installed, which is usually the case, you may instead specify `--tpm2-device=auto` to automatically select the only available TPM.
-   
-   Specifying the root volume using the `/etc/crypttab.initramfs`:
-   ```properties /etc/crypttab.initramfs
-   cryptroot       UUID=<UUID_OF_ROOTFS>       -       tpm2-device=auto,discard
-   ```
-   Regenerate the initramfs:
-   ```console
-   # mkinitcpio -P
-   ```
-   > To remove a key enrolled using this method, run:
-   > ```console
-   > # systemd-cryptenroll /dev/sdX --wipe-slot=slot_number
-   > ```
-   > where `slot_number` is the numeric LUKS slot number in which your TPM key is stored.
-   > Alternatively, run:
-   > ```console
-   > # systemd-cryptenroll /dev/sdX --wipe-slot=tpm2
-   > ```
-   > to remove all TPM-associated keys from your LUKS volume. 
-3. Secure Boot by using a signed boot loader (shim)
-   Install `shim-signed`<sup>[AUR]</sup>, `sbsigntools` and `efibootmgr`
-   ```console
-   # paru -S shim-signed sbsigntools efibootmgr
-   ```
-   As shim tries to launch `grubx64.efi`, rename systemd boot loader to it.
-   ```console
-   # cp /boot/EFI/systemd/systemd-bootx64.efi /boot/EFI/BOOT/grubx64.efi
-   ```
-   Copy shim and MokManager to boot loader directory:
-   ```console
-   # cp /usr/share/shim-signed/shimx64.efi /boot/EFI/BOOT/BOOTx64.EFI
-   # cp /usr/share/shim-signed/mmx64.efi /boot/EFI/BOOT/
-   ```
-   (Optional) create a new NVRAM entry to boot `BOOTx64.EFI`:
-   ```console
-   # efibootmgr --verbose --disk /dev/sda --part 1 --create --label "Shim" --loader /EFI/BOOT/BOOTx64.EFI
-   ```
-   Generate a Machine Owner Key:
-   ```console
-   $ openssl req -newkey rsa:4096 -nodes -keyout MOK.key -new -x509 -sha256 -days 3650 -subj "/CN=my Machine Owner Key/" -out MOK.crt
-   $ openssl x509 -outform DER -in MOK.crt -out MOK.cer
-   ```
-   Sign boot loader (named `grubx64.efi`) and kernel:
-   ```console
-   # sbsign --key MOK.key --cert MOK.crt --output /boot/vmlinuz-linux /boot/vmlinuz-linux
-   # sbsign --key MOK.key --cert MOK.crt --output /boot/EFI/BOOT/grubx64.efi /boot/EFI/BOOT/grubx64.efi
-   ```
-   We can automate the kernel signing with a pacman hook:
-   > Create pacman's default hooks directory if it doesn's exist:
-   > ```console
-   > # mkdir /etc/pacman.d/hooks
-   > ```
+### Btrfs snapshots & Snapper
 
-   ```properties /etc/pacman.d/hooks/999-sign_kernel_for_secureboot.hook
-   [Trigger]
-   Operation = Install
-   Operation = Upgrade
-   Type = Package
-   Target = linux
-   Target = linux-lts
-   Target = linux-hardened
-   Target = linux-zen
-   
-   [Action]
-   Description = Signing kernel with Machine Owner Key for Secure Boot
-   When = PostTransaction
-   Exec = /usr/bin/find /boot/ -maxdepth 1 -name 'vmlinuz-*' -exec /usr/bin/sh -c 'if ! /usr/bin/sbverify --list {} 2>/dev/null | /usr/bin/grep -q "signature certificates"; then /usr/bin/sbsign --key /etc/pacman.d/hooks/MOK.key --cert /etc/pacman.d/hooks/MOK.crt --output {} {}; fi' ;
-   Depends = sbsigntools
-   Depends = findutils
-   Depends = grep
-   ```
-   Also, there is a pacman hook for systemd-boot upgrades:
-   ```properties /etc/pacman.d/hooks/100-systemd-boot.hook
-   [Trigger]
-   Type = Package
-   Operation = Upgrade
-   Target = systemd
-   
-   [Action]
-   Description = Gracefully upgrading systemd-boot...
-   When = PostTransaction
-   Exec = /bin/sh -c '/usr/bin/systemctl restart systemd-boot-update.service && cp /boot/EFI/systemd/systemd-bootx64.efi /boot/EFI/BOOT/grubx64.efi && cp /usr/share/shim-signed/shimx64.efi /boot/EFI/BOOT/BOOTx64.EFI && sbsign --key /etc/pacman.d/hooks/MOK.key --cert /etc/pacman.d/hooks/MOK.crt --output /boot/EFI/BOOT/grubx64.efi /boot/EFI/BOOT/grubx64.efi'
-   Depends = shim-signed
-   Depends = sbsigntools
-   ```
+Ensure `/.snapshots` is not mounted and does not exist as folder:
+```console
+# umount /.snapshots
+# rm -r /.snapshots
+```
+Then create a new configuration for `/`. Snapper create-config automatically creates a subvolume `.snapshots` with the root subvolume `@` as its parent, that is not needed for current filesystem layout, and can be deleted.
+```console
+# snapper -c root create-config /
+# btrfs subvolume delete /.snapshots
+# mkdir /.snapshots
+```
+Now mount `@snapshots` to `/.snapshots`:
+```console
+# mount -o compress=zstd,subvol=@snapshots,discard /dev/mapper/cryptroot /.snapshots
+```
 
-   Then copy `Mok.key` and `MOK.crt` to the path which is specified above:
+### Unlocking encrypted root filesystem by using TPM 2
+
+list installed TPMs and the driver in use:
+```console
+$ systemd-cryptenroll --tpm2-device=list
+```
+> If you encounter such message "<span style="color:#FF0000;">TPM2 support is not installed</span>" then try to install `tpm2-tss`
+
+A key may be enrolled in both the TPM and the LUKS volume using only one command. The following example binds the key to PCRs 0 and 7 (the system firmware and Secure Boot state): 
+```console
+# systemd-cryptenroll --tpm2-device=/path/to/tpm2_device --tpm2-pcrs=0+7 /dev/sda2
+```
+> Tip: If your computer has only one TPM installed, which is usually the case, you may instead specify `--tpm2-device=auto` to automatically select the only available TPM.
+
+Specifying the root volume using the `/etc/crypttab.initramfs`:
+```properties /etc/crypttab.initramfs
+cryptroot       UUID=<UUID_OF_ROOTFS>       -       tpm2-device=auto,discard
+```
+Regenerate the initramfs:
+```console
+# mkinitcpio -P
+```
+> To remove a key enrolled using this method, run:
+> ```console
+> # systemd-cryptenroll /dev/sdX --wipe-slot=slot_number
+> ```
+> where `slot_number` is the numeric LUKS slot number in which your TPM key is stored.
+> Alternatively, run:
+> ```console
+> # systemd-cryptenroll /dev/sdX --wipe-slot=tpm2
+> ```
+> to remove all TPM-associated keys from your LUKS volume.
+
+### Secure Boot by using a signed boot loader (shim)
+
+Install `shim-signed`<sup>[AUR]</sup>, `sbsigntools` and `efibootmgr`
+```console
+# paru -S shim-signed sbsigntools efibootmgr
+```
+As shim tries to launch `grubx64.efi`, rename systemd boot loader to it.
+```console
+# cp /boot/EFI/systemd/systemd-bootx64.efi /boot/EFI/BOOT/grubx64.efi
+```
+Copy shim and MokManager to boot loader directory:
+```console
+# cp /usr/share/shim-signed/shimx64.efi /boot/EFI/BOOT/BOOTx64.EFI
+# cp /usr/share/shim-signed/mmx64.efi /boot/EFI/BOOT/
+```
+(Optional) create a new NVRAM entry to boot `BOOTx64.EFI`:
+```console
+# efibootmgr --verbose --disk /dev/sda --part 1 --create --label "Shim" --loader /EFI/BOOT/BOOTx64.EFI
+```
+Generate a Machine Owner Key:
+```console
+$ openssl req -newkey rsa:4096 -nodes -keyout MOK.key -new -x509 -sha256 -days 3650 -subj "/CN=my Machine Owner Key/" -out MOK.crt
+$ openssl x509 -outform DER -in MOK.crt -out MOK.cer
+```
+Sign boot loader (named `grubx64.efi`) and kernel:
+```console
+# sbsign --key MOK.key --cert MOK.crt --output /boot/vmlinuz-linux /boot/vmlinuz-linux
+# sbsign --key MOK.key --cert MOK.crt --output /boot/EFI/BOOT/grubx64.efi /boot/EFI/BOOT/grubx64.efi
+```
+We can automate the kernel signing with a pacman hook:
+> Create pacman's default hooks directory if it doesn's exist:
+> ```console
+> # mkdir /etc/pacman.d/hooks
+> ```
+
+```properties /etc/pacman.d/hooks/999-sign_kernel_for_secureboot.hook
+[Trigger]
+Operation = Install
+Operation = Upgrade
+Type = Package
+Target = linux
+Target = linux-lts
+Target = linux-hardened
+Target = linux-zen
+
+[Action]
+Description = Signing kernel with Machine Owner Key for Secure Boot
+When = PostTransaction
+Exec = /usr/bin/find /boot/ -maxdepth 1 -name 'vmlinuz-*' -exec /usr/bin/sh -c 'if ! /usr/bin/sbverify --list {} 2>/dev/null | /usr/bin/grep -q "signature certificates"; then /usr/bin/sbsign --key /etc/pacman.d/hooks/MOK.key --cert /etc/pacman.d/hooks/MOK.crt --output {} {}; fi' ;
+Depends = sbsigntools
+Depends = findutils
+Depends = grep
+```
+Also, there is a pacman hook for systemd-boot upgrades:
+```properties /etc/pacman.d/hooks/100-systemd-boot.hook
+[Trigger]
+Type = Package
+Operation = Upgrade
+Target = systemd
+
+[Action]
+Description = Gracefully upgrading systemd-boot...
+When = PostTransaction
+Exec = /bin/sh -c '/usr/bin/systemctl restart systemd-boot-update.service && cp /boot/EFI/systemd/systemd-bootx64.efi /boot/EFI/BOOT/grubx64.efi && cp /usr/share/shim-signed/shimx64.efi /boot/EFI/BOOT/BOOTx64.EFI && sbsign --key /etc/pacman.d/hooks/MOK.key --cert /etc/pacman.d/hooks/MOK.crt --output /boot/EFI/BOOT/grubx64.efi /boot/EFI/BOOT/grubx64.efi'
+Depends = shim-signed
+Depends = sbsigntools
+```
+
+Then copy `Mok.key` and `MOK.crt` to the path which is specified above:
+```console
+# cp MOK.key MOK.crt /etc/pacman.d/hooks/
+```
+Copy `MOK.cer` to a FAT formatted file system (you can use EFI system partition).
+```console
+# cp MOK.cer /boot/
+```
+Reboot and enable Secure Boot. If shim does not find the certificate `grubx64.efi` is signed with in MokList it will launch MokManager (`mmx64.efi`).
+In MokManager select Enroll key from disk, find `MOK.cer` and add it to MokList. When done select Continue boot and your boot loader will launch and it will be capable launching any binary signed with your Machine Owner Key.
+
+### NVIDIA & NVIDIA Optimus
+
+Using `PRIME render offload` which was official method supported by NVIDIA
+
+1. The [nvidia-prime](https://www.archlinux.org/packages/?name=nvidia-prime) package provides a script that can be used to run programs on the NVIDIA card.
    ```console
-   # cp MOK.key MOK.crt /etc/pacman.d/hooks/
+   # pacman -S nvidia nvidia-prime
    ```
-   Copy `MOK.cer` to a FAT formatted file system (you can use EFI system partition).
+   To run a program on the NVIDIA card you can use the prime-run command:
    ```console
-   # cp MOK.cer /boot/
+   $ prime-run glxinfo | grep "OpenGL renderer"
+   $ prime-run vulkaninfo
    ```
-   Reboot and enable Secure Boot. If shim does not find the certificate `grubx64.efi` is signed with in MokList it will launch MokManager (`mmx64.efi`).
-   In MokManager select Enroll key from disk, find `MOK.cer` and add it to MokList. When done select Continue boot and your boot loader will launch and it will be capable launching any binary signed with your Machine Owner Key.
+2. Dynamic power management of the dGPU
+   * Enable runtime power management for each PCI function
+     ```console
+     # echo auto > /sys/bus/pci/devices/<Domain>:<Bus>:<Device>.<Function>/power/control
+     # modprobe nvidia "NVreg_DynamicPowerManagement=0x02"
+     ```
+
+   * The automated ways to perform the manual steps mentioned above so that this feature works seamlessly after boot:
+     1. Create a file named `80-nvidia-pm.rules` in `/lib/udev/rules.d/` directory
+        ```properties /lib/udev/rules.d/80-nvidia-pm.rules
+        # Remove NVIDIA Audio devices, if present
+        ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x040300", ATTR{remove}="1"
+
+        # Enable runtime PM for NVIDIA VGA/3D controller devices on driver bind
+        ACTION=="bind", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x030000", TEST=="power/control", ATTR{power/control}="auto"
+
+        # Disable runtime PM for NVIDIA VGA/3D controller devices on driver unbind
+        ACTION=="unbind", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x030000", TEST=="power/control", ATTR{power/control}="on"
+        ```
+        > You can use `udevadm info --attribute-walk --path=/sys/bus/pci/devices/<Domain>\:<Bus>\:<Slot>.<Function>` to get a PCI device's   attribution
+     2. Set the driver option via the kernel module configuration files
+        ```properties /etc/modprobe.d/nvidia.conf
+        options nvidia "NVreg_DynamicPowerManagement=0x02"
+        ```
+     3. Reboot the system
 
 ## Desktop Environment
 
@@ -463,45 +539,6 @@ For Lenovo user, Enter `F12` for Boot Menu when on bootstrap stage
 3. (Optional|KDE) Turn off screen (DPMS) together with locking session:
    Go to: System Settings > Notifications > Applications(The button "Configure") > Search "Screen Saver" > Configure Events:
    Select Screen locked and check box "Run command", paste `/bin/sleep 2; /usr/bin/xset dpms force off` into it.
-
-## NVIDIA & NVIDIA Optimus
-
-I will use the method of `PRIME render offload` which was official method supported by NVIDIA
-
-1. The [nvidia-prime](https://www.archlinux.org/packages/?name=nvidia-prime) package provides a script that can be used to run programs on the NVIDIA card.
-   ```console
-   # pacman -S nvidia nvidia-prime
-   ```
-   To run a program on the NVIDIA card you can use the prime-run command:
-   ```console
-   $ prime-run glxinfo | grep "OpenGL renderer"
-   $ prime-run vulkaninfo
-   ```
-2. Dynamic power management of the dGPU
-   * Enable runtime power management for each PCI function
-     ```console
-     # echo auto > /sys/bus/pci/devices/<Domain>:<Bus>:<Device>.<Function>/power/control
-     # modprobe nvidia "NVreg_DynamicPowerManagement=0x02"
-     ```
-   
-   * The automated ways to perform the manual steps mentioned above so that this feature works seamlessly after boot:
-     1. Create a file named `80-nvidia-pm.rules` in `/lib/udev/rules.d/` directory
-        ```properties /lib/udev/rules.d/80-nvidia-pm.rules
-        # Remove NVIDIA Audio devices, if present
-        ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x040300", ATTR{remove}="1"
-
-        # Enable runtime PM for NVIDIA VGA/3D controller devices on driver bind
-        ACTION=="bind", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x030000", TEST=="power/control", ATTR{power/control}="auto"
-
-        # Disable runtime PM for NVIDIA VGA/3D controller devices on driver unbind
-        ACTION=="unbind", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x030000", TEST=="power/control", ATTR{power/control}="on"
-        ```
-        > You can use `udevadm info --attribute-walk --path=/sys/bus/pci/devices/<Domain>\:<Bus>\:<Slot>.<Function>` to get a PCI device's   attribution
-     2. Set the driver option via the kernel module configuration files
-        ```properties /etc/modprobe.d/nvidia.conf
-        options nvidia "NVreg_DynamicPowerManagement=0x02"
-        ```
-     3. Reboot the system
 
 ## Troubleshot
 
@@ -561,11 +598,9 @@ I will use the method of `PRIME render offload` which was official method suppor
      Finally go to System Settings > Startup and Shutdown > Autostart:
      Press Add button and select Add Login Script, choose the script you just created.
 
-
 ## Additional Packages
 
-1. Additional Packages
-   ```
+   ```plaintext
    [AUR] gnome-shell-extension-appindicator
    [AUR] gnome-shell-extension-kimpanel-git
    [AUR] gnome-shell-extension-dash-to-dock
