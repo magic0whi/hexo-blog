@@ -2414,6 +2414,95 @@ $$
   </ol>
 </details>
 
+### Cramer's Rule, Inverses, and Volumes
+
+1. \\(A^{-1}\\) **equals** \\(C^\mathrm{T}/\det A\\). Then \\((A^{-1})\_{ij}=\text{cofactor $\bm{C_{ji}}$ divided by the determinant of $A$}\\).
+   <details>
+     <summary><span class="list-summary">&dagger; WHY &dagger;</span></summary>
+     <ol>
+       <li>
+         By using Cramer's Rule to solve \(A\bm{x}=(1,0,0)\) (to find column 1 of \(A^{-1}\)), we will see <strong>the determinant of each \(B_j\) is a cofactor of \(A\)</strong>
+         $$
+         \begin{array}{l}
+           B_j=\text{$A$ with column $j$ changed to $\bm{b}$}
+         \\
+           B_1=\begin{vmatrix} \bm{1} & a_{12} & a_{13} \\ \bm{0} & a_{22} & a_{23} \\ \bm{0} & a_{32} & a_{33} \end{vmatrix}=a_{22}a_{33}-a_{23}a_{32}=C_{11}
+           \rarr
+           (A^{-1})_{11}=x_1=\dfrac{C_{11}}{\det A}
+         \\ \\
+           B_2=\begin{vmatrix} a_{11} & \bm{1} & a_{13} \\ a_{21} & \bm{0} & a_{23} \\ a_{31} & \bm{0} & a_{33} \end{vmatrix}=a_{21}a_{33}-a_{23}a_{31}=C_{12}
+           \rarr
+           (A^{-1})_{21}=x_2=\dfrac{C_{12}}{\det A}
+         \\ \\
+           B_3=\begin{vmatrix} a_{11} & a_{12} & \bm{1} \\ a_{21} & a_{22} & \bm{0} \\ a_{31} & a_{32} & \bm{0} \end{vmatrix}=a_{21}a_{32}-a_{22}a_{31}=C_{13}
+           \rarr
+           (A^{-1})_{31}=x_3=\dfrac{C_{13}}{\det A}
+         \end{array}
+         $$
+         For \(A\bm{y}=(0,1,0)\) it goes to \((A^{-1})_{12}=y_1=\dfrac{C_{21}}{\det A}\), \((A^{-1})_{22}=y_2=\dfrac{C_{22}}{\det A}\), \((A^{-1})_{32}=y_3=\dfrac{C_{23}}{\det A}\). Then \((A^{-1})_{ij}=\dfrac{C_{ji}}{\det A}\)
+       </li>
+       <li>
+         Direct proof of the formula \(A^{-1}=C^\mathrm{T}/\det A\). This means \(AC^\mathrm{T}=(\det A)I\):
+         $$
+         \begin{bmatrix} a_{11} & a_{12} & a_{13} \\ a_{21} & a_{22} & a_{23} \\ a_{31} & a_{32} & a_{33} \end{bmatrix}
+         \begin{bmatrix} C_{11} & C_{21} & C_{31} \\ C_{12} & C_{22} & C_{32} \\ C_{13} & C_{23} & C_{33} \end{bmatrix}
+         =
+         \begin{bmatrix} \det A & 0 & 0 \\ 0 & \det A & 0 \\ 0 & 0 & \det A \end{bmatrix}
+         .
+         $$
+         How to explain the zeros off the main diagonal? When the rows of \(A\) multiplying cofactors from different rows, restore the equation to its matrix form, you will see two lines of this matrix are same, thus the determinant is zero. For example:
+         $$
+         \begin{alignedat}{1}
+           (AC^\mathrm{T})_{21}=(\text{Row 2 of $A$})(\text{Column 1 of $C^\mathrm{T}$})
+         & =a_{21}C_{11}+a_{22}C_{12}+a_{23}C_{13}
+         \\
+         & =\begin{vmatrix} \bm{a_{21}} & \bm{a_{22}} & \bm{a_{23}} \\ a_{21} & a_{22} & a_{23} \\ a_{31} & a_{32} & a_{33} \end{vmatrix}
+           =0
+         \end{alignedat}
+         $$
+       </li>
+     </ol>
+   </details>
+2. **Cramer's Rule** computes \\(\bm{x}=A^{-1}\bm{b}\\) from \\(x_j=\det(\text{$A$ with column $j$ changed to $\bm{b}$})/\det A\\).
+   <details>
+     <summary><span class="list-summary">&dagger; WHY &dagger;</span></summary>
+     Replacing the first column of \(I\) by \(\bm{x}\) gives a matrix with determinant \(x_1\). When multiply it by \(A\), <em>the first column becomes \(A\bm{x}\) which is \(\bm{b}\).</em> The other columns of \(B_1\) are copied from \(A\):
+     $$
+     \begin{alignedat}{2}
+       \textbf{Key idea}\quad
+       A
+       \begin{bmatrix} x_1 & 0 & 0  \\ x_2 & 1 & 0 \\ x_3 & 0 & 1 \end{bmatrix}
+       =
+       \begin{bmatrix} & & \\ \bm{b} & \bm{a}_2 & \bm{a}_3 \\ & & \end{bmatrix}
+       =B_1
+     & \rarr(\det A)\det\begin{bmatrix} x_1 & 0 & 0  \\ x_2 & 1 & 0 \\ x_3 & 0 & 1 \end{bmatrix}=\det B_1
+     \\
+     & \rarr(\det A)x_1=\det B_1
+     \\
+     & \rarr x_1=\frac{\det B_1}{\det A}
+     \end{alignedat}
+     $$
+     To find \(x_2\) and \(B_2\), put the vectors \(\bm{x}\) and \(\bm{b}\) into the <em>second</em> columns of \(I\) and \(A\):
+     $$
+     \begin{alignedat}{2}
+       \textbf{Same idea}\quad
+       A
+       \begin{bmatrix} 1 & x_1 & 0 \\ 0 & x_2 & 0 \\ 0 & x_3 & 1 \end{bmatrix}
+       =
+       \begin{bmatrix} & & \\ \bm{a}_1 & \bm{b} & \bm{a}_3 \\ & & \end{bmatrix}
+       =B_2
+       & \rarr(\det A)\det\begin{bmatrix} 1 & x_1 & 0 \\ 0 & x_2 & 0 \\ 0 & x_3 & 1 \end{bmatrix}=\det B_2
+       \\
+       & \rarr(\det A)x_2=\det B_2
+       \\
+       & \rarr x_2=\frac{\det B_2}{\det A}
+     \end{alignedat}
+     $$
+   </details>
+3. **Area of parallelogram** \\(=|ad-bc|\\) if the four corners are \\((0,0)\\), \\((a,b)\\), \\((c,d)\\), and \\((a+c,b+d)\\).
+4. **Volume of box** \\(=|\det A|\\) if the rows of \\(A\\) (or the columns of \\(A\\)) give the sides of the box.
+5. The **cross product** \\(\bm{w}=\bm{u}\times\bm{v}\\) is \\(\det\begin{bmatrix} \bm{i} & \bm{j} & \bm{k} \\\ u_1 & u_2 & u_3 \\\ v_1 & v_2 & v_3 \end{bmatrix}\\). \\(\begin{array}{l} \text{Notice $\bm{v}\times\bm{u}=-(\bm{u}\times\bm{v})$.} \\\ \text{$w_1$, $w_2$, $w_3$ are cofactors of row 1.} \\\ \text{Notice $\bm{w}^\mathrm{T}\bm{u}=0$ and $\bm{w}^\mathrm{T}\bm{v}=0$.} \end{array}\\)
+
 ## LINEAR ALGEBRA IN A NUTSHELL
 
 <div style="text-align:center"><strong>((<em>The matrix \(A\) is \(n\) by \(n\)</em>))</strong></div>
