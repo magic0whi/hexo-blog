@@ -2459,11 +2459,11 @@ $$
            B_1=\begin{vmatrix} \bm{1} & a_{12} & a_{13} \\ \bm{0} & a_{22} & a_{23} \\ \bm{0} & a_{32} & a_{33} \end{vmatrix}=a_{22}a_{33}-a_{23}a_{32}=C_{11}
            \rarr
            (A^{-1})_{11}=x_1=\dfrac{C_{11}}{\det A}
-         \\ \\
+         \\\\
            B_2=\begin{vmatrix} a_{11} & \bm{1} & a_{13} \\ a_{21} & \bm{0} & a_{23} \\ a_{31} & \bm{0} & a_{33} \end{vmatrix}=a_{23}a_{31}-a_{21}a_{33}=C_{12}
            \rarr
            (A^{-1})_{21}=x_2=\dfrac{C_{12}}{\det A}
-         \\ \\
+         \\\\
            B_3=\begin{vmatrix} a_{11} & a_{12} & \bm{1} \\ a_{21} & a_{22} & \bm{0} \\ a_{31} & a_{32} & \bm{0} \end{vmatrix}=a_{21}a_{32}-a_{22}a_{31}=C_{13}
            \rarr
            (A^{-1})_{31}=x_3=\dfrac{C_{13}}{\det A}
@@ -2594,6 +2594,203 @@ $$
       \text{. Multiply to check }AA^{-1}=I
       $$
       The box from the columns of \(A\) has \(\text{volume}=\det A=2\). The box from the rows also has volume 2, since \(|A^{T}|=|A|\). The box from the rows of \(A^{-1}\) has volume \(1/|A|=\frac{1}{2}\).
+    </li>
+  </ol>
+</details>
+
+## Chapter 6 Eigenvalues and Eigenvectors
+
+### Introduction to Eigenvalues
+
+1. An **eigenvector** \\(\bm{x}\\) lies along the same line as \\(A\bm{x}\\): \\(\boxed{A\bm{x}=\lambda\bm{x}}\\). The **eigenvalue** is \\(\lambda\\).
+2. If \\(A\bm{x}=\lambda\bm{x}\\) then \\(A^2\bm{x}=\lambda^2\bm{x}\\) and \\(A^{-1}\bm{x}=\lambda^{-1}\bm{x}\\) and \\((A+cI)\bm{x}=(\lambda+c)\bm{x}\\): the same \\(\bm{x}\\).
+3. If \\(A\bm{x}=\lambda\bm{x}\\) then \\((A-\lambda I)\bm{x}=\bm{x}\\) and \\(A-\lambda I\\) is singular and \\(\boxed{\bm{\det(A-\lambda I)=0}}\\). \\(n\\) eigenvalues.
+      <figure class="highlight diff">
+     <table>
+       <tr>
+         <td class="gutter">
+           <span class="line">1</span>
+         </td>
+         <td class="code">
+           <span class="line">
+             <span class="addition">
+               + Solve \(\det(A-\lambda I)=0\) to find \(n\) eigenvalues.
+             </span>
+           </span>
+         </td>
+       </tr>
+       <tr>
+         <td class="gutter">
+           <span class="line">2</span>
+         </td>
+         <td class="code">
+           <span class="line">
+             <span class="addition">
+               + Then for each eigenvalue \(\lambda\) solve \((A-\lambda I)\bm{x}=\bm{0}\) or \(A\bm{x}=\lambda\bm{x}\) to find an eigenvector \(\bm{x}\).
+             </span>
+           </span>
+         </td>
+       </tr>
+       <tr>
+         <td class="gutter">
+           <span class="line">2</span>
+         </td>
+         <td class="code">
+           <span class="line">
+             <span class="addition">
+               + All other vector are combinations of the \(n\) eigenvectors. Thus \(A\bm{y}=A(c_1\bm{x}_1+c_2\bm{x}_2+\cdots+c_n\bm{x}_n)=c_1\lambda_1\bm{x}_1+c_2\lambda_2\bm{x}_2+\cdots+c_n\lambda_n\bm{x}_n\)
+             </span>
+           </span>
+         </td>
+       </tr>
+       <tr>
+         <td class="gutter">
+           <span class="line">2</span>
+         </td>
+         <td class="code">
+           <span class="line">
+             <span class="addition">
+               + We must add a warning. Some 2 by 2 matrices have only <em>one</em> line of eigenvectors. This can only happen when two eigenvalues are equal. (On the other hand \(A=I\) has equal eigenvalues and plenty of eigenvectors.) Without a full set of eigenvectors, we don't have a basis to write every \(\bm{v}\) as a combination of eigenvectors. In the language of the next section, <em>we can't diagonalize a matrix without \(n\) independent eigenvectors.</em>
+             </span>
+           </span>
+         </td>
+       </tr>
+     </table>
+   </figure>
+4. Check \\(\lambda\\)'s by \\(\det A=(\lambda_1)(\lambda_2)\cdots(\lambda_n)\\) and diagonal sum \\(a_{11}+a_{22}+\cdots+a_{nn}=\text{sum of $\lambda$'s}\\).
+5. Projections have \\(\lambda=1\\) and \\(0\\). Reflections have \\(1\\) and \\(-1\\). Rotations have \\(e^{i\theta}\\) and \\(e^{-i\theta}\\): *complex!*
+   <details>
+     <summary><span class="list-summary">&dagger; WHY &dagger;</span></summary>
+     For a two-dimensionl rotation matrix \(R=\begin{bmatrix} \cos\theta & -\sin\theta \\ \sin\theta & \cos\theta \end{bmatrix}\), solve \(\det(R-\lambda I)=0\):
+     $$
+     \begin{alignedat}{1}
+       \det(R-\lambda I)=0 & \harr(\cos\theta-\lambda)^2+\sin^2\theta=0 \\
+       & \harr(\cos\theta-\lambda)^2=-\sin^2\theta \\
+       & \harr\cos\theta-\lambda=\pm(i\sin\theta) \\
+       & \harr\lambda=\cos\theta\pm i\sin\theta=e^{\pm i\theta}
+     \end{alignedat}
+     $$
+     Last stage comes from Euler's formula \(e^{ix}=\cos x+i\sin x\) and \(e^{-ix}=e^{i(-x)}=\cos(-x)+i\sin(-x)=\cos x-i\sin x\)
+   </details>
+
+<details>
+  <summary><span class="list-summary">&dagger; WORKED EXAMPLES &dagger;</span></summary>
+  <ol class="worked-examples">
+    <li>
+      <span class="list-head">6.1 A</span>&emsp;Find the eigenvalues and eigenvectors of \(A\) and \(A^2\) and \(A^{-1}\) and \(A+4I\):
+      $$
+      A=\begin{bmatrix*}[r] 2 & -1 \\ -1 & 2 \end{bmatrix*}
+      \quad\text{and}\quad
+      A^2=\begin{bmatrix*}[r] 5 & -4 \\ -4 & 5 \end{bmatrix*}
+      .
+      $$
+      Check the trace \(\lambda_1+\lambda_2=4\) and the determinant \(\lambda_1lambda_2=3\).
+      <br>
+      <span class="list-head">Solution</span>&emsp;The eigenvalues of \(A\) come from \(\det(A-\lambda I=0)\):
+      $$
+      A=\begin{bmatrix} 2 & -1 \\ -1 & 2 \end{bmatrix}
+      \qquad
+      \det(A-\lambda I)=\begin{vmatrix} \bm{2-\lambda} & \bm{-1} \\ \bm{-1} & \bm{2-\lambda} \end{vmatrix}=\lambda^2-4\lambda+3=0
+      $$
+      This factors into \((\lambda-1)(\lambda-3)=0\) so the eigenvalues of \(A\) are \(\lambda_1=\bm{1}\) and \(\lambda_2=\bm{3}\). For the trace, the sum \(2+2\) agrees with \(1+3\). The determinant \(3\) agrees with the product \(\lambda_1\lambda_2\).
+      <br>
+      &emsp;&ensp;The eigenvectors come separately by solving \((A-\lambda I)\bm{x}=\bm{0}\) which is \(A\bm{x}=\lambda\bm{x}\):
+      $$
+      \begin{array}{c}
+        \bm{\lambda=1}\text{:}\quad(A-I)\bm{x}=\begin{bmatrix*}[r] 1 & -1 \\ -1 & 1 \end{bmatrix*}\begin{bmatrix} x \\ y \end{bmatrix}=\begin{bmatrix} 0 \\ 0 \end{bmatrix}\text{ gives the eigenvector }\bm{x}_1=\begin{bmatrix} 1 \\ 1 \end{bmatrix}
+        \\\\
+        \bm{\lambda=3}\text{:}\quad(A-3I)\bm{x}=\begin{bmatrix*}[r] -1 & -1 \\ -1 & -1 \end{bmatrix*}\begin{bmatrix} x \\ y \end{bmatrix}=\begin{bmatrix} 0 \\ 0 \end{bmatrix}\text{ gives the eigenvector }\bm{x}_2=\begin{bmatrix*}[r] 1 \\ -1 \end{bmatrix*}
+      \end{array}
+      $$
+      \(A^2\) and \(A^{-1}\) and \(A+4I\) keep the <em>same eigenvectors as</em> \(A\). Their eigenvalues are \(\lambda^2\) and \(\lambda^{-1}\) and \(\lambda+4\):
+      $$
+      \textcolor{RoyalBlue}{\text{
+        $A^2$ has eigenvalues $1^2=1$ and $3^2=9\quad
+        A^{-1}$ has $\dfrac{1}{1}$ and $\dfrac{1}{3}\quad
+        A+4I$ has $\begin{array}{l} 1+4=5 \\ 3+4=7 \end{array}$
+      }}
+      $$
+      Notes for later sections: \(A\) has <em>orthogonal eigenvectors</em> (Section 6.4 on symmetric matrices). \(A\) can be <em>diagonalized</em> since \(\lambda_1\neq\lambda_2\) (Section 6.2). \(A\) is <em>similar</em> to any 2 by 2 matrix with eigenvalues \(1\) and \(3\) (Section 6.2). \(A\) is a <em>positive definite matrix</em> (Section 6.5) since \(A=A^\mathrm{T}\) and the \(\lambda\)'s are positive.
+    </li>
+    <li>
+      <span class="list-head">6.1 B</span>&emsp;<strong>How can you estimate the eigenvalues of any \(\bm{A}\)?</strong> Gershgorin gave this answer.
+      <br><br>
+      Every eigenvalue of \(A\) must be &ldquo;near&rdquo; at least one of the entries \(a_{ii}\) on the main diagonal. For \(\lambda\) to be &ldquo;near \(a_{ii}\)&rdquo; means that \(\|a_{ii}-\lambda\|\) is no more than <strong>the sum \(\bm{R_i}\) of all other \(\bm{|a_{ij}|}\) in that row \(i\) of the matrix</strong>. Then \(R_i=\sum_{j\neq i}|a_{ij}|\) is the radius of a circle centered at \(a_{ii}\).
+      <br><br>
+      <strong>Every \(\bm{\lambda}\) is in the circle around one or more diagonal entrices \(\bm{a_{ii}}\): \(\bm{|a_{ii}-\lambda|\leq R_i}\).</strong>
+      <br><br>
+      &emsp;&ensp;Here is the reasoning. If \(\lambda\) is an eigenvalue, then \(A-\lambda I\) is not invertible. Then \(A-\lambda I\) cannot be diagonally dominant (see Section 2.5). So at least one diagonal entry \(a_{ii}-\lambda\) is <em>not larger</em> than the sum \(R_i\) of all other entries \(|a_{ij}|\) (we take absolute values!) in row \(i\).
+      <details>
+        <summary><span class="list-summary">&dagger; Diagonally dominant &dagger;</span></summary>
+          <strong>Diagonally dominant matrices are invertible.</strong> Each \(a_{ii}\) on the diagonal is larger than the total sum along the rest of row \(i\). On every row,
+          $$
+          |a_{ii}|\gt\sum_{j\neq i}|a_{ij}|
+          \quad\text{means that}\quad
+          |a_{ii}|\ge|a_{i1}|+\cdots(\text{skip }|a_{ii}|)\cdots+|a_{in}|
+          .
+          $$
+          <strong>Reasoning</strong>.&emsp;&ensp;Take any nonzero vector \(\bm{x}\). <em>Suppose its largest component is \(|x_i|\).</em> Then \(A\bm{x}=\bm{0}\) is impossible, because row \(i\) of \(A\bm{x}=\bm{0}\) would need
+          $$
+          a_{i1}x_1+\cdots+a_{ii}x_i+\cdots+a_{in}x_n=0
+          .
+          $$
+          Those can't add to zero when \(A\) is diagonally dominant! The size of \(a_{ii}x_{i}\) (that one particular term) is greater than all the other terms combined:
+          $$
+          \textbf{All }\bm{|x_j|\leq|x_i|\quad\sum_{j\neq i}|a_{ij}x_j|\leq\sum_{j\neq i}|a_{ij}||x_i|\lt|a_{ii}||x_i|}\textbf{ because $\bm{a_{ii}}$ dominates}
+          $$
+      </details>
+      <em>Example 1.</em>&emsp;&ensp;Every eigenvalue \(\lambda\) of this \(A\) falls into one or both of the <strong>Gershgorin circles</strong>: The centers are \(a\) and \(d\), the radii are \(R_1=|b|\) and \(R_2=|c|\).
+      $$
+      A=\begin{bmatrix} a & b \\ c & d \end{bmatrix}\qquad
+      \begin{array}{ll}
+        \text{First circle:} & |\lambda-a|\leq|b| \\
+        \text{Second circle:} & |\lambda-d|\leq|c|
+      \end{array}
+      $$
+      Those are circles in the complex plane, since \(\lambda\) could certaubky be complex.
+      <br>
+      <em>Example 2.</em>&emsp;&ensp;All eigenvalues of this \(A\) lie in a circle of radius \(R=3\) around <em>one or more</em> of the diagonal entries \(d_1\), \(d_2\), \(d_3\):
+      $$
+      A=\begin{bmatrix} d_1 & 1 & 2 \\ 2 & d_2 & 1 \\ -1 & 2 & d_3 \end{bmatrix}\qquad
+      \begin{array}{l}
+        |\lambda-d_1|\leq 1+2=R_1 \\
+        |\lambda-d_2|\leq 2+1=R_2 \\
+        |\lambda-d_3|\leq 1+2=R_3
+      \end{array}
+      $$
+      You see that &ldquo;near&rdquo; means not more than 3 away from \(d_1\) or \(d_2\) or \(d_3\), for this example.
+    </li>
+    <li>
+      <span class="list-head">6.1 C</span>&emsp;Find the eigenvalues and eigenvectors of this symmetric 3 by 3 matrix \(S\):
+      $$
+      \textcolor{RoyalBlue}{\begin{array}{l}
+        \textbf{Symmetric matrix} \\
+        \textbf{Singular matrix} \\
+        \textbf{Trace $1+2+1=4$}
+      \end{array}}
+      \qquad
+      S=\begin{bmatrix*}[r] 1 & -1 & 0 \\ -1 & 2 & -1 \\ 0 & -1 & 1 \end{bmatrix*}
+      $$
+      <span class="list-head">Solution</span>&emsp;Since all rows of \(S\) add to zero, the vector \(\bm{x}=(1,1,1)\) gives \(S\bm{x}=\bm{0}\). This is an eigenvector for \(\lambda=0\). To find \(\lambda_2\) and \(\lambda_3\) I will compute the 3 by 3 determinant:
+      $$
+      \det(S-\lambda I)=
+      \begin{vmatrix} 1-\lambda & -1 & 0 \\ -1 & 2-\lambda & -1 \\ 0 & -1 & 1-\lambda \end{vmatrix}
+      \begin{array}{l}
+        =(1-\lambda)(2-\lambda)(1-\lambda)-2(1-\lambda) \\
+        =(1-\lambda)[(2-\lambda)(1-\lambda)-2] \\
+        =(\bm{1-\lambda})(\bm{-\lambda})(\bm{3-\lambda})
+      \end{array}
+      $$
+      Those three factors give \(\lambda=0,1,3\). Each eigenvalue corresponds to an eigenvector (or a line of eigenvectors):
+      $$
+      \bm{x}_1=\begin{bmatrix} 1 \\ 1 \\ 1 \end{bmatrix}\quad S\bm{x}_1=\bm{0x}_1\qquad
+      \bm{x}_2=\begin{bmatrix*}[r] 1 \\ 0 \\ -1 \end{bmatrix*}\quad S\bm{x}_2=\bm{1x}_2\qquad
+      \bm{x}_3=\begin{bmatrix*}[r] 1 \\ -2 \\ 1 \end{bmatrix*}\quad S\bm{x}_3=\bm{3x}_3
+      .
+      $$
+      I notice again that eigenvectors are perpendicular when \(S\) is symmetric. We were lucky to find \(\lambda=0,1,3\). For a larger matrix I would use \(\textbf{\textsf{eig}}(A)\), and never touch determinants.
+      <br>
+      &emsp;&ensp;The full command \([\bm{X},\bm{E}]=\textbf{\textsf{eig}}(A)\) will produce unit eigenvectosrs in the columns of \(X\).
     </li>
   </ol>
 </details>
