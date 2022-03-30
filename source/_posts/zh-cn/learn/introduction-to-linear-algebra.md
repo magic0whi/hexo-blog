@@ -2657,6 +2657,27 @@ $$
        </tr>
      </table>
    </figure>
+   <details>
+     <summary><span class="list-summary">&dagger; WHY (Independent \(\bm{x}\) from different \(\lambda\)) &dagger;</span></summary>
+     Suppose \(c_1\bm{x}_1+\cdots+c_n\bm{x}_n=\bm{0}\). Multiply by \(A\) to find \(c_1\lambda_1\bm{x}_1+\cdots+c_n\lambda_n\bm{x}_n=\bm{0}\). Multiply by \(\lambda_n\) to find \(c_1\lambda_n\bm{x}_1+\cdots+c_n\lambda_n\bm{x}_n=\bm{0}\). Now subtract one from the other:
+     $$
+     \tag{1}
+     \text{Subtraction leaves }(\lambda_1-\lambda_n)c_1\bm{x}_1+\cdots+(\lambda_{n-1}-\lambda_n)c_{n-1}\bm{x}_{n-1}=\bm{0}
+     $$
+     \(\bm{x}_n\) is gone. Now from (1) multiply by \(A\) and by \(\lambda_{j-1}\) and subtract:
+     $$
+     \begin{array}{rl}
+     \text{$A\cdot$(1)} & (\lambda_1-\lambda_n)c_1\lambda_1\bm{x}_1+\cdots+(\lambda_{n-1}-\lambda_n)c_{n-1}\lambda_{n-1}\bm{x}_{n-1}=\bm{0} \\
+     \text{$\lambda_{n-1}\cdot$(1)} & (\lambda_1-\lambda_n)c_1\lambda_{n-1}\bm{x}_1+\cdots+(\lambda_{n-1}-\lambda_n)c_{n-1}\lambda_{n-1}\bm{x}_{n-1}=\bm{0} \\
+     \text{Subtraction leaves} & (\lambda_1-\lambda_{n-1})(\lambda_1-\lambda_n)c_1\bm{x}_1+\cdots+(\lambda_{n-2}-\lambda_{n-1})(\lambda_{n-2}-\lambda_n)c_{n-2}\bm{x}_{n-2}=\bm{0}
+     \end{array}
+     $$
+     This removes \(\bm{x}_{n-1}\). Repeat the steps above and eventually only \(x_1\) is left:
+     $$
+     \text{We reach $(\lambda_1-\lambda_2)\cdots(\lambda_1-\lambda_n)c_1\bm{x}_1=\bm{0}$ which forces $c_1=0$.}
+     $$
+     Since the \(\lambda\)'s are different and \(\bm{x}_1\neq\bm{0}\), we are forced to the conclusion that \(c_1=0\). Then from \(c_2\bm{x}_2+\cdots+c_n\bm{x}_n=\bm{0}\) we can proof \(c_2=0\) and eventually all the \(c\)'s equal to zero. When the \(\lambda\)'s are all different, the eigenvectors are independent.
+   </details>
 4. Check \\(\lambda\\)'s by \\(\det A=(\lambda_1)(\lambda_2)\cdots(\lambda_n)\\) and diagonal sum \\(a_{11}+a_{22}+\cdots+a_{nn}=\text{sum of $\lambda$'s}\\).
 5. Projections have \\(\lambda=1\\) and \\(0\\). Reflections have \\(1\\) and \\(-1\\). Rotations have \\(e^{i\theta}\\) and \\(e^{-i\theta}\\): *complex!*
    <details>
@@ -2791,6 +2812,113 @@ $$
       I notice again that eigenvectors are perpendicular when \(S\) is symmetric. We were lucky to find \(\lambda=0,1,3\). For a larger matrix I would use \(\textbf{\textsf{eig}}(A)\), and never touch determinants.
       <br>
       &emsp;&ensp;The full command \([\bm{X},\bm{E}]=\textbf{\textsf{eig}}(A)\) will produce unit eigenvectosrs in the columns of \(X\).
+    </li>
+  </ol>
+</details>
+
+### Diagonalizing a Matrix
+
+1. The columns of \\(AX=X\Lambda\\) are \\(A\bm{x}_k=\lambda_k\bm{x}_k\\). The eigenvalue matrix \\(\Lambda\\) is diagonal.
+2. \\(\bm{n}\\) independent eigenvectors in \\(X\\) diagonalize \\(A\\): \\(\boxed{\bm{A=X\Lambda X^{-1}}\text{ and }\bm{\Lambda=X^{-1}AX}}\\).
+3. The eigenvector matrix \\(X\\) also diagonalizes all powers \\(A^k\\): \\(\boxed{\bm{A^k=X\Lambda^kX^{-1}}}\\).
+4. Solve \\(\bm{u}_{k+1}=A\bm{u}_k\\) by \\(\bm{u}_k=A^k\bm{u}_0=X\Lambda^kX^{-1}\bm{u}_0=\boxed{\bm{c_1(\lambda_1)^kx_1+\cdots+c_n(\lambda_n)^kx_n}}\\).
+   <details>
+     <summary><span class="list-summary">&dagger; WHY &dagger;</span></summary>
+     Write \(\bm{u}_0\) as a combination \(c_1\bm{x}_1+\cdots+c_n\bm{x}_n=X\bm{c}\), then \(\bm{u}_k=A^k\bm{u}_0=X\Lambda^kX^{-1}\bm{u}_0=X\Lambda^kX^{-1}X\bm{c}=(X\Lambda^k)\bm{c}=c_1(\lambda_1)^k\bm{x}_1+\cdots+c_n(\lambda_n)^k\bm{x}_n\)
+   </details>
+5. **No equal eigenvalues** &rArr; \\(X\\) is invertible and \\(A\\) can be diagonalized.
+   **Equal eigenvalues** &rArr; \\(A\\) *might* have too few independent eigenvectors. Then \\(X^{-1}\\) fails.
+6. Every matrix \\(C=B^{-1}AB\\) has the **same eigenvalues** as \\(A\\). These \\(C\\)'s are "**similar**" to \\(A\\).
+   <details>
+     <summary><span class="list-summary">&dagger; WHY &dagger;</span></summary>
+     Suppose \(A\bm{x}=\lambda\bm{x}\). Then \(C=B^{-1}AB\) has the same eigenvalue \(\lambda\) with the new eigenvector \(B^{-1}\bm{x}\):
+     $$
+     \textbf{Same $\bm{\lambda}\quad C(B^{-1}\bm{x})=(B^{-1}AB)(B^{-1}\bm{x})=B^{-1}A\bm{x}=B^{-1}\lambda\bm{x}=\lambda(B^{-1}\bm{x})$.}
+     $$
+   </details>
+
+<details>
+  <summary><span class="list-summary">&dagger; WORKED EXAMPLES &dagger;</span></summary>
+  <ol class="worked-examples">
+    <li>
+      <span class="list-head">6.2 A</span>&emsp;The <strong>Lucas numbers</strong> are like the Fibonacci numbers except they start with \(L_1=1\) and \(L_2=3\). Using the same rule \(L_{k+2}=L_{k+1}+L_k\), the next Lucas numbers are \(4\), \(7\), \(11\) , \(18\). Show that the Lucas number \(L_{100}\) is \(\lambda_1^{100}+\lambda_2^{100}\).
+      <span class="list-head">Solution</span>&emsp;\(\bm{u}_{k+1}=\left[\begin{smallmatrix} 1 & 1 \\ 1 & 0 \end{smallmatrix}\right]\) is the same as for Fibonacci, because \(L_{k+2}=L_{k+1}+L_k\) is the same rule (with different starting values). The equation becomes a 2 by 2 system:
+      $$
+      \colorbox{e8f1fe}{
+        Let \colorbox{ffffff}{$u_k=\begin{bmatrix} L_{k+1} \\ L_k \end{bmatrix}$}.
+        The rule $\begin{array}{l} L_{k+2}=L_{k+1}+L_k \\ L_{k+1}=L_{k+1} \end{array}$
+        is \colorbox{ffffff}{$\bm{u}_{k+1}=\begin{bmatrix} 1 & 1 \\ 1 & 0 \end{bmatrix}\bm{u}_k$}.
+      }
+      $$
+      The eigenvalues and eigenvectors of \(A=\left[\begin{smallmatrix} 1 & 1 \\ 1 & 0 \end{smallmatrix}\right]\) still come from \(\lambda^2=\lambda+1\):
+      $$
+      \text{
+        $\lambda_1=\dfrac{1+\sqrt{5}}{2}$\quad and\quad$\bm{x}_1=\begin{bmatrix} \lambda_1 \\ 1 \end{bmatrix}$\qquad\qquad
+        $\lambda_2=\dfrac{1-\sqrt{5}}{2}$\quad and\quad $\bm{x}_2=\begin{bmatrix} \lambda_2 \\ 1 \end{bmatrix}$.
+      }
+      $$
+      Now solve \(c_1\bm{x}_1+c_2\bm{x}_2=\bm{u}_1=(3,1)\). The solution is \(c_1=\lambda_1\) and \(c_2=\lambda_2\). Check:
+      $$
+      \lambda_1\bm{x}_1+\lambda_2\bm{x}_2
+      =\begin{bmatrix} \lambda_1^2+\lambda_2^2 \\ \lambda_1+\lambda_2 \end{bmatrix}
+      =\begin{bmatrix} \text{trace of }A^2 \\ \text{trace of }A \end{bmatrix}
+      =\begin{bmatrix} 3 \\ 1 \end{bmatrix}
+      =\bm{u}_1
+      $$
+      \(\bm{u}_{100}=A^{99}\bm{u}_1\) tells us the Lucas numbers \((L_{101}, L_{100})\). The second components of the eigenvectors \(\bm{x}_1\) and \(\bm{x}_2\) are \(1\), so the second component of \(\bm{u}_{100}\) is the answer we want:
+      $$
+      \boxed{
+        \textbf{Lucas number\qquad$\bm{L_{100}}=c_1\lambda_1^{99}+c_2\lambda_2^{99}=\bm{\lambda_1^{100}}+\bm{\lambda_2^{100}}$.}
+      }
+      $$
+      Lucas starts faster than Fibonacci, and ends up larger by a factor near \(\sqrt{5}\).
+    </li>
+    <li>
+      <span class="list-head">6.2 B</span>&emsp;Find the inverse and the eigenvalues and the determinant of this matrix \(A\):
+      $$
+      A=5*\textbf{\textsf{eye}}(4)-\textbf{\textsf{ones}}(4)=
+      \begin{bmatrix*}[r]
+        4 & -1 & -1 & -1 \\
+        -1 & 4 & -1 & -1 \\
+        -1 & -1 & 4 & -1 \\
+        -1 & -1 & -1 & 4
+      \end{bmatrix*}
+      .
+      $$
+      Describe an eigenvector matrix \(X\) that gives \(X^{-1}AX=\Lambda\).
+      <br>
+      <span class="list-head">Solution</span>&emsp;What are the eigenvalues of the all-ones matrix? Its rank is certainly 1, so three eigenvalues are \(\lambda=0,0,0\). Its trace is 4, so the other eigenvalue is \(\lambda=4\). Subtract this all=ones matrix from \(5I\) to get our matrix \(A\):
+      $$
+      \textcolor{RoyalBlue}{\textbf{Subtract the eigenvalues 4, 0, 0, 0 from 5, 5, 5, 5. The eigenvalues of $A$ are 1, 5, 5, 5.}}
+      $$
+      The determinant of \(A\) is \(125\), the product of those four eigenvalues. The eigenvector for \(\lambda=1\) is \(\bm{x}=(1,1,1,1)\) or \((c,c,c,c)\). The other eigenvectors are perpendicular to \(\bm{x}\) (since \(A\) is symmetric). The nicest eigenvector matrix \(X\) is the symmetric orthogonal <strong>Hadamard matrix \(\bm{H}\)</strong>. The factor \(\frac{1}{2}\) produces unit column vectors.
+      $$
+      \textbf{Orthonormal eigenvectors}\quad
+      X=H=\dfrac{1}{2}
+      \begin{bmatrix*}[r]
+        1 & 1 & 1 & 1 \\
+        1 & -1 & 1 & -1 \\
+        1 & 1 & -1 & -1 \\
+        1 & -1 & -1 & 1
+      \end{bmatrix*}
+      =H^\mathrm{T}=H^{-1}
+      .
+      $$
+      The eigenvalues of \(A^{-1}\) are \(1\), \(\frac{1}{5}\), \(\frac{1}{5}\), \(\frac{1}{5}\). The eigenvectors are not changed so \(A^{-1}=H\Lambda^{-1}H^{-1}\). The inverse matrix is surprisingly neat:
+      $$
+      A^{-1}=\dfrac{1}{5}*(\textbf{\textsf{eye}}(4)+\textbf{\textsf{ones}}(4))=\dfrac{1}{5}
+      \begin{bmatrix}
+        2 & 1 & 1 & 1 \\
+        1 & 2 & 1 & 1 \\
+        1 & 1 & 2 & 1 \\
+        1 & 1 & 1 & 2
+      \end{bmatrix}
+      $$
+      \(A\) is a rank-one change from \(5I\). So \(A^{-1}\) is a rank-one change from \(I/5\).
+      <br>
+      &emsp;&ensp;In a graph with 5 nodes, the determinant \(125\) counts the &ldquo;spanning trees&rdquo; (trees that touch all nodes). <em>Trees have no loops</em> (graphs and trees are in Section 10.1).
+      <br>
+      &emsp;&ensp;With 6 nodes, the matrix \(6*\textbf{\textsf{eye}}(5)-\textbf{\textsf{ones}}(5)\) has the five eigenvalues \(1\), \(6\), \(6\), \(6\), \(6\), \(6\).
     </li>
   </ol>
 </details>
