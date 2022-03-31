@@ -2923,6 +2923,22 @@ $$
   </ol>
 </details>
 
+### Systems of Differential Equations
+
+1. If \\(A\bm{x}=\lambda\bm{x}\\) then \\(\bm{u}(t)=e^{\lambda t}\bm{x}\\) will solve \\(\dfrac{\mathrm{d}\bm{u}}{\mathrm{d}t}=A\bm{u}\\). Each \\(\lambda\\) and \\(\bm{x}\\) give a solution \\(e^{\lambda t}\bm{x}\\).
+   <details>
+     <summary><span class="list-summary">&dagger; WHY &dagger;</span></summary>
+     \(\bm{u}=e^{\lambda t}\bm{x}\) is true in \(\dfrac{\mathrm{d}\bm{u}}{\mathrm{d}t}=A\bm{u}\) if \(A\bm{x}=\lambda\bm{x}\).:
+     $$
+     \begin{array}{ll}
+       \text{Left side: $\bm{x}$ is a fixed vector so} & \dfrac{\mathrm{d}\bm{u}}{\mathrm{d}t}=\bm{u}^\prime=\lambda e^{\lambda t}\bm{x} \\
+       \text{Right side: $e^{\lambda t}$ can be easily move aside} & A\bm{u}=e^{\lambda t}A\bm{x}=\lambda e^{\lambda t}\bm{x}
+     \end{array}
+     $$
+     Both side are the same, therefore \(\bm{u}=e^{\lambda t}\bm{x}\) satisfies the equation.
+   </details>
+2. If \\(A=X\Lambda X^{-1}\\) then \\(\boxed{\bm{u}(t)=e^{At}\bm{u}(0)=Xe^{\Lambda t}X^{-1}\bm{u}(0)=c_1e^{\lambda_1 t}\bm{x}_1+\cdots+c_ne^{\lambda_n t}\bm{x}_n}\\).
+
 ## LINEAR ALGEBRA IN A NUTSHELL
 
 <div style="text-align:center"><strong>((<em>The matrix \(A\) is \(n\) by \(n\)</em>))</strong></div>
