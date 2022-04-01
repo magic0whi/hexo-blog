@@ -2936,8 +2936,131 @@ $$
      \end{array}
      $$
      Both side are the same, therefore \(\bm{u}=e^{\lambda t}\bm{x}\) satisfies the equation.
+     <br>
+     The constants in complete solution \(u(t)=c_1e^{\lambda_1 t}\bm{x}_1+\cdots+c_ne^{\lambda_n t}\bm{x}_n\) can be determined by starting vector \(\bm{u}(0)\), as it eliminates the exponents:
+     $$
+     \bm{u}(0)=c_1e^{\lambda_1\cdot 0}\bm{x}_1+\cdots+c_ne^{\lambda_n\cdot 0}x_n=c_1\bm{x}_1+\cdots+c_n\bm{x}_n
+     $$
    </details>
 2. If \\(A=X\Lambda X^{-1}\\) then \\(\boxed{\bm{u}(t)=e^{At}\bm{u}(0)=Xe^{\Lambda t}X^{-1}\bm{u}(0)=c_1e^{\lambda_1 t}\bm{x}_1+\cdots+c_ne^{\lambda_n t}\bm{x}_n}\\).
+   <details>
+     <summary><span class="list-summary">&dagger; WHY &dagger;</span></summary>
+     To prove \(\bm{u}(t)=e^{At}C\) (\(\bm{u}\) is \(n\) by \(1\) and \(e^{At}\) is \(n\) by \(n\) which is same as \(A\), \(C\) is \(n\) by \(1\)) satisfies the \(\dfrac{\mathrm{d}\bm{u}}{\mathrm{d}t}=A\bm{u}\), we need some truth of \(e^{At}\):
+     $$
+     \begin{array}{ll}
+     \text{Seris definition:} & e^{At}=I+At+\frac{1}{2}(At)^2+\frac{1}{6}(At)^3+\cdots \\
+     \text{Its $t$ derivative:} & (e^{At})^\prime=A+A^2t+\frac{1}{2}A^3t^2+\cdots=Ae^{At}
+     \end{array}
+     $$
+     On the left \(\dfrac{\mathrm{d}\bm{u}}{\mathrm{d}t}=\bm{u}'=(e^{At}C)^\prime=Ae^{At}C\) which is equal to the right side \(A\bm{u}=Ae^{At}C\). Q.E.D.
+     <br>
+     Since \(\bm{u}(0)=e^{A\cdot 0}C=IC=C\), we can write \(\bm{u}(t)\) as:
+     $$
+     \bm{u}(t)=e^{At}\bm{u}(0)
+     $$
+     If \(A\) is diagonalizable, \(e^{At}\) has the same eigenvector matrix \(X\) as \(A\):
+     $$
+     \begin{alignedat}{2}
+       & \textbf{Use the series}  & e^{At} & =I+X\Lambda X^{-1}t+\frac{1}{2}(X\Lambda^2X^{-1}t)+\cdots \\
+       & \textbf{Factor out $X$ and $X^{-1}$} & & =X[I+\Lambda t+\frac{1}{2}(\Lambda t)^2+\cdots]X^{-1} \\
+       & e^{At}\textbf{ is diagonalized!} & & \boxed{e^{At}=Xe^{\Lambda t}X^{-1}}
+     \end{alignedat}
+     $$
+     \(e^{\Lambda t}\) is a diagonal matrix with \(e^{\lambda_i}t\) on its diagonal:
+     $$
+     \begin{alignedat}{1}
+       e^{\Lambda t }
+     & =I+\Lambda t+\frac{1}{2}(\Lambda t)^2+\cdots
+     \\
+     & =
+       \begin{bmatrix}
+         (1+\lambda_1 t+\frac{1}{2}(\lambda_1 t)^2+\cdots) & & \\
+         & \ddots & \\
+         & & (1+\lambda_n t+\frac{1}{2}(\lambda_n t)^2+\cdots)
+       \end{bmatrix}
+     \\
+     & = \begin{bmatrix} e^{\lambda_1 t} & & \\ & \ddots & \\ & & e^{\lambda_n t} \end{bmatrix}
+     \end{alignedat}
+     $$
+     \(A\) is diagonalizable also means we have \(n\) independent eigenvectors, then we can written \(\bm{u}(0)=c_1\bm{x}_1+\cdots+c_n\bm{x}_n=X\bm{c}\). Recognize \(\bm{u}(t)\):
+     $$
+     \begin{alignedat}{1}
+       e^{At}\bm{u}(0)=Xe^{\Lambda t}X^{-1}X\bm{c}
+     & =
+       \begin{bmatrix} & & \\ \bm{x}_1 & \cdots & \bm{x}_n \\ & & \end{bmatrix}
+       \begin{bmatrix} e^{\lambda_1 t} & & \\ & \ddots & \\ & & e^{\lambda_n t} \end{bmatrix}
+       \begin{bmatrix} c_1 \\ \vdots \\ c_n \end{bmatrix}
+     \\
+     & =c_1e^{\lambda_1 t}\bm{x}_1+\cdots+c_ne^{\lambda_n t}\bm{x}_n
+     \end{alignedat}
+     $$
+   </details>
+3. \\(A\\) is **stable** and \\(\bm{u}(t)\rarr\bm{0}\\) and \\(e^{At}\rarr 0\\) when all eigenvalues of \\(A\\) have real part \\(\lt 0\\).
+4. Matrix exponential \\(e^{At}=I+At+\cdots+(At)^n/n!+\cdots=Xe^{\Lambda t}X^{-1}\\) if \\(A\\) is diagonalizable.
+5. \\(\begin{array}{l} \textbf{Second order equation} \\\ \textbf{First order system} \end{array} u^{\prime\prime}+Bu^\prime+Cu=0\\) is equivalent to \\(\begin{bmatrix} u \\\ u^\prime \end{bmatrix}^\prime=\begin{bmatrix*}[r] 0 & 1 \\\ -C & -B \end{bmatrix*}\begin{bmatrix} u \\\ u^\prime \end{bmatrix}\\).
+
+<!-- <details>
+  <summary><span class="list-summary">&dagger; WORKED EXAMPLES &dagger;</span></summary> -->
+  <ol class="worked-examples">
+    <li>
+      <span class="list-head">6.3 A</span>&emsp;Solve \(y^{\prime\prime}+4y^\prime+3y=0\) by substituting \(e^{\lambda t}\) and also by linear algebra.
+      <br><br>
+      <span class="list-head">Solution</span>&emsp;Substituting \(y=e^{\lambda t}\) yields \((\lambda^2+4\lambda+3)e^{\lambda t}=0\). That quadratic factors into \(\lambda^2+4\lambda+3=(\lambda+1)(\lambda+3)=0\). Therefore \(\bm{\lambda_1=-1}\) and \(\bm{\lambda_2=-3}\). The pure solutions are \(y_1=e^{-t}\) and \(y_2=e^{-3t}\). The complete solution \(\bm{y}=c_1y_1+c_2y_2\) approaches zero.
+      <br>
+      &emsp;&ensp;To use linear algebra we set \(\bm{u}=(y,y^\prime\). Then the vector equation is \(\bm{u}^\prime=A\bm{u}\):
+      $$
+      \begin{array}{l}
+        \mathrm{d}y/\mathrm{d}t=y^\prime \\
+        \mathrm{d}y^\prime/\mathrm{d}t=-3y-4y^\prime
+      \end{array}
+      \quad\text{converts to}\quad
+      \dfrac{\mathrm{d}\bm{u}}{\mathrm{d}t}=\begin{bmatrix*}[r] 0 & 1 \\ -3 & -4 \end{bmatrix*}\bm{u}
+      .
+      $$
+      This \(A\) is a &ldquo;companion matrix&rdquo; and its eigenvalues are again \(-1\) and \(-3\):
+      $$
+      \textbf{Same quadratic}\qquad
+      \det(A-\lambda I)=\begin{vmatrix} -\lambda & 1 \\ -3 & -4-\lambda \end{vmatrix}=\lambda^2+4\lambda+3=0
+      .
+      $$
+      The eigenvectors of \(A\) are \((1,\lambda_1)\) and \((1,\lambda_2)\). Either way, the decay in \(y(t)\) comes from \(e^{-t}\) and \(e^{-3t}\). With constant coefficients, calculus leas to linear algebra \(A\bm{x}=\lambda\bm{x}\).
+      <br><br>
+      <span class="list-head">Note</span>&emsp;In linear algebra the serious danger is a shortage of eigenvectors. Our eigenvectors \((1,\lambda_1)\) and \((1,\lambda_2)\) are the same if \(\lambda_1=\lambda_2\). Then we can't diagonalize \(A\). In this case we don't yet have two independent solutions to \(\mathrm{d}\bm{u}/\mathrm{d}t=A\bm{u}\).
+      <br>
+      &emsp;&ensp;In differential equations the danger is also a repeated \(\lambda\). After \(y=e^{\lambda t}\), a second solution has to be found. It turns out to be \(y=\bm{te^{\lambda t}}\). This &ldquo;impure&rdquo; solution (with an extra \(\bm{t}\)) appears in the matrix exponential \(e^{At}\). Example 4 showed how.
+      <details>
+        <summary><span class="list-summary">&dagger; Example 4 &dagger;</span></summary>
+        When you substitute \(y=e^{\lambda t}\) into \(y^{\prime\prime}-2y^\prime+y=0\), you get an equation with <strong>repeated roots</strong>: \(\lambda^2-2\lambda+1=0\) is \((\lambda-1)^2=0\) with \(\bm{\lambda=1,1}\). A differential equations course would propose \(e^t\) and \(te^t\) as two independent solutions. Here we discover why.
+        <br>
+        &emsp;&ensp;Linear algebra reduces \(y^{\prime\prime}-2y^\prime+y=0\) to a vector equation for \(\bm{u}=(y,y^\prime)\):
+        $$
+        \dfrac{\mathrm{d}}{\mathrm{d}t}\begin{bmatrix} y \\ y^\prime \end{bmatrix}=
+        \left[\begin{alignedat}{1}
+          y^\prime  & \\
+          2y^\prime & -y
+        \end{alignedat}\right]
+        \quad\text{is}\quad
+        \dfrac{\mathrm{d}\bm{u}}{\mathrm{d}t}=A\bm{u}=\begin{bmatrix*}[r] 0 & 1 \\ -1 & 2 \end{bmatrix*}\bm{u}
+        .
+        $$
+        \(A\) has a <strong>repeated eigenvalue \(\bm{\lambda=1,1}\)</strong> (with \(\text{trace}=2\) and \(\det A=1\)). The only eigenvectors are multiples of \(\bm{x}=(1,1)\). <em>Diagonalization is not possible,</em> \(A\) has only one line of eigenvectors. So we compute \(e^{At}\) from its definition as serire:
+        $$
+        \tag{19}
+        \textbf{Short series}\qquad
+        \bm{e^{At}}=e^{It}e^{(A-I)t}=e^t[I+(A-I)t]
+        .
+        $$
+        That &ldquo;infinite&rdquo; series for \(e^{(A-I)t}\) ended quickly because \((A-I)^2\) is the zero matrix! You can see \(\bm{te^t}\) in equation (19). The first component of \(e^{At}\bm{u}(0)\) is our answer \(y(t)\):
+        $$
+        \begin{bmatrix} y \\ y^\prime \end{bmatrix}=e^t\left[I+\begin{bmatrix} -1 & 1 \\ -1 & 1\end{bmatrix}t\right]\begin{bmatrix} y(0) \\ y^\prime(0) \end{bmatrix}
+        \qquad
+        y(t)=e^ty(0)-\bm{te^t}y(0)+\bm{te^t}y^\prime(0)
+        .
+        $$
+      </details>
+    </li>
+  </ol>
+<!-- </details> -->
 
 ## LINEAR ALGEBRA IN A NUTSHELL
 
