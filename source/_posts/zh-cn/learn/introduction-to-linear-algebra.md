@@ -2999,8 +2999,8 @@ $$
 4. Matrix exponential \\(e^{At}=I+At+\cdots+(At)^n/n!+\cdots=Xe^{\Lambda t}X^{-1}\\) if \\(A\\) is diagonalizable.
 5. \\(\begin{array}{l} \textbf{Second order equation} \\\ \textbf{First order system} \end{array} u^{\prime\prime}+Bu^\prime+Cu=0\\) is equivalent to \\(\begin{bmatrix} u \\\ u^\prime \end{bmatrix}^\prime=\begin{bmatrix*}[r] 0 & 1 \\\ -C & -B \end{bmatrix*}\begin{bmatrix} u \\\ u^\prime \end{bmatrix}\\).
 
-<!-- <details>
-  <summary><span class="list-summary">&dagger; WORKED EXAMPLES &dagger;</span></summary> -->
+<details>
+  <summary><span class="list-summary">&dagger; WORKED EXAMPLES &dagger;</span></summary>
   <ol class="worked-examples">
     <li>
       <span class="list-head">6.3 A</span>&emsp;Solve \(y^{\prime\prime}+4y^\prime+3y=0\) by substituting \(e^{\lambda t}\) and also by linear algebra.
@@ -3059,8 +3059,154 @@ $$
         $$
       </details>
     </li>
+    <li>
+      <span class="list-head">6.3 B</span>&emsp;Find the eigenvalues and eigenvectors of \(A\). Then write \(\bm{u}(0)=(0,2\sqrt{2},0)\) as a combination of the eigenvectors. Solve both equations \(\bm{u}^\prime=A\bm{u}\) and \(\bm{u}^{\prime\prime}=A\bm{u}\):
+      $$
+      \dfrac{\mathrm{d}\bm{u}}{\mathrm{d}t}=\begin{bmatrix*}[r] -2 & 1 & 0 \\ 1 & -2 & 1 \\ 0 & 1 & -2 \end{bmatrix*}\bm{u}
+      \quad\text{and}\quad
+      \dfrac{\mathrm{d}^2\bm{u}}{\mathrm{d}t^2}=\begin{bmatrix*}[r] -2 & 1 & 0 \\ 1 & -2 & 1 \\ 0 & 1 & -2 \end{bmatrix*}\bm{u}
+      \quad\text{with}\quad
+      \dfrac{\mathrm{d}\bm{u}}{\mathrm{d}t}(0)=\bm{0}
+      .
+      $$
+      &emsp;&ensp;\(\textcolor{RoyalBlue}{\textit{\textbf{$\bm{u^\prime=}A\bm{u}$ is like the heat equation $\bm{\partial u/\partial t=\partial^2u/\partial x^2}$.}}}\)
+      <br>
+      &emsp;&ensp;Its solution \(u(t)\) will decay (\(A\) has negative eigenvalues).
+      <br>
+      &emsp;&ensp;\(\textcolor{RoyalBlue}{\textit{\textbf{$\bm{u^{\prime\prime}=}A\bm{u}$ is like the wave equation $\bm{\partial^2u/\partial t^2=\partial^2u/\partial x^2}$.}}}\)
+      <br>
+      &emsp;&ensp;Its solution will oscillate (the square roots of \(\lambda\) are imaginary).
+      <br><br>
+      <span class="list-head">Solution</span>&emsp;The eigenvalues and eigenvectors come from \(\det(A-\lambda I)=0\):
+      $$
+      \det(A-\lambda I)=
+      \begin{vmatrix}
+        -2-\lambda & 1 & 0 \\
+        1 & -2-\lambda & 1 \\
+        0 & 1 & -2-\lambda
+      \end{vmatrix}
+      =(-2-\lambda)[(-2-\lambda)^2-2]=0
+      .
+      $$
+      One eigenvalue is \(\lambda=-2\), when \(-2-\lambda\) is zero. The other factor is \(\lambda^2+4\lambda+2\), so the other eigenvalues (also real and negative) are \(\lambda=-2\pm\sqrt{2}\). Find the eigenvectors:
+      $$
+      \begin{array}{ll}
+        \bm{\lambda=-2}
+      & (A+2I)\bm{x}=\begin{bmatrix} 0 & 1 & 0 \\ 1 & 0 & 1 \\ 0 & 1 & 0 \end{bmatrix}\begin{bmatrix} x \\ y \\ z \end{bmatrix}\quad\text{for }\bm{x}_1=\begin{bmatrix*}[r] 1 \\ 0 \\ -1 \end{bmatrix*}
+      \\\\
+        \bm{\lambda=-2-\sqrt{2}}
+      & (A-\lambda I)\bm{x}=\begin{bmatrix} \sqrt{2} & 1 & 0 \\ 1 & \sqrt{2} & 1 \\ 0 & 1 & \sqrt{2} \end{bmatrix}\begin{bmatrix} x \\ y \\ z \end{bmatrix}\quad\text{for }\bm{x}_2=\begin{bmatrix} 1 \\ -\sqrt{2} \\ 1 \end{bmatrix}
+      \\\\
+        \bm{\lambda=-2+\sqrt{2}}
+      & (A-\lambda I)\bm{x}=\begin{bmatrix} -\sqrt{2} & 1 & 0 \\ 1 & -\sqrt{2} & 1 \\ 0 & 1 & -\sqrt{2} \end{bmatrix}\begin{bmatrix} x \\ y \\ z \end{bmatrix}\quad\text{for }\bm{x}_3=\begin{bmatrix} 1 \\ \sqrt{2} \\ 1 \end{bmatrix}
+      \end{array}
+      $$
+      &emsp;&ensp;The eigenvectors are <em>orthogonal</em> (proved in Section 6.4 for all symmetric matrices). All three \(\lambda_i\) are negative. This \(A\) is <em>negative definite</em> and \(e^{At}\) decays to zero (stability).
+      <br>
+      &emsp;&ensp;The starting \(\bm{u}(0)=(0,2\sqrt{2},0)\) is \(\bm{x}_3-\bm{x}_2\). The solution is \(\bm{u}(t)=\bm{e^{\lambda_3t}x_3-e^{\lambda_2t}x_2}\).
+      <br><br>
+      <span style="font-style:italic;font-weight:bold;color:royalblue;">Heat equation</span>&emsp;In Figure 6.6a, the temperature at the center starts at \(2\sqrt{2}\). Heat diffuses into the neighboring boxes and then to the outside boxes (frozen at 0&deg;). The rate of heat flow between boxes is the temperature difference. From box 2, heat flows left and right at the rate \(u_1-u_2\) and \(u_3-u_2\). So the flow out is \(u_1-2u_2+u_3\) in the second row of \(A\bm{u}\).
+      <br>
+      <span style="font-style:italic;font-weight:bold;color:royalblue;">Wave equation</span>&emsp;\(\mathrm{d}^2\bm{u}/\mathrm{d}t^2=A\bm{u}\) has the same eigenvectors \(\bm{x}\). But now the eigenvalues \(\lambda\) lead to <strong>oscillations</strong> \(e^{i\omega t}\bm{x}\) and \(e^{-i\omega t}\bm{x}\). The frequencies come from \(\omega^2=-\lambda\):
+      $$
+      \dfrac{\mathrm{d}^2}{\mathrm{d}t^2}(e^{i\omega t}\bm{x})=A(e^{i\omega t}\bm{x})
+      \quad\text{becomes}\quad
+      (i\omega)^2e^{i\omega t}\bm{x}=\lambda e^{i\omega t}\bm{x}
+      \quad\text{and}\quad
+      \bm{\omega^2=-\lambda}
+      .
+      $$
+      There are two square roots of \(-\lambda\), so we have \(e^{i\omega t}\bm{x}\) and \(e^{-i\omega t}\bm{x}\). With three eigenvectors this makes <em>six</em> solutions to \(\bm{u}^{\prime\prime}=A\bm{u}\). A combination will match the six components of \(\bm{u}(0)\) and \(\bm{u}^\prime(0)\). Since \(\bm{u}^\prime=\bm{0}\) in this problem, \(e^{i\omega t}\bm{x}\) and \(e^{-i\omega t}\bm{x}\) produce \(2\cos(\omega t)\bm{x}\).
+      {% asset_img Figure6.6.png %}
+    </li>
+    <li>
+      <span class="list-head">6.3 C</span>&emsp;Solve the four equations \(\mathrm{d}a/\mathrm{d}t=0\), \(\mathrm{d}b/\mathrm{d}t=a\), \(\mathrm{d}c/\mathrm{d}t=2b\), \(\mathrm{d}z/\mathrm{d}t=3c\) in that order starting from \(\bm{u}(0)=(a(0),b(0),c(0),z(0))\). Solve the same equations by the matrix exponential in \(\bm{u}(t)=e^{At}\bm{u}(0)\).
+      $$
+      \begin{array}{l}
+        \textbf{Four equations} \\
+        \lambda=\bm{0,0,0,0} \\
+        \textbf{Eigenvalues on} \\
+        \textbf{the diagonal}
+      \end{array}
+      \quad
+      \dfrac{\mathrm{d}}{\mathrm{d}t}\begin{bmatrix} a \\ b \\ c \\ z \end{bmatrix}
+      =
+      \begin{bmatrix}
+        0 & 0 & 0 & 0 \\
+        \bm{1} & 0 & 0 & 0 \\
+        0 & \bm{2} & 0 & 0 \\
+        0 & 0 & \bm{3} & 0
+      \end{bmatrix}
+      \begin{bmatrix} a \\ b \\ c \\ z \end{bmatrix}
+      \quad\text{is}\quad
+      \dfrac{\mathrm{d}\bm{u}}{\mathrm{d}t}=A\bm{u}
+      .
+      $$
+      First find \(A^2\), \(A^3\), \(A^4\) and \(e^{At}=I+At+\frac{1}{2}(At)^2+\frac{1}{6}(At)^3\). Why does the series stop? Why is it true that \((e^A)(e^A)=(e^{2A})\)? <em><strong>Always \(\bm{e^{As}}\) times \(\bm{e^{At}}\) is \(\bm{e^{A(s+t)}}\).</strong></em>
+      <br><br>
+      <span class="list-head">Solution 1</span>&emsp;Integrate \(\mathrm{d}a/\mathrm{d}t=0\), then \(\mathrm{d}b/\mathrm{d}t=a\), then \(\mathrm{d}c/\mathrm{d}t=2b\) and \(\mathrm{d}z/\mathrm{d}t=3c\):
+      $$
+      \begin{alignedat}{4}
+        a(t)= &&    a(0) &   &          &   &        & \\
+        b(t)= &&   ta(0) & + &     b(0) &   &        & \\
+        c(t)= && t^2a(0) & + &   2tb(0) & + &   c(0) & \\
+        z(t)= && t^3a(0) & + & 3t^2b(0) & + & 3tc(0) & +z(0)
+      \end{alignedat}
+      \quad
+      \begin{array}{l}
+        \text{The 4 by 4 matrix which is} \\
+        \text{multiplyting $a(0),b(0),c(0),d(0)$} \\
+        \text{to produce $a(t),b(t),c(t),d(t)$} \\
+        \text{must be the same $e^{At}$ as below}
+      \end{array}
+      $$
+      <br><br>
+      <span class="list-head">Solution 2</span>&emsp;<em>The powers of \(A\) (strictly triangular) are all zero after \(A^3\).</em>
+      $$
+      \bm{A}=
+      \begin{bmatrix}
+        0 & 0 & 0 & 0 \\
+        \bm{1} & 0 & 0 & 0 \\
+        0 & \bm{2} & 0 & 0 \\
+        0 & 0 & \bm{3} & 0
+      \end{bmatrix}
+      \quad
+      \bm{A^2}=
+      \begin{bmatrix}
+        0 & 0 & 0 & 0 \\
+        0 & 0 & 0 & 0 \\
+        \bm{2} & 0 & 0 & 0 \\
+        0 & \bm{6} & 0 & 0
+      \end{bmatrix}
+      \quad
+      \bm{A^3}=
+      \begin{bmatrix}
+        0 & 0 & 0 & 0 \\
+        0 & 0 & 0 & 0 \\
+        0 & 0 & 0 & 0 \\
+        \bm{6} & 0 & 0 & 0
+      \end{bmatrix}
+      \quad
+      \bm{A^4}=\bm{0}
+      $$
+      The diagonals move down at each step. So the series for \(e^{At}\) stops after four terms:
+      $$
+      \textcolor{RoyalBlue}{\begin{array}{l}
+        \textbf{Same $\bm{e^{At}}$ as} \\
+        \textbf{in Solution 1}
+      \end{array}}
+      \qquad e^{At}=I+At+\dfrac{(At)^2}{2}+\dfrac{(At)^3}{6}=
+      \begin{bmatrix}
+        1 & & & \\
+        t & 1 & & \\
+        t^2 & 2t & 1 & \\
+        t^3 & 3t^2 & 3t & 1
+      \end{bmatrix}
+      $$
+      <strong>The square of \(\bm{e^A}\) is \(\bm{e^{2A}}\). But \(\bm{e^Ae^B}\) and \(\bm{e^Be^A}\) and \(\bm{e^{A+B}}\) can be all different.</strong>
+    </li>
   </ol>
-<!-- </details> -->
+</details>
 
 ## LINEAR ALGEBRA IN A NUTSHELL
 
