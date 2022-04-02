@@ -3210,7 +3210,32 @@ $$
 ### Symmetric Matrices
 
 1. A symmetric matrix \\(S\\) has \\(n\\) real eigenvalues \\(\lambda_i\\) and \\(n\\) **orthonormal eigenvectors** \\(\bm{q}_1,\ldots,\bm{q}_n\\).
-2. Every real symmetric \\(S\\) can be diagonalized: \\(\boxed{S=Q\Lambda Q^{-1}=\bm{Q\Lambda Q^\mathrm{T}}}\\)
+2. Every real symmetric \\(S\\) can be diagonalized: \\(\boxed{S=Q\Lambda Q^{-1}=\bm{Q\Lambda Q^\mathrm{T}}}\\).
+   <details>
+     <summary><span class="list-summary">&dagger; WHY &dagger;</span></summary>
+     Schur's Theorem: If \(A\) is a square real matrix with real eigenvalues, then there is an orthogonal matrix \(Q\) and an upper triangular matrix \(T\) such that \(A=QTQ^\mathrm{T}\).
+     <br>
+     &emsp;&ensp;This theorem allows repeated \(\lambda\)'s, Schur's \(S=QTQ^{-1}\) means that \(T=Q^\mathrm{T}SQ\). The transpose is again \(Q^\mathrm{T}SQ\). <em>The triangular \(T\) is symmetric when \(S^\mathrm{T}=S\).</em> Then \(T\) must be diagonal and \(T=\Lambda\).
+     <br><br>
+     Real eigenvalues: All the eigenvalues of a real symmetric matrix are real.
+     <br>
+     <span class="list-head">Proof</span>&emsp;Suppose that \(S\bm{x}=\lambda\bm{x}\) and \(\lambda\) might be a complex number \(a+ib\). Its complex conjugate is \(\overline{\lambda}=a-ib\). Similarly the components of \(\bm{x}\) may be complex numbers, and switching the signs of their imaginary parts gives \(\overline{\bm{x}}\).
+     <br>
+     &emsp;&ensp;The good thing is that \(\overline{\lambda}\overline{\bm{x}}\) is always the conjugate of \(\lambda\bm{x}\). So we can take conjugates of \(S\bm{x}=\lambda\bm{x}\), remembering that \(S\) is real:
+     $$
+     \text{$S\bm{x}=\lambda\bm{x}$\quad leads to \quad $S\overline{\bm{x}}=\overline{\lambda}\overline{\bm{x}}$.}
+     \qquad
+     \text{Transpose to\quad$\overline{\bm{x}}^\mathrm{T}S=\overline{\bm{x}}^\mathrm{T}\overline{\lambda}$.}
+     $$
+     Now take the dot product of the first equation with \(\overline{\bm{x}}\) and the last equation with \(\bm{x}\):
+     $$
+     \overline{\bm{x}}^\mathrm{T}S\bm{x}=\overline{\bm{x}}^\mathrm{T}\lambda\bm{x}
+     \quad\text{and also}\quad
+     \overline{\bm{x}}^\mathrm{T}S\bm{x}=\overline{\bm{x}}^\mathrm{T}\overline{\lambda}\bm{x}
+     .
+     $$
+     The left sides are the same so the rights side are equal. They multiply \(\overline{\bm{x}}^\mathrm{T}\bm{x}=|x_1|^2+|x_2|^2+\cdots=\text{length squared}\) which is not zero. <em>Therefore \(\lambda\) must equal \(\overline{\lambda}\),</em> and \(a+ib\) equals \(a-ib\). So \(b=0\) and \(\lambda=a=\textit{real}\). Q.E.D.
+   </details>
    <details>
      <summary><span class="list-summary">&dagger; Proof of Schur's Theorem &dagger;</span></summary>
      Here I referenced the <a target="_blank" rel="noopener" href="https://math.mit.edu/~gs/linearalgebra/lafe_schur03.pdf">David H. Wagner's version</a>
@@ -3294,7 +3319,7 @@ $$
        \end{bmatrix}
      \end{alignedat}
      $$
-     We can see an upper triangular matrix is in the middle of contruction. You may wonder that the \(Q_2\) on the upper right corner will broken something, in fact it is doesn't matter since our goal is to produce the upper triangular matrix \(T\). We now prove that in this new matrix, the new \(Q\)'s are still orthogonal:
+     We can see an upper triangular matrix is in the middle of contruction. You may wonder that the \(Q_2\) on the upper right corner will broken something, in fact it doesn't matter since our goal is to produce the upper triangular matrix \(T\). We now prove that in this new matrix, the new \(Q\)'s are still orthogonal:
      $$
      \begin{array}{l}
        \textbf{Both are transpose of each other}
@@ -3312,6 +3337,18 @@ $$
      $$
      Continue the process above we will eventually get what we want, the \(A=QTQ\).
    </details>
+3. The number of positive eigenvalues of \\(S\\) equals the number of positive pivots.
+4. Antisymmetric matrices \\(A=-A^\mathrm{T}\\) have <em>imaginary</em> \\(\lambda\\)'s and *orthonormal (complex)* \\(\bm{q}\\)'s.
+5. Section 9.2 explains why the test \\(S=S^\mathrm{T}\\) becomes \\(\bm{S=\overline{S}^\mathrm{T}}\\) for *complex matrices*.
+   <div>
+   $$
+   \text{$S=\begin{bmatrix} 0 & i \\ -i & 0 \end{bmatrix}=\overline{S}^\mathrm{T}$ has real $\lambda=1,-1$.}
+   \qquad
+   \text{$A=\begin{bmatrix} 0 & i \\ i & 0 \end{bmatrix}=-\overline{A}^\mathrm{T}$ has $\lambda=i,-i$.}
+   $$
+   </div>
+
+
 
 ## LINEAR ALGEBRA IN A NUTSHELL
 
