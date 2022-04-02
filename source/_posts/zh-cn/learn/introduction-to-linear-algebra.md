@@ -2175,7 +2175,7 @@ $$
   </ol>
 </details>
 
-## Determinants
+## Chapter 5 Determinants
 
 ### The properties of Determinants
 
@@ -3387,21 +3387,17 @@ $$
       <br><br>
       <span class="list-head">Solution</span>&emsp;The eigenvalues of \(A_3\) are \(\lambda=2-\sqrt{2}\) and \(2\) and \(2+\sqrt{2}\) (see <b>6.3 B</b>). Their sum is \(6\) (the trace of \(A_3\)) and their product is \(4\) (the determinant). The eigenvector matrix gives the &ldquo;Discrete Sine Transform&rdquo; and the eigenvectors fall onto sine curves.
       $$
-      \begin{array}{l}
+      \begin{array}{lc}
         \textbf{Sines}=\begin{bmatrix} 1 & \sqrt{2} & 1 \\ \sqrt{2} & 0 & -\sqrt{2} \\ 1 & -\sqrt{2} & 1 \end{bmatrix}
-      \\\\
-        \textbf{Sine matrix = Eigenvectors of $A_3$}
-      \end{array}
-      \qquad
-      \begin{array}{l}
-        \textbf{Cosines}=\left[\begin{array}{ccrc}
+      & \textbf{Cosines}=\left[\begin{array}{ccrc}
           1 &          1 &  1 &          1 \\
           1 & \sqrt{2}-1 & -1 & 1-\sqrt{2} \\
           1 & 1-\sqrt{2} & -1 & \sqrt{2}-1 \\
           1 &         -1 &  1 &         -1
         \end{array}\right]
       \\
-        \textbf{Cosine matrix = Eigenvectors of $\bm{B_4}$}
+        \textbf{Sine matrix = Eigenvectors of $\bm{A_3}$}
+      & \textbf{Cosine matrix = Eigenvectors of $\bm{B_4}$}
       \end{array}
       $$
       &emsp;&ensp;The eigenvalues of \(B_4\) are \(\lambda=2-\sqrt{2}\) and \(2\) and \(2+\sqrt{2}\) and \(0\) (the same as for \(A_3\), plus the zero eigenvalue). The trace is still \(6\), but the determinant is now zero. The eigenvector matrix \(C\) gives the 4-point &ldquo;Discrete Cosine Transform&rdquo;. The graph on the Web shows how the first two eigenvectors fall onto cosine curves. (So do all the eigenvectors of \(B\).) These eigenvectors match cosines at the <em>halfway points</em> \(\pi/8\), \(3\pi/8\), \(5\pi/8\), \(7\pi/8\).
