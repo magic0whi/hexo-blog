@@ -3160,7 +3160,6 @@ $$
         \text{must be the same $e^{At}$ as below}
       \end{array}
       $$
-      <br><br>
       <span class="list-head">Solution 2</span>&emsp;<em>The powers of \(A\) (strictly triangular) are all zero after \(A^3\).</em>
       $$
       \bm{A}=
@@ -3207,6 +3206,112 @@ $$
     </li>
   </ol>
 </details>
+
+### Symmetric Matrices
+
+1. A symmetric matrix \\(S\\) has \\(n\\) real eigenvalues \\(\lambda_i\\) and \\(n\\) **orthonormal eigenvectors** \\(\bm{q}_1,\ldots,\bm{q}_n\\).
+2. Every real symmetric \\(S\\) can be diagonalized: \\(\boxed{S=Q\Lambda Q^{-1}=\bm{Q\Lambda Q^\mathrm{T}}}\\)
+   <details>
+     <summary><span class="list-summary">&dagger; Proof of Schur's Theorem &dagger;</span></summary>
+     Here I referenced the <a target="_blank" rel="noopener" href="https://math.mit.edu/~gs/linearalgebra/lafe_schur03.pdf">David H. Wagner's version</a>
+     <br>
+     \(A\) is a square real matrix with real eigenvalues. Let \(\bm{q}_1\) be an eigenvector of norm 1, with eigenvalue \(\lambda_1\). Let \(\bm{q}_2,\ldots,\bm{q}_n\) be <em>any</em> orthonormal vectors orthogonal to \(\bm{q}_1\). Let \(Q_1=\begin{bmatrix} \bm{q}_1 & \cdots & \bm{q}_n \end{bmatrix}\). Then \(Q_1^\mathrm{T}Q_1=I\), and
+     $$
+     \begin{alignedat}{1}
+       Q_1^\mathrm{T}AQ_1=
+       \begin{bmatrix} \bm{q}_1^\mathrm{T} \\ \vdots \\ \bm{q}_n^\mathrm{T} \end{bmatrix}
+       \begin{bmatrix} A\bm{q}_1 & \cdots & A\bm{q}_n \end{bmatrix}
+     & =
+       \begin{bmatrix} \bm{q}_1^\mathrm{T} \\ \vdots \\ \bm{q}_n^\mathrm{T} \end{bmatrix}
+       \begin{bmatrix} \lambda_1\bm{q}_1 & \cdots & A\bm{q}_n \end{bmatrix}
+     \\
+     & =
+       \begin{bmatrix}
+         \lambda_1 & \bm{q}_1^\mathrm{T}A\bm{q}_2 & \cdots & \bm{q}_1A\bm{q}_n \\
+         0 & \bm{q}_2^\mathrm{T}Aq_2 & \cdots & \vdots \\
+         \vdots & \vdots & \ddots & \vdots \\
+         0 & \cdots & \cdots & \bm{q}_n^\mathrm{T}A\bm{q}_n
+       \end{bmatrix}
+     \\
+     & =
+       \left[\begin{array}{c|c}
+         \lambda_1 & \cdots
+       \\ \hline
+         \bm{0} & A_2
+       \end{array}\right]
+     \end{alignedat}
+     $$
+     Now I claim that \(A_2\) has eigenvalues \(\lambda_n,\ldots,\lambda_n\). This is true because
+     $$
+     \begin{alignedat}{1}
+       \det(A-\lambda I)
+       =\det(Q_1^\mathrm{T}Q_1)\det(A-\lambda I)
+     & =\det Q_1^\mathrm{T}\det(A-\lambda I)\det Q_1
+     \\
+     & =\det(Q_1^\mathrm{T}(A-\lambda I)Q_1)
+     \\
+     & =\det(Q_1^\mathrm{T}AQ_1-\lambda Q_1^\mathrm{T}Q_1)
+     \\
+     & =\det
+       \left[\begin{array}{c|c}
+         \lambda_1-\lambda & \cdots
+       \\ \hline
+         \bm{0} & A_2-\lambda I
+       \end{array}\right]
+     \\
+     & =（\lambda_1-\lambda)\det(A_2-\lambda I)
+     \end{alignedat}
+     $$
+     Then we can perform a similar process for \(A_2\):
+     $$
+     Q_2^\mathrm{T}A_2Q_2=
+     \left[\begin{array}{c|c}
+       \lambda_2 & \cdots
+     \\ \hline
+       \bm{0} & A_3
+     \end{array}\right]
+     $$
+     Back to \(Q_1^\mathrm{T}AQ_1\) we can make \(Q_2^\mathrm{T}A_2Q_2\) appears by multiply two special matrices on both sides:
+     $$
+     \begin{alignedat}{1}
+     & \left[\begin{array}{c|c} 1 & \bm{0} \\ \hline \bm{0} & Q_2^\mathrm{T} \end{array}\right]
+       Q_1^\mathrm{T}AQ_1
+       \left[\begin{array}{c|c} 1 & \bm{0} \\ \hline \bm{0} & Q_2 \end{array}\right]
+     \\
+       =
+     & \left[\begin{array}{c|c} 1 & \bm{0} \\ \hline \bm{0} & Q_2^\mathrm{T} \end{array}\right]
+       \left[\begin{array}{c|c} \lambda_1 & \cdots \\ \hline \bm{0} & A_2 \end{array}\right]
+       \left[\begin{array}{c|c} 1 & \bm{0} \\ \hline \bm{0} & Q_2 \end{array}\right]
+     \\
+       =
+     & \left[\begin{array}{c|c} \lambda_1 & (\cdots)Q_2 \\ \hline \bm{0} & Q_2^\mathrm{T}AQ_2  \end{array}\right]
+     \\
+       =
+     & \begin{bmatrix}
+         \lambda_1 & (\cdots & \cdots)Q_2 \\
+         0 & \lambda_2 & \cdots \\
+         \bm{0} & \bm{0} & A_3
+       \end{bmatrix}
+     \end{alignedat}
+     $$
+     We can see an upper triangular matrix is in the middle of contruction. You may wonder that the \(Q_2\) on the upper right corner will broken something, in fact it is doesn't matter since our goal is to produce the upper triangular matrix \(T\). We now prove that in this new matrix, the new \(Q\)'s are still orthogonal:
+     $$
+     \begin{array}{l}
+       \textbf{Both are transpose of each other}
+     \end{array}
+     \qquad
+     \left(
+       \left[\begin{array}{c|c} 1 & \bm{0} \\ \hline \bm{0} & Q_2^\mathrm{T} \end{array}\right]
+       Q_1^\mathrm{T}
+     \right)
+     \left(
+       Q_1
+       \left[\begin{array}{c|c} 1 & \bm{0} \\ \hline \bm{0} & Q_2 \end{array}\right]
+     \right)
+     =I
+     $$
+     Continue the process above we will eventually get what we want, the \(A=QTQ\).
+   </details>
 
 ## LINEAR ALGEBRA IN A NUTSHELL
 
