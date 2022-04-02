@@ -3348,7 +3348,66 @@ $$
    $$
    </div>
 
-
+<details>
+  <summary><span class="list-summary">&dagger; WORKED EXAMPLES &dagger;</span></summary>
+  <ol class="worked-examples">
+    <li>
+      <span class="list-head">6.4 A</span>&emsp;What matrix \(A\) has eigenvalues \(\lambda=1,-1\) and eigenvectors \(\bm{x}_1=(\cos\theta,\sin\theta)\) and \(\bm{x}_2=(-\sin\theta,\cos\theta)\)? Which of these properties can be predicted in advance?
+      $$
+      \textcolor{RoyalBlue}{
+        \text{$A=A^\mathrm{T}$\qquad$A^2=I$\qquad$\det A=-1$\qquad pivots are $+$ and $-$\qquad$A^{-1}=A$}
+      }
+      $$
+      <span class="list-head">Solution</span>&emsp;All those properties can be predicted! With real eigenvalues \(1\), \(-1\) and orthonormal \(\bm{x}_1\) and \(\bm{x}_2\), the matrix \(A=Q\Lambda Q^T\) must be symmetric. The eigenvalues \(1\) and \(-1\) tell us that \(A^2=I\) (since \(\lambda^2=1\)) and \(A^{-1}=A\) (same thing) and \(\det A=-1\). The two pivots must be positive and negative like the eigenvalues, since \(A\) is symmetric.
+      <br>
+      &emsp;&ensp;The matrix will be a reflection. Vectors in the direction of \(\bm{x}_1\) are unchanged by \(A\) (since \(\lambda=1\)). Vectors in the perpendicular direction are reversed (since \(\lambda=-1\)). The reflection \(A=Q\Lambda Q^\mathrm{T}\) is across the &ldquo;\(\theta\)-line&rdquo;. Write \(c\) for \(\cos\theta\) and \(s\) for \(\sin\theta\):
+      $$
+      A=\begin{bmatrix*}[r] c & -s \\ s & c \end{bmatrix*}\begin{bmatrix*}[r] 1 & 0 \\ 0 & -1 \end{bmatrix*}\begin{bmatrix*}[r] c & s \\ -s & c \end{bmatrix*}
+      =\begin{bmatrix} c^2-s^2 & 2cs \\ 2cs & s^2-c^2 \end{bmatrix}
+      =\begin{bmatrix*}[r] \cos 2\theta & \sin 2\theta \\ \sin 2\theta & -\cos 2\theta \end{bmatrix*}
+      .
+      $$
+      Notice that \(\bm{x}=(1,0)\) goes to \(A\bm{x}=(\cos 2\theta,\sin 2\theta)\) on the \(2\theta\)-line. And \((\cos 2\theta,\sin 2\theta)\) goes back across the \(\theta\)-line to \(\bm{x}=(1,0)\).
+    </li>
+    <li>
+      <span class="list-head">6.4 B</span>&emsp;Find the eigenvalues and eigenvectors (discrete sines and cosines) of \(A_3\) and \(B_4\).
+      $$
+      A_3=\begin{bmatrix*}[r] 2 & -1 & 0 \\ -1 & 2 & -1 \\ 0 & -1 & 2 \end{bmatrix*}
+      \qquad
+      B_4=\begin{bmatrix*}[r]
+         1 & -1 &    &    \\
+        -1 &  2 & -1 &    \\
+           & -1 &  2 & -1 \\
+           &    & -1 &  1 \\
+      \end{bmatrix*}
+      $$
+      The \(-1,2,-1\) pattern in both matrices is a &ldquo;second difference&rdquo;. This is like a second derivative. Then \(A\bm{x}=\lambda\bm{x}\) and \(B\bm{x}=\lambda\bm{x}\) are like \(\mathrm{d}^2x/\mathrm{d}t^2=\lambda x\). This has eigenvectors \(x=\sin kt\) and \(x=\cos kt\) that are the bases for Fourier series.
+      <br>
+      &emsp;&ensp;\(A_n\) and \(B_n\) lead to &ldquo;discrete sines&rdquo; and &ldquo;discrete cosines&rdquo; that are the bases for the <em>Discrete Fourier Transform</em>. This DFT is absolutely central to all areas of digital signal processing. The favorite choice for JPEG in image processing has been \(B_8\) of size \(n=8\).
+      <br><br>
+      <span class="list-head">Solution</span>&emsp;The eigenvalues of \(A_3\) are \(\lambda=2-\sqrt{2}\) and \(2\) and \(2+\sqrt{2}\) (see <b>6.3 B</b>). Their sum is \(6\) (the trace of \(A_3\)) and their product is \(4\) (the determinant). The eigenvector matrix gives the &ldquo;Discrete Sine Transform&rdquo; and the eigenvectors fall onto sine curves.
+      $$
+      \begin{array}{l}
+        \textbf{Sines}=\begin{bmatrix} 1 & \sqrt{2} & 1 \\ \sqrt{2} & 0 & -\sqrt{2} \\ 1 & -\sqrt{2} & 1 \end{bmatrix}
+      \\\\
+        \textbf{Sine matrix = Eigenvectors of $A_3$}
+      \end{array}
+      \qquad
+      \begin{array}{l}
+        \textbf{Cosines}=\left[\begin{array}{ccrc}
+          1 &          1 &  1 &          1 \\
+          1 & \sqrt{2}-1 & -1 & 1-\sqrt{2} \\
+          1 & 1-\sqrt{2} & -1 & \sqrt{2}-1 \\
+          1 &         -1 &  1 &         -1
+        \end{array}\right]
+      \\
+        \textbf{Cosine matrix = Eigenvectors of $\bm{B_4}$}
+      \end{array}
+      $$
+      &emsp;&ensp;The eigenvalues of \(B_4\) are \(\lambda=2-\sqrt{2}\) and \(2\) and \(2+\sqrt{2}\) and \(0\) (the same as for \(A_3\), plus the zero eigenvalue). The trace is still \(6\), but the determinant is now zero. The eigenvector matrix \(C\) gives the 4-point &ldquo;Discrete Cosine Transform&rdquo;. The graph on the Web shows how the first two eigenvectors fall onto cosine curves. (So do all the eigenvectors of \(B\).) These eigenvectors match cosines at the <em>halfway points</em> \(\pi/8\), \(3\pi/8\), \(5\pi/8\), \(7\pi/8\).
+    </li>
+  </ol>
+</details>
 
 ## LINEAR ALGEBRA IN A NUTSHELL
 
