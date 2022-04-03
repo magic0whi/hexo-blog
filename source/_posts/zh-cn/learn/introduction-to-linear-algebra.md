@@ -3405,6 +3405,14 @@ $$
   </ol>
 </details>
 
+### Positive Definite Matrices
+
+1. **Symmetric \\(\bm{S}\\):** \\(\text{all eigenvalues$\bm{\gt 0\space\hArr}$ all pivots $\bm{\gt 0\space\hArr}$ all upper left determinants $\bm{\gt 0}$}\\).
+2. The matrix \\(S\\) is then **positive definite**. The energy test is \\(\bm{x}^\mathrm{T}S\bm{x}\gt 0\\) for all vectors \\(\bm{x}\neq\bm{0}\\).
+3. One more test for positive definiteness: \\(S=A^\mathrm{T}A\\) with independent columns in \\(A\\).
+4. **Positive semidefinite** \\(S\\) allows \\(\lambda=0\\), \\(\text{pivot}=0\\), \\(\text{determinant}=0\\), \\(\text{energy }\bm{x}^\mathrm{T}S\bm{x}=0\\).
+5. The equation \\(\bm{x}^\mathrm{T}S\bm{x}=1\\) gives an ellipse in \\(\mathbf{R}^n\\) when \\(S\\) is symmetric positive definite.
+
 ## LINEAR ALGEBRA IN A NUTSHELL
 
 <div style="text-align:center"><strong>((<em>The matrix \(A\) is \(n\) by \(n\)</em>))</strong></div>
