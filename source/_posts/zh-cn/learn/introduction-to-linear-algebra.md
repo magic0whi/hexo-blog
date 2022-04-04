@@ -1869,7 +1869,7 @@ $$
      $$
      Here \(A^\mathrm{T}A\) is a \(n\) by \(n\) symmetric matrix. It is invertible if the \(\bm{a}\)'s are independent. (Be aware \(A\) might not invertible as it may not a square matrix.) Solve this system we find \(\widehat{\bm{x}}\) and then \(p=A\widehat{\bm{x}}=A(A^\mathrm{T}A)^{-1}A^\mathrm{T}\bm{b}\).
      <br>
-     &emsp;&ensp;From <a href="https://math.stackexchange.com/questions/1840801/why-is-ata-invertible-if-a-has-independent-columns">Math StackExchange</a>. To prove \(A^\mathrm{T}A\) is invertible we can work on the statement &ldquo;\(A^\mathrm{T}A\bm{x}=\bm{0}\) has only one solution \(\bm{x}=\bm{0}\)&rdquo;. Because \(A^\mathrm{T}\bm{y}=\bm{0}\) may have solutions \(\bm{y}\neq\bm{0}\), we must prove that \(\bm{y}=\bm{0}\) while \(\bm{y}=A\bm{x}\):
+     &emsp;&ensp;From <a href="https://math.stackexchange.com/a/1840807">Math StackExchange</a>. To prove \(A^\mathrm{T}A\) is invertible we can work on the statement &ldquo;\(A^\mathrm{T}A\bm{x}=\bm{0}\) has only one solution \(\bm{x}=\bm{0}\)&rdquo;. Because \(A^\mathrm{T}\bm{y}=\bm{0}\) may have solutions \(\bm{y}\neq\bm{0}\), we must prove that \(\bm{y}=\bm{0}\) while \(\bm{y}=A\bm{x}\):
      <br>
      &emsp;&ensp;\(A\bm{x}\) is a combination in \(\bm{C}(A)\) which is also in \(\bm{N}(A^\mathrm{T})\). However \(\bm{N}(A^\mathrm{T})\) and \(\bm{C}(A)\) are orthogonal complements, the only vector that can be in both a subspace and the orthogonal complement of its subspace is the zero vector, so \(A\bm{x}\) must produce zero vector.
      <br>
@@ -3338,6 +3338,17 @@ $$
      Continue the process above we will eventually get what we want, the \(A=QTQ\).
    </details>
 3. The number of positive eigenvalues of \\(S\\) equals the number of positive pivots.
+   <details>
+     <summary><span class="list-summary">&dagger; WHY &dagger;</span></summary>
+     From <a href="https://math.stackexchange.com/a/57958">this answer</a>.
+     <br>
+     The reason why this works out is due to the Inertia Theorem of Sylvester: briefly put, for a symmetric matrix \(A\) and some nonsingular matrix \(W\), \(A\) and \(WAW^\mathrm{T}\) have the same number of positive, negative, and zero eigenvalues. (\(A\) and \(WAW^\mathrm{T}\) are then said to be <em>congruent</em>.)
+     <br>
+     &emsp;&ensp;Since the symmetric matrix \(S\) can have decomposition form \(S=LDL^\mathrm{T}\). The diagonal matrix \(D\) have the signs of eigenvalues and pivots all same, then from Inertia Theorem of Sylvester we know \(S\) has same number of positive eigenvalues as \(D\). Furthmore, introducing the conclusion \(S=Q\Lambda Q^T\harr\Lambda=Q^\mathrm{T}SQ\quad(Q^T=Q^{-1})\), then we get:
+     $$
+     \Lambda=(Q^\mathrm{T}L)D(L^\mathrm{T}Q)\quad(\text{$Q^\mathrm{T}L$ and $L^\mathrm{T}Q$ are transpose of each other})
+     $$
+     We can see that \(D\) share the signs of positive eigenvalues with \(\Lambda\).
 4. Antisymmetric matrices \\(A=-A^\mathrm{T}\\) have <em>imaginary</em> \\(\lambda\\)'s and *orthonormal (complex)* \\(\bm{q}\\)'s.
 5. Section 9.2 explains why the test \\(S=S^\mathrm{T}\\) becomes \\(\bm{S=\overline{S}^\mathrm{T}}\\) for *complex matrices*.
    <div>
