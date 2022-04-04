@@ -3420,9 +3420,25 @@ $$
 
 1. **Symmetric \\(\bm{S}\\):** \\(\text{all eigenvalues$\bm{\gt 0\space\hArr}$ all pivots $\bm{\gt 0\space\hArr}$ all upper left determinants $\bm{\gt 0}$}\\).
 2. The matrix \\(S\\) is then **positive definite**. The energy test is \\(\bm{x}^\mathrm{T}S\bm{x}\gt 0\\) for all vectors \\(\bm{x}\neq\bm{0}\\).
+   <details>
+     <summary><span class="list-summary">&dagger; WHY &dagger;</span></summary>
+     From \(S\bm{x}=\lambda\bm{x}\), multiply by \(\bm{x}^\mathrm{T}\) to get \(\bm{x}^\mathrm{T}S\bm{x}=\lambda\bm{x}^\mathrm{T}\bm{x}=\lambda\|\bm{x}\|^2\). The right side is positive for all nonzero vectors while the \(\lambda\) is positive.
+   </details>
 3. One more test for positive definiteness: \\(S=A^\mathrm{T}A\\) with independent columns in \\(A\\).
+   <details>
+     <summary><span class="list-summary">&dagger; WHY &dagger;</span></summary>
+     Take energy test we get \(\bm{x}^\mathrm{T}S\bm{x}=\bm{x}^\mathrm{T}A^\mathrm{T}A\bm{x}=(A\bm{x})^\mathrm{T}(A\bm{x})=\|A\bm{x}\|^2\geq 0\), \(A\bm{x}\) never equal to zero if \(A\) has independent columns and \(x\neq 0\).
+   </details>
 4. **Positive semidefinite** \\(S\\) allows \\(\lambda=0\\), \\(\text{pivot}=0\\), \\(\text{determinant}=0\\), \\(\text{energy }\bm{x}^\mathrm{T}S\bm{x}=0\\).
 5. The equation \\(\bm{x}^\mathrm{T}S\bm{x}=1\\) gives an ellipse in \\(\mathbf{R}^n\\) when \\(S\\) is symmetric positive definite.
+   <details>
+     <summary><span class="list-summary">&dagger; WHY &dagger;</span></summary>
+     The graph of \(\bm{x}^\mathrm{T}S\bm{x}=1\) is an ellipse. For example, a 2 by 2 positve definite symmetric matrix \(S=Q\Lambda Q^\mathrm{T}\):
+     $$
+     \bm{x}^\mathrm{T}S\bm{x}=1\harr\begin{bmatrix} x & y \end{bmatrix}Q\Lambda Q^\mathrm{T}\begin{bmatrix} x \\ y \end{bmatrix}=\begin{bmatrix} X & Y \end{bmatrix}\Lambda\begin{bmatrix} X \\ Y \end{bmatrix}=\lambda_1X^2+\lambda_2Y^2=1
+     $$
+     Which is similar to the ellipse standard equation \(x^2/a^2+y^2/b^2=1\). Here it comes with \(x=X\) and \(y=Y\) and \(a=1/\sqrt{\lambda_1}\) and \(b=1/\sqrt{\lambda_2}\)
+   </details>
 
 ## LINEAR ALGEBRA IN A NUTSHELL
 
