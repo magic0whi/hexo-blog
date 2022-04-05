@@ -21,10 +21,11 @@ date: 2020-02-08 15:14:28
 
 Feel free to contact me:
 - Email: lollipop.studio.cn@gmail.com
-- Twitter: [@ndoskrnl](https://twitter.com/ndoskrnl)
-- Telegram: [@ndoskrnl](https://t.me/ndoskrnl)
-- QQ: 2113952182
-- Zhihu: [ndoskrnl](https://www.zhihu.com/people/logarithm-96)
+- Mastodon: [@ndoskrnl@mastodon.social](https://mastodon.social/web/@ndoskrnl)
+- Twitter: [@ndoskrnl](https://twitter.com/ndoskrnl) (已停用)
+- Telegram: [@ndoskrnl](https://t.me/ndoskrnl) (不活跃)
+- QQ: 2113952182 (不活跃)
+- Zhihu: [ndoskrnl](https://www.zhihu.com/people/logarithm-96) (不活跃)
 
 Features: Retiring
 

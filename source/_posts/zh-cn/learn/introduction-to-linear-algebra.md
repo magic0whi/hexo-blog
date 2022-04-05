@@ -763,7 +763,7 @@ $$
         \bm{1} & \bm{2} & \bm{1} & 0 \\
         \bm{1} & \bm{3} & \bm{3} & \bm{1}
       \end{bmatrix}
-      =\textsf{abs}(\textsf{pascal}(4,1))
+      =\textsf{abs(pascal(4,1))}
       $$
       <span class="list-head">Solution</span>&emsp;Gausss-Jordan starts with \(\begin{bmatrix} L & I \end{bmatrix}\) and produces zeros by subtracting row 1:
       $$
@@ -848,11 +848,11 @@ $$
     <li>
       <span class="list-head">2.6 A</span>&emsp;The lower triangular Pascal matrix \(L\) contains the famous <em>&ldquo;Pascal triangle&rdquo;</em>. Gauss-Jordan inverted \(L\) in the worked example <span class="list-head">2.5 C</span>. Here we factor Pascal.
       <br>
-      &emsp;&ensp;<strong>The symmetric Pascal matrix \(\bm{P}\) is a product of triangular Pascal matrices \(L\) and \(U\).</strong> The symmetric \(P\) has Pascal's triangle tilted, so each entry is the sum of entry above and the entry to the left. The \(n\) by \(n\) symmetric \(P\) is \(\textsf{pascal}(n)\) in \(\textsf{MATLAB}\).
+      &emsp;&ensp;<strong>The symmetric Pascal matrix \(\bm{P}\) is a product of triangular Pascal matrices \(L\) and \(U\).</strong> The symmetric \(P\) has Pascal's triangle tilted, so each entry is the sum of entry above and the entry to the left. The \(n\) by \(n\) symmetric \(P\) is \(\textsf{pascal(n)}\) in \(\textsf{MATLAB}\).
       <br>
       <strong>Problem:</strong> <em>Establish the amazing lower-upper factorization \(P=LU\).</em>
       $$
-      \textsf{pascal}(4)=
+      \textsf{pascal(4)}=
       \begin{bmatrix}
         \bm{1} & \bm{1} & \bm{1} & \bm{1} \\
         \bm{1} & \bm{2} & \bm{3} & 4 \\
@@ -912,7 +912,7 @@ $$
       <br>
       &emsp;&ensp;The next section will show how symmetry produces a special relationship between the triangular \(L\) and \(U\). For Pascal, \(U\) is the <strong>&ldquo;transpose&rdquo;</strong> of \(\bm{L}\).
       <br>
-      &emsp;&ensp;You might expect the \(\textsf{MATLAB}\) command \(\textsf{lu}(\textsf{pascal}(4))\) to produce these \(L\) and \(U\). That doesn't happen because \(\textbf{\textsf{lu}}\) subroutine chooses the largest available pivot in each column. The second pivot will change from 1 to 3. But a &ldquo;Cholesky factorization&rdquo; does no row exchanges: \(U=\textsf{chol}(\textsf{pascal}(4))\)
+      &emsp;&ensp;You might expect the \(\textsf{MATLAB}\) command \(\textsf{lu(pascal(4))}\) to produce these \(L\) and \(U\). That doesn't happen because \(\textbf{\textsf{lu}}\) subroutine chooses the largest available pivot in each column. The second pivot will change from 1 to 3. But a &ldquo;Cholesky factorization&rdquo; does no row exchanges: \(U=\textsf{chol(pascal(4))}\)
       <br>
       &emsp;&ensp;The full proof of \(P=LU\) for all Pascal sizes is quite fascinating. The paper &ldquo;Pascal Matrices&rdquo; is on the course web page <strong>web.mit.edu/18.06</strong> which is also available through MIT's <em>OpenCourseWare</em> at <strong>ocw.mit.edu</strong>. These Pascal matrices have so many remarkable properties&mdash;we will see them again.
     </li>
@@ -957,7 +957,7 @@ $$
         x_4=\bm{-1}
       \end{alignedat}
       $$
-      I see a pattern in that \(\bm{x}\), but I don't know where it comes from. Try \(\textsf{inv}(\textsf{pascal}(4))\).
+      I see a pattern in that \(\bm{x}\), but I don't know where it comes from. Try \(\textsf{inv(pascal(4))}\).
     </li>
   </ol>
 </details>
@@ -1195,7 +1195,7 @@ $$
 
 1. The **nullspace** \\(\bm{N}(A)\\) in \\(\mathbf{R}^n\\) contains all solutions \\(\bm{x}\\) to \\(A\bm{x}=\bm{0}\\). This includes \\(\bm{x}=\bm{0}\\)
 2. Elimination (from \\(A\\) to \\(U\\) to \\(R\\)) does not change the nullspace: \\(\bm{N}(A)=\bm{N}(U)=\bm{N}\(R\)\\).
-3. The **reduced row echelon form** \\(\bm{R=\textbf{\textsf{rref}}(A)}\\) has all pivots \(=1\), with zeros above and below.
+3. The **reduced row echelon form** \\(\bm{R=\textbf{\textsf{rref(A)}}}\\) has all pivots \\(=1\\), with zeros above and below.
 4. If column \\(j\\) of \\(R\\) is free (no pivot), there is a "*special solution*" to \\(A\bm{x}=\bm{0}\\) with \\(x_j=1\\).
 5. Number of pivots = number of nonzero rows in \\(R=\textbf{rank }\bm{r}\\). There are \\(n-r\\) free columns.
 6. Every matrix with \\(m\lt n\\) has nonzero solution to \\(A\bm{x}=\bm{0}\\) in its nullspace.
@@ -1725,7 +1725,7 @@ $$
 
 1. Orthogonal vectors have \\(\bm{v}^\mathrm{T}\bm{w}=0\\). Then \\(\\|\bm{v}\\|^2+\\|\bm{w}\\|^2=\\|\bm{v}+\bm{w}\\|^2=\\|\bm{v}-\bm{w}\\|^2\\).
 2. Subspaces \\(\bm{V}\\) and \\(\bm{W}\\) are orthogonal when \\(\bm{v}^\mathrm{T}\bm{w}=0\\) for every \\(\bm{v}\\) in \\(\bm{V}\\) and every \\(\bm{w}\\) in \\(\bm{W}\\).
-3. The row space of \\(A\\) is orthogonal to the nullspace. The column space is orthogonal to \\(\bm{N}(A^\mathrm{T}\\).
+3. The row space of \\(A\\) is orthogonal to the nullspace. The column space is orthogonal to \\(\bm{N}(A^\mathrm{T})\\).
 4. One pair of dimensions adds to \\(r+(n-r)=n\\). The other pair has \\(r+(m-r)-m\\).
 5. Row space and nullspace are orthogonal *complements*: Every \\(\bm{x}\\) in \\(\mathbf{R}^n\\) splits into \\(\bm{x}\_\textbf{row}+\bm{x}_\textbf{null}\\).
 6. Suppose a space \\(\bm{S}\\) has dimension \\(d\\). Then every basis for \\(\bm{S}\\) consists of \\(d\\) vectors.
@@ -2439,7 +2439,7 @@ $$
       <br>
       &emsp;&ensp;In Question <b>3</b>, each \(a_{ij}\) is multiplied by \(i/j\). So each product \(a_{1\alpha}a_{2\beta}\cdots a_{n\omega}\) in the big formula is multiplied by all the row numbers \(i=1,2,\ldots,n\) and divided by all the column numbers \(j=1,2,\ldots,n\). (The columns come in some permuted order!) Then each product is unchanged and \(\det A\) stays the same.
       <br>
-      &emsp;&ensp;Another approach to Question <b>3</b>: We are multiplying the matrix \(A\) by the diagonal matrix \(D=\textbf{\textsf{diag}}(1 : n)\) when row \(i\) is multiplied by \(i\). And we are postmultiplying by \(D^{-1}\) when column \(j\) is divided by \(j\). The determinant of \(DAD^{-1}\) is the same as \(\det A\) by the product rule.
+      &emsp;&ensp;Another approach to Question <b>3</b>: We are multiplying the matrix \(A\) by the diagonal matrix \(D=\textbf{\textsf{diag(1 : n)}}\) when row \(i\) is multiplied by \(i\). And we are postmultiplying by \(D^{-1}\) when column \(j\) is divided by \(j\). The determinant of \(DAD^{-1}\) is the same as \(\det A\) by the product rule.
     </li>
   </ol>
 </details>
@@ -2809,9 +2809,9 @@ $$
       \bm{x}_3=\begin{bmatrix*}[r] 1 \\ -2 \\ 1 \end{bmatrix*}\quad S\bm{x}_3=\bm{3x}_3
       .
       $$
-      I notice again that eigenvectors are perpendicular when \(S\) is symmetric. We were lucky to find \(\lambda=0,1,3\). For a larger matrix I would use \(\textbf{\textsf{eig}}(A)\), and never touch determinants.
+      I notice again that eigenvectors are perpendicular when \(S\) is symmetric. We were lucky to find \(\lambda=0,1,3\). For a larger matrix I would use \(\textbf{\textsf{eig(A)}}\), and never touch determinants.
       <br>
-      &emsp;&ensp;The full command \([\bm{X},\bm{E}]=\textbf{\textsf{eig}}(A)\) will produce unit eigenvectosrs in the columns of \(X\).
+      &emsp;&ensp;The full command \([\bm{X},\bm{E}]=\textbf{\textsf{eig(A)}}\) will produce unit eigenvectosrs in the columns of \(X\).
     </li>
   </ol>
 </details>
@@ -2876,7 +2876,7 @@ $$
     <li>
       <span class="list-head">6.2 B</span>&emsp;Find the inverse and the eigenvalues and the determinant of this matrix \(A\):
       $$
-      A=5*\textbf{\textsf{eye}}(4)-\textbf{\textsf{ones}}(4)=
+      A=5*\textbf{\textsf{eye(4)}}-\textbf{\textsf{ones(4)}}=
       \begin{bmatrix*}[r]
         4 & -1 & -1 & -1 \\
         -1 & 4 & -1 & -1 \\
@@ -2918,7 +2918,7 @@ $$
       <br>
       &emsp;&ensp;In a graph with 5 nodes, the determinant \(125\) counts the &ldquo;spanning trees&rdquo; (trees that touch all nodes). <em>Trees have no loops</em> (graphs and trees are in Section 10.1).
       <br>
-      &emsp;&ensp;With 6 nodes, the matrix \(6*\textbf{\textsf{eye}}(5)-\textbf{\textsf{ones}}(5)\) has the five eigenvalues \(1\), \(6\), \(6\), \(6\), \(6\), \(6\).
+      &emsp;&ensp;With 6 nodes, the matrix \(6*\textbf{\textsf{eye(5)}}-\textbf{\textsf{ones(5)}}\) has the five eigenvalues \(1\), \(6\), \(6\), \(6\), \(6\), \(6\).
     </li>
   </ol>
 </details>
@@ -3439,6 +3439,19 @@ $$
      $$
      Which is similar to the ellipse standard equation \(x^2/a^2+y^2/b^2=1\). Here it comes with \(x=X\) and \(y=Y\) and \(a=1/\sqrt{\lambda_1}\) and \(b=1/\sqrt{\lambda_2}\)
    </details>
+
+<!-- <details>
+  <summary><span class="list-summary">&dagger; WORKED EXAMPLES &dagger;</span></summary> -->
+  <ol class="worked-examples">
+    <li>
+      <span class="list-head">6.5 A</span>&emsp;The great factorizations of a symmetric matrix are \(S=LDL^\mathrm{T}\) from pivots and multipliers, and \(S=QAQ^\mathrm{T}\) from eigenvalues and eigenvectors. Try these \(n\) by \(n\) tests on \(\textsf{pascal(6)}\) and \(\textsf{ones(6)}\) and \(\textsf{hilb(6)}\) and other matrices in \(\textsf{MATLAB}\)'s gallery.
+      <br>
+      \(\textbf{\textsf{pascal(6)}}\) is positive <em>definite</em> because all its pivots are \(1\) (Worked Example <span class="list-head">2.6 A</span>)
+      <br>
+      \(\textbf{\textsf{ones(6)}}\) is positive <em>semidefinite</em> because its eigenvalues are \(0\), \(0\), \(0\), \(0\), \(0\), \(6\).
+    </li>
+  </ol>
+<!-- </details> -->
 
 ## LINEAR ALGEBRA IN A NUTSHELL
 
