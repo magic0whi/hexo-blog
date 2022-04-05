@@ -3449,6 +3449,71 @@ $$
       \(\textbf{\textsf{pascal(6)}}\) is positive <em>definite</em> because all its pivots are \(1\) (Worked Example <span class="list-head">2.6 A</span>)
       <br>
       \(\textbf{\textsf{ones(6)}}\) is positive <em>semidefinite</em> because its eigenvalues are \(0\), \(0\), \(0\), \(0\), \(0\), \(6\).
+      <br>
+      \(\textbf{\textsf{H=hlib(6)}}\) is positive <em>definite</em> even though \(\textsf{eig(H)}\) shows eigenvalues very near zero.
+      <br>
+      <strong>Hilbert matrix</strong> \(\bm{x}^\mathrm{T}H\bm{x}=\int_0^1(x_1+x_2s+\cdots+x_6s^5)^2\mathrm{d}s\gt 0\), \(H_{ij}=1/(i+j-1)\).
+      <br>
+      \(\textbf{\textsf{rand(6)+rand(6)$^\prime$}} %Using \prime to make it look clearer\) can be positive definite or not. <em>Experiments gave only 2 in 20000.</em>
+      <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">n=<span class="number">20000</span>;p=<span class="number">0</span>;<span class="keyword">for</span> k=<span class="number">1</span>:n,A=<span class="built_in">rand</span>(<span class="number">6</span>);p=p+all(eig(A+A&#x27;)&gt;<span class="number">0</span>);<span class="keyword">end</span>,p/n</span><br></pre></td></tr></table></figure>
+    </li>
+    <li>
+      <span class="head-list">6.5 B</span>&emsp;\(\textcolor{RoyalBlue}{\text{When is the symmetric block matrix $M=\begin{bmatrix} A & B \\ B^\mathrm{T} & C \end{bmatrix}$ positive definite?}}\)
+      <br><br>
+      <span class="head-list">Solution</span>&emsp;Multiply the first row of \(M\) by \(B^\mathrm{T}A^{-1}\) and subtract from the second row, to get a block of zeros. The <em>Schur complement</em> \(S=C-B^\mathrm{T}A^{-1}B\) appears in the corner:
+      $$
+      \begin{bmatrix} I & 0 \\ -B^\mathrm{T}A^{-1} & I \end{bmatrix}
+      \begin{bmatrix} A & B \\ B^\mathrm{T} & C \end{bmatrix}
+      =
+      \begin{bmatrix} A & B \\ 0 & C-B^\mathrm{T}A^{-1}B \end{bmatrix}
+      =
+      \begin{bmatrix} \bm{A} & B \\ 0 & \bm{S} \end{bmatrix}
+      $$
+      <em><strong>Those two blocks \(\bm{A}\) and \(S\) must be positive definite.</strong></em> Their pivots are the pivots of \(M\).
+    </li>
+    <li>
+      <span class="head-list">6.5 C</span>&emsp;Find the eigenvalues of the \(-1,2,-1\) tridiagonal \(n\) by \(n\) matrix \(S\) (my favorite).
+      <br><br>
+      <span class="head-list">Solution</span>&emsp;The best way is to guess \(\lambda\) and \(\bm{x}\). Then check \(S\bm{x}=\lambda\bm{x}\). Guessing could not work for most matrices, but special cases are a big part of mathematics (pure and applied).
+      <br>
+      &emsp;&ensp;The key is hidden in a differential equation. The second difference matrix \(S\) is like a <em>second derivative</em>, and those eigenvalues are much easier to see:
+      $$
+      \tag{5}
+      \colorbox{e8f1fe}{
+        $\begin{array}{l}
+          \textbf{Eigenvalues $\bm{\lambda_1,\lambda_2,\ldots}$} \\
+          \textbf{Eigenfunctions $\bm{y_1,y_2,\ldots}$}
+        \end{array}$
+        \qquad
+        \colorbox{ffffff}{$\dfrac{\mathrm{d}^2y}{\mathrm{d}x^2}=\lambda y(x)$}
+        \quad\textbf{with}\quad
+        $\begin{array}{l}
+          y(0)=0 \\
+          y(1)=0
+        \end{array}$
+      }
+      $$
+      Try \(y=\sin cx\). Its second derivative is \(y^{\prime\prime}=-c^2\sin cx\). So the eigenvalue in (5) will be \(\lambda=-c^2\), provided \(y=\sin cx\) satisfies the end point conditions \(y(0)=0=y(1)\).
+      <br>
+      &emsp;&ensp;Certainly \(\sin 0=0\) (this is where cosines are eliminated). At the other end \(x=1\), we need \(y(1)=\sin c=0\). The number \(c\) must be \(k\pi\), a multiple of \(\pi\). Then \(\lambda\) is \(-k^2\pi^2\):
+      $$
+      \begin{array}{l}
+        \textbf{Eigenvalues $\bm{\lambda=-k^2\pi^2}$} \\
+        \textbf{Eigenfunctions $\bm{y=\sin k\pi x}$}
+      \end{array}
+      \qquad
+      \dfrac{\mathrm{d}^2}{\mathrm{d}x^2}\sin k\pi x=-k^2\pi^2\sin k\pi x
+      .
+      $$
+      Now we go back to the matrix \(S\) and guess its eigenvectors. They come from \(\sin k\pi x\) at \(n\) points \(x=h,2h,\ldots,nh\), equally spaced between \(0\) and \(1\). The spacing \(\Delta x\) is \(h=1/(n+1)\), so the \((n+1)\)st point has \((n+1)h=1\). Multiply that sine vector \(\bm{x}\) by \(S\):
+      $$
+      \textcolor{RoyalBlue}{
+        \begin{array}{ll}
+          \textbf{Eigenvalue of $\bm{S}$ is positive} & S\bm{x}=\lambda_k\bm{x}=(2-2\cos k\pi h)\bm{x} \\
+          \textbf{Eigenvector of $\bm{S}$ is sine vector} & \bm{x}=(\sin k\pi h,\ldots,\sin nk\pi h)
+        \end{array}
+      }
+      $$
     </li>
   </ol>
 <!-- </details> -->

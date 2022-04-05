@@ -280,3 +280,6 @@ to submit your revision.
    ```
 3. 一些踩坑:
    Hexo 中的内嵌 \\(\KaTeX\\) 如果出现这样的字符 `(R)` 会被识别成商标 \((R)\), 需转义括号: `\(R\)`
+4. Code of conduct (KaTeX):
+   MATLAB command: `\textsf{one(4)}` **not** `\textsf{one}(4)`.
+   Inequality: `\gt`,`\lt` **not** `>`,`<`.
