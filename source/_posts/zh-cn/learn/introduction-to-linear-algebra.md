@@ -9,6 +9,14 @@ date: 2021-02-24 11:53:14
 tags: mathematics
 ---
 
+This is an excerpt of both brief summary and worked examples of each section in the Introduction to Linear Algebra (Fifth Edition) by Gilbert Strang
+
+[MIT Course 18.06, Spring 2022](https://github.com/mitmath/1806/)
+
+TODO: draw svg format figure by using tikz; Using `gather*` or `align*` or `array` while there is a line break in display mode LaTex.
+
+<!-- more -->
+
 <style>
 .content {
     font-family: KaTeX_Main, 'FZYaSongS-R-GB';
@@ -57,15 +65,6 @@ article.article .content {
     padding: 0;
 }
 </style>
-
-This is an excerpt of both brief summary and worked examples of each section in the Introduction to Linear Algebra (Fifth Edition) by Gilbert Strang
-
-[MIT Course 18.06, Spring 2022](https://github.com/mitmath/1806/)
-
-TODO: draw svg format figure by using tikz; Using `gather*` or `align*` or `array` while there is a line break in display mode LaTex.
-
-<!-- more -->
-
 <!-- <div>
 $$
 \newcommand\d[1]{\operatorname{d}\!{\\#1}}
