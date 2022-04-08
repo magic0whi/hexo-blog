@@ -1,5 +1,6 @@
 {
   "MD013": false,
+  "MD014": false,
   "MD031": false,
   "MD032": false,
   "MD033": { "allowed_elements": ["style","math","mrow","mi","mo","figure","figcaption","pre","details","summary","span","div","a","ol","li","table","tr","td","br","em","b","strong","sup","u"] }

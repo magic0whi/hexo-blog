@@ -365,7 +365,7 @@ $ systemd-cryptenroll --tpm2-device=list
 ```
 > If you encounter such message "<span style="color:#FF0000;">TPM2 support is not installed</span>" then try to install `tpm2-tss`
 
-A key may be enrolled in both the TPM and the LUKS volume using only one command. The following example binds the key to PCRs 0 and 7 (the system firmware and Secure Boot state): 
+A key may be enrolled in both the TPM and the LUKS volume using only one command. The following example binds the key to PCRs 0 and 7 (the system firmware and Secure Boot state):
 ```console
 # systemd-cryptenroll --tpm2-device=/path/to/tpm2_device --tpm2-pcrs=0+7 /dev/sda2
 ```
@@ -703,6 +703,16 @@ Using `PRIME render offload` which was official method supported by NVIDIA
    - lib32-libxinerama
    - lib32-libxslt
    - lib32-gst-plugins-base-libs
+
+   [MATLAB]
+   libxcrypt-compat
+   gtk2
+
+   samba
+   kdenetwork-filesharing
+   [AUR] wsdd2
+
+   ctags
 
    debootstrap
    ubuntu-keyring
