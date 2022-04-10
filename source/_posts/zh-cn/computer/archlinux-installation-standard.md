@@ -229,17 +229,16 @@ For Lenovo user, Enter `F12` for Boot Menu when on bootstrap stage
 
 ## Post-installation
 
-### Random number generation
+### Miscellaneous
 
-```console
-# systemctl enable rngd.service
-```
-
-### Enable sshd
-
-```console
-# systemctl enable sshd.service
-```
+1. Random number generation
+   ```console
+   # systemctl enable rngd.service
+   ```
+2. Enable sshd
+   ```console
+   # systemctl enable sshd.service
+   ```
 
 ### Configurate zram-generator
 
@@ -255,7 +254,7 @@ Applying changes
 # systemctl restart systemd-zram-setup@zram0
 ```
 
-### Enable bluetooth
+### Enable bluetooth auto power-on
 
 ```console
 # systemctl enable bluetooth.service
@@ -264,6 +263,11 @@ Bluetooth auto power-on after boot:
 ```properties /etc/bluetooth/main.conf
 [Policy]
 AutoEnable=true
+```
+
+Bluetooth audio support:
+```console
+pulseaudio-bluetooth
 ```
 
 ### Userspace OOM daemon
@@ -317,7 +321,7 @@ Install archlinux-keyring:
 # pacman -S archlinuxcn-keyring
 ```
 
-### Swapfile in a btrfs filesystem within dm-crypt and hibernation support
+### Swapfile in a btrfs filesystem within dm-crypt and also hibernation support
 
 1. Swap file creation
    Create a zero length file, set the `No_COW` attribute on it with `chattr`, and make sure compression is disabled, then using `dd` to allocate a swap file:
@@ -400,6 +404,11 @@ Then create a new configuration for `/`. Snapper create-config automatically cre
 Now mount `@snapshots` to `/.snapshots`:
 ```console
 # mount -o compress=zstd,subvol=@snapshots,discard /dev/mapper/cryptroot /.snapshots
+```
+
+Pacman Hook:
+```console
+pacman -S snap-pac
 ```
 
 ### Unlocking encrypted root filesystem by using TPM 2
@@ -565,10 +574,10 @@ Using `PRIME render offload` which was official method supported by NVIDIA
      > Some packages require archlinuxcn's repository
      ```console
      $ paru -S gnome-shell gnome-shell-extensions gdm \
-     nautilus file-roller sushi seahorse eog \
+     nautilus file-roller gvfs-mtp sushi seahorse eog \
      gnome-{control-center,terminal,tweaks,keyring,backgrounds,clocks,logs,screenshot,menus} \
      gtk-engine-murrine materia-gtk-theme \
-     dconf-editor loginized
+     dconf-editor loginized gpaste
      # systemctl enable gdm.service
      ```
 2. (Optional) Install & Configure input method:
@@ -587,23 +596,18 @@ Using `PRIME render offload` which was official method supported by NVIDIA
 
 ## Troubleshot
 
-1. blacklist kernel module
-   ```properties /etc/modprobe.d/blacklist.conf
-   blacklist ideapad_laptop
-   blacklist nouveau
-   ```
-2. Disable media automount in GNOME
+1. Disable media automount in GNOME
    ```console
    $ gsettings set org.gnome.desktop.media-handling automount false
    $ gsettings set org.gnome.desktop.media-handling automount-open false 
    ```
-3. Video Decode is disabled in Microsoft Edge
+2. Video Decode is disabled in Microsoft Edge
    ```properties ~/.config/microsoft-edge-dev-flags.conf
    --ignore-gpu-blocklist
    --enable-features=VaapiVideoDecoder
    --enable-accelerated-video-decode
    ```
-4. In Surface Devices:
+3. In Surface Devices:
    > I use KDE for more smooth experience
    * Instal linux-surface kernel
      ```console
@@ -646,30 +650,27 @@ Using `PRIME render offload` which was official method supported by NVIDIA
 ## Additional Packages
 
    ```plaintext
+   ## GNOME
    [AUR] gnome-shell-extension-appindicator
    [AUR] gnome-shell-extension-kimpanel-git
    [AUR] gnome-shell-extension-dash-to-dock
    [AUR] gnome-shell-extension-desktop-icons-ng
    [AUR] gnome-shell-extension-freon-git
-   gvfs-mtp
-   gpaste
-
-   snap-pac
 
    noto-fonts{,-cjk,-emoji}
-
-   xf86-video-intel
-   vulkan-intel
-   vulkan-tools
-   libva-utils
-   ^[AUR] libva-intel-driver-hybrid
-   ^intel-media-driver
-
-   pulseaudio-bluetooth
 
    [AUR] fcitx5-pinyin-zhwiki
    fcitx5-material-color
 
+   ## GPU
+   xf86-video-intel
+   vulkan-intel
+   vulkan-tools
+   libva-utils
+   intel-media-driver
+   ^[AUR] libva-intel-driver-hybrid
+
+   ## Misc
    bpytop
    htop
    docker
@@ -686,10 +687,10 @@ Using `PRIME render offload` which was official method supported by NVIDIA
    traceroute
    compsize
    wireguard-tools
-   picocom  ($ picocom -b 1500000 /dev/ttyUSB0, Ctrl-a Ctrl-q to quit)
+   picocom  # ($ picocom -b 1500000 /dev/ttyUSB0, Ctrl-a Ctrl-q to quit)
    [AUR] tealdeer
-   ncdu
    [AUR] cppman
+   ncdu
    openbsd-netcat
    bc
    p7zip
@@ -699,42 +700,31 @@ Using `PRIME render offload` which was official method supported by NVIDIA
    zsh-autosuggestions
    zsh-syntax-highlighting
    zsh-history-substring-search
-
-   npm
-   [AUR] hexo-cli
    
-   telegram-desktop
-   thunderbird
+   ## Desktop apps
    anki
+   blender
+   krita
+   libreoffice-still
+   mpv
+   obs-studio
    remmina
    - libvncserver
    - freerdp
-   v2ray
-   texlive-most
-   - [AUR] tllocalmgr-git
-   libreoffice-still
-   blender
-   krita
+   telegram-desktop
+   thunderbird
+
    [AUR] bitwarden
-   [AUR] qv2ray-dev-git
-   [AUR] v2ray-cap-git
-   [AUR] cgproxy
-
-   obs-studio
-   mpv
-   [AUR] visual-studio-code-bin
+   [AUR] yesplaymusic-electron
    [AUR] microsoft-edge-dev-bin
-   [AUR] xmind-2020
-   [AUR] netease-cloud-music-gtk
+   [AUR] qv2ray
+   [AUR] visual-studio-code-bin
 
+   ## Gaming
+   ## Yep, probably the fastest way to set up a 32 runtime environment
    steam
    - ttf-liberation
    - lib32-vulkan-intel
-
-   python-pip
-   python-matplotlib
-   python-pandas
-   python-seaborn
 
    lutris
    wine
@@ -749,29 +739,48 @@ Using `PRIME render offload` which was official method supported by NVIDIA
    - lib32-libxslt
    - lib32-gst-plugins-base-libs
 
-   [MATLAB]
+   python-pip
+   python-matplotlib
+   python-pandas
+   python-seaborn
+
+   npm
+   [AUR] hexo-cli
+
+   texlive-most
+   - [AUR] tllocalmgr-git
+
+   ## MATLAB
    libxcrypt-compat
    gtk2
 
+   ## KDE file shareing
+   ## This enable dolphin accesses fileshares of another Windows machine.
    samba
    kdenetwork-filesharing
    [AUR] wsdd2
 
+   ## Vim's things
+   ripgrep
+   fzf
    ctags
 
+   ## Systemd-nspawn bootstrap
    debootstrap
    ubuntu-keyring
 
+   ## VM
    virt-manager
    libvirt
    - dmidecode
    - dnsmasq
    - ebtables
-   - ^qemu
+   - edk2-ovmf
+   - qemu
      ^[AUR] qemu-user-static
-        [AUR] binfmt-qemu-static-all-arch
-   edk2-ovmf
+      - [AUR] binfmt-qemu-static-all-arch
 
+   [AUR] xray
    [AUR] v2raya
    [Archlinuxcn] fcitx5-pinyin-moegirl
    [AUR] syncthing-gtk
