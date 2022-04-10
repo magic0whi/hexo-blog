@@ -229,78 +229,93 @@ For Lenovo user, Enter `F12` for Boot Menu when on bootstrap stage
 
 ## Post-installation
 
-1. Random number generation
-   Enable Rng-tools
-   ```console
-   # systemctl enable rngd.service
-   ```
-2. Enable sshd
-   ```console
-   # systemctl enable sshd.service
-   ```
-3. Configurate zram-generator
-   Configuration
-   ```properties /etc/systemd/zram-generator.conf
-   [zram0]
-   zram-size = min(min(ram, 4096) + max(ram - 4096, 0) / 2, 32 * 1024)
-   compression-algorithm = zstd
-   ```
-   Applying changes
-   ```console
-   # systemctl daemon-reload
-   # systemctl restart systemd-zram-setup@zram0
-   ```
-4. Enable bluetooth
-   ```console
-   # systemctl enable bluetooth.service
-   ```
+### Random number generation
 
-   Bluetooth auto power-on after boot:
-   ```properties /etc/bluetooth/main.conf
-   [Policy]
-   AutoEnable=true
-   ```
-5. Enable [systemd-oomd](https://fedoraproject.org/wiki/Changes/EnableSystemdOomd)
-   ```console
-   # systemctl enable systemd-oomd.service
-   ```
-   Configure memory pressure killing (Here I set it slice wide to make it observable in `oomctl`):
-   ```console
-   # systemctl edit user.slice
-   ```
-   Have this in your editor:
-   ```properties
-   [Slice]
-   ManagedOOMMemoryPressure=kill
-   ManagedOOMMemoryPressureLimit=50%
-   ```
-   Configure swap-based killing:
-   ```console
-   sudo systemctl edit --force -- -.slice
-   ```
-   With this in your edior:
-   ```properties
-   [Slice]
-   ManagedOOMSwap=kill
-   ```
-   (Optional) See also [oomd.conf(5)](https://man.archlinux.org/man/oomd.conf.5.en):
-   ```properties /etc/systemd/oomd.conf
-   [OOM]
-   SwapUsedLimit=80%
-   DefaultMemoryPressureDurationSec=20s
-   ```
-   Furthmore, if you set `OOMPolicy=kill` to a service unit, when one of the process belong to this service is being killed by systemd-oomd, the whole service will also get killed (this option sets service's cgroup `memory.oom.group` to `1`, which means all tasks belonging to this cgroup were killed together).
-6. Archlinuxcn's repository
-   ```properties /etc/pacman.conf
-   [archlinuxcn]
-   Server = https://repo.archlinuxcn.org/$arch
-   ## or install archlinuxcn-mirrorlist-git and use the mirrorlist
-   #Include = /etc/pacman.d/archlinuxcn-mirrorlist
-   ```
-   Install archlinux-keyring
-   ```console
-   # pacman -S archlinuxcn-keyring
-   ```
+```console
+# systemctl enable rngd.service
+```
+
+### Enable sshd
+
+```console
+# systemctl enable sshd.service
+```
+
+### Configurate zram-generator
+
+Configuration
+```properties /etc/systemd/zram-generator.conf
+[zram0]
+zram-size = min(min(ram, 4096) + max(ram - 4096, 0) / 2, 32 * 1024)
+compression-algorithm = zstd
+```
+Applying changes
+```console
+# systemctl daemon-reload
+# systemctl restart systemd-zram-setup@zram0
+```
+
+### Enable bluetooth
+
+```console
+# systemctl enable bluetooth.service
+```
+Bluetooth auto power-on after boot:
+```properties /etc/bluetooth/main.conf
+[Policy]
+AutoEnable=true
+```
+
+### Userspace OOM daemon
+
+Enable [systemd-oomd](https://fedoraproject.org/wiki/Changes/EnableSystemdOomd)
+```console
+# systemctl enable systemd-oomd.service
+```
+
+Configure memory pressure killing (Here I set it slice wide to make it observable in `oomctl`):
+```console
+# systemctl edit user.slice
+```
+Have this in your editor:
+```properties
+[Slice]
+ManagedOOMMemoryPressure=kill
+ManagedOOMMemoryPressureLimit=50%
+```
+
+Configure swap-based killing:
+```console
+sudo systemctl edit --force -- -.slice
+```
+With this in your edior:
+```properties
+[Slice]
+ManagedOOMSwap=kill
+```
+
+(Optional) See also [oomd.conf(5)](https://man.archlinux.org/man/oomd.conf.5.en):
+```properties /etc/systemd/oomd.conf
+[OOM]
+SwapUsedLimit=80%
+DefaultMemoryPressureDurationSec=20s
+```
+
+Furthmore, you can set `OOMPolicy=kill` to a service unit, which says if one of the process belong to this service is being killed by systemd-oomd, the whole service will also get killed (this option sets service's cgroup `memory.oom.group` to `1`, which means all tasks belonging to this cgroup were killed together).
+
+### Archlinuxcn's repository
+
+```properties /etc/pacman.conf
+[archlinuxcn]
+Server = https://repo.archlinuxcn.org/$arch
+## or install archlinuxcn-mirrorlist-git and use the mirrorlist
+#Include = /etc/pacman.d/archlinuxcn-mirrorlist
+```
+
+Install archlinux-keyring:
+```console
+# pacman -S archlinuxcn-keyring
+```
 
 ### Swapfile in a btrfs filesystem within dm-crypt and hibernation support
 
