@@ -289,7 +289,7 @@ For Lenovo user, Enter `F12` for Boot Menu when on bootstrap stage
    SwapUsedLimit=80%
    DefaultMemoryPressureDurationSec=20s
    ```
-   Furthmore, if you set `OOMPolicy=kill` to a service unit, while one of the process belong to this service is being killed by systemd-oomd, the whole service will also get killed (this option sets service's cgroup `memory.oom.group` to `1`, which means all tasks belonging to this cgroup were killed together).
+   Furthmore, if you set `OOMPolicy=kill` to a service unit, when one of the process belong to this service is being killed by systemd-oomd, the whole service will also get killed (this option sets service's cgroup `memory.oom.group` to `1`, which means all tasks belonging to this cgroup were killed together).
 6. Archlinuxcn's repository
    ```properties /etc/pacman.conf
    [archlinuxcn]
