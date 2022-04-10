@@ -260,7 +260,37 @@ For Lenovo user, Enter `F12` for Boot Menu when on bootstrap stage
    [Policy]
    AutoEnable=true
    ```
-5. Archlinuxcn's repository
+5. Enable [systemd-oomd](https://fedoraproject.org/wiki/Changes/EnableSystemdOomd)
+   ```console
+   # systemctl enable systemd-oomd.service
+   ```
+   Configure memory pressure killing (Here I set it slice wide to make it observable in `oomctl`):
+   ```console
+   # systemctl edit user.slice
+   ```
+   Have this in your editor:
+   ```properties
+   [Slice]
+   ManagedOOMMemoryPressure=kill
+   ManagedOOMMemoryPressureLimit=50%
+   ```
+   Configure swap-based killing:
+   ```console
+   sudo systemctl edit --force -- -.slice
+   ```
+   With this in your edior:
+   ```properties
+   [Slice]
+   ManagedOOMSwap=kill
+   ```
+   (Optional) See also [oomd.conf(5)](https://man.archlinux.org/man/oomd.conf.5.en):
+   ```properties /etc/systemd/oomd.conf
+   [OOM]
+   SwapUsedLimit=80%
+   DefaultMemoryPressureDurationSec=20s
+   ```
+   Furthmore, if you set `OOMPolicy=kill` to a service unit, while one of the process belong to this service is being killed by systemd-oomd, the whole service will also get killed (this option sets service's cgroup `memory.oom.group` to `1`, which means all tasks belonging to this cgroup were killed together).
+6. Archlinuxcn's repository
    ```properties /etc/pacman.conf
    [archlinuxcn]
    Server = https://repo.archlinuxcn.org/$arch

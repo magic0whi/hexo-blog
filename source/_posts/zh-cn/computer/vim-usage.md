@@ -179,23 +179,19 @@ D    Delete a file or directory
 
 #### Setup
 
-Ripgrep is a search tool much like grep. It is generally faster than grep and has many useful features. Fzf is a general-purpose command-line fuzzy finder. You can use it with any commands, including ripgrep. Together, they make a powerful search tool combination.
+Ripgrep is a search tool much like grep. It is generally faster than grep and has many useful features.
+Fzf is a general-purpose command-line fuzzy finder.
 
-Fzf does not use ripgrep by default, so we need to tell fzf to use ripgrep by defining a FZF_DEFAULT_COMMAND variable. In my .zshrc (.bashrc if you use bash), I have these:
-
-```bash
+Using `ripgrep` in `Fzf`:
+```bash ~/.bashrc
 if type rg &> /dev/null; then
   export FZF_DEFAULT_COMMAND='rg --files'
-  export FZF_DEFAULT_OPTS='-m'
+  export FZF_DEFAULT_OPTS='-m' # Allow multiple selections with `<Tab>` or `<Shift-Tab>`.
 fi
 ```
 
-Pay attention to `-m` in `FZF_DEFAULT_OPTS`. This option allows us to make multiple selections with `<Tab>` or `<Shift-Tab>`.
-
-After installing fzf and ripgrep, let's set up the fzf plugin. I am using [vim-plug](https://github.com/junegunn/vim-plug) plugin manager in this example, but you can use any plugin managers.
-Add these inside your `.vimrc` plugins. You need to use fzf.vim plugin (created by the same fzf author).
-
-```plaintext
+I am using [vim-plug](https://github.com/junegunn/vim-plug) plugin manager.
+```plaintext ~/.vimrc
 call plug#begin()
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -214,13 +210,16 @@ To use fzf efficiently, you should learn some basic fzf syntax. Fortunately, the
 `|` is an "or" match. To search for either "friends" or "foes": `friends | foes`.
 `!` is an inverse match. To search for phrase containing "welcome" and not "friends": `welcome !friends`
 
-#### Finding Files
-
-To search for files inside Vim using fzf.vim plugin, run `:Files` from Vim and you will be prompted with fzf search prompt.
-
-#### Finding in Files
-
-To search inside files, you can use the `:Rg` command.
+<table>
+  <tr>
+    <td>:Files</td>
+    <td>Finding Files</td>
+  </tr>
+  <tr>
+    <td>:Rg</td>
+    <td>Finding in Files</td>
+  </tr>
+</table>
 
 #### Other Searches
 
@@ -242,44 +241,34 @@ nnoremap <silent> <Leader>h/ :History/<CR>
 
 #### Replacing Grep With Rg
 
-Now let's setup grepprg so that the :grep Vim command uses ripgrep. Add this in your vimrc:
-```plaintext
+```plaintext ~/.vimrc
 set grepprg=rg\ --vimgrep\ --smart-case\ --follow
 ```
 
-If you want to search for "donut" using ripgrep, you can now run a more succinct command `:grep "donut"` instead of `:grep "donut" . -R`
-
 #### Search and Replace in Multiple Files
 
-The first method is to replace all matching phrases in your project. You will need to use `:grep`. If you want to replace all instances of "pizza" with "donut", here's what you do:
+First method
 ```plaintext
 :grep "pizza"
 :cfdo %s/pizza/donut/g | update
 ```
 
-Let's break down the commands:
-
-`:grep pizza` uses ripgrep to search for all instances of "pizza" (by the way, this would still work even if you didn't reassign grepprg to use ripgrep. You would have to do `:grep "pizza" . -R` instead of `:grep "pizza"`).
-`:cfdo` executes any command you pass to all files in your quickfix list. In this case, your command is the substitution command `%s/pizza/donut/g`. The pipe (`|`) is a chain operator. The `update` command saves each file after substitution. I will cover the substitute command in more depth in a later chapter.
-
-The second method is to search and replace in selected files. With this method, you can manually choose which files you want to perform select-and-replace on. Here is what you do:
-Clear your buffers first. It is imperative that your buffer list contains only the files you want to apply the replace on. You can either restart Vim or run `:%bd | e#` command (`%bd` deletes all the buffers and `e#` opens the file you were just on).
-Run `:Files`.
-Select all files you want to perform search-and-replace on. To select multiple files, use `<Tab>` / `<Shift-Tab>`. This is only possible if you have the multiple flag (`-m`) in `FZF_DEFAULT_OPTS`.
-Run `:bufdo %s/pizza/donut/g | update`.
+Second method
+```plaintext
+:%bd | e#    "Its better to clean buffers, close all buffer except current file.
+:Files       "Select all files you want to perform search-and-replace on.
+:bufdo %s/pizza/donut/g | update
+```
 
 ## Ch04. Vim Grammar
 
 ### Grammar Rule
 
-There is only one grammar rule in Vim language:
-```plaintext
-verb + noun
-```
+There is only one grammar rule in Vim language: `verb + noun`
 
 ### Nouns (Motions)
 
-Nouns are Vim motions. Motions are used to move around in Vim. Below is a list of some of Vim motions:
+some of Vim motions:
 ```plaintext
 h    Left
 j    Down
@@ -299,56 +288,27 @@ d    Delete text and save to register
 c    Delete text, save to register, and start insert mode
 ```
 
-Btw, after you yank a text, you can paste it with `p` (after the cursor) or `P` (before the cursor).
-
 ### Verb and Noun
 
-Now that you know basic nouns and verbs, let's apply the grammar rule, verb + noun! Suppose you have this expression:
-```c++
-const learn = "vim";
+```plaintext
+y$    yank to the end of the line
+dw    delete to the beginning of the next word
+c}    change to the end of paragraph
+y2h   yank two characters to the left
+d2w   delete the next two words   
+c2j   change the next two lines
+dd    delete entire line
+yy    yank entire line
+cc    change entire line
 ```
-
-To yank everything from your current location to the end of the line: `y$`.
-To delete from your current location to the beginning of the next word: `dw`.
-To change from your current location to the end of the current paragraph, say `c}`.
-Motions also accept count number as arguments (I will discuss this in the next chapter). If you need to go up 3 lines, instead of pressing `k` 3 times, you can do `3k`. Count works with Vim grammar.
-
-To yank two characters to the left: `y2h`.
-To delete the next two words: `d2w`.
-To change the next two lines: `c2j`.
-
-In general, by typing an operator command twice, Vim performs a linewise operation for that action. For example, `dd`, `yy`, and `cc` perform deletion, yank, and change on the entire line.
 
 ### More Nouns (Text Objects)
 
-Text objects are used with operators. There are two types of text objects: inner and outer text objects.
+Two types of text objects:
 ```textplain
-i + object    Inner text object
-a + object    Outer text object
+i + object    Inner text object, select without the white space or the surrounding objects
+a + object    Outer text object, select including the white space or the surrounding objects
 ```
-
-Inner text object selects the object inside without the white space or the surrounding objects. Outer text object selects the object inside including the white space or the surrounding objects
-
-In the expression `(hello Vim)`:
-- To delete the text inside the parentheses without deleting the parentheses: `di(`.
-- To delete the parentheses and the text inside: `da(`.
-
-Suppose you have these HTML tags:
-```html
-<div>
-  <h1>Header1</h1>
-  <p>Paragraph1</p>
-  <p>Paragraph2</p>
-</div>
-```
-If your cursor is on "Header1" text:
-- To delete "Header1": `dit`.
-- To delete `<h1>Header1</h1>`: `dat`.
-
-If your cursor is on "div":
-- To delete h1 and both p lines: `dit`.
-- To delete everything: `dat`.
-- To delete "div": `di<`.
 
 Below is a list of common text objects:
 ```plaintext
@@ -365,9 +325,7 @@ t         XML tags
 `         A pair of ` `
 ```
 
-### Learn Vim Grammar the Smart Way
-
-One of my biggest Vim "AHA!" moment was when I had just learned about the uppercase (`gU`) operator and wanted to uppercase the current word, I *instinctively* ran `gUiw` and it worked!
+`gUiw` to uppercase current word
 
 ## Ch05. Moving in a File
 
@@ -383,10 +341,8 @@ gj  Down in a soft-wrapped line
 gk  Up in a soft-wrapped line
 ```
 
-You can also move with directional arrows. If you are just starting, feel free to use any method you're most comfortable with.
-
-I prefer hjkl because my right hand can stay in the home row. Doing this gives me shorter reach to surrounding keys. To get used to hjkl, I actually disabled the arrow buttons when starting out by adding these in ~/.vimrc:
-```plaintext
+Disable the arrow buttons
+```plaintext ~/.vimrc
 noremap <Up> <NOP>
 noremap <Down> <NOP>
 noremap <Left> <NOP>
@@ -395,8 +351,7 @@ noremap <Right> <NOP>
 
 ### Relative Numbering
 
-I think it is helpful to have number and relativenumber set. You can do it by having this on `.vimrc`:
-```textplain
+```textplain ~/.vimrc
 set relativenumber number
 ```
 
@@ -425,7 +380,6 @@ $     Go to the last char in the current line
 n|    Go the column n in the current line
 ```
 
-The difference between `f` and `t` is that `f` takes you to the first letter of the match and `t` takes you till (right before) the first letter of the match. So if you want to search for "h" and land on "h", use `fh`. If you want to search for first "h" and land right before the match, use `th`. If you want to go to the *next* occurrence of the last current line search, use `;`. To go to the previous occurrence of the last current line match, use `,`.
 ```plaintext
 f    Search forward for a match in the same line
 F    Search backward for a match in the same line
@@ -437,7 +391,8 @@ T    Search backward for a match in the same line, stopping before match
 
 ### Sentence and Paragraph Navigation
 
-A sentence ends with either `. ! ?` followed by an EOL, a space, or a tab. You can jump to the next sentence with `)` and the previous sentence with `(`.
+A sentence ends with either `. ! ?` followed by an EOL, a space, or a tab.
+
 ```plaintext
 (    Jump to the previous sentence
 )    Jump to the next sentence
@@ -448,8 +403,6 @@ A paragraph begins after each empty line and also at each set of a paragraph mac
 {    Jump to the previous paragraph
 }    Jump to the next paragraph
 ```
-
-If you're not sure what a paragraph macro is, do not worry. The important thing is that a paragraph begins and ends after an empty line. This should be true most of the time.
 
 ### Match Navigation
 
@@ -464,9 +417,8 @@ gg    Go to the first line
 G     Go to the last line
 nG    Go to line n
 n%    Go to n% in file
+Ctrl-g  see total lines in a file
 ```
-
-By the way, if you want to see total lines in a file, you can use `Ctrl-g.`
 
 ### Window Navigation
 
@@ -480,7 +432,6 @@ nL    Go n line from bottom
 
 ### Scrolling
 
-To scroll, you have 3 speed increments: full-screen (`Ctrl-F/Ctrl-B`), half-screen (`Ctrl-D/Ctrl-U`), and line (`Ctrl-E/Ctrl-Y`).
 ```plaintext
 Ctrl-E    Scroll down a line
 Ctrl-D    Scroll down half screen
@@ -506,15 +457,13 @@ n    Repeat last search in same direction of previous search
 N    Repeat last search in opposite direction of previous search
 ```
 
-You can enable search highlight with `set hlsearch`. It will highlight all matching phrases in the file. In addition, you can set incremental search with `set incsearch`. This will highlight the pattern while typing. By default, your matching phrases will remain highlighted until you search for another phrase. This can quickly turn into an annoyance. To disable highlight, you can run `:nohlsearch` or simply `:noh`. Because I use this no-highlight feature frequently, I created a map in vimrc:
-```plaintext
+```plaintext ~/.vimrc
+set hlsearch incsearch
 nnoremap <esc><esc> :noh<return><esc>
 ```
 
-You can quickly search for the text under the cursor with `*` to search forward and `#` to search backward. If your cursor is on the string "one", pressing `*` will be the same as if you had done `/\<one\>`.
-Both `\<` and `\>` in `/\<one\>` mean whole word search. It does not match "one" if it is a part of a bigger word. It will match for the word "one" but not "onetwo". If your cursor is over "one" and you want to search forward to match whole or partial words like "one" and "onetwo", you need to use `g*` instead of `*`.
 ```plaintext
-*     Search for whole word under cursor forward
+*     Search for whole word under cursor forward, same as type '/\<one\>'
 #     Search for whole word under cursor backward
 g*    Search for word under cursor forward
 g#    Search for word under cursor backward
@@ -522,7 +471,6 @@ g#    Search for word under cursor backward
 
 ### Marking Position
 
-You can use marks to save your current position and return to this position later. It's like a bookmark for text editing. You can set a mark with `mx`, where `x` can be any alphabetical letter `a-zA-Z`. There are two ways to return to mark: exact (line and column) with ```x`` and linewise (`'x`).
 ```plaintext
 ma    Mark position with mark "a"
 `a    Jump to line and column "a"
@@ -531,11 +479,8 @@ ma    Mark position with mark "a"
 
 There is a difference between marking with lowercase letters (a-z) and uppercase letters (A-Z). Lowercase alphabets are local marks and uppercase alphabets are global marks (sometimes known as file marks).
 
-Let's talk about local marks. Each buffer can have its own set of local marks. If I have two files opened, I can set a mark "a" (`ma`) in the first file and another mark "a" (`ma`) in the second file.
+To view all marks, use `:marks`.
 
-Unlike local marks where you can have a set of marks in each buffer, you only get one set of global marks. If you set mA inside myFile.txt, the next time you run mA in a different file, it will overwrite the first "A" mark. One advantage of global marks is you can jump to any global mark even if you are inside a completely different project. Global marks can travel across files.
-
-To view all marks, use `:marks`. You may notice from the marks list there are more marks other than `a-zA-Z`. Some of them are:
 ```plaintext
 ''    Jump back to the last line in current buffer before jump
 ``    Jump back to the last position in current buffer before jump
@@ -547,8 +492,6 @@ To view all marks, use `:marks`. You may notice from the marks list there are mo
 ```
 
 ### Jump
-
-In Vim, you can "jump" to a different file or different part of a file with some motions. Not all motions count as a jump, though. Going down with `j` does not count as a jump. Going to line 10 with 10G counts as a jump.
 
 Here are the commands Vim consider as "jump" commands:
 ```plaintext
@@ -573,11 +516,13 @@ H       Go to the top line of displayed window
 :tag    Jump to tag definition
 ```
 
-I don't recommend memorizing this list. A good rule of thumb is, any motion that moves farther than a word and current line navigation is probably a jump. Vim keeps track of where you've been when you move around and you can see this list inside `:jumps`.
-
-Why are jumps useful? Because you can navigate the jump list with `Ctrl-O` to move up the jump list and `Ctrl-I` to move down the jump list.
-
-You can manually add the current location to jump list with `m'` before movement. For example, `m'5j` adds current location to jump list and goes down 5 lines, and you can come back with `Ctrl-O`.
+Any motion that moves farther than a word and current line navigation is probably a jump.
+```
+:jumps    see this list.
+Ctrl-O    move up the jump list
+Ctrl-I    move down the jump list
+m'5j      addcurrent location to jump list, follows a move
+```
 
 ## Ch06. Insert Mode
 
@@ -611,8 +556,7 @@ You can pass a count parameter before entering insert mode. For example:
 ```plaintext
 10i
 ```
-
-If you type "hello world!" and exit insert mode, Vim will repeat the text 10 times. This will work with any insert mode method (ex: `10I`, `11a`, `12o`).
+Vim will repeat the text 10 times.
 
 ### Deleting Chunks in Insert Mode
 
@@ -624,11 +568,12 @@ Ctrl-u    Delete the entire line
 
 ### Insert From Register
 
-Vim registers can store texts for future use. To insert a text from any named register while in insert mode, type `Ctrl-R` plus the register symbol. There are many symbols you can use, but for this section, let's cover only the named registers (a-z).
-
-To see it in action, first you need to yank a word to register a. Move your cursor on any word. Then type:
 ```plaintext
-"ayiw
+Ctrl-R <register symbol>
+```
+
+```plaintext
+"ayiw    
 ```
 
 - `"a` tells Vim that the target of your next action will go to register a.
@@ -655,88 +600,31 @@ Ctrl-X Ctrl-L    Insert a whole line
 Ctrl-X Ctrl-N    Insert a text from current file
 Ctrl-X Ctrl-I    Insert a text from included files
 Ctrl-X Ctrl-F    Insert a file name
-```
-
-To navigate up and down the pop-up window, use `Ctrl-N` and `Ctrl-P`.
-
-Vim also has two autocompletion shortcuts that don't involve the Ctrl-X sub-mode:
-```plaintext
-Ctrl-N             Find the next word match
-Ctrl-P             Find the previous word match
+Ctrl-N/Ctrl-P    Navigate up/down the pop-up window
+Ctrl-N           Find the next word match
+Ctrl-P           Find the previous word match
 ```
 
 ### Executing a Normal Mode Command
 
-While in insert mode, if you press `Ctrl-O`, you'll be in insert-normal sub-mode. If you look at the mode indicator on bottom left, normally you will see -- INSERT --, but pressing `Ctrl-O` changes it to -- (insert) --. In this mode, you can do one normal mode command. Some things you can do:
-
-Centering and jumping
 ```plaintext
 Ctrl-O zz       Center window
 Ctrl-O H/M/L    Jump to top/middle/bottom window
 Ctrl-O 'a       Jump to mark a
-```
-
-Repeating text
-```plaintext
 Ctrl-O 100ihello    Insert "hello" 100 times
-```
-
-Executing terminal commands
-```plaintext
 Ctrl-O !! curl https://google.com    Run curl
 Ctrl-O !! pwd                        Run pwd
-```
-
-Deleting faster
-```plaintext
 Ctrl-O dtz    Delete from current location till the letter "z"
 Ctrl-O D      Delete from current location to the end of the line
 ```
 
 ## Ch07. the Dot Command
 
-### Usage
-
-If you want to replace all "let" with "const" in the following expressions:
-```plaintext
-let one = "1";
-let two = "2";
-let three = "3";
-```
-
-Search with `/let` to go to the match.
-Change with `cwconst<Esc>` to replace "let" with "const".
-Navigate with `n` to find the next match using the previous search.
-Repeat what you just did with the dot command (`.`).
-Continue pressing `n . n .` until you replace every word.
-Here the dot command repeated the `cwconst<Esc>` sequence. It saved you from typing eight keystrokes in exchange for just one.
-
 ### What Is a Change?
-
-If you look at the definition of the dot command (`:h .`), it says that the dot command repeats the last change. What is a change?
 
 Any time you update (add, modify, or delete) the content of the current buffer, you are making a change. The exceptions are updates done by command-line commands (the commands starting with `:`) do not count as a change.
 
-Let's try another example:
-```plaintext
-pancake, potatoes, fruit-juice,
-```
-This time, your task is to delete the comma, not the breakfast items. With the cursor at the beginning of the line, go to the first comma, delete it, then repeat two more times with `f,x..` Easy, right? Wait a minute, it didn't work! Why?
-
-A change excludes motions because it does not update buffer content. The command `f,x` consisted of two actions: the command `f`, to move the cursor to "," and `x` to delete a character. Only the latter, `x`, caused a change. Contrast that with `df`, from the earlier example. In it, `f`, is a directive to the delete operator `d`, not a motion to move the cursor. The `f`, in `df`, and `f,x` have two very different roles.
-
-Let's finish the last task. After you run `f`, then `x`, go to the next comma with `;` to repeat the latest `f`. Finally, use `.` to delete the character under the cursor. Repeat `; . ; .` until everything is deleted. The full command is `f,x;.;.`.
-
-Let's try another one:
-```plaintext
-pancake
-potatoes
-fruit-juice
-```
-
-Let's add a comma at the end of each line. Starting at the first line, do `A,<Esc>j`. By now, you realize that `j` does not cause a change. The change here is only `A,`. You can move and repeat the change with `j . j .`. The full command is `A,<Esc>j.j.`.
-
-Every action from the moment you press the insert command operator (`A`) until you exit the insert command (`<Esc>`) is considered as a change.
+Every action from the moment you press the insert command operator until you exit the insert command is considered as a change.
 
 ### Multi-line Repeat
 
