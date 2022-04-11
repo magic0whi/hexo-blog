@@ -94,6 +94,7 @@ Pending Mods (Management): None.
 | Entity Culling Fabric/Forge | [entityculling-fabric-mc1.18-1.5.0.jar](https://www.curseforge.com/minecraft/mc-mods/entityculling/files/all) | Feb 9, 2022 |
 | Sodium | [sodium-fabric-mc1.18.2-0.4.1+build.15.jar](https://modrinth.com/mod/sodium/versions) | Mar 2, 2022 |
 | Sodium Extra | [sodium-extra-mc1.18.2-0.4.2.jar](https://modrinth.com/mod/sodium-extra/versions) | Mar 9, 2022 |
+| Reese's Sodium Options | [reeses_sodium_options-mc1.18.2-1.4.2.jar](https://modrinth.com/mod/reeses-sodium-options/versions) | Mar 9, 2022 |
 | Indium | [indium-1.0.2+mc1.18.2.jar](https://modrinth.com/mod/indium/versions) | Mar 2, 2022 |
 | Baritone | [baritone-standalone-fabric-1.8.3.jar](https://github.com/cabaletta/baritone/releases) | Mar 9, 2021 |
 | Advanced XRay (Fabric Edition) | [advanced-xray-fabric-1.18.2-1.0.0-build.11.jar](https://www.curseforge.com/minecraft/mc-mods/advanced-xray-fabric-edition/files/all) | Mar 27, 2022 |

@@ -719,6 +719,8 @@ Using `PRIME render offload` which was official method supported by NVIDIA
    [AUR] microsoft-edge-dev-bin
    [AUR] qv2ray
    [AUR] visual-studio-code-bin
+   - gnome-keyring # required to store vscode login token
+   - seahorse      # GUI to manage keyring
 
    ## Gaming
    ## Yep, probably the fastest way to set up a 32 runtime environment
