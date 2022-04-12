@@ -163,3 +163,41 @@ article.article .content {
      $$
      Hence formula (1.2.4) holds for all \(n\in\mathbb{Z}^+\).
    </details>
+
+#### Important Special Cases
+
+1. There are two special cases of (1.2.2), one of them is
+   <div>
+   $$
+   \tag{1.2.5}
+   y(n+1)=ay(n)+g(n),\quad y(0)=y_0
+   $$
+   Using formula (1.2.4) may establish that
+   $$
+   \tag{1.2.6}
+   y(n)=a^ny_0+\sum_{k=0}^{n-1}a^{n-k-1}g(k)
+   $$
+   </div>
+2. The another one is
+   <div>
+   $$
+   \tag{1.2.7}
+   y(n+1)=ay(n)+b,\quad y(0)=y_0
+   $$
+   Using formula (1.2.6) we obtain
+   $$
+   y=\begin{cases}
+     a^ny_0+b\dfrac{a^n-1}{a-1} & \text{if $a\neq 1$,} \\
+                        y_0+bn & \text{if $a=1$.}
+   \end{cases}
+   $$
+   Notice here we used the sum formula of the Geometric Series: \(S_n=\dfrac{a_1(1-q^n)}{1-q}\), in \(\sum_{k=0}^{n-1}a^{n-k-1}=a^{n-1}+\cdots+a^0\) we know \(a_1=a^0=1\) and \(q=a\).
+   </div>
+3. The solution of the nonhomogeneous differential equation \\(\dfrac{\mathrm{d}y}{\mathrm{d}t}=ay(t)+g(t)\\), \\(y(0)=y_0\\) is given by \\(y(t)=e^{at}y_0+\int_0^t e^{a(t-s)}g(s)\mathrm{d}s\\).
+   <details>
+     <summary><span class="list-summary">&dagger; Details &dagger;</span></summary>
+     Here we using the complete solution of first-order nonhomogeneous differential equation, which is the hard one to prove in calculus courses.
+     Current I am work in progess to try to make it as clear as possible...
+     If you can read chinese, you can go to the obscure prove in the <a href="{% post_path postgraduate-advanced-mathematics %}#齐次微分方程">同济高等数学笔记整合(上)</a>
+     TODO
+   </details>
