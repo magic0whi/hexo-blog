@@ -198,7 +198,7 @@ article.article .content {
      <summary><span class="list-summary">&dagger; Details &dagger;</span></summary>
      Here we using the complete solution of first-order nonhomogeneous differential equation, which is the hard one to explain in calculus courses.
      <br>
-     However, we can prove it in a forward way by take derivatives of the solution:
+     However, we can prove it in a forward way by taking derivatives of the solution:
      $$
      \begin{alignedat}{1}
        y^\prime(t)=\frac{\mathrm{d}y}{\mathrm{d}t}= & ae^{at}y_0+\left[e^{at}\int_0^t e^{-as}g(s)\mathrm{d}s\right]^\prime \\
