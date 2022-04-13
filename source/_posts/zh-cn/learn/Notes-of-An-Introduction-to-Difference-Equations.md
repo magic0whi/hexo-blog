@@ -196,8 +196,19 @@ article.article .content {
 3. The solution of the nonhomogeneous differential equation \\(\dfrac{\mathrm{d}y}{\mathrm{d}t}=ay(t)+g(t)\\), \\(y(0)=y_0\\) is given by \\(y(t)=e^{at}y_0+\int_0^t e^{a(t-s)}g(s)\mathrm{d}s\\).
    <details>
      <summary><span class="list-summary">&dagger; Details &dagger;</span></summary>
-     Here we using the complete solution of first-order nonhomogeneous differential equation, which is the hard one to prove in calculus courses.
-     Current I am work in progess to try to make it as clear as possible...
-     If you can read chinese, you can go to the obscure prove in the <a href="{% post_path postgraduate-advanced-mathematics %}#齐次微分方程">同济高等数学笔记整合(上)</a>
-     TODO
+     Here we using the complete solution of first-order nonhomogeneous differential equation, which is the hard one to explain in calculus courses.
+     <br>
+     However, we can prove it in a forward way by take derivatives of the solution:
+     $$
+     \begin{alignedat}{1}
+       y^\prime(t)=\frac{\mathrm{d}y}{\mathrm{d}t}= & ae^{at}y_0+\left[e^{at}\int_0^t e^{-as}g(s)\mathrm{d}s\right]^\prime \\
+       = & ae^{at}y_0+(e^{at})^\prime\int_0^t e^{-as}g(s)\mathrm{d}s+e^{at}\left[\int_0^t e^{-as}g(s)\mathrm{d}s\right]^\prime \\
+       = & ae^{at}y_0+ae^{at}\int_0^t e^{-as}g(s)\mathrm{d}s+e^{at}\underbrace{\left[\int_0^t e^{-as}g(s)\mathrm{d}s\right]^\prime}_{\text{Let }F^\prime(x)=f(x)=e^{-ax}g(x)} \\
+       = & ae^{at}y_0+ae^{at}\int_0^t e^{-as}g(s)\mathrm{d}s+e^{at}[F(t)-F(0)]^\prime \\
+       = & ae^{at}y_0+ae^{at}\int_0^t e^{-as}g(s)\mathrm{d}s+e^{at}[e^{-at}g(t)] \\
+       = & ae^{at}y_0+ae^{at}\int_0^t e^{-as}g(s)\mathrm{d}s+g(t) \\
+       = & a\left[a^{at}y_0+\int_0^t e^{a(t-s)}g(s)\mathrm{d}s\right]+g(t) \\
+       = & ay(t)+g(t)
+     \end{alignedat}
+     $$
    </details>
