@@ -20,6 +20,10 @@ TODO: works to be merged
 `<c-o,i>`, Jump old / newer position.
 `<c-^>` Go to previously edited buffer.
 `:tag`    Jump to tag definition
+`:t` (copy) method copys all matches to an address.
+`:j` join command join the lines
+`sort` sort command sort the lines
+
 
 ## Ch 02 - Buffers, Windows, and Tabs
 
@@ -75,11 +79,11 @@ TODO: works to be merged
 ### Fzf
 
 Fzf syntax:
-* `^` prefix exact match. e.g. `^welcome`.
-* `$` suffix exact match. e.g. `friends$`.
-* `'` exact match. e.g. `'welcome my friends`.
-* `|` "or" match. e.g. `friends | foes`.
-* `!` inverse match. e.g. `welcome !friends`
+- `^` prefix exact match. e.g. `^welcome`.
+- `$` suffix exact match. e.g. `friends$`.
+- `'` exact match. e.g. `'welcome my friends`.
+- `|` "or" match. e.g. `friends | foes`.
+- `!` inverse match. e.g. `welcome !friends`
 
 | `:Files` or `<c-f>`      | Find files                                      |
 |---------------------|-------------------------------------------------|
@@ -118,6 +122,9 @@ There is only one grammar rule in Vim language: `Verb (Operator) + Noun (Motion)
 |-------|------------------------------------------------------|
 | `d`   | Delete text and save to register                     |
 | `c`   | Delete text, save to register, and start insert mode |
+| `~`   | Toggle the case of the character under the cursor    |
+| `gU`  | Uppercase text                                       |
+| `gu`  | Lowercase text                                       |
 | `yy`  | yank entire line                                     |
 | `dd`  | delete entire line                                   |
 | `cc`  | change entire line                                   |
@@ -131,8 +138,8 @@ There is only one grammar rule in Vim language: `Verb (Operator) + Noun (Motion)
 ### More Nouns (Text Objects)
 
 Two types of text objects:
-* `i + object`    Inner text object, select without the white space or the surrounding objects
-* `a + object`    Outer text object, select including the white space or the surrounding objects
+- `i + object`    Inner text object, select without the white space or the surrounding objects
+- `a + object`    Outer text object, select including the white space or the surrounding objects
 
 e.g. `gUiw` to uppercase current word.
 
@@ -214,11 +221,12 @@ A paragraph begins after each empty line and also at each set of a paragraph mac
 | `/` / `?`           | Search forward / backward for a match                               |
 |---------------------|---------------------------------------------------------------------|
 | `n` / `N`           | Repeat last search in same / opposite direction of previous search  |
-| `:noh` `<esc><esc>` | Turn off match highlights                                           |
+| `:noh` or `<esc><esc>` | Turn off match highlights                                           |
 | `*`                 | Search for whole word under cursor forward, same as type `/\<one\>` |
 | `#`                 | Search for whole word under cursor backward                         |
 | `g*`                | Search for word under cursor forward                                |
 | `g#`                | Search for word under cursor backward                               |
+| `gn`                | Searches forward for the last search pattern and do a visual selection |
 
 ### Marking Position
 
@@ -271,10 +279,7 @@ There are a few different ways to return to the normal mode while in the insert 
 
 ### Deleting Chunks in Insert Mode
 
-| `c-h` | Delete one char    |
-|-------|--------------------|
-| `c-w` | Delete one word    |
-| `c-u` | Delete entire line |
+`<c-h,w,u>`: Delete one char / one word / entire line
 
 ### Insert From Register
 
@@ -282,13 +287,12 @@ There are a few different ways to return to the normal mode while in the insert 
 
 ### Scrolling Inside Insert Mode
 
-`<c-x> <c-y>`: Scroll up
-`<c-x> <c-e>`: Scroll down
+`<c-x> <c-y,e>`: Scroll up / down
 
 ### Autocompletion
 
-`<c-x> <c-l,n,i,f>`: Insert a whole line / a text from current file / a text from included files / a file name
-`c-n` / `c-p`: Find the next / previous word match, or navigate up / down the pop-up completion menu
+`<c-x> <c-l,n,i,f>`: Insert a whole line / a text from current file / a text from included files / a filename
+`<c-n,p>`: Find the next / previous word match, or navigate up / down the pop-up completion menu
 
 ### Executing a Normal Mode Command
 
@@ -320,8 +324,7 @@ zlet zztwo = "2";
 zlet zzthree = "3";
 let four = "4";
 ```
-
-Let's remove all the z's. Starting from the first character on the first line, visually select only the first z from the first three lines with blockwise visual mode (`Ctrl-Vjj`). If you're not familiar with blockwise visual mode, I will cover them in a later chapter. Once you have the three z's visually selected, delete them with the delete operator (`d`). Then move to the next word (`w`) to the next z. Repeat the change two more times (`..`). The full command is `Ctrl-vjjdw..`.
+Let's remove all the z's. `<c-v>jjdw..`
 
 ### Including a Motion in a Change
 
@@ -331,85 +334,63 @@ let one = "1";
 let two = "2";
 let three = "3";
 ```
-There is a faster way to accomplish this. After you searched `/let`, run `cgnconst<Esc>` then `. .`.
-
-`gn` is a motion that searches forward for the last search pattern (in this case, `/let`) and automatically does a visual highlight.
+To accomplish this. After you searched `/let`, run `cgnconst<esc>..`.
 
 ## Ch08. Registers
 
-The Ten Register Types
-1. The unnamed register (`""`).
-2. The numbered registers (`"0-9`).
-3. The small delete register (`"-`).
-4. The named registers (`"a-z`).
-5. The read-only registers (`":`, `".`,and `"%`).
-6. The alternate file register (`"#`).
-7. The expression register (`"=`).
-8. The selection registers (`"*` and `"+`).
-9. The black hole register (`"_`).
-10. The last search pattern register (`"/`).
+The Ten Register Types:
+1. The unnamed register (`"`).
+2. The numbered registers (`0-9`).
+3. The small delete register (`-`).
+4. The named registers (`a-z`).
+5. The read-only registers (`:`, `.`, and `%`).
+6. The alternate file register (`#`).
+7. The expression register (`=`).
+8. The selection registers (`*` and `+`).
+9. The black hole register (`_`).
+10. The last search pattern register (`/`).
 
 ### Register Operators
 
-To use registers, you need to first store them with operators. Here are some operators that store values to registers:
-```plaintext
-y    Yank (copy)
-c    Delete text and start insert mode
-d    Delete text
-p    Paste the text after the cursor
-P    Paste the text before the cursor
-10"ap  Paste text in register a ten times
-```
-
-### Calling Registers From Insert Mode
-
-The syntax to call register a from insert mode is:
-```plaintext
-Ctrl-R a
-```
+| `"a`      | To access / store text into register `a` |
+|-----------|------------------------------------------|
+| `p` / `P` | Paste the text after / before the cursor |
+| `10"ap`   | Paste text in register a ten times       |
+| `"ayiw`   | To yank a word into register `a`         |
 
 ### The Unnamed Register
 
 It stores the last text you yanked, changed, or deleted.
 
-By default, `p` (or `P`) is connected to the unnamed register.
+By default, `p` / `P` is connected to the unnamed register.
 
 ### The Numbered Registers
 
 #### The Yanked Register
 
 If you yank an entire line of text (`yy`), Vim actually saves that text in two registers:
-
-1. The unnamed register (`p`).
-2. The yanked register (`"0p`).
-
-Any other operations (like delete) will not be stored in register 0.
+1. The unnamed register (`"`).
+2. The yanked / zero register (`0`).
 
 #### The Non-zero Numbered Registers
 
 When you change or delete a text that is at least **one line long**, that text will be stored in the numbered registers 1-9 sorted by the most recent.
 
-As a side note, these numbered registers are automatically incremented when using the dot command.
+As a side note, these numbered registers are automatically incremented when using the dot command `.`.
 
 ### The Small Delete Register
 
-Changes or deletions less than one line are not stored in the numbered registers 0-9, but in the small delete register (`"-`).
+Changes or deletions **less than one line** are not stored in the numbered registers 0-9, but in the small delete register (`-`).
 
 ### The Named Register
 
-To yank a word into register a, you can do it with `"ayiw`.
-- `"a` tells Vim that the next action (delete / change / yank) will be stored in register a.
-- `yiw` yanks the word.
-
-Sometimes you may want to add to your existing named register. In this case, you can append your text instead of starting all over. To do that, you can use the uppercase version of that register. For example, suppose you have the word "Hello " already stored in register a. If you want to add "world" into register a, you can find the text "world" and yank it using A register (`"Ayiw`).
+You can append your text to the register. Using the uppercase version of that register. For example, suppose you have the word "Hello " already stored in register `a`. If you want to add "world" into register `a`, you can find the text "world" and yank it using A register (`"Ayiw`).
 
 ### The Read-only Registers
 
-```plaintext
-.    Stores the last inserted text
-:    Stores the last executed command-line
-%    Stores the name of current file
-```
+- `.` stores the last inserted text
+- `:` stores the last executed command-line
+- `%` stores the name of current file
 
 ### The Alternate File Register
 
@@ -417,53 +398,37 @@ In Vim, `#` usually represents the alternate file. An alternative file is the la
 
 ### The Expression Register
 
-```plaintext
-"=1+1<Enter>p
-Ctrl-R =1+1    Evaluate mathematical expression from insert mode
-```
-
-You can also get the values from any register via the expression register when appended with `@`. If you wish to get the text from register a:
-```plaintext
-"=@a<Enter>p
-```
-
-Similarly, to get values from register a while in insert mode:
-```plaintext
-Ctrl-r =@a
-```
+`"=1+1<enter>p` / `Ctrl-R =1+1`: Evaluate mathematical expression "1+1" and paste it / from insert mode
+`"=@a<enter>p` / `Ctrl-r =@a`: Get values from register `a` and paste it / from insert mode
 
 ### The Selection Registers
 
-Vim has two selection registers: `quotestar` (`"*`) and `quoteplus` (`"+`). You can use them to access copied text from external programs.
+Vim has two selection registers: star (`*`) and plus (`+`). You can use them to access copied text from external programs.
 
-If you yank a word from Vim with `"+yiw` or `"*yiw`, you can paste that text in the external program with `Ctrl-V` (or `Cmd-V`). Note that this only works if your Vim program comes with the `+clipboard` option (to check it, run `:version`).
+If you yank a word from Vim with `"+yiw` or `"*yiw`, you can paste that text in the external program with `<c-v>`. Note that this only works if your Vim program comes with the `+clipboard` option (to check it, run `:version`).
 
 ### The Black Hole Register
 
-You can use the black hole register (`"_`). To delete a line and not have Vim store the deleted line into any register, use `"_dd`.
+You can use the black hole register (`_`). To delete a line and not have Vim store the deleted line into any register, use `"_dd`.
 
 ### The Last Search Pattern Register
 
-To paste your last search (`/` or `?`), you can use the last search pattern register (`"/`). To paste the last search term, use `"/p`.
+`"/p`: Paste your last search (`/` or `?`)
 
 ### Viewing the Registers
 
-To view all your registers, use the `:register` command. To view only registers "a, "1, and "-, use `:register a 1 -`.
-
-There is a plugin called [vim-peekaboo](https://github.com/junegunn/vim-peekaboo) that lets you to peek into the contents of the registers when you hit `"` or `@` in normal mode and `Ctrl-R` in insert mode.
+To view all your registers, use the `:register` command. To view only registers `a`, `1`, and `-`, use `:register a 1 -`.
 
 ### Clearing a Register
 
-- `qaq`
+- `qaq` Using Macro recording
 - `:call setreg('a', 'hello world')`
 - `:let @a = ''`
 
-### Putting the Content of a Register
+### Putting the Content of a Register (Command-line)
 
-```plaintext
-:10put a    Paste text from register a to below line 10.
-:g/end/put _    Insert blank lines below all lines contain the text "end", by using black hole register
-```
+`:10put a`: Paste text from register `a` to below line 10.
+`:g/end/put _`: Insert blank lines below all lines contain the text "end", by using black hole register
 
 ## Ch09. Macros
 
@@ -494,13 +459,30 @@ To replay it, run `@a`. Just like many other Vim commands, you can pass a count 
 
 ### Command Line Macro
 
+`:2,3 normal @a`: execute macro between lines 2 and 3, `:normal` allows the user to execute any normal mode command passed as argument.
+
+### Recursive Macro
+
+Suppose you have this list again and you need to toggle the case of the first word:
 ```plaintext
-:2,3 normal @a    execute macro between lines 2 and 3, ':normal' allows the user to execute any normal mode command passed as argument.
+a. chocolate donut
+b. mochi donut
+c. powdered sugar donut
+d. plain donut
 ```
+
+This time, let's do it recursively:
+```plaintext
+qaqqa0W~j@aq
+```
+
+Now you can just run `@a` and watch Vim execute the macro recursively.
+
+How did the macro know when to stop? When the macro was on the last line, it tried to run `j`, since there was no more line to go to, it stopped the macro execution.
 
 ### Executing a Macro Across Multiple Files
 
-Suppose you have multiple `.txt` files, each contains some texts. Your task is to uppercase the first word only on lines containing the word "donut". Assume you have `0W~j` in register a (the same macro as before). How can you quickly accomplish this?
+Suppose you have three txt files. Your task is to uppercase the first word only on lines containing the word "donut". Assume you have `0W~j` in register `a`. How can you quickly accomplish this?
 
 First file:
 ```plaintext
@@ -526,80 +508,32 @@ b. plain donut
 ```
 
 Here is how you can do it:
-- `:args *.txt` to find all `.txt` files in your current directory.
-- `:argdo g/donut/normal @a` executes the global command `g/donut/normal @a` on each file inside `:args`.
-- `:argdo update` executes `update` command to save each file inside `:args` when the buffer has been modified.
-
-### Recursive Macro
-
-You can recursively execute a macro by calling the same macro register while recording that macro. Suppose you have this list again and you need to toggle the case of the first word:
-```plaintext
-a. chocolate donut
-b. mochi donut
-c. powdered sugar donut
-d. plain donut
-```
-
-This time, let's do it recursively. Run:
-```plaintext
-qaqqa0W~j@aq
-```
-
-Here is the breakdown of the steps:
-- `qaq` records an empty macro a. It is necessary to start with an empty register because when you recursively call the macro, it will run whatever is in that register.
-- `qa` starts recording on register a.
-- `0` goes to the first character in the current line.
-- `W` goes to the next WORD.
-- `~` toggles the case of the character under the cursor.
-- `j` goes down one line.
-- `@a` executes macro a.
-- `q` stops recording.
-
-Now you can just run `@a` and watch Vim execute the macro recursively.
-
-How did the macro know when to stop? When the macro was on the last line, it triedto run `j`, since there was no more line to go to, it stopped the macro execution.
+1. `:args *.txt` to find all `.txt` files in your current directory and store in list `:args`.
+2. `:argdo g/donut/normal @a` executes the global command `g/donut/normal @a` on each file inside `:args`.
+3. `:argdo update` executes `update` command to save each file inside`:args` when the buffer has been modified.
 
 ### Appending a Macro
 
-Record a macro in register a: `qa0W~q` (this sequence toggles the case of the next WORD in a line). If you want to append a new sequence to also add a dot at the end of the line, run:
-```plaintext
-qAA.<Esc>q
-```
+Use the uppercase of registers to append a macro.
 
-The breakdown:
-- `qA` starts recording the macro in register A.
-- `A.<Esc>` inserts at the end of the line (here `A` is the insert mode command, not to be confused with the macro A) a dot, then exits insert mode.
-- `q` stops recording macro.
-
-Now when you execute `@a`, it not only toggles the case of the next WORD, it also adds a dot at the end of the line.
+e.g. `qAiHello<esc>q`
 
 ### Amending a Macro
 
-Suppose that between uppercasing the first word and adding a period at the end of the line, you need to add the word "deep fried" right before the word "donut" *(because the only thing better than regular donuts are deep fried donuts)*.
-
-```plaintext
-a. chocolate donut
-b. mochi donut
-c. powdered sugar donut
-d. plain donut
-```
-
-First, let's call the existing macro with `:put a`:
-```plaintext
-0W~A.^[
-```
-You can't literally type `<Esc>`. You will have to write the internal code representation for the `<Esc>` key. While in insert mode, you press `Ctrl-V` followed by `<Esc>`. Vim will print `^[`. `Ctrl-V` is an insert mode operator to insert the next non-digit character *literally*. Your macro code should look like this now:
-```plaintext
-0W~$bideep fried ^[A.^[
-```
-At the start of the line, run `"ay$` to store the yanked text in register a.
+For example:
+1. First `:put a` to put macro's contexts in register `a`.
+2. Change the macro's context as usual text. Be aware that some operations like `<esc>`, you can't literally type `<esc>`. To achieve that, (in insert mode) press `<c-v>` followed by `<esc>`. Vim will print `^[`, this is the internal code representation for the `<esc>` key.
+3. Yank the text into register `a`, such as `0"ay$`.
 
 ### Macro Redundancy
 
-You can easily duplicate macros from one register to another. For example, to duplicate a macro in register a to register z, you can do `:let @z = @a`. `@a` represents the content of register a.
+`:let @z = @a`. `@a` to duplicate a macro in register a to register z,
 
 ### Series vs Parallel Macro
 
+TL; DR: Using command-line `:normal` and specify a range, e.g. `:1,$ normal @a`.
+
+You want lowercase all the uppercased "FUNC", then you record this macro `qa0f{gui{jq`:
 ```plaintext
 import { FUNC1 } from "library1";
 import { FUNC2 } from "library2";
@@ -608,161 +542,87 @@ import foo from "bar";
 import { FUNC4 } from "library4";
 import { FUNC5 } from "library5";
 ```
-
-If you want to record a macro to lowercase all the uppercased "FUNC", this macro should work:
-```platintext
-qa0f{gui{jq
-```
-
-Running `99@a`, only executes the macro three times. It does not execute the macro on last two lines because the execution fails to run `f{` on the "foo" line. This is expected when running the macro in series. You can always go to the next line where "FUNC4" is and replay that macro again. But what if you want to get everything done in one go?
+Running `99@a`, only executes the macro three times. It does not execute the macro on last two lines because the execution fails to run `f{` on the "foo" line. You can always go to the next line where "FUNC4" is and replay that macro again. But what if you want to get everything done in one go?
 
 Run the macro in parallel.
 
-Recall from earlier section that macros can be executed using the  command line command `:normal` (ex: `:3,5 normal @a` executes macro a on lines 3-5). If you run `:1,$ normal @a`, you will see that the macro is being executed on all lines except the "foo" line. It works!
+Recall from earlier section that macros can be executed using the command-line command `:normal`. If you run `:1,$ normal @a`, you will see that the macro is being executed on all lines except the "foo" line. It works!
 
 ## Ch10. Undo
 
 ### Breaking the Blocks
 
-`Ctrl-G u` creates undo break in insert mode.
-
-It is also useful to create an undo breakpoint when deleting chunks in insert mode with `Ctrl-W` (delete the word before the cursor) and `Ctrl-U` (delete all text before the cursor). A friend suggested to use the following maps:
-```plaintext
-inoremap <c-u> <c-g>u<c-u>
-inoremap <c-w> <c-g>u<c-w>
-```
-
-With these, you can easily recover the deleted texts.
+`<c-g> u` creates undo break in insert mode.
 
 ### Undo Tree
 
-In Vim, every time you press `u` and then make a different change, Vim stores the previous state's text by creating an "undo branch". In this example, after you typed "two", then pressed `u`, then typed "three", you created an leaf branch that stores the state containing the text "two". At that moment, the undo tree contained at least two leaf nodes: the main node containing the text "three" (most recent) and the undo branch node containing the text "two". If you had done another undo and typed the text "four", you would have at three nodes: a main node containing the text "four" and two nodes containing the texts "three" and "two".
+In Vim, every time you press `u` and then make a different change, Vim stores the previous state's text by creating an "undo branch".
 
-To traverse each undo tree nodes, you can use `g+` to go to a newer state and `g-` to go to an older state. The difference between `u`, `Ctrl-R`, `g+`, and `g-` is that both `u` and `Ctrl-R` traverse only the *main* nodes in undo tree while `g+` and `g-` traverse *all* nodes in the undo tree.
+Traverse undo tree
+`g+` / `g-`: Go to a newer / older state
+
+Both `u` and `<c-r>` traverse only the *main* nodes in undo tree while `g+` and `g-` traverse *all* nodes in the undo tree.
 
 [vim-mundo](https://github.com/simnalamburt/vim-mundo) plugin is very useful to help visualize Vim's undo tree.
 
 ### Persistent Undo
 
-```plaintext
-:wundo file.undo  save undo file
-:rundo file.undo  load undo file
-```
-
-If you want to have an automatic undo persistence, one way to do it is by adding these in vimrc:
-```plaintext
-set undodir=~/.vim/undo_dir
-set undofile
-```
-make sure that you create the actual `undo_dir` directory inside `~/.vim` directory.
+`:wundo file.undo`:  save undo file
+`:rundo file.undo`:  load undo file
 
 ### Time Travel
 
-You can use `:undolist` to see when the last change was made.
-
-```plaintext
-:earlier 10s    Go to the state 10 seconds before
-:earlier 10m    Go to the state 10 minutes before
-:earlier 10h    Go to the state 10 hours before
-:earlier 10d    Go to the state 10 days before
-:later 10s    go to the state 10 seconds later
-:later 10m    go to the state 10 minutes later
-:later 10h    go to the state 10 hours later
-:later 10d    go to the state 10 days later
-:later 10     go to the newer state 10 times
-:later 10f    go to the state 10 saves later
-```
+| `:undolist`                           | See undo list.                                                            |
+|---------------------------------------|---------------------------------------------------------------------------|
+| `:earlier 10`,`10f`,`10s`,`10m`,`10d` | Go to the state 10 times / saves / seconds / minutes / hours / days older |
+| `:later 10`                           | Go to the state 10 times newer                                            |
 
 ## Ch11. Visual Mode
 
 ### The Three Types of Visual Modes
 
-```
-v         Character-wise visual mode
-V         Line-wise visual mode
-Ctrl-V    Block-wise visual mode
-gv        Go to the previous visual mode.
-```
+| `v`     | Character-wise visual mode     |
+|---------|--------------------------------|
+| `V`     | Line-wise visual mode          |
+| `<c-v>` | Block-wise visual mode         |
+| `gv`    | Go to the previous visual mode |
 
 ### Visual Mode Navigation
 
-With `o` or `O` in visual mode, the cursor jumps from the beginning to the end of the highlighted block, allowing you to expand the highlight area.
-
-### Visual Mode Grammar
-
-There is no noun in visual mode, select the text block first, then the command follows.
+Press `o` or `O` in visual mode, the cursor jumps from the beginning to the end of the highlighted block, allowing you to expand the highlight area.
 
 ### Adding Text on Multiple Lines
 
-```plaintext
-const one = "one"
-const two = "two"
-const three = "three"
-```
-
 With your cursor on the first line:
-- Run block-wise visual mode and go down two lines (`Ctrl-V jj`).
-- Highlight to the end of the line (`$`).
-- Append (`A`) then type ";".
-- Exit visual mode (`<Esc>`).
+1. Run block-wise visual mode and go down two lines (`<c-v> jj`).
+2. Highlight to the end of the line (`$`).
+3. Append (`A`) then type text you want.
+4. Exit visual mode.
 
 Alternatively, you can also use the `:normal` command to add text on multiple lines:
-- Highlight all 3 lines (`vjj`).
-- Type `:normal! A;`.
+1. Highlight all 3 lines (`vjj`).
+2. Type `:normal! A;`.
 
 ### Incrementing Numbers
 
-Vim has `Ctrl-X` and `Ctrl-A` commands to decrement and increment numbers. When used with visual mode, you can increment numbers across multiple lines.
+`<c-x>` / `<c-a>` decrement / increment numbers, alphabetical characters.
 
-```plaintext
-<div id="app-1"></div>
-<div id="app-1"></div>
-<div id="app-1"></div>
-<div id="app-1"></div>
-<div id="app-1"></div>
-```
-
-- Move your cursor to the "1" on the second line.
-- Start block-wise visual mode and go down 3 lines (`Ctrl-V 3j`). This highlights the remaining  "1"s. Now all "1" should be highlighted (except the first line).
-- Run `g Ctrl-A`.
-
-```plaintext
-set nrformats+=alpha
-```
-By adding `alpha`, an alphabetical character is now considered as a number. If you have the following HTML elements:
-
-```plaintext
-<div id="app-a"></div>
-<div id="app-a"></div>
-<div id="app-a"></div>
-<div id="app-a"></div>
-<div id="app-a"></div>
-```
+Increment numbers across multiple lines, using the block-wise visual mode (`<c-v>`) to select the numvers you want. Then run `g <c-a>`
 
 ## Ch12. Search and Substitute
-
-### Smart Case Sensitivity
-
-Vim has a `smartcase` option to search for case insensitive string if the search pattern *contains at least one uppercase character*.
-
-Inside your vimrc, add:
-```plaintext
-set ignorecase smartcase
-```
 
 You can use `\C` pattern anywhere in your search term to tell Vim that the subsequent search term will be case sensitive. If you do `/\Chello`, it will strictly match "hello", not "HELLO" or "Hello".
 
 ### Repeating Search
 
-You can repeat the previous search with `//`.
-
-You can quickly traverse the search history by first pressing `/`, then press `up`/`down` arrow keys (or `Ctrl-N`/`Ctrl-P`)
+`//` Repeat the previous search
+`/ <up>`,`<down>`,`<c-n>`,`<c-p>` to traverse search history
 
 ### Repeating the Last Substitution
 
-You can repeat the last substitute command with either the normal command `&` or by running `:s`. If you have just run `:s/good/awesome/`, running either `&` or `:s` will repeat it.
+`&` or `:s` or leave the first substitute pattern argument black `:s//awesome/`
 
-If `/good` was done recently and you leave the first substitute pattern argument blank, like in `:s//awesome/`, it works the same as running `:s/good/awesome/`.
+By the way, the repeat-substitution commands (`&` and `:s`) do not retain the flags. To quickly repeat the last substitute command with all the flags, run `:&&`.
 
 ### Substitution Range
 
@@ -770,8 +630,8 @@ Here are some range variations you can pass:
 
 - `:,3s/let/const/` Substitute from current line to line 3.
 - `:1,s/let/const/` Substitute from line 1 to current line.
-- `:3s/let/const/` -it does substitution on line 3 only.
-- In Vim, `%` usually means the entire file. If you run `:%s/let/const/`, it will do substitution on all lines.
+- `:3s/let/const/`  Substitute on line 3 only.
+- `:%s/let/const/`  Sbstitution on all lines.
 
 In addition to numbers, you can also use these symbols as range:
 - `.` means the current line. A range of `.,3` means between the current line and line 3.
@@ -780,94 +640,28 @@ In addition to numbers, you can also use these symbols as range:
 
 ### Substitution Flags
 
-```plaintext
-&    Reuse the flags from the previous substitute command.
-g    Replace all matches in the line.
-c    Ask for substitution confirmation.
-e    Prevent error message from displaying when substitution fails.
-i    Perform case insensitive substitution.
-I    Perform case sensitive substitution.
-```
-
-By the way, the repeat-substitution commands (`&` and `:s`) do not retain the flags. To quickly repeat the last substitute command with all the flags, run `:&&`.
+- `&` Reuse the flags from the previous substitute command.
+- `g` Replace all matches in the line.
+- `c` Ask for substitution confirmation.
+- `e` Prevent error message from displaying when substitution fails.
+- `i` / `I` Perform case insensitive / sensitive substitution.
 
 ### Changing the Delimiter
 
-When it is hard to tell which forward slashes (`/`) are part of the substitution pattern and which ones are the delimiters. You can change the delimiter with any single-byte characters (except for alphabets, numbers, or `"`, `|`, and `\`). Let's replace them with `+`:
-```plaintext
-:s+https:\/\/mysite.com\/a\/b\/c\/d\/e+hello+
-```
+ You can change the delimiter with any single-byte characters (except for alphabets, numbers, or `"`, `|`, and `\`) when it is hard to tell which forward slashes (`/`) are part of the substitution pattern and which ones are the delimiters.
 
 ## Ch13. the Global Command
 
 ### Global Command Overview
 
-The global command has the following syntax:
-```plaintext
-:g/pattern/command
-```
-The global command executes `command` against each line that matches the `pattern`.
-
-If you have the following expressions:
-```plaintext
-const one = 1;
-console.log("one: ", one);
-
-const two = 2;
-console.log("two: ", two);
-
-const three = 3;
-console.log("three: ", three);
-```
-
-To remove all lines containing "console", you can run:
-```plaintext
-:g/console/d
-```
-
-### Inverse Match
-
-To run the global command on non-matching lines, you can run:
-```plaintext
-:g!/pattern/command
-```
-or
-```plaintext
-:v/pattern/command
-```
-
-### Reversing the Entire Buffer
-
-To reverse the entire file, run:
-```plaintext
-:g/^/m 0
-```
-
-### Aggregating All Todos
-
-To copy all TODOs to the end of the file for easier introspection, run:
-```
-:g/TODO/t $
-```
-`:t` (copy) method copys all matches to an address.
-
-### Black Hole Delete
-
-```
-:g/console/d_
-```
-
-### Reduce Multiple Empty Lines to One Empty Line
-
-You can also run the global command with the following form: `:g/pattern1/,/pattern2/command`. With this, Vim will apply the `command` within `pattern1` and `pattern2`.
-```plaintext
-:g/^$/,/./-1j
-```
-
-With that in mind, let's break down the command:
-- `/^$/` represents an empty line (a line with zero character).
-- `/./` represents a non-empty line (a line with at least one character). The `-1` means the line above that.
-- `command` is `j`, the join command (`:j`). In this context, this global command joins all the given lines.
+`:g/pattern/cmd` Executes `cmd` against each line that matches the `pattern`.
+`:g!/pattern/command` or `:v/pattern/cmd` Run the global command on non-matching lines
+`:g/console/d` Remove all lines containing "console"
+`:g/^/m 0` Reverse the entire file / buffer
+`:g/TODO/t $` Aggregate all todos to the end of file
+`:g/console/d_` Black hole delete that matches the `pattern`
+`:g/pattern1/,/pattern2/cmd` Apply the `cmd` within `pattern1` and `pattern2`
+`:g/^$/,/./-1j` Reduce multiple empty lines to one empty line, `/^$/` represents an empty line. `/./` represents a non-empty line (a line with at least one character), `-1` means the line above that
 
 ### Advanced Sort
 
@@ -903,142 +697,71 @@ If you need to sort the elements inside the arrays, but not the arrays themselve
 
 ## Ch14. External Commands
 
-### Reading the STDOUT of a Command Into Vim
-
-```plaintext
-:r !cmd     Read the STDOUT of an external command into the current buffer
-:r file1.txt
-```
-
-### Writing the Buffer Content Into an External Command
-
-```plaintext
-:w !cmd    Pass the text in the current buffer as the STDIN for an external command
-```
-
-### Filtering Texts
-
-If you give `!` a range, it can be used to filter texts. Suppose you have the following texts:
-```plaintext
-hello vim
-hello vim
-```
-
-Let's uppercase the current line using the `tr` (translate) command. Run:
-```plaintext
-:.!tr '[:lower:]' '[:upper:]'
-```
-
-### Normal Mode Command
-
-To uppercase the current line and the line below, you can run:
-```
-!jtr '[a-z]' '[A-Z]'
-```
+| `:r <filename>` / `:r !cmd` | Read a file / the STDOUT of an external command into the current buffer |
+|---|---|
+| `:w <filename>` / `:w !cmd` | writing the current buffer content as a file / the STDIN for an external command |
+| `:.!tr '[:lower:]' '[:upper:]'` | Uppercase current line |
+| `!jtr '[a-z]' '[A-Z]'` | Uppercase the current line and the line below, you can run:, be aware this in normal mode |
 
 ## Ch15. Command-line Mode
 
-### Command-line Mode Shortcuts
-
-```plaintext
-Ctrl-B    Go to the start of the line
-Ctrl-E    Go to the end of the line
-Ctrl-H    Delete one character
-Ctrl-W    Delete one word
-Ctrl-U    Delete the entire line
-Ctrl-F    Edit the command like a normal textfile, same with q:
-Ctrl-R Ctrl-W  Get the word under the cursor
-Ctrl-R Ctrl-A  Get the WORD under cursor
-Ctrl-R Ctrl-L  Get the line line under cursor
-Ctrl-R Ctrl-F  Get the filename under the cursor
-:his :    View command history
-:his /    View search history, same with :his ?
-q/        Open search history window and edit, same with q?
-```
+| `<c-b>`        | Go to the start of the line                           |
+|---------------|-------------------------------------------------------|
+| `<c-e`        | Go to the end of the line                             |
+| `<c-h>`        | Delete one character                                  |
+| `<c-w>`        | Delete one word                                       |
+| `<c-u>`        | Delete the entire line                                |
+| `<c-f>` or `q:`        | Open command history window and edit |
+|  `<c-r> <c-w>`,`<c-a>`,`<c-l>`,`<c-f>` | Get the word / WORD / line / filename under the cursor                         |
+| `:his :`        | View command history                                  |
+| `:his /` or `:his ?`       | View search history                 |
+| `q/` or `q?`    | Open search history window and edit      |
 
 ## Ch16. Tags
 
-To jump to a definition, you can use `Ctrl-]` in the normal mode.
-However, you need to generate the tag file first.
-
 Here I recommand universal ctags, install it by `pacman -S ctags`
-let's generate a basic tag file. Run:
-```console
-$ ctags -R .
-```
+`$ ctags -R .` manual generate tag files under cuurent directory
+`$ ctags -R --exclude=.git --exclude=vendor --exclude=node_modules --exclude=db --exclude=log .`
 
-### The Tag File
-
-```plaintext
-:set tags?
-```
-
-You don't have to store your tag file inside your project, you can keep them separate.
-
-To add a new tag file location, use the following:
-```plaintext
-set tags+=path/to/my/tags/file
-```
-
-### Generating Tags for a Large Project
-
-```console
-$ ctags -R --exclude=.git --exclude=vendor --exclude=node_modules --exclude=db --exclude=log .
-```
-
-```plaintext
-:tselect pancake    selective tag jumps, type numerical key to jump.
-:tjump donut         selective tag jumps, prompt only when > 2 options.
-g Ctrl-]            normal mode key for tjump, much useful.
-Ctrl-X Ctrl-]       auto completion with tags.
-:tags               a list of the tags you have jumped to. Called tag stack.
-:pop                to "pop" the tag stack.
-```
-
-### Using Plugins to generate Tags on save
-
-I use [vim-gutentags](https://github.com/ludovicchabant/vim-gutentags).
+| `:set tags?`                     | See the tag files path                                 |
+|----------------------------------|--------------------------------------------------------|
+| `set tags+=path/to/my/tags/file` | Add a new tag file location                            |
+| `<c-]>`                          | Jump to a definition                                   |
+| `:tselect <pattern>`             | Selective tag jumps, type numerical key to jump.       |
+| `g <c-]>` or `:tjump <pattern>`  | Selective tag jumps, prompt only when > 2 options.     |
+| `<c-x> <ctrl-]>`                 | Auto completion with tags.                             |
+| `:tags`                          | List of the tags you have jumped to. Called tag stack. |
+| `:pop`                           | "pop" the tag stack.                                   |
 
 ## Ch17. Fold
 
-```plaintext
-##Manual Fold
-zfj    'zf' is the fold operator, whereas 'j' is the motion, it can be either a text object. You can fold from visual mode.
-zo    open a foleded text.
-zc    close he fold.
-:,+1fold    fold in command-line mode
-zR    open all folds.
-zM    close all folds.
-za    toggle a fold.
+There are six different fold methods: `manual`, `indent`, `expression`, `syntax`, `diff`, `marker`. `manual` is the default.
+You can persisting fold by save the View. Goto see Chaper Views, Sessions, and Viminfo
 
-:set foldmethod?    to see which folding method you are currently using. There are six different fold methods: manual, indent, expression, syntax, diff, marker. manual is the default.
+| `zf` | Fold operator, follows a motion, or use it in visual mode |
+|---|---|
+| `zo` / `zc` / `za` | Open / Close / Toggle a foleded text. |
+| `:,+1fold` | Fold in command-line mode |
+| `zR` / `zM` | Open / close all folds. |
+| `:set foldmethod?` | See which folding method you are currently using. |
+| `:set foldmethod=indent` |  |
+| `:set shiftwidth=1` | Set the how much spaces the Vim consider as an indent fold. |
+| `:set foldmethod=syntax` | Syntax Fold is determined by syntax language highlighting. Using a language syntax plugin like `vim-polyglot` will work right out of box. |
+| `:set foldmethod=marker` | Vim looks for special markers defined by 'foldmarker' option. |
+| `:set foldmarker=coffee1,coffee2` | Will fold texts between `coffee1` and `coffee2` |
 
-##Indent Fold
-:set foldmethod=indent
-:set shiftwidth=1    set the how much spaces the Vim consider as an indent fold.
+### Diff Fold
 
-##Syntax Fold
-:set foldmethod=syntax    fold is determined by syntax language highlighting. Using a language syntax plugin like vim-polyglot, this will work right out of box.
-
-##Diff Fold
-$ vimdiff file1.txt file2.txt
-$ vim -d file1.txt file2.txt    Same as vimdiff
-
-##Marker Fold
-:set foldmethod=marker    Vim looks for special markers defined by 'foldmarker' option.
-:set foldmarker=coffee1,coffee2
-
-##Persisting Fold
-## Goto see Chapter View
-```
+`$ vimdiff <file1> <file2>` or `$ vim -d <file1> <file2>`
 
 ### Expression Fold
 
-Expression fold allows you to define an expression to match for a fold. if the 'foldexpr' return 0, then the line is not folded.
-`:set foldmethod=expr`
+Expression fold allows you to define an expression to match for a fold. if the `foldexpr` return `0`, then the line is not folded.
 
-Suppose you have a list of breakfast foods and you want to fold all breakfast items starting with "p":
-```
+`:set foldmethod=foldexpr`
+
+Suppose you want to fold all breakfast items starting with "p":
+```plaintext
 donut
 pancake
 pop-tarts
@@ -1047,14 +770,11 @@ salmon
 scrambled eggs
 ```
 
-Next, change the `foldexpr` to capture the expressions starting with "p":
-
-```
+```vim
 :set foldexpr=getline(v:lnum)[0]==\\"p\\"
 ```
 
-The expression above looks complicated. Let's break it down:
-- `:set foldexpr` sets up the `'foldexpr'` option to accept a custom expression.
+Let's break it down:
 - `getline()` is a Vimscript function that returns the content of any given line. If you run `:echo getline(5)`, it will return the content of line 5.
 - `v:lnum` is Vim's special variable for the `'foldexpr'` expression. Vim scans each line and at that moment stores each line's number in `v:lnum` variable. On line 5, `v:lnum` has value of 5. On line 10, `v:lnum` has value of 10.
 - `[0]` in the context of `getline(v:lnum)[0]` is the first character of each line. When Vim scans a line, `getline(v:lnum)` returns the content of each line. `getline(v:lnum)[0]` returns the first character of each line. On the first line of our list, "donut", `getline(v:lnum)[0]` returns "d". On the second line of our list, "pancake", `getline(v:lnum)[0]` returns "p".
@@ -1064,15 +784,12 @@ The expression above looks complicated. Let's break it down:
 
 ### Diffing
 
-`vimdiff` or `vim -d`
-
-```
-]c    jump to next diff
-[c    jump to previous diff
-:diffput    put out the text from the current buffer to another buffer.
-:diffget    get the text from another buffer to the current buffer.
-If you have multiple buffers, use :diffput fileN.txt and :diffget fileN.txt
-```
+| `vimdiff` or `vim -d` |  |
+|---|---|
+| `]c` / `[c` | jump to next / previous diff |
+| `:diffput` | put out text from current buffer to another buffer. |
+| `:diffget` | get text from another buffer to current buffer. |
+| `:diffput [filename]` / `:diffget [filename]` |  |
 
 ### Vim As a Merge Tool
 
@@ -1097,17 +814,17 @@ Vim displays four windows.
 
 ### Git Inside Vim
 
-```
-:!git add %         " git add current file
-:!git checkout #    " git checkout the other file
-:windo !git add %   " add multiple files in different window
+```vim
+:!git add %         "Git add current file
+:!git checkout #    "Git checkout the other file
+:windo !git add %   "Add multiple files in different window
 ```
 
 ### Vim-fugitive
 
-The [vim-fugitive](https://github.com/tpope/vim-fugitive) plugin allows you to run the git CLI without leaving the Vim editor. You will find that some commands are better when executed from inside Vim.
+[vim-fugitive](https://github.com/tpope/vim-fugitive)
 
-```
+```plaintext
 :Git             "display a git summary window, you can do
   Ctrl-N/Ctrl-P  "to go up or down the file list.
   -              "to stage or unstage the file under the cursor.
@@ -1166,31 +883,35 @@ autocmd BufEnter *_spec.rb let b:dispatch = 'bundle exec rspec %'
 
 ## Ch20. Views, Sessions, and Viminfo
 
-```
-##View
-"A View is the smallest subset of the three (View, Session, Viminfo). It is a collection of settings for one window.
+### View
 
-:set viewoptions?
-:set viewoptions+=localoptions    "tell View to remember the 'localoptions'
-:mkview 1                          "save the View, Vim let you save 9 numbered Views
-:loadview 1                        "load the View
-:set viewdir?                     "see where did Vim save View files
+View is the smallest subset of the three (View, Session, Viminfo). It is a collection of settings for one window
 
-###Automating View Creation
-To autosave file name with txt extensions, add these in your '.vimrc':
+`:set viewoptions?`
+`:set viewoptions+=localoptions`    Remember the `localoptions`
+`:mkview 1`                         Save the View, Vim let you save 9 numbered Views
+`:loadview 1`                       Load the View
+`:set viewdir?`                     See where did Vim save View files
+
+### Automating View Creation
+
+e.g. To autosave txt files:
+```vim ~/.vimrc
 autocmd BufWinLeave *.txt mkview
 autocmd BufWinEnter *.txt silent loadview
+```
 
-##Sessions
-"If a View saves the settings of a window, a Session saves the information of all windows (including the layout).
+### Sessions
 
-:mksession    "by default, this will save a Session file (Session.vim) in the current directory. Otherwise, you can pass an argument like ':mksession ~/some/where/else.vim'
-:source Session.vim     "To load a Session.
-"You can also load a Session file from the terminal:
-$ vim -S Session.vim
+View saves the settings of a window, Session saves the information of all windows (including the layout).
 
-:set sessionoptions?
-:set sessionoptions-=terminal    "If you don't want to save 'terminal'.
+| `:mksession` / :mksession `~/some/where/else.vim` | By default, this will save a Session file (`Session.vim`) in the current directory. |
+|---|---|
+| `:source Session.vim` or `$ vim -S Session.vim` | Load a Session. You can also load a Session file from the terminal |
+| `:set sessionoptions?` |  |
+| `:set sessionoptions-=terminal` | If you don't want to save `terminal`. |
+
+Session Options:
 - `blank` stores empty windows
 - `buffers` stores buffers
 - `folds` stores folds
@@ -1202,7 +923,8 @@ $ vim -S Session.vim
 - `tabpages` stores tabs
 - `unix` stores files in Unix format
 
-##Viminfo
+### Viminfo
+
 Viminfo stores:
 - The command-line history.
 - The search string history.
@@ -1210,23 +932,18 @@ Viminfo stores:
 - Contents of non-empty registers.
 - Marks for several files.
 - File marks, pointing to locations in files.
-- Last search / substitute pattern (for 'n' and '&').
+- Last search / substitute pattern (for `n' and `&`).
 - The buffer list.
 - Global variables.
 
-:wv ~/.viminfo_extra    "although you will use only one Viminfo file, you can create multiple Viminfo files.
-:rv ~/.viminfo_extra
+`:wv ~/.viminfo_extra` Save Viminfo file
+`:rv ~/.viminfo_extra` or `$ vim -i ~/.viminfo_extra` Load Viminfo file, you can also load a Viminfo file from the terminal.
+`$ vim -i NONE`     Start Vim without Viminfo. To make it permant, you can add `set viminfo="NONE" in your vimrc file
 
-"You can also load a Viminfo file from the terminal:
-$ vim -i ~/.viminfo_extra
-$ vim -i NONE    # To start Vim without Viminfo
-To make it permant, you can add this in your vimrc file:
-set viminfo="NONE"
-
-:set viminfo?
+`:set viminfo?`
 You will get:
 
-```
+```plaintext
 !,'100,<50,s10,h
 ```
 
@@ -1236,7 +953,6 @@ This looks cryptic. Let's break it down:
 - `<50` tells Viminfo how many maximum lines are saved for each register (50 in this case). If I yank 100 lines of text into register a (`"ay99j`) and close Vim, the next time I open Vim and paste from register a (`"ap`), Vim will only paste 50 lines max. If you don't give maximum line number, *all* lines will be saved. If you give it 0, nothing will be saved.
 - `s10` sets a size limit (in kb) for a register. In this case, any register greater than 10kb size will be excluded.
 - `h` disables highlighting (from `hlsearch`) when Vim starts.
-```
 
 ## Multiple File Operations
 
@@ -1252,20 +968,17 @@ Vim has eight ways to execute commands across multiple files:
 - location list (`ldo`)
 - location list filewise (`lfdo`)
 
-```
-##Argument List
-:args file1 file2 file3  "create a list. To view the list of files, run ':args'
-:arga file5 file 5       "add 'file4' and 'file5' into your initial files list.
+## Argument List
 
-##Location List
-"you may only have one quickfix list, whereas you can have as many location list as windows. Vim creates a distinct location list for each window.
-:lvim /bagel/ **/*.md    "the location variant for the ':vimgrep' command
-:lopen
-:lclose
-:lfirst
-:llast
-:lnext
-:lprev
-:lgrep
-:lmake
-```
+`:args file1 file2 file3`  Create new argument list. To view the list of files, run ':args'
+`:arga file4 file5`       add `file4` and `file5` into your argument list.
+
+## Location List
+
+You may only have one quickfix list, whereas you can have as many location list as windows. Vim creates a distinct location list for each window.
+
+`:lvim /bagel/ **/*.md` / `:lgrep`   location list variant for the `:vimgrep` command
+`:lopen` / `:lclose`
+`:lfirst` / `:llast`
+`:lnext` / `:lprev`
+`:lmake`
