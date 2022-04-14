@@ -13,250 +13,98 @@ Here comes a cheatsheet
 
 <!-- more -->
 
-## Ch 2 - Buffers, Windows, and Tabs
+`<s-a>` means `Shift+A`
+`<c-a>` means `Ctrl+A`
 
-Whenever you switch buffers and your current buffer is not saved, Vim will prompt you to save the file (you don't want that if you want to move quickly).
+TODO: works to be merged
+`<c-o,i>`, Jump old / newer position.
+`<c-^>` Go to previously edited buffer.
+`:tag`    Jump to tag definition
 
-```plaintext ~/.vimrc
-set hidden
-```
+## Ch 02 - Buffers, Windows, and Tabs
 
-<table>
-  <tr>
-    <td colspan="2"><strong>Buffers</strong></td>
-  </tr>
-  <tr>
-    <td>Ctrl-O,I,^<br>:bnext<br>:blast<br>:bfirst<br>:blast</td>
-    <td>Traverse buffers</td>
-  </tr>
-  <tr>
-    <td>:qall, :wqall</td>
-    <td>Close, Save close</td>
-  </tr>
-  <tr>
-    <td>:buffers, :ls, :files</td>
-    <td>List buffers</td>
-  </tr>
-  <tr>
-    <td>:bdelete</td>
-    <td>Remove buffer</td>
-  </tr>
-  <tr>
-    <td>:ball</td>
-    <td>display all buffers horizontally</td>
-  </tr>
-  <tr>
-    <td>:vertical ball</td>
-    <td>display all buffers vertically</td>
-  </tr>
-  <tr>
-    <td colspan="2"><strong>Windows: A window is how you are viewing a buffer through</strong></td>
-  </tr>
-  <tr>
-    <td>:split file3.js, :vsplit file3.js</td>
-    <td>Split window</td>
-  </tr>
-  <tr>
-    <td>Ctrl-W H,J,K,L</td>
-    <td>Navigate</td>
-  </tr>
-  <tr>
-    <td>Ctrl-W V</td>
-    <td>Opens a new vertical split</td>
-  </tr>
-  <tr>
-    <td>Ctrl-W S</td>
-    <td>Opens a new horizontal split</td>
-  </tr>
-  <tr>
-    <td>Ctrl-W C</td>
-    <td>Closes a window</td>
-  </tr>
-  <tr>
-    <td>Ctrl-W O</td>
-    <td>Makes the current window the only one on screen and closes other windows</td>
-  </tr>
-  <tr>
-    <td colspan="2"><strong>Tabs: A tab is a collection of windows</strong></td>
-  </tr>
-  <tr>
-    <td>:tabnew file.txt</td>
-    <td>Open file.txt in a new tab</td>
-  </tr>
-  <tr>
-    <td>:tabclose</td>
-    <td>Close the current tab</td>
-  </tr>
-  <tr>
-    <td>:tabnext</td>
-    <td>Go to next tab</td>
-  </tr>
-  <tr>
-    <td>:tabprevious</td>
-    <td>Go to previous tab</td>
-  </tr>
-  <tr>
-    <td>:tablast</td>
-    <td>Go to last tab</td>
-  </tr>
-  <tr>
-    <td>:tabfirst</td>
-    <td>Go to first tab</td>
-  </tr>
-</table>
+### Buffers
+
+| `:bnext` / `:blast` / `:bfirst` / `:blast` | Traverse buffers                 |
+|--------------------------------------|----------------------------------|
+| `:qall` / `:wqall`                     | Close/Save close                |
+| `:buffers` / `:ls` / `:files`            | List buffers                     |
+| `:bdelete`                           | Remove current buffer                    |
+| `:ball` / `:vertical ball`                              | display all buffers horizontally / vertically |
+
+### Windows: A window is how you are viewing a buffer through
+
+| `:split [filename]` / `:vsplit [filename]` | Split window                          |
+|------------------------------------------|---------------------------------------|
+| `<c-w> h`,`j`,`k`,`k`                      | Navigate                              |
+| `<c-w> v`,`s`                          | Opens a new vertical/horizontal split |
+| `<c-w> c`                                  | Closes a window                       |
+| `<c-w> o`                                  | Closes all other windows              |
+
+### Tabs: A tab is a collection of windows
+
+| `:tabnew [filename]` | Open a new tab     |
+|----------------------|--------------------|
+| `:tabclose`          | Close current tab  |
+| `:tabnext` / `:tabprev`           | Go to next / previous tab     |
+| `:tablast` / `:tabfirst`          | Go to last / first tab     |
 
 ## Ch03. Searching Files
 
 ### Searching in Files With Grep
 
-<table>
-  <tr>
-    <td>:find, :edit</td>
-    <td>:find finds file in path, :edit doesn't.<br>Using :set path+={your-path-here} to set.</td>
-  </tr>
-  <tr>
-    <td>:vim /pattern/ file<br>:grep -R "pattern"&nbsp;&nbsp;/path/to/search<br></td>
-    <td>Vim's search uses quickfix window.</td>
-  </tr>
-  <tr>
-    <td>:copen</td>
-    <td>Open the quickfix window</td>
-  </tr>
-  <tr>
-    <td>:cclose</td>
-    <td>Close the quickfix window</td>
-  </tr>
-  <tr>
-    <td>:cnext</td>
-    <td>Go to the next error</td>
-  </tr>
-  <tr>
-    <td>:cprev</td>
-    <td>Go to the previous error</td>
-  </tr>
-  <tr>
-    <td>:colder</td>
-    <td>Go to the older error list</td>
-  </tr>
-  <tr>
-    <td>:cnewer</td>
-    <td>Go to the newer error list</td>
-  </tr>
-  <tr>
-    <td>:cfirst</td>
-    <td>Go to the first item in error list</td>
-  </tr>
-  <tr>
-    <td>:clast</td>
-    <td>Go to the last item in error list</td>
-  </tr>
-</table>
+| `:find` / `:edit` | `:find` finds file in path, `:edit` doesn't. Using `:set path+=<your-path-here>` to set. |
+|---|---|
+| 1. `:vim /pattern/ file` <br> 2. `:grep -R "pattern"  /path/to/search/` | Vim's search uses Quickfix Window. |
+| `:copen` / `:cclose` | Open/Close the quickfix window |
+| `:cnext` / `:cprev` | Go to the next / previous error |
+| `:colder` / `:cnewer` | Go to the older / newer error list |
+| `:cfirst` / `:clast` | Go to the first / last item in error list |
 
 ### Browsing Files With Netrw
 
-To run netrw, you need these two settings in your `.vimrc`:
-```textplain
-set nocp
-filetype plugin on
-```
-
-There are other ways to launch netrw window without passing a directory:
-```plaintext
-:Explore     Starts netrw on current file
-:Sexplore    No kidding. Starts netrw on split top half of the screen
-:Vexplore    Starts netrw on split left half of the screen
-```
-
-here is a list of useful netrw commands:
-```plaintext
-%    Create a new file
-d    Create a new directory
-R    Rename a file or directory
-D    Delete a file or directory
-```
+| `:Explore`  | Starts netrw on current file                             |
+|-------------|----------------------------------------------------------|
+| `:Sexplore` | No kidding. Starts netrw on split top half of the screen |
+| `:Vexplore` | Starts netrw on split left half of the screen            |
+| `%`         | Create a new file                                        |
+| `d`         | Create a new directory                                   |
+| `R`         | Rename a file or directory                               |
+| `D`         | Delete a file or directory                               |
 
 ### Fzf
 
-#### Setup
+Fzf syntax:
+* `^` prefix exact match. e.g. `^welcome`.
+* `$` suffix exact match. e.g. `friends$`.
+* `'` exact match. e.g. `'welcome my friends`.
+* `|` "or" match. e.g. `friends | foes`.
+* `!` inverse match. e.g. `welcome !friends`
 
-Ripgrep is a search tool much like grep. It is generally faster than grep and has many useful features.
-Fzf is a general-purpose command-line fuzzy finder.
-
-Using `ripgrep` in `Fzf`:
-```bash ~/.bashrc
-if type rg &> /dev/null; then
-  export FZF_DEFAULT_COMMAND='rg --files'
-  export FZF_DEFAULT_OPTS='-m' # Allow multiple selections with `<Tab>` or `<Shift-Tab>`.
-fi
-```
-
-I am using [vim-plug](https://github.com/junegunn/vim-plug) plugin manager.
-```plaintext ~/.vimrc
-call plug#begin()
-Plug 'junegunn/fzf.vim'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-call plug#end()
-```
-
-After adding these lines, you will need to open vim and run `:PlugInstall`
-
-### Fzf Syntax
-
-To use fzf efficiently, you should learn some basic fzf syntax. Fortunately, the list is short:
-
-`^` is a prefix exact match. To search for a phrase starting with "welcome": `^welcome`.
-`$` is a suffix exact match. To search for a phrase ending with "my friends": `friends$`.
-`'` is an exact match. To search for the phrase "welcome my friends": `'welcome my friends`.
-`|` is an "or" match. To search for either "friends" or "foes": `friends | foes`.
-`!` is an inverse match. To search for phrase containing "welcome" and not "friends": `welcome !friends`
-
-<table>
-  <tr>
-    <td>:Files</td>
-    <td>Finding Files</td>
-  </tr>
-  <tr>
-    <td>:Rg</td>
-    <td>Finding in Files</td>
-  </tr>
-</table>
-
-#### Other Searches
-
-Fzf.vim provides many other search commands. I won't go through each one of them here, but you can check them out [here](https://github.com/junegunn/fzf.vim#commands).
-
-Here's what my fzf maps look like:
-```plaintext
-nnoremap <silent> <Leader>b :Buffers<CR>
-nnoremap <silent> <C-f> :Files<CR>
-nnoremap <silent> <Leader>f :Rg<CR>
-nnoremap <silent> <Leader>/ :BLines<CR>
-nnoremap <silent> <Leader>' :Marks<CR>
-nnoremap <silent> <Leader>g :Commits<CR>
-nnoremap <silent> <Leader>H :Helptags<CR>
-nnoremap <silent> <Leader>hh :History<CR>
-nnoremap <silent> <Leader>h: :History:<CR>
-nnoremap <silent> <Leader>h/ :History/<CR>
-```
-
-#### Replacing Grep With Rg
-
-```plaintext ~/.vimrc
-set grepprg=rg\ --vimgrep\ --smart-case\ --follow
-```
+| `:Files` or `<c-f>`      | Find files                                      |
+|---------------------|-------------------------------------------------|
+| `:Buffers` or `<\-b>`    | Find files in buffers                           |
+| `:Rg` or `<\-f>`         | Find in files context                           |
+| `:BLines` or `<\-/>`     | Find lines in current buffer                    |
+| `:Marks` or `<\-'>`      | Find marks                                      |
+| `:Commits` or `<\-g>`    | Find git commits                                |
+| `:Helptags` or `<\-H>`   | Find help tags                                  |
+| `:History` or `<\-h> h`  | Find in opened files' history (list `:oldfiles`) |
+| `:History:` or `<\-h> :` | Find in command history                         |
+| `:History/` or `<\-h> /` | Find in search history                          |
 
 #### Search and Replace in Multiple Files
 
 First method
-```plaintext
+```vim
 :grep "pizza"
 :cfdo %s/pizza/donut/g | update
 ```
 
 Second method
-```plaintext
-:%bd | e#    "Its better to clean buffers, close all buffer except current file.
-:Files       "Select all files you want to perform search-and-replace on.
+```vim
+:%bd | e#    "Close all buffer except current file.
+:Files       "Select all files you want
 :bufdo %s/pizza/donut/g | update
 ```
 
@@ -264,365 +112,202 @@ Second method
 
 ### Grammar Rule
 
-There is only one grammar rule in Vim language: `verb + noun`
+There is only one grammar rule in Vim language: `Verb (Operator) + Noun (Motion)`
 
-### Nouns (Motions)
-
-some of Vim motions:
-```plaintext
-h    Left
-j    Down
-k    Up
-l    Right
-w    Move forward to the beginning of the next word
-}    Jump to the next paragraph
-$    Go to the end of the line
-```
-
-### Verbs (Operators)
-
-According to `:h` operator, Vim has 16 operators. However, in my experience, learning these 3 operators is enough for 80% of my editing needs:
-```plaintext
-y    Yank text (copy)
-d    Delete text and save to register
-c    Delete text, save to register, and start insert mode
-```
-
-### Verb and Noun
-
-```plaintext
-y$    yank to the end of the line
-dw    delete to the beginning of the next word
-c}    change to the end of paragraph
-y2h   yank two characters to the left
-d2w   delete the next two words   
-c2j   change the next two lines
-dd    delete entire line
-yy    yank entire line
-cc    change entire line
-```
+| `y`   | Yank text (copy)                                     |
+|-------|------------------------------------------------------|
+| `d`   | Delete text and save to register                     |
+| `c`   | Delete text, save to register, and start insert mode |
+| `yy`  | yank entire line                                     |
+| `dd`  | delete entire line                                   |
+| `cc`  | change entire line                                   |
+| `y$`  | yank to the end of the line                          |
+| `dw`  | delete to the beginning of the next word             |
+| `c}`  | change to the end of paragraph                       |
+| `y2h` | yank two characters to the left                      |
+| `d2w` | delete the next two words                            |
+| `c2j` | change the next two lines                            |
 
 ### More Nouns (Text Objects)
 
 Two types of text objects:
-```textplain
-i + object    Inner text object, select without the white space or the surrounding objects
-a + object    Outer text object, select including the white space or the surrounding objects
-```
+* `i + object`    Inner text object, select without the white space or the surrounding objects
+* `a + object`    Outer text object, select including the white space or the surrounding objects
 
-Below is a list of common text objects:
-```plaintext
-w         A word
-p         A paragraph
-s         A sentence
-( or )    A pair of ( )
-{ or }    A pair of { }
-[ or ]    A pair of [ ]
-< or >    A pair of < >
-t         XML tags
-"         A pair of " "
-'         A Pair of ' '
-`         A pair of ` `
-```
+e.g. `gUiw` to uppercase current word.
 
-`gUiw` to uppercase current word
+Common text objects:
+| `w`                                            | A word                            |
+|------------------------------------------------|-----------------------------------|
+| `p`                                            | A paragraph                       |
+| `s`                                            | A sentence                        |
+| `t`                                            | XML tags                          |
+| `(` / `{` / `[` / `<` or `>` / `]` / `}` / `)` | A pair of `( )` / `{ }` / `[ ]` / `< >` |
+| `"` / `'` / `` ` ``                            | A pair of `" "` / `' '` / `` ` ` ``   |
+| `%` |   Navigate to another match, usually works for `()`, `[]`, `{}` |
 
 ## Ch05. Moving in a File
 
 ### Character Navigation
 
-The most basic motion unit is moving one character left, down, up, and right.
-```plaintext
-h   Left
-j   Down
-k   Up
-l   Right
-gj  Down in a soft-wrapped line
-gk  Up in a soft-wrapped line
-```
-
-Disable the arrow buttons
-```plaintext ~/.vimrc
-noremap <Up> <NOP>
-noremap <Down> <NOP>
-noremap <Left> <NOP>
-noremap <Right> <NOP>
-```
-
-### Relative Numbering
-
-```textplain ~/.vimrc
-set relativenumber number
-```
-
-### Word Navigation
-
-```plaintext
-w     Move forward to the beginning of the next word
-W     Move forward to the beginning of the next WORD
-e     Move forward one word to the end of the next word
-E     Move forward one word to the end of the next WORD
-b     Move backward to beginning of the previous word
-B     Move backward to beginning of the previous WORD
-ge    Move backward to end of the previous word
-gE    Move backward to end of the previous WORD
-```
-
 A word is a sequence of characters containing *only* `a-zA-Z0-9_`. A WORD is a sequence of all characters except white space (a white space means either space, tab, and EOL).
+
+| `gj` / `gk` | Down/Up in a soft-wrapped line                         |
+|-----------|--------------------------------------------------------|
+| `w` / `W`   | Move forward to the beginning of the next word/WORD    |
+| `e` / `E`   | Move forward one word to the end of the next word/WORD |
+| `b` / `B`   | Move backward to beginning of the previous word/WORD   |
+| `ge` / `gE` | Move backward to end of the previous word/WORD         |
 
 ### Current Line Navigation
 
-```plaintext
-0     Go to the first character in the current line
-^     Go to the first nonblank char in the current line
-g_    Go to the last non-blank char in the current line
-$     Go to the last char in the current line
-n|    Go the column n in the current line
-```
-
-```plaintext
-f    Search forward for a match in the same line
-F    Search backward for a match in the same line
-t    Search forward for a match in the same line, stopping before match
-T    Search backward for a match in the same line, stopping before match
-;    Repeat the last search in the same line using the same direction
-,    Repeat the last search in the same line using the opposite direction
-```
+| `0`       | Go to the first char                                      |
+|-----------|-----------------------------------------------------------|
+| `^`       | Go to the first nonblank char                             |
+| `$`       | Go to the last char                                       |
+| `g_`      | Go to the last non-blank char                             |
+| `n\|`     | Go the column n                                           |
+| `f` / `F` | Search forward / backward for a char                        |
+| `t` / `T` | Search forward / backward for a char, stopping before match |
+| `;`       | Repeat the last char search (same direction)              |
+| `,`       | Repeat the last char search (opposite direction)          |
 
 ### Sentence and Paragraph Navigation
 
 A sentence ends with either `. ! ?` followed by an EOL, a space, or a tab.
-
-```plaintext
-(    Jump to the previous sentence
-)    Jump to the next sentence
-```
-
 A paragraph begins after each empty line and also at each set of a paragraph macro specified by the pairs of characters in paragraphs option.
-```plaintext
-{    Jump to the previous paragraph
-}    Jump to the next paragraph
-```
 
-### Match Navigation
-
-```plaintext
-%    Navigate to another match, usually works for (), [], {}
-```
+| `(` / `)`   | Jump to the previous / next sentence  |
+|-------------|---------------------------------------|
+| `{` / `}`   | Jump to the previous / next paragraph |
+| `[[` / `]]` | Jump to the previous / next section   |
 
 ### Line Number Navigation
 
-```plaintext
-gg    Go to the first line
-G     Go to the last line
-nG    Go to line n
-n%    Go to n% in file
-Ctrl-g  see total lines in a file
-```
+| `gg`    | Go to the first line      |
+|---------|---------------------------|
+| `G`     | Go to the last line       |
+| `nG`    | Go to line n              |
+| `n%`    | Go to n% in file          |
+| `<c-g>` | See total lines in a file |
 
 ### Window Navigation
 
-```plaintext
-H     Go to top of screen
-M     Go to medium screen
-L     Go to bottom of screen
-nH    Go n line from top
-nL    Go n line from bottom
-```
+| `H`  | Go to top of screen     |
+|------|-------------------------|
+| `M`  | Go to medium screen     |
+| `L`  | Go to bottom of screen  |
+| `nH` | Go `n` line from top    |
+| `nL` | Go `n` line from bottom |
 
 ### Scrolling
 
-```plaintext
-Ctrl-E    Scroll down a line
-Ctrl-D    Scroll down half screen
-Ctrl-F    Scroll down whole screen
-Ctrl-Y    Scroll up a line
-Ctrl-U    Scroll up half screen
-Ctrl-B    Scroll up whole screen
-```
-
-You can also scroll relatively to the current line (zoom screen sight):
-```plaintext
-zt    Bring the current line near the top of your screen
-zz    Bring the current line to the middle of your screen
-zb    Bring the current line near the bottom of your screen
-```
+| `<c-e,d,f>` | Scroll down a line / half screen / whole screen       |
+|-------------|-------------------------------------------------------|
+| `<c-y,u,b>` | Scroll up a line / half screen / whole screen         |
+| `zt`        | Bring the current line near the top of your screen    |
+| `zz`        | Bring the current line to the middle of your screen   |
+| `zb`        | Bring the current line near the bottom of your screen |
 
 ### Search Navigation
 
-```plaintext
-/    Search forward for a match
-?    Search backward for a match
-n    Repeat last search in same direction of previous search
-N    Repeat last search in opposite direction of previous search
-```
-
-```plaintext ~/.vimrc
-set hlsearch incsearch
-nnoremap <esc><esc> :noh<return><esc>
-```
-
-```plaintext
-*     Search for whole word under cursor forward, same as type '/\<one\>'
-#     Search for whole word under cursor backward
-g*    Search for word under cursor forward
-g#    Search for word under cursor backward
-```
+| `/` / `?`           | Search forward / backward for a match                               |
+|---------------------|---------------------------------------------------------------------|
+| `n` / `N`           | Repeat last search in same / opposite direction of previous search  |
+| `:noh` `<esc><esc>` | Turn off match highlights                                           |
+| `*`                 | Search for whole word under cursor forward, same as type `/\<one\>` |
+| `#`                 | Search for whole word under cursor backward                         |
+| `g*`                | Search for word under cursor forward                                |
+| `g#`                | Search for word under cursor backward                               |
 
 ### Marking Position
 
-```plaintext
-ma    Mark position with mark "a"
-`a    Jump to line and column "a"
-'a    Jump to line "a"
-```
-
 There is a difference between marking with lowercase letters (a-z) and uppercase letters (A-Z). Lowercase alphabets are local marks and uppercase alphabets are global marks (sometimes known as file marks).
 
-To view all marks, use `:marks`.
-
-```plaintext
-''    Jump back to the last line in current buffer before jump
-``    Jump back to the last position in current buffer before jump
-`[    Jump to beginning of previously changed / yanked text
-`]    Jump to the ending of previously changed / yanked text
-`<    Jump to the beginning of last visual selection
-`>    Jump to the ending of last visual selection
-`0    Jump back to the last edited file when exiting vim
-```
+| `ma`     | Mark position with mark `a`        |
+|----------|------------------------------------|
+| `` `a``  | Jump to exact position of mark `a` |
+| `'a`     | Jump to line of mark `a`           |
+| `:marks` | View all marks                     |
 
 ### Jump
 
-Here are the commands Vim consider as "jump" commands:
-```plaintext
-'       Go to the marked line
-`       Go to the marked position
-G       Go to the line
-/       Search forward
-?       Search backward
-n       Repeat the last search, same direction
-N       Repeat the last search, opposite direction
-%       Find match
-(       Go to the last sentence
-)       Go to the next sentence
-{       Go to the last paragraph
-}       Go to the next paragraph
-L       Go to the the last line of displayed window
-M       Go to the middle line of displayed window
-H       Go to the top line of displayed window
-[[      Go to the previous section
-]]      Go to the next section
-:s      Substitute
-:tag    Jump to tag definition
-```
-
 Any motion that moves farther than a word and current line navigation is probably a jump.
-```
-:jumps    see this list.
-Ctrl-O    move up the jump list
-Ctrl-I    move down the jump list
-m'5j      addcurrent location to jump list, follows a move
-```
+
+| `''`      | Jump back to the last line in current buffer before jump     |
+|-----------|--------------------------------------------------------------|
+| ` `` `    | Jump back to the last position in current buffer before jump |
+| `` `[``   | Jump to beginning of previously changed / yanked text        |
+| `` `]``   | Jump to the ending of previously changed / yanked text       |
+| `` `<``   | Jump to the beginning of last visual selection               |
+| `` `>``   | Jump to the ending of last visual selection                  |
+| `` `0``   | Jump back to the last edited file when exiting vim           |
+| `:jumps`  | See jump list                                                |
+| `<c-o,i>` | Move up / down the jump list                                 |
+| `m'5j`    | Add current location to jump list, follows a move            |
 
 ## Ch06. Insert Mode
 
 ### Ways to Go to Insert Mode
 
-```textplain
-i    Insert text before the cursor
-I    Insert text before the first non-blank character of the line
-a    Append text after the cursor
-A    Append text at the end of line
-o    Starts a new line below the cursor and insert text
-O    Starts a new line above the cursor and insert text
-s    Delete the character under the cursor and insert text
-S    Delete the current line and insert text, synonym for "cc"
-gi   Insert text in same position where the last insert mode was stopped
-gI   Insert text at the start of line (column 1)
-```
+| `i` / `I` / `gI`  | Insert text before the cursor / first non-blank character of the line / start of line |
+|-------------------|---------------------------------------------------------------------------------------|
+| `a` / `A`         | Append text after the cursor / end of line                                            |
+| `o` / `O`         | Starts a new line below / above the cursor and insert text                            |
+| `s` / `S` or `cc` | Delete the character / line under the cursor and insert text                          |
+| `gi`              | Insert text in same position where the last insert mode was stopped                   |
 
 ### Different Ways to Exit Insert Mode
 
 There are a few different ways to return to the normal mode while in the insert mode:
-```textplain
-<Esc>     Exits insert mode and go to normal mode
-Ctrl-[    Exits insert mode and go to normal mode
-Ctrl-C    Like Ctrl-[ and <Esc>, but does not check for abbreviation
-```
+| `<esc>` | Exit insert mode and go to normal mode |
+|---------|----------------------------------------|
+| `<c-[>` | Exit insert mode and go to normal mode |
+| `<c-c>` | Exit and do not check for abbreviation |
 
 ### Repeating Insert Mode
 
-You can pass a count parameter before entering insert mode. For example:
-```plaintext
-10i
-```
-Vim will repeat the text 10 times.
+`10i`: Vim will repeat the text 10 times.
 
 ### Deleting Chunks in Insert Mode
 
-```plaintext
-Ctrl-h    Delete one character
-Ctrl-w    Delete one word
-Ctrl-u    Delete the entire line
-```
+| `c-h` | Delete one char    |
+|-------|--------------------|
+| `c-w` | Delete one word    |
+| `c-u` | Delete entire line |
 
 ### Insert From Register
 
-```plaintext
-Ctrl-R <register symbol>
-```
+`c-r <register symbol>`
 
-```plaintext
-"ayiw    
-```
+### Scrolling Inside Insert Mode
 
-- `"a` tells Vim that the target of your next action will go to register a.
-- `yiw` yanks inner word. Review the chapter on Vim grammar for a refresher.
-
-Register a now contains the word you just yanked. While in insert mode, to paste the text stored in register a:
-```plaintext
-Ctrl-R a
-```
-
-### Scrolling
-
-Did you know that you can scroll while inside insert mode? While in insert mode, if you go to `Ctrl-X` sub-mode, you can do additional operations. Scrolling is one of them.
-
-```plaintext
-Ctrl-X Ctrl-Y    Scroll up
-Ctrl-X Ctrl-E    Scroll down
-```
+`<c-x> <c-y>`: Scroll up
+`<c-x> <c-e>`: Scroll down
 
 ### Autocompletion
 
-```plaintext
-Ctrl-X Ctrl-L    Insert a whole line
-Ctrl-X Ctrl-N    Insert a text from current file
-Ctrl-X Ctrl-I    Insert a text from included files
-Ctrl-X Ctrl-F    Insert a file name
-Ctrl-N/Ctrl-P    Navigate up/down the pop-up window
-Ctrl-N           Find the next word match
-Ctrl-P           Find the previous word match
-```
+`<c-x> <c-l,n,i,f>`: Insert a whole line / a text from current file / a text from included files / a file name
+`c-n` / `c-p`: Find the next / previous word match, or navigate up / down the pop-up completion menu
 
 ### Executing a Normal Mode Command
 
-```plaintext
-Ctrl-O zz       Center window
-Ctrl-O H/M/L    Jump to top/middle/bottom window
-Ctrl-O 'a       Jump to mark a
-Ctrl-O 100ihello    Insert "hello" 100 times
-Ctrl-O !! curl https://google.com    Run curl
-Ctrl-O !! pwd                        Run pwd
-Ctrl-O dtz    Delete from current location till the letter "z"
-Ctrl-O D      Delete from current location to the end of the line
-```
+| `<c-o> zz`                         | Center window                                       |
+|------------------------------------|-----------------------------------------------------|
+| `<c-o> H`,`M`,`L`                  | Jump to top / middle / bottom of the window         |
+| `<c-o> 'a`                         | Jump to mark a                                      |
+| `<c-o> 100ihello`                  | Insert "hello" 100 times                            |
+| `<c-o> !! curl https://google.com` | Run `curl`                                          |
+| `<c-o> !! pwd`                     | Run `pwd`                                           |
+| `<c-o> dtz`                        | Delete from current location till the letter `z`    |
+| `<c-o> d`                          | Delete from current location to the end of the line |
 
 ## Ch07. the Dot Command
 
 ### What Is a Change?
 
-Any time you update (add, modify, or delete) the content of the current buffer, you are making a change. The exceptions are updates done by command-line commands (the commands starting with `:`) do not count as a change.
+Any time you update (add, modify, or delete) the content of the current buffer, you are making a change.
+The exceptions are updates done by command-line commands (the commands starting with `:`) do not count as a change.
 
 Every action from the moment you press the insert command operator until you exit the insert command is considered as a change.
 
@@ -664,7 +349,7 @@ The Ten Register Types
 9. The black hole register (`"_`).
 10. The last search pattern register (`"/`).
 
-## Register Operators
+### Register Operators
 
 To use registers, you need to first store them with operators. Here are some operators that store values to registers:
 ```plaintext
@@ -807,13 +492,13 @@ The breakdown:
 
 To replay it, run `@a`. Just like many other Vim commands, you can pass a count argument to macros. For example, running `3@a` executes the macro three times.
 
-## Command Line Macro
+### Command Line Macro
 
 ```plaintext
 :2,3 normal @a    execute macro between lines 2 and 3, ':normal' allows the user to execute any normal mode command passed as argument.
 ```
 
-## Executing a Macro Across Multiple Files
+### Executing a Macro Across Multiple Files
 
 Suppose you have multiple `.txt` files, each contains some texts. Your task is to uppercase the first word only on lines containing the word "donut". Assume you have `0W~j` in register a (the same macro as before). How can you quickly accomplish this?
 
@@ -845,7 +530,7 @@ Here is how you can do it:
 - `:argdo g/donut/normal @a` executes the global command `g/donut/normal @a` on each file inside `:args`.
 - `:argdo update` executes `update` command to save each file inside `:args` when the buffer has been modified.
 
-## Recursive Macro
+### Recursive Macro
 
 You can recursively execute a macro by calling the same macro register while recording that macro. Suppose you have this list again and you need to toggle the case of the first word:
 ```plaintext
@@ -874,7 +559,7 @@ Now you can just run `@a` and watch Vim execute the macro recursively.
 
 How did the macro know when to stop? When the macro was on the last line, it triedto run `j`, since there was no more line to go to, it stopped the macro execution.
 
-## Appending a Macro
+### Appending a Macro
 
 Record a macro in register a: `qa0W~q` (this sequence toggles the case of the next WORD in a line). If you want to append a new sequence to also add a dot at the end of the line, run:
 ```plaintext
@@ -888,7 +573,7 @@ The breakdown:
 
 Now when you execute `@a`, it not only toggles the case of the next WORD, it also adds a dot at the end of the line.
 
-## Amending a Macro
+### Amending a Macro
 
 Suppose that between uppercasing the first word and adding a period at the end of the line, you need to add the word "deep fried" right before the word "donut" *(because the only thing better than regular donuts are deep fried donuts)*.
 
@@ -909,11 +594,11 @@ You can't literally type `<Esc>`. You will have to write the internal code repre
 ```
 At the start of the line, run `"ay$` to store the yanked text in register a.
 
-## Macro Redundancy
+### Macro Redundancy
 
 You can easily duplicate macros from one register to another. For example, to duplicate a macro in register a to register z, you can do `:let @z = @a`. `@a` represents the content of register a.
 
-## Series vs Parallel Macro
+### Series vs Parallel Macro
 
 ```plaintext
 import { FUNC1 } from "library1";
@@ -949,7 +634,7 @@ inoremap <c-w> <c-g>u<c-w>
 
 With these, you can easily recover the deleted texts.
 
-## Undo Tree
+### Undo Tree
 
 In Vim, every time you press `u` and then make a different change, Vim stores the previous state's text by creating an "undo branch". In this example, after you typed "two", then pressed `u`, then typed "three", you created an leaf branch that stores the state containing the text "two". At that moment, the undo tree contained at least two leaf nodes: the main node containing the text "three" (most recent) and the undo branch node containing the text "two". If you had done another undo and typed the text "four", you would have at three nodes: a main node containing the text "four" and two nodes containing the texts "three" and "two".
 
@@ -957,7 +642,7 @@ To traverse each undo tree nodes, you can use `g+` to go to a newer state and `g
 
 [vim-mundo](https://github.com/simnalamburt/vim-mundo) plugin is very useful to help visualize Vim's undo tree.
 
-## Persistent Undo
+### Persistent Undo
 
 ```plaintext
 :wundo file.undo  save undo file
@@ -1058,7 +743,7 @@ By adding `alpha`, an alphabetical character is now considered as a number. If y
 
 ### Smart Case Sensitivity
 
-Vim has a `smartcase` option to search for case insensitive string if the search pattern *contains at least one uppercase character*. You can combine both `ignorecase` and `smartcase` to perform a case insensitive search when you enter all lowercase characters and a case sensitive search when you enter one or more uppercase characters.
+Vim has a `smartcase` option to search for case insensitive string if the search pattern *contains at least one uppercase character*.
 
 Inside your vimrc, add:
 ```plaintext
@@ -1140,7 +825,7 @@ To remove all lines containing "console", you can run:
 :g/console/d
 ```
 
-## Inverse Match
+### Inverse Match
 
 To run the global command on non-matching lines, you can run:
 ```plaintext
@@ -1218,14 +903,14 @@ If you need to sort the elements inside the arrays, but not the arrays themselve
 
 ## Ch14. External Commands
 
-## Reading the STDOUT of a Command Into Vim
+### Reading the STDOUT of a Command Into Vim
 
 ```plaintext
 :r !cmd     Read the STDOUT of an external command into the current buffer
 :r file1.txt
 ```
 
-## Writing the Buffer Content Into an External Command
+### Writing the Buffer Content Into an External Command
 
 ```plaintext
 :w !cmd    Pass the text in the current buffer as the STDIN for an external command
@@ -1310,7 +995,7 @@ Ctrl-X Ctrl-]       auto completion with tags.
 :pop                to "pop" the tag stack.
 ```
 
-## Using Plugins to generate Tags on save
+### Using Plugins to generate Tags on save
 
 I use [vim-gutentags](https://github.com/ludovicchabant/vim-gutentags).
 
@@ -1418,7 +1103,7 @@ Vim displays four windows.
 :windo !git add %   " add multiple files in different window
 ```
 
-## Vim-fugitive
+### Vim-fugitive
 
 The [vim-fugitive](https://github.com/tpope/vim-fugitive) plugin allows you to run the git CLI without leaving the Vim editor. You will find that some commands are better when executed from inside Vim.
 

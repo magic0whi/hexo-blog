@@ -750,7 +750,8 @@ Using `PRIME render offload` which was official method supported by NVIDIA
    [AUR] hexo-cli
 
    texlive-most
-   - [AUR] tllocalmgr-git
+   texlive-lang
+   [AUR] tllocalmgr-git
 
    ## MATLAB
    libxcrypt-compat
