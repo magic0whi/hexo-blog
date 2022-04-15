@@ -521,7 +521,7 @@ For example:
 
 ### Macro Redundancy
 
-`:let @z = @a`. `@a` to duplicate a macro in register a to register z,
+`:let @z = @a`. Duplicate a macro in register `a` to register `z`.
 
 ### Series vs Parallel Macro
 
@@ -634,14 +634,16 @@ In addition to numbers, you can also use these symbols as range:
 
 ### Global Command Overview
 
-`:g/pattern/cmd` Executes `cmd` against each line that matches the `pattern`.
-`:g!/pattern/command` or `:v/pattern/cmd` Run the global command on non-matching lines
-`:g/console/d` Remove all lines containing "console"
-`:g/^/m 0` Reverse the entire file / buffer
-`:g/TODO/t $` Aggregate all todos to the end of file
-`:g/console/d_` Black hole delete that matches the `pattern`
-`:g/pattern1/,/pattern2/cmd` Apply the `cmd` within `pattern1` and `pattern2`
-`:g/^$/,/./-1j` Reduce multiple empty lines to one empty line, `/^$/` represents an empty line. `/./` represents a non-empty line (a line with at least one character), `-1` means the line above that
+|                                           |                                                              |
+| --                                        | --                                                           |
+| `:g/pattern/cmd`                          | Executes `cmd` against each line that matches the `pattern`. |
+| `:g!/pattern/command` or `:v/pattern/cmd` | Run the global command on non-matching lines                 |
+| `:g/console/d`                            | Remove all lines containing "console"                        |
+| `:g/^/m 0`                                | Reverse the entire file / buffer                             |
+| `:g/TODO/t $`                             | Aggregate all todos to the end of file                       |
+| `:g/console/d_`                           | Black hole delete that matches the `pattern`                 |
+| `:g/pattern1/,/pattern2/cmd`              | Apply the `cmd` within `pattern1` and `pattern2`             |
+| `:g/^$/,/./-1j`                           | Reduce multiple empty lines to one empty line, `/^$/` represents an empty line. `/./` represents a non-empty line (a line with at least one character), `-1` means the line above that |
 
 ### Advanced Sort
 
@@ -677,25 +679,27 @@ If you need to sort the elements inside the arrays, but not the arrays themselve
 
 ## Ch14. External Commands
 
-| `:r <filename>` / `:r !cmd` | Read a file / the STDOUT of an external command into the current buffer |
-|---|---|
-| `:w <filename>` / `:w !cmd` | writing the current buffer content as a file / the STDIN for an external command |
-| `:.!tr '[:lower:]' '[:upper:]'` | Uppercase current line |
-| `!jtr '[a-z]' '[A-Z]'` | Uppercase the current line and the line below, you can run:, be aware this in normal mode |
+|                                 |                                                                                           |
+| --                              | --                                                                                        |
+| `:r <filename>` / `:r !cmd`     | Read a file / the STDOUT of an external command into the current buffer                   |
+| `:w <filename>` / `:w !cmd`     | writing the current buffer content as a file / the STDIN for an external command          |
+| `:.!tr '[:lower:]' '[:upper:]'` | Uppercase current line                                                                    |
+| `!jtr '[a-z]' '[A-Z]'`          | Uppercase the current line and the line below, you can run:, be aware this in normal mode |
 
 ## Ch15. Command-line Mode
 
-| `<c-b>`        | Go to the start of the line                           |
-|---------------|-------------------------------------------------------|
-| `<c-e`        | Go to the end of the line                             |
-| `<c-h>`        | Delete one character                                  |
-| `<c-w>`        | Delete one word                                       |
-| `<c-u>`        | Delete the entire line                                |
-|  `<c-r> <c-w>`,`<c-a>`,`<c-l>`,`<c-f>` | Get the word / WORD / line / filename under the cursor                         |
-| `:his :`        | View command history                                  |
-| `:his /` or `:his ?`       | View search history                 |
-| `<c-f>` or `q:`        | Open command history window and edit |
-| `q/` or `q?`    | Open search history window and edit      |
+|                                       |                                                        |
+| --                                    | --                                                     |
+| `<c-b>`                               | Go to the start of the line                            |
+| `<c-e`                                | Go to the end of the line                              |
+| `<c-h>`                               | Delete one character                                   |
+| `<c-w>`                               | Delete one word                                        |
+| `<c-u>`                               | Delete the entire line                                 |
+| `<c-r> <c-w>`,`<c-a>`,`<c-l>`,`<c-f>` | Get the word / WORD / line / filename under the cursor |
+| `:his :`                              | View command history                                   |
+| `:his /` or `:his ?`                  | View search history                                    |
+| `<c-f>` or `q:`                       | Open command history window and edit                   |
+| `q/` or `q?`                          | Open search history window and edit                    |
 
 ## Ch16. Tags
 
@@ -703,32 +707,34 @@ Here I recommand universal ctags, install it by `pacman -S ctags`
 `$ ctags -R .` manual generate tag files under cuurent directory
 `$ ctags -R --exclude=.git --exclude=vendor --exclude=node_modules --exclude=db --exclude=log .`
 
-| `:set tags?`                     | See the tag files path                                 |
-|----------------------------------|--------------------------------------------------------|
-| `set tags+=path/to/my/tags/file` | Add a new tag file location                            |
-| `<c-]>`                          | Jump to a definition                                   |
-| `:tselect <pattern>`             | Selective tag jumps, type numerical key to jump.       |
-| `g <c-]>` or `:tjump <pattern>`  | Selective tag jumps, prompt only when > 2 options.     |
-| `<c-x> <ctrl-]>`                 | Auto completion with tags.                             |
-| `:tags`                          | List of the tags you have jumped to. Called tag stack. |
-| `:pop`                           | "pop" the tag stack.                                   |
+|                                 |                                                        |
+| --                              | --                                                     |
+| `:set tags?`                    | See the tag files path                                 |
+| `set tags+=path/to/tags/file`   | Add a new tag file location                            |
+| `<c-]>`                         | Jump to a definition                                   |
+| `:tselect <pattern>`            | Selective tag jumps, type numerical key to jump.       |
+| `g <c-]>` or `:tjump <pattern>` | Selective tag jumps, prompt only when > 2 options.     |
+| `<c-x> <ctrl-]>`                | Auto completion with tags.                             |
+| `:tags`                         | List of the tags you have jumped to. Called tag stack. |
+| `:pop`                          | "pop" the tag stack.                                   |
 
 ## Ch17. Fold
 
 There are six different fold methods: `manual`, `indent`, `expression`, `syntax`, `diff`, `marker`. `manual` is the default.
 You can persisting fold by save the View. Goto see Chaper Views, Sessions, and Viminfo
 
-| `zf` | Fold operator, follows a motion, or use it in visual mode |
-|---|---|
-| `zo` / `zc` / `za` | Open / Close / Toggle a foleded text. |
-| `:,+1fold` | Fold in command-line mode |
-| `zR` / `zM` | Open / close all folds. |
-| `:set foldmethod?` | See which folding method you are currently using. |
-| `:set foldmethod=indent` |  |
-| `:set shiftwidth=1` | Set the how much spaces the Vim consider as an indent fold. |
-| `:set foldmethod=syntax` | Syntax Fold is determined by syntax language highlighting. Using a language syntax plugin like `vim-polyglot` will work right out of box. |
-| `:set foldmethod=marker` | Vim looks for special markers defined by 'foldmarker' option. |
-| `:set foldmarker=coffee1,coffee2` | Will fold texts between `coffee1` and `coffee2` |
+|                                   |                                                                                                                                           |
+| --                                | --                                                                                                                                        |
+| `zf`                              | Fold operator, follows a motion, or use it in visual mode                                                                                 |
+| `zo` / `zc` / `za`                | Open / Close / Toggle a foleded text.                                                                                                     |
+| `:,+1fold`                        | Fold in command-line mode                                                                                                                 |
+| `zR` / `zM`                       | Open / close all folds.                                                                                                                   |
+| `:set foldmethod?`                | See which folding method you are currently using.                                                                                         |
+| `:set foldmethod=indent`          |                                                                                                                                           |
+| `:set shiftwidth=1`               | Set the how much spaces the Vim consider as an indent fold.                                                                               |
+| `:set foldmethod=syntax`          | Syntax Fold is determined by syntax language highlighting. Using a language syntax plugin like `vim-polyglot` will work right out of box. |
+| `:set foldmethod=marker`          | Vim looks for special markers defined by 'foldmarker' option.                                                                             |
+| `:set foldmarker=coffee1,coffee2` | Will fold texts between `coffee1` and `coffee2`                                                                                           |
 
 ### Diff Fold
 
@@ -764,12 +770,13 @@ Let's break it down:
 
 ### Diffing
 
-| `vimdiff` or `vim -d` |  |
-|---|---|
-| `]c` / `[c` | jump to next / previous diff |
-| `:diffput` | put out text from current buffer to another buffer. |
-| `:diffget` | get text from another buffer to current buffer. |
-| `:diffput [filename]` / `:diffget [filename]` |  |
+|                                               |                                                     |
+| --                                            | --                                                  |
+| `vimdiff` or `vim -d`                         |                                                     |
+| `]c` / `[c`                                   | jump to next / previous diff                        |
+| `:diffput`                                    | put out text from current buffer to another buffer. |
+| `:diffget`                                    | get text from another buffer to current buffer.     |
+| `:diffput [filename]` / `:diffget [filename]` |                                                     |
 
 ### Vim As a Merge Tool
 
@@ -804,62 +811,55 @@ Vim displays four windows.
 
 [vim-fugitive](https://github.com/tpope/vim-fugitive)
 
-```plaintext
-:Git             "display a git summary window, you can do
-  Ctrl-N/Ctrl-P  "to go up or down the file list.
-  -              "to stage or unstage the file under the cursor.
-  s              "to stage the file under the cursor.
-  u              "to unstage the file under the cursor.
-  > or <         "to display or hide an inline diff of the file under the cursor.
-
-:Git blame       "display a split blame window, you can do
-  q              "to close the the blame window.
-  A              "to resize the author column.
-  C              "to resize the commit column.
-  D              "to resize the data / time column.
-
-:Gdiffsplit      "runs a 'vimdiff' of the current file against the index or work tree. Or run :Gdiffsplit <commit> to specify a commit.
-
-:Gwrite          "Stage the changes of current file. Like 'git add <current=file>'
-:Gread           "Restore the file. Like 'git checkout <current-file>'. You can undo this action.
-:Gclog           "display the commit history. Like 'git log', but this one using quickfix, so you can use ':cnext' and ':cprevious' to traverse the log information. Furthmore, you can run ':Gclog' arguments just like before, such as ':Gclog --after="January 1" --before="March 14"'
-```
+- `:Git` Display a git summary window
+  |                 |                                                              |
+  | --              | --                                                           |
+  | `Ctrl-N/Ctrl-P` | Go up or down the file list.                                 |
+  | `-`             | Stage or unstage the file under the cursor.                  |
+  | `s`             | Stage the file under the cursor.                             |
+  | `u`             | Unstage the file under the cursor.                           |
+  | `>` / `<`       | Display or hide an inline diff of the file under the cursor. |
+- `:Git blame`   Display a split blame window, you can do
+  |     |                                |
+  | --  | --                             |
+  | `q` | Close the the blame window.    |
+  | `A` | Resize the author column.      |
+  | `C` | Resize the commit column.      |
+  | `D` | Resize the data / time column. |
+- `:Gdiffsplit`: Runs a 'vimdiff' of the current file against the index or work tree. Or run :Gdiffsplit <commit> to specify a commit.
+- `:Gwrite`: Stage the changes of current file. Like `git add <current=file>`
+- `:Gread`: Restore the file. Like `git checkout <current-file>`. You can undo this action.
+- `:Gclog`:  Display the commit history. Like `git log`, but this one using quickfix, so you can use `:cnext` and `:cprevious` to traverse the log information. Furthmore, you can run `:Gclog` arguments just like before, such as `:Gclog --after="January 1" --before="March 14"`
 
 ## Ch19. Compile
 
-```
-:make    "Vim looks for a makefile in the current directory and execute it. You specify a command and other arguments just like running it from terminal. It uses quickfix to store any error.
+`:make` Vim looks for a makefile in the current directory and execute it. It uses quickfix to store any error.
+`:set makeprg=g++\ %\ -o\ %<` Change the `:make` command. `\ ` is to escape the space after `g++`. `%<` Represents the current file name without an extension (`hello.cpp` becomes `hello`)
 
-:set makeprg=g++\ %\ -o\ %<    "to change the ':make' command.
-" '\ ' is to escape the space after 'g++'.
-" '%<' represents the current file name without an extension (hello.cpp becomes hello)
+`autocmd BufWritePost *.cpp make` Add in `.vimrc`, to auto-compile on save.
 
-autocmd BufWritePost *.cpp make    "add in '.vimrc', to auto-compile on save.
+`:compiler ruby` Vim runs the `$VIMRUNTIME/compiler/ruby.vim` script and changes the `makeprg` to use the ruby.
 
-:compiler ruby    "vim runs the '$VIMRUNTIME/compiler/ruby.vim' script and changes the 'makeprg' to use the ruby.
-
-"To create a simple Typescript compiler, in your '~/.vim/compiler/typescript.vim':
+To create a simple Typescript compiler:
+```vim ~/.vim/compiler/Typescript.vim
 CompilerSet makeprg=tsc
-CompilerSet errorformat=%f:\ %m
-" '%f' represents the error file, whereas '%m' represents the error message.
+CompilerSet errorformat=%f:\ %m "'%f' represents the error file, whereas '%m' represents the error message.
 ```
 
 ### Plugin: Vim-dispatch
 
 [vim-dispatch](https://github.com/tpope/vim-dispatch)
 
-```
-###Async Make
-:Make    "Vim will run make asynchronously. You can continue doing whatever your were doing.
-
-###Async Dispatch
-:Dispatch    "like the ':compiler' and the ':!' command. It can run any external command asynchronously. e.g. ':Dispatch bundle exec rspec %'
-
-###Automating Dispatch
-"Vim-dispatch has 'b:dispatch' buffer variable that you can configure to evaluate specific command automatically.
-"If you add this in your '.vimrc', each time you enter a file that ends with '_spec.rb', running ':Dispatch' automatically 'executes bundle exec rspec %':
-autocmd BufEnter *_spec.rb let b:dispatch = 'bundle exec rspec %'
-```
+- Async Make
+  `:Make` Vim will run make asynchronously. You can continue doing whatever your were doing.
+- Async Dispatch
+  `:Dispatch` Like the ':compiler' and the ':!' command. It can run any external command asynchronously. e.g. ':Dispatch bundle exec rspec %'
+- Automating Dispatch
+  Vim-dispatch has `b:dispatch` buffer variable that you can configure to evaluate specific command automatically.
+  add this in your `.vimrc`, each time you enter a file that ends with `_spec.rb`, running `:Dispatch` automatically executes `bundle exec rspec %`:
+  ```vim ~/.vimrc
+  autocmd BufEnter *_spec.rb let b:dispatch = 'bundle exec rspec %'
+  ```
 
 ## Ch20. Views, Sessions, and Viminfo
 
@@ -867,11 +867,13 @@ autocmd BufEnter *_spec.rb let b:dispatch = 'bundle exec rspec %'
 
 View is the smallest subset of the three (View, Session, Viminfo). It is a collection of settings for one window
 
-`:set viewoptions?`
-`:set viewoptions+=localoptions`    Remember the `localoptions`
-`:mkview 1`                         Save the View, Vim let you save 9 numbered Views
-`:loadview 1`                       Load the View
-`:set viewdir?`                     See where did Vim save View files
+|                                  |                                                  |
+| --                               | --                                               |
+| `:set viewoptions?`              |                                                  |
+| `:set viewoptions+=localoptions` | Remember the `localoptions`                      |
+| `:mkview 1`                      | Save the View, Vim let you save 9 numbered Views |
+| `:loadview 1`                    | Load the View                                    |
+| `:set viewdir?`                  | See where did Vim save View files                |
 
 ### Automating View Creation
 
@@ -885,11 +887,12 @@ autocmd BufWinEnter *.txt silent loadview
 
 View saves the settings of a window, Session saves the information of all windows (including the layout).
 
-| `:mksession` / :mksession `~/some/where/else.vim` | By default, this will save a Session file (`Session.vim`) in the current directory. |
-|---|---|
-| `:source Session.vim` or `$ vim -S Session.vim` | Load a Session. You can also load a Session file from the terminal |
-| `:set sessionoptions?` |  |
-| `:set sessionoptions-=terminal` | If you don't want to save `terminal`. |
+|                                                 |                                                                                     |
+| --                                              | --                                                                                  |
+| `:mksession` / :mksession `~/mysession.vim`     | By default, this will save a Session file (`Session.vim`) in the current directory. |
+| `:source Session.vim` or `$ vim -S Session.vim` | Load a Session. You can also load a Session file from the terminal                  |
+| `:set sessionoptions?`                          |                                                                                     |
+| `:set sessionoptions-=terminal`                 | If you don't want to save `terminal`.                                               |
 
 Session Options:
 - `blank` stores empty windows
@@ -912,13 +915,13 @@ Viminfo stores:
 - Contents of non-empty registers.
 - Marks for several files.
 - File marks, pointing to locations in files.
-- Last search / substitute pattern (for `n' and `&`).
+- Last search / substitute pattern (for `n` and `&`).
 - The buffer list.
 - Global variables.
 
 `:wv ~/.viminfo_extra` Save Viminfo file
 `:rv ~/.viminfo_extra` or `$ vim -i ~/.viminfo_extra` Load Viminfo file, you can also load a Viminfo file from the terminal.
-`$ vim -i NONE`     Start Vim without Viminfo. To make it permant, you can add `set viminfo="NONE" in your vimrc file
+`$ vim -i NONE`     Start Vim without Viminfo. To make it permant, you can add `set viminfo="NONE"` in your vimrc file
 
 `:set viminfo?`
 You will get:
@@ -956,9 +959,11 @@ Vim has eight ways to execute commands across multiple files:
 ### Location List
 
 You may only have one quickfix list, whereas you can have as many location list as windows. Vim creates a distinct location list for each window.
+|                                    |                                                  |
+| --                                 | --                                               |
+| `:lvim /bagel/ **/*.md` / `:lgrep` | location list variant for the `:vimgrep` command |
+| `:lopen` / `:lclose`               |                                                  |
+| `:lfirst` / `:llast`               |                                                  |
+| `:lnext` / `:lprev`                |                                                  |
+| `:lmake`                           |                                                  |
 
-`:lvim /bagel/ **/*.md` / `:lgrep`   location list variant for the `:vimgrep` command
-`:lopen` / `:lclose`
-`:lfirst` / `:llast`
-`:lnext` / `:lprev`
-`:lmake`
