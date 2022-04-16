@@ -213,7 +213,7 @@ For Lenovo user, Enter `F12` for Boot Menu when on bootstrap stage
     editor   no
     ```
 
-    > use `lsblk -f` to show persistent block device naming
+    > use `blkid` or `lsblk -f` to show persistent block device naming
     ```properties /boot/loader/entries/arch.conf
     title   Arch Linux
     linux   /vmlinuz-linux
@@ -750,8 +750,7 @@ Using `PRIME render offload` which was official method supported by NVIDIA
    [AUR] hexo-cli
 
    texlive-most
-   texlive-lang
-   [AUR] tllocalmgr-git
+   - [AUR] tllocalmgr-git
 
    ## MATLAB
    libxcrypt-compat

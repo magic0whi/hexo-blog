@@ -15,14 +15,21 @@ Here comes a cheatsheet
 
 `<s-a>` means `Shift+A`
 `<c-a>` means `Ctrl+A`
+`<CR>` means `<Enter>` or `<Return>`
 
 TODO: works to be merged
 `<c-o,i>`, Jump old / newer position.
 `<c-^>` Go to previously edited buffer.
 `:tag`    Jump to tag definition
-`:t` (copy) method copys all matches to an address.
+`:t` (copy) method copies all matches to an address.
 `:j` join command join the lines
 `sort` sort command sort the lines
+`<c-t,d>` indent current line forward / backward in insert mode.
+`>` or `<` indent visual block forward / backward
+Spell Check:
+`]s` / `[s` Jump to next / prev bad word
+`zg` / `zug` Add / Undo add word under cursor as a good word to `spellfile`
+`z=` Find suggestion under the cursor
 
 ## Ch 02 - Buffers, Windows, and Tabs
 
@@ -811,7 +818,7 @@ Vim displays four windows.
 
 [vim-fugitive](https://github.com/tpope/vim-fugitive)
 
-- `:Git` Display a git summary window
+- `:Git` Display a git summary window, here you can do:
   |                 |                                                              |
   | --              | --                                                           |
   | `Ctrl-N/Ctrl-P` | Go up or down the file list.                                 |
@@ -819,7 +826,7 @@ Vim displays four windows.
   | `s`             | Stage the file under the cursor.                             |
   | `u`             | Unstage the file under the cursor.                           |
   | `>` / `<`       | Display or hide an inline diff of the file under the cursor. |
-- `:Git blame`   Display a split blame window, you can do
+- `:Git blame`   Display a split blame window, here you can do:
   |     |                                |
   | --  | --                             |
   | `q` | Close the the blame window.    |
