@@ -326,22 +326,22 @@ Install archlinux-keyring:
 1. Swap file creation
    Create a zero length file, set the `No_COW` attribute on it with `chattr`, and make sure compression is disabled, then using `dd` to allocate a swap file:
    ```console
-   # truncate -s 0 /swapfile
-   # chattr +C /swapfile
-   # btrfs property set /swapfile compression none
-   # dd if=/dev/zero of=/swapfile bs=1M count=4096 status=progress
-   # chmod 600 /swapfile
-   # mkswap /swapfile
-   # swapon /swapfile
+   # truncate -s 0 /.snapshots/swapfile
+   # chattr +C /.snapshots/swapfile
+   # btrfs property set /.snapshots/swapfile compression none
+   # dd if=/dev/zero of=/.snapshots/swapfile bs=1M count=4096 status=progress
+   # chmod 600 /.snapshots/swapfile
+   # mkswap /.snapshots/swapfile
+   # swapon /.snapshots/swapfile
    ```
    Adding the appropriate entry in `fstab`:
    ```properties /etc/fstab
    ...
-   /swapfile none swap defaults 0 0
+   /.snapshots/swapfile none swap defaults 0 0
    ```
 2. Setting the required kernel parameters
    The `resume_offset` number can be computed using the tool [btrfs_map_physical.c](https://github.com/osandov/osandov-linux/blob/master/scripts/btrfs_map_physical.c). Do not try to use the `filefrag` tool, on Btrfs the "physical" offset you get from `filefrag` is not the real physical offset on disk
-   <figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">curl https://raw.githubusercontent.com/osandov/osandov-linux/master/scripts/btrfs_map_physical.c &gt; btrfs_map_physical.c</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">gcc -O2 -o btrfs_map_physical btrfs_map_physical.c</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">./btrfs_map_physical /swapfile</span></span><br><span class="line">FILE OFFSET     FILE SIZE       EXTENT OFFSET   EXTENT TYPE     LOGICAL SIZE    LOGICAL OFFSET  PHYSICAL SIZE   DEVID   PHYSICAL OFFSET</span><br><span class="line">0       134217728       0       regular 134217728       21358571520     134217728       1       <b>22440701952</b></span><br><span class="line">134217728       134217728       0       regular 134217728       21642440704     134217728       1       22724571136</span><br><span class="line">268435456       134217728       0       regular 134217728       22067875840     134217728       1       23150006272</span><br><span class="line">...</span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">getconf PAGESIZE</span></span><br><span class="line">4096</span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">echo</span> $((<span class="number">22440701952</span>/<span class="number">4096</span>))</span></span><br><span class="line">5478687</span><br></pre></td></tr></table></figure>
+   <figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">curl https://raw.githubusercontent.com/osandov/osandov-linux/master/scripts/btrfs_map_physical.c &gt; btrfs_map_physical.c</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">gcc -O2 -o btrfs_map_physical btrfs_map_physical.c</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">./btrfs_map_physical /.snapshots/swapfile</span></span><br><span class="line">FILE OFFSET     FILE SIZE       EXTENT OFFSET   EXTENT TYPE     LOGICAL SIZE    LOGICAL OFFSET  PHYSICAL SIZE   DEVID   PHYSICAL OFFSET</span><br><span class="line">0       134217728       0       regular 134217728       21358571520     134217728       1       <b>22440701952</b></span><br><span class="line">134217728       134217728       0       regular 134217728       21642440704     134217728       1       22724571136</span><br><span class="line">268435456       134217728       0       regular 134217728       22067875840     134217728       1       23150006272</span><br><span class="line">...</span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">getconf PAGESIZE</span></span><br><span class="line">4096</span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">echo</span> $((<span class="number">22440701952</span>/<span class="number">4096</span>))</span></span><br><span class="line">5478687</span><br></pre></td></tr></table></figure>
 
    Note the the first physical offset returned by this tool. In this example, we use `22440701952`. Also note the pagesize that can be found with `getconf PAGESIZE`.
    To compute the `resume_offset` value, divide the physical offset by the pagesize. In this example, it is `22440701952 / 4096 = 5478687`.
