@@ -7,7 +7,7 @@ tags:
 toc: true
 ---
 
-Some notes of KVM & GVT-g
+Some notes in KVM & GVT-g
 
 <!-- more -->
 
@@ -15,21 +15,32 @@ for tpm support install `swtpm`
 
 ## GVT-g with i915ovmfPkg
 
-Using the VBIOS [i915ovmfPkg](https://github.com/patmagauran/i915ovmfPkg), these paramters were no longer works:
+Using the VBIOS [i915ovmfPkg](https://github.com/patmagauran/i915ovmfPkg), these paramters were **no longer works**:
 ```xml
 <qemu:arg value='-set'/>
 <qemu:arg value='device.hostdev0.ramfb=on'/>
 <qemu:arg value='-set'/>
 <qemu:arg value='device.hostdev0.driver=vfio-pci-nohotplug'/>
-<qemu:arg value='-set'/>
-<qemu:arg value='device.hostdev0.x-igd-opregion=on'/>
 ```
-Instead, using these:
+
+Using Qemu GTK to get a more smoothly experience:
 ```xml
-<qemu:arg value='-fw_cfg'/>
-<qemu:arg value='name=etc/igd-opregion,file=/opregion.bin'/>
-<qemu:arg value='-fw_cfg'/>
-<qemu:arg value='name=etc/igd-bdsm-size,file=/bdsmSize.bin'/>
+<domain type='kvm' xmlns:qemu='http://libvirt.org/schemas/domain/qemu/1.0'>
+  <qemu:commandline>
+    <qemu:arg value='-display'/>
+    <qemu:arg value='gtk,gl=on'/>
+    <qemu:arg value='-set'/>
+    <qemu:arg value='device.hostdev0.display=on'/>
+    <qemu:arg value='-set'/>
+    <qemu:arg value='device.hostdev0.romfile=/i915ovmf.rom'/>
+    <qemu:arg value='-set'/>
+    <qemu:arg value='device.hostdev0.x-igd-opregion=on'/>
+    <qemu:arg value='-fw_cfg'/>
+    <qemu:arg value='name=etc/igd-bdsm-size,file=/bdsmSize.bin'/>
+    <qemu:env name='DISPLAY' value=':0'/>
+    <qemu:env name='MESA_LOADER_DRIVER_OVERRIDE' value='iris'/>
+  </qemu:commandline>
+</domain>
 ```
 
 Meanwhile, I've set some minor stuffs such like KVM hidden, vendor_id, full KVM mode and cpu pins (specific for my i7-8750H, with a iothread created). Whereas some virtio features for disks and network bridges were enabled to satisfy my experience:
@@ -58,7 +69,7 @@ Meanwhile, I've set some minor stuffs such like KVM hidden, vendor_id, full KVM 
     <ioapic driver='kvm'/>
   </features>
   <devices>
-     <!-- Despite I've added the virtio mouse and keyboard, the PS2 devices cannot be removed as they are an internal function of the emulated Q35/440FX chipsets -->
+     <!-- Through I've added the virtio mouse and keyboard, the PS2 devices cannot be removed as they are an internal function of the emulated Q35/440FX chipsets -->
     <input type='mouse' bus='virtio'/>
     <input type='keyboard' bus='virtio'/>
     <disk type='file' device='disk'>
