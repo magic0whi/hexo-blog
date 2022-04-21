@@ -35,8 +35,6 @@ Using Qemu GTK to get a more smoothly experience:
     <qemu:arg value='device.hostdev0.romfile=/i915ovmf.rom'/>
     <qemu:arg value='-set'/>
     <qemu:arg value='device.hostdev0.x-igd-opregion=on'/>
-    <qemu:arg value='-fw_cfg'/>
-    <qemu:arg value='name=etc/igd-bdsm-size,file=/bdsmSize.bin'/>
     <qemu:env name='DISPLAY' value=':0'/>
     <qemu:env name='MESA_LOADER_DRIVER_OVERRIDE' value='iris'/>
   </qemu:commandline>
