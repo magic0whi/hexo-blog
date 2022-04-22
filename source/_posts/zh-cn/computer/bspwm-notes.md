@@ -1,4 +1,7 @@
---- title: bspwm-notes toc: true category: computer
+---
+title: bspwm-notes
+toc: true
+category: computer
 date: 2022-04-20 16:46:23
 tags:
 ---

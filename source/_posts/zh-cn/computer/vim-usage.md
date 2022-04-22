@@ -13,66 +13,69 @@ Here comes a cheatsheet
 
 <!-- more -->
 
-`<s-a>` means `Shift+A`
-`<c-a>` means `Ctrl+A`
+`<S-a>` means `Shift+A`
+`<C-a>` means `Ctrl+A`
 `<CR>` means `<Enter>` or `<Return>`
-i\_`<c-p>` means `<c-p>` in Insert Mode
-v\_b\_`g <c-a>` means `g <c-a>` in Visual Block-Wise Mode
-`{a,b,c}` means either a or b or c
-`[a,b,c]` means either a or b or c or none.
+i\_`<C-p>` means `<C-p>` in Insert Mode
+v\_b\_`g <C-a>` means `g <C-a>` in Visual Block-Wise Mode
+{`a`,`b`,`c`} means either a or b or c
+[`a`,`b`,`c`] means either a or b or c or none.
 
 TODO: works to be merged
-`<c-o,i>`, Jump old / newer position.
-`<c-^>` Go to previously edited buffer.
+`<C-`{`o`,`i`}`>`, Jump old / newer position.
+`<C-^>` Go to previously edited buffer.
 `:tag`    Jump to tag definition
 `:t` (copy) method copies all matches to an address.
 `:j` join command join the lines
 `sort` sort command sort the lines
-`<c-t,d>` indent current line forward / backward in insert mode.
+`<C-`{`t`,`d`}`>` indent current line forward / backward in insert mode.
 `>` or `<` indent visual block forward / backward
 Spell Check:
-`]s` / `[s` Jump to next / prev bad word
-`zg` / `zug` Add / Undo add word under cursor as a good word to `spellfile`
-`z=` Find suggestion under the cursor
+{`]`,`[`}`s` Jump to next / prev wrong word
+`z`[`u`]{`g`,`w`,`G`,`w`} Add / Undo add good / wrong word under cursor to `spellfile` / or save to current session (Which is temporarily if you don't save session)
+`z=` Find suggestion of the word under cursor
+
 
 ## Ch 01. Starting Vim
 
-Open Vim with two horizontal windows: `vim -o2 [file1] [file2]`
-Open Vim with two vertical windows: `vim -O2 [file1] [file2]`
+Open Vim with two horizontal windows: `vim -o2 `[`file1`]` `[`file2`]
+Open Vim with two vertical windows: `vim -O2 `[`file1`]` `[`file2`]
 
 ## Ch 02 - Buffers, Windows, and Tabs
 
 ### Buffers
 
-|                               |                                               |
-| --                            | --                                            |
-| `:b{next,prev,first,last}`    | Traverse buffers                              |
-| `:[w]qall`                    | Close / Save close                            |
-| `:buffers` / `:ls` / `:files` | List buffers                                  |
-| `:bdelete`                    | Remove current buffer                         |
-| `:[vertical ]ball`            | display all buffers horizontally / vertically |
+|                                    |                                               |
+| --                                 | --                                            |
+| `:b`{`next`,`prev`,`first`,`last`} | Traverse buffers                              |
+| `:`[`w`]`qall`                     | Close / Save close                            |
+| `:buffers` / `:ls` / `:files`      | List buffers                                  |
+| `:bdelete`                         | Remove current buffer                         |
+| `:`[`vertical `]`ball`             | display all buffers horizontally / vertically |
 
 ### Windows
 
 A window is how you are viewing a buffer through
 
-|                        |                                                                                              |
-| --                     | --                                                                                           |
-| `:[v]split [filename]` | Split window                                                                                 |
-| `<c-w> {h,j,k,l}`      | Navigate                                                                                     |
-| `<c-w> {v,s}`          | Opens a new vertical / horizontal / split                                                    |
-| `<c-w> {c,o}`          | Closes focused window / Close all other windows                                              |
-| `<c-w> {r,R,H,J,K,L}`  | Rotate focused window {down,right} / {up,left} / far left / far bottom / far top / far right |
+|                                      |                                                                                              |
+| --                                   | --                                                                                           |
+| `:`[`v`]`split `[`filename`]         | Split window                                                                                 |
+| `<C-w> `{`h,j,k,l`}                  | Navigate                                                                                     |
+| `<C-w> `{`v,s`}                      | Opens a new vertical / horizontal / split                                                    |
+| `<C-w> `{`c,o`}                      | Closes focused window / Close all other windows                                              |
+| `<C-w> `{`r`,`R`,`H`,`J`,`K`,`L`}    | Rotate focused window {down,right} / {up,left} / far left / far bottom / far top / far right |
+| `:`[`vertical `]`resize `{`80`,`+5`} | Set focused window to 80 rows / columns, or increment 5 rows / columns                       |
+| `<C-w> `{(`-`,`+`,`_`),(`<`,`>`,`\   | `),`=`}                                                                                      | Decrease  1 / Increase 1 / Maximize row or column for horizontal / vertical split. Equal balance for horizontal, vertical split |
 
 ### Tabs
 
 A tab is a collection of windows
 
-|                              |                                         |
-| --                           | --                                      |
-| `:tabnew [filename]`         | Open a new tab                          |
-| `:tabclose`                  | Close current tab                       |
-| `:tab{next,prev,last,first}` | Go to next / previous /last / first tab |
+|                                |                                         |
+| --                             | --                                      |
+| `:tabnew `[`filename`]         | Open a new tab                          |
+| `:tabclose`                    | Close current tab                       |
+| `:tab`{`next,prev,last,first`} | Go to next / previous /last / first tab |
 
 ## Ch03. Searching Files
 
@@ -82,15 +85,15 @@ A tab is a collection of windows
 | --                                                                 | --                                                                                       |
 | `:find` / `:edit`                                                  | `:find` finds file in path, `:edit` doesn't. Using `:set path+=<your-path-here>` to set. |
 | 1. `:vim /pattern/ file` <br> 2. `:grep -R "pattern" /search/path` | Vim's search uses Quickfix Window.                                                       |
-| `:c{open,close,next,prev,older,newer,first,last}`                  | Open / Close / Navigate the quickfix window                                              |
+| `:c`{`open`,`close`,`next`,`prev`,`older`,`newer`,`first`,`last`}  | Open / Close / Navigate the quickfix window                                              |
 
 ### Browsing Files With Netrw
 
-|             |                                                          |
-| --          | --                                                       |
-| `:[S,V]Explore`  | Starts netrw on current file {with split top / left half of the screen}                             |
-| `%,d`         | Create a new file / dir                                        |
-| `R,D`         | Rename / Delete a file or directory                               |
+|                     |                                                                         |
+| --                  | --                                                                      |
+| `:`[`S,V`]`Explore` | Starts netrw on current file {with split top / left half of the screen} |
+| `%` / `d`           | Create a new file / dir                                                 |
+| `R` / `D`           | Rename / Delete a file or directory                                     |
 
 ### Fzf
 
@@ -103,7 +106,7 @@ Fzf syntax:
 
 |                          |                                                  |
 | --                       | --                                               |
-| `:Files` or `<c-f>`      | Find files                                       |
+| `:Files` or `<C-f>`      | Find files                                       |
 | `:Buffers` or `<\-b>`    | Find files in buffers                            |
 | `:Rg` or `<\-f>`         | Find in files context                            |
 | `:BLines` or `<\-/>`     | Find lines in current buffer                     |
@@ -180,13 +183,13 @@ Common text objects:
 
 A word is a sequence of characters containing *only* `a-zA-Z0-9_`. A WORD is a sequence of all characters except white space (a white space means either space, tab, and EOL).
 
-|             |                                                        |
-| --          | --                                                     |
-| `gj` / `gk` | Down/Up in a soft-wrapped line                         |
-| `w` / `W`   | Move forward to the beginning of the next word/WORD    |
-| `e` / `E`   | Move forward to the end of the next word/WORD |
-| `b` / `B`   | Move backward to beginning of the previous word/WORD   |
-| `ge` / `gE` | Move backward to end of the previous word/WORD         |
+|              |                                                        |
+| --           | --                                                     |
+| `g`{`j`,`k`} | Down / Up in a soft-wrapped line                       |
+| `w` / `W`    | Move forward to the beginning of next word / WORD      |
+| `b` / `B`    | Move backward to the beginning of previous word / WORD |
+| `e` / `E`    | Move forward to the end of next word / WORD            |
+| `g`{`e`,`E`} | Move backward to the end of previous word / WORD       |
 
 ### Current Line Navigation
 
@@ -217,22 +220,22 @@ A paragraph begins after each empty line and also at each set of a paragraph mac
 | `gg` / `G` | Go to first / last line   |
 | `nG`       | Go to line n              |
 | `n%`       | Go to n% in file          |
-| `<c-g>`    | See total lines in a file |
+| `<C-g>`    | See total lines in a file |
 
 ### Window Navigation
 
 |                 |                                       |
 | --              | --                                    |
 | `H` / `M` / `L` | Go to top / medium / bottom of screen |
-| `nH` / `nL`     | Go `n` line from top / bottom         |
+| `n`{`H`,`L`}    | Go `n` line from top / bottom         |
 
 ### Scrolling
 
-|               |                                                                |
-| --            | --                                                             |
-| `<c-{e,d,f}>` | Scroll down a line / half screen / whole screen                |
-| `<c-{y,u,b}>` | Scroll up a line / half screen / whole screen                  |
-| `z{t,z,b}`    | Bring the current line to top / middle / bottom of your screen |
+|                       |                                                                |
+| --                    | --                                                             |
+| `<C-`{`e`,`d`,`f`}`>` | Scroll down a line / half screen / whole screen                |
+| `<C-`{`y`,`u`,`b`}`>` | Scroll up a line / half screen / whole screen                  |
+| `z`{`t`,`z`,`b`}      | Bring the current line to top / middle / bottom of your screen |
 
 ### Search Navigation
 
@@ -240,60 +243,58 @@ A paragraph begins after each empty line and also at each set of a paragraph mac
 | --                     | --                                                                     |
 | `/` / `?`              | Search forward / backward for a match                                  |
 | `n` / `N`              | Repeat last search in same / opposite direction of previous search     |
-| `:noh` or `<esc><esc>` | Turn off match highlights                                              |
+| `:noh` or `<Esc><Esc>` | Turn off match highlights                                              |
 | `*`                    | Search for whole word under cursor forward, same as type `/\<one\>`    |
 | `#`                    | Search for whole word under cursor backward                            |
-| `g*`                   | Search for word under cursor forward                                   |
-| `g#`                   | Search for word under cursor backward                                  |
+| `g`{`*`,`#`}           | Search for word under cursor forward / backward                        |
 | `gn`                   | Searches forward for the last search pattern and do a visual selection |
 
 ### Marking Position
 
 There is a difference between marking with lowercase letters (a-z) and uppercase letters (A-Z). Lowercase alphabets are local marks and uppercase alphabets are global marks (a.k.a. file marks).
 
-|          |                                    |
-| --       | --                                 |
-| `ma`     | Mark position with mark `a`        |
-| `` `a``  | Jump to exact position of mark `a` |
-| `'a`     | Jump to line of mark `a`           |
-| `:marks` | View all marks                     |
+|                  |                                           |
+| --               | --                                        |
+| `ma`             | Mark position with mark `a`               |
+| {`'`,`` ` ``}`a` | Jump to line / exact position of mark `a` |
+| `:marks`         | View all marks                            |
 
 ### Jump
 
 Any motion that moves farther than a word and current line navigation is probably a jump.
 
-|                   |                                                                           |
-| --                | --                                                                        |
-| `''` / ` `` `     | Jump back to the last line / exact position in current buffer before jump |
-| `` `[`` / `` `]`` | Jump to beginning / ending of previously changed or yanked text           |
-| `` `<`` / `` `>`` | Jump to the beginning / ending of last visual selection                   |
-| `` `0``           | Jump back to the last edited file when exiting vim                        |
-| `:jumps`          | See jump list                                                             |
-| `<c-{o,i}>`       | Move up / down the jump list                                              |
-| `m'5j`            | Add current location to jump list, follows a move                         |
+|                   |                                                                  |
+| --                | --                                                               |
+| `''` / ` `` `     | Jump back to line / exact position in current buffer before jump |
+| `` `[`` / `` `]`` | Jump to beginning / ending of previously changed or yanked text  |
+| `` `<`` / `` `>`` | Jump to the beginning / ending of last visual selection          |
+| `` `0``           | Jump back to the last edited file when exiting vim               |
+| `:jumps`          | See jump list                                                    |
+| `<C-`{`o`,`i`}`>` | Move up / down the jump list                                     |
+| `m'5j`            | Add current location to jump list, follows a move                |
 
 ## Ch06. Insert Mode
 
-|                                    |                                                                                            |
-| --                                 | --                                                                                         |
-| `i` / `I` / `gI`                   | Insert text before the cursor / first non-blank character of the line / start of line      |
-| `a` / `A`                          | Append text after the cursor / end of line                                                 |
-| `o` / `O`                          | Starts a new line below / above the cursor and insert text                                 |
-| `s` / `S` (=`cc`)                  | Delete the character / line under the cursor and insert text                               |
-| `gi`                               | Insert text in same position where the last insert mode was stopped                        |
-| `<esc>` or `<c-[>`                 | Exit insert mode and go to normal mode                                                     |
-| `<c-c>`                            | Exit insert mode and do not check for abbreviation                                         |
-| `<c-{h,w,u}>`                      | Delete one char / one word / entire line                                                   |
-| `c-r a`                            | Insert text from register `a`                                                              |
-| `<c-x> <c-{y,e}>`                  | Scroll up / down                                                                           |
-| `<c-x> <c-{l,n,i,f,]}>`            | Auto completion line / text from current file / text from included files / filename / tag  |
-| `<c-{n,p}>`                        | Find the next / previous word match, or navigate up / down the auto completion pop-up menu |
-| `<c-o> <normal cmd>`               | Excute a normal mode command                                                               |
-| `<c-o> 100ihello`                  | Insert "hello" 100 times                                                                   |
-| `<c-o> !! curl https://google.com` | Run `curl`                                                                                 |
-| `<c-o> !! pwd`                     | Run `pwd`                                                                                  |
-| `<c-o> dtz`                        | Delete from current location till the letter `z`                                           |
-| `<c-o> D`                          | Delete from current location to the end of the line                                        |
+|                                     |                                                                                            |
+| --                                  | --                                                                                         |
+| `i` / `I` / `gI`                    | Insert text before the {cursor, first non-blank character of the line, start of line}      |
+| `a` / `A`                           | Append text after the cursor / end of line                                                 |
+| `o` / `O`                           | Starts a new line below / above the cursor and insert text                                 |
+| `s` / `S` (=`cc`)                   | Delete the character / line under the cursor and insert text                               |
+| `gi`                                | Insert text in same position where the last insert mode was stopped                        |
+| `<Esc>` or `<C-[>`                  | Exit insert mode
+| `<C-c>`                             | Exit insert mode and do not check for abbreviation                                         |
+| `<C-`{`h`,`w`,`u`}`>`               | Delete one char / one word / entire line                                                   |
+| `<C-r> a`                           | Insert text from register `a`                                                              |
+| `<C-x> <C-`{`y`,`e`}`>`             | Scroll up / down                                                                           |
+| `<C-x> <C-`{`l`,`n`,`i`,`f`,`]`}`>` | Auto completion line / text from current file / text from included files / filename / tag  |
+| `<C-`{`n`,`p`}`>`                   | Find the next / previous word match, or navigate up / down the auto completion pop-up menu |
+| `<C-o> <normal cmd>`                | Excute a normal mode command                                                               |
+| `<C-o> 100ihello`                   | Insert "hello" 100 times                                                                   |
+| `<C-o> !! curl https://google.com`  | Run `curl` and insert stdout                                                               |
+| `<C-o> !! pwd`                      | Run `pwd` and insert stdout                                                                |
+| `<C-o> dtz`                         | Delete from current location till the letter `z`                                           |
+| `<C-o> D`                           | Delete from current location to the end of the line                                        |
 
 ### Repeating Insert Mode
 
@@ -392,8 +393,8 @@ In Vim, `#` usually represents the alternate file. An alternative file is the la
 
 ### The Expression Register
 
-`"=1+1<enter>p` / `Ctrl-R =1+1`: Evaluate mathematical expression "1+1" and paste it / from insert mode
-`"=@a<enter>p` / `Ctrl-r =@a`: Get values from register `a` and paste it / from insert mode
+`"=1+1<Enter>p` / `<C-r> =1+1`: Evaluate mathematical expression "1+1" and paste it / from insert mode
+`"=@a<Enter>p` / `<C-r> =@a`: Get values from register `a` and paste it / from insert mode
 
 ### The Selection Registers
 
@@ -516,7 +517,7 @@ e.g. `qAiHello<esc>q`
 
 For example:
 1. First `:put a` to put macro's contexts in register `a`.
-2. Change the macro's context as usual text. Be aware that some operations like `<esc>`, you can't literally type `<esc>`. To achieve that, (in insert mode) press `<c-v>` followed by `<esc>`. Vim will print `^[`, this is the internal code representation for the `<esc>` key.
+2. Change the macro's context as usual text. Be aware that some operations like `<Esc>`, you can't literally type `<Esc>`. To achieve that, (in insert mode) press {c,i,s}\_`<C-v>` followed by `<Esc>`. Vim will print `^[`, this is the internal code representation for the `<Esc>` key.
 3. Yank the text into register `a`, such as `0"ay$`.
 
 ### Macro Redundancy
@@ -549,23 +550,23 @@ Recall from earlier section that macros can be executed using the command-line c
 In Vim, every time you press `u` and then make a different change, Vim stores the previous state's text by creating an "undo branch".
 [vim-mundo](https://github.com/simnalamburt/vim-mundo) plugin is very useful to help visualize Vim's undo tree.
 
-|                        |                                                                                                                             |
-| --                     | --                                                                                                                          |
-| `<c-g> u`              | creates undo break in insert mode.                                                                                          |
-| `g{+,-}`               | Both `u` and `<c-r>` traverse only the *main* nodes in undo tree while `g+` and `g-` traverse *all* nodes in the undo tree. |
-| `:{w,r}undo file.undo` | Save / Load undo file                                                                                                       |
-| `:undolist`            | See undo list.                                                                                                              |
-| `:earlier 10[f,s,m,d]` | Go to the state 10 times / saves / seconds / minutes / hours / days older                                                   |
-| `:later 10`            | Go to the state 10 times newer                                                                                              |
+|                                |                                                                                                                             |
+| --                             | --                                                                                                                          |
+| `<C-g> u`                      | creates undo break in insert mode.                                                                                          |
+| `g`{`+`,`-`}                   | Both `u` and `<C-r>` traverse only the *main* nodes in undo tree while `g+` and `g-` traverse *all* nodes in the undo tree. |
+| `:`{`w`,`r`}`undo file.undo`   | Save / Load undo file                                                                                                       |
+| `:undolist`                    | See undo list.                                                                                                              |
+| `:earlier 10`[`f`,`s`,`m`,`d`] | Go to the state 10 times / saves / seconds / minutes / hours / days older                                                   |
+| `:later 10`                    | Go to the state 10 times newer                                                                                              |
 
 ## Ch11. Visual Mode
 
-|                     |                                                        |
-| --                  | --                                                     |
-| `v` / `V` / `<c-v>` | Character-wise / Line-wise / Block-wise visual mode    |
-| `gv`                | Go to the previous visual mode                         |
-| `<c-{x,a}>`         | Decrement / Increment numbers, alphabetical characters |
-| v\_b\_`g <c-{x,a}`  | Decrement / Increment across multiple lines
+|                        |                                                        |
+| --                     | --                                                     |
+| `v` / `V` / `<C-v>`    | Character-wise / Line-wise / Block-wise visual mode    |
+| `gv`                   | Go to the previous visual mode                         |
+| `<C-`{`x`,`a`}`>`      | Decrement / Increment numbers, alphabetical characters |
+| v\_b\_`g <C-`{`x`,`a`} | Decrement / Increment across multiple lines            |
 
 ### Visual Mode Navigation
 
@@ -590,7 +591,7 @@ You can use `\C` pattern anywhere in your search term to tell Vim that the subse
 ### Repeating Search
 
 `//` Repeat the previous search
-s_`<{up,down,c-{n,p}}>` to traverse search history
+s_`<`{`up`,`down`,`c-`{`n`,`p`}}`>` to traverse search history
 
 ### Repeating the Last Substitution
 
@@ -631,7 +632,7 @@ In addition to numbers, you can also use these symbols as range:
 |                                           |                                                              |
 | --                                        | --                                                           |
 | `:g/pattern/cmd`                          | Executes `cmd` against each line that matches the `pattern`. |
-| `:g!/pattern/command` or `:v/pattern/cmd` | Run the global command on non-matching lines                 |
+| `:`{`g!`,`v`}`/pattern/command`             | Run the global command on non-matching lines                 |
 | `:g/console/d`                            | Remove all lines containing "console"                        |
 | `:g/^/m 0`                                | Reverse the entire file / buffer                             |
 | `:g/TODO/t $`                             | Aggregate all todos to the end of file                       |
@@ -673,21 +674,21 @@ If you need to sort the elements inside the arrays, but not the arrays themselve
 
 ## Ch14. External Commands
 
-|                                 |                                                                                           |
-| --                              | --                                                                                        |
-| `:{r,w} <filename>` / `:{r,w} !cmd`     | {Read,Write} a file / the {STDOUT,STDIN} of an external command to {current buffer,external command}                   |
-| `:.!tr '[:lower:]' '[:upper:]'` | Uppercase current line                                                                    |
-| `!jtr '[a-z]' '[A-Z]'`          | Uppercase the current line and the line below, the difference is this is a normal mode operator |
+|                                                 |                                                                                                      |
+| --                                              | --                                                                                                   |
+| `:`{`r`,`w`}` <filename>` / `:`{`r`,`w`}` !cmd` | {Read,Write} a file / the {STDOUT,STDIN} of an external command to {current buffer,external command} |
+| `:.!tr '[:lower:]' '[:upper:]'`                 | Uppercase current line                                                                               |
+| `!jtr '[a-z]' '[A-Z]'`                          | Uppercase the current line and the line below, the difference is this is a normal mode operator      |
 
 ## Ch15. Command-line Mode
 
-|                               |                                                        |
-| --                            | --                                                     |
-| `<c-{b,e}>`                   | Go to the start / end of the line                      |
-| `<c-{h,w,u}>`                 | Delete one character / one word / entire line          |
-| `<c-r> <c-{w,a,l,f}>`         | Get the word / WORD / line / filename under the cursor |
-| `:his {:,/,?}`                | View command / search history                          |
-| `q{:,/,?}` or  {c,s}\_`<c-f>` | Open editable command / search history                 |
+|                                     |                                                        |
+| --                                  | --                                                     |
+| `<C-`{`b`,`e`}`>`                   | Go to the start / end of the line                      |
+| `<C-`{`h`,`w`,`u`}`>`               | Delete one character / one word / entire line          |
+| `<C-r> <C-`{`w`,`a`,`l`,`f`}`>`     | Get the word / WORD / line / filename under the cursor |
+| `:his `{`:`,`/`,`?`}                | View command / search history                          |
+| `q`{`:`,`/`,`?`} or  {c,s}\_`<C-f>` | Open editable command / search history                 |
 
 ## Ch16. Tags
 
@@ -697,11 +698,11 @@ Here I recommand universal ctags, install it by `pacman -S ctags`
 
 |                                 |                                                        |
 | --                              | --                                                     |
-| `:set tags?`                    | See tag files path                                 |
-| `set tags+=path/to/tags/file`   | Add a new tag files location                            |
-| `<c-]>`                         | Jump to **a** definition                                   |
+| `:set tags?`                    | See tag files path                                     |
+| `set tags+=path/to/tags/file`   | Add a new tag files location                           |
+| `<C-]>`                         | Jump to **a** definition                               |
 | `:tselect <pattern>`            | Selective tag jumps, type numerical key to jump.       |
-| `g <c-]>` or `:tjump <pattern>` | Selective tag jumps, prompt only when > 2 options.     |
+| `g <C-]>` or `:tjump <pattern>` | Selective tag jumps, prompt only when > 2 options.     |
 | `:tags`                         | List of the tags you have jumped to. Called tag stack. |
 | `:pop`                          | "pop" the tag stack.                                   |
 
@@ -710,16 +711,16 @@ Here I recommand universal ctags, install it by `pacman -S ctags`
 There are six different fold methods: `manual`, `indent`, `expression`, `syntax`, `diff`, `marker`. `manual` is the default.
 You can persisting fold by save the View. Goto see Chaper Views, Sessions, and Viminfo
 
-|                                          |                                                             |
-| --                                       | --                                                          |
-| `zf<any motion>`                         | Fold operator, follows a motion, or use it in visual mode   |
-| `z{o,c,a}`                               | Open / Close / Toggle a foleded text.                       |
-| `:,+1fold`                               | Fold in command-line mode                                   |
-| `z{R,M}`                                 | Open / close all folds.                                     |
-| `:set foldmethod?`                       | See which folding method you are currently using.           |
-| `:set foldmethod={indent,syntax,marker}` | Set Indent / Syntax / Marker Fold mode                      |
-| `:set shiftwidth=1`                      | Set the how much spaces the Vim consider as an indent fold. |
-| `:set foldmarker=coffee1,coffee2`        | Will fold texts between `coffee1` and `coffee2`             |
+|                                                |                                                             |
+| --                                             | --                                                          |
+| `zf`<`any motion`>                             | Fold operator, follows a motion, or use it in visual mode   |
+| `z`{`o`,`c`,`a`}                               | Open / Close / Toggle a foleded text.                       |
+| `:,+1fold`                                     | Fold in command-line mode                                   |
+| `z`{`R`,`M`}                                   | Open / close all folds.                                     |
+| `:set foldmethod?`                             | See which folding method you are currently using.           |
+| `:set foldmethod=`{`indent`,`syntax`,`marker`} | Set Indent / Syntax / Marker Fold mode                      |
+| `:set shiftwidth=1`                            | Set the how much spaces the Vim consider as an indent fold. |
+| `:set foldmarker=coffee1,coffee2`              | Will fold texts between `coffee1` and `coffee2`             |
 
 - Syntax Fold determined by syntax language highlighting. Using syntax plugin like `vim-polyglot` will work out of box
 - Maker Fold determined by special markers defined in 'foldmarker' option.
@@ -758,11 +759,11 @@ Let's break it down:
 
 ### Diffing
 
-|                             |                                                                                  |
-| --                          | --                                                                               |
-| `vimdiff` or `vim -d`       |                                                                                  |
-| `]c` / `[c`                 | jump to next / previous diff                                                     |
-| `:diff{put,get} [filename]` | {put,get} text from {current,another} buffer to {another,current} buffer / file. |
+|                                                     |                                                                                          |
+| --                                                  | --                                                                                       |
+| `vimdiff` or `vim -d`                               |                                                                                          |
+| {`]`,`[`}`c`                                        | jump to next / previous diff                                                             |
+| `d`{`p`,`o`} or `:diff`{`put`,`get`}` `[`filename`] | {put,obtain(get)} text from {current,another} buffer to {another,current} buffer / file. |
 
 ### Vim As a Merge Tool
 
@@ -798,13 +799,13 @@ Vim displays four windows.
 [vim-fugitive](https://github.com/tpope/vim-fugitive)
 
 - `:Git` Display a git summary window, here you can do:
-  |            |                                                              |
-  | --         | --                                                           |
-  | `<c-{n,p}` | Go up or down the file list.                                 |
-  | `-`        | Stage or unstage the file under the cursor.                  |
-  | `s`        | Stage the file under the cursor.                             |
-  | `u`        | Unstage the file under the cursor.                           |
-  | `>` / `<`  | Display / Hide an inline diff of the file under the cursor. |
+  |                |                                                             |
+  | --             | --                                                          |
+  | `<C-`{`n`,`p`} | Go up or down the file list.                                |
+  | `-`            | Stage or unstage the file under the cursor.                 |
+  | `s`            | Stage the file under the cursor.                            |
+  | `u`            | Unstage the file under the cursor.                          |
+  | `>` / `<`      | Display / Hide an inline diff of the file under the cursor. |
 - `:Git blame`   Display a split blame window, here you can do:
   |                |                                           |
   | --             | --                                        |
@@ -856,7 +857,7 @@ View is the smallest subset of the three (View, Session, Viminfo). It is a colle
 | `:set viewoptions?`              |                                                     |
 | `:set viewoptions+=localoptions` | Remember the `localoptions`                         |
 | `:set viewdir?`                  | See where did Vim save View files                   |
-| `:{mk,load}view 1`               | Save / Load View, Vim let you save 9 numbered Views |
+| `:`{`mk`,`load`}`view 1`         | Save / Load View, Vim let you save 9 numbered Views |
 
 ### Automating View Creation
 
@@ -870,12 +871,12 @@ autocmd BufWinEnter *.txt silent loadview
 
 View saves the settings of a window, Session saves the information of all windows (including the layout).
 
-|                                                 |                                                                    |
-| --                                              | --                                                                 |
-| `:mksession [/path/to/mysession.vim]`           | By default Vim save `Session.vim` in current directory.            |
-| `:source Session.vim` or `$ vim -S Session.vim` | Load a Session. You can also load a Session file from the terminal |
-| `:set sessionoptions?`                          |                                                                    |
-| `:set sessionoptions-=terminal`                 | If you don't want to save `terminal`.                              |
+|                                                 |                                                        |
+| --                                              | --                                                     |
+| `:mksession `[`/path/to/mysession.vim`]         | By default Vim save `Session.vim` in current directory |
+| `:source Session.vim` or `$ vim -S Session.vim` | Load a Session. You can also load from terminal        |
+| `:set sessionoptions?`                          | Show session options                                   |
+| `:set sessionoptions-=terminal`                 | If you don't want to save `terminal`                   |
 
 Session Options:
 - `blank` stores empty windows
@@ -902,23 +903,29 @@ Viminfo stores:
 - The buffer list.
 - Global variables.
 
-`:wv ~/.viminfo_extra` Save Viminfo file
-`:rv ~/.viminfo_extra` or `$ vim -i ~/.viminfo_extra` Load Viminfo file, you can also load a Viminfo file from the terminal.
-`$ vim -i NONE`     Start Vim without Viminfo. To make it permant, you can add `set viminfo="NONE"` in your vimrc file
+- `:`{`w`,`r`}`v ~/.viminfo_extra` Save / Viminfo file
+- `$ vim -i ~/.viminfo_extra` Load Viminfo file from terminal.
+- `$ vim -i NONE` Start Vim without Viminfo. To make it permant, you can add `set viminfo="NONE"` in your vimrc file
 
 `:set viminfo?`
-You will get:
+You will get like as:
 
 ```plaintext
 !,'100,<50,s10,h
 ```
 
 This looks cryptic. Let's break it down:
-- `!` saves global variables that start with an uppercase letter and don't contain lowercase letters. Recall that `g:` indicates a global variable. For example, if at some point you wrote the assignment `let g:FOO = "foo"`, Viminfo will save the global variable `FOO`. However if you did `let g:Foo = "foo"`, Viminfo will not save this global variable because it contains lowercase letters.
-- `'100` represents marks. In this case, Viminfo will save the local marks (a-z) of the last 100 files. Be aware that if you tell Viminfo to save too many files, Vim can start slowing down. 1000 is a good number to have.
-- `<50` tells Viminfo how many maximum lines are saved for each register (50 in this case). If I yank 100 lines of text into register a (`"ay99j`) and close Vim, the next time I open Vim and paste from register a (`"ap`), Vim will only paste 50 lines max. If you don't give maximum line number, *all* lines will be saved. If you give it 0, nothing will be saved.
-- `s10` sets a size limit (in kb) for a register. In this case, any register greater than 10kb size will be excluded.
+- `!` saves global variables that start with an uppercase letter and don't contain lowercase letters.
+  Recall that `g:` indicates a global variable. For example, if at some point you wrote the assignment `let g:FOO = "foo"`, Viminfo will save the global variable `FOO`. However if you did `let g:Foo = "foo"`, Viminfo will not save this global variable because it contains lowercase letters.
+- `'100` saves the local marks (a-z) of the last 100 files. 1000 is a good number to have.
+- `<50` maximize 50 lines saved for each register. If you don't give maximum line number, *all* lines will be saved. If you give it 0, nothing will be saved.
+- `s10` size limit (in kb) for each register.
 - `h` disables highlighting (from `hlsearch`) when Vim starts.
+
+There are more parameters you can set:
+- `:100` stores 100 command-line history.
+- `%` saves and restore the buffer list.
+- `n~/.vim/.viminfo` sets Viminfo file path
 
 ## Multiple File Operations
 
@@ -936,14 +943,13 @@ Vim has eight ways to execute commands across multiple files:
 
 ### Argument List
 
-`:args file1 file2 file3`  Create new argument list. To view the list of files, run ':args'
-`:arga file4 file5`       add `file4` and `file5` into your argument list.
+`:arg`{`s`,`a`}` file1 file2 file3`  Initialize / Append argument list. Run `:args` standalone to view file list.
 
 ### Location List
 
 You may only have one quickfix list, whereas you can have as many location list as windows. Vim creates a distinct location list for each window.
-|                                            |                                                            |
-| --                                         | --                                                         |
-| `:l{vim,grep} /bagel/ **/*.md`             | location list variant for the `:vimgrep` / `:grep` command |
-| `:l{open,close,first,last,next,prev,make}` | bunch of location list vraiant commands                    |
+|                                                          |                                                            |
+| --                                                       | --                                                         |
+| `:l`{`vim`,`grep`}` /bagel/ **/*.md`                     | location list variant for the `:vimgrep` / `:grep` command |
+| `:l`{`open`,`close`,`first`,`last`,`next`,`prev`,`make`} | bunch of location list vraiant commands                    |
 
