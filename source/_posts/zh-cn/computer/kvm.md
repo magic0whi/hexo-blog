@@ -26,6 +26,8 @@ Using the VBIOS [i915ovmfPkg](https://github.com/patmagauran/i915ovmfPkg), these
 <qemu:arg value='device.hostdev0.driver=vfio-pci-nohotplug'/>
 ```
 
+BTW, this [DVMT Pre Alloc Stolen Memory Issues](https://github.com/patmagauran/i915ovmfPkg/wiki/DVMT-Pre-Alloc---Stolen-Memory-Issues) happens to me.
+
 Using Qemu GTK to get a more smoothly experience:
 ```xml
 <domain type='kvm' xmlns:qemu='http://libvirt.org/schemas/domain/qemu/1.0'>
