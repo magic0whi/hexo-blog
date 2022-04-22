@@ -35,6 +35,11 @@ Spell Check:
 `zg` / `zug` Add / Undo add word under cursor as a good word to `spellfile`
 `z=` Find suggestion under the cursor
 
+## Ch 01. Starting Vim
+
+Open Vim with two horizontal windows: `vim -o2 [file1] [file2]`
+Open Vim with two vertical windows: `vim -O2 [file1] [file2]`
+
 ## Ch 02 - Buffers, Windows, and Tabs
 
 ### Buffers
