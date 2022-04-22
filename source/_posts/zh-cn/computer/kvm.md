@@ -12,6 +12,9 @@ Some notes in KVM & GVT-g
 <!-- more -->
 
 for tpm support install `swtpm`
+## For btrfs
+
+If you store your kvm images under btrfs filesystem. It is recommend to enable nocow, for example `chattr +C /var/lib/libvirt/images`.
 
 ## GVT-g with i915ovmfPkg
 
@@ -41,6 +44,8 @@ Using Qemu GTK to get a more smoothly experience:
 </domain>
 ```
 
+### Hypervisor Feafures
+
 Meanwhile, I've set some minor stuffs such like KVM hidden, vendor_id, full KVM mode and cpu pins (specific for my i7-8750H, with a iothread created). Whereas some virtio features for disks and network bridges were enabled to satisfy my experience:
 ```xml
 <domain type='kvm' xmlns:qemu='http://libvirt.org/schemas/domain/qemu/1.0'>
@@ -59,7 +64,23 @@ Meanwhile, I've set some minor stuffs such like KVM hidden, vendor_id, full KVM 
   </cputune>
   <features>
     <hyperv mode='custom'>
+      <relaxed state='on'/>
+      <vapic state='on'/>
+      <spinlocks state='on' retries='8191'/>
+      <vpindex state='on'/>
+      <runtime state='on'/>
+      <synic state='on'/>
+      <!-- For me, enable stimer will cause win10 KVM don't boot -->
+      <!-- <stimer state='on'>
+        <direct state='on'/>
+      </stimer> -->
+      <reset state='on'/>
       <vendor_id state='on' value='GenuineIntel'/>
+      <frequencies state='on'/>
+      <reenlightenment state='on'/>
+      <tlbflush state='on'/>
+      <ipi state='on'/>
+      <evmcs state='on'/>
     </hyperv>
     <kvm>
       <hidden state='on'/>
