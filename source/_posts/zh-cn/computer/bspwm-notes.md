@@ -38,6 +38,53 @@ Manual Mode: User preselect the insertion point.
 ```
 
 Automatic Mode: The insertion position of new node determined by automatic scheme (`longest_side`, `alternate`, `spiral`) and initial polarity (`second_child`)
+- Longest side scheme: the split direction was chosen based on dimensions of the tiling rectangle (whether height or width is longer) and the initial polarity.
+  The following scenario set the initial polarity to `second_child`:
+```plaintext
+            1                          a                          a
+            ^                         / \                        / \
+                        --->         1   2         --->         1   b
+                                         ^                         / \
+                                                                  2   3
+                                                                      ^
+
++-----------------------+  +-----------------------+  +-----------------------+
+|                       |  |           |           |  |           |           |
+|                       |  |           |           |  |           |     2     |
+|                       |  |           |           |  |           |           |
+|           1           |  |     1     |     2     |  |     1     |-----------|
+|           ^           |  |           |     ^     |  |           |           |
+|                       |  |           |           |  |           |     3     |
+|                       |  |           |           |  |           |     ^     |
++-----------------------+  +-----------------------+  +-----------------------+
+
+            X                          Y                          Z
+```
+- Alternate scheme: If parent is split horizontally, the child will be split vertically and vise versa.
+- Spiral scheme:
+```plaintext
+            a                          a                          a
+           / \                        / \                        / \
+          1   b         --->         1   c         --->         1   d
+             / \                        / \                        / \
+            2   3                      4   b                      5   c
+            ^                          ^  / \                     ^  / \
+                                          3   2                      b   4
+                                                                    / \
+                                                                   3   2
+
++-----------------------+  +-----------------------+  +-----------------------+
+|           |           |  |           |           |  |           |           |
+|           |     2     |  |           |     4     |  |           |     5     |
+|           |     ^     |  |           |     ^     |  |           |     ^     |
+|     1     |-----------|  |     1     |-----------|  |     1     |-----------|
+|           |           |  |           |     |     |  |           |  3  |     |
+|           |     3     |  |           |  3  |  2  |  |           |-----|  4  |
+|           |           |  |           |     |     |  |           |  2  |     |
++-----------------------+  +-----------------------+  +-----------------------+
+
+            X                          Y                          Z
+```
 \[TODO\]
 
 ## Cheatsheet
