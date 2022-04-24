@@ -209,40 +209,43 @@ $ certbot certonly --preferred-challenges dns --manual -d *.example.com
 ### if 判断
 
 ```
-# 用于数字判断
--eq 相等
--ne 不等
--gt 大于
--ge 大于等于
--lt 小于
--le 小于等于
+# Integer Operator
+-eq   equal
+-ne   not equal
+-gt   greater
+-ge   geeater or equal
+-lt   lesser
+-le   lesser or equal
 
-# 用于文件判断
--r 可读
--w 可写
--x 可执行
--f 是否是标准文件
--d 是否是目录
--c 是否是字符特殊文件
--b 是否是块特殊文件
--s 文件大小非0时为真
--t 当文件描述符(默认为1)指定的设备为终端时为真
+# File Operator
+-r   Readable
+-w   Writable
+-x   Executable
+-f   Whether a normal file
+-d "dir"  Whether a directory exists
+! -d "dir" Whether a directioy not exists
+-c   Whether a char file
+-b   Whether a block file
+-s   Ture if file size is not zero
+-t   Whether a tty file
 
-# 用于字符串判断
-string1 = string2 and string1 == string2 - The equality operator returns true if the operands are equal.
-    Use the = operator with the test [ command.
-    Use the == operator with the [[ command for pattern matching.
-string1 != string2 - The inequality operator returns true if the operands are not equal.
-string1 =~ regex- The regex operator returns true if the left operand matches the extended regular expression on the right.
-string1 > string2 - The greater than operator returns true if the left operand is greater than the right sorted by lexicographical (alphabetical) order.
-string1 < string2 - The less than operator returns true if the right operand is greater than the right sorted by lexicographical (alphabetical) order.
--z string - True if the string length is zero.
--n string - True if the string length is non-zero.
+# String Operator (Pattern matching)
+string1 == string2
+string1 != string2
+string1 =~ regex     extended regular expression
+string1 > string2    by alphabetical order
+string1 < string2
+-z string            True if the string length is zero.
+-n string            True if the string length is non-zero.
 
-# 逻辑判断
--a 与
--o 或
-! 非
+# Logical Operator
+-a    And
+-o    Or
+!     Not
+[] && []        And (Integer Expression)
+[[]] && [[]]    And (Pattern matching)
+[] || []        Or (Integer Expression)
+[[]] || [[]]    Or (Pattern matching)
 ```
 
 ## 字符串变量匹配

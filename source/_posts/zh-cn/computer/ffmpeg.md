@@ -46,15 +46,14 @@ toc: true
    -c:a copy \
    output.mp4
   ```
-* 钱桑の常用参数 x265
+* 钱桑の常用参数 x265 10bit
   ```console
   ffmpeg -i example.mp4 \
    -c:v libx265 \
+   -pix_fmt yuv420p10le \
+   -preset slower \
    -x265-params \
-   "y4m=true \
-   :depth=10 \
-   :preset=slower \
-   :deblock=-1,-1 \
+   "deblock=-1,-1 \
    :ctu=32 \
    :qg-size=8 \
    :crf=28.0 \
@@ -85,7 +84,7 @@ toc: true
     -ar 48000 \
    output.mp4
   ```
-   Windows 平台下 ffmpeg 的 libx265 貌似没有 `y4m`、`depth`、`preset` 等参数, 此时可用 ffmpeg 参数 `-pix_fmt yuv420p` (10bit 为 `yuv420p10le`)、`-preset slower` 来解决.
+  如果想压 8bit 可以改成 `-pix_fmt yuvj420p`
 * 通过 VA-API 压 HEVC (相比软压缺少很多参数)
   ```console
   $ ffmpeg -hwaccel vaapi -hwaccel_device /dev/dri/renderD128 -vaapi_device /dev/dri/renderD128 -ss 0 -t 4:59 -i example.mkv -vf 'format=nv12,hwupload' -c:v hevc_vaapi -crf 26 -r 24 -acodec aac -strict -2 -ac 2 -ab 192k -ar 44100 -f mp4 -y output.mp4
