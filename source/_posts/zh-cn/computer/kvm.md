@@ -53,6 +53,7 @@ Meanwhile, I've set some minor stuffs such like KVM hidden, vendor_id, full KVM 
 <domain type='kvm' xmlns:qemu='http://libvirt.org/schemas/domain/qemu/1.0'>
   <iothreads>1</iothreads>
   <cputune>
+    <!-- Use lscpu -e to see cpu topology. Here I pinned CPU2,3,4,5. To hypervisor, CPU1 to emulator and iothread -->
     <vcpupin vcpu='0' cpuset='2'/>
     <vcpupin vcpu='1' cpuset='8'/>
     <vcpupin vcpu='2' cpuset='3'/>
@@ -61,8 +62,8 @@ Meanwhile, I've set some minor stuffs such like KVM hidden, vendor_id, full KVM 
     <vcpupin vcpu='5' cpuset='10'/>
     <vcpupin vcpu='6' cpuset='5'/>
     <vcpupin vcpu='7' cpuset='11'/>
-    <emulatorpin cpuset='0,6'/>
-    <iothreadpin iothread='1' cpuset='0,6'/>
+    <emulatorpin cpuset='1,7'/>
+    <iothreadpin iothread='1' cpuset='1,7'/>
   </cputune>
   <features>
     <hyperv mode='custom'>
