@@ -669,6 +669,7 @@ Using `PRIME render offload` which was official method supported by NVIDIA
    libva-utils
    intel-media-driver
    ^[AUR] libva-intel-driver-hybrid
+   - [AUR] intel-hybrid-codec-driver
 
    ## Misc
    bpytop
