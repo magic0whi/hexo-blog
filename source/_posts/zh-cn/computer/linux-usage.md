@@ -206,62 +206,82 @@ $ certbot certonly --preferred-challenges dns --manual -d *.example.com
 
 ## bash
 
-### if 判断
+### IF Statement in Bash
 
-```
-# Integer Operator
--eq   equal
--ne   not equal
--gt   greater
--ge   geeater or equal
--lt   lesser
--le   lesser or equal
+- Integer Operator
+  ```plaintext
+  -eq    equal
+  -ne    not equal
+  -gt    greater
+  -ge    geeater or equal
+  -lt    lesser
+  -le    lesser or equal
+  ```
+- File Operator
+  ```
+  -r            Readable
+  -w            Writable
+  -x            Executable
+  -f            Whether a normal file
+  -d "dir"      Whether a directory exists
+  ! -d "dir"    Whether a directioy not exists
+  -c            Whether a char file
+  -b            Whether a block file
+  -s            Ture if file size is not zero
+  -t            Whether a tty file
+  ```
+- String Operator
+  ```
+  ==POSIX sh
+  str1 = str2
+  str1 > str2       compare by alphabetical order
+  str1 < str2
+  -z str            True if the string length is zero.
+  -n str            True if the string length is non-zero.
+  ==Bash specific (Can use pattern matching '[[' ']]')
+  str1 == str2
+  str1 != str2
+  str1 =~ regex     extended regular expression
+  ```
+- Logical Operator
+  ```plaintext
+  -a    And
+  -o    Or
+  !     Not
+  [] && []     And (For pattern matching use '[[' ']]')
+  [] || []     Or
+  ```
 
-# File Operator
--r   Readable
--w   Writable
--x   Executable
--f   Whether a normal file
--d "dir"  Whether a directory exists
-! -d "dir" Whether a directioy not exists
--c   Whether a char file
--b   Whether a block file
--s   Ture if file size is not zero
--t   Whether a tty file
+### Bash Extended Globbing
 
-# String Operator (Pattern matching)
-string1 == string2
-string1 != string2
-string1 =~ regex     extended regular expression
-string1 > string2    by alphabetical order
-string1 < string2
--z string            True if the string length is zero.
--n string            True if the string length is non-zero.
+| Glob         | Regular Expression Equivalent |
+| --           | --                            |
+| `*`          | `.*`                          |
+| `?`          | `.`                           |
+| `[a-z]`      | SAME                          |
+| `?(pattern)` | `(regex)?`                    |
+| `*(pattern)` | `(regex)*`                    |
+| `+(pattern)` | `(regex)+`                    |
+| `@(pattern)` | `(regex){1}`                  |
+| `!(pattern)` | `^((?!regex).)*$`             |
 
-# Logical Operator
--a    And
--o    Or
-!     Not
-[] && []        And (Integer Expression)
-[[]] && [[]]    And (Pattern matching)
-[] || []        Or (Integer Expression)
-[[]] || [[]]    Or (Pattern matching)
-```
+### String Variable Parameter Expansions
 
-## 字符串变量匹配
+|                 |                                                                                                 |
+| --              | --                                                                                              |
+| `::n`           | Cut `n` chars from left to right if `n` is positive, otherwise right to left if negative        |
+| `:n`            | Cut to end start from column `n`, if `n` is negative then right to left (use `:(-n)` or `: -n`) |
+| `:x:y`          | Cut `y` chars start from column `x`                                                             |
+| `${food:-Cake}` | Defaults to `Cake` if `$food` does not exist                                                    |
 
-```
-::x 正数时从左往右截取x个, 负数时从右往左截掉x个
-:x 从x开始截取后面所有内容, 负数时 :(-x) 或者 : -x 从右往左截取所有内容
-:x:y 从x开始截取y个字符
-${food:-Cake} 若 $food 不存在则输出 "Cake"
-
-STR="/path/to/foo.cpp"
-echo ${STR%/*}   # /path/to     % 是从右向左截去, 单个 % 是非贪婪模式, 
-echo ${STR#*/}   # path/to/foo.cpp   # 是从左向右截去, 单个 # 是非贪婪模式, 
-echo ${STR%.cpp} # /path/to/foo 两个 %% 是贪婪模式
-echo ${STR##*.}  # cpp          两个 ## 是贪婪模式
-```
+| `STR="/path/to/foo.cpp"`                 |                                                      |
+| --                                       | --                                                   |
+| `echo ${STR%/*}   # /path/to`            | Cut from right to left, single `%` means non-greedy. |
+| `echo ${STR#*/}   # path/to/foo.cpp`     | Cut from left to right, single `#` means non-greedy. |
+| `echo ${STR%.cpp} # /path/to/foo`        | Two `%` is greedy.                                   |
+| `echo ${STR##*.}  # cpp`                 | Two `#` is greedy.                                   |
+| `echo ${STR/foo/bar} # /path/to/bar.cpp` | String substitition, single `/` means non-greedy     |
+| `echo ${STR//o/b} # /path/tb/fbb.cpp`    | Two `/` is greedy
 
 ## ssh-agent 自启动
 
