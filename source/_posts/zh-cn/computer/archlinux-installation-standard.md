@@ -567,7 +567,7 @@ Using `PRIME render offload` which was official method supported by NVIDIA
 1. Installation
    * KDE
      ```console
-     # pacman -S plasma-meta konsole dolphin ark kio-fuse
+     # pacman -S plasma-meta konsole dolphin kdegraphics-thumbnailers gwenview kimageformats ark kio-fuse
      # systemctl enable sddm.service
      ```
    * GNOME
