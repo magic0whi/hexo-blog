@@ -57,15 +57,15 @@ Open Vim with two vertical windows: `vim -O2 `[`file1`]` `[`file2`]
 
 A window is how you are viewing a buffer through
 
-|                                      |                                                                                              |
-| --                                   | --                                                                                           |
-| `:`[`v`]`split `[`filename`]         | Split window                                                                                 |
-| `<C-w> `{`h,j,k,l`}                  | Navigate                                                                                     |
-| `<C-w> `{`v,s`}                      | Opens a new vertical / horizontal / split                                                    |
-| `<C-w> `{`c,o`}                      | Closes focused window / Close all other windows                                              |
-| `<C-w> `{`r`,`R`,`H`,`J`,`K`,`L`}    | Rotate focused window {down,right} / {up,left} / far left / far bottom / far top / far right |
-| `:`[`vertical `]`resize `{`80`,`+5`} | Set focused window to 80 rows / columns, or increment 5 rows / columns                       |
-| `<C-w> `{(`-`,`+`,`_`),(`<`,`>`,`\   | `),`=`}                                                                                      | Decrease  1 / Increase 1 / Maximize row or column for horizontal / vertical split. Equal balance for horizontal, vertical split |
+|                                            |                                                                                              |
+| --                                         | --                                                                                           |
+| `:`[`v`]`split `[`filename`]               | Split window                                                                                 |
+| `<C-w> `{`h,j,k,l`}                        | Navigate                                                                                     |
+| `<C-w> `{`v,s`}                            | Opens a new vertical / horizontal / split                                                    |
+| `<C-w> `{`c,o`}                            | Closes focused window / Close all other windows                                              |
+| `<C-w> `{`r`,`R`,`H`,`J`,`K`,`L`}          | Rotate focused window {down,right} / {up,left} / far left / far bottom / far top / far right |
+| `:`[`vertical `]`resize `{`80`,`+5`}       | Set focused window to 80 rows / columns, or increment 5 rows / columns                       |
+| `<C-w> `{(`-`,`+`,`_`),(`<`,`>`,`\|`),`=`} | Decrease  1 / Increase 1 / Maximize row or column for horizontal / vertical split. Equal balance for horizontal, vertical split |
 
 ### Tabs
 
