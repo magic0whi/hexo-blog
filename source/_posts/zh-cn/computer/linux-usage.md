@@ -12,172 +12,120 @@ A paper of my Linux gists
 
 <!-- more -->
 
-## linux命令
+## Linux Common Commands
 
 ### sed
 
-从Next的Katex行内式 `$...$` 迁移到Icarus的Katex行内式 `\\(...\\)`
+The usage of group in regular expression: (`(regex)` and `\1`)
 ```console
 $ sed -i 's,\$\([^$]*\)\$,\\\\(\1\\\\),g' file.md
 ```
 
 ### grep
 
-根据文件内容搜索文件
-
+Find in files:
 ```console
 $ grep -iRl "your-text-to-find" ./
 ```
 
 ### rsync
 
-1. 拷贝文件, 保留所有信息
+1. Copy and preserve all attributes
    ```console
    $ rsync -aXHAv -P $SOURCE_DIR/ $TARGET_DIR/`
    ```
-2. 仅复制, 不保留权限
+2. Copy only, don't keep permission and owner (keep only touch times)
    ```console
    $ rsync -rlt -P --no-owner --no-group --no-perms $SOURCE_DIR/ $TARGET_DIR/
    ```
-3. 同步文件夹(小心, 有--delete参数, 会删光目标文件夹多余的文件)
+3. Synchronize folders, be aware that `--delete` will delete any additional folder / files from `$TARGET_DIR` which is not in `$SOURCE_DIR`
    ```console
    $ rsync -aXHAz -v -P --exclude={"filename1","path/to/filename2"} --delete $SOURCE_DIR/ $TARGET_DIR/
    ```
 
 ### ss
-ss is a member of iproute tools set
-ss has only 22 parameters
 
-列出套接字统计
-```console
-$ ss -s
-```
+`ss` is member of iproute tools set
 
-查看端口占用
-```console
-# ss -nlptu | grep <端口号>
-```
+List sockets statitics: `ss -s`
+To see which process was using specific port: `ss -nlptu | grep $PORT_NUMBER`
 
 ### dd
 
-备份GPT分区表
+To backup your GPT:
 ```console
 # dd if=/dev/sda of=gpt-partition.bin bs=512 count=34
 ```
 
-恢复GPT分区表
+To restore your GPT
 ```console
 # dd if=gpt-partition.bin of=/dev/sda bs=512 count=34
 ```
 
-### 生成随机密码
+### pwgen
 
-生成20个长度为12的 含大写字母 `-c` , 数字 `-n` , 符号 `-y` , 完全随机 `-s` 的密码
-
+Random password generator
+To generate 20 different passwords which has length 12 and at least one big letter (`-c`), number (`-n`), symbol (`-y`). Furthmore, `-s` can generate more randomize passwords
 ```console
 $ pwgen -cnys 12 20
 ```
 
-### Recursively chmod all directories except files
+### Recursively chmod all directories and exclude files
 
-To recursively give directories read&execute privileges:
-
+To recursively give directories read & execute privileges:
 ```console
-# find /path/to/base/dir -type d -exec chmod 755 {} +
+# find /path/to/dir -type d -exec chmod 755 {} +
 ```
 
 To recursively give files read privileges:
-
 ```console
-# find /path/to/base/dir -type f -exec chmod 644 {} +
+# find /path/to/dir -type f -exec chmod 644 {} +
 ```
 
 Reference from [StackExchange](https://superuser.com/questions/91935/how-to-recursively-chmod-all-directories-except-files)
 
-### 带排除项删除文件和目录
+### Exclusive delete
 
+By using glob extension in bash:
 ```console
-# shopt -s extglob    #打开extglob模式
-# rm -fr !(filename)
-```
-
-### SWAP file
-
-```console
-# truncate -s 0 /swapfile
-# chattr +C /swapfile
-# btrfs property set /swapfile compression none
+# shopt -s extglob
+# rm -r !(filename1|filename2|dir1)
 ```
 
 ### ssh-keygen
 
-1. 查看某个 key 的公钥指纹
+1. Show the fingerprint of a keyfile:
    ```console
-   $ ssh-keygen -l -f </path/to/ssh/key>
-   $ ssh-keygen -l -E md5 -f <Your key> # MD5 格式
+   $ ssh-keygen -l -f </path/to/key>
+   $ ssh-keygen -l -E md5 -f </path/to/key>
    ```
-2. 修改某个 key 的 Comment
+2. Modify the comment of a keyfile:
    ```console
-   $ ssh-keygen -c -C <Your comment> -f <Your key>
+   $ ssh-keygen -c -C <Your comment> -f </path/to/key>
    ```
-3. 输出某个 key 的公钥格式
+3. Show the information of a keyfile:
    ```console
    $ ssh-keygen -y -f <Your key>
    ```
 
-### 泛域名证书
-
-```console
-$ certbot certonly --preferred-challenges dns --manual -d *.example.com
-```
-
 ### Kernel interface
 
-1. 获取uuid
+1. UUID Generator (Or `uuidgen`):
    ```console
    $ cat /proc/sys/kernel/random/uuid
    ```
-2. 查看熵池
+2. Show available entropy:
    ```console
    cat /proc/sys/kernel/random/entropy_avail
    ```
-3. 查看电池电量
+3. Show battery capacity remain:
    ```console
    $ cat /sys/class/power_supply/<Your battery name>/capacity
    ```
 
-### iptables
+## Iptables
 
-1. 透明代理(TPROXY)
-   ```console
-   # 设置策略路由
-   ip rule add fwmark 1 table 100
-   ip route add local 0.0.0.0/0 dev lo table 100
-   
-   # 代理局域网设备
-   iptables -t mangle -N V2RAY
-   iptables -t mangle -A V2RAY -d 127.0.0.1/32 -j RETURN
-   iptables -t mangle -A V2RAY -d 224.0.0.0/4 -j RETURN
-   iptables -t mangle -A V2RAY -d 255.255.255.255/32 -j RETURN
-   iptables -t mangle -A V2RAY -d 192.168.0.0/16 -p tcp -j RETURN # 直连局域网，避免 V2Ray 无法启动时无法连网关的 SSH，如果你配置的是其他网段（如 10.x.x.x 等），则修改成自己的
-   iptables -t mangle -A V2RAY -d 192.168.0.0/16 -p udp -j RETURN # 直连局域网
-   iptables -t mangle -A V2RAY -p udp -j TPROXY --on-port 12345 --tproxy-mark 1 # 给 UDP 打标记 1，转发至 12345 端口
-   iptables -t mangle -A V2RAY -p tcp -j TPROXY --on-port 12345 --tproxy-mark 1 # 给 TCP 打标记 1，转发至 12345 端口
-   iptables -t mangle -A PREROUTING -j V2RAY # 应用规则
-   
-   # 代理网关本机
-   iptables -t mangle -N V2RAY_MASK
-   iptables -t mangle -A V2RAY_MASK -d 224.0.0.0/4 -j RETURN
-   iptables -t mangle -A V2RAY_MASK -d 255.255.255.255/32 -j RETURN
-   iptables -t mangle -A V2RAY_MASK -d 192.168.0.0/16 -p tcp -j RETURN # 直连局域网
-   iptables -t mangle -A V2RAY_MASK -d 192.168.0.0/16 -p udp ! --dport 53 -j RETURN # 直连局域网，53 端口除外（因为要使用 V2Ray 的 DNS）
-   iptables -t mangle -A V2RAY_MASK -j RETURN -m mark --mark 0xff    # 直连 SO_MARK 为 0xff 的流量(0xff 是 16 进制数，数值上等同与上面V2Ray 配置的 255)，此规则目的是避免代理本机(网关)流量出现回环问题
-   iptables -t mangle -A V2RAY_MASK -p udp -j MARK --set-mark 1   # 给 UDP 打标记,重路由
-   iptables -t mangle -A V2RAY_MASK -p tcp -j MARK --set-mark 1   # 给 TCP 打标记，重路由
-   iptables -t mangle -A OUTPUT -j V2RAY_MASK # 应用规则
-   ```
-   [参考来源](https://guide.v2fly.org/app/tproxy.html)
-2. IPSET u32 匹配
+1. IPSET u32 匹配
    判断一个包的 TCP Seq 的最后一个值是否等于 41 : `0>>22&0x3C@ 4 &0xFF=0x29`
    举个例子(可以用 WireShark 抓包):
    ```
@@ -289,28 +237,6 @@ $ certbot certonly --preferred-challenges dns --manual -d *.example.com
 
 Windows用户见[Github Docs](https://help.github.com/en/github/authenticating-to-github/working-with-ssh-key-passphrases#auto-launching-ssh-agent-on-git-for-windows)
 
-## Github SSH 测试
-
-先添加ssh key: [快捷通道](https://github.com/settings/keys)
-
-然后:
-
-```console
-$ ssh -T git@github.com
-```
-
-### GitHub 的 SSH 密钥指纹
-
-以下是 MD5 格式(十六进制格式):
-
-* 16:27:ac:a5:76:28:2d:36:63:1b:56:4d:eb:df:a6:48 (RSA)
-* ad:1c:08:a4:40:e3:6f:9c:f5:66:26:5d:4b:33:5d:8c (DSA)
-
-以下是 SHA256 格式(base64 格式):
-
-* SHA256:nThbg6kXUpJWGl7E1IGOCspRomTxdCARLviKw6E5SY8 (RSA)
-* SHA256:br9IjFspm1vxR3iA35FWE+4VTyz1hYVLIE2t1/CeyWQ (DSA)
-
 ## GIT 常用命令
 
 1. 友好地输出日志:
@@ -338,16 +264,7 @@ $ ssh -T git@github.com
    * 移动HEAD指针(有人在此间隔提交可能会丢失更改) `git reset --hard HEAD~<n>`
    * 新建一个revert提交(适用于多人合作) `git revert <Commit ID>`
 
-## Git SSH 协议代理
-
-```bash ~/.ssh/config
-ProxyCommand nc -v -x 127.0.0.1:1080 %h %p
-
-# 或者 socat (http代理)
-ProxyCommand=socat - PROXY:127.0.0.1:%h:%p,proxyport=1080
-```
-
-## 更好的Submodule
+## More Great Submodule for Git
 
 使用[git-subrepo](https://github.com/ingydotnet/git-subrepo)
 
@@ -403,7 +320,9 @@ $ git config --global pack.packSizeLimit "100m"
 $ git config --global pack.threads "1"
 ```
 
-## X11vnc startup
+## SSH Tunnel
+
+X11vnc startup
 
 With SDDM and SSH Tunnel.
 Please be aware that this command need to be executed on client-side.
