@@ -122,6 +122,7 @@ By using glob extension in bash:
    ```console
    $ cat /sys/class/power_supply/<Your battery name>/capacity
    ```
+4. List network interfaces: ` ls /sys/class/net` or `ip link`
 
 ## Iptables
 

@@ -11,17 +11,13 @@ toc: true
 
 <!-- more -->
 
-## 关于关于出生以来钱桑的若干历史问题的决议
-
-
-
-
 ## 钱桑战时摸鱼体制(DEFCON 3)
 
 总优先级: MATLAB>GTM>CS61a>ACM入门
 
-1. 寻找 Mathlab 的 python 替代(numpy, panda, matplotlib), 顺便了解下 R 语言、也许我们还可以试试 Mathematica?
-2. Operation Baroque, 尝试阅读以下列表的前五本:
+1. Swithing to bspwm environment, learning some linux stuff
+2. 寻找 Mathlab 的 python 替代(numpy, panda, matplotlib), 顺便了解下 R 语言、也许我们还可以试试 Mathematica?
+3. Operation Baroque, 尝试阅读以下列表的前五本:
    Undergraduate Texts in Mathematics
    - An Introduction to Difference Equations - Saber Elaydi
    - Calculus or Several Variables - Serge Lang
@@ -43,17 +39,17 @@ toc: true
    - Linear Geometry - K.W. Greenberg & A. J. Weir
    - Matrix Analysis - Rajendra Bhatia
    - The Symmetric Group - Bruce E. Sagan
-3. IndyMill
-4. [漫画绘画入门](https://www.icourse163.org/course/NEU-1002922017)
-5. 清空数据结构笔记的 TODO, 还有两个我没理解的算法
-6. Operation Canteralla: Organic Chemistry I, II, III
-7. cs61a(SICP, 计算机程序构造和解释), cmu15-213(CSAPP, 深入理解计算机程序)
+4. IndyMill
+5. [漫画绘画入门](https://www.icourse163.org/course/NEU-1002922017)
+6. 清空数据结构笔记的 TODO, 还有两个我没理解的算法
+7. Operation Canteralla: Organic Chemistry I, II, III
+8. cs61a(SICP, 计算机程序构造和解释), cmu15-213(CSAPP, 深入理解计算机程序)
 
-## 未曾设想的道路(考研)
+## The Failed Path (Obsolete)
 
 焦点树: {% asset_link individual-focus-tree.xmind "individual-focus-tree.xmind" %}
 
-## 时间管理技巧
+## Times Manage Skills
 
 > from: [Ali Abdaal](https://aliabdaal.com/); Noodlefighter's Wiki
 
