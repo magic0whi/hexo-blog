@@ -11,13 +11,14 @@ toc: true
 
 <!-- more -->
 
-## 钱桑战时摸鱼体制(DEFCON 3)
+## The Prelimary
 
-总优先级: MATLAB>GTM>CS61a>ACM入门
+The things need to be done first.
 
-1. Swithing to bspwm environment, learning some linux stuff
-2. 寻找 Mathlab 的 python 替代(numpy, panda, matplotlib), 顺便了解下 R 语言、也许我们还可以试试 Mathematica?
-3. Operation Baroque, 尝试阅读以下列表的前五本:
+1. Free up my homelab
+2. Swithing to bspwm environment, learning some linux stuff
+3. 寻找 Mathlab 的 python 替代(numpy, panda, matplotlib), 顺便了解下 R 语言、也许我们还可以试试 Mathematica?
+4. Operation Baroque, 尝试阅读以下列表的前五本:
    Undergraduate Texts in Mathematics
    - An Introduction to Difference Equations - Saber Elaydi
    - Calculus or Several Variables - Serge Lang
@@ -39,11 +40,11 @@ toc: true
    - Linear Geometry - K.W. Greenberg & A. J. Weir
    - Matrix Analysis - Rajendra Bhatia
    - The Symmetric Group - Bruce E. Sagan
-4. IndyMill
-5. [漫画绘画入门](https://www.icourse163.org/course/NEU-1002922017)
-6. 清空数据结构笔记的 TODO, 还有两个我没理解的算法
-7. Operation Canteralla: Organic Chemistry I, II, III
-8. cs61a(SICP, 计算机程序构造和解释), cmu15-213(CSAPP, 深入理解计算机程序)
+5. IndyMill: Last stage, waiting for a new 6.35mm GT2 Pulley to be ship from seller
+6. [漫画绘画入门](https://www.icourse163.org/course/NEU-1002922017)
+7. 清空数据结构笔记的 TODO, 还有两个我没理解的算法
+8. Operation Canteralla: Organic Chemistry I, II, III
+9. cs61a(SICP, 计算机程序构造和解释), cmu15-213(CSAPP, 深入理解计算机程序)
 
 ## The Failed Path (Obsolete)
 
