@@ -6,6 +6,8 @@ date: 2022-04-20 16:46:23
 tags:
 ---
 
+Cheatsheet for bspwm
+
 <!-- more -->
 
 ## Concepts
@@ -92,8 +94,6 @@ Automatic Mode: The insertion position of new node determined by automatic schem
               X                          Y                          Z
   ```
   New node take the place of insertion point, whole tree rooted as its parent reattached and swapped at first depth. 
-
-\[TODO\]
 
 ## Cheatsheet
 

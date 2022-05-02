@@ -168,6 +168,7 @@ By using glob extension in bash:
   ```
 - File Operator
   ```
+  -e            File or directory exist
   -r            Readable
   -w            Writable
   -x            Executable
@@ -214,7 +215,7 @@ By using glob extension in bash:
 | `@(pattern)` | `(regex){1}`                  |
 | `!(pattern)` | `^((?!regex).)*$`             |
 
-### String Variable Parameter Expansions
+### Variable Parameter Expansions
 
 |                 |                                                                                                 |
 | --              | --                                                                                              |
@@ -232,94 +233,9 @@ By using glob extension in bash:
 | `echo ${STR/foo/bar} # /path/to/bar.cpp` | String substitition, single `/` means non-greedy     |
 | `echo ${STR//o/b} # /path/tb/fbb.cpp`    | Two `/` is greedy
 
-## ssh-agent 自启动
+### Bash Built-in variables
 
-参考 [Archlinux Wiki](https://wiki.archlinux.org/index.php/SSH_keys#SSH_agents)
-
-Windows用户见[Github Docs](https://help.github.com/en/github/authenticating-to-github/working-with-ssh-key-passphrases#auto-launching-ssh-agent-on-git-for-windows)
-
-## GIT 常用命令
-
-1. 友好地输出日志:
-   ```console
-   $ git log --graph --oneline --decorate --all
-   ```
-2. 输出最近一次commit及diff格式的改动:
-   ```console
-   git log --cc -1
-   ```
-3. 查看commit间的修改
-   ```console
-   git diff HEAD HEAD~
-   git diff HEAD^! --stat
-   ```
-4. 撤销对某个文件的更改
-   ```console
-   # 工作区
-   $ git checkout -- <file> # unstaged changes
-   $ git reset HEAD <file>  # staged changes
-   # 缓存区
-   $ git restore --staged <file>
-   ```
-5. 撤销合并
-   * 移动HEAD指针(有人在此间隔提交可能会丢失更改) `git reset --hard HEAD~<n>`
-   * 新建一个revert提交(适用于多人合作) `git revert <Commit ID>`
-
-## More Great Submodule for Git
-
-使用[git-subrepo](https://github.com/ingydotnet/git-subrepo)
-
-然后使用`git subrepo`为开头
-
-还可将子目录变为子仓库:
-
-```console
-$ git subrepo init <subdir> [-r <remote>] [-b <branch>] [--method <merge|rebase>]
-```
-
-## Git LFS
-
-https://zzz.buzz/zh/2016/04/19/the-guide-to-git-lfs/
-
-## Git Cherry-pick
-
-git cherry-pick用于把另一个本地分支的commit修改应用到当前分支
-
-假设`dev`分支有一个hash为`38361a68`的commit
-```
-$ git checkout master
-$ git cherry-pick 38361a68
-```
-
-## Git Format-patch
-
-1. 两个commit间的修改(包含两个commit)
-```console
-$ git format-patch <r1>..<r2>
-```
-
-2. 单个commit
-```console
-$ git format-patch -1 <r1>
-```
-
-3. 从某commit以来的修改(不包含该commit)
-```console
-$ git format-patch <r1>
-```
-
-4. 应用.patch文件
-```console
-$ git am 0001-xxxx.patch
-```
-
-## 限制 git-gc 的内存占用
-
-```console
-$ git config --global pack.windowMemory "100m"
-$ git config --global pack.packSizeLimit "100m"
-$ git config --global pack.threads "1"
-```
+`$#` number of arguments
 
 ## SSH Tunnel
 
@@ -331,3 +247,17 @@ Please be aware that this command need to be executed on client-side.
 ```console
 ssh -t -L 5900:localhost:5900 <REMOTE HOST> 'sudo x11vnc -localhost -display :0 -auth $(find /var/run/sddm/ -type f)'
 ```
+
+## Trap
+
+Reset signal `TERM`'s action to the default: `trap - TERM`
+
+| Signal Number | Signal Name | Default Action                                                |
+| --            | --          |
+| 0 | EXIT | Nothing |
+| 2             | INT      | Terminate (Interrupt, weakest, Ctrl+C)                        |
+| 15            | TERM     | Terminate (Exit cleanly, normal)                              |
+| 1             | HUP     | Terminate (Hangup, normal, sent from SSH disconnect) |
+| 3             | QUIT     | Terminate (Harshest but still handle ignorable, core dump)    |
+| 9             | KILL     | Terminate (Unconditionally)                                   |
+
