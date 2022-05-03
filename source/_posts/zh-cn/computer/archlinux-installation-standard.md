@@ -267,7 +267,7 @@ AutoEnable=true
 
 Bluetooth audio support:
 ```console
-pulseaudio-bluetooth
+# pacman -S pipewire-pulse
 ```
 
 ### Userspace OOM daemon

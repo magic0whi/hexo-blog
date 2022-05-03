@@ -17,7 +17,7 @@ The things need to be done first.
 
 1. Free up my homelab
 2. Swithing to bspwm environment, learning some linux stuff
-3. 寻找 Mathlab 的 python 替代(numpy, panda, matplotlib), 顺便了解下 R 语言、也许我们还可以试试 Mathematica?
+3. 寻找 Mathlab 的 python 替代(numpy, panda, matplotlib), 顺便了解下 R 语言、也许我还可以试试 Mathematica?
 4. Operation Baroque, 尝试阅读以下列表的前五本:
    Undergraduate Texts in Mathematics
    - An Introduction to Difference Equations - Saber Elaydi
