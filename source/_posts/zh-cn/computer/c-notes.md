@@ -37,7 +37,8 @@ $ Result: A = Bar Foo
 all: sub_target target.c
     Recipe
 
-# prequisites is the output files or other sub targets.
+# prequisites is the required files or other sub targets or a local variable.
+sub_target: LOCAL_VAR = Foobar
 sub_target: prequisites
     Recipe
 
@@ -66,7 +67,7 @@ BINS := $(SRCS:%.c=%)
 
 all: ${BINS}
 
-# '%' matches any target name, '$<' is a patten to match prerequisites, '$@' matches the target name
+# '%' matches any target name, '$<' is a patten to match first prerequisite, '$@' matches the target name
 %: %.o
     @echo 'Linking...'
     ${CC} ${LINKERFLAG} $< -o $@
