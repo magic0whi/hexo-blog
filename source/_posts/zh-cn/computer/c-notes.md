@@ -6,6 +6,8 @@ date: 2022-05-03 16:55:46
 tags:
 ---
 
+Workflow: C + GDB + Makefile
+
 <!-- more -->
 
 ## Makefile Introduction
@@ -25,7 +27,7 @@ A ?= Fooo
 
 # Appending '+='
 A += Foo
-$ Result: A = Bar Foo
+# Result: A = Bar Foo
 
 # ${A} and $(A) are the same, I personally like to use '$()' to express that there is a function called.
 
@@ -82,7 +84,7 @@ all: ${BINS}
 
 # The targets order does not manner
 %.o: %.c
-    @echo 'Creating objects...'
+    @echo 'Compile to objects...'
     ${CC} -c $<
 
 clean:

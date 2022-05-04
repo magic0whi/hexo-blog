@@ -13,31 +13,7 @@ tags:
 
 ## linux
 
-1. SSH:
-   ```properties .ssh/config
-   Host *
-       # 每隔 30s 向远端发送 keep-alive 包, 如果发送 5 次无回应断开连接。
-       ServerAliveInterval 30
-       ServerAliveCountMax 5
-       # ssh代理设置, 请使用 openbsd-netcat
-       ProxyCommand nc -v -x 127.0.0.1:1080 %h %p
-       # 压缩流量
-       Compression yes
-       # 多个 ssh 会话共享同一个连接, 减少重复连线的时间
-       ControlMaster auto
-       ControlPath /tmp/ssh-%r@%h:%p
-       # 延长连接有效时间
-       ControlPersist 30m
-
-   # github的密钥配置
-   Host github.com
-       User git
-       IdentityFile ~/.ssh/id_ed25519.key
-   ```
-2. Bash: {% asset_link bashrc.example "~/.bashrc" %}
-   Zsh: {% asset_link zshrc.example "~/.zshrc" %}
-3. Aria2: {% asset_link aria2.conf.example "aria2.conf" %}
-4. sysctl
+1. sysctl
    ```properties /etc/sysctl.d/99-sysctl.conf
    # BBR TCP Congestion
    net.core.default_qdisc = cake
@@ -106,16 +82,6 @@ tags:
 
 ## MPV
 
-放入 portable_config/{% asset_link mpv.conf.example "mpv.conf" %}
-
-MPV的配置
-针对上网本注释了了一些占用高的选项
-TODO: [可能的一份更好的配置](https://github.com/Argon-/mpv-config/blob/master/mpv.conf)
-
-为了区别化特意用 **\#@\#** 标记出了我做的注释
-{% asset_link mpv.conf "mpv.conf" %}
-
-额外的文件:
 1. 脚本 `portable_config\scripts\auto-profiles.lua`
 2. shaders文件 `portable_config\shaders\`, 请自行取消我的注释以启用shaders
    - `KrigBilateral.glsl`
@@ -124,11 +90,9 @@ TODO: [可能的一份更好的配置](https://github.com/Argon-/mpv-config/blob
    - `SSimDownscaler.glsl`
    - `SSimSuperRes.glsl`
 
-此配置fork于[@cczzhh的配置](http://bbs.vcb-s.com/thread-2730-1-1.html)
+## 升级Openwrt
 
 记录小米路由器3G 的 Openwrt 配置
-
-## 升级Openwrt
 
 1. 使用 sysupgrade 方式升级
    ```console
