@@ -91,3 +91,93 @@ clean:
    @echo 'Cleaning up...'
    rm -rvf *.o ${BINS}
 ```
+
+## Basic Data Types and its length
+
+| Data Types                       | Length (Bytes) | Range               | Format Specifier             |
+| --                               | --             | --                  | --                           |
+| `\[signed\] int`                 | 4              | -(2^31)~(2^31-1)    | %d (Dec), %o (Oct), %x (Hex) |
+| `unsigned int`                   | 4              | 0~(2^32-1)          | %u                           |
+| `short \[int\]`                  | 2              | -(2^15)~(2^15-1)    | %hd                          |
+| `unsigned short \[int\]`         | 2              | 0~(2^16-1)          | %hu                          |
+| `\[long\] long \[int\]`          | 8              | -(2^63)~(2^63-1)    | %[l]ld                       |
+| `unsigned \[long\] long \[int\]` | 8              | 0~(2^64-1)          | %[l]lu                       |
+| `float`                          | 4              | -3.4e-38~3.4e38     | %f                           |
+| `double`                         | 8              | -1.7e-308~1.7e308   | %lf                          |
+| `long double`                    | 16             | -1.2e-4932~1.7e4932 | %Lf                          |
+| `char`                           | 1              | -128~127            | %c                           |
+| `unsigned char`                  | 1              | 0~255               | %c                           |
+| `char *` (String)                | NA             | NA                  | %s                           |
+
+Different compilers may differ, this results was come from GCC11.2.0 (x86\_64), you can test by using the C codes below:
+```c
+#include <stdio.h>
+
+int main()
+{
+    int a;
+    signed int b;
+    unsigned int c;
+
+    short d;
+    long e;
+    long long f;
+    
+    float g;
+    double h;
+    long double i;
+
+    char j;
+    printf("int size %lu bytes \n", sizeof(a));
+    printf("signed int size %lu bytes \n", sizeof(b));
+    printf("unsigned int size %lu bytes \n", sizeof(c));
+    printf("short size %lu bytes \n", sizeof(d));
+    printf("long size %lu bytes \n", sizeof(e));
+    printf("long long size %lu bytes \n", sizeof(f));
+    printf("float size %lu bytes \n", sizeof(g));
+    printf("double size %lu bytes \n", sizeof(h));
+    printf("long double size %lu bytes \n", sizeof(i));
+    printf("char size %lu bytes \n", sizeof(j));
+}
+```
+
+Some notes on format specifier:
+- `%m.ns`: Output string, has length `>=m` (add space from left if less), only read left `n` chars in a string.
+- `%-m.ns`: Same as above, but add space from right if less than `m`.
+- `%m.nf`: Same as above, but for float variables.
+- `%e`: Shows the data in exponential form.
+- `%g`: Auto select `%f` or `%e` determined by size.
+- `%%`: Twice `%` to print '%'.
+
+## C Compound Assignment
+
+Ten Compound Assignment: `{+,-,*,/,%,<<,>>,&,^,|}=`.
+
+It was computed from right to left:
+```c
+int a=12;
+
+a+=a*=a/=a-6;
+// Is same as
+a=a/(a-6); // a=12/(12-6)=2
+a=a*a;     // a=2*2=4
+a=a+a;     // a=4+4=8
+```
+
+## Assignment Expression Does NOT Do Variable Define
+
+```c
+// Not allowed
+int a=b=c=5;
+
+// Allowed
+int b=2,c=3;
+int a=b=c=5;
+```
+
+## Math Function in C
+
+`#include <math.h>`
+
+- `hypot(a,b)` Return hypotenuse length from its neighbor edge a, b.
+- `sqrt(a)`
