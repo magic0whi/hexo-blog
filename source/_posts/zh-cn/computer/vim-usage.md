@@ -821,7 +821,7 @@ Vim displays four windows.
 `:make` Vim looks for a makefile in the current directory and execute it. It uses quickfix to store any error.
 `:set makeprg=g++\ %\ -o\ %<` Change the `:make` command. `\ ` is to escape the space after `g++`. `%<` Represents the current file name without an extension (`hello.cpp` becomes `hello`)
 
-`autocmd BufWritePost *.cpp make` Add in `.vimrc`, to auto-compile on save.
+Add `autocmd BufWritePost *.cpp make` in `.vimrc` to auto compile cpp files on save.
 
 `:compiler ruby` Vim runs the `$VIMRUNTIME/compiler/ruby.vim` script and changes the `makeprg` to use the ruby.
 

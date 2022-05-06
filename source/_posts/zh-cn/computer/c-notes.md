@@ -181,3 +181,41 @@ int a=b=c=5;
 
 - `hypot(a,b)` Return hypotenuse length from its neighbor edge a, b.
 - `sqrt(a)`
+
+## Basic Types, Array, Object
+
+```c
+int i = 233;
+
+int j = i;   // equivalent to  int j = 233;
+int *k = &i; // the address of variable 'i'
+
+int l[3] = {1, 2, 3}; // 'l' is a pointer to the address of first element in array, its type is 'int *'
+int *m = l;           // '&l' is not needed since 'l' has type 'int *'
+
+Object l;   // To be continue
+Object *m; 
+```
+
+## Frequently Used Functions
+
+### IO
+
+`#include<stdio.h>`
+
+- `scanf("pattern",&address)`
+  Default delimiter is space ' ', you can change it by using an pattern, for example, to use comma as delimiter:
+  ```c
+  float x, y, z;
+  scanf("%f,%f,%f",&x,&y,&z); // Then you can type '1.0,2.0,3.0' in terminal
+  ```
+
+### String
+
+- `puts(char *)`: Ouput a char array to STDOUT
+- `gets(char *)`: Similar to `scanf()` but use `\n` as delimiter instead of space ' '.
+- `strcat(char *str1,char *str2)`: Corcatenate `str2` to the end of `str1`, changes apply to `str1`, return `str1`.
+- `strcmp(char *str1,char *str2)`: Compare by first different char (using sort of ASCII), return 0 if `str1`=`str2`; return positive if `str1`>`str2`; return negative if `str1`<`str2`.
+- `strlen(char *)`: Return the length of a char array.
+- `str{lwr,upr}(char *)`: Lowercase / Uppercase a char array.
+
