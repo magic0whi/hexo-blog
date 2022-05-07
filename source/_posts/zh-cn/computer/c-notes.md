@@ -185,6 +185,7 @@ int a=b=c=5;
 ## Basic Types, Array, Object
 
 ```c
+// Variable definition auto create a memory space which has size equal to its data type (for integer it is 4 bytes)
 int i = 233;
 
 int j = i;   // equivalent to  int j = 233;
@@ -193,8 +194,10 @@ int *k = &i; // the address of variable 'i'
 int l[3] = {1, 2, 3}; // 'l' is a pointer to the address of first element in array, its type is 'int *'
 int *m = l;           // '&l' is not needed since 'l' has type 'int *'
 
-Object l;   // To be continue
+// No, there is no objects in C
+Object l;   
 Object *m; 
+// BTW, in C++ what object variable store is the copy function of that object. By default it copies all its member variables' value into new object
 ```
 
 ## Frequently Used Functions

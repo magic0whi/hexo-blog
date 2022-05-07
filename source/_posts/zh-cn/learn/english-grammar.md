@@ -811,12 +811,71 @@ it takes sb. some time to do sth.
 
 ##### 时态
 
-|                    | Present                                | Past (Predicate/Copule must be v2) | Future (+will after Subject)              | Past Future                                |
-|--------------------|----------------------------------------|------------------------------------|-------------------------------------------|--------------------------------------------|
-| Simple             | Subject + Verb(v1)-s/es                | Subject + Verb(v2)                 | Subject + will/shall + Verb(v1)           | Subject + would + Verb(v1)                 |
-| Continuous         | Subject + is/am/are + Verb(+ing)       | Subject + was/were + Verb(+ing)    | Subject + will/shall + be + Verb(+ing)    | Subject + would/should + be + Verb(v1)     |
-| Perfect            | Subject + has/have + Verb(v3)          | Subject + had + Verb(v3)           | Subject + will + have + Verb(v3)          | Subject + would/should + have + Verb(v3)   |
-| Perfect Continuous | Subject + has/have + been + Verb(+ing) | Subject + had + been + Verb(+ing)  | Subject + will + have + been + Verb(+ing) | Subject + would + have + been + Verb(+ing) |
+<table>
+<thead>
+  <tr>
+    <th></th>
+    <th>Present</th>
+    <th><span style="color:#ff0000">Past</span></th>
+    <th><span style="color:#00ff00">Future</span></th>
+    <th><span style="color:#0000ff">Past Future</span></th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td rowspan="2">Simple</td>
+    <td>Verb(v1)-s/es</td>
+    <td><span style="color:#ff0000">Verb(v2)</span></td>
+    <td><span style="color:#00ff00">will/shall</span> Verb(v1)</td>
+    <td><span style="color:#0000ff">would/should</span> Verb(v1)</td>
+  </tr>
+  <tr>
+    <td>am/is/are Verb(v3)</td>
+    <td>was/were Verb(v3)</td>
+    <td>will/shall be Verb(v3)</td>
+    <td>would/should be Verb(v3)</td>
+  </tr>
+  <tr>
+    <td rowspan="2"><span style="color:#ef00ff">Continuous</span></td>
+    <td><span style="color:#ef00ff">am/is/are Verb(+ing)</span></td>
+    <td><span style="color:#ff0000">w<span style="color:#ef00ff">a</span>s/<span style="color:#ef00ff">w</span>e<span style="color:#ef00ff">r</span>e</span> <span style="color:#ef00ff">Verb(+ing)</span></td>
+    <td><span style="color:#00ff00">will/shall</span> <span style="color:#ef00ff">be Verb(+ing)</span></td>
+    <td><span style="color:#0000ff">would/should</span> <span style="color:#ef00ff">be Verb(+ing)</span></td>
+  </tr>
+  <tr>
+    <td>am/is/are being Verb(v3)</td>
+    <td>was/were being Verb(v3)<br></td>
+    <td>will/shall be being Verb(v3)</td>
+    <td>would/should be being Verb(+ing)</td>
+  </tr>
+  <tr>
+    <td rowspan="2"><span style="color:#00ffff">Perfect</span></td>
+    <td><span style="color:#00ffff">has/have Verb(v3)</span></td>
+    <td><span style="color:#ff0000">h<span style="color:#00ffff">a</span>d</span> <span style="color:#00ffff">Verb(v3)</span></td>
+    <td><span style="color:#00ff00">will/shall</span> <span style="color:#00ffff">have Verb(v3)</span></td>
+    <td><span style="color:#0000ff">would/should</span> <span style="color:#00ffff">have Verb(v3)</span></td>
+  </tr>
+  <tr>
+    <td>has/have been Verb(v3)<br></td>
+    <td>had been Verb(v3)</td>
+    <td>will/shall have been Verb(v3)</td>
+    <td>would/should have been Verb(v3)</td>
+  </tr>
+  <tr>
+    <td rowspan="2"><span style="color:#008080">Perfect</span> <span style="color:#800080">Continuous</span></td>
+    <td><span style="color:#008080">has/have <span style="color:#800080">be</span>en</span> <span style="color:#800080">Verb(+ing)</span></td>
+    <td><span style="color:#ff0000">h<span style="color:#008080">a</span>d</span> <span style="color:#008080"><span style="color:#800080">be</span>en</span> <span style="color:#800080">Verb(+ing)</span></td>
+    <td><span style="color:#00ff00">will/shall</span> <span style="color:#008080">have <span style="color:#800080">be</span>en</span> <span style="color:#800080">Verb(+ing)</span></td>
+    <td><span style="color:#0000ff">would/should</span> <span style="color:#008080">have <span style="color:#800080">be</span>en</span> <span style="color:#800080">Verb(+ing)</span></td>
+  </tr>
+  <tr>
+    <td>has/have been being Verb(v3)</td>
+    <td>had been being Verb(v3)</td>
+    <td>will/shall have been being Verb(v3)</td>
+    <td>would should have been being Verb(v3)</td>
+  </tr>
+</tbody>
+</table>
 
 分清句子时态: 过去的过去用过去完成时; 见到一段时间用完成时
 
@@ -895,19 +954,6 @@ it takes sb. some time to do sth.
                The driver <u>had hist car washed</u> once a week.
             2. 遭受某人做. 过去分词的动作由他人完成, 被动含义且强调动作已完成.
                He <u>had his wallet stolen</u> when he was shopping.
-
-## 考试特点
-
-考试特点: 七大题型(主观5个+客观2个)
-
-### 写作套路
-
-写作套路: 三段式写作(观点, 理由说明, 结论)
-
-2-3 min 审题
-想出框架结构
-中文稿子 5-7 min
-十几分钟翻译成英文
 
 ## 杂项
 
