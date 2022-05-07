@@ -830,23 +830,23 @@ it takes sb. some time to do sth.
     <td><span style="color:#0000ff">would/should</span> Verb(v1)</td>
   </tr>
   <tr>
-    <td>am/is/are Verb(v3)</td>
-    <td>was/were Verb(v3)</td>
-    <td>will/shall be Verb(v3)</td>
-    <td>would/should be Verb(v3)</td>
+    <td><span style="color:#d7af00">am/is/are Verb(v3)</span></td>
+    <td><span style="color:#d7af00"><span style="color:#ff0000">w</span>a<span style="color:#ff0000">s</span>/w<span style="color:#ff0000">e</span>r<span style="color:#ff0000">e</span> Verb(v3)</span></td>
+    <td><span style="color:#00ff00">will/shall</span> <span style="color:#d7af00">be Verb(v3)</span></td>
+    <td><span style="color:#0000ff">would/should</span> <span style="color:#d7af00">be Verb(v3)</span></td>
   </tr>
   <tr>
     <td rowspan="2"><span style="color:#ef00ff">Continuous</span></td>
     <td><span style="color:#ef00ff">am/is/are Verb(+ing)</span></td>
-    <td><span style="color:#ff0000">w<span style="color:#ef00ff">a</span>s/<span style="color:#ef00ff">w</span>e<span style="color:#ef00ff">r</span>e</span> <span style="color:#ef00ff">Verb(+ing)</span></td>
+    <td><span style="color:#ef00ff"><span style="color:#ff0000">w</span>a<span style="color:#ff0000">s</span>/w<span style="color:#ff0000">e</span>r<span style="color:#ff0000">e</span> Verb(+ing)</span></td>
     <td><span style="color:#00ff00">will/shall</span> <span style="color:#ef00ff">be Verb(+ing)</span></td>
     <td><span style="color:#0000ff">would/should</span> <span style="color:#ef00ff">be Verb(+ing)</span></td>
   </tr>
   <tr>
-    <td>am/is/are being Verb(v3)</td>
-    <td>was/were being Verb(v3)<br></td>
-    <td>will/shall be being Verb(v3)</td>
-    <td>would/should be being Verb(+ing)</td>
+    <td><span style="color:#ef00ff">am/is/are</span> <span style="color:#d7af00">be<span style="color:#ef00ff">ing</span> Verb(v3)</span></td>
+    <td><span style="color:#ef00ff">was/were</span> <span style="color:#d7af00">be<span style="color:#ef00ff">ing</span> Verb(v3)</span></td>
+    <td><span style="color:#00ff00">will/shall</span> <span style="color:#ef00ff">be</span> <span style="color:#d7af00">be<span style="color:#ef00ff">ing</span> Verb(v3)</span></td>
+    <td><span style="color:#0000ff">would/should</span> <span style="color:#ef00ff">be</span> <span style="color:#d7af00">be<span style="color:#ef00ff">ing</span> Verb(v3)</span></td>
   </tr>
   <tr>
     <td rowspan="2"><span style="color:#00ffff">Perfect</span></td>
@@ -856,10 +856,10 @@ it takes sb. some time to do sth.
     <td><span style="color:#0000ff">would/should</span> <span style="color:#00ffff">have Verb(v3)</span></td>
   </tr>
   <tr>
-    <td>has/have been Verb(v3)<br></td>
-    <td>had been Verb(v3)</td>
-    <td>will/shall have been Verb(v3)</td>
-    <td>would/should have been Verb(v3)</td>
+    <td><span style="color:#00ffff">has/have</span> <span style="color:#d7af00">be<span style="color:#00ffff">en</span> Verb(v3)</span></td>
+    <td><span style="color:#ff0000">h<span style="color:#00ffff">a</span>d</span> <span style="color:#d7af00">be<span style="color:#00ffff">en</span> Verb(v3)</span></td>
+    <td><span style="color:#00ff00">will/shall</span> <span style="color:#00ffff">have</span> <span style="color:#d7af00">be<span style="color:#00ffff">en</span> Verb(v3)</span></td>
+    <td><span style="color:#0000ff">would/should</span> <span style="color:#00ffff">have</span> <span style="color:#d7af00">be<span style="color:#00ffff">en</span> Verb(v3)</span></td>
   </tr>
   <tr>
     <td rowspan="2"><span style="color:#008080">Perfect</span> <span style="color:#800080">Continuous</span></td>
@@ -869,10 +869,10 @@ it takes sb. some time to do sth.
     <td><span style="color:#0000ff">would/should</span> <span style="color:#008080">have <span style="color:#800080">be</span>en</span> <span style="color:#800080">Verb(+ing)</span></td>
   </tr>
   <tr>
-    <td>has/have been being Verb(v3)</td>
-    <td>had been being Verb(v3)</td>
-    <td>will/shall have been being Verb(v3)</td>
-    <td>would should have been being Verb(v3)</td>
+    <td><span style="color:#008080">has/have <span style="color:#800080">be</span>en</span> <span style="color:#d7af00">be<span style="color:#800080">ing</span> Verb(v3)</span></td>
+    <td><span style="color:#ff0000">h<span style="color:#008080">a</span>d</span> <span style="color:#008080"><span style="color:#800080">be</span>en</span> <span style="color:#d7af00">be<span style="color:#800080">ing</span> Verb(v3)</span></td>
+    <td><span style="color:#00ff00">will/shall</span> <span style="color:#008080">have <span style="color:#800080">be</span>en</span> <span style="color:#d7af00">be<span style="color:#800080">ing</span> Verb(v3)</span></td>
+    <td><span style="color:#0000ff">would/should</span> <span style="color:#008080">have <span style="color:#800080">be</span>en</span> <span style="color:#d7af00">be<span style="color:#800080">ing</span> Verb(v3)</span></td>
   </tr>
 </tbody>
 </table>
