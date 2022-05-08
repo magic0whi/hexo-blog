@@ -13,6 +13,46 @@ tags:
 
 <!-- more -->
 
+<style>
+article.article .content {
+    font-family: KaTeX_Main, 'FZYaSongS-R-GB';
+    font-size: 1.0rem;
+}
+.nospace {
+    font-size: 0;
+    /* For sub elements use rem (only relative to root font-size)
+       since font-size is set to zero
+    */
+}
+.def {
+    font-size: 1.0rem
+}
+.red {
+    color: #ff0000;
+    font-size: 1.0rem;
+}
+.green {
+    color: #00ff00;
+    font-size: 1.0rem;
+}
+.blue {
+    color: #0000ff;
+    font-size: 1.0rem;
+}
+.yellow {
+    color: #d7af00;
+    font-size: 1.0rem;
+}
+.pink {
+    color: #ef00ff;
+    font-size: 1.0rem;
+}
+.cyan {
+    color: #008080;
+    font-size: 1.0rem;
+}
+</style>
+
 ## 句子结构
 
 ### 句子成分
@@ -811,68 +851,286 @@ it takes sb. some time to do sth.
 
 ##### 时态
 
-<table>
+<table class="colorize">
 <thead>
   <tr>
     <th></th>
     <th>Present</th>
-    <th><span style="color:#ff0000">Past</span></th>
-    <th><span style="color:#00ff00">Future</span></th>
-    <th><span style="color:#0000ff">Past Future</span></th>
+    <th><span class="red">Past</span></th>
+    <th><span class="green">Future</span></th>
+    <th><span class="blue">Past Future</span></th>
   </tr>
 </thead>
 <tbody>
   <tr>
     <td rowspan="2">Simple</td>
     <td>Verb(v1)-s/es</td>
-    <td><span style="color:#ff0000">Verb(v2)</span></td>
-    <td><span style="color:#00ff00">will/shall</span> Verb(v1)</td>
-    <td><span style="color:#0000ff">would/should</span> Verb(v1)</td>
+    <td><span class="red">Verb(v2)</span></td>
+    <td><span class="green">will/shall</span> Verb(v1)</td>
+    <td><span class="blue">would/should</span> Verb(v1)</td>
   </tr>
   <tr>
-    <td><span style="color:#d7af00">am/is/are Verb(v3)</span></td>
-    <td><span style="color:#d7af00"><span style="color:#ff0000">w</span>a<span style="color:#ff0000">s</span>/w<span style="color:#ff0000">e</span>r<span style="color:#ff0000">e</span> Verb(v3)</span></td>
-    <td><span style="color:#00ff00">will/shall</span> <span style="color:#d7af00">be Verb(v3)</span></td>
-    <td><span style="color:#0000ff">would/should</span> <span style="color:#d7af00">be Verb(v3)</span></td>
+    <td><span class="yellow">am/is/are Verb(v3)</span></td>
+    <td>
+      <span class="nospace">
+        <span class="red">w</span><span class="yellow">a</span><span class="red">s</span>
+        <span class="def">/</span>
+        <span class="red">w</span><span class="yellow">e</span><span class="red">r</span><span class="yellow">e</span>
+        <span class="def">&nbsp;</span>
+        <span class="yellow">Verb(v3)</span>
+      </span>
+    </td>
+    <td>
+      <span class="nospace">
+        <span class="green">will/shall</span>
+        <span class="def">&nbsp;</span>
+        <span class="yellow">be Verb(v3)</span>
+      </span>
+    </td>
+    <td>
+      <span class="nospace">
+        <span class="blue">would/should</span>
+        <span class="def">&nbsp;</span>
+        <span class="yellow">be Verb(v3)</span>
+      </span>
+    </td>
   </tr>
   <tr>
-    <td rowspan="2"><span style="color:#ef00ff">Continuous</span></td>
-    <td><span style="color:#ef00ff">am/is/are Verb(+ing)</span></td>
-    <td><span style="color:#ef00ff"><span style="color:#ff0000">w</span>a<span style="color:#ff0000">s</span>/w<span style="color:#ff0000">e</span>r<span style="color:#ff0000">e</span> Verb(+ing)</span></td>
-    <td><span style="color:#00ff00">will/shall</span> <span style="color:#ef00ff">be Verb(+ing)</span></td>
-    <td><span style="color:#0000ff">would/should</span> <span style="color:#ef00ff">be Verb(+ing)</span></td>
+    <td rowspan="2"><span class="pink">Continuous</span></td>
+    <td><span class="pink">am/is/are Verb(+ing)</span></td>
+    <td>
+      <span class="nospace">
+        <span class="red">w</span><span class="pink">a</span><span class="red">s</span>
+        <span class="def">/</span>
+        <span class="red">w</span><span class="pink">e</span><span class="red">r</span><span class="pink">e</span>
+        <span class="def">&nbsp;</span>
+        <span class="pink">Verb(+ing)</span>
+      </span>
+    </td>
+    <td>
+      <span class="nospace">
+        <span class="green">will/shall</span>
+        <span class="def">&nbsp;</span>
+        <span class="pink">be Verb(+ing)</span>
+      </span>
+    </td>
+    <td>
+      <span class="nospace">
+        <span class="blue">would/should</span>
+        <span class="def">&nbsp;</span>
+        <span class="pink">be Verb(+ing)</span>
+      </span>
+    </td>
   </tr>
   <tr>
-    <td><span style="color:#ef00ff">am/is/are</span> <span style="color:#d7af00">be<span style="color:#ef00ff">ing</span> Verb(v3)</span></td>
-    <td><span style="color:#ef00ff">was/were</span> <span style="color:#d7af00">be<span style="color:#ef00ff">ing</span> Verb(v3)</span></td>
-    <td><span style="color:#00ff00">will/shall</span> <span style="color:#ef00ff">be</span> <span style="color:#d7af00">be<span style="color:#ef00ff">ing</span> Verb(v3)</span></td>
-    <td><span style="color:#0000ff">would/should</span> <span style="color:#ef00ff">be</span> <span style="color:#d7af00">be<span style="color:#ef00ff">ing</span> Verb(v3)</span></td>
+    <td>
+      <span class="nospace">
+        <span class="pink">am/is/are</span>
+        <span class="def">&nbsp;</span>
+        <span class="yellow">be</span><span class="pink">ing</span>
+        <span class="def">&nbsp;</span>
+        <span class="yellow">Verb(v3)</span>
+      </span>
+    </td>
+    <td>
+      <span class="nospace">
+        <span class="red">w</span><span class="pink">a</span><span class="red">s</span>
+        <span class="def">/</span>
+        <span class="red">w</span><span class="pink">e</span><span class="red">r</span><span class="pink">e</span>
+        <span class="def">&nbsp;</span>
+        <span class="yellow">be</span><span class="pink">ing</span>
+        <span class="def">&nbsp;</span>
+        <span class="yellow">Verb(v3)</span>
+      </span>
+    </td>
+    <td>
+      <span class="nospace">
+        <span class="green">will/shall</span>
+        <span class="def">&nbsp;</span>
+        <span class="pink">be</span>
+        <span class="def">&nbsp;</span>
+        <span class="yellow">be</span><span class="pink">ing</span>
+        <span class="def">&nbsp;</span>
+        <span class="yellow">Verb(v3)</span>
+      </span>
+    </td>
+    <td>
+      <span class="nospace">
+        <span class="blue">would/should</span>
+        <span class="def">&nbsp;</span>
+        <span class="pink">be</span>
+        <span class="def">&nbsp;</span>
+        <span class="yellow">be</span><span class="pink">ing</span>
+        <span class="def">&nbsp;</span>
+        <span class="yellow">Verb(v3)</span>
+      </span>
+    </td>
   </tr>
   <tr>
-    <td rowspan="2"><span style="color:#00ffff">Perfect</span></td>
-    <td><span style="color:#00ffff">has/have Verb(v3)</span></td>
-    <td><span style="color:#ff0000">h<span style="color:#00ffff">a</span>d</span> <span style="color:#00ffff">Verb(v3)</span></td>
-    <td><span style="color:#00ff00">will/shall</span> <span style="color:#00ffff">have Verb(v3)</span></td>
-    <td><span style="color:#0000ff">would/should</span> <span style="color:#00ffff">have Verb(v3)</span></td>
+    <td rowspan="2"><span class="cyan">Perfect</span></td>
+    <td><span class="cyan">has/have Verb(v3)</span></td>
+    <td>
+      <span class="nospace">
+        <span class="cyan">ha</span><span class="red">d</span>
+        <span class="def">&nbsp;</span>
+        <span class="cyan">Verb(v3)</span>
+      </span>
+    </td>
+    <td>
+      <span class="nospace">
+        <span class="green">will/shall</span>
+        <span class="def">&nbsp;</span>
+        <span class="cyan">have Verb(v3)</span>
+      </span>
+    </td>
+    <td>
+      <span class="nospace">
+        <span class="blue">would/should</span>
+        <span class="def">&nbsp;</span>
+        <span class="cyan">have Verb(v3)</span>
+      </span>
+    </td>
   </tr>
   <tr>
-    <td><span style="color:#00ffff">has/have</span> <span style="color:#d7af00">be<span style="color:#00ffff">en</span> Verb(v3)</span></td>
-    <td><span style="color:#ff0000">h<span style="color:#00ffff">a</span>d</span> <span style="color:#d7af00">be<span style="color:#00ffff">en</span> Verb(v3)</span></td>
-    <td><span style="color:#00ff00">will/shall</span> <span style="color:#00ffff">have</span> <span style="color:#d7af00">be<span style="color:#00ffff">en</span> Verb(v3)</span></td>
-    <td><span style="color:#0000ff">would/should</span> <span style="color:#00ffff">have</span> <span style="color:#d7af00">be<span style="color:#00ffff">en</span> Verb(v3)</span></td>
+    <td>
+      <span class="nospace">
+        <span class="cyan">has/have</span>
+        <span class="def">&nbsp;</span>
+        <span class="yellow">be<span class="cyan">en</span>
+        <span class="def">&nbsp;</span>
+        <span class="yellow">Verb(v3)</span>
+      </span>
+    </td>
+    <td>
+      <span class="nospace">
+        <span class="cyan">ha</span><span class="red">d</span>
+        <span class="def">&nbsp;</span>
+        <span class="yellow">be<span class="cyan">en</span>
+        <span class="def">&nbsp;</span>
+        <span class="yellow">Verb(v3)</span>
+      </span>
+    </td>
+    <td>
+      <span class="nospace">
+        <span class="green">will/shall</span>
+        <span class="def">&nbsp;</span>
+        <span class="cyan">have</span>
+        <span class="def">&nbsp;</span>
+        <span class="yellow">be<span class="cyan">en</span>
+        <span class="def">&nbsp;</span>
+        <span class="yellow">Verb(v3)</span>
+      </span>
+    </td>
+    <td>
+      <span class="nospace">
+        <span class="blue">would/should</span>
+        <span class="def">&nbsp;</span>
+        <span class="cyan">have</span>
+        <span class="def">&nbsp;</span>
+        <span class="yellow">be<span class="cyan">en</span>
+        <span class="def">&nbsp;</span>
+        <span class="yellow">Verb(v3)</span>
+      </span>
+    </td>
   </tr>
   <tr>
-    <td rowspan="2"><span style="color:#008080">Perfect</span> <span style="color:#800080">Continuous</span></td>
-    <td><span style="color:#008080">has/have <span style="color:#800080">be</span>en</span> <span style="color:#800080">Verb(+ing)</span></td>
-    <td><span style="color:#ff0000">h<span style="color:#008080">a</span>d</span> <span style="color:#008080"><span style="color:#800080">be</span>en</span> <span style="color:#800080">Verb(+ing)</span></td>
-    <td><span style="color:#00ff00">will/shall</span> <span style="color:#008080">have <span style="color:#800080">be</span>en</span> <span style="color:#800080">Verb(+ing)</span></td>
-    <td><span style="color:#0000ff">would/should</span> <span style="color:#008080">have <span style="color:#800080">be</span>en</span> <span style="color:#800080">Verb(+ing)</span></td>
+    <td rowspan="2">
+      <span class="nospace">
+        <span class="cyan">Perfect</span>
+        <span class="def">&nbsp;</span>
+        <span class="pink">Continuous</span>
+      </span>
+    </td>
+    <td>
+      <span class="nospace">
+        <span class="cyan">has/have</span>
+        <span class="def">&nbsp;</span>
+        <span class="pink">be</span><span class="cyan">en</span>
+        <span class="def">&nbsp;</span>
+        <span class="pink">Verb(+ing)</span>
+      </span>
+    </td>
+    <td>
+      <span class="nospace">
+        <span class="cyan">ha</span><span class="red">d</span>
+        <span class="def">&nbsp;</span>
+        <span class="pink">be</span><span class="cyan">en</span>
+        <span class="def">&nbsp;</span>
+        <span class="pink">Verb(+ing)</span>
+      </span>
+    </td>
+    <td>
+      <span class="nospace">
+        <span class="green">will/shall</span>
+        <span class="def">&nbsp;</span>
+        <span class="cyan">have</span>
+        <span class="def">&nbsp;</span>
+        <span class="pink">be</span><span class="cyan">en</span>
+        <span class="def">&nbsp;</span>
+        <span class="pink">Verb(+ing)</span>
+      </span>
+    </td>
+    <td>
+      <span class="nospace">
+        <span class="blue">would/should</span>
+        <span class="def">&nbsp;</span>
+        <span class="cyan">have</span>
+        <span class="def">&nbsp;</span>
+        <span class="pink">be</span><span class="cyan">en</span>
+        <span class="def">&nbsp;</span>
+        <span class="pink">Verb(+ing)</span>
+      </span>
+    </td>
   </tr>
   <tr>
-    <td><span style="color:#008080">has/have <span style="color:#800080">be</span>en</span> <span style="color:#d7af00">be<span style="color:#800080">ing</span> Verb(v3)</span></td>
-    <td><span style="color:#ff0000">h<span style="color:#008080">a</span>d</span> <span style="color:#008080"><span style="color:#800080">be</span>en</span> <span style="color:#d7af00">be<span style="color:#800080">ing</span> Verb(v3)</span></td>
-    <td><span style="color:#00ff00">will/shall</span> <span style="color:#008080">have <span style="color:#800080">be</span>en</span> <span style="color:#d7af00">be<span style="color:#800080">ing</span> Verb(v3)</span></td>
-    <td><span style="color:#0000ff">would/should</span> <span style="color:#008080">have <span style="color:#800080">be</span>en</span> <span style="color:#d7af00">be<span style="color:#800080">ing</span> Verb(v3)</span></td>
+    <td>
+      <span class="nospace">
+        <span class="cyan">has/have</span>
+        <span class="def">&nbsp;</span>
+        <span class="pink">be</span><span class="cyan">en</span>
+        <span class="def">&nbsp;</span>
+        <span class="yellow">be</span><span class="pink">ing</span>
+        <span class="def">&nbsp;</span>
+        <span class="yellow">Verb(v3)</span>
+      </span>
+    </td>
+    <td>
+      <span class="nospace">
+        <span class="cyan">ha</span><span class="red">d</span>
+        <span class="def">&nbsp;</span>
+        <span class="pink">be</span><span class="cyan">en</span>
+        <span class="def">&nbsp;</span>
+        <span class="yellow">be</span><span class="pink">ing</span>
+        <span class="def">&nbsp;</span>
+        <span class="yellow">Verb(v3)</span>
+      </span>
+    </td>
+    <td>
+      <span class="nospace">
+        <span class="green">will/shall</span>
+        <span class="def">&nbsp;</span>
+        <span class="cyan">have</span>
+        <span class="def">&nbsp;</span>
+        <span class="pink">be</span><span class="cyan">en</span>
+        <span class="def">&nbsp;</span>
+        <span class="yellow">be</span><span class="pink">ing</span>
+        <span class="def">&nbsp;</span>
+        <span class="yellow">Verb(v3)</span>
+      </span>
+    </td>
+    <td>
+      <span class="nospace">
+        <span class="blue">would/should</span>
+        <span class="def">&nbsp;</span>
+        <span class="cyan">have</span>
+        <span class="def">&nbsp;</span>
+        <span class="pink">be</span><span class="cyan">en</span>
+        <span class="def">&nbsp;</span>
+        <span class="yellow">be</span><span class="pink">ing</span>
+        <span class="def">&nbsp;</span>
+        <span class="yellow">Verb(v3)</span>
+      </span>
+    </td>
   </tr>
 </tbody>
 </table>
@@ -905,22 +1163,6 @@ it takes sb. some time to do sth.
          Paper was first made in China.
       2. 当强调或突出动作承受者的作用时.
          The new machine was invented by a 20-year-old young worker.
-   4. 被动语态的各种时态形式:
-      一般现在时 am/is/are done
-      一般过去时 was/were done
-      一般将来时 will/shall be done
-      
-      现在进行时 am/is/are being done
-      过去进行时 was/were being done
-      将来进行时 will/shall be being done
-
-      现在完成时 have/has been done
-      过去完成时 had been done
-      将来完成时 will/shall have been done
-
-      现在完成进行时 have/has been being done
-      过去完成进行时 had been being done
-      将来完成进行时 will/shall have been being done
 2. 被动语态注意的问题
    1. 不及物动词、表状态动词一般用主动语态(即不能作被动)
       come true, consist of, take place, happen, become, rise, occur, belong, break out, appear, arrive, die, fall, last, exist, fail, succeed
