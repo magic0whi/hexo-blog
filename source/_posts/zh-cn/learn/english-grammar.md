@@ -328,19 +328,19 @@ something 为先行词, 定语从句不能用 which
 ##### 虚拟条件句
 
 1. 在含有虚拟条件句的复合语句中, 主句和从句的谓语都要用虚拟语气
-   1. 与现在事实相反
-      从句: 动词过去式(be + were), 主句: would/should/could/might + 动词原形
+   1. 违反现在事实
+      (从句) `V2`, (主句) {`would`/`should`/`could`/`might`} `V1`
       If my brother were here, everything would be all right.
-   2. 与过去事实相反
-      从句: had + 过去分词, 主句: would/should/could/might + have + 过去分词
-      If you had taken my device, you wouldn't(couldn't) have failed in the exam.
-   3. 与将来事实相反
-      从句: 动词过去式, should + 动词原形, were to + 动词原形, 主句: would/should/could/might + 动词原形
-      If it were Sunday tomorrow, I should(would, could, might) go to see my grandma.
+   2. 违反过去事实
+      (从句) `had V3`, (主句) {`would`/`should`/`could`/`might`} `have V3`
+      If you had taken my device, you wouldn't/couldn't) have failed in the exam.
+   3. 违反将来事实
+      (从句) {`V3`/`should V1`/`were to V1`}, (主句) {`would`/`should`/`could`/`might`} `V1`
+      If it were Sunday tomorrow, I would/should/could/might/ go to see my grandma.
       If it were to snow this evening, they would not go out.
    4. 错综时间
       有时条件从句中动词和主语中的动作发生时间不一致, 这时动词形式要根据它所表示的时间加以调整
-      If you had listened to doctor, you would be all right now. (从句动作指过去, 主句动作指现在)
+      If you had listened to doctor, you would be all right now. (从句过去动作, 主句现在动作)
    
    注意: 主句中 should 只用于第一人称(但在美语中 should 常被 would 代替); 从句中 should 可用于各种人称.
 2. 虚拟条件句可以转换成下列形式
@@ -472,84 +472,7 @@ there be 开头的句子也是独立主格
    Hurry up, <u>or</u> you will be late.
    = If you don't hurry up, you will be late.
 
-## 词语
-
-### 单词前后缀
-
-1. prefix
-   ```
-   anti- : "opposite" antisocial
-   auto- : "by oneself or itself" autobiography
-   bi- : "two" bicycle
-   bio- : "biological" biology
-   co- : "together" cooperate
-   counter- : "against" counteraccack
-   de- : "negative, remove" defrost
-   dis- : "negative, opposite" dishonest
-   en- : "make it in...state" enlarge
-   il- : "not, used before the letter 'l'" illegal
-   im- : "not, used before the letter 'm', 'b', 'p'" impossible
-   in- : "not" inactive
-   ir- : "not, used before the letter 'r'" irregular
-   inter- : "between" international
-   mid- : "middle" midday
-   mini- : "small" miniskirt
-   mis- : "wrong" misunderstand
-   non- : "not" nonstop
-   post- : "after" postwar
-   pre- : "before" prewar
-   re- : "again" rewrite
-   sub- : "below" subway
-   super- : "great" superhero
-   tele- : "large distance" telescope
-   trans- : "across" transpacific
-   tri- : "three" triangle
-   un- : "not" unimportant
-   under- : "beneath", "not enough" underestimate
-   ```
-2. suffix
-   1. 名词后缀
-      ```
-      -age
-      -ance, -ence
-      -ancy, -ency
-      -er, -or
-      -hood                childhood
-      -ion, -tion, -ation
-      -ian
-      -ist
-      -ment
-      -ness
-      -ology               biology, psychology
-      -ship                friendship, membership
-      -ty, -ity
-      ```
-   2. 动词后缀
-      ```
-      -en                  fasten. shorten
-      -fy, -ify            satisfy, simplify
-      -ize, -ise           modernize
-      ```
-   3. 形容词后缀
-      ```
-      -able, -ible, -ble
-      -al                  environmental
-      -ful
-      -ic, -ical           atomic, economical
-      -ish                 bluish
-      -ive
-      -less
-      -ly
-      -ous
-      -some                troublesome
-      -y
-      ```
-   4. 副词后缀
-      ```
-      -ly
-      -ward(s)             backward(s), afterward(s)
-      -wise                clockwise
-      ```
+## 词法
 
 ### 代词
 
@@ -849,7 +772,7 @@ it takes sb. some time to do sth.
 
 #### 动词形态
 
-##### 时态
+##### 时态和语态
 
 <table class="colorize">
 <thead>
@@ -863,62 +786,69 @@ it takes sb. some time to do sth.
 </thead>
 <tbody>
   <tr>
-    <td rowspan="2">Simple</td>
-    <td>Verb(v1)-s/es</td>
-    <td><span class="red">Verb(v2)</span></td>
-    <td><span class="green">will/shall</span> Verb(v1)</td>
-    <td><span class="blue">would/should</span> Verb(v1)</td>
+    <td rowspan="3">Simple</td>
+    <td>V1-s/es</td>
+    <td><span class="red">V2</span></td>
+    <td><span class="green">will/shall</span> V1</td>
+    <td><span class="blue">would/should</span> V1</td>
   </tr>
   <tr>
-    <td><span class="yellow">am/is/are Verb(v3)</span></td>
+    <td><span class="yellow">am/is/are V3</span></td>
     <td>
       <span class="nospace">
         <span class="red">w</span><span class="yellow">a</span><span class="red">s</span>
         <span class="def">/</span>
         <span class="red">w</span><span class="yellow">e</span><span class="red">r</span><span class="yellow">e</span>
         <span class="def">&nbsp;</span>
-        <span class="yellow">Verb(v3)</span>
+        <span class="yellow">V3</span>
       </span>
     </td>
     <td>
       <span class="nospace">
         <span class="green">will/shall</span>
         <span class="def">&nbsp;</span>
-        <span class="yellow">be Verb(v3)</span>
+        <span class="yellow">be V3</span>
       </span>
     </td>
     <td>
       <span class="nospace">
         <span class="blue">would/should</span>
         <span class="def">&nbsp;</span>
-        <span class="yellow">be Verb(v3)</span>
+        <span class="yellow">be V3</span>
       </span>
     </td>
   </tr>
   <tr>
-    <td rowspan="2"><span class="pink">Continuous</span></td>
-    <td><span class="pink">am/is/are Verb(+ing)</span></td>
+    <td>
+      to V1
+      <br>
+      to <span class="yellow">be V3</span>
+    </td>
+  </tr>
+  <tr>
+    <td rowspan="3"><span class="pink">Continuous</span></td>
+    <td><span class="pink">am/is/are V+ing</span></td>
     <td>
       <span class="nospace">
         <span class="red">w</span><span class="pink">a</span><span class="red">s</span>
         <span class="def">/</span>
         <span class="red">w</span><span class="pink">e</span><span class="red">r</span><span class="pink">e</span>
         <span class="def">&nbsp;</span>
-        <span class="pink">Verb(+ing)</span>
+        <span class="pink">V+ing</span>
       </span>
     </td>
     <td>
       <span class="nospace">
         <span class="green">will/shall</span>
         <span class="def">&nbsp;</span>
-        <span class="pink">be Verb(+ing)</span>
+        <span class="pink">be V+ing</span>
       </span>
     </td>
     <td>
       <span class="nospace">
         <span class="blue">would/should</span>
         <span class="def">&nbsp;</span>
-        <span class="pink">be Verb(+ing)</span>
+        <span class="pink">be V+ing</span>
       </span>
     </td>
   </tr>
@@ -929,7 +859,7 @@ it takes sb. some time to do sth.
         <span class="def">&nbsp;</span>
         <span class="yellow">be</span><span class="pink">ing</span>
         <span class="def">&nbsp;</span>
-        <span class="yellow">Verb(v3)</span>
+        <span class="yellow">V3</span>
       </span>
     </td>
     <td>
@@ -940,7 +870,7 @@ it takes sb. some time to do sth.
         <span class="def">&nbsp;</span>
         <span class="yellow">be</span><span class="pink">ing</span>
         <span class="def">&nbsp;</span>
-        <span class="yellow">Verb(v3)</span>
+        <span class="yellow">V3</span>
       </span>
     </td>
     <td>
@@ -951,7 +881,7 @@ it takes sb. some time to do sth.
         <span class="def">&nbsp;</span>
         <span class="yellow">be</span><span class="pink">ing</span>
         <span class="def">&nbsp;</span>
-        <span class="yellow">Verb(v3)</span>
+        <span class="yellow">V3</span>
       </span>
     </td>
     <td>
@@ -962,32 +892,47 @@ it takes sb. some time to do sth.
         <span class="def">&nbsp;</span>
         <span class="yellow">be</span><span class="pink">ing</span>
         <span class="def">&nbsp;</span>
-        <span class="yellow">Verb(v3)</span>
+        <span class="yellow">V3</span>
       </span>
     </td>
   </tr>
   <tr>
-    <td rowspan="2"><span class="cyan">Perfect</span></td>
-    <td><span class="cyan">has/have Verb(v3)</span></td>
+    <td>
+      to <span class="pink">be V+ing</span>
+      <br>
+      <span class="nospace">
+        <span class="def">to</span>
+        <span class="def">&nbsp;</span>
+        <span class="pink">be</span>
+        <span class="def">&nbsp;</span>
+        <span class="yellow">be</span><span class="pink">ing</span>
+        <span class="def">&nbsp;</span>
+        <span class="yellow">V3</span>
+      </span>
+    </td>
+  </tr>
+  <tr>
+    <td rowspan="3"><span class="cyan">Perfect</span></td>
+    <td><span class="cyan">has/have V3</span></td>
     <td>
       <span class="nospace">
         <span class="cyan">ha</span><span class="red">d</span>
         <span class="def">&nbsp;</span>
-        <span class="cyan">Verb(v3)</span>
+        <span class="cyan">V3</span>
       </span>
     </td>
     <td>
       <span class="nospace">
         <span class="green">will/shall</span>
         <span class="def">&nbsp;</span>
-        <span class="cyan">have Verb(v3)</span>
+        <span class="cyan">have V3</span>
       </span>
     </td>
     <td>
       <span class="nospace">
         <span class="blue">would/should</span>
         <span class="def">&nbsp;</span>
-        <span class="cyan">have Verb(v3)</span>
+        <span class="cyan">have V3</span>
       </span>
     </td>
   </tr>
@@ -998,7 +943,7 @@ it takes sb. some time to do sth.
         <span class="def">&nbsp;</span>
         <span class="yellow">be<span class="cyan">en</span>
         <span class="def">&nbsp;</span>
-        <span class="yellow">Verb(v3)</span>
+        <span class="yellow">V3</span>
       </span>
     </td>
     <td>
@@ -1007,7 +952,7 @@ it takes sb. some time to do sth.
         <span class="def">&nbsp;</span>
         <span class="yellow">be<span class="cyan">en</span>
         <span class="def">&nbsp;</span>
-        <span class="yellow">Verb(v3)</span>
+        <span class="yellow">V3</span>
       </span>
     </td>
     <td>
@@ -1018,7 +963,7 @@ it takes sb. some time to do sth.
         <span class="def">&nbsp;</span>
         <span class="yellow">be<span class="cyan">en</span>
         <span class="def">&nbsp;</span>
-        <span class="yellow">Verb(v3)</span>
+        <span class="yellow">V3</span>
       </span>
     </td>
     <td>
@@ -1029,7 +974,22 @@ it takes sb. some time to do sth.
         <span class="def">&nbsp;</span>
         <span class="yellow">be<span class="cyan">en</span>
         <span class="def">&nbsp;</span>
-        <span class="yellow">Verb(v3)</span>
+        <span class="yellow">V3</span>
+      </span>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      to <span class="cyan">have V3</span>
+      <br>
+      <span class="nospace">
+        <span class="def">to</span>
+        <span class="def">&nbsp;</span>
+        <span class="cyan">have</span>
+        <span class="def">&nbsp;</span>
+        <span class="yellow">be</span><span class="cyan">en</span>
+        <span class="def">&nbsp;</span>
+        <span class="yellow">V3</span>
       </span>
     </td>
   </tr>
@@ -1047,7 +1007,7 @@ it takes sb. some time to do sth.
         <span class="def">&nbsp;</span>
         <span class="pink">be</span><span class="cyan">en</span>
         <span class="def">&nbsp;</span>
-        <span class="pink">Verb(+ing)</span>
+        <span class="pink">V+ing</span>
       </span>
     </td>
     <td>
@@ -1056,7 +1016,7 @@ it takes sb. some time to do sth.
         <span class="def">&nbsp;</span>
         <span class="pink">be</span><span class="cyan">en</span>
         <span class="def">&nbsp;</span>
-        <span class="pink">Verb(+ing)</span>
+        <span class="pink">V+ing</span>
       </span>
     </td>
     <td>
@@ -1067,7 +1027,7 @@ it takes sb. some time to do sth.
         <span class="def">&nbsp;</span>
         <span class="pink">be</span><span class="cyan">en</span>
         <span class="def">&nbsp;</span>
-        <span class="pink">Verb(+ing)</span>
+        <span class="pink">V+ing</span>
       </span>
     </td>
     <td>
@@ -1078,7 +1038,7 @@ it takes sb. some time to do sth.
         <span class="def">&nbsp;</span>
         <span class="pink">be</span><span class="cyan">en</span>
         <span class="def">&nbsp;</span>
-        <span class="pink">Verb(+ing)</span>
+        <span class="pink">V+ing</span>
       </span>
     </td>
   </tr>
@@ -1091,7 +1051,7 @@ it takes sb. some time to do sth.
         <span class="def">&nbsp;</span>
         <span class="yellow">be</span><span class="pink">ing</span>
         <span class="def">&nbsp;</span>
-        <span class="yellow">Verb(v3)</span>
+        <span class="yellow">V3</span>
       </span>
     </td>
     <td>
@@ -1102,7 +1062,7 @@ it takes sb. some time to do sth.
         <span class="def">&nbsp;</span>
         <span class="yellow">be</span><span class="pink">ing</span>
         <span class="def">&nbsp;</span>
-        <span class="yellow">Verb(v3)</span>
+        <span class="yellow">V3</span>
       </span>
     </td>
     <td>
@@ -1115,7 +1075,7 @@ it takes sb. some time to do sth.
         <span class="def">&nbsp;</span>
         <span class="yellow">be</span><span class="pink">ing</span>
         <span class="def">&nbsp;</span>
-        <span class="yellow">Verb(v3)</span>
+        <span class="yellow">V3</span>
       </span>
     </td>
     <td>
@@ -1128,7 +1088,7 @@ it takes sb. some time to do sth.
         <span class="def">&nbsp;</span>
         <span class="yellow">be</span><span class="pink">ing</span>
         <span class="def">&nbsp;</span>
-        <span class="yellow">Verb(v3)</span>
+        <span class="yellow">V3</span>
       </span>
     </td>
   </tr>
@@ -1204,3 +1164,80 @@ it takes sb. some time to do sth.
   如 He is an able man = He is a man of ability
 * hardly Verb(v3) when
   no sooner Verb(v2) than
+
+## 常用前后缀
+
+1. prefix
+   ```
+   anti- : "opposite" antisocial
+   auto- : "by oneself or itself" autobiography
+   bi- : "two" bicycle
+   bio- : "biological" biology
+   co- : "together" cooperate
+   counter- : "against" counteraccack
+   de- : "negative, remove" defrost
+   dis- : "negative, opposite" dishonest
+   en- : "make it in...state" enlarge
+   il- : "not, used before the letter 'l'" illegal
+   im- : "not, used before the letter 'm', 'b', 'p'" impossible
+   in- : "not" inactive
+   ir- : "not, used before the letter 'r'" irregular
+   inter- : "between" international
+   mid- : "middle" midday
+   mini- : "small" miniskirt
+   mis- : "wrong" misunderstand
+   non- : "not" nonstop
+   post- : "after" postwar
+   pre- : "before" prewar
+   re- : "again" rewrite
+   sub- : "below" subway
+   super- : "great" superhero
+   tele- : "large distance" telescope
+   trans- : "across" transpacific
+   tri- : "three" triangle
+   un- : "not" unimportant
+   under- : "beneath", "not enough" underestimate
+   ```
+2. suffix
+   1. 名词后缀
+      ```
+      -age
+      -ance, -ence
+      -ancy, -ency
+      -er, -or
+      -hood                childhood
+      -ion, -tion, -ation
+      -ian
+      -ist
+      -ment
+      -ness
+      -ology               biology, psychology
+      -ship                friendship, membership
+      -ty, -ity
+      ```
+   2. 动词后缀
+      ```
+      -en                  fasten. shorten
+      -fy, -ify            satisfy, simplify
+      -ize, -ise           modernize
+      ```
+   3. 形容词后缀
+      ```
+      -able, -ible, -ble
+      -al                  environmental
+      -ful
+      -ic, -ical           atomic, economical
+      -ish                 bluish
+      -ive
+      -less
+      -ly
+      -ous
+      -some                troublesome
+      -y
+      ```
+   4. 副词后缀
+      ```
+      -ly
+      -ward(s)             backward(s), afterward(s)
+      -wise                clockwise
+      ```
