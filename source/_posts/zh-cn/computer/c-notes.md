@@ -186,13 +186,17 @@ int a=b=c=5;
 
 ```c
 // Variable definition auto create a memory space which has size equal to its data type (for integer it is 4 bytes)
-int i = 233;
+int i=233;
 
-int j = i;   // equivalent to  int j = 233;
-int *k = &i; // the address of variable 'i'
+int j=i;   // equivalent to  int j = 233;
+int *k=&i; // the address of variable 'i'
 
-int l[3] = {1, 2, 3}; // 'l' is a pointer to the address of first element in array, its type is 'int *'
-int *m = l;           // '&l' is not needed since 'l' has type 'int *'
+int l[3]={1,2,3}; // 'l' is a pointer to the address of first element in array, its type is 'int *'
+int *m=l;         // '&l' is not needed since 'l' has type 'int *'
+// Be aware that for char pointer arrays
+char *str=(char*) {'h','e','l','l','o','\0'}; // This is wrong, indeed it is same as 'char *str = 'h';'
+const char *str="hello"; // "string" implicitly creates a const memory area
+char str[]={'h','e','l','l','o','\0};
 
 // No, there is no objects in C
 Object l;   
@@ -221,4 +225,30 @@ Object *m;
 - `strcmp(char *str1,char *str2)`: Compare by first different char (using sort of ASCII), return 0 if `str1`=`str2`; return positive if `str1`>`str2`; return negative if `str1`<`str2`.
 - `strlen(char *)`: Return the length of a char array.
 - `str{lwr,upr}(char *)`: Lowercase / Uppercase a char array.
+
+## Function Declaration
+
+- If a function has type `int`, there is not necessary to have a declearation first (I defenitely recommand to have a declaration first):
+  ```c
+  #include<stdio.h>
+  int main()
+  {
+      int len;
+      char *str[100];
+      printf("please input a string:\n");
+      gets(str);
+      len=length(str);
+      printf("the string has %d characters.",len);
+  }
+  int length(char *p)
+  {
+      int n=0;
+      while(*p!='\0')
+      {
+          n++;
+          p++;
+      }
+      return n;
+  }
+  ```
 
