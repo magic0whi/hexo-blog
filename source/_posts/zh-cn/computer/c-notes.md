@@ -181,6 +181,9 @@ int a=b=c=5;
 
 - `hypot(a,b)` Return hypotenuse length from its neighbor edge a, b.
 - `sqrt(a)`
+- `int abs(int x)` / `long labs(long x)` / `double fabs(double x)`
+- `double `{`sin`,`cos`,`tan`}`(double x)`: Here `x` is radian.
+- `double `{`exp`,`log`,`log10`}`(double x)`: \\(e^x\\) / \\(\ln x\\) / \\(\log_{10}x\\)
 
 ## Basic Types, Array, Object
 
@@ -201,7 +204,9 @@ char str[]={'h','e','l','l','o','\0};
 // No, there is no objects in C
 Object l;   
 Object *m; 
-// BTW, in C++ what object variable store is the copy function of that object. By default it copies all its member variables' value into new object
+// BTW, in C++ what object variable store is the copy construct function of that object '=()'. By default it copies all its member variables' value into new object
+
+int (*n)[5]; // Create a pointer 'n' point to type 'int (*)[5]' and 'int [][5]' (a 2-dimensional integer array which explicitly has 5 columns)
 ```
 
 ## Frequently Used Functions
@@ -224,7 +229,11 @@ Object *m;
 - `strcat(char *str1,char *str2)`: Corcatenate `str2` to the end of `str1`, changes apply to `str1`, return `str1`.
 - `strcmp(char *str1,char *str2)`: Compare by first different char (using sort of ASCII), return 0 if `str1`=`str2`; return positive if `str1`>`str2`; return negative if `str1`<`str2`.
 - `strlen(char *)`: Return the length of a char array.
-- `str{lwr,upr}(char *)`: Lowercase / Uppercase a char array.
+- `str`{`lwr`,`upr`}`(char *)`: Lowercase / Uppercase a char array.
+- `char *strchr(char *str, char ch)`: Return a pointer to the first occurance of the character `ch` in string `str` or return `NULL` if the character doesn't found.
+- `int isalpha(int ch)`: Return non-zero if `ch` is a letter in alphabet.
+  `int isdigit(int ch)`
+  `int isalnum(int ch)`: Return non-zero if `ch` is whether a letter or number.
 
 ## Functions
 
@@ -293,3 +302,10 @@ Object *m;
       ----------
                   Up the stair
    ```
+
+## Veriable Store Types
+
+- `auto`: For C language it is the default store types for variables. `int i;` equals `auto int i;`
+- `static`: For local variable its memory was keep along the program running. For global variables and functions it means that they are only allowed to be called in this translation unit. (Local function)
+- `register`: Variable will try to store in Registers. Optimize for frequency accessed variable.
+- `extern`: TODO
