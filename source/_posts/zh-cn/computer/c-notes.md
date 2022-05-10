@@ -226,7 +226,7 @@ Object *m;
 - `strlen(char *)`: Return the length of a char array.
 - `str{lwr,upr}(char *)`: Lowercase / Uppercase a char array.
 
-## Function Declaration
+## Functions
 
 - If a function has type `int`, there is not necessary to have a declearation first (I defenitely recommand to have a declaration first):
   ```c
@@ -234,7 +234,7 @@ Object *m;
   int main()
   {
       int len;
-      char *str[100];
+      char str[100];
       printf("please input a string:\n");
       gets(str);
       len=length(str);
@@ -251,4 +251,45 @@ Object *m;
       return n;
   }
   ```
+ - There is a little bit clearer way to describe a recursion
+   We have this code to do a factorial:
+   ```c
+   int factor1(int n)
+   {
+       int result;
+       if(n==1)
+           return 1;
+       result=factor(n-1)*n;
+       return result;
+   }
+   ```
+   Now we describe it by using a "stair graph"(assume we call `factor(5)`):
+   First stage we go down the stair
+   ```plaintext
+   factor(5)=factor(4)*5
+   ----------
+            | factor(4)=factor(3)*4
+            ----------
+                     | factor(3)=factor(2)*3
+                     ----------
+                              | factor(2)=factor(1)*2
+                              ----------
+                                       | factor(1)=1
+                                       ----------
 
+                  Down the stair
+   ```
+   Second stage we go up the stair
+   ```plaintext
+                                 factor(5)=24*5=120 |
+                                           ----------
+                          factor(4)=6*4=24 |
+                                  ----------
+                  factor(3)=2*3=6 |
+                         ----------
+         factor(2)=1*2=2 |
+               ----------
+   factor(1)=1 |
+      ----------
+                  Up the stair
+   ```
