@@ -175,15 +175,22 @@ int b=2,c=3;
 int a=b=c=5;
 ```
 
-## Math Function in C
+## Library Functions in C
 
+Mathematics:
 `#include <math.h>`
-
 - `hypot(a,b)` Return hypotenuse length from its neighbor edge a, b.
 - `sqrt(a)`
 - `int abs(int x)` / `long labs(long x)` / `double fabs(double x)`
 - `double `{`sin`,`cos`,`tan`}`(double x)`: Here `x` is radian.
 - `double `{`exp`,`log`,`log10`}`(double x)`: \\(e^x\\) / \\(\ln x\\) / \\(\log_{10}x\\)
+
+Memory:
+`#include<stdlib.h>`
+- `void *malloc(unsigned int size)` allocate and return the memory address.
+- `void free(void *p)`
+
+- `int system(const char *command)` running a shell command, return -1 if failed.
 
 ## Basic Types, Array, Object
 
@@ -196,10 +203,15 @@ int *k=&i; // the address of variable 'i'
 
 int l[3]={1,2,3}; // 'l' is a pointer to the address of first element in array, its type is 'int *'
 int *m=l;         // '&l' is not needed since 'l' has type 'int *'
-// Be aware that for char pointer arrays
-char *str=(char*) {'h','e','l','l','o','\0'}; // This is wrong, indeed it is same as 'char *str = 'h';'
-const char *str="hello"; // "string" implicitly creates a const memory area
+
+// Be aware for char pointer arrays
+char *str={'h','e','l','l','o','\0'}; // This is wrong, indeed it is same as 'char *str = 'h';'
+// Using
+char *str=(char[]) {'h','e','l','l','o','\0'};
+// Or
 char str[]={'h','e','l','l','o','\0};
+// Or
+const char *str="hello"; // "string" implicitly creates a const memory area
 
 // No, there is no objects in C
 Object l;   
@@ -207,6 +219,20 @@ Object *m;
 // BTW, in C++ what object variable store is the copy construct function of that object '=()'. By default it copies all its member variables' value into new object
 
 int (*n)[5]; // Create a pointer 'n' point to type 'int (*)[5]' and 'int [][5]' (a 2-dimensional integer array which explicitly has 5 columns)
+
+struct time
+{
+    long int day;
+    long int hour;
+}
+
+struct time time1 = {1,0}; // struct variable does not store address, it might be only available in preprocessing stage.
+
+struct time time2 = time1;
+// Same as (similar to copy construct function in C++)
+struct time time2;
+time2.day=time1.day;
+time2.hour=time1.hour;
 ```
 
 ## Frequently Used Functions
@@ -309,3 +335,242 @@ int (*n)[5]; // Create a pointer 'n' point to type 'int (*)[5]' and 'int [][5]' 
 - `static`: For local variable its memory was keep along the program running. For global variables and functions it means that they are only allowed to be called in this translation unit. (Local function)
 - `register`: Variable will try to store in Registers. Optimize for frequency accessed variable.
 - `extern`: TODO
+
+## Struct & Union & Emum
+
+- Struct format:
+  ```c
+  #include<stdio.h>
+  
+  //struct <[struct_name]>
+  //{
+  //} [<var1,var2,...>];
+  
+  struct Student
+  {
+      int num;
+      char name[20];
+      char sex;
+      int age;
+      float score;
+  };
+  
+  int main()
+  {
+      struct student student1={1001,"Liming",'M',20,93.5};
+      printf("num: %d\n",student1.num);
+      printf("name: %s\n",student1.name);
+      printf("sex: %c\n",student1.sex);
+      printf("age: %d\n",student1.age);
+      printf("score: %5.1f\n",student1.score);
+  }
+  ```
+- Struct array
+  ```c
+  struct student
+  {
+      int num;
+      char name[20];
+      float score;
+  } stu[5] =
+      {
+          {101,"liming",89},
+          {102,"zhanghong",95},
+          {103."lili",89},
+          {104,"weichen",85},
+          {105,"yangfan",75}
+      };
+  ```
+- Struct pointer
+  ```c
+  struct student *p;
+  p=&student1;
+  printf("%s",(*p).name);
+  printf("%s",p->name);
+  ```
+- Linked list
+  ```c
+  struct Student
+  {
+      char name[15];
+      float mark;
+      struct student *next;
+  };
+  typedef struct Student Node;
+  typedef Node *Link;
+  // Or
+  typedef struct Student
+  {
+      char name[15];
+      float mark;
+      struct student *next;
+  } Node, *Link;
+  ```
+- Union: their members share the same memory
+  ```c
+  union <[union_name]>
+  {
+      char name[];
+      int age;
+      char sex;
+      float labor_age;
+  } [<union_var1, union_var2,...>]
+  ```
+- Enum:
+  ```c
+  //enum <[enum_name]>
+  //{
+  //    E1,
+  //    E2,
+  //    E3
+  //} [<enum_var1,enum_var2,...>]
+
+  enum Weekday
+  {
+      SUN,MON,TUE,WED,THU,FRI,SAT
+  }
+  ```
+
+## Bit Operation
+
+- And `&` can be used as a filter.
+- XOR `^` can be used to flip specific bits:
+  ```plaintext
+    01000101
+  ^ 00001111
+  ----------
+    01001010
+  ```
+- Right shift `>>` do logical shift (for unsigned) or arithmetic shift (for signed; fill '1' on the leftmost bits)
+- Bit fields
+  ```c
+  struct packed_data
+  {
+      // This bit fields distribute four bytes (see 'sizeof(unsigned int)'). They must be defined continuously, and can only have types '[signed] int', 'unsigned int'.
+      unsigned int a:2;
+      unsigned int b:1;
+      unsigned int c:1;
+      int i;
+  }
+
+  // It has the follow memory form:
+  // -------------------------------------------------------------------------------------------------------------
+  // |  a  |  b  | c |                        Not used                         |                i                |
+  // -------------------------------------------------------------------------------------------------------------
+  //    |     |    |                             |                                              |
+  //   2bit  2bit 1bit                          24bit                                         32 bit
+  ```
+
+## Macro
+
+- `#define` with parameters
+  ```c
+  #include<stdio.h>
+  #define MIN(a, b) (a<b)?a:b
+  #define SWAP(a,b) {int c;c=a;a=b;b=c;}
+
+  // When you call SWAP(x,y), it just paste '{int c;c=x;x=y;y=c;}'
+  // It doesn't paste text in ""
+  // e.g. printf("SWAP(x,y)");
+  ```
+- Conditional compilation
+  ```c
+  #define NUM 200
+  main()
+  {
+  #if NUM>100
+      printf("the number is larger than 100!");
+  #elif NUM==100
+      printf("the number is equal to 100!");
+  #else
+      printf("the number is less than 100");
+  #endif
+  ```
+  `#ifdef MACRO_NAME`: True if `MACRO_NAME` is defined.
+  `#ifndef MACRO_NAME`: True if `MACRO_NAME` is not defined.
+  `#undef MACRO_NAME`: Delete a defined macro `MACRO_NAME`.
+
+## File
+
+- Write / Read a file by char 
+  - `int fputs(const char *filename, FILE *fp)`
+  - `int fgetc(FILE *fp)`: Read a single char
+  - Example:
+    ```c
+    #include<stdio.h>
+    #include<stdlib.h>
+    int main()
+    {
+        FILE *fp; // File pointer
+        char ch;
+        char filename[]="text.txt";
+
+        // Write Start
+        if((fp=fopen(filename,"w"))==NULL)
+        {
+            printf("cannot open file\n");
+            exit(1);
+        }
+        ch=getchar();
+        ch=getchar();
+        while(ch!='#')
+        {
+            fputc(ch,fp);
+            ch=getchar();
+        }
+        fclose(fp);
+        // Write End
+
+        // Read Start
+        if((fp=fopen(filename,"r"))==NULL)
+        {
+            printf("cannot open file\n");
+            exit(1);
+        }
+        while((ch=fgetc(fp))!=EOF)
+        {
+            putchar(ch);
+        }
+        fclose(fp);
+        // Read End
+    }
+    ```
+- Write / Read a file by string
+  - `int fputs(const char *filename, FILE *fp)`
+  - `char *fgets(char *str, int n, FILE *fp)`: Store to char array `str`
+  - Example:
+    ```c
+    #include<stdio.h>
+    #include<stdlib.h>
+    int main()
+    {
+        FILE *fp;
+        char str[100];
+        char filename[]="test.txt";
+        
+        // Write Start
+        if((fp=fopen(filename,"w"))==NULL)
+        {
+            printf("cannot open file\n");
+            exit(1);
+        }
+        fputs("hello world", fp);
+        fclose(fp);
+        // Write End
+
+        // Read Start
+        if((fp=fopen(filename,"rb"))==NULL)
+        {
+            printf("cannot open file\n");
+            exit(1);
+        }
+        while(fgets(str,sizeof(str),fp))
+            printf("%s",str);
+        fclose(fp);
+        // Read End
+    }
+    ```
+- Open mode:
+  {`r`,`w`,`a`}[`b`] {read,write,append} only (binary)
+  {`r`,`w`}[`b`]`+` read & write (binary)
+  `a`[`b`]`+` read & append (binary

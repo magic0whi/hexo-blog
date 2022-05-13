@@ -20,7 +20,7 @@ I'm Proteus, 你可以称呼我为钱桑, 很高兴认识你.
 
 欢迎交换友链~
 
-Feel free to contact me:
+不推荐闲聊, 无论结果如何, 社交都会使我感到疲惫:
 - Email: lollipop.studio.cn@gmail.com
 - Mastodon: [@ndoskrnl@mastodon.social](https://mastodon.social/web/@ndoskrnl)
 - Twitter: [@ndoskrnl](https://twitter.com/ndoskrnl) (已停用)
