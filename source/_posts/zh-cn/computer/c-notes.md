@@ -94,20 +94,20 @@ clean:
 
 ## Basic Data Types and its length
 
-| Data Types                       | Length (Bytes) | Range               | Format Specifier             |
-| --                               | --             | --                  | --                           |
-| `\[signed\] int`                 | 4              | -(2^31)~(2^31-1)    | %d (Dec), %o (Oct), %x (Hex) |
-| `unsigned int`                   | 4              | 0~(2^32-1)          | %u                           |
-| `short \[int\]`                  | 2              | -(2^15)~(2^15-1)    | %hd                          |
-| `unsigned short \[int\]`         | 2              | 0~(2^16-1)          | %hu                          |
-| `\[long\] long \[int\]`          | 8              | -(2^63)~(2^63-1)    | %[l]ld                       |
-| `unsigned \[long\] long \[int\]` | 8              | 0~(2^64-1)          | %[l]lu                       |
-| `float`                          | 4              | -3.4e-38~3.4e38     | %f                           |
-| `double`                         | 8              | -1.7e-308~1.7e308   | %lf                          |
-| `long double`                    | 16             | -1.2e-4932~1.7e4932 | %Lf                          |
-| `char`                           | 1              | -128~127            | %c                           |
-| `unsigned char`                  | 1              | 0~255               | %c                           |
-| `char *` (String)                | NA             | NA                  | %s                           |
+| Data Types                                      | Length (Bytes) | Range               | Format Specifier             |
+| --                                              | --             | --                  | --                           |
+| `\[signed\] int`                                | 4              | -(2^31)~(2^31-1)    | %d (Dec), %o (Oct), %x (Hex) |
+| `unsigned int`                                  | 4              | 0~(2^32-1)          | %u                           |
+| `short \[int\]`                                 | 2              | -(2^15)~(2^15-1)    | %hd                          |
+| `unsigned short \[int\]`                        | 2              | 0~(2^16-1)          | %hu                          |
+| `\[long\] long \[int\]`                         | 8              | -(2^63)~(2^63-1)    | %[l]ld                       |
+| `unsigned \[long\] long \[int\]` (aka `size_t`) | 8              | 0~(2^64-1)          | %[l]lu                       |
+| `float`                                         | 4              | -3.4e-38~3.4e38     | %f                           |
+| `double`                                        | 8              | -1.7e-308~1.7e308   | %lf                          |
+| `long double`                                   | 16             | -1.2e-4932~1.7e4932 | %Lf                          |
+| `char`                                          | 1              | -128~127            | %c                           |
+| `unsigned char`                                 | 1              | 0~255               | %c                           |
+| `char *` (String)                               | NA             | NA                  | %s                           |
 
 Different compilers may differ, this results was come from GCC11.2.0 (x86\_64), you can test by using the C codes below:
 ```c
@@ -574,3 +574,86 @@ time2.hour=time1.hour;
   {`r`,`w`,`a`}[`b`] {read,write,append} only (binary)
   {`r`,`w`}[`b`]`+` read & write (binary)
   `a`[`b`]`+` read & append (binary
+- Write / Read a file by block
+  - `size_t fwrite(void *buf, size_t write_size, size_t count, FILE *fp)`
+  - `size_t fread(void *buf, size_t read_bytes, size_t count, FILE *fp)`
+  - Example:
+    ```c
+    #include<stdio.h>
+    #include<stdlib.h>
+    
+    struct student_score
+    {
+        char Name[10];
+        int Num;
+        int Chinese;
+        int Math;
+        int English;
+    } score[100];
+    
+    int main()
+    {
+        FILE *fp;
+        int i, n;
+        char filename[50];
+    
+        printf("how many students in your class?\n");
+        scanf("%d", &n);
+        printf("please input filename:\n");
+        scanf("%s", filename);
+        printf("please input Name, Number, Chinese, Math, English:\n");
+        for(i=0; i<n; i++)
+        {
+            printf("NO%d", i);
+            scanf("%s%d%d%d%d", score[i].Name, &score[i].Num, &score[i].Chinese, &score[i].Math, &score[i].English);
+        }
+    
+        // Write Start
+        if((fp=fopen(filename, "wb")) == NULL)
+        {
+            printf("cannot open file\n");
+            exit(1);
+        }
+        for(i=0; i<n; i++)
+            if(fwrite(score, sizeof(struct student_score), 1, fp) != 1)
+                printf("file write error\n");
+        fclose(fp);
+        // Write End
+        
+        // Read Start
+        if((fp=fopen(filename,"rb")) == NULL)
+        {
+            printf("cannot open file\n");
+            exit(1);
+        }
+        for(i=0; i<n; i++)
+        {
+            fread(score, sizeof(struct student_score), 1, fp);
+            printf("%-10s%4d%4d%4d%4d\n",score[i].Name, score[i].Num, score[i].Chinese, score[i].Math, score[i].English);
+        }
+        fclose(fp);
+        // Read End
+    }
+    ```
+    Input Example:
+    ```plaintext
+    how many students in your class?
+    5
+    please input filename:
+    test.bin
+    please input Name, Number, Chinese, Math, English:
+    lili 1001 89 69 86
+    mimi 1002 66 56 98
+    qiqi 1003 99 56 23
+    yuyu 1004 69 88 56
+    xixi 1005 85 65 79
+    ```
+- Write / Read a file in random position
+  - `int fseek(FILE *fp, long int offset, int whence)`
+    The `whence` has three enums: `SEEK_SET` (Beginning of file), `SEEK_CUR` (Current position), `SEEK_END` (End of file).
+  - `int feof(FILE *fp)` return non-zero if `fp` is in End-of-File.
+  - `void rewind(FILE *fp)` set `fp` to beginning of the file.
+  - `long int ftell(FILE *fp)` return `fp`'s current position.
+  - `int ferror(FILE *fp)` return non-zero if some operation (read, write) to `fp` result an error.
+
+  
