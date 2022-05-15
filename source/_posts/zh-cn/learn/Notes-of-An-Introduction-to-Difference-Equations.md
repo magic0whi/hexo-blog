@@ -212,3 +212,43 @@ article.article .content {
      \end{alignedat}
      $$
    </details>
+
+### Examples
+
+1. **Example 1.1.** Solve the equation
+   <div>
+   $$
+   y(n+1)=(n+1)y(n)+2^n(n+1)!\qquad y(0)=1\qquad n\gt 0
+   $$
+   </div>
+
+   > <div>
+   > $$
+   > \begin{array}{c}
+   >   \text{TABLE 1.1. Definite sum.} \\
+   >   \begin{array}{ccc}
+   >     \hline
+   >     \text{Number} & \text{Summation} & \text{Definite sum} \\
+   >     \hline
+   >     1 & \displaystyle\sum_{k=1}^n k & \dfrac{n(n+1)}{2} \\
+   >     2 & \displaystyle\sum_{k=1}^n k^2 & \dfrac{n(n+1)(2n+1)}{6} \\
+   >     3 & \displaystyle\sum_{k=1}^n k^3 & \left[\dfrac{n(n+1)}{2}\right]^2 \\
+   >     4 & \displaystyle\sum_{k=1}^n k^4 & \dfrac{n(6n^4+15n^3+10n^2-1)}{30} \\
+   >     5 & \displaystyle\sum_{k=0}^{n-1} a^k & \begin{cases} (a^n-1)/(a-1) & \text{if }a\neq 1 \\ n & \text{if }a=1 \end{cases} \\
+   >     6 & \displaystyle\sum_{k=1}^{n-1} a^k & \begin{cases} (a^n-1)/(a-1) & \text{if }a\neq 1 \\ n-1 & \text{if }a=1 \end{cases} \\
+   >     7 & \displaystyle\sum_{k=1}^n ka^k,\space a\neq 1 & \dfrac{(a-1)(n+1)a^{n+1}-a^{n+2}+a}{(a-1)^2} \\
+   >     \hline
+   >   \end{array}
+   > \end{array}
+   > $$
+   > </div>
+   *Solution*
+   <div>
+   $$
+   \begin{alignedat}{1}
+     y(n) & =\prod_{i=0}^{n-1}(i+1)+\sum_{k=0}^{n-1}\left[\prod_{i=k+1}^{n-1}(i+1)\right]2^k(k+1)! \\
+          & =n!+\sum_{k=0}^{n-1}n!2^k \\
+          & =2^n n!\quad\text{(from Table 1.1.)}
+   \end{alignedat}
+   $$
+   </div>

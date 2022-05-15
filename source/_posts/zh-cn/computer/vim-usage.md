@@ -22,14 +22,9 @@ v\_b\_`g <C-a>` means `g <C-a>` in Visual Block-Wise Mode
 [`a`,`b`,`c`] means either a or b or c or none.
 
 TODO: works to be merged
-`<C-`{`o`,`i`}`>`, Jump old / newer position.
-`<C-^>` Go to previously edited buffer.
-`:tag`    Jump to tag definition
 `:t` (copy) method copies all matches to an address.
 `:j` join command join the lines
 `sort` sort command sort the lines
-`<C-`{`t`,`d`}`>` indent current line forward / backward in insert mode.
-`>` or `<` indent visual block forward / backward
 Spell Check:
 {`]`,`[`}`s` Jump to next / prev wrong word
 `z`[`u`]{`g`,`w`,`G`,`w`} Add / Undo add good / wrong word under cursor to `spellfile` / or save to current session (Which is temporarily if you don't save session)
@@ -45,37 +40,39 @@ Open Vim with two vertical windows: `vim -O2 `[`file1`]` `[`file2`]
 
 ### Buffers
 
-|                                    |                                               |
-| --                                 | --                                            |
-| `:b`{`next`,`prev`,`first`,`last`} | Traverse buffers                              |
-| `:`[`w`]`qall`                     | Close / Save close                            |
-| `:buffers` / `:ls` / `:files`      | List buffers                                  |
-| `:bdelete`                         | Remove current buffer                         |
-| `:`[`vertical `]`ball`             | display all buffers horizontally / vertically |
+|                                    |                                                 |
+| --                                 | --                                              |
+| `:b`{`next`,`prev`,`first`,`last`} | Traverse buffers                                |
+| `:`[`w`]`qall`                     | [Save] Close all                                |
+| `:`{`buffers`,`ls`,`files`}        | List buffers                                    |
+| `:bdelete`                         | Remove current buffer                           |
+| `:`[`vertical `]`ball`             | Display all buffers {[vertically],horizontally} |
+| `<C-^>`                            | Go to previously edited buffer                  |
 
 ### Windows
 
 A window is how you are viewing a buffer through
 
-|                                            |                                                                                              |
-| --                                         | --                                                                                           |
-| `:`[`v`]`split `[`filename`]               | Split window                                                                                 |
-| `<C-w> `{`h,j,k,l`}                        | Navigate                                                                                     |
-| `<C-w> `{`v,s`}                            | Opens a new vertical / horizontal / split                                                    |
-| `<C-w> `{`c,o`}                            | Closes focused window / Close all other windows                                              |
-| `<C-w> `{`r`,`R`,`H`,`J`,`K`,`L`}          | Rotate focused window {down,right} / {up,left} / far left / far bottom / far top / far right |
-| `:`[`vertical `]`resize `{`80`,`+5`}       | Set focused window to 80 rows / columns, or increment 5 rows / columns                       |
-| `<C-w> `{(`-`,`+`,`_`),(`<`,`>`,`\|`),`=`} | Decrease  1 / Increase 1 / Maximize row or column for horizontal / vertical split. Equal balance for horizontal, vertical split |
+|                                            |                                                                                      |
+| --                                         | --                                                                                   |
+| `:`[`v`]`split `[`filename`]               | Split window                                                                         |
+| `:`[`vertical `]`sbuffer [N]`              | Split window by buffer. (`[N]` is buffer's NO.)                                      |
+| `<C-w> `{`h,j,k,l`}                        | Navigate                                                                             |
+| `<C-w> `{`v,s`}                            | Opens a new {vertical,horizontal} split                                              |
+| `<C-w> `{`c,o`}                            | Closes {focused window,all other windows}                                            |
+| `<C-w> `{`r`,`R`,`H`,`J`,`K`,`L`}          | Rotate focused window {(down|right),(up|left),far left,far bottom,far top,far right} |
+| `:`[`vertical `]`resize `{`80`,`+5`}       | {Set,Increment} {[width],height} of focused window to {80,5}                         |
+| `<C-w> `{(`-`,`+`,`_`),(`<`,`>`,`\|`),`=`} | (Decrease  1,Increase 1,Maximize) (row,column) for current (horizontal,vertical) split; Equal balance for horizontal or vertical split |
 
 ### Tabs
 
 A tab is a collection of windows
 
-|                                |                                         |
-| --                             | --                                      |
-| `:tabnew `[`filename`]         | Open a new tab                          |
-| `:tabclose`                    | Close current tab                       |
-| `:tab`{`next,prev,last,first`} | Go to next / previous /last / first tab |
+|                                |                                      |
+| --                             | --                                   |
+| `:tabnew `[`filename`]         | Open a new tab                       |
+| `:tabclose`                    | Close current tab                    |
+| `:tab`{`next,prev,last,first`} | Go to {next,previous,last,first tab} |
 
 ## Ch03. Searching Files
 
@@ -196,7 +193,7 @@ A word is a sequence of characters containing *only* `a-zA-Z0-9_`. A WORD is a s
 |            |                                                             |
 | --         | --                                                          |
 | `0` / `^`  | Go to the first char / non-blank char                       |
-| `$` / `g_` | Go to the last char non-blsnk char                          |
+| `$` / `g_` | Go to the last char / non-blank char                        |
 | `n\|`      | Go to column n                                              |
 | `f` / `F`  | Search forward / backward for a char                        |
 | `t` / `T`  | Search forward / backward for a char, stopping before match |
@@ -270,25 +267,26 @@ Any motion that moves farther than a word and current line navigation is probabl
 | `` `<`` / `` `>`` | Jump to the beginning / ending of last visual selection          |
 | `` `0``           | Jump back to the last edited file when exiting vim               |
 | `:jumps`          | See jump list                                                    |
-| `<C-`{`o`,`i`}`>` | Move up / down the jump list                                     |
+| `<C-`{`o`,`i`}`>` | Move {up,down} the jump list                                     |
 | `m'5j`            | Add current location to jump list, follows a move                |
 
 ## Ch06. Insert Mode
 
 |                                     |                                                                                            |
 | --                                  | --                                                                                         |
-| `i` / `I` / `gI`                    | Insert text before the {cursor, first non-blank character of the line, start of line}      |
-| `a` / `A`                           | Append text after the cursor / end of line                                                 |
-| `o` / `O`                           | Starts a new line below / above the cursor and insert text                                 |
-| `s` / `S` (=`cc`)                   | Delete the character / line under the cursor and insert text                               |
+| `i` / `I` / `gI`                    | Insert text before the {cursor,first non-blank character of the line,start of line}        |
+| `a` / `A`                           | Append text after the {cursor,end of line}                                                 |
+| `o` / `O`                           | Starts a new line {below,above} the cursor and go insert mode                              |
+| `s` / `S` (=`cc`)                   | Delete the {character,line} under the cursor and go insert mode                            |
 | `gi`                                | Insert text in same position where the last insert mode was stopped                        |
-| `<Esc>` or `<C-[>`                  | Exit insert mode
+| `<Esc>` or `<C-[>`                  | Exit insert mode                                                                           |
 | `<C-c>`                             | Exit insert mode and do not check for abbreviation                                         |
-| `<C-`{`h`,`w`,`u`}`>`               | Delete one char / one word / entire line                                                   |
+| `<C-`{`h`,`w`,`u`}`>`               | Delete {char,word,line}                                                                    |
 | `<C-r> a`                           | Insert text from register `a`                                                              |
-| `<C-x> <C-`{`y`,`e`}`>`             | Scroll up / down                                                                           |
-| `<C-x> <C-`{`l`,`n`,`i`,`f`,`]`}`>` | Auto completion line / text from current file / text from included files / filename / tag  |
-| `<C-`{`n`,`p`}`>`                   | Find the next / previous word match, or navigate up / down the auto completion pop-up menu |
+| `<C-x> <C-`{`y`,`e`}`>`             | Scroll {up,down}                                                                           |
+| `<C-x> <C-`{`l`,`n`,`i`,`f`,`]`}`>` | Auto completion {line,text from current file,text from included files,filename,tag}        |
+| `<C-`{`n`,`p`}`>`                   | Find the {next,previous} word match, or navigate {up,down} the auto completion pop-up menu |
+| `<C-`{`t`,`d`}`>`                   | Indent current line {forward,backward}                                                     |
 | `<C-o> <normal cmd>`                | Excute a normal mode command                                                               |
 | `<C-o> 100ihello`                   | Insert "hello" 100 times                                                                   |
 | `<C-o> !! curl https://google.com`  | Run `curl` and insert stdout                                                               |
@@ -452,7 +450,7 @@ The breakdown:
 
 To replay it, run `@a`. Just like many other Vim commands, you can pass a count argument to macros. For example, running `3@a` executes the macro three times.
 
-### Command Line Macro
+### Command-Line Macro
 
 `:2,3 normal @a`: execute macro between lines 2 and 3, `:normal` allows the user to execute any normal mode command passed as argument.
 
@@ -565,8 +563,9 @@ In Vim, every time you press `u` and then make a different change, Vim stores th
 | --                     | --                                                     |
 | `v` / `V` / `<C-v>`    | Character-wise / Line-wise / Block-wise visual mode    |
 | `gv`                   | Go to the previous visual mode                         |
-| `<C-`{`x`,`a`}`>`      | Decrement / Increment numbers, alphabetical characters |
-| v\_b\_`g <C-`{`x`,`a`} | Decrement / Increment across multiple lines            |
+| `<C-`{`x`,`a`}`>`      | {Decrement,Increment} numbers, alphabetical characters |
+| v\_b\_`g <C-`{`x`,`a`} | {Decrement,Increment} across multiple lines            |
+| `>`/ `<`               | Indent visual block forward / backward                 |
 
 ### Visual Mode Navigation
 
@@ -587,6 +586,11 @@ Alternatively, you can also use the `:normal` command to add text on multiple li
 ## Ch12. Search and Substitute
 
 You can use `\C` pattern anywhere in your search term to tell Vim that the subsequent search term will be case sensitive. If you do `/\Chello`, it will strictly match "hello", not "HELLO" or "Hello".
+
+### Search Visual Selected Text
+
+1. Yank the text you want.
+2. In search mode, type `<C-r>"` (Paste text in unamed register)
 
 ### Repeating Search
 
@@ -700,7 +704,7 @@ Here I recommand universal ctags, install it by `pacman -S ctags`
 | --                              | --                                                     |
 | `:set tags?`                    | See tag files path                                     |
 | `set tags+=path/to/tags/file`   | Add a new tag files location                           |
-| `<C-]>`                         | Jump to **a** definition                               |
+| `<C-]>` or `:tag`               | Jump to **a** definition                               |
 | `:tselect <pattern>`            | Selective tag jumps, type numerical key to jump.       |
 | `g <C-]>` or `:tjump <pattern>` | Selective tag jumps, prompt only when > 2 options.     |
 | `:tags`                         | List of the tags you have jumped to. Called tag stack. |

@@ -14,6 +14,10 @@ A paper of my Linux gists
 
 ## Linux Common Commands
 
+### Misc
+
+- `findmnt` list all mounted filesystems.
+
 ### sed
 
 The usage of group in regular expression: (`(regex)` and `\1`)
@@ -252,12 +256,12 @@ ssh -t -L 5900:localhost:5900 <REMOTE HOST> 'sudo x11vnc -localhost -display :0 
 
 Reset signal `TERM`'s action to the default: `trap - TERM`
 
-| Signal Number | Signal Name | Default Action                                                |
-| --            | --          |
-| 0 | EXIT | Nothing |
-| 2             | INT      | Terminate (Interrupt, weakest, Ctrl+C)                        |
-| 15            | TERM     | Terminate (Exit cleanly, normal)                              |
-| 1             | HUP     | Terminate (Hangup, normal, sent from SSH disconnect) |
-| 3             | QUIT     | Terminate (Harshest but still handle ignorable, core dump)    |
-| 9             | KILL     | Terminate (Unconditionally)                                   |
+| Signal Number | Signal Name | Default Action                                             |
+| --            | --          | --                                                         |
+| 0             | EXIT        | Nothing                                                    |
+| 2             | INT         | Terminate (Interrupt, weakest, Ctrl+C)                     |
+| 15            | TERM        | Terminate (Exit cleanly, normal)                           |
+| 1             | HUP         | Terminate (Hangup, normal, sent from SSH disconnect)       |
+| 3             | QUIT        | Terminate (Harshest but still handle ignorable, core dump) |
+| 9             | KILL        | Terminate (Unconditionally)                                |
 
