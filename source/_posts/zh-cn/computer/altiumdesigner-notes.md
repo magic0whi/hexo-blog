@@ -50,12 +50,29 @@ tags: electronic-and-information-engineering
 8. 利用 IPC 封装创建向导快速创建封装: (`.PcbLib`) <u>T</u>ools&rarr;<u>I</u>PC Compliant Footprint Wizard...
    输入参数时, 底下勾选 Generate STEP Model Preview 可获得更逼真的模型预览.
    对于 Solder Fillets 的 Board density Level 设置时, 如果板子上的元件比较密集可以设置 Level C - High density (悍盘会更小), 稀疏则可以选择 Level A - Low density, 默认的 B 适用于大多数情况.
+9. 3D 模型的创建和导入
+   默认 3D 模型的创建和导入都放在机械一层 (Mechanical 1).
+   导入: <u>P</u>lace&rarr;3D B<u>o</u>dy
+   手动绘制: <u>P</u>lace&rarr;Extruded 3D <u>B</u>ody
+   默认绘制的是挤出类型 (Properties&rarr;3D Model Type&rarr;Extruded; Overall Height 是挤出高度设置, Standoff Height 悬浮高度)
    
+### PCB 网表导入和布线
 
-#### 快捷键
+1. 网表导入及长久报错处理
+   (`PcbDoc`) <u>D</u>esign&rarr;<u>I</u>mport Changes From XXX.PrjPcb
+   或者 (`SchDoc`) <u>D</u>esign&rarr;<u>U</u>pdate PCB Document XXX.PcbdDoc
+   在弹出的 Engineering Change Order 中, 如果只有一张原理图 Add Rooms 可以不勾
+   报错处理: 根据错误信息, 分析是没有封装还是管脚缺失, 还是管脚号和封装没对应.
+2. 常见绿色报错的消除
+   <u>T</u>ools&rarr;<u>D</u>esign Rule Check... 可以修改设计规则检查
+   如果遇到提示悍盘直接短路的情况, 检查封装中悍盘的 Jumper (跳线) 参数是否设为 0 (禁用), 否则 AD 会连接 Jumper 参数相同的悍盘并导致短路. 
+
+### 快捷键
 
 自定义快捷键: 按住 `<C>` 点击想要修改快捷键的命令
 
+- `J` 搜索菜单
+  (`PcbLib`) `JC` 根据元件位号查找元件
 - `A` 对齐菜单 (<u>E</u>dit&rarr;Ali<u>g</u>n)
 - 移动
   `M` 移动菜单 (<u>E</u>dit&rarr;<u>M</u>ove)
@@ -89,6 +106,7 @@ tags: electronic-and-information-engineering
   - 添加多个悍盘同样可以使用阵列粘贴:
     <u>E</u>dit&rarr;Paste Arra<u>y</u>...)
   - 同样的, 可从 PCB 图反向生成 PCB 封装库: (`.SchDoc`) <u>D</u>esign&rarr;Make <u>P</u>CB Library
+  - 更改完封装后别忘了在 PCB Library 选中该封装然后右键 Update PCB with XXX
 
 
 ## 元件知识
@@ -96,3 +114,4 @@ tags: electronic-and-information-engineering
 1. 零欧姆电阻=毫欧电阻, 一般为 20&Omega;-50&Omega;
    作用: 作保险丝, 功能切换, 跳线, 作高频电感、电容, 作磁珠等
 2. 阻焊的作用是防止绿油覆盖.
+3. 固定孔要接地
