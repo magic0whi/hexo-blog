@@ -534,6 +534,10 @@ through thick and thin 风雨同舟
 
 ### 动词
 
+#### 及物动词和不及物动词
+
+及物动词需后跟宾语
+
 #### 助动词
 
 助动词: do, have, be, 情态动词
@@ -1159,11 +1163,20 @@ it takes sb. some time to do sth.
 
 ## 杂项
 
-* pursue sth.=in pursuit of sth.
-* be + adj. = be + of + n.
-  如 He is an able man = He is a man of ability
+* Equivalent
+  pursue sth. = in pursuit of sth.
+  be + adj. = be + of + n.  e.g. He is an able man = He is a man of ability
+* Mass Noun, Uncountable Noun
+  advice
+  furniture
+  information
+  news
+* Append Gerund only
+  practice V(+ing)
+
 * hardly Verb(v3) when
   no sooner Verb(v2) than
+* do well to 最好做...
 
 ## 常用前后缀
 

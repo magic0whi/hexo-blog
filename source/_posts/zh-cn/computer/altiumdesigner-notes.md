@@ -6,7 +6,7 @@ date: 2021-11-02 21:52:02
 tags: electronic-and-information-engineering
 ---
 
-进度 Pass 1/2, Stage 18/38
+进度 Pass 1/2, Stage 30/38, 6:00
 
 <!-- more -->
 
@@ -56,7 +56,7 @@ tags: electronic-and-information-engineering
    手动绘制: <u>P</u>lace&rarr;Extruded 3D <u>B</u>ody
    默认绘制的是挤出类型 (Properties&rarr;3D Model Type&rarr;Extruded; Overall Height 是挤出高度设置, Standoff Height 悬浮高度)
    
-### PCB 网表导入和布线
+### PCB 网表导入和模块化布局
 
 1. 网表导入及长久报错处理
    (`PcbDoc`) <u>D</u>esign&rarr;<u>I</u>mport Changes From XXX.PrjPcb
@@ -64,7 +64,7 @@ tags: electronic-and-information-engineering
    在弹出的 Engineering Change Order 中, 如果只有一张原理图 Add Rooms 可以不勾
    报错处理: 根据错误信息, 分析是没有封装还是管脚缺失, 还是管脚号和封装没对应.
 2. 常见绿色报错的消除
-   <u>T</u>ools&rarr;<u>D</u>esign Rule Check... 可以修改设计规则检查
+   <u>T</u>ools&rarr;<u>D</u>esign Rule Check... 可以修改设计规则检查的启用. (在 <u>D</u>esign&rarr;<u>R</u>ules... 里可以修改规则的参数)
    如果遇到提示悍盘直接短路的情况, 检查封装中悍盘的 Jumper (跳线) 参数是否设为 0 (禁用), 否则 AD 会连接 Jumper 参数相同的悍盘并导致短路. 
 3. 元器件摆放&板框评估&叠层设置
    器件阵列排步: <u>T</u>&rarr;C<u>o</u>mponent Placement&rarr;Arrange Within Rectang<u>l</u>e.
@@ -75,6 +75,39 @@ tags: electronic-and-information-engineering
 
    打开叠层管理器: <u>D</u>esign&rarr;Layer Stac<u>k</u> Manager..., 默认是 2 层, Overlay 后缀表示丝印层, Solder 表示阻悍层. 只有橙色的才是信号层如 Top Layer 和 Bottom Layer.
    要添加新层, 可右键已有层然后 Insert layer {above,below}&rarr;{Signal,Plane,Core,Prepreg}, Signal 信号层, Plane 负片层(默认导通, 线起绝缘作用; 电源层), Core 心板(屏蔽用), Prepreg PP片(基材)
+4. PCB 布局
+  分割显示, 打开配合交叉选择模式(`<S-C-x>` <u>T</u>ools&rarr;Cross Select Mode
+  然后框选原理图的元件时对于 PCB 板上的元件也会被选择. 此时就可以配合矩形排列 (`tol`) 分离模块.
+  选中多个元件可以设置联合: Right Mouse&rarr;<u>U</u>nions&rarr;Create Union from selected objects
+  布局原则: 先大后小
+  
+5. PCB 布线
+  首先需要先把电源跳线隐藏掉, <u>D</u>esign&rarr;<u>C</u>lass... 打开对象类编辑器, 在 Net Classes 下新建一个 "PWR" 类, 然后把电源相关的网络都加进这个类.
+  要隐藏这个 "PWR", 首先确保右下角 Panel 里的 PCB 面板启用, 然后可以在 PCB 面板里将 "PWR" 右键把 Connections 设置为隐藏.
+  Ro<u>u</u>te&rarr;<u>U</u>n-Route&rarr;<u>C</u>onnection 可以一次性删除整根线(也可以点击某段线然后按 `<Tab>` 选中整根线删掉)
+  Place 中的 Line 和 Track 的区别: Line 默认不设置网络, Track 会自动设置走线网络为起点悍盘的网络.
+
+### PCB 设计规则及 PCB 手动布线
+
+1. Class、设计规则的创建
+   <u>D</u>esign&rarr;<u>R</u>ules... 打开 PCB Rules and Constrains Editor
+   在规则编辑器中:
+   - Electrical&rarr;Clearance&rarr;Constraints&rarr;Minimum Clearance 可以设置最小间距 (推荐 6 mil)
+   - Routing&rarr;Width 可以修改线宽 (推荐整体设为 6mil)
+   - 对于电源走线, 建议增加线宽(如 10mil), 在 Routing&rarr;Width 下新建一个规则, 然后在 Where The Object Matches 选择我们的电源类即可, 如 "PWR". 注意规则的优先级.
+   - Routing&rarr;Routing Via Style&rarr;RoutingVias 可以设置过孔孔径 (建议 16mil) 和过孔直径 (建议是2倍过孔直径&plusmn;2mil).
+     过孔还需要在首选项的默认设置进行更改 <u>T</u>ools&rarr;<u>P</u>references...&rarr;Primitive List&rarr;Via, Via Stack&rarr;(Diameter = 22mil, Hole Size = 12mil), Solder Mask Expansion&rarr;Manual 顶部底部都勾选 Tented (进行盖油处理, 过孔不是悍盘).
+   - Plane
+     过孔对不同平面的连接方式: &rarr;Power Plane Connect Style&rarr;PlaneConnect, 推荐设置为 Direct Connect
+     反悍盘间距: &rarr;Power Plane Clearance&rarr;PlaneClearance, 推荐 8mil
+     铺铜连接方式: &rarr;Polygon Connect Style&rarr;PolygonConnect, 手焊建议 Relief Connect, 回流焊建议 Direct Connect.
+     - 在 Constraints 勾选高级后还可对 SMD 悍盘、过孔的连接方式进行更改, 这里推荐将铺铜对过孔的连接设为 Direct Connect.
+   - Manufacturing
+     &rarr;Silk To Solder Mask Clearance 建议将最小丝印到阻悍间距设为 2mil.
+2. 扇孔 (占位过孔) 的必要性
+   原则: 短线直径连接, 长线预先打过孔
+   好处: 在其他层布线的时候能提前避开过孔, 减少线路重排的工作量; 对于四层以上的板子, 连接 GND 的悍盘可以直接通过过孔连接 GND 层, 从而获得避免绕路并获得更好的信号质量.
+
 
 ### 快捷键
 
@@ -101,7 +134,7 @@ tags: electronic-and-information-engineering
 - `<S-r>` 改变走线方式: Ignore Obstacles (忽略障碍), Walkaround Obstacles (绕开障碍), Push Obstacles (推挤障碍), HugNPush Obstacles (紧贴并推挤障碍), Stop At First Obstacle (遇到第一个障碍就停止), AutoRoute Current Layer (当前层自动布线), AutoRoute MultiLayer (多层自动布线).
 - `<S-s>` 切换单层/多层显示.
 - `q` 单位切换mil/mm
-- `n` 网络/走线显示和隐藏菜单
+- `n` 网络/飞线显示和隐藏菜单
 
 #### 技巧
 
@@ -124,14 +157,13 @@ tags: electronic-and-information-engineering
     <u>E</u>dit&rarr;Paste Arra<u>y</u>...)
   - 同样的, 可从 PCB 图反向生成 PCB 封装库: (`.SchDoc`) <u>D</u>esign&rarr;Make <u>P</u>CB Library
   - 更改完封装后别忘了在 PCB Library 选中该封装然后右键 Update PCB with XXX
-- PCB 布局
-  分割显示, 打开配合交叉选择模式(`<S-C-x>` <u>T</u>ools&rarr;Cross Select Mode
-  然后框选原理图的元件时对于 PCB 板上的元件也会被选择. 此时就可以配合矩形排列 (`TOL`) 分离模块.
-- PCB 布线
-  首先需要先把电源跳线隐藏掉, <u>D</u>esign&rarr;<u>C</u>lass... 打开对象类编辑器, 在 Net Classes 下新建一个 "PWR" 类, 然后把电源相关的网络都加进这个类.
-  要隐藏这个 "PWR", 首先确保右下角 Panel 里的 PCB 面板启用, 然后可以在 PCB 面板里将 "PWR" 右键设置为隐藏.
-  Ro<u>u</u>te&rarr;<u>U</u>n-Route&rarr;<u>C</u>onnection 可以一次性删除整根线(也可以点击某段线然后按 `<Tab>` 选中整根线删掉)
-  Place 中的 Line 和 Track 的区别: Line 默认不设置网络, Track 会自动设置走线网络为起点悍盘的网络.
+- PCB
+  更改丝印大小: 选中丝印, 右键 Fi<u>n</u>d Similar Objects..., 将 Object Specific&rarr;String Type&rarr;Designator 设为 Same. 然后就能选中所有丝印设置丝印文字大小了.
+  更改丝印位置: `<C-a>` 选中所有器件, `a` (对齐菜单) &rarr; <u>P</u>psition Component Text...
+  定位原件在原理图中的位置: (记得分屏显示原理图) <u>T</u>ools&rarr;<u>C</u>ross Probe
+  按住 `<C>` 点击悍盘可以进行高亮
+  在 Panel&rarr;PCB 里, 可以设置为 Mask 模式来高亮某个网络类. 还可设置网络颜色 (右键网络类&rarr;Change Net Color, 再次右键&rarr;Display Override&rarr;Selected On)
+  重新铺铜快捷方式 `tgr` (<u>T</u>ools&rarr;Poly<u>g</u>on Pours&rarr;<u>R</u>epour Selected
  
 
 ## 元件知识
