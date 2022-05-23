@@ -67,7 +67,7 @@ tags: electronic-and-information-engineering
    <u>T</u>ools&rarr;<u>D</u>esign Rule Check... 可以修改设计规则检查的启用. (在 <u>D</u>esign&rarr;<u>R</u>ules... 里可以修改规则的参数)
    如果遇到提示悍盘直接短路的情况, 检查封装中悍盘的 Jumper (跳线) 参数是否设为 0 (禁用), 否则 AD 会连接 Jumper 参数相同的悍盘并导致短路. 
 3. 元器件摆放&板框评估&叠层设置
-   器件阵列排步: <u>T</u>&rarr;C<u>o</u>mponent Placement&rarr;Arrange Within Rectang<u>l</u>e.
+   器件阵列排步: <u>T</u>ool&rarr;C<u>o</u>mponent Placement&rarr;Arrange Within Rectang<u>l</u>e.
    在机械一层用线画出矩形的两条边 <u>P</u>lace&rarr;<u>L</u>ine, 然后设置这两条线的长度为整数, 然后完成矩形.
    使用线性尺寸工具标注长度: <u>P</u>lace&rarr;<u>D</u>imension&rarr;<u>L</u>inear.
    然后设置原点 <u>E</u>dit&rarr;<u>O</u>rigin&rarr;<u>S</u>et.
@@ -80,12 +80,12 @@ tags: electronic-and-information-engineering
   然后框选原理图的元件时对于 PCB 板上的元件也会被选择. 此时就可以配合矩形排列 (`tol`) 分离模块.
   选中多个元件可以设置联合: Right Mouse&rarr;<u>U</u>nions&rarr;Create Union from selected objects
   布局原则: 先大后小
-  
 5. PCB 布线
   首先需要先把电源跳线隐藏掉, <u>D</u>esign&rarr;<u>C</u>lass... 打开对象类编辑器, 在 Net Classes 下新建一个 "PWR" 类, 然后把电源相关的网络都加进这个类.
   要隐藏这个 "PWR", 首先确保右下角 Panel 里的 PCB 面板启用, 然后可以在 PCB 面板里将 "PWR" 右键把 Connections 设置为隐藏.
   Ro<u>u</u>te&rarr;<u>U</u>n-Route&rarr;<u>C</u>onnection 可以一次性删除整根线(也可以点击某段线然后按 `<Tab>` 选中整根线删掉)
   Place 中的 Line 和 Track 的区别: Line 默认不设置网络, Track 会自动设置走线网络为起点悍盘的网络.
+  铺铜记得设置 Properties&rarr;{选择 Pour Over All Same Net Objects, 勾选 Remove Dead Copper}
 
 ### PCB 设计规则及 PCB 手动布线
 
@@ -93,10 +93,10 @@ tags: electronic-and-information-engineering
    <u>D</u>esign&rarr;<u>R</u>ules... 打开 PCB Rules and Constrains Editor
    在规则编辑器中:
    - Electrical&rarr;Clearance&rarr;Constraints&rarr;Minimum Clearance 可以设置最小间距 (推荐 6 mil)
-   - Routing&rarr;Width 可以修改线宽 (推荐整体设为 6mil)
+   - Routing&rarr;Width 可以修改线宽 (推荐最小 6mil, 最大20mil)
    - 对于电源走线, 建议增加线宽(如 10mil), 在 Routing&rarr;Width 下新建一个规则, 然后在 Where The Object Matches 选择我们的电源类即可, 如 "PWR". 注意规则的优先级.
    - Routing&rarr;Routing Via Style&rarr;RoutingVias 可以设置过孔孔径 (建议 16mil) 和过孔直径 (建议是2倍过孔直径&plusmn;2mil).
-     过孔还需要在首选项的默认设置进行更改 <u>T</u>ools&rarr;<u>P</u>references...&rarr;Primitive List&rarr;Via, Via Stack&rarr;(Diameter = 22mil, Hole Size = 12mil), Solder Mask Expansion&rarr;Manual 顶部底部都勾选 Tented (进行盖油处理, 过孔不是悍盘).
+     过孔还需要在首选项的默认设置进行更改 <u>T</u>ools&rarr;<u>P</u>references...&rarr;PCB Editor&rarr;Defaults&rarr;Primitive List&rarr;Via, Via Stack&rarr;(Diameter = 22mil, Hole Size = 12mil), Solder Mask Expansion&rarr;Manual 顶部底部都勾选 Tented (进行盖油处理, 过孔不是悍盘).
    - Plane
      过孔对不同平面的连接方式: &rarr;Power Plane Connect Style&rarr;PlaneConnect, 推荐设置为 Direct Connect
      反悍盘间距: &rarr;Power Plane Clearance&rarr;PlaneClearance, 推荐 8mil
@@ -107,6 +107,12 @@ tags: electronic-and-information-engineering
 2. 扇孔 (占位过孔) 的必要性
    原则: 短线直径连接, 长线预先打过孔
    好处: 在其他层布线的时候能提前避开过孔, 减少线路重排的工作量; 对于四层以上的板子, 连接 GND 的悍盘可以直接通过过孔连接 GND 层, 从而获得避免绕路并获得更好的信号质量.
+3. 信号线的走线
+   信号线尽量不要通过过孔走多层, 这样可以减少干扰.
+4. 电源走线
+   如果表层和底层都需要绕过远的线, 可以使用多个过孔在表层和底层来回穿梭的方式来走线.
+   负片层的电源可以通过走线画闭合圈来划分不同的电源区域
+   电源线走好后, 在表层和底层铺一块包围整个版面的地铜 (网络 GND), 注意铜皮需要用多边形挖空工具修掉死角 (减少尖端放点现象以减少对信号线的干扰) <u>P</u>lace&rarr;Polygon Pour Cutout (记得重新灌铜).
 
 
 ### 快捷键
@@ -131,7 +137,8 @@ tags: electronic-and-information-engineering
 - `s` 选择菜单
   `sl` 线选
   `si` 框选
-- `<S-r>` 改变走线方式: Ignore Obstacles (忽略障碍), Walkaround Obstacles (绕开障碍), Push Obstacles (推挤障碍), HugNPush Obstacles (紧贴并推挤障碍), Stop At First Obstacle (遇到第一个障碍就停止), AutoRoute Current Layer (当前层自动布线), AutoRoute MultiLayer (多层自动布线).
+  `sn` 选择网络
+- `<S-r>` 改变走线绕路方式: Ignore Obstacles (忽略障碍), Walkaround Obstacles (绕开障碍), Push Obstacles (推挤障碍), HugNPush Obstacles (紧贴并推挤障碍), Stop At First Obstacle (遇到第一个障碍就停止), AutoRoute Current Layer (当前层自动布线), AutoRoute MultiLayer (多层自动布线).
 - `<S-s>` 切换单层/多层显示.
 - `q` 单位切换mil/mm
 - `n` 网络/飞线显示和隐藏菜单
@@ -164,6 +171,11 @@ tags: electronic-and-information-engineering
   按住 `<C>` 点击悍盘可以进行高亮
   在 Panel&rarr;PCB 里, 可以设置为 Mask 模式来高亮某个网络类. 还可设置网络颜色 (右键网络类&rarr;Change Net Color, 再次右键&rarr;Display Override&rarr;Selected On)
   重新铺铜快捷方式 `tgr` (<u>T</u>ools&rarr;Poly<u>g</u>on Pours&rarr;<u>R</u>epour Selected
+  设置扇孔时, 过孔会自动分配网络到走线上, 所以先从悍盘引出一条短的走线, 然后再添加过孔.
+- PCB 走线
+  Ro<u>u</u>te&rarr;Interactive <u>M</u>ulti-Routing 可以选择多跟线进行平行走线.
+  设置一个网络内所有走线的宽度, `s` (选择菜单)&rarr;<u>N</u>et 选择网络, 然后在属性窗口 (Properties) 的过滤器图表中只选择走线 (Tracks) 即可对所有该网络的走线进行属性更改.
+  按住 `<C>` 高亮网络时可以按 `[` / `]` 调整高亮对比度.
  
 
 ## 元件知识
@@ -172,3 +184,4 @@ tags: electronic-and-information-engineering
    作用: 作保险丝, 功能切换, 跳线, 作高频电感、电容, 作磁珠等
 2. 阻焊的作用是防止绿油覆盖.
 3. 固定孔要接地
+4. 走线载流能力一般20mil/A, 信号线一般 6mil 足够, 电源部分建议用铺铜连接
