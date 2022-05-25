@@ -6,7 +6,7 @@ date: 2021-11-02 21:52:02
 tags: electronic-and-information-engineering
 ---
 
-进度 Pass 1/2, Stage 30/38, 6:00
+进度 Pass 2/2, Stage 38/38, Completed
 
 <!-- more -->
 
@@ -114,6 +114,21 @@ tags: electronic-and-information-engineering
    负片层的电源可以通过走线画闭合圈来划分不同的电源区域
    电源线走好后, 在表层和底层铺一块包围整个版面的地铜 (网络 GND), 注意铜皮需要用多边形挖空工具修掉死角 (减少尖端放点现象以减少对信号线的干扰) <u>P</u>lace&rarr;Polygon Pour Cutout (记得重新灌铜).
 
+### PCB 的 DRC 检查、拼板设计及资料输出
+
+1. DRC 检查: (`.PcbDoc`) <u>T</u>ools&rarr;<u>D</u>esign Rule Check...&rarr;(Left-Bottom Corner) <u>R</u>un Design Rule Check... (检查之前记得重新灌铜 `tga`)
+   丝印的调整: 丝印最好只有两个方向, 推荐从左到右, 竖着的底部朝右从下往上; 字宽/字高 4/25mil、5/30mil、6/45mil. 按 `l` 然后设置单独显示丝印和悍盘 (Overlay, Paste, Solder), 结合属性面板里的过滤器可以方便地手动微调丝印.
+2. 拼板: 工艺边 (夹持边)、定位孔、光学定位点 (3 个)
+   新建 PCB (<u>F</u>ile&rarr;<u>N</u>ew&rarr;<u>P</u>CB), 然后 (`PcbDoc`) <u>P</u>lace&rarr;Embedded Board Array/Panelize 然后 `<Tab>` 在属性中选择 PCB Document 为要拼板的 PCB 文件, 列数 (Column Count), 行数 (Row Count), 并设置间距 Column Margin、Row Margin 和行列长度 Row Spacing、Column Spacing. 由于默认新建的 PCB 是二层板, 放置的如果是四层就会出现警告叠层不相同, 选择 Synchronize Automatically Now 同步叠层. 拼板阵列会自动同步原始 PCB 的更改.
+   用绘制线 (`pl`) 在机械一层 (Mechanical 1) 添加工艺边, 然后选中边框设置 PCB 板面大小 (`dsd`). 记得在负片层放置填充 (`pf`), 代表工艺边区域没有铜覆盖.
+   用多层悍盘 (`pp`, 层属性为 MultiLayer, 通常称为非金属化孔) 作为固定孔, 设置悍盘孔径和大小为 3mm (Prperties&rarr;Pad Stack&rarr;{(X/Y), Hole Size}), 四个角都要放置.
+   用表贴悍盘 (`pp`, 层属性为 Top Layer) 作为光学定位孔, 设置悍盘大小为 1mm (Properties&rarr;Pad Stack&rarr; (X/Y)=1mm). 在板面的三个角放置. 如果底层也有器件的话, 底层也要相应放置光学定位孔.
+3. 装配图的输出: <u>F</u>ile&rarr;Assem<u>b</u>ly Outputs&rarr;<u>A</u>ssembly Drawings; 或者 <u>F</u>ile&rarr;S<u>m</u>art PDF... 然后在 PCB Printout Settings 这步右键选择 Create <u>A</u>ssembly Drawings, Printout Options 勾上 Holes, 对于底层还可勾上 Mirror. 右键&rarr;P<u>r</u>operties... 可以对输出层进行编辑, 一般装配图留下丝印层 (Overlay)、机械一层 (Mechanical 1)、阻悍层 (Solder) 就够了.
+   BOM 标的输出: (`PcbDoc`, `SchDoc`) <u>R</u>eports&rarr;B<u>i</u>ll of Materials
+   Gerber 文件的输出: <u>F</u>ile&rarr;<u>F</u>abrication Outputs&rarr;Gerver Files, 然后在 Layer 选项卡下设置输出的层, 一般 Mirror 可以不勾. 在 Drill Drawing 勾选 <u>P</u>lot all used drill pairs
+   钻孔文件输出: <u>F</u>ile&rarr;<u>F</u>abrication Outputs&rarr;NC Drill Files
+   坐标文件输出: <u>F</u>ile&rarr;Assem<u>b</u>ly Outputs&rarr;<u>G</u>enerates pick and place files
+   IPC 网表输出: <u>F</u>ile&rarr;<u>F</u>abrication Outputs&rarr;Test Point Report, Report Formats 只勾选 <u>I</u>PC-D-356A
 
 ### 快捷键
 
@@ -142,6 +157,8 @@ tags: electronic-and-information-engineering
 - `<S-s>` 切换单层/多层显示.
 - `q` 单位切换mil/mm
 - `n` 网络/飞线显示和隐藏菜单
+- `l` / `<C-d>` 视图配置, 可切换层显示/关闭
+- `ea` 特殊粘贴
 
 #### 技巧
 
@@ -176,6 +193,8 @@ tags: electronic-and-information-engineering
   Ro<u>u</u>te&rarr;Interactive <u>M</u>ulti-Routing 可以选择多跟线进行平行走线.
   设置一个网络内所有走线的宽度, `s` (选择菜单)&rarr;<u>N</u>et 选择网络, 然后在属性窗口 (Properties) 的过滤器图表中只选择走线 (Tracks) 即可对所有该网络的走线进行属性更改.
   按住 `<C>` 高亮网络时可以按 `[` / `]` 调整高亮对比度.
+  在其他层复制的元件默认会在它所在的层粘贴, 想要粘贴到当前层需要使用 <u>E</u>dit&rarr;P<u>a</u>ste&rarr;Special... 勾选 Paste on current layer.
+  缝合孔可以区域性地给网络添加过孔: <u>T</u>ools&rarr;Via Stitc<u>h</u>ing/Shielding&rarr;<u>A</u>dd Stiching to Net...
  
 
 ## 元件知识
