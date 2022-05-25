@@ -12,23 +12,28 @@ tags:
 
 <!-- more -->
 
-## 常规软件设置
+## 常规设置
 
-1. 在状态栏(右下角)显示内存、显存、点线面数量等信息: {% asset_img 1-1.png %}
-2. 启用模拟三键鼠标(`Alt+鼠标左键` 旋转视角, 类似 MAYA 的操作): {% asset_img 1-2.png %}
-   但是注意开启之后会导致选择循环边快捷键变成双击选择, 建议适应鼠标中键旋转视角(这样的优势在于一只手就能旋转视觉了)
-3. 启用围绕选择物体旋转和自动深度(解决视角无法继续推近的问题) {% asset_img 1-3.png %}
-4. 启用自动加载 Python 脚本(一些插件需要开启, 不然可能会报错)
-   {% asset_img 1-4.png %}   
+1. 状态栏 (右下角) 显示内存、显存、点线面数量信息: Edit&rarr;<u>P</u>references...&rarr;Interface&rarr;Editors&rarr;Status Bar&rarr;[&check;]{Scene Statistics, System Memory, Video Memory}.
+   <details>
+     <summary><strong>&dagger; Example Photos &dagger;</strong></summary>
+     {% asset_img 1-1.png %}
+   </details>
+2. (不推荐) 启用模拟三键鼠标(`<M-LeftMouse>` 旋转视角, 类似 MAYA):
+   开启会导致选择循环边快捷键变成双击选择, 建议适应鼠标中键旋转视角 (优势在于一只手就能旋转视角): Edit&rarr;<u>P</u>references...&rarr;Input&rarr;Mouse&rarr;[&check;]Emulate 3 Button Mouse.
+3. 启用围绕选择物体旋转和自动深度 (解决视角无法继续推近的问题): Edit&rarr;<u>P</u>references...&rarr;Navigation&rarr;Orbit & Pan&rarr;[&check;]{Orbit Around Selection, Depth}
+4. 启用自动加载 Python 脚本 (一些插件需要开启, 不然可能会报错)
+   Edit&rarr;<u>P</u>references...&rarr;Save & Load&rarr;[&check;]Auto Run Python Scripts.
 5. 启用插件:
+   Edit&rarr;<u>P</u>references...&rarr;Add-ons&rarr;
    Node: Node Wrangler (强大的节点工具)
-   Rigging: Rigify (自带的强大绑骨软件)
+   Rigging: Rigify (自带强大绑骨)
    Import-Export: Import Images as Planes (导入图像为平面)
    Import-Export: Export Autocad DXF Format (.dxf) (导出为 DXF 格式)
    Import-Export: Import AutoCAD DXF Format (.dxf) (导入为 DXF 格式)
-   Add Curve: Extra Objects (添加额外的曲线物体)
-   Add Mesh: BoltFactory (添加螺栓)
-   Add Mesh: Extra Objects (添加额外的网格物体)
+   Add Curve: Extra Objects (额外曲线物体)
+   Add Mesh: BoltFactory (螺栓)
+   Add Mesh: Extra Objects (额外网格物体)
    Add Mesh: A.N.T.Landscape (简单地形制作)
    Interface: Modifier Tools (修改器工具)
    Interface: Copy Attributes Menu (复制属性菜单)
@@ -36,65 +41,67 @@ tags:
    Object: Bool Tool (布尔工具)
    Render: Auto Tile Size (自动 Tile 大小, 能自动帮你设置渲染块数量, 提供硬件利用率)
    UV: Magic UV (魔法 UV)
-   {% asset_img 1-6.png %}
-6. 最后别忘了保存设置 {% asset_img 1-5.png %}
+6. 最后别忘了保存设置  Edit&rarr;<u>P</u>references...&rarr;&equiv;&rarr;<u>S</u>ave Preferences
 
 ## 基础操作
 
-1. 观察物体:
-   
-   {% asset_img 2-1.png %}
-   &#10112; 视角旋转: `鼠标中键` 或 `Alt+左键` (模拟三键鼠标)
-   &#10113; 视角平移: `Shift+鼠标中键` 或 `Shift+Alt+鼠标左键` (模拟三键鼠标)
-   &#10114; 摄像机视图切换: `小键盘0`
-   &#10115; 透视/正交切换: `小键盘5`
-   提示: 若是87键键盘没有小键盘, 可通过在首选项开启模拟数字键盘, 使普通数字键作为快捷键使用
-   {% asset_img 2-2.png %}
-   1. 摄像机相关:
-      * 如何让摄像机跟随视角同步?
-        按 `N` 键开启 N 面板, 然后点击视图选项卡, 勾选锁定相机到视图
-        {% asset_img 2-3.png %}
-      * 如何更改摄像机取景框的比例和大小?
-        &#10112; 见图:
-        
-        {% asset_img 2-4.png %}
-        &#10113; 在关闭锁定相机到视图的情况下, 在相机视图下直接使用鼠标滚轮和视角平移操作就可以改变相机取景框在屏幕上的大小和位置
-      * 我找到了一个不错的角度, 如何将当前的视角快速变为摄像机视图?
-        场景集合列表(Scene Collection)中选中相机物体, 然后 `Ctrl+Alt+小键盘0`
-   2. 四视图视角: `Ctrl+Alt+Q`
-      顶视图: `小键盘7`; 底视图: `Ctrl+小键盘7`
-      前视图: `小键盘1`; 后视图: `Ctrl+小键盘1`
-      右视图: `小键盘3`; 左视图: `Ctrl+小键盘3`
-      翻转当前视角: `小键盘9` (如当前是顶视图, 翻转变成底视图; 正交视图之外的情况是绕Z轴翻转)
-   3. 聚焦当前物体: 选中目标物体, 然后在视图中按`小键盘的'.'键`
-      聚焦并屏蔽其他物体的显示: 选中目标物体, 然后在视图中按`小键盘的'/'键`
-      在四视图界面, 要想同步聚焦, 按 `Ctrl+小键盘'.'键`
-      显示整个场景: `Home` 键
-2. 调整物体
-   * 开启移动, 旋转, 调整工具的实时显示:
-     {% asset_img 2-5.png %}
-     > Gizmo 可通过 ``Ctrl+` `` 来快速开关
-   * 移动物体: 快捷键 `G`, 此时按 `X`、`Y`、`Z` 可使其在对应的轴上移动, 输入数字可以进行精确移动.
-     若要在对应的平面上移动, 可按 `Shift+垂直轴的字母`, 如 `Shift+Z` 为在 `X-Y` 平面内移动
-     位置归零: `Alt+G`
-   * 旋转物体: 快捷键 `R`, 默认是基于当前视角旋转, 此时再按 `R` 可进入视角深度旋转, 按 `X`、`Y`、`Z` 可使其在对应的轴上旋转, 输入数字可以进行精确旋转(角度制).
-     旋转归零: `Alt+R`
-   * 缩放物体: 快捷键 `S`, 按 `X`、`Y`、`Z` 可使其在对应的轴上缩放, 输入数字可以进行精确缩放.
-     若要在对应的平面上缩放, 可按 `Shift+垂直轴的字母`
-     缩放归零: `Alt+S`
-   * 也可利用N面板调整物体:
-     
-     {% asset_img 2-6.png %}
-3. 选择物体
-   按 `W` 切换选择工具, 共有四种, 分别为选择移动工具、框选工具、刷选工具、套索选择工具
-   还可以设置对应工具的属性(如交集选择)
-   {% asset_img 2-7.png %}
+### 观察物体:
 
-   按 `A` 键全选, 再次按 `A` 或 `Alt+A` 取消全选
-4. 新建物体
-   物体添加: `Shift+A`, 注意物品添加时部分支持使用新建参数, 但这个参数仅在新建时才有效
-5. 删除物体
-   两种方法: `Delete` 键删除或按 `X` 删除
+{% asset_img 2-1.png %}
+
+&#10112; 视角旋转 `<MiddleMouse>` (模拟三键鼠标 `<M-LeftMouse>`)
+&#10113; 视角平移 `<S-MiddleMouse>` (模拟三键鼠标`<S-M-LeftMouse>`)
+&#10114; 摄像机视图(切换) `<k0>`
+&#10115; 透视/正交切换 `<k5>`
+> 提示: 若没有小键盘, 可在首选项开启模拟数字键盘使普通数字键作为快捷键使用: Edit&rarr;<u>P</u>references...&rarr;Input&rarr;Keyboard&rarr;\[&check;\]Emulate Numpad
+
+#### 摄像机
+
+- 如何让摄像机跟随视角同步? (锁定相机到视图)
+  `n` (开启 N 面板)&rarr;\[View\]&rarr;View Lock&rarr;\[&check;\]Camera to View
+- 如何更改摄像机取景框的比例和大小?
+  方法 1: &#x2780; 选中摄像机 (如 \[Outliner\] (`<S-F9>`)&rarr;Scene Collection&rarr;Collection&rarr;\[&check;\]Camera) &#x2781; \[Properties\] (`<S-F7>`)&rarr;\[Output Properties\]&rarr;Format&rarr;{Resolution (X,Y,%),Aspect (X,Y)}
+  方法 2: (关闭锁定相机到视图) 在相机视图下直接用鼠标滚轮和视角平移就可改变相机取景框在屏幕上的大小和位置.
+- 找到一个不错的角度, 如何将当前的视角快速设为摄像机视图?
+  &#x2780; 选中摄像机 &#x2781; `<C-M-k0>`
+
+#### 切换四视图
+
+四视图分割(切换) `<C-M>-q`
+顶视图 `<k7>`; 底视图 `<C-k7>`
+前视图 `<k1>`; 后视图 `<C-k1>`
+右视图 `<k3>`; 左视图 `<C-k3>`
+翻转 `<k9>` (若当前非正交视图则绕Z轴翻转)
+
+#### 聚焦物体
+
+- 选中目标物体, 然后 (`3D Viewpont`, `<S-F5>`) `<kPoint>`
+- 聚焦并隐藏其他物体(切换): 选中目标物体, 然后 (\[3D Viewport\] `<S-F5>`) `<kDivide>`
+- 在四视图界面同步聚焦: `<C-kPoint>`
+- 显示整个场景 `<Home>`
+
+#### 物体变换
+
+- 在物体上的实时显示移动、旋转、调整工具:
+  \[3D Viewport\] (`<S-F5`)&rarr;(Top bar)\[V\] Gizmos&rarr;Object Gizmos&rarr;\[&check;\]{Move,Rotate,Scale}
+  > Gizmo 快速开关 ``<C-`>``
+- 移动物体 `g`&rarr;{\[`<S>`-\](`x`,`y`,`z`),\[0-9\]+} (使其只在{轴,除去该轴的平面}上移动; 输入数字精确移动)
+  移动归零 `<M>-g`
+- 旋转物体 `r`\[`r`\] (默认基于当前视角旋转, 再按切换视角深度旋转)&rarr;{`x`,`y`,`z`,\[0-9\]+} (使其只在对应轴上旋转; 输入数字精确旋转(角度制)).
+  旋转归零 `<M>-r`
+- 缩放物体 `s`&rarr;{\[`<S>`-(`x`,`y`,`z`),\[0-9\]+} (使其只在{轴,除去该轴的平面}上缩放; 输入数字精确缩放).
+  缩放归零 `<M>-s`
+
+> 也可使用N面板调整物体: `n`&rarr;\[Item\]&rarr;Transform
+
+#### 选择物体
+
+- 切换选择工具(移动/框选/刷选/套索) `w`, 在 3D Viewport 的顶栏还可设置工具属性 (如交集选择)
+- 全选 `a`; 取消全选 `<M>-a` 或 `aa` (快速)
+#### 新建/删除物体
+
+- 物体添加 `<S>-a`, 物品添加时的参数仅在新建时可调
+- 删除物体 `<Del>` 或 `x` 
 
 ## 坐标系与轴心点
 

@@ -4,6 +4,7 @@ toc: true
 category: daily-life
 date: 2022-05-16 19:38:54
 tags:
+---
 
 
 Record my mood daily
@@ -26,4 +27,4 @@ N: `Null`
 | 1N   | 2N  | 3N    | 4N              | 5N   | 6N    | 7N  |
 | 8A   | 9A  | 10AT  | 11C             | 12B  | 13T   | 14C |
 | 15CT | 16C | 17BTA | 18B{49%D,51%A}T | 19AB | 20ACA | 21A |
-| 22B  | 23B | 24A   | 25B             |
+| 22B  | 23B | 24A   | 25BCB           |
