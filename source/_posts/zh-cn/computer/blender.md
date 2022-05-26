@@ -60,7 +60,7 @@ tags:
 - 如何让摄像机跟随视角同步? (锁定相机到视图)
   `n` (开启 N 面板)&rarr;\[View\]&rarr;View Lock&rarr;\[&check;\]Camera to View
 - 如何更改摄像机取景框的比例和大小?
-  方法 1: &#x2780; 选中摄像机 (如 \[Outliner\] (`<S-F9>`)&rarr;Scene Collection&rarr;Collection&rarr;\[&check;\]Camera) &#x2781; \[Properties\] (`<S-F7>`)&rarr;\[Output Properties\]&rarr;Format&rarr;{Resolution (X,Y,%),Aspect (X,Y)}
+  方法 1: &#x2780; 选中摄像机 (如 \[Outliner `<S-F9>`\]Scene Collection&rarr;Collection&rarr;\[&check;\]Camera) &#x2781; \[Properties `<S-F7>`\]&rarr;\[Output Properties\]&rarr;Format&rarr;{Resolution (X,Y,%),Aspect (X,Y)}
   方法 2: (关闭锁定相机到视图) 在相机视图下直接用鼠标滚轮和视角平移就可改变相机取景框在屏幕上的大小和位置.
 - 找到一个不错的角度, 如何将当前的视角快速设为摄像机视图?
   &#x2780; 选中摄像机 &#x2781; `<C-M-k0>`
@@ -75,98 +75,80 @@ tags:
 
 #### 聚焦物体
 
-- 选中目标物体, 然后 (`3D Viewpont`, `<S-F5>`) `<kPoint>`
-- 聚焦并隐藏其他物体(切换): 选中目标物体, 然后 (\[3D Viewport\] `<S-F5>`) `<kDivide>`
+- 选中物体&rarr;\[3D Viewpont `<S-F5>`\] `<kPoint>`
+- 聚焦并隐藏其他物体(切换): 选中物体&rarr;\[3D Viewport `<S-F5>`\] `<kDivide>`
 - 在四视图界面同步聚焦: `<C-kPoint>`
 - 显示整个场景 `<Home>`
 
 #### 物体变换
 
 - 在物体上的实时显示移动、旋转、调整工具:
-  \[3D Viewport\] (`<S-F5`)&rarr;(Top bar)\[V\] Gizmos&rarr;Object Gizmos&rarr;\[&check;\]{Move,Rotate,Scale}
+  \[3D Viewport `<S-F5>`\](Top bar)\[V\] Gizmos&rarr;Object Gizmos&rarr;\[&check;\]{Move,Rotate,Scale}
   > Gizmo 快速开关 ``<C-`>``
-- 移动物体 `g`&rarr;{\[`<S>`-\](`x`,`y`,`z`),\[0-9\]+} (使其只在{轴,除去该轴的平面}上移动; 输入数字精确移动)
+- 移动物体 `g`&rarr;{\[`<S>`-\](`x`,`y`,`z`),\[0-9\]+} 使其只在{轴,除去该轴的平面}上移动; 输入数字精确移动
   移动归零 `<M>-g`
-- 旋转物体 `r`\[`r`\] (默认基于当前视角旋转, 再按切换视角深度旋转)&rarr;{`x`,`y`,`z`,\[0-9\]+} (使其只在对应轴上旋转; 输入数字精确旋转(角度制)).
+- 旋转物体 `r`\[`r`\] (默认基于当前视角旋转, 再按切换视角深度旋转)&rarr;{`x`,`y`,`z`,\[0-9\]+} 使其只在对应轴上旋转; 输入数字精确旋转(角度制).
   旋转归零 `<M>-r`
-- 缩放物体 `s`&rarr;{\[`<S>`-(`x`,`y`,`z`),\[0-9\]+} (使其只在{轴,除去该轴的平面}上缩放; 输入数字精确缩放).
+- 缩放物体 `s`&rarr;{\[`<S>`-(`x`,`y`,`z`),\[0-9\]+} 使其只在{轴,除去该轴的平面}上缩放; 输入数字精确缩放.
   缩放归零 `<M>-s`
 
 > 也可使用N面板调整物体: `n`&rarr;\[Item\]&rarr;Transform
 
 #### 选择物体
 
-- 切换选择工具(移动/框选/刷选/套索) `w`, 在 3D Viewport 的顶栏还可设置工具属性 (如交集选择)
+- 切换选择工具(移动/框选/刷选/套索) \[3D Viewport `<S-F5>`\] `w`, 在 \[3D Viewport\] 顶栏还可设置工具属性 (如交集选择)
 - 全选 `a`; 取消全选 `<M>-a` 或 `aa` (快速)
-#### 新建/删除物体
+
+#### 新建/删除/复制物体
 
 - 物体添加 `<S>-a`, 物品添加时的参数仅在新建时可调
 - 删除物体 `<Del>` 或 `x` 
+- 复制物体 选中物体&rarr;`<C-c> <C-v>`; 或者 `<S-d>`
 
 ## 坐标系与轴心点
 
-1. 物体变换坐标系: 快捷键 `,`
-   * 局部(Local)坐标系: 基于物体本身方向的坐标系
-     可在对象属性下的视图显示里开启局部坐标轴显示:
-     {% asset_img 3-1.png %}
+### 物体坐标系
 
-     > * 进入变换模式, 二次点击轴字母即可快速切换全局/局部坐标系.
-     > * 可以在编辑器的顶栏设置默认使用的坐标系:
-     >   
-     >   {% asset_img 3-2.png %}
-   * 法向(Normal)坐标系
-     切换到法向模式, 进入编辑模式中的面选择模式, 点击一个平面, 可以看到Z轴和这个平面平行
-     (按 `Tab` 进入编辑模式, 此时按 `1`、`2`、`3` 进入点、线、面选择模式, 注意要使用这个快捷键需关闭**模拟数字键盘**)
-     {% asset_img 3-3.png %}
-     > 同样的, 进入变换模式后, 二次点击轴字母即可快速切换到全局坐标系
-   * 万向(Gimbal)坐标系
-     对于万向轴来说, 它可通过固定两个轴(旋转轴和转向轴)的方式让第三个绕旋转轴旋转,
-     如让某个圆球的万向轴设置为旋转轴是它的的局部X轴, 转向轴为它的局部Z轴,
-     可在 Object Properties->Transform 选择 Mode 为 "YXZ Eular" (第二个字母为旋转轴, 第三个字母为转向轴):
-     此时当我们尝试将物体绕着X轴旋转, Y轴会发生变化, 但无论如何旋转, 万向坐标系的Z轴永远保持和全局坐标Z轴一个方向, 且万向Z轴与X轴始终保持正交
-     {% asset_img 3-4.png %}
-   * 视图(View)坐标系
-     坐标轴XY与视窗锁定, 上下为Y, 左右为X, 垂直平面为Z
-   * 创建坐标系功能
-     使场景中所有的物体的坐标系为某个物体的局部坐标系
-     (复制物体の两种方法: 选中物体, `Ctrl+C` + `Ctrl+V` 或 `Shift+D`)
-     选中某个物体, 点击变换坐标系菜单的"+"号:
-     {% asset_img 3-5-1.png %}
-     
-     此时会生成一个与该物体名称相同的坐标系, 其他物体的坐标系变为此物体的局部坐标系:
-     {% asset_img 3-5-2.png %}
-   * 游标坐标系
-     和创建坐标系功能相似, 可以选择游标工具或在选择工具下按住 `Shift+鼠标右键` 拖动, 移动后游标会朝向移动时的视角
-     {% asset_img 3-6.png %}
-2. 物体变换轴心点
-   * 原点: 物体中心的橘黄色的小点称为原点, 可在编辑器右上角的选项中启用仅影响原点来对原点进行变换操作:
-     
-     {% asset_img 3-7.jpg %}
-     移动了原点后, 可通过右键菜单中的设置原点子菜单恢复原点位置:
-     (分别是几何中心到原点, 原点到几何中心, 原点到3D游标, 原点到重心(表面), 原点到重心(体积))
-     
-     {% asset_img 3-8.png %}
-   * 变换轴心点: 选择多个物体后出现的一个变换位置用的轴心点, 可使用句号键 "`.`" 或在编辑器的顶部选择变换轴心点位置的计算方式(边界框中心、3D游标、各自的原点、质心点、活动元素):
-     
-     {% asset_img 3-9.png %}
-     * 质心点(Median Point): 为变换轴心点计算的默认方式, 是基于原点计算产生的均值, 在只有一个物体选择的情况下, **质心等于原点**.
-     * 边界框中心(Bounding Box Center)
-       > 边界框可在 Object Properties-> Viewport Display 这里勾选 Bounds 来开启显示
-         {% asset_img 3-10.png %}
-       
-       如图, 在边界框中心模式下, 两物体的变换轴心点是根据两个边界框来计算的
+> 设置默认坐标系: \[3D Viewport\](Top bar)\[V\]Transform Orientations
+> 快捷键 `,`
 
-       {% asset_img 3-11.png %}
-     * 3D游标(3D Cursor): 顾名思义, 就是变换轴心点的位置是游标的位置. 配合下一章的吸附.
-     * 各自的原点(Individual Origins): 比较特别, 此模式下对选中的多个物体进行缩放和旋转都会对以各自的原点进行变换, 而不是一个统一的变换轴心点. 如下图中的旋转操作:
-        {% asset_img 3-12.png %}
-     * 活动元素(Active Element): 变换轴心点的位置是活动元素(最后选择的对象, Scene Collection 中高亮的那个)的原点
-       {% asset_img 3-13.png %}
-     
-     > 当使用句号键 "`.`" 在弹出的浮动菜单勾选仅位置后, 选择的多个物体的缩放和旋转只会相对于变换轴心点进行相对的距离和角度的变换而不会改变物体本身的缩放和旋转.
-     > {% asset_img 3-14.png %}
-     > 如图, 旋转操作不旋转物体本身, 只是相对于变换轴心点的角度进行位置上的"旋转"
-     > {% asset_img 3-15.png %}
+- 局部 (Local) 坐标系: 基于物体本身方向
+  显示: 选中物体&rarr;\[Properties `<S-F7>`\]&rarr;\[Object Properties\]&rarr;Viewport Display&rarr;\[&check;\]Axis.
+  > 在物体变换操作时, 多次按下轴字母可切换全局/默认坐标系, 
+- 法向 (Normal) 坐标系
+  实践: 切到法向坐标系&rarr;选中物体&rarr;编辑模式 `<Tab>`&rarr;启用面选择模式: \[3D Viewport\](Top bar) Face Selection Mode &rarr;点击一个平面, 尝试在 Z 轴上移动, 会发现这个平面的 Z 轴垂直于该平面 (法向)
+  > 如果没有启用模拟小键盘的话, 在编辑模式可用快捷键 `1`、`2`、`3` 启用点、线、面选择模式);
+  > 同样的, 进入变换模式后, 多次按下轴字母即可快速切换全局/默认坐标系.
+- 万向 (Gimbal) 坐标系
+  对于万向轴来说, 它可通过固定两个轴 (旋转轴和转向轴) 的方式让第三轴绕旋转轴旋转,
+  如将圆球设置为旋转轴=它的局部 X 轴; 转向轴=它的局部 Z 轴:
+  切到万向坐标系&rarr;选中该圆球&rarr;\[Properties `<S-F7>`\]&rarr;[Object Properties]&rarr;Transform&rarr;Mode='YXZ Eular' (第二个字母为旋转轴, 第三个字母为转向轴)
+  当我们尝试将该圆球绕 X 轴旋转, Y 轴会发生变化, 但无论如何旋转, 万向坐标系的 Z 轴永远保持和全局坐标 Z 轴一个方向, 且万向 Z 轴与万向 X 轴始终保持正交 (即万向 X 轴永远在 XY 平面).
+- 视图 (View) 坐标系
+  坐标轴 XY 与视窗锁定, 上下为 Y, 左右为 X, 垂直屏幕方向为 Z
+
+#### 自定义坐标系/游标坐标系
+
+将默认坐标系设为某个物体的局部坐标系
+选中物体&rarr;\[3D Viewport\](Top bar)\[V\]Transform Orientations&rarr;点击 '+' 号, 会生成一个与该物体名称相同的坐标系
+
+游标 (Cursor) 坐标系: 和自定义坐标系相似, 不过是游标的局部坐标系. 要改变游标方向, 可使用游标工具或者 \[3D Viewport\] `<S-RightMouse>` 拖动, 移动后游标会朝向屏幕方向.
+
+### 轴心点
+
+- 原点: 选中单个物体后中心的橘黄色的小点称为原点. 变换原点: \[3D Viewport\](Upper Right Corner)[V]Options&rarr;Affect Only [&check;]Origins, 然后可以对原点进行移动旋转缩放
+  恢复原点位置: 选中物体&rarr;\[3D Viewport\]`<RightMouse>`&rarr;Set <u>O</u>rigin&rarr;{<u>G</u>eometry to Origin,<u>O</u>rigin to Geometry,Origin <u>t</u>o 3D Cursor, Origin to <u>C</u>enter of Mass (Surface),Origin to Center of <u>M</u>ass (Volume)} 几何中心到原点, 原点到几何中心, 原点到3D游标, 原点到重心(表面), 原点到重心(体积)
+- 变换轴心点: 选择多个物体后出现的一个变换位置用的轴心点, 要设置变换轴心点, 可使用句号键 `.` 调出浮动菜单或 \[3D Viewport\](Top bar)[V]Transform Pivot Point&rarr;{<u>B</u>ounting Box Center,3<u>D</u> Cursor,<u>I</u>ndividual Origins,<u>M</u>edian Point,<u>A</u>ctive Element} 边界框中心、3D游标、各自的原点、质心点、活动元素
+- 质心点 (Median Point): 为变换轴心点计算的默认方式, 是基于原点计算产生的均值, 在只有一个物体选择的情况下, **质心等于原点**.
+- 边界框中心 (Bounding Box Center): 选中多个物体的变换轴心点根据它们的边界框来计算.
+  > 显示边界框: 选中物体&rarr;\[Properties\]&rarr;Object Properties&rarr;Viewport Display&rarr;[&check;]Bounds
+- 3D游标 (3D Cursor): 变换轴心点是游标位置. 配合下一章的吸附.
+- 各自的原点 (Individual Origins): 比较特别, 此模式下对选中的多个物体进行缩放和旋转都会对以各自的原点进行变换, 而不是一个统一的变换轴心点.
+  实践: 选中多个物体然后旋转变换试试.
+- 活动元素 (Active Element): 变换轴心点的位置是活动元素 (最后选择的物体, [Scene Collection] 中高亮的那个) 的原点
+
+> 当使用句号键 `.` 在浮动菜单勾选 Only Locations (`9`), 选择的多个物体的缩放和旋转只会相对于变换轴心点进行相对的距离和角度的变换而不会改变物体本身的缩放和旋转.
+> 如旋转操作不旋转物体本身, 只是相对于变换轴心点的角度进行位置上的"旋转"
 
 ## 吸附与衰减编辑工具
 
