@@ -53,23 +53,69 @@ article.article .content {
 }
 </style>
 
+## 词法
+
+### 连词 Conjunction
+
+连词属于虚词, 无实义.
+
+- 并列连词: and, or, but, for, not only...but also, neither...nor.
+- 从属连词: that, if, whether, when, although, because, so that
+
+### 介词 Preposition
+
+Prepositions are a class of words used to express spatial or temporal relations or mark various semantic roles.
+
+A preposition typically combines with a noun phrases, this being called its complement, or sometimes object. A preposition establishes a grammical/sematic relationship that links its complement to another word or phrase in the context.
+
+spatial: towards, in, on, under, against.
+temporal: after, during.
+sematic roles: of, for, without, than, via.
+
+### 副词 Adverb
+
+not, even, where, how
+
+### 代词 Pronoun
+
+疑问代词: who[m], whose, which, what
+关系代词: who[m], whose, which, that
+不定代词: some
+
+### 感叹词 Interjection
+
+oh
+
 ## 句子结构
 
 ### 句子成分
 
-1. 主语: 名词, 动词不定式, 动名词, 名词性从句(主语从句)
-2. 谓语: 动词
-3. 宾语: 名词, 动词不定式, 动名词
-4. 表语: 名词, 形容词, 副词, 动词不定式, 动名词, 分词
-5. 补语(主语/宾语补足语): 名词, 形容词, 动词不定式, 分词
-6. 定语: 形容词, 动词不定式, 动名词, 分词
-7. 状语: 副词, 动词不定式, 分词
+#### 词类-句子成分对应关系
 
-[状语]+[前置定语]+主语+[后置定语]+[状语]+谓语+[前置定语]+宾语+[后置定语]+[补语]+[状语]
+|               | 主语    | 宾语    | 表语 Predicative | 定语    | 状语    | 主/宾语补语 |
+| --            | --      | --      | --               | --      | --      | --          |
+| 名词          | &check; | &check; | &check;          | &check; | &check; | &check;     |
+| 代词          | &check; | &check; | &check;          | &check; |         | &check;     |
+| 形容词        |         |         | &check;          | &check; |         | &check;     |
+| 副词          |         |         | &check;          |         | &check; |             |
+| 数词          | &check; | &check; | &check;          | &check; |         | &check;     |
+| 不定式        | &check; | &check; | &check;          | &check; | &check; | &check;     |
+| 现在/过去分词 |         |         | &check;          | &check; | &check; | &check;     |
+| 动名词        | &check; | &check; | &check;          | &check; |         |             |
+| 介词短语      |         |         | &check;          | &check; | &check; | &check;     |
 
-主语+系动词+[前置定语]+表语+[后置定语]+[补语]
+- [状语]+[前置定语]+主语+[后置定语]+[状语]+谓语+[前置定语]+宾语+[后置定语]+[补语]+[状语]+[远宾语(指物,此时近宾指人)]
+- [状语]+[前置定语]+主语+[后置定语]+系动词+表语+[状语]
+  补语修饰谁看具体含义
 
-补语修饰谁看具体含义
+例子:
+1. 主语
+   数词做主语: *Three* plus four equals seven.
+2. 表语
+   介词短语作表语: The story of my life may be *of help to others*
+   不定式短语作表语: His plan is *to seek work* in the city. 其中 work 是 to seek 的宾语.
+3. 
+   
 
 #### 定语
 
@@ -558,8 +604,13 @@ have作使役动词不能直接跟动词
 
 #### 系动词(也称连系动词)
 
-系动词: be, ramain  appear, keep, 感官动词(look, sound, feel, smell, taste, seem, ...), 趋势动词(get, go, become, turn, ...)
-系动词的否定形式为前面加don't
+系动词: 后面不接宾语, 而接表语.
+非实义系动词: be
+实义系动词:be, ramain  appear, keep, 感官动词(look, sound, feel, smell, taste, seem, ...), 趋势动词(get, go, become, turn, ...)
+
+不完全不及物动词: 需跟表语意思才完整, 如 The match | became | very exciting.
+
+系动词否定形式: don't+系动词
 
 #### 及物和不及物
 
