@@ -68,13 +68,13 @@ Prepositions are a class of words used to express spatial or temporal relations 
 
 A preposition typically combines with a noun phrases, this being called its complement, or sometimes object. A preposition establishes a grammical/sematic relationship that links its complement to another word or phrase in the context.
 
-spatial: towards, in, on, under, against.
+spatial: towards, in, on, under, against, near.
 temporal: after, during.
 sematic roles: of, for, without, than, via.
 
 ### 副词 Adverb
 
-not, even, where, how
+not, even, where, how, thus
 
 ### 代词 Pronoun
 
@@ -92,55 +92,100 @@ oh
 
 #### 词类-句子成分对应关系
 
-|               | 主语    | 宾语    | 表语 Predicative | 定语    | 状语    | 主/宾语补语 |
-| --            | --      | --      | --               | --      | --      | --          |
-| 名词          | &check; | &check; | &check;          | &check; | &check; | &check;     |
-| 代词          | &check; | &check; | &check;          | &check; |         | &check;     |
-| 形容词        |         |         | &check;          | &check; |         | &check;     |
-| 副词          |         |         | &check;          |         | &check; |             |
-| 数词          | &check; | &check; | &check;          | &check; |         | &check;     |
-| 不定式        | &check; | &check; | &check;          | &check; | &check; | &check;     |
-| 现在/过去分词 |         |         | &check;          | &check; | &check; | &check;     |
-| 动名词        | &check; | &check; | &check;          | &check; |         |             |
-| 介词短语      |         |         | &check;          | &check; | &check; | &check;     |
+|                       | 主语    | 宾语    | 表语 Predicative | 定语    | 状语    | 主/宾语补语 (complement) |
+| --                    | --      | --      | --               | --      | --      | --                       |
+| 名词[短语]            | &check; | &check; | &check;          | &check; | &check; | &check;                  |
+| 代词                  | &check; | &check; | &check;          | &check; |         | &check;                  |
+| 数词                  | &check; | &check; | &check;          | &check; |         | &check;                  |
+| 形容词                |         |         | &check;          | &check; |         | &check;                  |
+| 副词                  |         |         | &check;          |         | &check; |                          |
+| 不定式[短语]          | &check; | &check; | &check;          | &check; | &check; | &check;                  |
+| {现在,过去}分词[短语] |         |         | &check;          | &check; | &check; | &check;                  |
+| 动名词[短语]          | &check; | &check; | &check;          | &check; |         |                          |
+| 介词短语              |         |         | &check;          | &check; | &check; | &check;                  |
 
-- [状语]+[前置定语]+主语+[后置定语]+[状语]+谓语+[前置定语]+宾语+[后置定语]+[补语]+[状语]+[远宾语(指物,此时近宾指人)]
-- [状语]+[前置定语]+主语+[后置定语]+系动词+表语+[状语]
-  补语修饰谁看具体含义
+- \[状语\]\[前置定语\]主语\[后置定语\] \[状语\]谓语\[状语\] \[前置定语\]宾语\[后置定语\]\[宾语补语\]\[状语\]
+- \[前置定语\]主语\[后置定语\] 系动词 表语\[主语补语\]
 
 例子:
 1. 主语
    数词做主语: *Three* plus four equals seven.
 2. 表语
    介词短语作表语: The story of my life may be *of help to others*
-   不定式短语作表语: His plan is *to seek work* in the city. 其中 work 是 to seek 的宾语.
-3. 
+   不定式短语作表语: His plan is *to seek work in the city*. 其中 work 是 seek 的宾语, in the city 是 seek 的状语.
+3. 宾语
+   动名词短语作宾语: Do you mind *opening the window*?
+4. 定语 (Attribute): 广义的形容词. 限定主语或宾语的范围. 修饰名词性的单词、短语、从句. 单词作定语时通常放在修饰名词前 (前置定语); 短语和从句作定语时通常放在所修饰名词后 (后置定语).
+   名词作定语: They are *woman* workers.
+   所有格名词作定语: *Tom's* father didn't write home until yesterday.
+   形容词作定语: *Equal* pay for *equal* work shoud be introduced. 其中 for equal work 是 pay 的后置定语.
+   代词、数词和介词短语作定语: This is *her first* trip *to Europe*.
+5. 状语: 广义的副词. 修饰动词、形容词、副词. 表示地点、时间、原因、目的、结果、条件、让步、程度、方式、伴随情况等.
+   副词作状语: These products are selling *quickly*. 这里 are 是助动词和 selling 组成复合谓语.
+   名词作状语: He is in *keen* deep snow.
+   介词短语作状语: The best fish swim *near the bottom*.
+
+   比较状语从句 as...as:
+   It is just *as foolish to say that one should never eat meat and potatoes together as it is to say that one should never eat bread or drink milk*. 这里 say 后面的都是同位语从句.
+   让步状语从句 as 引出:
+   The ants, *hard-working as they are*, have their times for play. hard-working 为表语成分, 放在从句句首构成倒装.
+6. 宾语补语和主语: 有些及物动词作谓语, 除了要有宾语, 还需要宾语补语才能使句子意义完整. 宾语和宾语补语一起构成复合宾语. 如果是被动态语句, 宾语是实际主语, 宾语补语变为实际主语补语.
+   分辨: 修饰主语/宾语的不是表示限定作用的定语, 那么就是补语.
+   名词短语作宾语补语: They elected me *caption of the team*.
+   形容词短语作宾语补语: He made me *ashamed of myself*. 形容词短语: 形容词+补语(介词短语, 不定式[短语).
+   介词短语作宾语补语: We found everything there *in good order*.
+   不定式短语作宾语补语: I should advise you *not to miss the chance*.
+   分词短语作宾语补语: I could feel my heart *beating fast*.
    
-
-#### 定语
-
-定语是广义的形容词, 限定主语或宾语对象的范围.
-
-定语和补语区别: 补语强调补充, 定语限定范围
-
-#### 状语
-
-状语是广义的副词. 说明谓语或表语的状态(时间, 地点, 程度, 目的, 结果)
+   不定式短语作主语补语: The price is expected *to rise the near future*.
+   形容词作主语补语: Some goods are left *unsold*.
+   名词短语作主语补语: She was elected *director of public relations*.
 
 ### 五大句型
 
-1. 主语 + 不及物动词
+1. (SV) 主语 谓语(不及物动词)
    e.g. He cried.
-2. 主语 + 系动词 + 表语
+2. (SVC) 主语 系动词 表语 \[主语补语\]
    e.g. The dinner smells good.
    e.g. This is an English-Chinese dictionary.
-3. 主语 + 谓语 + 宾语
+3. (SVO) 主语 谓语 宾语
    e.g. He enjoys reading
-4. 主语 + 谓语 + 间接宾语 + 直接宾语
+4. (SVOO) 主语 谓语 间接宾语(通常指人) 直接宾语(通常指物)
    e.g. He brought you a dictionary.
-5. 主语 + 谓语 + 宾语 + 宾语补足语
+5. (SVOC) 主语 谓语 宾语 宾语补语
+   宾语与宾语补语构成复合宾语, 存在意义上的主谓关系.
    e.g. I often find him at work.
    e.g. They painted the door green.
+
+### 句子用途
+
+英语句子按用途可分为陈述句、疑问句、祈使句、感叹句.
+
+- 疑问句 Interrogative sentence
+  有四类: 一般, 特殊, 选择, 反意
+  - 一般疑问句 General question: 用 yes/no 来回答. 句中助动词 (包括情态动词) 要放在主语前, 形成到装. 特别情况下, 如表示猜测、惊异、怀疑时, 可以自然语序. 如:
+    You think the boy is impossible?
+  - 特殊疑问句 Special question: 就句中具体内容提出问题. 常用疑问词有 who\[m\], whose, which, what, where, when, why, how 等. 如:
+    Who are responsible for the company's advertising?
+    What does macaroni look like?
+  - 选择疑问句 Alternative question: 提供两种或两种以上情况, 问对方选择哪一种. 通常有两个一般疑问句加 or 构成, 后一句常用省略结构. 如:
+    Does your sister work in the wholesale department or in the retail store?
+    Is the action necessary or unnecessary?
+  - 反意疑问句 Disjunctive question: 附在陈述句后, 对陈述句叙述的事实提出相反疑问. 通常表示说话怀疑或没有把我, 要求 yes/no 回答. 但有时也用于加强语气, 并不要求回答.
+    通常结构: {do,have,be,情态动词} + 主语; 若陈述句为否定结构, 反意疑问句用肯定结构.
+    She doesn't often wash her hair, does she?
+    Tom washed his car yesterday, didn't he?
+    Everything is arranged in a good order, isn't it?
+- 祈使句 Imperative sentence
+  祈使句的主语 (听话者, 即 you) 通常被省略. 否定结构为在肯定结构前加 do not.
+  用 let 引起的是第一人称祈使句, let us 表示说话者和听话者都包括在内; let me 则只指说话者一方.
+  Let's start work at once.
+- 感叹句 Exclamatory sentence
+  由 how, what 感叹词加被强调部分及陈述句其他部分组成. 如:
+  How hard he works!
+  How lucky I am to be invited to the party!
+  What an interesting role she played!
+  What a pity it is to lose the game again!
 
 ### 三大从句
 
@@ -356,7 +401,10 @@ something 为先行词, 定语从句不能用 which
 
 #### 同位语从句
 
-区分同位语从句和定语从句: 同位语能替换宾语, 而定语不能
+起补充说明主语或宾语作用.
+识别同位语从句: 1. 同位语从句是名词性从句; 2. 因为名词性所以同位语能替换主语或宾语, 而定语和补语不能.
+如果修饰主语的同位语较长, 可以置于句子最后:
+A *plan* was made last year *that several roads would be built in this part of the city*.
 
 ### 特殊句式
 
@@ -457,7 +505,7 @@ something 为先行词, 定语从句不能用 which
 #### 强调句
 
 强调句结构: (that/who 不能省略)
-1. 强调名词 It is/was + 强调部分 + that/who + 剩余部分
+1. 强调名词 It is/was + 强调部分 + that/who (强调部分是状语用 that) + 剩余部分
 2. 强调动词: 人称代词 + do/did + 强调部分 + that 剩余部分
 
 #### 祈使句
@@ -470,6 +518,7 @@ something 为先行词, 定语从句不能用 which
 1. 情态动词 + 动词原形
 2. 助动词 + 实意动词或动词短语
 3. 助动词 + 动名词/过去分词
+   The machine is drilling a hole.
 4. 系动词 + 表语(主系表可看作主谓)
 
 #### 独立主格
@@ -606,9 +655,10 @@ have作使役动词不能直接跟动词
 
 系动词: 后面不接宾语, 而接表语.
 非实义系动词: be
-实义系动词:be, ramain  appear, keep, 感官动词(look, sound, feel, smell, taste, seem, ...), 趋势动词(get, go, become, turn, ...)
+实义系动词:be, ramain  appear, keep, 感官动词(look, sound, feel, smell, taste, seem, ...), 趋势动词(get, go, become, turn, grow, remain, come, fall, hold, keep, stand, stay...)
 
-不完全不及物动词: 需跟表语意思才完整, 如 The match | became | very exciting.
+不完全不及物动词: 需跟表语意思才完整, become, 
+如 The match | become | very exciting.
 
 系动词否定形式: don't+系动词
 
@@ -641,6 +691,10 @@ give it up 代词
 
 构成: to + 动词原形, to 是不定式的符号, 无意义, 有时可省略.
 但是不定式具有动词的特点, 可以有自己的宾语和状语, 但没有三单和复数形式.
+
+由于他们是动词, 因此可以被状语修饰. 动名词还兼有名词特性, 可作主语, 比如:
+Thus forming an integrated image *with all the information placed in a single mental picture* can help us to preserve a memory.
+独立结构 with + n. (all the information) + V3 (placed \[in a single mental picture\]) 作方式状语修饰动名词短语 forming an integrated image.
 
 句法功能:
 1. 作主语:
@@ -1212,7 +1266,7 @@ it takes sb. some time to do sth.
             2. 遭受某人做. 过去分词的动作由他人完成, 被动含义且强调动作已完成.
                He <u>had his wallet stolen</u> when he was shopping.
 
-## 杂项
+## 杂项 Misc
 
 * Equivalent
   pursue sth. = in pursuit of sth.
@@ -1224,12 +1278,66 @@ it takes sb. some time to do sth.
   news
 * Append Gerund only
   practice V(+ing)
-
 * hardly Verb(v3) when
   no sooner Verb(v2) than
 * do well to 最好做...
+* 一个名词放在另一个名词前作定语时, 通常用单数, 但 "销售税" 却是 sales tax. 又如: sports meeting 运动会.
+* part of 某物的一部分; a part of 某物的一小部分.
+* no more than = only
+  He is no more than a beginner = He is only a beginner.
+* nothing but 仅仅, 不过是
+- have \[nothing,much\] to do with 与...{有,无,有很大}关系.
+- 倒装
+  主语和表语: Very busy must be their thoughts = Their thoughts must be very busy.
+  宾语道装:
+  Many of the things that animals know how to do they seem to know either without learning, or in some way which we cannot understand.
+  They | seem to know | many of the things that animals know how to do | either without learning, or in some way which we cannot understand.
+  
+  Nor 引出的否定句用倒装: Nor is this all.
 
-## 常用前后缀
+## 构词法
+
+### 派生法 Derivation
+
+在词根 (root) 前面或后面加上词缀来产生新词.
+* 构成名词的后缀
+  人或物 -er, -or, -ist, -ee, -ian, -ese, -ant
+  如: thiner; translator, conductor; physicist; employee, trainee; Italian; Japanese; assistant.
+
+  行为、性质、状态 -ance, -ence, -\[a\]tion, -sion, -ics, -ing, -ity, -ment, -ness, -th, -ty, -ure, -ship
+  如: acceptance; confidence; reptition, preparation; discussion; physics, fabrics; wedding; reality; settlement; hardness; length; safety; failure, pressure; leadership.
+* 构成形容词的后缀 -able, -ible, -al, ful, -less, -ish, -ive, -ous, -an, -ic, -ly, -y, -ant, -ent, -ary, -en
+  available; permissible; national; powerful; useless; selfish; decisive; famous; American; scientific; friendly; noisy; significant; dependent; imaginary; golden.
+* 构成副词的后缀 -ly, -ward, -wise.
+  regularly; eastward; otherwise.
+* 动词后缀 -ise (美国 -ize), -en, -ify
+  realize; widen; verify.
+
+#### 前缀
+
+- 相反意义 un-, dis-, in-, im-, ir-, il-, de-
+  unhappy; dislike; informal; impossible; irregular; illegal; devalue.
+- 重新 re- retell
+  错误 mis- misunderstand
+  反、防 anti- anti-social
+  前 ex- ex-president
+  预先 pre- preheat
+  后 post- postgraduate
+  先 fore- forecast
+  自我、自动 self- self-control
+  自动 auto- automobile
+  超级、上层 super- supermarket
+  下级 sub- subdivide
+  之间、互相 inter- interact
+  跨越、移 trans- transport
+  外、极 ultra- ultraviolet
+  半 semi- semiconductor
+  副 vice- vice-premier
+  单 uni- uniform
+  双 bi- bicycle
+  多 multi- multistage
+
+### 常用前后缀
 
 1. prefix
    ```
@@ -1303,5 +1411,30 @@ it takes sb. some time to do sth.
       ```
       -ly
       -ward(s)             backward(s), afterward(s)
-      -wise                clockwise
       ```
+
+#### 合成法 Compounding
+
+由两个以上的词合成一个新词
+- 名词: hardware, network, well-being.
+- 形容词: duty-free, far-reaching, face-to-face.
+- 动词: overthrow, heat-treat, counteroffer.
+
+#### 转换法 Conversion
+
+词形不变, 词性转变. 通常词义与转换前有密切联系, 但有时差异很大.
+
+look *v.* 看 &rarr; *n.* 相貌
+back *n.* 后背 &rarr; *v.* 支持
+second *num.* 第二; &rarr; *v.* 赞成
+
+有些双音节词转换后, 重音发生变化. 通常名词重音在前, 动词重音在后, 有时读音也有不同.
+TODO: 补充注音
+|          | 名词   | 动词 |
+| --       | --     | --   |
+| conduct  | 行为   | 传导 |
+| digest   | 文摘   | 消化 |
+| export   | 出口   | 出口 |
+| increase | 增加   | 增加 |
+| produce  | 农产品 | 生产 |
+| refuse   | 垃圾   | 拒绝 |
