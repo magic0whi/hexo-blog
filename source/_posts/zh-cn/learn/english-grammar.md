@@ -9,7 +9,6 @@ tags:
 
 英语的语法是一系列的规则, 只要理清和遵循这些规则, 就能写出正确的句子
 本文的作用旨在脑中形成一个能够检查英语语法正确性的模型.
-主从复合句: 至少包含两个谓语(主句一个从句一个)的句子
 
 <!-- more -->
 
@@ -79,14 +78,14 @@ not, even, where, how, thus
 ### 代词 Pronoun
 
 疑问代词: who[m], whose, which, what
-关系代词: who[m], whose, which, that
+关系代词: who[m], whose, which, that, as
 不定代词: some
 
 ### 感叹词 Interjection
 
 oh
 
-## 句子结构
+## 句法
 
 ### 句子成分
 
@@ -527,20 +526,24 @@ A *plan* was made last year *that several roads would be built in this part of t
 比如: Her eyes moist and red
 there be 开头的句子也是独立主格
 
-#### 并列句
+#### 并列句 Compound sentence
 
-定义: 使用并列连词连接起来的两个以上的句子
+使用并列连词连接起来的两个以上的句子 
 结构: 简单句 + 并列连词 + 简单句
 常见的并列连词
+1. 分号 `;`、冒号 `:`、逗号 `,`
+   Every day the newspapers carry a few pages of classified ads; in the large Sunday editions there may be several sections of them.
+   I've just had some good news: I've been offered a job in a law firm.
+   Sometimes I laugh, sometimes I am down.
 1. 表示转折、并列、递进关系的并列连词
    and, both..., and..., as well as, not only...but also..., neither...nor...
    My father bought me a present <u>and</u> I like it very much
    He is <u>not only</u> a good basketball player <u>but also</u> can play the plano very skillfully.
 2. 表示转折、对比关系的并列连词
-   but, yet, while
+   but, yet, while, however, whereas
    Lucy likes playing the plano <u>while</u> Lily likes playing basketball.
 3. 表示选择关系的并列连词
-   either...or... 连接主语时, 动词和靠近它的主语在人称、数上保持一致, 即就近原则. or 或者, 还可以表示否则
+   either...or... 连接主语时, 动词和靠近它的主语在人称、数上保持一致, 即就近原则. or 或者, 还可以表示否则; otherwise
    <u>Either</u> you <u>or</u> your mother has been invited.
    Study hard, <u>or</u> you will fail the exam.
 4. 表示因果关系的并列连词
@@ -566,6 +569,10 @@ there be 开头的句子也是独立主格
    = If you think it over, you will find the answer.
    Hurry up, <u>or</u> you will be late.
    = If you don't hurry up, you will be late.
+
+#### 复合句
+
+复合句 (Complex sentence): 由一个主句和一个或一个以上从句构成的句子叫复合句, 也称主从复合句. 从句由关联词 (Connective) 引导, 可分为主语从句、宾语从句、表语从句、同位语从句、定语从句和状语从句. 复合句的特征是至少包含两个谓语 (主句一个从句一个)的句子.
 
 ## 词法
 
@@ -1294,6 +1301,7 @@ it takes sb. some time to do sth.
   They | seem to know | many of the things that animals know how to do | either without learning, or in some way which we cannot understand.
   
   Nor 引出的否定句用倒装: Nor is this all.
+- be made from..., be made of... 前者看不到原材料, 后者可以看出原材料.
 
 ## 构词法
 
