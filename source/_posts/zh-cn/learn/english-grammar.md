@@ -515,7 +515,7 @@ A *plan* was made last year *that several roads would be built in this part of t
 
 复合谓语的形式:
 1. 情态动词 + 动词原形
-2. 助动词 + 实意动词或动词短语
+2. 助动词 + 实意动词或短语动词
 3. 助动词 + 动名词/过去分词
    The machine is drilling a hole.
 4. 系动词 + 表语(主系表可看作主谓)
@@ -675,9 +675,17 @@ have作使役动词不能直接跟动词
 
 await (vt.) = wait (vi.) for
 
-#### 动词短语
+#### 短语动词 Phrasal Verb
 
-动词短语形式为: 动词 + 介词/副词
+四种结构:
+- 动词 介词
+  I *look after* my young brother.
+- 动词 副词
+  Cats are *taking over* the planet.
+- 动词 副词 介词
+  He is *moving forward to* it.
+- 动词 名词 介词
+  Not all nursery schools *make use of* the opportunities open to them.
 
 take into
 
@@ -890,10 +898,18 @@ it takes sb. some time to do sth.
 
 ##### 时态和语态
 
+英语动词从时间 (time) 上看有现在、过去、将来机过去将来; 从体 (aspect) 上看有一般、进行、完成及完成进行. 动词的时间与体的结合即动词时态 (verb tense).
+在十六种时态中, 将来完成进行时 (future perfect continusus tense)、过去将来进行时 (past future continuous tense)、过去将来完成时 (past future perfect tense)、过去将来完成进行时 (past future perfect continuous tense) 很少使用.
+
+分清句子时态: 过去的过去用过去完成时; 见到一段时间用完成时
+
+谓语动词有主动和被动两种语态. 主动语态 (active voice) 表示主语是动作执行者, 被动语态 (passive voice) 表示主语是动作的承受者, 宾语是动作的执行者.
+被动语态一共有十二种, 但实际常用的只有八种.
+
 <table class="colorize">
 <thead>
   <tr>
-    <th></th>
+    <th>aspect\time</th>
     <th>Present</th>
     <th><span class="red">Past</span></th>
     <th><span class="green">Future</span></th>
@@ -965,6 +981,7 @@ it takes sb. some time to do sth.
         <span class="blue">would/should</span>
         <span class="def">&nbsp;</span>
         <span class="pink">be V+ing</span>
+        <span class="def">&nbsp;(Rare)</span>
       </span>
     </td>
   </tr>
@@ -998,6 +1015,7 @@ it takes sb. some time to do sth.
         <span class="yellow">be</span><span class="pink">ing</span>
         <span class="def">&nbsp;</span>
         <span class="yellow">V3</span>
+        <span class="def">&nbsp;(Rare)</span>
       </span>
     </td>
     <td>
@@ -1009,6 +1027,7 @@ it takes sb. some time to do sth.
         <span class="yellow">be</span><span class="pink">ing</span>
         <span class="def">&nbsp;</span>
         <span class="yellow">V3</span>
+        <span class="def">&nbsp;(Rare)</span>
       </span>
     </td>
   </tr>
@@ -1049,6 +1068,7 @@ it takes sb. some time to do sth.
         <span class="blue">would/should</span>
         <span class="def">&nbsp;</span>
         <span class="cyan">have V3</span>
+        <span class="def">&nbsp;(Rare)</span>
       </span>
     </td>
   </tr>
@@ -1057,7 +1077,7 @@ it takes sb. some time to do sth.
       <span class="nospace">
         <span class="cyan">has/have</span>
         <span class="def">&nbsp;</span>
-        <span class="yellow">be<span class="cyan">en</span>
+        <span class="yellow">be</span><span class="cyan">en</span>
         <span class="def">&nbsp;</span>
         <span class="yellow">V3</span>
       </span>
@@ -1066,7 +1086,7 @@ it takes sb. some time to do sth.
       <span class="nospace">
         <span class="cyan">ha</span><span class="red">d</span>
         <span class="def">&nbsp;</span>
-        <span class="yellow">be<span class="cyan">en</span>
+        <span class="yellow">be</span><span class="cyan">en</span>
         <span class="def">&nbsp;</span>
         <span class="yellow">V3</span>
       </span>
@@ -1077,9 +1097,10 @@ it takes sb. some time to do sth.
         <span class="def">&nbsp;</span>
         <span class="cyan">have</span>
         <span class="def">&nbsp;</span>
-        <span class="yellow">be<span class="cyan">en</span>
+        <span class="yellow">be</span><span class="cyan">en</span>
         <span class="def">&nbsp;</span>
         <span class="yellow">V3</span>
+        <span class="def">&nbsp;(Rare)</span>
       </span>
     </td>
     <td>
@@ -1088,9 +1109,10 @@ it takes sb. some time to do sth.
         <span class="def">&nbsp;</span>
         <span class="cyan">have</span>
         <span class="def">&nbsp;</span>
-        <span class="yellow">be<span class="cyan">en</span>
+        <span class="yellow">be</span><span class="cyan">en</span>
         <span class="def">&nbsp;</span>
         <span class="yellow">V3</span>
+        <span class="def">&nbsp;(Rare)</span>
       </span>
     </td>
   </tr>
@@ -1144,6 +1166,7 @@ it takes sb. some time to do sth.
         <span class="pink">be</span><span class="cyan">en</span>
         <span class="def">&nbsp;</span>
         <span class="pink">V+ing</span>
+        <span class="def">&nbsp;(Rare)</span>
       </span>
     </td>
     <td>
@@ -1155,97 +1178,200 @@ it takes sb. some time to do sth.
         <span class="pink">be</span><span class="cyan">en</span>
         <span class="def">&nbsp;</span>
         <span class="pink">V+ing</span>
-      </span>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <span class="nospace">
-        <span class="cyan">has/have</span>
-        <span class="def">&nbsp;</span>
-        <span class="pink">be</span><span class="cyan">en</span>
-        <span class="def">&nbsp;</span>
-        <span class="yellow">be</span><span class="pink">ing</span>
-        <span class="def">&nbsp;</span>
-        <span class="yellow">V3</span>
-      </span>
-    </td>
-    <td>
-      <span class="nospace">
-        <span class="cyan">ha</span><span class="red">d</span>
-        <span class="def">&nbsp;</span>
-        <span class="pink">be</span><span class="cyan">en</span>
-        <span class="def">&nbsp;</span>
-        <span class="yellow">be</span><span class="pink">ing</span>
-        <span class="def">&nbsp;</span>
-        <span class="yellow">V3</span>
-      </span>
-    </td>
-    <td>
-      <span class="nospace">
-        <span class="green">will/shall</span>
-        <span class="def">&nbsp;</span>
-        <span class="cyan">have</span>
-        <span class="def">&nbsp;</span>
-        <span class="pink">be</span><span class="cyan">en</span>
-        <span class="def">&nbsp;</span>
-        <span class="yellow">be</span><span class="pink">ing</span>
-        <span class="def">&nbsp;</span>
-        <span class="yellow">V3</span>
-      </span>
-    </td>
-    <td>
-      <span class="nospace">
-        <span class="blue">would/should</span>
-        <span class="def">&nbsp;</span>
-        <span class="cyan">have</span>
-        <span class="def">&nbsp;</span>
-        <span class="pink">be</span><span class="cyan">en</span>
-        <span class="def">&nbsp;</span>
-        <span class="yellow">be</span><span class="pink">ing</span>
-        <span class="def">&nbsp;</span>
-        <span class="yellow">V3</span>
+        <span class="def">&nbsp;(Rare)</span>
       </span>
     </td>
   </tr>
 </tbody>
 </table>
 
-分清句子时态: 过去的过去用过去完成时; 见到一段时间用完成时
+###### 一般现在时 Simple Present Tense
 
-###### 时态呼应
+1. 经常或反复发生的动作或存在的状态. 常和表示频率的时间状语 (如 often, always, usually, sometimes, every day, once a week) 连用.
+   He *takes* a walk after supper every day.
+   How often *do* you *wash* your hair?
+2. 表示主语的特征、性格、能力等.
+   Mr. Smith *hates* fish and never *eats* any.
+   She *has* great concern for others.
+3. 客观事实或普遍真理.
+   The sun *rises* in the east and *sets* in the west.
+   Light *travels* faster than sound.
+4. 表示安排或计划好的将来发生的动作.
+   The plane *takes* off at 10 a.m.
+   When *does* the train *leave* for Shanghai?
+5. 在时间或条件状语从句中表示将来的动作.
+   Please wait till Jane *arrives*.
+   When you *see* her, just tell her that I am all right.
+6. 代替过去时表示某些文学作品中的情节描写, 或用于引述书看材料.
+   The little boy *goes* up to the policeman and *says*, "There's a car accident over there."
+   The author *says* that the soldiers *fight* for freedom not for money.
 
-主句现在时态, 从句该用什么时态用什么
+###### 一般过去时 Simple Past Tense
+
+表示过去某时发生的动作或状态, 常和表示过去的时间状语 (如 yesterday, last week, three years age, in 1984) 连用.
+She *bought* a Sabtabb kast week.
+He *lived* in London when he *was* young.
+
+###### 一般将来时 Simple Future Tense
+
+表示将来发生的动作或情况.
+They *will leave* for Hong Kong tomorrow.
+We *won't be* free tonight.
+
+在时间或条件状语从句中, 一般不用将来时, 而用现在时代替.
+I'll let you know when I*'m* through with the work.
+If you *put* the baby down, he will scream.
+
+将来时还有以下形式:
+1. am/is/are goint to V1
+   表示最近打算去做或可能要发生的事情.
+   We *are going to visit* the Museum of Chinese History tomorrow.
+   How long *are you going to stay* here?
+2. am/is/are about to V1
+   表示即将发生的动作.
+   We *are about to leave*, so there is no time to visit her now.
+   Please get everything ready. The experiment *is about to start*.
+3. am/is/are to V1
+   表示必须或计划进行的动作.
+   The girl *are to go* to school next week.
+   There *is to be* a sport meet on Saturday.
+
+###### 过去将来时 Past Future Tense
+
+主要用来表示过去某一时间内将要发生的动作或存在的状态.
+He told me that he *would see* mee off at the station.
+I rang up to tell my father that I *should go* home next Monday.
+
+和一般将来时类似, 过去将来时也有特殊形式:
+1. was/were going to V1
+   There *were going to have* a meeting to discuss the matter.
+2. was/were about to V1
+   I *was about to go* out when a friend of mine dropped in.
+3. was/were to V1
+   They *were to visit* the White House that afternoon
+
+###### 现在进行时 Present Continuous Tense
+
+表示现在正在进行的动作.
+What *are you doing*?
+I*'m doing* some washing.
+
+有些动词 (如 go, come, stay, leave, start) 的现在进行时形式也可表示将来即将发生的动作.
+He *is coming to see* you tomorrow.
+The plane *is leaving* for London.
+
+有些表示状态和感觉的动词不用于或在某个词义上不用于进行时. 如 hate, like, love, believe, think (以为), look (看起来), mind (在意), have (有), seem, sound (听起来), remain.
+
+###### 过去进行时 Past Continuous Tense
+
+表示过去某一时刻或某段时间内正在进行的动作.
+I *was practicing* my oral English at eight o'clock yesterday evening.
+When I *saw* her, she *was working* at the computer.
+
+与现在进行时类相似, go, come, stay, leave 等动词的过去进行时形式可以表示过去将要发生的动作.
+She asked my whether I *was starting* the next day.
+Mr. White told me that he *was leaving* for Singapore in a few days.
+
+###### 将来进行时 Future Continuous Tense
+
+表示在将来的某段时间正在发生的动作或按计划在奖将来将要进行的动作.
+"What will you *be doing* at there tomorrow afternoon?" "I*'ll be flying* to Hong Kong."
+We *shall be having* a business talk with Mr. Brown in a minute.
+
+###### 现在完成时 Present Perfect Tense
+
+表示过去开始, 但持续到现在的动作; 或表示过去发生的动作, 但对现在仍留下某种影响.
+My mother *has been ill* for three days.
+I *have not seen* her since 1991.
+
+###### 过去完成时 Past Perfect Tense
+
+表示过去某个时间或某个动作前已经完成的动作; 或表示过去某个时间开始一直延续到过去另一个时间的动作.
+When I came to her room, she *had alrady left*.
+I waited until he *had finished* his work.
+
+###### 将来完成时 Future Perfect Tense
+
+表示在将来某一时间以前已经完成的动作.
+We hope it *will have stopped* raining before we set of for the picnic.
+I*'ll have dont* all the work by the time you are back this eveing.
+
+###### 现在完成进行时 Present Perfect Continuous Tense
+
+表示从过去某一时间开始一直持续到现在的动作. 这个动作可能刚刚结束, 也有可能继续进行下去.
+She *has been working* in Shenzhen since 1985.
+Where have you been? I *have been looking* for you everywhere.
+
+###### 过去完成进行时 Past Perfect Continuous Tense
+
+表示过去某个时间以前已经开始而又延续到过去这个时间的动作. 这个动作可能刚刚结束, 也可能还在继续.
+He told me that he *had been teaching* physics for more thant twenty years.
+Dick *had been smocking* for ten years before he decided to give it up last year.
+
+###### 时态呼应 The Sequence of Tenses
+
+名词从句, 尤其是宾语从句中的动词时态, 常受主句中时态的影响.
+例如 She told John that she liked his tie 中, 从句的谓语 like 用了过去时, 这并不是说她现在已经不喜欢 John 的领带了. 而是因为主句的谓语是过去时.
+规则: 从句谓语由一般现在时变成一般过去时, 一般过去时变为过去完成时, 一般将来时变成过去将来时. 即
+主句现在时态, 从句该用什么时态用什么.
 主句过去时态, 分情况讨论:
-1. 从句动作若在主句动作发生之前, 从句用过去完成时态; 若从句有表示具体时间的状语, 从句依然用一般过去时
+1. 从句动作若在主句动作发生之前, 从句用过去完成时态.
 2. 从句的动作与主句动作同时发生, 用一般过去时或过去完成时.
+   I thought the experiment *was going on* now.
 3. 从句动作发生在主句动作之后, 从句用过去将来时
-4. 客观真理, 自然现象, 格言谚语, 从句用一般现在时
+   She siad the apparatus *would be* available next week.
 
-##### 被动
+以下情况可不遵守时态呼应的规则:
+1. 客观真理, 自然现象, 格言谚语.
+   The boys learned yesterday that the planets *are circling* about the sun. (不用 were circling)
+2. 从句中有表示绝对过去时间的状语.
+   The old man said he *joined* the Red Army in 1933. (不用 have joined)
+3. 说话者强调动作现在正在进行或将要发生.
+   He told me the train *leaves* at three. (不用 left)
+   
+
+##### 被动语态的用法
 
 被动是针对于主语而言的, 无生命的一般为被动
 
-1. 被动语态
-   英语中动词的语态有两种: 主动语态和被动语态. 主动语态表示主语是动作的执行者, 被动语态表示宾语是动作的执行者, 主语是动作的承受者.
-   在被动语态的句子中, 动作的执行者一般由介词 by 引起的短语来表示.
+1. 在被动语态的句子中, 动作的执行者一般由介词 by 引起的短语来表示.
    We often help them. (主动)
    They are often helped by us. (被动)
-   1. 被动语态各时态的形式由助动词 be 的各时态形式加(及物)动词的过去分词构成.
-   2. 被动语态八种时态的用法:
-      被动语态常用的八种时态的基本用法和主动语态各时态的基本用法相同, 只是句中的主语不是动作的执行者, 而是动作的承受者.
-   3. 一般使用被动语态的情况
-      1. 当不知道动作执行者是谁或没有必要提到动作执行者.
-         Paper was first made in China.
-      2. 当强调或突出动作承受者的作用时.
-         The new machine was invented by a 20-year-old young worker.
-2. 被动语态注意的问题
+2. 被动语态常用于一下情况
+   1. 当不知道动作执行者是谁或没有必要提到动作执行者.
+      Paper was first made in China.
+      No decision *has been made* so far.
+   2. 当强调或突出动作承受者的作用时. 此时动作执行者用介词 by 加代表动作执行者的名词或代词表示.
+      The new machine was invented by a 20-year-old young worker.
+2. 被动语态的几种特殊结构
    1. 不及物动词、表状态动词一般用主动语态(即不能作被动)
       come true, consist of, take place, happen, become, rise, occur, belong, break out, appear, arrive, die, fall, last, exist, fail, succeed
+   2. 含情态动词的被动语态结构: 情态动词 + be + 及物动词的过去分词.
+      The goods *must be shipped* before the end of September.
+      In this sense, bad things *can be turned* into good things.
+   3. 短语动词的被动语态结构.
+      短语动词应作为一个整体看待, 变为被动语态不能丢弃构成短语动词的介词、副词或名词等成分.
+      |                                              |                                                     |
+      | --                                           | --                                                  |
+      | We *have sent for* the doctor.               | The doctor *has been sent for*.                     |
+      | We *shall put off* the meeting till Friday.  | The meeting *will be put off* till Friday.          |
+      | People *looked down upon* women in the past  | Women *were looked down upon* in the past.          |
+      | The nurse *takes good care of* the children. | The children *are taken good care of* by the nurse. |
+   3. 含有双宾的主动结构变为被动结构.
+      主动结构中若有两个宾语, 变为被动结构时, 只将其中一个宾语变为主语, 另一个宾语不变, 通常称为保留宾语 (retained object).
+      We allowed *him an hour* to get to the airport.
+      变为被动:
+      *He* was allowed *an hour* to get to the airport.
+      或者:
+      *An hour* was allowd *him* to get to the airport.
+   4. 含有复合宾语的主动结构变为被动结构.
+      主动结构中如有复合宾语 (宾语+宾语补语), 变为被动结构时只将元复合宾语中的宾语变为主语, 宾语补语部分不变, 但语法上变为主语补语 (subject complement).
+      We advised *him to practice speaking English*.
+      *He* was advised *to practice speaking English*.
    2. 下列动词的主动形态表被动含义
-      1. lock, wash, sell, read, wear, blame, ride, write (且常与 well, easily, badly 等副词连用)
+      1. lock, wash, sell, read, wear, blame, ride, drive, write (且常与 well, easily, badly 等副词连用)
          Glass breaks easily.
-         The car rides smoothly.
+         The car rides/drives smoothly.
          The case locks easily.
          The book sells well.
       2. 系动词(look, sound, feel, smell, taste, appear, seem, turn, keep, ...):

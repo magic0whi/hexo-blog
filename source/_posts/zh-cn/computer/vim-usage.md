@@ -719,6 +719,7 @@ You can persisting fold by save the View. Goto see Chaper Views, Sessions, and V
 | --                                             | --                                                          |
 | `zf`<`any motion`>                             | Fold operator, follows a motion, or use it in visual mode   |
 | `z`{`o`,`c`,`a`}                               | Open / Close / Toggle a foleded text.                       |
+| `z`{`d`,`D`}                                   | Delete a fold \[Recursively\] under cursor                  |
 | `:,+1fold`                                     | Fold in command-line mode                                   |
 | `z`{`R`,`M`}                                   | Open / close all folds.                                     |
 | `:set foldmethod?`                             | See which folding method you are currently using.           |
