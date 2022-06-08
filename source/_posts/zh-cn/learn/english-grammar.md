@@ -69,7 +69,7 @@ A preposition typically combines with a noun phrases, this being called its comp
 
 spatial: towards, in, on, under, against, near.
 temporal: after, during.
-sematic roles: of, for, without, than, via.
+sematic roles: of, for, without, than, via, per.
 
 ### 副词 Adverb
 
@@ -700,66 +700,106 @@ give it up 代词
 
 #### 非谓语动词
 
-##### 动词不定式
+不可单独作谓语. 非谓语动词有三种: 不定式、分词和动名词.
 
-(作主语、宾语、表语、补语、定语和状语)
+##### 不定式 Infinitive
 
-构成: to + 动词原形, to 是不定式的符号, 无意义, 有时可省略.
-但是不定式具有动词的特点, 可以有自己的宾语和状语, 但没有三单和复数形式.
+1. 构成 to V1 (to 是不定式的符号, 无意义, 有时可省略).
+   不定式具有动词特点, 可以有自己的状语和宾语 (及物动词), 组成不定式短语, 但没有三单和复数形式.
+   如 to read the text slowly.
 
-由于他们是动词, 因此可以被状语修饰. 动名词还兼有名词特性, 可作主语, 比如:
-Thus forming an integrated image *with all the information placed in a single mental picture* can help us to preserve a memory.
-独立结构 with + n. (all the information) + V3 (placed \[in a single mental picture\]) 作方式状语修饰动名词短语 forming an integrated image.
+   不定式前可加某些疑问代词, 如 who, what, which; 或疑问副词如 when, where, how, why 等. 构成特殊的不定式短语.
+   如 what to do next, how to get there.
 
-句法功能:
-1. 作主语:
-   <u>To learn English</u> is not easy for me.
-   不定式作主语时, 常用 it 作为形式主语, 而把真正的不定式放后面.
-   其结构为: It + be + adj. (+for/of sb.) + 动词不定式
-   It is not easy for me <u>to learn English</u>.
-   It is very kind of you <u>to tell me the truth</u>.
-2. 作表语:
-   My work is <u>to clean the room everyday</u>.
-3. 作宾语:
-   What sport does he like <u>to play</u>? He likes <u>to play football</u>.
-   不定式只能作某些动词的宾语, 不能作介词的宾语(but, expect 除外).
-   这些动词常常表示命令、打算或希望. 如: would like, want, wish, hope, decide, plan, expect 等.
-   Would you like <u>to see a film this evening</u>?
-   如果动词为 find 或者 think 后跟不定式作宾语时, 常用 it 作形式宾语, 而将真正的宾语放在后面.
-   I find it hard <u>to write English articles</u>.
-   注意: 不定式常和疑问句 what, which, when, where, how 连用作宾语, 相当于一个宾语从句.
-   The kid doesn't know <u>how to do it himself</u>. (= how he should do it himself.)
-4. 作宾语补足语:
-   不定式作宾补时与宾语有逻辑上的主动关系.
-   Lucy asked him <u>to turn down the radio</u>.
-   谓语 tell, ask, want, allow, get, would like, encourage 等后面常跟不定式作**宾语补足语**.
-   注意: 还有一些使役动词和感官动词也用不定式作宾补. 这时要省略 to. 这些动词有:
-   这些动词有: 一感(feel), 二听(hear, listen to), 三让(let, make, have), 四看(look at, see, watch, notice), 但是这些动词变被动语态时, 作动词的不定式必须加上 to
-   The boss made them <u>work the whole night</u>.
-   They were made <u>to work the whole night</u> by the boss.
-5. 作定语:
-   不定式作定语应放在名词之后(即只能作后置定语), 它与名词之间有逻辑上的被动关系.
-   We don't have enough food <u>to eat</u>.
-   如果是不及物动词, 且与所修饰的词之间有被动的关系, 需要在不定式后面加上适当的介词.
-   There is nothing <u>to worry about</u>.
-   Do you have any ink <u>to write with</u>?
-   It is a very good <u>school to study in</u>.
-6. 作状语:
-   1. 作目的状语
-      <u>To save the time</u>, we took the plane to Beijing.
-      注意: 如果强调此目的, 可在不定式前加 in order/so as. 但 so as to 不能用于句首.
-      I will take notes <u>in order not to/so as not to forget these important points</u>.
-   2. 作结果状语
-      往往表示出乎意料的结果, 常与 only 连用
-      He hurried to the station <u>only to find that the train had left</u>.
-   3. 在某些形容词后面常表示喜怒哀乐的原因.
-      We are pround <u>to be the citizens of China</u>.
-   4. 在带有 enough 或 too 的句子里作状语
-      He is old enough <u>to go to school</u>.
-      We found the room too small <u>to hold so many people</u>.
+   不定式还可有逻辑主语, 构成另一种特殊的不定式短语. 它由 "for 名词 不定式" 组成.
+   如 for the children to watch TV, for us to look for a job.
+2. 用法
+   不定式可作主语、主语补语、表语、宾语、宾语补语、定语、状语.
+   1. 作主语
+      *To learn English* is not easy for me.
+      不定式短语作主语时, 往往放在最后面, 而用 it 作为形式主语. 其结构为 It be adj. \[for/of sb.\] 动词不定式
+      如上句可改为 It is not easy for me *to learn English*.
+   2. 作主语补语
+      复合宾语中不定式作宾补时, 若变为被动语态, 原宾语变为主语, 原宾语补语变为主语补语.
+      不定式作主语补语时, 不能省略 to.
+      He was asked *to maek a speech at the meeting.*
+      They were made *to work day and night*.
+   2. 作表语
+      My work is *to clean the room everyday*.
+   3. 作宾语
+      What sport does he like *to play*? He likes *to play football*.
+      
+      不定式常作某些及物动词的宾语, 不能作介词的宾语 (but, expect 除外).
+      这些动词常常表示命令、打算或希望. 这些及物动词有: would like, want, like, wish, hate, hope, continue, manage, try, offer, start, begin, forget, promise, mean (打算), pretend, intend (想要), decide, learn, desire, agree, care, choose (愿意), refuse, fail, plan, expect 等.
+      Would you like *to see a film this evening*?
+      
+      如果谓语为 find/think 后跟不定式作宾语时, 常用 it 作形式宾语, 而将真正的宾语放在最后面.
+      I find it hard *to write English articles*.
+      注意: 不定式常和疑问代词/副词 what, which, when, where, how 作不定式短语的宾语, 在句法中作宾语从句.
+      The kid doesn't know *how to do it himself*. (= how he should do it himself.)
+   4. 作宾语补语
+      不定式作宾补时与宾语有逻辑上的主动关系.
+      Lucy asked him *to turn down the radio*.
+      有些及物动词的宾语后常有不定式作宾语补语, 构成复合宾语, 这样意义才能完整. 这些及物动词有 tell, ask, invite, force, get (让), allow, wish, want, hate, help, leave, expect, prefer, advise, presuade, permit, remind, request, order, warn, mean (打算), cause, allow, would like, encourage 等.
+      Would you like us *to go with you*.
+      He asked you *to call him back at 11*.
+
+      还有一些使役动词和感官动词也用不定式作宾补. 这时要省略 to. 这些动词有:  一感 (feel, notice), 二听 (hear, listen to), 三让 (let, make, have), 四看 (look at, see, watch, notice), 但是这些动词变被动语态时, 作动词的不定式必须加上 to
+      The boss made them *work the whole night*.
+      They were made *to work the whole night* by the boss.
+   5. 作定语
+      不定式作定语应放在被修饰名词之后 (只作后置定语), 它与被修饰名词之间有逻辑上的被动关系.
+      We don't have enough food *to eat*.
+      如果不定式是不及物动词, 且与所修饰词间有被动关系, 需在不定式后加上适当介词.
+      There is nothing *to worry about*.
+      Do you have any ink *to write with*?
+      It is a very good school *to study in*.
+   6. 作状语
+      不定式作状语, 用来修饰动词、形容词、副词或整个句子. 通常表示目的、结果、原因、程度等.
+      1. 作目的状语
+         *To save the time*, we took the plane to Beijing.
+         注意: 如果强调此目的, 可在不定式前加 in order/so as. 但 so as to 不能用于句首.
+         I will take notes *in order not to/so as not to forget these important points*.
+      2. 作结果状语, 往往表示出乎意料的结果, 常与 only 连用
+         He hurried to the station *only to find that the train had left*.
+         著名的 too...to...句式
+         It is too late *to do anything now*.
+      3. 作原因状语
+         *To hear him talk to me in that manner*, you would think that the is my boss.
+         接在某些形容词后面常表示喜怒哀乐的原因.
+         We are pround *to be the citizens of China*.
+      4. 作程度状语
+         He is old enough *to go to school*.
+         Mary wouldn't be so careless as *to forget her key*.
+3. 时态与语态
+   1. 一般现在时
+      表示不定式的与主要谓语动词的动作或状态几乎同时或在其后发生.
+      She was seen *to enter the hall*. (seen 与 to enter 两个动作同时发生)
+      I have some news *to tell you*. (to tell 动作发生在 have 之后)
+   2. 现在进行时
+      表示不定式动作正在进行且与谓语表示的动作同时发生.
+      They seem *to be getting along quite well*.
+      They are said *to be building another bridge across the river*. 据说他们正在这条河上修建另一座大桥.
+   3. 现在完成时
+      表示不定式动作发生在谓语动作之前.
+      I am sorry *to have hept you waiting*. (to have kept 发生在 am 表示的时间之前)
+      She seems *to have read the book before*.
+   4. 被动语态
+      当不定式的逻辑主语是该不定式动作的承受者时, 不定式一般要用被动形式.
+      Is is an honour for me *to be asked to speak here*.
+      He wanted the letter *to be mailed at once*.
+
+      但在某些句子中, 虽然不定式与最近的名词与动宾关系, 但与句中另一个名词却可能有主谓关系. 这时不定式常用主动式.
+      He has no one *to take care of*. (He 与 to take care of 有主谓关系)
+      We still have many difficulties *to overcome*.
+      Give him some books *to read, please.
+      They found the lecture hard *to understand*.
 
 ##### 动名词
 
+动名词兼有名词特性, 可作主语, 比如:
+Thus forming an integrated image *with all the information placed in a single mental picture* can help us to preserve a memory.
+独立结构 with + n. (all the information) + V3 (placed \[in a single mental picture\]) 作方式状语修饰动名词短语 forming an integrated image.
 (作主语、宾语、表语、定语)
 构成: 动词原形+ing, 但是有不规则形式.
 用法:
@@ -775,33 +815,86 @@ Thus forming an integrated image *with all the information placed in a single me
       have trouble/problems/difficulty (in), spend some time/money (in), feel like, be/get used to.
       Stamps are used for <u>sending letters</u>.
 
-##### 分词
+##### 分词 Participle
 
-(作表语、补语、定语、状语)
-构成: 现在分词由动词+ing构成; 过去分词由动词+ed构成, 但是有不规则形式.
-现在分词有主动、进行之意; 过去分词有被动、完成之意.
-句法功能:
-1. 作定语:
-   现在分词作定语修饰其逻辑主语;
-   过去分词作定语修饰其逻辑宾语.
-   Do you know the girl <u>standing under the tree</u>?
-   Please hand in your <u>written</u> exercises.
-2. 作状语:
-   现在分词作状语其逻辑主语为句子的主语.
-   The student went out of the classroom, <u>talking and laughing</u>.
-   当主句和从句主语不一致且要用分词作状语时, 要在分词前面加上动作的逻辑主语
-   <u>It</u> being a fine day, we decided to go swimming in the lake.
-3. 作表语:
-   现在分词表示主语的性质、特征;
-   过去分词表示某种状态.
-   The book is so <u>interesting</u> that I will read it again.
-   The boy is too <u>frightened</u> to move.
-4. 作补语:
-   现在分词作补语, 被补足的宾语或主语是它的逻辑主语
-   过去分词作补语, 被补足的宾语或主语是它的逻辑宾语(因为过去分词有被动含义所以是逻辑宾语)
-   Don't keep us <u>waiting</u> for a long time.
-   I heard him <u>singing</u> in the classroom.
-   He'll have his hair <u>cut</u> after school.
+分词的作用相当于形容词, 在句中可以担当定语、表语、状语、补语.
+
+1. 现在分词 (present participle) 与过去分词 (past participle)
+   现在分词 V+ing; 过去分词 V+ed, 但有不规则形式.
+   现在分词有主动、进行之意; 过去分词有被动、完成之意.
+2. 用法
+   1. 作定语
+      单个分词常放在修饰名词前, 分词短语常放在被修饰名词后. 但有时过去分词也可放在被修饰名词之后.
+      现在分词作定语修饰其逻辑主语; 过去分词作定语修饰其逻辑宾语.
+      Do you know the girl *standing under the tree*?
+      Please hand in your *written* exercises.
+      They decided to change the material *used*. (单个过去分词作后置定语)
+   2. 作状语
+      表示时间、原因、方式、结果、条件、让步和伴随情况等.
+      作状语的分词通常放在句首或句尾, 有时也可插在主谓直接.
+      分词作状语其逻辑主语为句子的主语.
+      *Relying on our own efforts*, we overcame all the difficulties. (原因)
+      *Hearing the news*, they all jumped with joy. (时间)
+      The teacher walked about the classroom, *using his hands* to help him in his explanation. (方式)
+      The child fell, *striking his head against the door and cutting it*. (结果)
+      The students went out of the school, *laughing and talking* (方式或伴随情况)
+      *Given better attention*, the trees could grow better. (条件)
+
+      为了表示明确时间或条件, 有时可在分词前加 when, while, if 等连词.
+      *When leaving the airport*, she waved again and again to us.
+      *While waiting for the train*, I had a long talk with Jane.
+      *If translated word by word*, the sentence will be meaning less.
+
+      当主句和从句主语不一致且要用分词作状语时 (称为独立结构 absolute construction), 要在分词前面加上动作的逻辑主语. 在很多情况下表示时间、原因、条件或伴随情况.
+      *The hoildays being over*, they began to get down to do their work again. (时间)
+      *So many people being absent*, we decided to put the meeting off. (原因)
+      *Weather permitting*, the football match will be played on Wednesday. (条件)
+      We went far into the forest, *her father acting as guide*. (伴随)
+      有时这样的独立结构还可用介词 with 引导.
+      He stood there *with his hands crossed before him*.
+      *With tears rolling down her cheeks*, she carefully covered her mother's body with sand.
+   3. 作表语
+      分词常在系词后作表语.
+      现在分词表示主语的性质、特征; 过去分词表示某种状态.
+      The book is so *interesting* that I will read it again.
+      The boy is too *frightened* to move.
+   4. 作补语
+      现在分词作补语, 被补足的宾语/主语是它的逻辑主语
+      过去分词作补语, 被补足的宾语/主语是它的逻辑宾语 (因为过去分词有被动含义)
+      分词可在 see, hear, notice, watch, keep, find, get, have, feel 等动词后与一个名词构成复合宾语.
+      Don't keep us *waiting for a long time*.
+      I heard him *singing in the classroom*.
+      He'll have his hair *cut after school*.
+
+      当谓语变为被动语态时, 原宾语变为主语, 原宾语补语变为主语补语.
+      The hall was found *thoroughly cleaned* and everything *arranged in good order*.
+      The children were heard *singing the song*.
+
+      在 see, hear, notice, watch, feel 等动词后既可用现在分词也可用不带 to 的不定式作宾语补语. 现在分词强调动作正在进行和发展中, 而不定时表示动作的全过程已经结束.
+      She saw the man *getting on the truck*. 她看见那个人在往卡车上爬.
+      She saw the man *get on the truck and drive off*. 她看见那个人爬上卡车并把车开走了.
+      &mdash;Do you hear someone *knocking at the door*?
+      &mdash;Yes, I heared him *knock three times*.
+3. 现在分词的时态和语态
+   |        | 主动      | 被动           |
+   | --     | --        | --             |
+   | 一般式 | V+ing     | being V3       |
+   | 完成式 | having V3 | having been V3 |
+   1. 完成时
+      现在分词的完成时主要用在状语中, 表示该动作在谓语动作之前发生.
+      *Having done his homework*, the boy began to watch TV.
+      *Having watered the vegetables*, the farmer took a short rest.
+   2. 被动式
+      现在分词的被动式不仅表示被动, 而且表示这个动作正在发生, 或与谓语动作同时发生.
+      现在分词被动式主要用于定语、状语和宾语补语.
+      The bridge *being built there* will be one of the longest in China. (正在进行, 定语)
+      *Being surrounded*, the enemy were forced to put down their guns. (正在进行, 状语)
+      He found the topic *being discussed everywhere*. (being discussed 与 found 同时发生, 宾语补语)
+   3. 完成时被动式
+      现在分词的完成时被动式不仅表示被动, 而且表示这个动作在谓语动作之前发生.
+      这种形式常用作状语.
+      *Having been given such a good chance*, how could she give it up?
+      *Having been told that some guests were coming*, she shopped all morning in that supermarket.
 
 ##### 易混淆点
 
@@ -905,6 +998,8 @@ it takes sb. some time to do sth.
 
 谓语动词有主动和被动两种语态. 主动语态 (active voice) 表示主语是动作执行者, 被动语态 (passive voice) 表示主语是动作的承受者, 宾语是动作的执行者.
 被动语态一共有十二种, 但实际常用的只有八种.
+
+不定式的主动式时态有一般现在时, 现在进行时和现在完成时三种. 被动式时态有一般现在时和现在完成时两种.
 
 <table class="colorize">
 <thead>
@@ -1034,16 +1129,6 @@ it takes sb. some time to do sth.
   <tr>
     <td>
       to <span class="pink">be V+ing</span>
-      <br>
-      <span class="nospace">
-        <span class="def">to</span>
-        <span class="def">&nbsp;</span>
-        <span class="pink">be</span>
-        <span class="def">&nbsp;</span>
-        <span class="yellow">be</span><span class="pink">ing</span>
-        <span class="def">&nbsp;</span>
-        <span class="yellow">V3</span>
-      </span>
     </td>
   </tr>
   <tr>
@@ -1425,6 +1510,7 @@ Dick *had been smocking* for ten years before he decided to give it up last year
   宾语道装:
   Many of the things that animals know how to do they seem to know either without learning, or in some way which we cannot understand.
   They | seem to know | many of the things that animals know how to do | either without learning, or in some way which we cannot understand.
+  only + 状语 引出一个句子时, 该句必须倒装.
   
   Nor 引出的否定句用倒装: Nor is this all.
 - be made from..., be made of... 前者看不到原材料, 后者可以看出原材料.
