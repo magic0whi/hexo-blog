@@ -85,6 +85,55 @@ not, even, where, how, thus
 
 oh
 
+### 形容词与副词比较级
+
+1. 原级 (positive degree) 即形容词和副词原形.
+   比较级 (comparative degree) 和最高级 (superlative degree) 是在形容词和副词的原级基础上构成.
+   对于单音节和少数双音节形容词和副词, 其变化规则为:
+   比较级: 原级+er
+   最高级: 原级+est
+   对于多音节和多数双音节的形容词和副词, 其变化规则为:
+   比较级: more+原级
+   最高级: most+原级
+   少数形容词与副词的比较级和最高级是不规则的:
+   | 原级 | 比较级 | 最高级 |
+   |--|--|--|
+   | good, well | better | best |
+   | bad, badly, ill (坏) | worse | worst |
+   | many, much | more | most |
+   | little | less | least |
+   | far | farther (距离), further (进一步) | farthest, furthest |
+   | old | older, elder (兄弟姐妹) | oldest, eldest |
+2. 用法
+   1. 原级
+      1. 表示双方程度相等用 as 原级 as.
+         He is *as busy as* before.
+      2. 表示双方程度不相等用 not so/as 原级 as.
+         It is not *so/as cold* today *as* yesterday.
+         He didn't make *as much progress as* he had expected.
+         She did'nt sing *so well* last night *as* she usually does.
+   2. 比较级
+      1. 两事物比较, 用 '比较级 than'.
+         She has *better* memories *than* I.
+         She arrived *earlier than* the others.
+      2. 比较级可用 much, far, a lot, a great deal, a little, a bit 等修饰.
+         The new method is *much more efficient than* the old one.
+         We have had *{a lot,great deal} more rainfall* this year *than* we had last year.
+      3. 用 'the 比较级, the 比较级' 结构表示 '越..., 越...".
+         In fact, *the busier* he is, *the happier* he feels.
+         *The soon* you leave there, *the better*.
+   3. 最高级
+      三个或三个以上事物比较用 'the 最高级' 结构.
+      Autumn is *the best season* in Beijing.
+      
+      如果最高级前有物主代词, 则不需要定冠词 the.
+      Please send us the goods at your *earliest* convenience.
+      如果不与他者相比, 最高级也可不加定冠词 the.
+      Vegetables are *best* when they are fresh.
+      有时最高级表示 "非常"、"很" 的以上, 可加不定冠词 a/an 或不加冠词.
+      This film is most interesting.
+      This is a most touching story.
+
 ## 句法
 
 ### 句子成分
@@ -269,6 +318,10 @@ something 为先行词, 定语从句不能用 which
       I will visit the Great Wall if it doesn't rain tomorrow.
    2. unless 引导的条件状语从句
       We'll go for an outing tomorrow unless it rains (=if it doesn't rain).
+   3. should 引导
+      should 与主语倒装, 置于句首. 这种句式多用于表示虚拟语气的结构中, 但其主句也可以是陈述语气.
+      *Should* the observations or predictions turn out to be as expected, the scientist has added confidence in the probable truth of his hypothesis.
+      *Should* I be free tomorrow, I will come.
       
    注意: 为了强调动作的完成, 从句中也能用完成时.
    You can go out if you have finished your homework
@@ -795,25 +848,98 @@ give it up 代词
       Give him some books *to read, please.
       They found the lecture hard *to understand*.
 
-##### 动名词
+##### 动名词 Gerund
 
-动名词兼有名词特性, 可作主语, 比如:
+动名词兼有名词特性, 可作主语, 及物动词的动名词可带宾语, 比如:
 Thus forming an integrated image *with all the information placed in a single mental picture* can help us to preserve a memory.
 独立结构 with + n. (all the information) + V3 (placed \[in a single mental picture\]) 作方式状语修饰动名词短语 forming an integrated image.
-(作主语、宾语、表语、定语)
-构成: 动词原形+ing, 但是有不规则形式.
-用法:
-1. 作主语:
-   谓语动词用单数.
-   <u>Eating too much</u> is bad for your health.
-3. 作宾语:
-   表示一般的习惯或抽象行为或经常性的动作.
-   1. 作动词宾语
-      I like <u>playing basketball</u> very much.
-   2. 作介词宾语
-      英语中有一些动词(短语)后面常跟动名词作宾语. 常用的有 finish, enjoy, mind, miss, be worth, practice,
-      have trouble/problems/difficulty (in), spend some time/money (in), feel like, be/get used to.
-      Stamps are used for <u>sending letters</u>.
+
+1. 构成: V+ing
+2. 用法
+   1. 作主语
+      谓语动词用单数.
+      *Eating too much* is bad for your health.
+      *Talking* mends no holes. 空谈无济于事.
+      
+      在某些结构中, 可用引导词 it 作形式主语放句首, 而将世纪主语放句尾.
+      It is no use *asking her advice*.
+      It is a waster of time *discussing such matters*.
+   2. 做表语
+      The real problem is *getting to know* the needs of the customers.
+      Her job is *nursing the disabled*.
+
+      动名词和不定式都可做主语或表语. 一般来说, 在表示比较抽象的一般行为时多用动名词; 在表示具体某次动作或将来发生的动作时, 多用不定式.
+      *Smoking* is not allowed here.
+      *To smoke* so much is not good for you.
+      Their job is *building houses*.
+      Their work is *to build another bridge across the river*.
+   3. 作宾语
+      表示一般的习惯或抽象行为或经常性的动作.
+      1. 作动词宾语
+         以下及物动词及短语动词常用动名词做宾语: avoid, finish, suggest, stop, mind, enjoy, require, postpone, delay, practise, excuse, risk, consider, miss, imagine, deny, escape, put off, give up, keep on, can't help (禁不住), be worth, have trouble/problems/difficulty (in), spend some time/money (in), feel like, be/get used to.
+         She suggested *spending another day in the mountain area*.
+         I enjoy *seeing you* and *talking about old times*.
+         There's no way to escape *doing the work*.
+         require 后的动名词有被动含义.
+         Does you care require *servicing*?
+
+         在 love, like, hate, prefer, begin, start, continue, intend, attempt, propose, deserve, need, want, can't bear, can't afford 等动词后可用动名词也可用不定式作宾语, 两种结构在意义上差别不大.
+         I like *{playing,to play} basketball* very much.
+         need, want 后面的动名词具有被动含义.
+         Your suit needs *{ironing,to be ironed}*. 你的西服需要烫平.
+         The plants want *{watering,to be watered}*.
+         在 like, hate, prefer 等动词后, 如果表示一般倾向, 多用动名词作宾语; 如指具体某次动作, 多用不定式.
+         I like *reading books of this kind*, but I don't like *to read that book*.
+         I prefer *to stay at home today*.
+         在 begin, start 和 cease 后, 如果表示有意识地开始或停止某动作, 多用动名词; 如果动作自动或惕然开始或停止则多用不定式.
+         He began *talking about his plan* for summer hoildays.
+         Suddenly it began *to rain*.
+
+         在 remember, regret 等动词后, 动名词做宾语和不定式作宾语的意义差距明显. 动名词表示已经做了, 不定时表示将要去做.
+         I remember *seeing her once somewhere*.
+         I must remember *to write to you often*.
+         I regret *not haveing taken your advice*. 
+         I regret *to say* that we can't accept your price.
+      2. 作介词宾语
+         动名词也和作介词的宾语, 并和介词一起构成介词短语. 在句中作定语、状语或表语.
+         Stamps are used *for sending letters*.
+         The simplest kind *of advertising* is the classified ad.
+   4. 做定语
+      单个动名词可作前置定语. 如 drinking water 饮用水, drawing paper 绘图纸.
+      动名词做定语与现在分词做定语有所不同: 动名词和他所修饰的名词在逻辑上没有主谓关系, 即前者不是后者发出的动作.
+      working method 工作方法 (working 是动名词, working 不是 method 发出的动作, 等价于 method for working)
+      working people 劳动人民 (working 是现在分词, working 是 people 发出的动作, 等价于 people who work)
+3. 时态与语态
+   动名词的时态语态与现在分词
+   |        | 主动      | 被动           |
+   | --     | --        | --             |
+   | 一般时 | V+ing     | being V3       |
+   | 完成时 | having V3 | having been V3 |
+   1. 一般时
+      表示动名词的动作与谓语动作同时发生, 或在谓语动作之后发生.
+      Children enjoy *reading picture-story books*.
+      He only took interest in *buying a second-hand computer*. (buying 在 took interest 之后)
+   2. 完成时
+      表示动名词的动作通常发生在谓语动作之后.
+      He was praised for *having made such a contribution to his community*.
+      I regret *having told her the news*.
+      
+      但在某些动词后或在某种情况下, 也可用动名词的一般时代替完成时, 尽管动名词的动作发生在谓语动词之前.
+      I don't remember *ever seeing the car anywhere*.
+      Thank you for *giving us so much help*.
+      On *returning home*, she found her father had been sent to hospital.
+   3. 被动式
+      当动名词的逻辑主语是动名词动作的对象时, 动名词一般要用被动形式.
+      He did all this without *being asked by anyone*.
+      After *having been interviewed*, he was offered the job.
+4. 动名词的逻辑主语
+   动名词可用物主代词或所有格来修饰, 表示动名词的逻辑主语.
+   Do you mind *my making a suggestion*?
+   I'm pleased with *John's paying his income tax in time*.
+
+   但在非正式英语中, 尤其是当动名词在句中做宾语时, 更常见的是用人称代词和普通格修饰动名词.
+   Do you mind *me making a suggestion*?
+   I'm pleased with *Join paying his income tax in time*.
 
 ##### 分词 Participle
 
@@ -878,8 +1004,8 @@ Thus forming an integrated image *with all the information placed in a single me
 3. 现在分词的时态和语态
    |        | 主动      | 被动           |
    | --     | --        | --             |
-   | 一般式 | V+ing     | being V3       |
-   | 完成式 | having V3 | having been V3 |
+   | 一般时 | V+ing     | being V3       |
+   | 完成时 | having V3 | having been V3 |
    1. 完成时
       现在分词的完成时主要用在状语中, 表示该动作在谓语动作之前发生.
       *Having done his homework*, the boy began to watch TV.
@@ -1514,6 +1640,9 @@ Dick *had been smocking* for ten years before he decided to give it up last year
   
   Nor 引出的否定句用倒装: Nor is this all.
 - be made from..., be made of... 前者看不到原材料, 后者可以看出原材料.
+- if...only 表示尚欠缺的条件.
+  In cases where the explanation is unknown the scientific point of view is that *there is a reason if it can only be discovered*.
+  在对一些现象的解释还不为人们所知的情况下, 科学的观点是, *其中必有原因, 只是尚未被发现罢了*.
 
 ## 构词法
 
