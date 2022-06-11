@@ -67,9 +67,66 @@ Prepositions are a class of words used to express spatial or temporal relations 
 
 A preposition typically combines with a noun phrases, this being called its complement, or sometimes object. A preposition establishes a grammical/sematic relationship that links its complement to another word or phrase in the context.
 
-spatial: towards, in, on, under, against, near.
-temporal: after, during.
-sematic roles: of, for, without, than, via, per.
+1. 介词分类
+   spatial: towards, in, on, under, against, near.
+   temporal: after, during.
+   sematic roles: of, for, without, than, via, per.
+   
+   介词按结构分为
+   1. 简单介词 Simple preposition 是由一个单词组成的介词. 例如 on, above, among.
+   2. 复合介词 Compound preposition 是由两个词合成的介词. 例如 into, outside, within, throughout.
+   3. 二重介词 Double preposition 是有两个介词构成的词组. 例如 from under, from behind, until after.
+   4. 短语介词 Phrasal preposition 是由一或多个其他此类与一或两个介词构成的词组. 其作用相当于一个介词. 如 according to, apart from, due to, because of, by means of, for the purpose of, in addition to, in comparison with, in front of, instead of, with reference to, with regard to.
+   5. 分词介词 Participle preposition 是有某些现在分词转换成的介词. 如 considering, including, regarding, concerning.
+2. 介词在动词、名词和形容词后
+   1. 与某些动词搭配: consist of, belong to, rely on/upon, add...to..., compare...with, differ from, insist on, persist in, depend on/upon.
+   2. 与某些名词搭配: advantage over, search for, arrival at, similarity to, confidence in, struggle against, contribution to, satisfaction with, key to.
+   3. 与某些形容词搭配: afraid of, responsible for, familiar with, fond of (喜欢), full of, faithful to, similar to, different from, free from.
+3. 介词与宾语的搭配
+   介词短语是由介词与其后宾语构成.
+   1. 介词+名词
+      along the road, as an engineer, before lunch, in front of the house, according to the passage, due to the failure.
+   2. 介词+代词
+      besides us, for them, except him, instead of her, on behalf of us all.
+   3. 介词+数词
+      on 21st, May; at six; plus 16; from 10 to 20.
+   4. 介词+动名词
+      without paying any taxes, upon hearing the news, instead of staying at home.
+   5. 介词+疑问代词/疑问副词 引出的从句或不定式短语.
+      about how he worked at the company.
+      from what she has said.
+      on how to improve the efficiency.
+4. 介词短语的用法
+   介词短语在句中主要担任定语和状语, 也可作表语和补足语.
+   1. 定语
+      介词短语通常作后置定语.
+      You must know the meaning *of every word* you learn.
+      Most of the products *on display* are new ones.
+   2. 状语
+      介词短语作状语修饰动词、形容词、副词或整个句子.
+      Ships are built *for sea transport*. (修饰谓语 are built)
+      Soon flying *in the air* became a fact. (修饰动名词 flying)
+      The book is very popular *among young people*. (修饰形容词 popular)
+      I haven't been away *from home*. (修饰副词 away)
+      *In spite of his shortcomings*, he is a responsible man. (修饰整句)
+   3. 表语
+      These goods are *of perfect quality*.
+      Mary seems *in high spirits* today.
+      His story sounds *like science fiction*.
+      The agreement will remain *in force* for another five years.
+  4. 宾/主语补语
+     Once a cold kept her *in bed* for three days (宾语补语)
+     When she entered the room she found everything *in good order*. (宾语补语)
+     Pure iron is considered *of little use*. (主语补语)
+     The price you offered is found *on the high side*. (主语补足语)
+5. 介词副词
+   介词副词是小品词 (particle), 它在形式上语介词相同, 但是句法功能不同. 它们在句中有时是介词, 有时是副词, 要注意区分.
+   A truck drove *past* the gold mine. (介词)
+   A truck *drove past* (副词)
+   The moon circles *round* the earch. (介词)
+   She will come *round* to see me. (副词)
+   Our boat sailed *up* the river. (介词)
+   The train stopped to pick *up* passenger. (副词)
 
 ### 副词 Adverb
 
@@ -641,11 +698,74 @@ there be 开头的句子也是独立主格
 whereas 然而; 鉴于
 wh-ever 任何...
 
-### 冠词
+### 冠词 Article
 
-(修饰主语, 宾语)
+冠词放在名词前. 冠词语两种: 不定冠词 (indefinite article) a/an 和定冠词 (definite article) the.
+a/an 表示泛指, a 用在辅音前, an 用在元音前.
+the 表示特指.
 
-不定冠词 the, 定冠词 a/an
+单复数: a/an 只能用于单数名词. the 可用于单/复数名词和不可数名词.
+
+1. 不定冠词
+   1. 表示人或事物的某一种类, 以区别其他类
+      She is *a* language teacher.
+      What you saw in sky last night was *a* man-made satelite.
+   2. 表示 "一" 这一数量概念, 但不强调.
+      The special apparatus had *a* cage for the rat and three doors.
+      Some people think of *a* family as *a* mother, *a* father, and their children.
+   3. 表示 "某个"、任何一个" 或 "每一个" 的意思.
+      By eating *an* animal, you could get some of the good qualities of that animal for yourself.
+      *A* library could hardly be used if the books were kepe in random order.
+2. 定冠词
+   1. 表示某个或某些特定的人或事物.
+      This is *the* house where my father once lived.
+      Let's see how *the* rat will open the door for itself.
+   2. 表示前面已提过的人或事物.
+      There is a girl and an old man standing at the bus stop. I think *the* man must be *the* girl's father.
+      I got a letter yesterday. *The* letter was sent from Russia by my uncle.
+   3. 表示说话人和听话人都知道的人或事物.
+      Close *the* door, please.
+      Let's meet at *the* railway station.
+   4. 表示独一无二的食物.
+      *The* moon is about 239,000 miles away from *the* earth.
+      *The* whole world is waiting for the result of their talks.
+   5. 和可数名词单数连用, 表示一类人或事物.
+      Anyone who is willing to quarrel with *the* dictionary is regarded as either eccentric or mad.
+      *The* family is important to people all over the world.
+
+      可数名词的类属可用 'the 单数名词'、'a/an 单数名词' 或 '复数名词' 表示.
+      *The* hammer is a useful tool.
+      *A* hammer is a useful tool.
+      Hammers are useful tools.
+   6. 某些河流、海洋、山脉、群岛、海峡、海湾常加定冠词.
+      *the Yangtze*, *the* Red Sea, *the* Alps, *the* Philippines, *the* English Channel, *the* Persian Guff.
+   7. 某些由普通名词和其他词构成的专有名词前多要加定冠词.
+      *the* People's Republic of China,
+      *the* United Nations,
+      *the* State Council,
+      *the* Great Hall of the People,
+      *the* Daily Mail,
+      *the* Capital Theatre.
+   8. 在某些形容词前加定冠词, 是形容词名词化, 代表某类人.
+      *the* poor, *the* rich, *the* sick, *the* wounded, *the* oppressed.
+   9. 在序数词、形容词最高级和表示方位的名词前要加定冠词.
+      *The* second tax is for the state government.
+      *The* simplest kind of advertising is the classified ad.
+      The sun rises in *the* east.
+   10. 在某些习惯用语的名词前加定冠词.
+       in *the* {morning,afternoon,evening}, in *the* city, by *the* way, for *the* time being (暂时), on *the* whole, out of *the* question (毫无可能的).
+3. 不加冠词
+   1. 泛指的不可数名词或表示一般概念的复数名词不加冠词.
+      Meaningfulness affects memory at all levels.
+      Air is necessary in many ways.
+      Social scientists study families.
+   2. 人名、地名不加冠词.
+      Deng Xiaoping, George Washington, India, Los Angeles, Paris, Hong Kong.
+   3. 名词前已有 this, that, our, your, some, any, no, every 等代词作定语时, 不加冠词.
+      *Some* birds are very lively in their sports.
+      They could occasionally see part of our earth in full sunlight.
+   4. 在某些固定词组或习惯用法中的名词不加冠词.
+      go to bed, by air, at home, in fact, after school, in town, from morning till night.
 
 ### 介词
 
