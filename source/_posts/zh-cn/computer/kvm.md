@@ -26,23 +26,24 @@ Using the VBIOS [i915ovmfPkg](https://github.com/patmagauran/i915ovmfPkg), these
 <qemu:arg value='device.hostdev0.driver=vfio-pci-nohotplug'/>
 ```
 
-BTW, this [DVMT Pre Alloc Stolen Memory Issues](https://github.com/patmagauran/i915ovmfPkg/wiki/DVMT-Pre-Alloc---Stolen-Memory-Issues) happens to me.
-
 Using Qemu GTK to get a more smoothly experience:
 ```xml
 <domain type='kvm' xmlns:qemu='http://libvirt.org/schemas/domain/qemu/1.0'>
   <qemu:commandline>
     <qemu:arg value='-display'/>
     <qemu:arg value='gtk,gl=on'/>
-    <qemu:arg value='-set'/>
-    <qemu:arg value='device.hostdev0.display=on'/>
-    <qemu:arg value='-set'/>
-    <qemu:arg value='device.hostdev0.romfile=/i915ovmf.rom'/>
-    <qemu:arg value='-set'/>
-    <qemu:arg value='device.hostdev0.x-igd-opregion=on'/>
     <qemu:env name='DISPLAY' value=':0'/>
     <qemu:env name='MESA_LOADER_DRIVER_OVERRIDE' value='iris'/>
   </qemu:commandline>
+  <qemu:override>
+    <qemu:device alias='hostdev0'>
+      <qemu:frontend>
+        <qemu:property name='display' type='string' value='on'/>
+        <qemu:property name='romfile' type='string' value='/i915ovmf.rom'/>
+        <qemu:property name='x-igd-opregion' type='bool' value='true'/>
+      </qemu:frontend>
+    </qemu:device>
+  </qemu:override>
 </domain>
 ```
 
