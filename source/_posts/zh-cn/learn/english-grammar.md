@@ -77,7 +77,9 @@ A preposition typically combines with a noun phrases, this being called its comp
    2. 复合介词 Compound preposition 是由两个词合成的介词. 例如 into, outside, within, throughout.
    3. 二重介词 Double preposition 是有两个介词构成的词组. 例如 from under, from behind, until after.
    4. 短语介词 Phrasal preposition 是由一或多个其他此类与一或两个介词构成的词组. 其作用相当于一个介词. 如 according to, apart from, due to, because of, by means of, for the purpose of, in addition to, in comparison with, in front of, instead of, with reference to, with regard to.
-   5. 分词介词 Participle preposition 是有某些现在分词转换成的介词. 如 considering, including, regarding, concerning.
+   5. 分词介词 Participle preposition 是有某些现在分词转换成的介词. 如 considering, including, regarding, concerning, given.
+      given 与后边的并词构成短语在句中作条件状语.
+      Given good health, I hope to finish the work this year.
 2. 介词在动词、名词和形容词后
    1. 与某些动词搭配: consist of, belong to, rely on/upon, add...to..., compare...with, differ from, insist on, persist in, depend on/upon.
    2. 与某些名词搭配: advantage over, search for, arrival at, similarity to, confidence in, struggle against, contribution to, satisfaction with, key to.
@@ -819,11 +821,95 @@ through thick and thin 风雨同舟
 助动词后跟动词原形组成复合谓语
 助动词作用: 构成时态、语态, 表达情感
 
-##### 情态动词
+##### 情态动词 Modal Verb
 
 情态动词属于助动词
-情态动词: can, may, must, need, ought to, dare, shall, will, have to
-情态动词没有非谓语动词形式
+情态动词: 主要有 can/could, may/might, must, need, ought, dare, 词为 shall/should, will/would 在一定场合也可用作情态动词.
+情态动词的特点是它有一定的词义, 但通常需同另一个动词一起构成复合谓语. 除 ought 不定式外, 其他情态动词都跟动词原形.
+
+1. can
+   1. 表示能力.
+      Two eyes *can* see more than one.
+      The theatre *can* seat 1,500 people.
+   2. 表示可能性.
+      You *can't* expect others to pay for your food, your clothes and your room.
+      You *can* sometimes meet him at the college.
+   3. 表示允许. 该用法和 may 意思相近.
+      You *can/may* go now.
+      We *can't* smoke near the gas station.
+   4. 后接动词完成时, 表示可能已做某事.
+      Where *can* he have gone?
+      They *can't* have gone out because the light's on! 他们不可能已经出门了, 因为灯还亮着呢?
+   5. 后接动词进行时, 表示可能正在做某事.
+      What *can* he be doing at this time of the day?
+      He *can't* be swimming all day.
+2. could
+   1. 表示能力、允许和可能性 (作为 can 的过去式).
+      When he was young, he *could* speak both English and French very well.
+      She asked whether she *could* take the books out of the reading-room.
+   2. 用于委婉地提出请求、疑问或看法. 在时态上与 can 没有差别.
+      *Could* you lend me some money?
+      *Could* that be true?
+   3. 后接动词完成时, 表示可能已做某事或本可以做某事.
+      How *could* she have forgotten her own name? 她怎么可能连自己名字都忘了呢?
+      We *could* have started a little earlier. 我们本可以早点动身.
+3. may
+   1. 表示允许.
+      *May* I trouble you with a question?
+      You *may* do exactly as you like.
+   2. 表示可能性
+      You *may* walk ten miles without seeing a house.
+      It *may* be a new model of engine.
+   3. 后接动词完成时, 表示可能已做某事.
+      He *may* have seen the movie.
+   4. 后接动词进行时, 表示可能正在做某事.
+      They *may* be waiting for you.
+      She *may* be leaving tomorrow.
+4. might
+   1. 表示允许、可能性. (作为 may 的过去式)
+      I asked her if I *might* see her.
+      I thought it *might* be difficult for her to study psychology.
+   2. may 的委婉形式. 在时态上与 may 没有差别.
+      Mr. White *might* want to contact you.
+      *Might* I ask for another cup of tea?
+   3. 后接动词完成时, 表示可能已做某事或本可以做某事.
+      He *might* have read the book.
+   4. 后接动词进行时, 表示可能正在做某事.
+      She *might* still be thinking about the questions you raised.
+      He *might* be planning to buy a car instead of a motorcycle.
+5. must
+   1. 表示必须要做某事.
+      We *must* leave at 5.
+      You *must* come earlier tomorrow.
+      
+      must 的否定是表示 "必须不能".
+      You *mustn't* talk like that.
+      We *mustn't* stay here any longer.
+
+
+      must 也可表示过去的情况, 主要用在间接引语或宾语从句中.
+      She said that she *must* finish her homework at once.
+      I felt I *must* call and see her.
+   2. 表示推测.
+      This *must* be your room.
+      There *must* be a mistake.
+   3. 后接动词完成时, 表示想必已经做某事.
+      They *must* have arrived by now.
+      She *must* have made a big mistake.
+   4. 后接动词进行时, 表示想必正在做某事.
+      Let's hurry up. She *must* be waiting for us.
+      You *must* be joking.
+6. ought
+   ought 与不定式构成谓语动词. 主要用法如下:
+   1. 表示应该做某事.
+      You *ought* to take his advice.
+      You *oughtn't* to smoke so much. 你不应该抽太多烟.
+      *Oughtn't* we to give him a change to try?
+   2. 后接不定时完成时, 表示本应该做某事.
+      He *ought* to have done the exercise more carefully.
+      You *oughtn't* to have spoken to her in that way.
+7. need
+   need 做情态动词时, 主要用于否定句和疑问句.
 
 #### 使役动词
 
