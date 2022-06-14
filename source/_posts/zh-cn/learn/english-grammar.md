@@ -910,6 +910,67 @@ through thick and thin 风雨同舟
       You *oughtn't* to have spoken to her in that way.
 7. need
    need 做情态动词时, 主要用于否定句和疑问句.
+   *Need* he go soon? 他需要马上走吗?
+   You *needn't* tell him.
+   
+   need 后接动词完成时, 主要用于否定句, 表示本可不必做某事.
+   You *needn't* have told her that.
+   You *need* not have gone there yestereday.
+
+   need 也可用作及物动词, 后接名词、不定式、动名词等做宾语.
+   She *needs* your help.
+   They did not *need* to arrive so early.
+8. dare
+   dare 作情态动词时, 主要用于否定句、疑问句和条件句.
+   He *daren't* even look at you.
+   No one *dared* live there any longer.
+
+   但是 dare 多用做及物动词, 后接不定时作宾语.
+   We must *dare* to think, to speak and to act.
+   I wondor how he *dared* to say such a thing.
+   She stopped at the door, not *daring* to enter.
+   但有时作 dare 宾语的不定式符号 to 也可省略.
+   I didn't *dare* (to) look up.
+   They do not *dare* (to) speak.
+9. shall
+   shall 通常作助动词, 它和其它动词一起构成将来时态, 主要用于第一人称.
+   但 shall 也可作情态动词, 用于第二和第三人称.
+   The seller *shall* make shipment before October and the buyer *shall* make payment within 10 days after receipt of the goods.
+   The law *shall* come into effect on May 1st.
+10. should
+    should 除作为助动词 shall 的过去式用于第一人称外, 还可作情态动词.
+    1. 表示劝告或建议.
+       He *should* learn how to drive the car.
+       You *should* listen to the doctor's advice.
+    2. 表示预测或可能.
+       They *should* be home by now, I think.
+       This kind of reference book *should* be in the reading-room.
+    3. 表示惊奇、愤怒、失望等感情.
+       Why *should* I go?
+       I can't think why you *should* tell her about it.
+       It's strange that it *should* be so hot tody. 很怪, 今天这么热.
+    4. 后接动词完成时, 表示应该已经做某事.
+       You are right, I *should* have thought of that.
+       They *shouldn't* have left so soon.
+    5. 后接动词进行时, 表示应该正在做某事.
+       Why *should* we be sitting here doing nothing?
+       You *shouldn't* be working like that.
+11. will
+    will 通常作助动词构成将来时态. 但 will 有时也可作情态动词, 可用于各个人称, 表示意志、意愿和习惯等.
+    I *will* do my best.
+    I *will* pay you at a rete you ask.
+
+    will 在疑问句中用于第二人称时, 表示说话人向对方提出请求或询问.
+    *Will* you explain the sentence once again?
+    *Won't* you come in and have a cold drink?
+12. would
+    would 除作为助动词 will 的过去式构成过去将来时态外, 还可作为情态动词.
+    1. 作为情态动词 will 的过去式, 可用于各个人称, 表示意志、意愿和习惯等.
+       He said that he *would* do everything to help us.
+       I told her that I *would* go with her.
+    2. would 在疑问句中用于第二人称时, 也表示说话如向对方提出请求或询问, 但语气更为委婉.
+       *Would* you tell me something about yourself?
+       *Would* you like to have a cup of milk?
 
 #### 使役动词
 
