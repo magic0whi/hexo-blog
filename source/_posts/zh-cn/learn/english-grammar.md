@@ -462,59 +462,64 @@ something 为先行词, 定语从句不能用 which
 
 #### 名词性从句
 
-##### 引导名词性从句的连接词
+##### 引导名词性从句的关联词 (connective)
 
-1. 连接代词: who, whose, whom, what, which. 有词义, 在从句中充当句子成分, 如主语、表语、宾语等
+主要有三类:
+1. 连接代词: who/whom, whose, what, which. 有词义, 在从句中充当句子成分, 如主语、表语、宾语等.
 2. 连接副词: when, where, why, how. 有词义, 在从句中充当句子成分, 作状语.
-3. 连结词: that, whether, if, as if.
+3. 主从连词: that, whether, if, as if.
    that 无词义, 在从句中不充当句子成分, 有时可省略;
    而 whether, if, as if 虽有词义, 但在从句中不充当句子成分.
 
 ##### 主语从句
 
 1. 主语从句在复合句中作主语.
-   Who will go is not important.
-2. **用 it 作为形式主语, 主语从句放在句末**,
-   但 what 引导的主句从句表示...的东西时, 不用 it 做形式主语,
-   whatever, whichever, whoever 一般也不用 it 做形式主语.
+   *Who will go* is not important.
+2. **用 it 作形式主语放句首, 主语从句放句末**,
    It doesn't matter so much <u>whether you will come or not.</u>
+
+   但 what 引导的主句从句表示 "...的东西" 时, 不用 it 做形式主语, whatever, whichever, whoever 一般也不用 it 做形式主语.
    <u>What he needs</u> is more experience.
 3. that 引导主语从句时不能省略
    <u>That he suddenly fell ill</u> made us surprised.
 
 ##### 表语从句
 
-在句中做表语的从句称为表语从句, 共分三类常考点:
-1. 若主句的主语是 advice, suggestion, order, request, requirement 等名词时, 则表语从句的谓语应用虚拟语气, 即 should + 动词原形的形式.
-   His suggestion is that we (should) change our course.
-2. 主语为 reason 时, 表语从句的连接词要用 that, 而不用 why 或 because.
-   The reason for such a serious accident is that the driver was too careless and drunk.
-3. because, why, as if/as though, as, like 等连接词也可以连接表语从句.
-   He has lung cancer. That is because he has been smoking too much.
+1. 若主句的主语是 advice, suggestion, order, request, requirement 等名词, 则表语从句的谓语用虚拟语气, 即 "should V1".
+   His suggestion is that we (*should*) *change* our course.
+2. 主语为 reason 时, 表语从句关联词要用 that, 而不用 why 或 because.
+   The reason for such a serious accident is *that* the driver was too careless and drunk.
+3. because, why, as if/as though, as, like 等也可作表语从句关联词.
+   He has lung cancer. That is *because* he has been smoking too much.
 
-(应根据句子结构判断是表语从句还是结果状语从句)
+(根据句子结构判断是表语从句还是结果状语从句)
 
 ##### 宾语从句
 
-在主从复合句起宾语作用
-宾语从句分为三类: 动词的宾语从句、介词的宾语从句和形容词的宾语从句.
-根据不同的作用, 宾语从句的连结词通常分为以下几类:
-1. that: 本身无意义, 只起连接作用, 口语中可以省略.
-   He said (that) Kate was good at swimming.
-2. what, which, who, whose, whom 等连接词, 在从句中作一定的成分, 如主语、宾语、表语、定语.
-   I don't know what they are going to do. (这里的 what 作宾语)
-   He asked me whose book it was. (这里的 whose 作定语)
+宾语从句分三类: 动词的宾语从句、介词的宾语从句和形容词的宾语从句.
+根据不同作用, 宾语从句的关联词通常分以下几类:
+1. that
+   本身无意义, 只起连接作用, 口语中可以省略.
+   He said (*that*) Kate was good at swimming.
+2. what, which, who/whom, whose 等连接词, 在从句中作一定的成分, 如主语、宾语、表语、定语.
+   I don't know *what* they are going to do. (what 作宾语)
+   He asked me *whose* book it was. (双宾; whose 作定语)
 3. when, where, why, how 等连接副词, 在从句中充当状语.
-   Could you tell me where you live? (地点状语)
-   Do you know how they found the place? (方式状语)
-4. If, whether 意为是否, 不作句子成分, 但不能省略. (这里和条件状语的区分关键是宾语从句的事情已经做了, 而条件状语的事情还没做)
+   Could you tell me *where* you live? (地点状语)
+   Do you know *how* they found the place? (方式状语)
+4. If, whether 意为是否, 不作句子成分, 但不能省略. (条件状语区分: 宾语从句事情已做, 而条件状语事还没做)
    He asked me if Miss Zhao was a teacher.
 
 #### 同位语从句
 
-起补充说明主语或宾语作用.
-识别同位语从句: 1. 同位语从句是名词性从句; 2. 因为名词性所以同位语能替换主语或宾语, 而定语和补语不能.
-如果修饰主语的同位语较长, 可以置于句子最后:
+起补充说明主语/宾语的作用.
+识别同位语从句:
+1. 同位语从句是名词性从句;
+2. 因为名词性所以同位语能替换主语或宾语, 而定语和补语不能.
+3. 主句中有些词义比较抽象的主语/宾语, 如 belief, doubt, evidence, idea, fact, hope, possibility, thought 等, 通常用 that 引出的同位语从句修饰.
+   There is no doubt *that a large number of people benefit from heart surgery*.
+   Is there any proof *that the food of the plant differs from that of animals*?
+如果修饰主语的同位语较长, 可置于句末:
 A *plan* was made last year *that several roads would be built in this part of the city*.
 
 ### 特殊句式
@@ -1910,6 +1915,15 @@ Dick *had been smocking* for ten years before he decided to give it up last year
 - if...only 表示尚欠缺的条件.
   In cases where the explanation is unknown the scientific point of view is that *there is a reason if it can only be discovered*.
   在对一些现象的解释还不为人们所知的情况下, 科学的观点是, *其中必有原因, 只是尚未被发现罢了*.
+- too/so + adj. + a/an + noun.
+  It's *too difficult a task* for me.
+  I've never before met *so intelligent a person* as he is.
+
+  had + noun. + V3
+  We'll *have this house built* in 5 months.
+  He *had his hair cut* yesterday.
+  
+  
 
 ## 构词法
 
