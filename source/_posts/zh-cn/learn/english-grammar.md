@@ -296,131 +296,181 @@ oh
 
 ### 三大从句
 
-#### 定语从句
+#### 定语从句 Attributive Clause
 
+被定语从句修饰的词叫先行词, 定语从句必须放在先行词后面
 something 为先行词, 定语从句不能用 which
 
 定语从句三要素: 先行词、关系词、关系词在从句中充当的成分.
 
-1. 关系代词(who/whom/which/that/whose)引导的定语从句
-   1. 先行词是人(用 who/whom/that)
-      **The man** <u>who/that is standing there</u> is my English teacher. (在从句中作主语不可省略)
-      **The man** <u>(whom/that) I am talking to</u> is from the US. (在从句中作宾语可省略)
-   2. 先行词是物 (用 which/that)
-      **The book** <u>which/that is on my desk</u> is the best saller of 2018. (在从句中作主语不可省略)
-      **The book** <u>(which/that) I am reading</u> is the best seller of 2018. (在从句中作宾语可省略)
-   3. 先行词是人或物具备的东西(用 whose)
-      **The man** <u>whose hair is brown</u> is the chairman of the meeting.
-      I am looking for **the book** <u>whose cover is red</u>.
-   4. 只用 that 不用 which 的情况
-      1. 多少: no, little, few, much
-      2. 不定代词: some-, -thing, any-, all, every-, none, no-, neither...
-      3. 唯一: the only, the one
-      4. 恰好: the very/right + 先行词
-      5. 人和物: 先行词中既有人又有物
-         They talk about **the thing and people** <u>that were unforgetable</u>. (在从句中作主语不可省略)
-      6. 最高级: 形容词最高级 + 先行词
-      7. 序数词: 序数词 + 先行词
-2. 关系副词(when/where/why)引导的定语从句
-   1. 先行词是事件(用 when)
-      I still remember **the day** <u>when we had the first class in this hall</u>.
-   2. 先行词是地点(用 where)
-      I still remember **the city** <u>where we visited ten years ago</u>.
-   3. 先行词为原因(用 why)
-      I don't know **the reason** <u>why you are absent from the meeting</u>.
-   4. 关系副词 when, where, why = 介词 + which
-      The house **in which**(=where) Lu Xun used the live is now a museum.
-3. 非限制性定语从句
-   1. 先行词与定语从句往往有逗号隔开, 不能用 that 引导
-   2. 起补充说明的作用, 如果去掉, 主句的意思仍然清楚
-      Jim passed the driving test, which surprised everybody in the office
+1. 关系代词 that, who/whom, which, whose 引导的定语从句
+   先行词在从句中作主语时不可省略, 作宾语时可省略.
+   1. 先行词是人, 用 who/whom, that
+      The man *{who,that} is standing there* is my English teacher. (先行词在从句作主语, 不可省略)
+      The man *\[{whom,that}\] I am talking to* is from the US. (先行词在从句中作宾语, 可省略)
+   2. 先行词是物, 用 which, that
+      The book *{which,that} is on my desk* is the best saller of 2018. (先行词在从句作主语, 不可省略)
+      The book *\[{which/that}\] I am reading* is the best seller of 2018. (先行词在从句中作宾语, 可省略)
+   3. 从句是人或物具备的特质, 用 whose (在从句中作定语)
+      The man *whose hair is brown* is the chairman of the meeting.
+      I am looking for the book *whose cover is red*.
+   4. that 与 which 的比较
+      that 不可作介词的宾语, 这种时候只能用 "prep. which".
+      只用 that 不用 which 的情况
+      1. 先行词为不定代词 (some-, -thing, any-, all, every-, none, no-, little, few, much, neither...)
+         Is there anything *\[that\] I can do for you*?
+         That's all *\[that\] I know*.
+      2. 唯一 (the only, the one)
+      3. 恰好 (the {very,right} that)
+      4. 人和物 (先行词既有人又有物)
+         They talk about | the thing and people *that were unforgetable* |.
+      5. 先行词为序数词或形容词最高级
+         The first thing *\[that\] we should do* is work out a plan.
+         This is one of the most exciting foolball games *\[that\] I have ever seen*.
+2. 关系副词 when, where, why 引导的定语从句 (在从句中作状语)
+   1. 先行词是事件, 用 when.
+      I still remember the day *when we had the first class in this hall*.
+   2. 先行词是地点, 用 where.
+      I still remember the city *where we visited ten years ago*.
+   3. 先行词为原因, 用 why.
+      I don't know the reason *why you are absent from the meeting*.
+3. "prep. {which,whom}" 引导的定语从句
+   如果 which 或 whom 在定语中原为介词的宾语, 那么该介词可提到从句前.
+   The house *in which Lu Xun used the live is now a museum*.
+   The girl *to whom you spoke* is my sister.
+3. 限制性/非限制性定语从句
+   定语从句根据先行词的密切程度可分为限制性定语从句和非限制性定语从句.
+   1. 限制性定语从句
+      从句与先行词关系密切, 从句为整个句子不可缺少的部分.
+      The distance *that light travels in one second* is 300 thousand kilometers.
+   2. 非限制性定语从句
+      从句与先行词关系松散, 起补充说明的作用. 去掉从句后主句的意思仍然清楚, 且从句往往有逗号隔开. 不能用 that 引导
+      Jim passed the driving test, *which surprised everybody in the office*.
+      Steel, *which has many useful properties*, is widely in the machine-building industry.
 4. as 引导的定语从句
    As is known to all, the earth is round.
    John, as you know, is a famous writer.
    He is from the south, as we can see from his accent.
 
-#### 状语从句
+   as 常在 such...as 和 same...as 的结构中作关系代词, 引出定语从句.
+   Such people *as you describe* are rare nowadays.
+   I feel just the same *as you do*.
+5. 定语从句表示状语关系
+   有时定语还可与主句有状语关系, 表示原因、条件、目的、结果等.
+   The computer, *which seems to play the role of a human brain*, is often called an electronic brain. (原因)
+   Computers, *which have many advantages*, cannot replace man. (让步)
 
-状语从句在复合句中修饰主句、主句中的动词等.
+#### 状语从句 Adverbial Clause
+
 由从属连词引导, 与主语连接, 常用逗号与主句分开. 如果位于句末, 其前一般不用逗号.
-根据其用途可以分为时间状语从句、原因状语从句、结果状语从句、条件状语从句、让步状语从句、地点状语从句、目的状语从句.
-
-1. 时间状语从句(when, while, as, before, after, since, until/till, as soon as...)
+根据其用途可以分为时间、地点、原因、目的、结果、条件、比较、方式、让步状语从句.
+1. 时间状语从句, 通常由下列连词引导: when, whenever, while, as, before, after, until/till, since, as soon as, once.
    1. when 的用法
       表示主句和从句动作同时或先后发生, 动词可以是延续性动词也可以是非延续性动词
-      I worked for a foreign company when I was in Shanghai.
-   2. while 的用法
+      I worked for a foreign company *when I was in Shanghai*.
+   2. whenever
+      Come and see me *whenever you want to*.
+   3. while 的用法
       往往表示主句和从句中的动作同时发生, 且常用延续性或表示状态的动词.
-      They rushed in while we were discussing problems.
-   3. as 的用法
+      They rushed in *while we were discussing problems*.
+   4. as 的用法
       as 引导时间状语从句表示一边...一边..., 随着, 或者正当...
-      Helen heared the story as she washed clothes.
-   4. before 和 after 的用法
+      Helen heared the story *as she washed clothes*.
+   5. before 和 after 的用法
       before 表示在...之前, after 表示在...之后.
-      I will always work hard before I enter Peking University.
-      She cooked several delicious dishes for me after I got to her home.
-   5. until/till 的用法
+      I will always work hard *before I enter Peking University*.
+      She cooked several delicious dishes for me *after I got to her home*.
+   6. until/till 的用法
       意思相同, 可以互换, 但 till 不能用于句首
       1. 主句谓语是延续性动词时. 主句用肯定形式, 表示这个动作或状态一直持续到 until/till 引导的从句的动作发生为止.
-         I will wait for you untill/till you come to see me.
+         I will wait for you *untill/till you come to see me*.
       2. 主句谓语是非延续性动词时, 主句用否定形式, 表示主句的动作直到 until 引导的从句动作发生才发生(构成 not...until 结构), 此时不能用 till. (有时不用 not, 而用其它表示否定的词, 如 never, nothing)
-      I didn't go to bed until I finished my homework.
-   6. since 的用法
+      I didn't go to bed *until I finished my homework*.
+   7. since 的用法
       since 引导的时间状语从句, 一般主句用现在完成时, 从句用一般过去时.
-      I have worked in this company since I graduated from Peking University.
-   7. as soon as 的用法
+      I have worked in this company *since I graduated from Peking University*.
+   8. as soon as 的用法
       as soon as 引导的时间状语从句, 表示从句的动作一发生, 主句的动作也随之发生. 该从句一般用现在时表示将来时.
-      I will tell him the truth as soon as he comes here.
+      I will tell him the truth *as soon as he comes here*.
+   9. 时间状语从句还可由一些名词 (the moment, the instant, every time 等) 和副词 (instantly, directly 等) 连接.
+      I'll telephone you *the instant I know*.
+      *Every time I catch a cold*, my nose runs.
 2. 条件状语从句
-   主句为祈使句、一般将来或含有情态动词时, 条件状语从句一般用现在时.
-   1. if 引导的条件状语从句
-      I will visit the Great Wall if it doesn't rain tomorrow.
-   2. unless 引导的条件状语从句
-      We'll go for an outing tomorrow unless it rains (=if it doesn't rain).
-   3. should 引导
-      should 与主语倒装, 置于句首. 这种句式多用于表示虚拟语气的结构中, 但其主句也可以是陈述语气.
-      *Should* the observations or predictions turn out to be as expected, the scientist has added confidence in the probable truth of his hypothesis.
-      *Should* I be free tomorrow, I will come.
+   通常有连词 if, unless, suppose/supposing (假设), provided/providing \[that\] (假若), on condition \[that\] (如果), as \[so\] long as (只要), in case (如果).
+   主句为祈使句、一般将来或含有情态动词时, 条件状语从句通常用一般现在时.
+
+   关于条件从句中连接词的省略, 详见非真实条件句中的虚拟语气.
+   
+   为了强调动作完成, 从句中也能用完成时
+   You can go out *if you have finished your homework*.
+   1. if 引导
+      I will visit the Great Wall *if it doesn't rain tomorrow*.
+      *If you want something done in a hurry*, don't go to the man who has clearly not much to do.
       
-   注意: 为了强调动作的完成, 从句中也能用完成时.
-   You can go out if you have finished your homework
+   2. unless 引导
+      We'll go for an outing tomorrow *unless it rains (=if it doesn't rain)*.
+      I shall return on Thursday *unless something unexpected happens*.
+   3. suppose/supposing, provided/providing 引导
+      *Suppose/Supposing we can't get the necessary data*, what shall we do?
+      We'll let you use the room *provided/providing you keep it clean and tidy*. 我们可以让你用这个房间, 但你要保持房间整洁.
+   4. on condition \[that\] 引导
+      I'll lend you my computer *on condition \[that\] you keep it in good shape*. 如果你能保持我的计算机的良好状态, 我就可以借你用.
+   5. as \[so\] long as 引导
+      You can go out *as long as you promise to be back before 11 o'clock.
+   6. in case
+      Send me a message *in case you have any difficulty*.
+   7. should 引导
+      should 与主语倒装, 置于句首. 这种句式多用于表示虚拟语气的结构中, 但其主句也可以是陈述语气.
+      *Should the observations or predictions turn out to be as expected*, the scientist has added confidence in the probable truth of his hypothesis.
+      *Should I be free tomorrow*, I will come.
 3. 原因状语从句
-   原因状语从句通常用 because, since 或 as 引导. 这三个词所表示的语气由 because 到 as 逐渐递减.
+   原因状语从句通常由 because, since, as 或 now \[that\] (既然), not that...but that (不是...而是) 引导. 前三个词表示的语气由 because 到 as 逐渐递减.
    1. because 的用法
       表示因果关系的语气最强, 用来回答 why 的问题, 所引出的原因往往是听话人所不知道或者感兴趣的, because 引导的原因状语从句往往显得比主句更重要.
-      I'm leaving because I am fed up with the lecture.
-      My friends admire me because I can speak English as fluently as the native speakers.
+      I'm leaving *because I am fed up with the lecture*.
+      My friends admire me *because I can speak English as fluently as the native speakers*.
    2. since 的用法
       表示已知事实, 不需要强调的原因, 因此经常译成既然..., 通常放在句首. since 引导的从句是次要的, 重点强调主句的内容.
-      Since every one is here, let's get started.
+      *Since every one is here*, let's get started.
    3. as 的用法
       as 与 since 用法相似, 所引出的理由在说话人看来已经很明显, 或已为听话人所熟悉而不需要用 because 加以强调. as 引导的从句与主句具有同等的重要性.
-      She didn't hear us come in as she was asleep. 
-   4. now(that) 的用法
+      She didn't hear us come in *as she was asleep*. 
+   4. now \[that\] 的用法
       主要用于口语, 表示微弱的原因, 主、从句因果关系不明显, 意为既然.
-      Now(that) you have come, you may as well stay.
+      *Now \[that\] you have come*, you may as well stay.
+   5. not that...but that 的用法
+      He felt a bit worried, *not that his students were not working hard, but that they cared little for their health*.
 4. 目的状语从句
-   1. 目的状语从句通常由 so that, in order that 等引导. 从句谓语中常含 may, might, can, could, will, would 等情态动词.
-      He must get up early so that he can go to work on time.
+   1. 目的状语从句通常由 {,so,in order} that (为了, 以便), lest (以免, 以防) 等引导. 从句谓语中常含 may, might, can, could, will, would 等情态动词.
+      They set out early *that they might arrive at the station in good time*.
+      He must get up early *so that he can go to work on time*.
+      We sent the letter by air mail *in order that it might reach them in time*.
+      We must hurry off *lest we should miss the bus*. (从句谓语虚拟语气, 即 should V1)
    2. 当从句主语与主句主语一致时, 可用 so as to 和 in order to.
-      He worked day and night in order that he could succeed.
-      = He worked day and night in order to succeed.
+      He worked day and night *in order that he could succeed*.
+      = He worked day and night *in order to succeed*.
 5. 结果状语从句
-   1. 由 so...that, such...that 引导
-      so + 形容词或副词 + that
-      so + 形容词 + a/an + 单数名词 + that
-      such + a/an + 形容词 + 名词 + that
-      such + 形容词 + 复数名词/不可数名词 + that
+   结果状语从句通常由 \[so\] that (结果, 以致), so...that (如此...以致), such...that (这样的...以致). 在非正式文本中, so...that, such...that 中的 that 有时可省略.
+   1. \[so\] that 引导
+      The weather was bad for some weeks, *so that progress with the building of the power station slowed down*.
+   2. 由 so...that, such...that 引导
+      - 1. so adj./adv. that
+           The problem is so complicated *that it will take us much time to work it out*.
+           His father gave him so many toys *he couldn't play with them all*. (非正式文本可省略 that)
+        2. such a/an adj. noun. that
+           The aircraft was flying at such a high altitude *that we could hardly see it*.
+
+        She is so lovely a girl *that we love her very much*.
+        She is such a lovely girl *that we love her very much*.
+      - 1. so adj. a/an 单数名词 that
+        2. such adj. 复数/不可数名词 that
       
-      She is such a lovely girl that we love her very much.
-      = She is so lovely a girl that we love her very much.
-      
-      注意: 当名词前面有 many, much, little, few 修饰时, 用 so 不用 such.
-      We have so much time that we can finish the work very well.
-   2. so...that 句型的否定形式可用简单句 too...to... 或 not...enough to 代替.
-      He is so young that he can't go to school.
-      = He is too young to go to school.
-      = He is not old enough to go to school.
+        当名词前有 many, much, little, few 修饰时, 用 so 不用 such.
+        We have so much time *that we can finish the work very well*.
+   2. so...that 句型否定形式可用简单句 too...to... 或 not...enough to 代替.
+      He is so young *that he can't go to school*.
+      He is too young to go to school.
+      He is not old enough to go to school.
 6. 让步状语从句
    1. though/although 的用法
       同义, 一般情况下可互换, 但是 although 语气较重, 大多置于句首. 可与 yet 连用, 不可与 but 连用
@@ -437,12 +487,13 @@ something 为先行词, 定语从句不能用 which
 7. 地点状语从句
    1. 引导地点状语从句的从属连词有 where 和 wherever.
       指具体地点时, 从句可位于主句之前或之后;
-      表示抽象含义时, 从句需放在主句前面.
-      He lives where the climate is cool.
-      Where there is a will, there is a way.
+      表抽象含义时, 从句需放主句前.
+      He lives *where the climate is cool*.
+      *Where there is a will*, there is a way.
+      *Whereever you go* you will see great changes that have taken place in that city.
    2. 注意区分 where 引导的状语从句和定语从句.
-      You'd better make a mark where you have questions. (状语从句)
-      You'd better make a mark **at the place** where you have questions. (有先行词, 定语从句)
+      You'd better make a mark *where you have questions*. (状语从句)
+      You'd better make a mark | at the place *where you have questions* |. (有先行词, 定语从句)
 
 注意:
 1. 不能同时出现在一个句子中的连词:
