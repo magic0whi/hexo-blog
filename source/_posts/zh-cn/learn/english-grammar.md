@@ -751,10 +751,23 @@ A *plan* was made last year *that several roads would be built in this part of t
       May you be happy!
       May good luck be yours!
 
-#### 强调句
+#### 强调句 Emphatic Sentence
 
-强调句结构: (that/who 不能省略)
-1. 强调名词 It is/was + 强调部分 + that/who (强调部分是状语用 that) + 剩余部分
+把强调的成分放到单独的分句中, 这样处理的句子成为强调句或分裂句 (cleft sentence).
+
+强调句构成有两种形式. (that/who/which 不能省略)
+1. 强调主语、宾语、状语: It is/was 强调部分 that/who/which 剩余部分
+   Anne had a severe heart attack last night.
+   (强调主语) It was Anne that/who had a severe heart attack last night.
+   (强调宾语) It was a severe heart attack that Anne had last night.
+   (强调状语) It was last night that Anne had a severe heart attack.
+
+   如果被强调的是人称代词, 该人称代词可用主格也可用宾格. 非正式问题中多用宾格.
+   It was she/her who told the police.
+
+   另一种是用名词从句 What...is/was..., 用来强调主语或宾语.
+   What impressed us most was his image.
+   What I like is her writing style.
 2. 强调动词: 人称代词 + do/did + 强调部分 + that 剩余部分
 
 #### 祈使句
