@@ -395,6 +395,14 @@ something 为先行词, 定语从句不能用 which
    9. 时间状语从句还可由一些名词 (the moment, the instant, every time 等) 和副词 (instantly, directly 等) 连接.
       I'll telephone you *the instant I know*.
       *Every time I catch a cold*, my nose runs.
+   10. when, while, as 的区别
+       when, while, as 引导的从句都可使用持续性动词. when 和 as 都可以与非持续性动词连用, 而 while 不能.
+       when 可表示瞬间, 也可表示时间段, 与主句所陈述的动作、事情可同时发生, 也可有先后.
+       while 常用于连接同时进行的两个持续性动词相伴随而发生的动作.
+       as 不指先后, 尤指两个动作或事件同时发生.
+       The film has been on when we arrived.
+       My mother was cooking while I was doing my homework.
+       As I left the house, I forgot the key.
 2. 条件状语从句
    通常有连词 if, unless, suppose/supposing (假设), provided/providing \[that\] (假若), on condition \[that\] (如果), as \[so\] long as (只要), in case (如果).
    主句为祈使句、一般将来或含有情态动词时, 条件状语从句通常用一般现在时.
@@ -472,18 +480,28 @@ something 为先行词, 定语从句不能用 which
       He is too young to go to school.
       He is not old enough to go to school.
 6. 让步状语从句
-   1. though/although 的用法
-      同义, 一般情况下可互换, 但是 although 语气较重, 大多置于句首. 可与 yet 连用, 不可与 but 连用
-      They are generous though they are poor.
-      Although he was Japanese, he spent most of his life in China.
-   2. even though 与 even if 的用法
+   让步状语从句通常由 although/though,  as (尽管, 虽然), even if/though (即使), however, whatever, no matter \[{how,what,where,when}\], whether...or 等引导.
+   1. although/though 的用法
+      同义, 一般情况下可互换, 但 although 语气较重, 大多置于句首. 可与 yet 连用, 不可与 but 连用.
+      They are generous *though they are poor*.
+      *Although he was Japanese*, he spent most of his life in China.
+
+      though 有时有 "但是, 不过" 的意思. 此时主句后面的让步状语从句接近并列的分句.
+      I haven't checked the information, *though I think it is correct*.
+   2. even though/if 的用法
       同义, 表示语气更强的让步.
-      Even though he is 24 new, he's still like a little child.
-      We'll make a trip even if/even though the weather is bad.
+      *Even though he is 24 new*, he's still like a little child.
+      We'll make a trip *even if/though the weather is bad*.
    3. wh-ever 类引导词的用法
-      在英语中 wh-ever 既可引导名词性从句, 还可引导让步状语从句且可换成 no matter + 相应的 wh- 词, 而在引导名词性从句时只能用 wh-ever.
+      在英语中 wh-ever 既可引导名词性从句, 还可引导让步状语从句且可换成 "no matter + 相应 wh- 词", 而在引导名词性从句时只能用 wh-ever.
       Whenever I am unhappy, it is my friend who cheers me up.
       = No matter when I am unhappy, it is my friend who cheers me up.
+   4. as
+      *Try as I might*, I couldn't lift the stone. (从句语序倒装)
+   5. no matter how
+      He keeps on with his physical training in the winter *no matter how cold it is*.
+   6. however
+      *However hard he tries*, he never seeoms able to do the work satisfactoroily.
 7. 地点状语从句
    1. 引导地点状语从句的从属连词有 where 和 wherever.
       指具体地点时, 从句可位于主句之前或之后;
@@ -494,22 +512,25 @@ something 为先行词, 定语从句不能用 which
    2. 注意区分 where 引导的状语从句和定语从句.
       You'd better make a mark *where you have questions*. (状语从句)
       You'd better make a mark | at the place *where you have questions* |. (有先行词, 定语从句)
-
-注意:
-1. 不能同时出现在一个句子中的连词:
-   1. because (因为) 引导原因状语从句. so (所以) 连接并列句. 不能同时出现在一个句子里, 只能用其一.
-      Because he was tired, he couldn't walk here.
-      = He was tired, so he couldn't walk here.
-   2. although/though (虽然) 引导让步状语从句. but (但是) 连接并列句. 不能同时出现在一个句子里, 只能用其一.
-      但 although/though 和 yet 可以出现在一个句子里(这里的 yet 不是连词, 而是副词).
-2. when, while, as 的区别
-   when, while, as 引导的从句都可使用持续性动词. when 和 as 都可以与非持续性动词连用, 而 while 不能.
-   when 可表示瞬间, 也可表示时间段, 与主句所陈述的动作、事情可同时发生, 也可有先后.
-   while 常用于连接同时进行的两个持续性动词相伴随而发生的动作.
-   as 不指先后, 尤指两个动作或事件同时发生.
-   The film has been on when we arrived.
-   My mother was cooking while I was doing my homework.
-   As I left the house, I forgot the key.
+8. 比较状语从句
+   比较状语从句通常由 as...as, than, not as/so...as, the...the..., as...so... 引导.
+   He worked *as fast as a skilled worker*.
+   The project was completed earlier *than we had expected*.
+   She didn't work as/so hard *as her sister*.
+   *The sooner*, the better.
+   *As one is to two*, so is five to ten.
+   
+   另请参阅形容词与副词的比较级.
+9. 方式状语从句
+   方式状语从句通常由连词 as, as if/though. 从句中谓语动词哦可用陈述语气, 也可用虚拟语气. 虚拟语气用来表示比较地 "非真实性".
+   Please state the facts *as they are*.
+   It looks *as if/though it's going to rain*.
+10. 注意: 不能同时出现在一个句子中的连词
+    1. because (因为) 引导原因状语从句. so (所以) 连接并列句. 不能同时出现在一个句子里, 只能用其一.
+       Because he was tired, he couldn't walk here.
+       = He was tired, so he couldn't walk here.
+    2. although/though (虽然) 引导让步状语从句. but (但是) 连接并列句. 不能同时出现在一个句子里, 只能用其一.
+        但 although/though 和 yet 可以出现在一个句子里 (这里 yet 不是连词, 而是副词).
 
 #### 名词性从句
 
@@ -575,16 +596,77 @@ A *plan* was made last year *that several roads would be built in this part of t
 
 ### 特殊句式
 
-#### 虚拟语气
+#### 虚拟语气 Subjunctive Mood
 
-所有跟要求有关的动词后面宾语都用虚拟语气
+虚拟语气是谓语动词的一种形式, 用来表示非真是的假设, 或用来表示命令、建议或说话人的主管愿望.
 
-1. if 引导的虚拟语气: if 条件句 + 结果句
-   对现在虚拟: If were/did (过去式), would + 动词原形
-   对过去虚拟: If had done (过去完成) , would have done
-   对将来虚拟: If would do (过去将来时) , would do
-2. 情态动词(should, ought to, need; 过去事实推测: can't/couldn't, must) + have ...
-   as if/as though 表虚拟(描述与事实不符时)/表陈述(描述与事实相符时)
+1. 非真实条件中的虚拟语气
+   非真实条件就是违背 (现在, 过去, 将来) 事实的假设.
+   |          | 条件从句                           | 主句                                  |
+   | --       | --                                 | --                                    |
+   | 违背现在 | 一般过去时                         | should/would V1 (过去将来时)          |
+   | 违背过去 | 过去完成时                         | should/would have V3 (过去将来完成时) |
+   | 违背将来 | 1) should V1<br>2) were 动词不定式 | should/would V1 (过去将来时)          |
+   虚拟语气中主句第一人称用 should, 第二、三人称用 would. 但在美式英语中第一人称用 would.
+   此外, 主句可用情态动词 could 或 might 代替 should 或 would.
+   1. 违背现在事实的假设.
+      在违背现在事实时, 如果条件从句谓语是 be, 各个人称均用 were. 但在非正式文体中, 特别是在口语中, 第一、三人称单数用 was 的也不少.
+      If I *were/was* you. I *would reconsider* their proposal.
+      What *would* you *do* if you *were* in his position.
+      If the manager *were/was* here, he *might/would make* a decision. (might 可代替 would)
+   2. 违背过去事实的假设
+      If I *had left* a little earlier, I *would have caught* the train.
+      I *could have done* it better if I *had been* more careful.
+   3. 可能违背将来事实的假设
+      指将来不太可能发生或说话人主观上不希望发生的假设.
+      If he *should fail*, we *would encourage* him to try again.
+      If I *were to do* it, I *would do* it in a different way.
+      We *would wipe* them out if they *should attack* us.
+      If it *should rain* tomorror, what *could we do*?
+   4. 介词短语表示假设条件.
+      有时不用 if 引导条件从句, 而用介词短语表示违背事实的假设条件, 这时句中谓语动词仍用虚拟语气形式.
+      Without air, there *would be* no wind or clouds.
+      In that case we *could have done* the work better.
+      But for the storm, we *should have arrived* earlier.
+   5. if 的省略
+      如果条件从句谓语包含 had, should, were, 有时 if 可省略. 这时 had, should, were 要移到从句主语前面形成倒装. 这种句型主要见于书面形式.
+      *Had* he not been ill, he *might have come*.
+      *Were* I to do it, I *would do* it in a different way.
+      *Should* it rain tomorror, what *could we do*?
+      *Were* it not for his help, we *chouldn't have got* over the difficulties.
+2. 名词性从句中的虚拟语气
+   在表示建议、命令、要求以及表示 "重要性" 和 "紧迫性" 等含义的主语、宾语、表语、同位语从句中, 谓语动词常用虚拟语气, 由 "\[should\] V1" 构成.
+   1. 主语从句
+      在下列结构的主语从句中, 谓语动词用虚拟语气.
+      It is {necessary,imperative,important,essential,advisable,better,ordered,proposed,desired,requested,suggested,recommended,demanded,decided,arranged} that
+      例如:
+      It is desired that we *\[should\] get* everything ready before Friday.
+      It is necessary that he *\[should\] be sent* there at once.
+   2. 宾语从句
+      在下列动词后面的宾语从句中, 谓语动词用虚拟语气: suggest, insist, recommend, order, propose, require, request, command, demand.
+      He commanded that we *\[should\] attack* the enemy at once.
+      They demanded that the right to vote *be given* to every adult man.
+   3. 同位语从句和表语从句
+      关联/修饰下列名词的同位语从句和表语从句中, 谓语动词用虚拟语气: suggestion, proposal, order, instruction, advice, motion (提议).
+      He gave the order that the results of the experiment *\[should\] be rechecked*.
+      My suggestion is that we *\[should\] send* a trade delegation to Malaysia.
+3. wish, would rather/sooner 后的虚拟语气
+   动词 wish 后的宾语从句表示未实现的主观愿望. 这类宾语从句的谓语动词用虚拟语气. 其形式及对应用法如下表:
+   | 用法                   | 宾语谓语动词形式 |
+   | --                     | --               |
+   | 当时未实现的愿望       | 一般过去时       |
+   | 过去未实现的愿望       | 过去完成时       |
+   | 将来不太可能实现的愿望 | 过去将来时       |
+   I wish I *knew* both English and French.
+   We wish he *hadn't gone*.
+
+   宾语从句谓语动词为 be 时, 用 were, 单数第一、第三人称也可用 was.
+   I wish I *were/was* as young as you.
+   I would rather/sooner the football match *would take place* tomorrow.
+
+   wish 如果是过去时, 后面的宾语从句虚拟语气形式不变.
+   She wished she *knew* how to drive the car.
+   I wished I *hadn't made* that mistake.
 
 ##### 虚拟条件句
 
@@ -1974,7 +2056,62 @@ Dick *had been smocking* for ten years before he decided to give it up last year
   We'll *have this house built* in 5 months.
   He *had his hair cut* yesterday.
   
-  
+## 倒装句
+
+在英语句子中, 通常主语放在谓语动词的前面, 这样的语序称为自然语序 (natural word-order). 反之, 如果谓语动词的一部分或全部放在主语前面, 则称为倒装语序 (inverted word-order)
+there be 句型和多数疑问句都是倒装句.
+
+### 表示否定或基本否定的词与词组放在句首作状语时
+
+这些词与词组主要有: never, scarcely, hardly, rarely, little, nowhere, no sooner...than, not only, in no case, in no way, on no account, at no time, under/in no circumstances.
+这些词/词组引出的倒装句中, 倒装到主语前的那部分谓语动词通常是助动词、情态动词或 be 动词.
+Never before has anyone applied such principles to practice.
+Hardly had he said anything before he left.
+Scarcely had she fallen asleep when a knock at the door awakened her.
+No sooner had Anne arrived there than she fell ill.
+Rarely did Tom leave his lab those days.
+Little did I think a year ago that I could work for your company.
+
+### only 引出的状语放在句首时
+
+这种情况下的倒装一般是部分倒装.
+Only then did the doctor realize that his patient needed surgery.
+Only after class was he allowed to raise the question.
+Only when you adjust down your price to some extent can we conclude the business.
+Only once did his father call his full name.
+
+### here, there, then, thus 等副词放在句首, 且谓语为 come, go, be, exist, follow 等不及物动词时
+
+这种情况下的倒装一般为全部倒装.
+Here is a book for you.
+Here comes the bus.
+There goes the bell.
+There exist two types of flying machines.
+Then follows the fashion show.
+Thus arose the division between the developed and developing countries.
+
+### 句首为 so, nor, neither 等副词, 表明前句说明的情况也适用于本句时
+
+Richard can speack Japanese. So can his sister.
+Copper is a good conductor, So are many other metals.
+He didn't say anything. Nor/Neither did his assistant.
+The first one wasn't good enough and neither was the second.
+
+### 在虚拟语气中, 非真是条件从句中的连词省略时
+
+这种情况下倒装到主语前的是助动词 had, should 和动词 were.
+Had I left a little earlier, I would have caught the train.
+Should it rain tomorrow, what could we do?
+Were there no air, there would be no sound.
+
+### 句子主语部分过长或上下文之间需要紧凑衔接时
+
+有的句子因为主语较长而谓语较短, 为使句子保持平衡需要倒装. 有的倒装是为了上下文之间衔接得更紧凑. 这类倒装并非语法上的要求, 而是一种修辞性倒装.
+Sitting in front of the counter is the young father who wishes to purchase a life insurance policy and agrees to pay a sum of $200 per year for 40 years. (此句主语因有一个定语从句而变得很长, 故倒装到谓语之后)
+
+More important is the question of how to face the possibilities of illness, injury, death and financial loss.
+
+The writing of a dictionary involves a number of tasks. Among them are the reading of literature, the copying of words on cards, the sorting of the cards and the writing of definitions. (后句倒装可与前句衔接更紧密)
 
 ## 构词法
 
