@@ -2068,6 +2068,11 @@ Dick *had been smocking* for ten years before he decided to give it up last year
   had + noun. + V3
   We'll *have this house built* in 5 months.
   He *had his hair cut* yesterday.
+- be to 相当于一个情态助动词. 可表示 "将", "要", "应", 会" 等意思.
+  I *am to see* him today at six o'clock.
+  You *are not to smoke* in this room.
+- not so much...as 与其说...不如...
+  He is *not so much* as scientist *as* a writer. 与其说他是个科学家, 不如说他是个作家.
   
 ## 倒装句
 

@@ -93,7 +93,7 @@ For Lenovo user, Enter `F12` for Boot Menu when on bootstrap stage
    ```
 2. Install essential packages
    ```console
-   # pacstrap /mnt base base-devel linux linux-firmware btrfs-progs vim rng-tools git tmux openssh bash-completion zram-generator bluez bluez-utils snapper
+   # pacstrap /mnt base base-devel linux linux-firmware btrfs-progs vim rng-tools git tmux openssh bash-completion zram-generator bluez bluez-utils snapper iwd
    ```
 
 ## Configure the system
@@ -132,31 +132,6 @@ For Lenovo user, Enter `F12` for Boot Menu when on bootstrap stage
    127.0.1.1   myhostname.neo    myhostname
    ```
 
-   Choose one of the following methods:
-   * Using systemd-networkd & systemd-resolved & iwd
-     Install iwd: `pacman -S iwd`
-     Wireless adapter configuration
-     > Use `ip link` to show network interface names
-     ```properties /etc/systemd/network/25-wireless.network
-     [Match]
-     Name=<Your wireless interface name>
-
-     [Network]
-     DHCP=yes
-     ```
-     Enable daemons and systemd-resolved stub mode:
-     ```console
-     # systemctl enable iwd.service
-     # systemctl enable systemd-networkd.service
-     # systemctl enable systemd-resolved.service
-     # ln -rsf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
-     ```
-   * Using NetworkManager
-     Install & Enable NetworkManager:
-     ```console
-     # pacman -S networkmanager
-     # systemctl enable NetworkManager.service
-     ```
 6. Configuring mkinitcpio
    Using the `sd-encrypt` hook with the systemd-base initramfs. (replace hook `udev` with `systemd`)
    <figure class="highlight properties">
@@ -173,7 +148,9 @@ For Lenovo user, Enter `F12` for Boot Menu when on bootstrap stage
      </table>
    </figure>
 
-   Configure `/etc/crypttab.initramfs` (As `/etc/crypttab` but in initramfs; Here I enabled Discard/TRIM support for SSD):
+   Configure `/etc/crypttab.initramfs` (As `/etc/crypttab` but in initramfs)
+   > use `blkid` or `lsblk -f` to show persistent block device naming
+   > Here I enabled Discard/TRIM support for SSD
    ```properties /etc/crypttab.initramfs
    cryptroot       UUID=<UUID_OF_ROOTFS>       -       discard
    ```
@@ -201,10 +178,6 @@ For Lenovo user, Enter `F12` for Boot Menu when on bootstrap stage
     ```console
     # bootctl install
     ```
-    > Automatic update
-      The package [systemd-boot-pacman-hook<sup>[AUR]</sup>](https://aur.archlinux.org/packages/systemd-boot-pacman-hook/) provides a Pacman hook to automate the update process.
-    > Please be aware that the description of configure Secure Boot below overrides the hook in this package.
-
     Configuring the boot loader
     ```properties /boot/loader/loader.conf
     default  arch.conf
@@ -213,7 +186,6 @@ For Lenovo user, Enter `F12` for Boot Menu when on bootstrap stage
     editor   no
     ```
 
-    > use `blkid` or `lsblk -f` to show persistent block device naming
     ```properties /boot/loader/entries/arch.conf
     title   Arch Linux
     linux   /vmlinuz-linux
@@ -228,6 +200,27 @@ For Lenovo user, Enter `F12` for Boot Menu when on bootstrap stage
     ```
 
 ## Post-installation
+
+### Network
+
+Using systemd-networkd & systemd-resolved & iwd
+- Wireless adapter configuration
+  > Use `ip link` to show network interface names
+  ```properties /etc/systemd/network/25-wireless.network
+  [Match]
+  Name=<Your wireless interface name>
+  
+  [Network]
+  DHCP=yes
+  IgnoreCarrierLoss=3s
+  ```
+  Enable daemons and systemd-resolved stub mode:
+  ```console
+  # systemctl enable iwd.service
+  # systemctl enable systemd-networkd.service
+  # systemctl enable systemd-resolved.service
+  # ln -rsf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
+  ```
 
 ### Miscellaneous
 
@@ -281,7 +274,7 @@ Configure memory pressure killing (Here I set it slice wide to make it observabl
 ```console
 # systemctl edit user.slice
 ```
-Have this in your editor:
+Having this in your editor:
 ```properties
 [Slice]
 ManagedOOMMemoryPressure=kill
@@ -290,7 +283,7 @@ ManagedOOMMemoryPressureLimit=50%
 
 Configure swap-based killing:
 ```console
-sudo systemctl edit --force -- -.slice
+# systemctl edit --force -- -.slice
 ```
 With this in your edior:
 ```properties
@@ -340,14 +333,24 @@ Install archlinux-keyring:
    /.snapshots/swapfile none swap defaults 0 0
    ```
 2. Setting the required kernel parameters
-   The `resume_offset` number can be computed using the tool [btrfs_map_physical.c](https://github.com/osandov/osandov-linux/blob/master/scripts/btrfs_map_physical.c). Do not try to use the `filefrag` tool, on Btrfs the "physical" offset you get from `filefrag` is not the real physical offset on disk
-   <figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">curl https://raw.githubusercontent.com/osandov/osandov-linux/master/scripts/btrfs_map_physical.c &gt; btrfs_map_physical.c</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">gcc -O2 -o btrfs_map_physical btrfs_map_physical.c</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">./btrfs_map_physical /.snapshots/swapfile</span></span><br><span class="line">FILE OFFSET     FILE SIZE       EXTENT OFFSET   EXTENT TYPE     LOGICAL SIZE    LOGICAL OFFSET  PHYSICAL SIZE   DEVID   PHYSICAL OFFSET</span><br><span class="line">0       134217728       0       regular 134217728       21358571520     134217728       1       <b>22440701952</b></span><br><span class="line">134217728       134217728       0       regular 134217728       21642440704     134217728       1       22724571136</span><br><span class="line">268435456       134217728       0       regular 134217728       22067875840     134217728       1       23150006272</span><br><span class="line">...</span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">getconf PAGESIZE</span></span><br><span class="line">4096</span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">echo</span> $((<span class="number">22440701952</span>/<span class="number">4096</span>))</span></span><br><span class="line">5478687</span><br></pre></td></tr></table></figure>
-
-   Note the the first physical offset returned by this tool. In this example, we use `22440701952`. Also note the pagesize that can be found with `getconf PAGESIZE`.
-   To compute the `resume_offset` value, divide the physical offset by the pagesize. In this example, it is `22440701952 / 4096 = 5478687`.
+   The `resume_offset` number can be computed using the tool [btrfs_map_physical.c](https://github.com/osandov/osandov-linux/blob/master/scripts/btrfs_map_physical.c). Do not try to use the `filefrag` tool, on Btrfs the "physical" offset you get from `filefrag` is not the real physical offset on disk.
+   ```console
+   #  ./btrfs_map_physical /.snapshots/swapfile | head -n 2
+   FILE OFFSET  FILE SIZE   EXTENT OFFSET   EXTENT TYPE LOGICAL SIZE    LOGICAL OFFSET  PHYSICAL SIZE   DEVID   PHYSICAL OFFSET
+   0    134217728   0   regular 134217728   2605207552  134217728   1   3687337984
+   $ getconf PAGESIZE
+   4096
+   $ echo $((3687337984/4096))
+   900229
+   ```
+   Note the the first physical offset returned by this tool. In this example, we see `3687337984`.
+   To compute the `resume_offset` value, divide the physical offset by the pagesize. In this example, it is `3687337984 / 4096 = 900229`.
 
    Finally, edit the boot loader's configuration:
-   <figure class="highlight properties"><figcaption><span>/boot/loader/entries/arch.conf</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">title</span>   <span class="string">Arch Linux</span></span><br><span class="line"><span class="attr">linux</span>   <span class="string">/vmlinuz-linux</span></span><br><span class="line"><span class="attr">initrd</span>  <span class="string">/initramfs-linux.img</span></span><br><span class="line"><span class="attr">options</span> <span class="string">... <b>resume=/dev/mapper/cryptroot resume_offset=5478687</b></span></span><br></pre></td></tr></table></figure>
+   ```properties /boot/loader/entries/arch.conf
+   ...
+   options ... resume=/dev/mapper/cryptroot resume_offset=900229
+   ```
 
 ### AUR helper
 
@@ -403,7 +406,7 @@ Then create a new configuration for `/`. Snapper create-config automatically cre
 ```
 Now mount `@snapshots` to `/.snapshots`:
 ```console
-# mount -o compress=zstd,subvol=@snapshots,discard /dev/mapper/cryptroot /.snapshots
+# mount -o compress=zstd,subvol=@snapshots,discard=async /dev/mapper/cryptroot /.snapshots
 ```
 
 Pacman Hook:
@@ -701,6 +704,9 @@ Using `PRIME render offload` which was official method supported by NVIDIA
    zsh-autosuggestions
    zsh-syntax-highlighting
    zsh-history-substring-search
+
+   ## TUI apps
+   cmus # Music Player
    
    ## Desktop apps
    anki
