@@ -675,38 +675,21 @@ Using `PRIME render offload` which was official method supported by NVIDIA
    - [AUR] intel-hybrid-codec-driver
 
    ## Misc
-   bpytop
-   htop
-   docker
-   docker-compose
+   htop man cmake gdb rsync tree nmap compsize bc p7zip unrar openbsd-netcat traceroute wireguard-tools tealdeer ntfs-3g
+   docker{,-compose}
    zerotier-one
-   man
-   cmake
-   gdb
-   arch-install-scripts
-   pacman-contrib
-   rsync
-   tree
-   nmap
-   traceroute
-   compsize
-   wireguard-tools
+   arch-install-scripts pacman-contrib
    picocom  # ($ picocom -b 1500000 /dev/ttyUSB0, Ctrl-a Ctrl-q to quit)
-   [AUR] tealdeer
    [AUR] cppman
-   ncdu
-   openbsd-netcat
-   bc
-   p7zip
-   unrar
 
-   zsh
-   zsh-autosuggestions
-   zsh-syntax-highlighting
-   zsh-history-substring-search
+   ## Vim's things
+   gvim ripgrep fzf ctags
+
+   zsh{,-autosuggestions,-syntax-highlighting,-history-substring-search}
 
    ## TUI apps
    cmus # Music Player
+   bpytop ncdu
    
    ## Desktop apps
    anki
@@ -715,12 +698,9 @@ Using `PRIME render offload` which was official method supported by NVIDIA
    libreoffice-still
    mpv
    obs-studio
-   remmina
-   - libvncserver
-   - freerdp
+   remmina libvncserver freerdp
    telegram-desktop
    thunderbird
-
    [AUR] bitwarden
    [AUR] yesplaymusic-electron
    [AUR] microsoft-edge-dev-bin
@@ -731,61 +711,35 @@ Using `PRIME render offload` which was official method supported by NVIDIA
 
    ## Gaming
    ## Yep, probably the fastest way to set up a 32 runtime environment
-   steam
-   - ttf-liberation
-   - lib32-vulkan-intel
+   steam ttf-liberation lib32-vulkan-intel
 
-   lutris
-   wine
-   - lib32-giflib
-   - lib32-gnutls
-   - lib32-mpg123
-   - lib32-openal
-   - lib32-v4l-utils
-   - lib32-libpulse
-   - lib32-libxcomposite
-   - lib32-libxinerama
-   - lib32-libxslt
-   - lib32-gst-plugins-base-libs
+   lutris innoextract
+   wine lib32-pipewire lib32-giflib lib32-gnutls mpg123 lib32-mpg123 lib32-openal lib32-v4l-utils lib32-libpulse lib32-libxcomposite lib32-libxinerama ocl-icd lib32-ocl-icd lib32-libxslt lib32-gst-plugins-base-libs vkd3d lib32-vkd3d
 
    python-pip
    python-matplotlib
    python-pandas
    python-seaborn
 
-   npm
    [AUR] hexo-cli
 
    texlive-most
    - [AUR] tllocalmgr-git
 
    ## MATLAB
-   libxcrypt-compat
-   gtk2
+   libxcrypt-compat gtk2
 
    ## KDE file shareing
    ## This enable dolphin accesses fileshares of another Windows machine.
-   samba
-   kdenetwork-filesharing
+   samba kdenetwork-filesharing
    [AUR] wsdd2
 
-   ## Vim's things
-   ripgrep
-   fzf
-   ctags
-
    ## Systemd-nspawn bootstrap
-   debootstrap
-   ubuntu-keyring
+   debootstrap ubuntu-keyring
 
    ## VM
-   virt-manager
-   libvirt
-   - dmidecode
-   - dnsmasq
-   - ebtables
-   - edk2-ovmf
-   - qemu
+   virt-manager libvirt dmidecode dnsmasq ebtables edk2-ovmf
+   qemu
      ^[AUR] qemu-user-static
       - [AUR] binfmt-qemu-static-all-arch
 
