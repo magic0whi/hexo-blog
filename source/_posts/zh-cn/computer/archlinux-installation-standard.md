@@ -586,14 +586,14 @@ Using `PRIME render offload` which was official method supported by NVIDIA
 2. (Optional) Install & Configure input method:
    ```console
    # pacman -S fcitx5-im fcitx5-chinese-addons
-   # cp /usr/share/applications/org.fcitx.Fcitx5.desktop ~/.config/autostart/
+   $ cp /usr/share/applications/org.fcitx.Fcitx5.desktop ~/.config/autostart/
    ```
    ```shell ~/.pam_environment
    GTK_IM_MODULE DEFAULT=fcitx
    QT_IM_MODULE  DEFAULT=fcitx
    XMODIFIERS    DEFAULT=\@im=fcitx
    ```
-3. (Optional|KDE) Turn off screen (DPMS) together with locking session:
+3. (Optional|KDE) Turn off DPMS & auto-locking session:
    Go to: System Settings > Notifications > Applications(The button "Configure") > Search "Screen Saver" > Configure Events:
    Select Screen locked and check box "Run command", paste `/bin/sleep 2; /usr/bin/xset dpms force off` into it.
 
@@ -666,7 +666,6 @@ Using `PRIME render offload` which was official method supported by NVIDIA
    fcitx5-material-color
 
    ## GPU
-   xf86-video-intel
    vulkan-intel
    vulkan-tools
    libva-utils

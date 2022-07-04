@@ -1176,7 +1176,7 @@ give it up 代词
 ##### 不定式 Infinitive
 
 1. 构成 to V1 (to 是不定式的符号, 无意义, 有时可省略).
-   不定式具有动词特点, 可以有自己的状语和宾语 (及物动词), 组成不定式短语, 但没有三单和复数形式.
+   不定式保有动词特征, 可以有自己的状语和宾语 (及物动词), 组成不定式短语, 但没有三单和复数形式.
    如 to read the text slowly.
 
    不定式前可加某些疑问代词, 如 who, what, which; 或疑问副词如 when, where, how, why 等. 构成特殊的不定式短语.
@@ -1256,6 +1256,54 @@ give it up 代词
       I am sorry *to have hept you waiting*. (to have kept 发生在 am 表示的时间之前)
       She seems *to have read the book before*.
    4. 被动语态
+      不定式中, 及物动词的简单时和完成时有被动语态, 但不及物动词则都没有被动语态.
+      <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th>及物动词</th>
+          <th>不及物动词<br></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td rowspan="2">一般时</td>
+          <td>to V1</td>
+          <td>to V1</td>
+        </tr>
+        <tr>
+          <td>to be V3</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td rowspan="2">完成时</td>
+          <td>to have V3</td>
+          <td>to have V3</td>
+        </tr>
+        <tr>
+          <td>to have been V3</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td rowspan="2">进行时</td>
+          <td>to be V(+ing)</td>
+          <td>to be V(+ing)</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td rowspan="2">完成进行时</td>
+          <td>to have been V(+ing)</td>
+          <td>to have been V(+ing)</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+        </tr>
+      </tbody>
+      </table>
       当不定式的逻辑主语是该不定式动作的承受者时, 不定式一般要用被动形式.
       Is is an honour for me *to be asked to speak here*.
       He wanted the letter *to be mailed at once*.
