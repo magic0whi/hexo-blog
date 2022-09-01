@@ -17,6 +17,7 @@ A paper of my Linux gists
 ### Misc
 
 - `findmnt` list all mounted filesystems.
+- `# systool -v -m module_name` list options that are set for a loaded module.
 
 ### sed
 
@@ -127,6 +128,10 @@ By using glob extension in bash:
    $ cat /sys/class/power_supply/<Your battery name>/capacity
    ```
 4. List network interfaces: ` ls /sys/class/net` or `ip link`
+5. Show monitor modes from kernel DRM module
+   ```console
+   $ cat /sys/class/drm/card0/card0-eDP-1/modes
+   ```
 
 ## Iptables
 

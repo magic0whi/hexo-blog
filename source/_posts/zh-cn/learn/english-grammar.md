@@ -1184,6 +1184,12 @@ give it up 代词
 
    不定式还可有逻辑主语, 构成另一种特殊的不定式短语. 它由 "for 名词 不定式" 组成.
    如 for the children to watch TV, for us to look for a job.
+
+   当不定式\[短语\]修饰的名词需通过介词才能联系时, 该不定式末尾需附有此介词:
+   The light is | too weak to read by. (too weak to read by the light)
+   The house is | good enough for us to live in. (good enough for us to live in the house.
+   She'd like to have someone to speak English to. (to speak English to Her)
+   
 2. 用法
    不定式可作主语、主语补语、表语、宾语、宾语补语、定语、状语.
    1. 作主语
@@ -1201,7 +1207,7 @@ give it up 代词
       What sport does he like *to play*? He likes *to play football*.
       
       不定式常作某些及物动词的宾语, 不能作介词的宾语 (but, expect 除外).
-      这些动词常常表示命令、打算或希望. 这些及物动词有: would like, want, like, wish, hate, hope, continue, manage, try, offer, start, begin, forget, promise, mean (打算), pretend, intend (想要), decide, learn, desire, agree, care, choose (愿意), refuse, fail, plan, expect 等.
+      这些动词常常表示命令、打算或希望. 这些及物动词有: afford, aim, claim, decline, demand, resolve, threaten, determine, endeavor, would like, want, like, wish, hate, hope, continue, manage, try, offer, start, begin, forget, promise, mean (打算), pretend, intend (想要), decide, learn, desire, agree, care, choose (愿意), refuse, fail, plan, expect 等.
       Would you like *to see a film this evening*?
       
       如果谓语为 find/think 后跟不定式作宾语时, 常用 it 作形式宾语, 而将真正的宾语放在最后面.
@@ -1342,7 +1348,7 @@ Thus forming an integrated image *with all the information placed in a single me
    3. 作宾语
       表示一般的习惯或抽象行为或经常性的动作.
       1. 作动词宾语
-         以下及物动词及短语动词常用动名词做宾语: avoid, finish, suggest, stop, mind, enjoy, require, postpone, delay, practise, excuse, risk, consider, miss, imagine, deny, escape, put off, give up, keep on, can't help (禁不住), be worth, have trouble/problems/difficulty (in), spend some time/money (in), feel like, be/get used to.
+         以下及物动词及短语动词常用动名词做宾语: acknowledge, admit, advocate, avoid, contemplate, dislike, evade, fancy, grudge, recollect, response, resist, include, finish, suggest, stop, mind, enjoy, require, postpone, delay, practise, excuse, risk, consider, miss, imagine, deny, escape, put off, give up, keep on, can't help (禁不住), be worth, have trouble/problems/difficulty (in), spend some time/money (in), feel like, be/get used to.
          She suggested *spending another day in the mountain area*.
          I enjoy *seeing you* and *talking about old times*.
          There's no way to escape *doing the work*.
@@ -1406,6 +1412,11 @@ Thus forming an integrated image *with all the information placed in a single me
    但在非正式英语中, 尤其是当动名词在句中做宾语时, 更常见的是用人称代词和普通格修饰动名词.
    Do you mind *me making a suggestion*?
    I'm pleased with *Join paying his income tax in time*.
+
+ 动名词和现在分词作定语区别
+ 现在分词通常表示修饰词的动作或状态, 可扩展为定语从句; 动名词通常表示所修饰的食物的用途或目的, 不可扩展为定语从句, 但可扩展为介词短语.
+ swimming mammals = mammals that swim (现在分词作定语)
+ swimming pool = pool for swimming (动名词作定语)
 
 ##### 分词 Participle
 
@@ -2078,24 +2089,24 @@ Dick *had been smocking* for ten years before he decided to give it up last year
 
 ## 杂项 Misc
 
-* Equivalent
+- Equivalent
   pursue sth. = in pursuit of sth.
   be + adj. = be + of + n.  e.g. He is an able man = He is a man of ability
-* Mass Noun, Uncountable Noun
+- Mass Noun, Uncountable Noun
   advice
   furniture
   information
   news
-* Append Gerund only
+- Append Gerund only
   practice V(+ing)
-* hardly Verb(v3) when
+- hardly Verb(v3) when
   no sooner Verb(v2) than
-* do well to 最好做...
-* 一个名词放在另一个名词前作定语时, 通常用单数, 但 "销售税" 却是 sales tax. 又如: sports meeting 运动会.
-* part of 某物的一部分; a part of 某物的一小部分.
-* no more than = only
+- do well to 最好做...
+- 一个名词放在另一个名词前作定语时, 通常用单数, 但 "销售税" 却是 sales tax. 又如: sports meeting 运动会.
+- part of 某物的一部分; a part of 某物的一小部分.
+- no more than = only
   He is no more than a beginner = He is only a beginner.
-* nothing but 仅仅, 不过是
+- nothing but 仅仅, 不过是
 - have \[nothing,much\] to do with 与...{有,无,有很大}关系.
 - 倒装
   主语和表语: Very busy must be their thoughts = Their thoughts must be very busy.
@@ -2121,6 +2132,14 @@ Dick *had been smocking* for ten years before he decided to give it up last year
   You *are not to smoke* in this room.
 - not so much...as 与其说...不如...
   He is *not so much* as scientist *as* a writer. 与其说他是个科学家, 不如说他是个作家.
+- 即可接动名词也可接不定式的及物动词
+  attempt begin commence continue deserve disdain dread endure forget hate help intend like love mean need neglect omit propose regret remember scorn try want
+- stop 跟动名词时时及物动词; 后跟不定式时时不及物动词, 不定式时目的状语
+  When did you stop working?
+  We stopped to rest.
+- try 跟不定式作宾语, 意为 "设法", "试图" (需费力或有困难). 后跟动名词作宾语, 意为 "试一试".
+  You must try to be more careful.
+  Let's try knocking at the back door.
   
 ## 倒装句
 
@@ -2184,17 +2203,17 @@ The writing of a dictionary involves a number of tasks. Among them are the readi
 ### 派生法 Derivation
 
 在词根 (root) 前面或后面加上词缀来产生新词.
-* 构成名词的后缀
+- 构成名词的后缀
   人或物 -er, -or, -ist, -ee, -ian, -ese, -ant
   如: thiner; translator, conductor; physicist; employee, trainee; Italian; Japanese; assistant.
 
   行为、性质、状态 -ance, -ence, -\[a\]tion, -sion, -ics, -ing, -ity, -ment, -ness, -th, -ty, -ure, -ship
   如: acceptance; confidence; reptition, preparation; discussion; physics, fabrics; wedding; reality; settlement; hardness; length; safety; failure, pressure; leadership.
-* 构成形容词的后缀 -able, -ible, -al, ful, -less, -ish, -ive, -ous, -an, -ic, -ly, -y, -ant, -ent, -ary, -en
+- 构成形容词的后缀 -able, -ible, -al, ful, -less, -ish, -ive, -ous, -an, -ic, -ly, -y, -ant, -ent, -ary, -en
   available; permissible; national; powerful; useless; selfish; decisive; famous; American; scientific; friendly; noisy; significant; dependent; imaginary; golden.
-* 构成副词的后缀 -ly, -ward, -wise.
+- 构成副词的后缀 -ly, -ward, -wise.
   regularly; eastward; otherwise.
-* 动词后缀 -ise (美国 -ize), -en, -ify
+- 动词后缀 -ise (美国 -ize), -en, -ify
   realize; widen; verify.
 
 #### 前缀

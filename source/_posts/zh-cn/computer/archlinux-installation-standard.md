@@ -117,13 +117,13 @@ For Lenovo user, Enter `F12` for Boot Menu when on bootstrap stage
    # sed -i 's/#en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/g' /etc/locale.gen
    # sed -i 's/#zh_CN.UTF-8 UTF-8/zh_CN.UTF-8 UTF-8/g' /etc/locale.gen
    # locale-gen
-   # echo "LANG=en_US.UTF-8" >> /etc/locale.conf
-   # echo "KEYMAP=us" >> /etc/vconsole.conf
+   # echo 'LANG=en_US.UTF-8' >> /etc/locale.conf
+   # echo 'KEYMAP=us' >> /etc/vconsole.conf
    ```
 5. Network configuration
    Create the `/etc/hostname` file:
    ```console
-   # echo "myhostname" > /etc/hostname
+   # echo 'myhostname' > /etc/hostname
    ```
    Add matching entries to [hosts(5)](https://jlk.fjfi.cvut.cz/arch/manpages/man/hosts.5):
    ```properties /etc/hosts
@@ -165,8 +165,8 @@ For Lenovo user, Enter `F12` for Boot Menu when on bootstrap stage
    ```
    sudo: add user to sudoers and disable password prompt timeout
    ```console
-   # echo "<Username> ALL=(ALL) ALL" >> /etc/sudoers.d/<Username>
-   # echo "Defaults passwd_timeout=0" > /etc/sudoers.d/notimeout
+   # echo '<Username> ALL=(ALL) ALL' >> /etc/sudoers.d/<Username>
+   # echo 'Defaults passwd_timeout=0' > /etc/sudoers.d/notimeout
    ```
    Setting the new user and root user's password
    ```console
@@ -216,9 +216,9 @@ Using systemd-networkd & systemd-resolved & iwd
   ```
   Enable daemons and systemd-resolved stub mode:
   ```console
-  # systemctl enable iwd.service
-  # systemctl enable systemd-networkd.service
-  # systemctl enable systemd-resolved.service
+  # systemctl enable --now iwd.service
+  # systemctl enable --now systemd-networkd.service
+  # systemctl enable --now systemd-resolved.service
   # ln -rsf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
   ```
 
@@ -583,6 +583,10 @@ Using `PRIME render offload` which was official method supported by NVIDIA
      dconf-editor loginized gpaste
      # systemctl enable gdm.service
      ```
+   * Bspwm
+     ```console
+     $ paru -S bspwm sxhkd lemonbar-git xtitle xdo xorg-xrdb redshift shotgun stalonetray
+     ```
 2. (Optional) Install & Configure input method:
    ```console
    # pacman -S fcitx5-im fcitx5-chinese-addons
@@ -688,7 +692,8 @@ Using `PRIME render offload` which was official method supported by NVIDIA
 
    ## TUI apps
    cmus # Music Player
-   bpytop ncdu
+   btop ncdu
+   ly # Display Manager
    
    ## Desktop apps
    anki
@@ -708,6 +713,10 @@ Using `PRIME render offload` which was official method supported by NVIDIA
    - gnome-keyring # required to store vscode login token
    - seahorse      # GUI to manage keyring
 
+
+   ## Audio
+   pipewire wireplumber pipewire-alsa pipewire-pulse
+   
    ## Gaming
    ## Yep, probably the fastest way to set up a 32 runtime environment
    steam ttf-liberation lib32-vulkan-intel
