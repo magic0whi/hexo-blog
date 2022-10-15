@@ -14,6 +14,126 @@ A paper of my Linux gists
 
 ## Linux Common Commands
 
+### Shell builtin & Concept
+
+- filter: 能用在管道里的命令属于过滤器.
+  什么样的命令能用于管道? 能对 stdin 文本按行处理, 并将结果输出到 stdout 的命令
+  cp, diff 不属于过滤器
+- Linux 命令特点
+  - 如果没有 argument, 默认从 stdin 读.
+  - 默认输出到 stdout
+
+- `type xxx` 查看命令类型(外部命令还是内部命令)
+- `man builtins` 查看 shell 的内部命令文档
+- `help xxx` 可查看内部命令的快速帮助
+- `history` 查看命令历史, 搭配 `fc` 使用
+
+Redirect:
+- 覆盖（write）输出重定向 `>`
+- 追加（append）重定向 `>>`
+- 字符串输入重定向 `<<<`
+
+- 理解命令行参数的实现，`stdin`/`stdout`/`stderr`的用法
+  ```C++
+  #include<stdio.h>
+  int main(int argc, char *argv[]) {
+	  int i = 0;
+	  char c;
+     for (; i < argc; ++i) {
+		  fprintf(stdout, "%d: %s\n", i, argv[i]);
+	  }
+	  fflush(stdout);
+	  c = fgetc(stdin);
+	  while (c != EOF) {
+		  if (c >= 'a' && c <= 'z') {
+		  c = c + 'A' - 'a';
+	  }
+		  fputc(c, stdout);
+		  c = fgetc(stdin);
+	  }
+	  fflush(stdout);
+	  fprintf(stderr, "I am stderr\n");
+	  fflush(stderr);
+  }
+  ```
+
+- 取值符 `$`
+  `$$`(等价于 `${$}`) 当前 Shell 的 PID
+  `$0` 上一个命令返回的状态编号 (≥0)
+- Shell中的变量
+  - 默认是字符串
+  - `declare -i` 可定于整数类型变量
+    ```Console
+    $ x=5
+    $ y=3
+    $ declare -i l=$x+$y
+    $ l=l+3 // 此时变量l是整数类型
+    // 也可用 k=$(($x+$y)), 不过 k 依然是字符串类型
+    ```
+  - 如果做整数数值运算, 会把非整数都理解为 0.
+  - `declare +i` 把变量整数属性去掉
+- Shell For loop
+  ```bash for.sh
+  sum=$1
+  for ((i=0;i<$num; i=i+1))
+  do
+      nohup ./run-folder.sh $num $i &
+  done
+  ```
+- Shell Function
+  ```bash sum.sh
+  function sum() {
+     echo $# # 收到的参数数量
+     echo $* # 参数的字符串
+     echo $0 # 第0个参数, 执行文件的名字
+     echo $1 # 第一个参数
+     echo $@ # 参数数组
+  }
+
+  sum 1 2 7 'a' # 函数调用
+  # 结果是
+  # 4
+  # 1 2 7 a
+  # ./sum.sh
+  # 1
+  # 1 2 7 a
+  ```
+
+- awk
+  awk 过滤第三列成绩大于等于 90 的同学: `awk '$3 >= 90 {print}' scores.txt4 | less`
+  `$3 >= 90` 为条件式 (pattern) `{print}` 为动作 (action)
+  输出单独第二列列可用 `{print $2}` (`$0`则表示所有列, 即整行)
+  条件式为可选, 如输出第二列和第五列 `awk '{print $2, $5}' scores.txt | less`
+  特殊变量`NR`表示当前行号, 如过滤掉第一行 `awk 'NR > 1 {print $2, $5}' scores.txt | less`
+  特殊模式 `BEGIN` 表示文件开始, `END` 表示文件结尾, 如在文件开始添加一行表头, 在结尾加一句 "Hi, bye": `awk 'BEGIN {print "No. ID. Score"}; {print}; END {print "HI, BYE"}' scores.txt4 | less`
+  awk 还能定义变量计算平均成绩: `awk 'BEGIN {sum = 0}; {sum = sum + $3}; END {aver = sum / NR; print NR, sum, aver}' scores.txt4 | less`
+  或者计算字符数 `awk '{cn = cn + length($0) + 1}; END {print NR, cn}' scores.txt4` (+1 是因为每行的末尾还有一个换行符)
+  或者计算字段(用到特殊变量`NF`, 表示当前行字段数) `awk '{cn = cn + length($0) + 1; wn = wn + NF}; END {print NR, wn, cn}' scores.txt4`
+  (可通过 `wc scores.txt4` 来验证行数、字段数和字符数)
+
+- `egrep -o` 只显示匹配上的文字, 如只显示匹配2000年人民日报的序号 `cat */*.txt | egrep '^[0-9-]+' -o | sort | less`
+  `-n` 可显示行号, `-v` 匹配取反, `-i` 大小写不敏感, `-r` 递归查询文件夹目录
+- `sort`默认是使用ASCII码排序, 对于数字排序, 需要加上参数 `-n`
+   对 scores.txt4 的第三列(成绩)进行排序 `sort -n -k 3 scores.txt4 | less`
+   反向排序时可加参数 `-r`.
+   `-u` 可删除排序内容相同的行, 与 `sort | uniq` 的区别是 `uniq` 命令是删除完全一样的行, 而前者会删除匹配列内容相同的行.
+- `tr` 可转换文字大小写, 如 `tr 'a-z' 'A-Z'`
+- `xargs` 可将管道前一个命令的输出作为输入参数
+   如计算一堆文件内数字及'-'的数量 `find . -name '*[0-9][0-9][0-9]*.txt' | xargs egrep -o '^[0-9-]+' | wc -l`
+
+- `diff` 共有三个命令: d(delete)、c(change)、a(add)
+   如 `130d129` 为删除 130 行对齐到 129 行, `249a130,131` 为将后者的 130, 131 行添加到前者的 249 行后, `271,373c163,271` 为拿后者的 163, 271 行去替换前者的 271, 373行
+
+- `nohup` 防止退出账户导致程序挂起
+  让程序后台运行 `nohup bash run0.sh &`
+
+### Filesystem
+
+6. 一个文件对应一个 inode (存储文件属性+block的指针列表)和0~n个block(存储文件真实内容)
+7. 硬链接: 同一个文件, 有多个名字; 只针对文件, 不支持目录; 不能跨文件系统.
+   软连接: 不同文件; 文件/目录都可以; 可用跨文件系统.
+8. 为什么文件夹不能创建硬链接, 硬连接数却大于1? 因为目录下的"."和子目录的".."能够增加目录硬链接数.
+
 ### Misc
 
 - `findmnt` list all mounted filesystems.
@@ -269,4 +389,3 @@ Reset signal `TERM`'s action to the default: `trap - TERM`
 | 1             | HUP         | Terminate (Hangup, normal, sent from SSH disconnect)       |
 | 3             | QUIT        | Terminate (Harshest but still handle ignorable, core dump) |
 | 9             | KILL        | Terminate (Unconditionally)                                |
-

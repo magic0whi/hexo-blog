@@ -41,8 +41,7 @@ tags:
 3. 景物内容尽量完整
 4. 人物视觉对象不能是显得堵的东西
 5. 虚化对象要保留起码的特征
-
-8. 尽量使主题出现在黄金分割线
+6. 尽量使主题出现在黄金分割线
 
 需要避免的
 1. 非刻意情况下画面要有层次感, 避免引起视觉错觉
@@ -59,7 +58,6 @@ tags:
 明日方舟基建英文字体是 Bender
 TNO字体: 主标题字体 Tannenberg, 旧版GUI字体 VT323, 新版GUI字体Aldrich
 
-
 ## Mechanism
 
 一些零件规格, PCB 打样可以找嘉立创
@@ -68,30 +66,18 @@ DIY 准备工作:
 电阻电容样品本(Pingcon 样品本 0603 封装, 0402 封装, 常用 IC 元件)
 示波器推荐 DS213 开源示波器
 
-### Screws
-
-M3x10 3mm直径, 10mm螺纹端长度
-
-M4x10r 4mm直径, 10mm螺纹端长度, 圆顶
-
-### 螺母
-
-M3nS 方形
-
-### Pulley
-
-GT2-16
-
-### Motor
-
-42步进电机
-无刷伺服电机
-
-### 同步带
-
-聚氨酯 PU 同步带
-
-### 驱动器
+1. Screws
+   M3x10 3mm直径, 10mm螺纹端长度
+2. M4x10r 4mm直径, 10mm螺纹端长度, 圆顶
+3. 螺母
+   M3nS 方形
+4. Pulley
+   GT2-16
+5. Motor
+   42步进电机
+   无刷伺服电机
+6. 同步带
+   聚氨酯 PU 同步带
 
 ### 软件
 
@@ -99,7 +85,6 @@ GT2-16
 2. Altium Designer 有开源替代 kicad
 3. Autodesk Fusion 或 Rhino 6
 4. Visual Studio Extension: Visual Micro
-
 
 ## Grandle
 
@@ -1053,7 +1038,7 @@ $$
 &emsp;&emsp;密稠稠, 七分鹅黄, 三分橘绿,
 &emsp;&emsp;那妙意只可去梦边缘捕捉; &ctdot;&ctdot;
 
-Cambridge As I Knew It<sup id="note_ref-1"><a href="#note-1">1</a></sup> [An Excerpt] Translted fomr the Chinese by Wang Jiao-sheng
+Cambridge As I Knew It<sup id="note_ref-1"><a href="#note-1">1</a></sup> [An Excerpt] Translated from the Chinese by Wang Jiao-sheng
 &emsp;&emsp;The very soul of Cambridge is in a river. The River Cam, I dare say, is the most beautiful stream in the world. Its name is Granta, but some call it the River Cam, maybe to indicate, I am not quite clear, the difference between the upper and lower reaches. The river meanders with many bends. The upper reach boasts the famous Byron's Pool, where the poet used to roam for pleasure. Here lies an ancient village called Glancester, which has an orchard where you can recline sipping tea in the shade of peach and plum trees laden with fruit. You let some of the fruit drop into your cup, and little sparrows would come down to your table to peck something to eat, so that you have the sensation of being in quite another world. This is the upper reach. The lower reach runs from Chesterton down to where the river broadens to afford an ideal spot for boat-racing between spring and summer. A dam separates the two reaches at a point where the current becomes very swift. To listen under starlight to the sound of the water, the chimes of evening bells wafted from a neighbouring village, and worn-out cows grazing at the river's edge: these are some of my most mysterious experiences at Cambridge. Here the beauty of Nature, its tranquility, its harmony, flood your soul in spite of yourself, with the starlight and the shimmering waves looking on, as it were, in acquiescence.
 &emsp;&emsp;But the essence of the River Cam is in its center, the famous Backs, where the river is lined on either bank with buildings of some of the best-known collages. Going from the upper to the lower end, you pass in succession Pembroke, St. Katherine's, King's, Clare, Trinkty, St. John's. The juncture of Clare and King's is where you are most tempted to linger: the enchanting gracefulness of Clare being in close vicinity to the grandeur of King's Chapel. There may be constructions more beautiful and dignified elsewhere, such as the precincts of the Louvre on the river Seine in Paris, the banks of the great Rialto Bridge in Venice, the environs of the ancient Pont Vecchio in Florence. But the Backs of Cambridge has characteristics all its own that defy summing up with a few epithets. Its lucid, delicate artistic conception, free from all mundane polution, may be said to be beyond the bounds of painting, and transformed into the magic flavour of music. There is nothing more harmonious, more symmetrical, than this group of structures. Comparable to it, perhaps, is only Corot's "Farmland" in painting, and Chopin's "Nocturne" in music. Yet even these cannot give you an impression quite so ethreal. The sense of beauty in inspires is \*nothing short of<sup id="note_ref-2"><a href="#note-2">2</a></sup> divine.
 &emsp;&emsp;Imageine yourself standing in the shade of that big cedar tree by King's College bridge and looking into the distance. To your right, beyond a spacious square of new-mown lawn, is our Fellows Building, which, though of no very ancient date, yet possesses a charm that cannot be concealed. Between spring and summer, on its pallid stone walls, roses sway in the soft breeze in a riot of colour. To the left is the Chapel, with its forest of pinnacles perpetually pointing skyward, not to be sullied. Still further left is St. Clare. Ah, that square court of incredibly exquisite workmanship &mdash; who can dispute its being the personification of St. Clare herself? And which of its stones but is glittering with her spirit of holy purity in bygone years? Faintly discernible behind Clare is Cambridge's most magnificent, most prestigious Trinity College, on top of whose library building, overlooking the river, sits on guard the Sculpture of Byron, his features brimming over with astonishing vitality.
@@ -1088,11 +1073,20 @@ Cambridge As I Knew It<sup id="note_ref-1"><a href="#note-1">1</a></sup> [An Exc
     <b><a href="#note_ref-4">^</a></b> 干脆. If you do something without further ado or without more ado, you do it at once and do not discuss or delay it any longer. 
   </li>
   <li id="note-5">
-    <b><a href="#note_ref-5">^</a></b> 轮廓. 可做动词或名词. (1) A silhouette is the solid dark shape that you see when someone or something has a bright light or pale background behind them. (2) The silhouette of something is the outline that it has, which often helps you to recognize it. 
+    <b><a href="#note_ref-5">^</a></b> 轮廓. 可做动词或名词. (1) A silhouette is the solid dark shape that you see when someone or something has a bright light or pale background behind them. (2) The silhouette of something is the outline that it has, which often helps you to recognize it.
   </li>
 </ol>
 
-## Prof.Lin Xu
+Doing Chores *August Heckscher*
+I have been doing chores, being for a brief spell alone in a house that recently was astir with bustle and echoed with the voices of a gathered family. For those, who may be in some doubt as to the nature of chores, their variety, their pleasures and their drudgery, I am prepared to deliver a short disquisition.
+The first point about chores is that they are repetitive. They come every day or thereabouts, and once done they require after a certain time to be done again. In this regard a chore is the very opposite of a 'happening'--that strange sort of event which a few years back was so much in fashion. For a happening was in essence unrepeatable; it came about in ways no one could predict, taking form from vaporous imaginings or sudden impulse. chores, by contrast, can be foreseen in advance; for better or worse, I know that tomorrow I must be re-enacting the same small round of ritualistic deeds; and they arise, moreover, from practical necessities, not from poetic flights.
+A second point about chores is that they leave no visible mark of improvement or progress behind them. When I am finished, things will be precisely as they were before--except that the fires will have been set, the garbage disposed of, and the garden weeded. In this, they are different from the works which optimistically I undertake. Ozymandias may have been presumptuous, but he was essentially right when he looked about him and said: "See how my works endure!" A work, once achieved, leaves a mark upon the world; nothing is ever quite the same again. The page of a book may have been printed or a page of manuscript written; a sketch, a poem, a song composed; or perhaps some happy achievement reached in one of the more evanescent art forms like the dance or cooking. All these have an existence of their own, outside of time, and at least for a little while live on in the mind of their creator and perhaps a few of his friends.
+The well-meaning wife, seeing her husband about his chores, will miss the character of his performance. "Henry loves to cut wood," she will say; "he positively dotes on controlling the flow of waste from dinner-table to compost heap." The wife is perhaps trying to appease an unnecessary sense of guilt at seeing her spouse engaged in mundane efforts. The fact is, he doesn't love doing chores. But neither does he feel humiliated or out of sorts for having to do them. The nature of a chore is that it is neither pleasant nor unpleasant in itself; it is entirely neutral--but it is obligatory.
+neutral--and yet I must confess that with their repetition, and perhaps because of their very inconsequence, chores can in the end evoke a mild sort of satisfaction. Here, as in more heroic fields of endeavor, a certain basic craft asserts itself. To do what must be done neatly, efficiently, expeditiously--"without rest and without haste"--lights a small fire deep in the interior being and puts a man in good humor with the world. Santayana described leisure as "being at home among manageable things"; and if he was right we who are the chore-doers of the world are the true leisure classes. At least one can be sure that no chore will defeat us; none will raise insuperable obstacles, or leave us deflated as when the divine muse abandons her devotee.
+A man I know became seduced by the minor pleasure of doing chores--or at any rate by the absence of pain which they involve--and could be seen from morning till nightfall trotting about his small domain, putting everything in order, setting everything to rights that the slow process of time had disturbed. He was perhaps going too far. To season chores with work and to intersperse them with a few happenings, is the secret of a contented existence. Fortunate the man or woman who achieves a just balance between these three types of activity--as I have been able to do by good chance, and for a little space of time.
+
+文章取自吉拉德&middot;列文所编&#x300A;短篇范文&#x300B; (*Short Essays--Models for Composition* by Gerald Levin, Third Edition, NY 1983). 本文作者奥古斯特&middot;赫克斯切 1913 年生于纽约市亨廷顿区， 曾多年担任&#x300A;纽约论坛报&#x300B; (New York Tribune) 编辑和社论撰稿人. 他的著作主要是关于城市生活的文章和论述公共事务的书籍.
+Chore 本是日常要做的家庭琐事. 但本文作者把它与正式工作和偶发事件并列, 认为是人的三种主要活动, 写法自然不同于一般, 这样的散文从内容到文字格调都比较高. 文章前后呼应结构严谨, 论述清晰, 列文认为可作美国大学生作文的范例而编入他的书.
 
 ## Prof.Lin Xu
 
@@ -1202,4 +1196,127 @@ To make it more specific, perhaps I cloud say: 'All roads lead to ShanghaiTech, 
 And, to make it even further, I would say 'All roads lead to the same destination - end of the life'. So, just cherish and enjoy
 every single minute and every single scene in our lives.
 
-## 
+## 激素
+
+2022-06-10 11:26:55
+雌二醇(SNSE2) 97 pg/ml
+促软泡激素(FSH) <0.20 mlU/mL
+睾酮(T) 0.30 ng/mL
+催乳素(PRL) 12.96 ng/mL
+促黄体生成素(LH) <0.20 mlU/ml
+
+谷草转氨酶 17 U/L
+谷丙转氨酶 12 U/L
+尿素 3.21 mmol/L
+肌酐 68.0 umol/L
+尿酸 272.7 umol/L
+
+## OD 可选药物
+
+> 引用自 @Spr1ngW1nd
+
+1. 右美沙芬
+   推荐12-48片, 起始剂量 6-8 片.
+   6-8片效果: 欣快感, 身体轻盈, 头晕
+2. 普瑞巴林
+   推荐 600mg (8片), 最大 1200mg (16片)
+   效果: 神经异常放电 (手抖), 性欲提升, 欣快感, 幸福感. 同理心增强, 语言能力增强, 犯困, 幻觉.
+3. 安非他酮
+   推荐 500mg 一下
+   效果: 欣快感, 空间感知能力下降, 提神, 癫痫.
+4. 苯海拉明 + 右美沙芬
+   2-6 片苯海拉明 + 12-24 片右美沙芬
+   效果: 欣快感
+5. 普瑞巴林 + 巴氯芬 + 褪黑素
+   普瑞巴林 600-1200mg, 巴氯芬 25-50mg, 褪黑素 2-4mg
+   效果: 话多, 吐真, 失忆
+6. 金刚烷胺
+   10-12 片, 最高 18 片
+   效果: 欣快感, 时间感知能力抑制, 幻
+
+## SSRI (NMDA)
+
+AXS-05 (Auvelity): 氢溴酸右美沙芬 45mg, 盐酸安非他酮缓释片 105mg
+
+## Hydroalcoholic 凝胶吸收率
+
+Forearm (Ventral) 1.0x
+Forearm (Dorsal) 1.1x
+Foot Arch (Plantar) 0.14x
+Ankle (Lateral) 0.42x
+Palm 0.83x
+Back 1.7x
+Scalp 3.5x
+Axilla 3.6x
+Forehead 6.0x
+Jaw Angle 13.0x
+Scrotum 42x
+
+## 常用等价无穷小
+
+<div>
+$$
+  x\to 0
+  \begin{array}{ll}
+    \sin x\sim x & \tan x\sim x \\
+    \ln(1+x)\sim x & e^x-1\sim x \\
+    \arcsin x\sim x & \arctan x\sim x \\
+    \log_a (1+x)\sim\frac{x}{\ln a} & x-\ln(1+x)\sim\frac{1}{2}x^2 \\
+    1-\cos x\sim\frac{1}{2}x^2 & \ln(x+\sqrt{1+x^2})\sim x \\
+    x-\sin x\sim\frac{1}{6}x^3 & \tan x-x\sim\frac{1}{3}x^3 \\
+    (1+x)^\alpha-1\sim\alpha x & \arcsin x-x\sim\frac{1}{6}x^3 \\
+    x-\arctan x\sim\frac{1}{3}x^3 & \tan x-\sin x\sim\frac{1}{2}x^3
+  \end{array}
+$$
+</div>
+
+## 示波器用法
+
+1. 原理: 示波器分时段截取波形, 需告诉示波器如何截取波形 (波形捕捉). 否则示波器自动截取的波形可能会 "走动". 旋转 Trigger 旋钮可调节波形中心点的捕捉电压.
+2. 默认是动态捕捉, 如果需捕捉瞬时的波形 (如开关闭合时的上电异常), 按下 Single 键.
+3. 测量波形: 按下 Cursor 键, 出现测量卡尺. 按菜单键可更改模式.
+   幅值模式下旋转 Cursor 旋钮能测最大电压;
+   时间模式下旋转 Cursor 旋钮能测持续时间.
+4. 采样率: 1 GSa/s 代表 1 Giga Sample/second
+   一般示波器标注的是最高采样率, 实际采样率受存储深度的限制.
+
+   存储深度, 示波器将分段采集的波形存储并用于展示的内存空间.
+   如 2.5k 的存储深度代表能同时存储 2500 个采样.
+   则 \\(\frac{\pu{2.5e3 Sa}}{\pu{1e9 Sa/s}}=\pu{2.5e-6 s}=\pu{2.5 us}\\)
+   即在满采样率下只能采集长度 2.5 微秒的波形.
+   如要采集长度 1 毫秒的波形, 通过变化上面的公式, 得到此时的采样率:
+   \\(\frac{\pu{2.5e3 Sa}}{\pu{1 ms}}=\pu{2.5e3 Sa/ms}=\pu{2.5e6 Sa/s}\\)
+5. 示波器带宽:
+   示波器探头到采用芯片的电路课简单理解为一个 RC 电路, 低频信号可以通过, 高频信号会被衰减. 频率和衰减幅值的关系如图:
+   {% asset_img 6.png %}
+   衰减到原来的 0.707x 时的信号频率便是示波器的带宽.
+
+   五倍原则: \\(\text{待测信号频率}\times 5\leqslant\text{示波器带宽}\\).
+   即 100M 带宽的示波器的待测信号频率不应超过 20M.
+   对照衰减曲线. 频率为 \\(\frac{\text{示波器带宽}}{5}\\) 的信号只衰减到 0.98x, 误差只有 2%.
+
+## 社会
+
+- 签协议时注意违约部分的不对等惩罚
+- 性别是身份认同的政治，通过创造出身份的道德从而利用固死的身份认同和身份认同的规训侵占个体的独特性。它是现代社会集体侵略个体的一种典型手段
+
+## 药物不良反应
+
+1. 盐酸曲咗酮片 (美时玉)
+   眼部疲劳
+   恶心/呕吐
+   震颤
+   全身乏力
+
+## 身体数据
+
+1. 2021-05-11
+   领围 40, 连肩袖长 72-74,
+   颈围 37, 腰围 73, 胸围 85,
+   臀围 88, 大腿 48, 小腿 36,
+   肩宽 40
+2. 2022-06-07
+   领围 36.5, 连肩袖长 65
+   颈围 35.5, 腰围 72, 上胸围 84.5, 下胸围 76
+   臀围 92, 大腿 52, 小腿 37
+   肩宽 37.5

@@ -765,6 +765,8 @@ A *plan* was made last year *that several roads would be built in this part of t
    如果被强调的是人称代词, 该人称代词可用主格也可用宾格. 非正式问题中多用宾格.
    It was she/her who told the police.
 
+   判断强调句的简便方法是将 It, is/was, that 三者去掉，句子结构仍然完整.
+
    另一种是用名词从句 What...is/was..., 用来强调主语或宾语.
    What impressed us most was his image.
    What I like is her writing style.
@@ -845,6 +847,10 @@ there be 开头的句子也是独立主格
 
 人称/物主代词, 反身代词, 指示代词(单this/that, 复these/those)
 不定代词(some-, -thing, any-, all, every-, none, no-, neither...), 相互代词, 疑问代词, 关系代词(用于从句)
+
+- for 反身代词: 由 (反身代词) 自己, 自己亲自; 为 (代词) 自己
+- by 反身代词: 不依靠别人, 独立地
+- in 反身代词: 就 (代词) 自己本身来说
 
 ### 连词
 

@@ -704,6 +704,7 @@ Using `PRIME render offload` which was official method supported by NVIDIA
    obs-studio
    remmina libvncserver freerdp
    telegram-desktop
+   zathura
    thunderbird
    [AUR] bitwarden
    [AUR] yesplaymusic-electron
