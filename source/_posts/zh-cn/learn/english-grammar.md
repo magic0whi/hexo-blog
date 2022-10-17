@@ -138,7 +138,7 @@ not, even, where, how, thus
 
 疑问代词: who[m], whose, which, what
 关系代词: who[m], whose, which, that, as
-不定代词: some
+不定代词: any, some, nothing, none
 
 ### 感叹词 Interjection
 
