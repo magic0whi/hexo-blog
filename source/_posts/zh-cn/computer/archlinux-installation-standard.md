@@ -692,7 +692,7 @@ Using `PRIME render offload` which was official method supported by NVIDIA
 
    ## TUI apps
    cmus # Music Player
-   btop ncdu
+   btop gdu/ncdu
    ly # Display Manager
    
    ## Desktop apps

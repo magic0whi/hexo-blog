@@ -114,14 +114,20 @@ Modify last 10 commits: `git rebase -i HEAD~10`
 - `edit` edit this commit
 - `squash` merge this commit with one commit above
 
-## Reset
+## Reset & Clean
 
-Reset work tree (and delete untracked files): `git reset --hard HEAD; git clean -fd`
+Reset work tree and delete untracked files: `git reset --hard HEAD; git clean -fdx`
 
+Reset:
 - `--soft` only change HEAD to `<commit>`
 - `--mixed` reset index only.
 - `--hard` reset both index and working tree
 - `--keep` reset working tree only (If a file differ between `<commit>` and `HEAD`, and also has modified copy in index, this reset will be abort)
+
+Clean:
+- `-f --force` allow `git clean` to delete files or directories while `clean.requireForce` is not set to false.
+- `-d` Normally, when no <path> is set, `git clean` will not recurse into untracked directories to removing too much. Specify `-d` to have it recurse into such directories as well.
+- `-x` Remove ignored files and directories mentioned in `.gitignore`
 
 ## Restore
 

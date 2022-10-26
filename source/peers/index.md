@@ -125,3 +125,5 @@ Proteusの友人们
 [septs](https://septs.blog/) `Frontend` `TC39`
 
 [liolok](https://liolok.com/) `Archlinux`
+
+[PRIN BLOG - 半吊子全栈开发者的日常](https://prinsss.github.io/)
