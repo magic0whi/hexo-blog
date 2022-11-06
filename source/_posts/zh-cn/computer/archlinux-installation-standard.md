@@ -585,17 +585,17 @@ Using `PRIME render offload` which was official method supported by NVIDIA
      ```
    * Bspwm
      ```console
-     $ paru -S bspwm sxhkd lemonbar-git xtitle xdo xorg-xrdb redshift shotgun stalonetray
+     $ paru -S bspwm sxhkd polybar-git xtitle xdo xorg-xrdb redshift picom flameshot
      ```
 2. (Optional) Install & Configure input method:
    ```console
    # pacman -S fcitx5-im fcitx5-chinese-addons
    $ cp /usr/share/applications/org.fcitx.Fcitx5.desktop ~/.config/autostart/
    ```
-   ```shell ~/.pam_environment
-   GTK_IM_MODULE DEFAULT=fcitx
-   QT_IM_MODULE  DEFAULT=fcitx
-   XMODIFIERS    DEFAULT=\@im=fcitx
+   ```properties ~/.config/environment.d/fcitx5.conf
+   GTK_IM_MODULE=fcitx
+   QT_IM_MODULE=fcitx
+   XMODIFIERS=@im=fcitx
    ```
 3. (Optional|KDE) Turn off DPMS & auto-locking session:
    Go to: System Settings > Notifications > Applications(The button "Configure") > Search "Screen Saver" > Configure Events:
@@ -747,7 +747,7 @@ Using `PRIME render offload` which was official method supported by NVIDIA
    debootstrap ubuntu-keyring
 
    ## VM
-   virt-manager libvirt dmidecode dnsmasq ebtables edk2-ovmf
+   virt-manager libvirt dmidecode dnsmasq iptables-nft edk2-ovmf swtpm
    qemu
      ^[AUR] qemu-user-static
       - [AUR] binfmt-qemu-static-all-arch

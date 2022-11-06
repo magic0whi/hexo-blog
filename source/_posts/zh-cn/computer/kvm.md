@@ -52,7 +52,11 @@ Using Qemu GTK to get a more smoothly experience:
 Meanwhile, I've set some minor stuffs such like KVM hidden, vendor_id, full KVM mode and cpu pins (specific for my i7-8750H, with a iothread created). Whereas some virtio features for disks and network bridges were enabled to satisfy my experience:
 ```xml
 <domain type='kvm' xmlns:qemu='http://libvirt.org/schemas/domain/qemu/1.0'>
+  <os>
+    <loader readonly='yes' secure='yes' type='pflash'>/usr/share/edk2-ovmf/x    64/OVMF_CODE.secboot.fd</loader> <!-- Secure Boot -->
+  </os>
   <iothreads>1</iothreads>
+  <vcpu placement='static'>8</vcpu>
   <cputune>
     <!-- Use lscpu -e to see cpu topology. Here I pinned CPU2,3,4,5. To hypervisor, CPU1 to emulator and iothread -->
     <vcpupin vcpu='0' cpuset='2'/>
@@ -66,6 +70,10 @@ Meanwhile, I've set some minor stuffs such like KVM hidden, vendor_id, full KVM 
     <emulatorpin cpuset='1,7'/>
     <iothreadpin iothread='1' cpuset='1,7'/>
   </cputune>
+  <cpu mode='host-passthrough' check='none' migratable='off'>
+    <topology sockets='1' dies='1' cores='4' threads='2'/>
+    <cache mode='passthrough'/>
+  </cpu>
   <features>
     <hyperv mode='custom'>
       <relaxed state='on'/>
@@ -90,11 +98,8 @@ Meanwhile, I've set some minor stuffs such like KVM hidden, vendor_id, full KVM 
       <hidden state='on'/>
     </kvm>
     <ioapic driver='kvm'/>
+    <smm state='on'/> <!-- Secure Boot -->
   </features>
-  <cpu mode='host-passthrough' check='none' migratable='off'>
-    <topology sockets='1' dies='1' cores='4' threads='2'/>
-    <cache mode='passthrough'/>
-  </cpu>
   <clock offset='localtime'>
     <timer name='rtc' tickpolicy='catchup'/>
     <timer name='pit' tickpolicy='delay'/>
@@ -112,9 +117,9 @@ Meanwhile, I've set some minor stuffs such like KVM hidden, vendor_id, full KVM 
       <source file='/mnt/storage4/win10.qcow2'/>
       <target dev='vda' bus='virtio'/>
     </disk>
-    <interface type='bridge'>
+    <interface type='direct'>
       <mac address='11:45:14:19:19:81'/>
-      <source bridge='br0'/>
+      <source dev='macvtap0' mode='vepa'/>
       <model type='virtio'/>
     </interface>
   </devices>
