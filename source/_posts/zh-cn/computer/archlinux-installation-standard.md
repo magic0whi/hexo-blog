@@ -585,7 +585,7 @@ Using `PRIME render offload` which was official method supported by NVIDIA
      ```
    * Bspwm
      ```console
-     $ paru -S bspwm sxhkd polybar-git xtitle xdo xorg-xrdb redshift picom flameshot
+     $ paru -S bspwm sxhkd polybar-git xtitle xdo xorg-xrdb clight picom flameshot
      ```
 2. (Optional) Install & Configure input method:
    ```console

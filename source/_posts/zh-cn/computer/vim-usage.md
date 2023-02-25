@@ -236,15 +236,14 @@ A paragraph begins after each empty line and also at each set of a paragraph mac
 
 ### Search Navigation
 
-|                        |                                                                        |
-| --                     | --                                                                     |
-| `/` / `?`              | Search forward / backward for a match                                  |
-| `n` / `N`              | Repeat last search in same / opposite direction of previous search     |
-| `:noh` or `<Esc><Esc>` | Turn off match highlights                                              |
-| `*`                    | Search for whole word under cursor forward, same as type `/\<one\>`    |
-| `#`                    | Search for whole word under cursor backward                            |
-| `g`{`*`,`#`}           | Search for word under cursor forward / backward                        |
-| `gn`                   | Searches forward for the last search pattern and do a visual selection |
+|                        |                                                                                             |
+| --                     | --                                                                                          |
+| `/` / `?`              | Search forward / backward for a match                                                       |
+| `n` / `N`              | Repeat last search in same / opposite direction of previous search                          |
+| `:noh` or `<Esc><Esc>` | Turn off match highlights                                                                   |
+| `*` / `#`              | Search for whole word under cursor forward / backward, same as type `/\<one\>` / `?\<one\>` |
+| `g`{`*`,`#`}           | Search for word under cursor forward / backward                                             |
+| `gn`                   | Searches forward for the last search pattern and do a visual selection                      |
 
 ### Marking Position
 
