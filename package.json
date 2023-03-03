@@ -28,6 +28,7 @@
     "hexo-renderer-stylus": "^2.1.0",
     "hexo-server": "^3.0.0",
     "hexo-symbols-count-time": "^0.7.1",
+    "hexo-theme-icarus": "^5.1.0",
     "hexo-util": "^2.7.0",
     "inferno": "^7.4.11",
     "inferno-create-element": "^7.4.11",
