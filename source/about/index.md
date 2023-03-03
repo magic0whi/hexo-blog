@@ -15,7 +15,7 @@ date: 2020-02-08 15:14:28
 你好, I'm Proteus, 中文昵称暂定为钱桑, 很高兴认识你.
 我喜欢捣鼓自己不懂的东西, 请多指教.
 
-目前受到{% post_link tricks-of-heart 性别焦虑 %}的影响, 属于 <font color=#5BCFFA>M</font>t<font color=#F5ABB9>F</font> 群体.
+目前受到性别焦虑的影响, 属于 <font color=#5BCFFA>M</font>t<font color=#F5ABB9>F</font> 群体.
 
 When a child is not insecure, they don't succumb the danger. If you make her confident who she is that she is amazing the way she is. She will not succumb to other people and that is how she would navigate.
 
