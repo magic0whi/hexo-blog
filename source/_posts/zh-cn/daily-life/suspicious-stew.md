@@ -96,6 +96,11 @@ systemProp.http.proxyHost=hostname
 systemProp.http.proxyPort=8080
 systemProp.http.proxyUser=username
 systemProp.http.proxyPassword=xxx
+
+systemProp.https.proxyHost=hostname
+systemProp.https.proxyPort=8080
+systemProp.https.proxyUser=username
+systemProp.https.proxyPassword=xxx
 ```
 
 ## 椭圆参数方程
