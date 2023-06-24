@@ -32,6 +32,6 @@
     "hexo-util": "^2.7.0",
     "inferno": "^7.4.11",
     "inferno-create-element": "^7.4.11",
-    "semver": "^7.3.8"
+    "semver": "^7.5.2"
   }
 }
