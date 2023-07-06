@@ -39,6 +39,7 @@ For Lenovo user, Enter `F12` for Boot Menu when on bootstrap stage
    ```console
    # cryptsetup -y -v --pbkdf-memory=114514 luksFormat /dev/sda2
    # cryptsetup open /dev/sda2 cryptroot
+   # cryptsetup --allow-discards --perf-no_read_workqueue --perf-no_write_workqueue --persistent refresh cryptroot
    # mkfs.btrfs -L arch_os /dev/mapper/cryptroot
    # mount /dev/mapper/cryptroot /mnt
    ```
@@ -66,12 +67,12 @@ For Lenovo user, Enter `F12` for Boot Menu when on bootstrap stage
    ```
    Now mount the newly created subvolumes by using the `subvol=` mount option (with enabled compress `zstd`).
    ```console
-   # mount -o compress=zstd,subvol=@,discard /dev/mapper/cryptroot /mnt
+   # mount -o compress=zstd,subvol=@,discard=async /dev/mapper/cryptroot /mnt
    # mkdir -p /mnt/{boot,home,.snapshots,var/log}
    # mount -o discard /dev/sda1 /mnt/boot
-   # mount -o compress=zstd,subvol=@home,discard /dev/mapper/cryptroot /mnt/home
-   # mount -o compress=zstd,subvol=@snapshots,discard /dev/mapper/cryptroot /mnt/.snapshots
-   # mount -o compress=zstd,subvol=@var_log,discard /dev/mapper/cryptroot /mnt/var/log
+   # mount -o compress=zstd,subvol=@home,discard=async /dev/mapper/cryptroot /mnt/home
+   # mount -o compress=zstd,subvol=@snapshots,discard=async /dev/mapper/cryptroot /mnt/.snapshots
+   # mount -o compress=zstd,subvol=@var_log,discard=async /dev/mapper/cryptroot /mnt/var/log
    ```
 3. Create nested subvolumes
    Create any nested subvolumes you do **not** want to have snapshots of when taking a snapshot of `/`.
@@ -89,11 +90,11 @@ For Lenovo user, Enter `F12` for Boot Menu when on bootstrap stage
 1. Select the mirrors
    I will use huaweicloud as main mirror
    ```console
-   # sed -i '1aServer = https://mirrors.huaweicloud.com/archlinux/$repo/os/$arch\n' /etc/pacman.d/mirrorlist
+   # sed -i '1iServer = https://mirrors.cloud.tencent.com/archlinux/$repo/os/$arch' /etc/pacman.d/mirrorlist
    ```
 2. Install essential packages
    ```console
-   # pacstrap /mnt base base-devel linux linux-firmware btrfs-progs vim rng-tools git tmux openssh bash-completion zram-generator bluez bluez-utils snapper iwd
+   # pacstrap -K /mnt base linux linux-firmware base-devel btrfs-progs vim rng-tools git tmux openssh bash-completion zram-generator snapper bluez bluez-utils iwd
    ```
 
 ## Configure the system
@@ -109,7 +110,6 @@ For Lenovo user, Enter `F12` for Boot Menu when on bootstrap stage
 3. Time zone
    ```console
    # ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
-   # timedatectl set-ntp true
    # hwclock --systohc
    ```
 4. Localization
@@ -125,7 +125,7 @@ For Lenovo user, Enter `F12` for Boot Menu when on bootstrap stage
    ```console
    # echo 'myhostname' > /etc/hostname
    ```
-   Add matching entries to [hosts(5)](https://jlk.fjfi.cvut.cz/arch/manpages/man/hosts.5):
+   Add matching entries to [hosts(5)](https://man.archlinux.org/man/hosts.5.en):
    ```properties /etc/hosts
    127.0.0.1   localhost
    ::1         localhost
@@ -142,17 +142,17 @@ For Lenovo user, Enter `F12` for Boot Menu when on bootstrap stage
            <pre><span class="line">1</span><br></pre>
          </td>
          <td class="code">
-           <pre><span class="line">HOOKS=(base <b>systemd</b> autodetect <b>keyboard</b> <b>sd-vconsole</b> modconf block <b>sd-encrypt</b> filesystems fsck)</span><br></pre>
+           <pre><span class="line">HOOKS=(base <b>systemd</b> autodetect modconf kms <b>keyboard</b> <b>sd-vconsole</b> block <b>sd-encrypt</b> filesystems fsck)</span><br></pre>
          </td>
       </tr>
      </table>
    </figure>
 
    Configure `/etc/crypttab.initramfs` (As `/etc/crypttab` but in initramfs)
-   > use `blkid` or `lsblk -f` to show persistent block device naming
+   > Use `blkid` or `lsblk -f` to see the persistent block device naming
    > Here I enabled Discard/TRIM support for SSD
    ```properties /etc/crypttab.initramfs
-   cryptroot       UUID=<UUID_OF_ROOTFS>       -       discard
+   cryptroot       UUID=<UUID_OF_ROOTFS>       none       discard,no-read-workqueue,no-write-workqueue
    ```
    Recreate the initramfs image
    ```console
@@ -190,13 +190,13 @@ For Lenovo user, Enter `F12` for Boot Menu when on bootstrap stage
     title   Arch Linux
     linux   /vmlinuz-linux
     initrd  /initramfs-linux.img
-    options root=/dev/mapper/cryptroot rootflags=compress=zstd,subvol=@,discard
+    options root=/dev/mapper/cryptroot rootflags=compress=zstd,subvol=@,discard=async
     ```
     ```properties /boot/loader/entries/arch-fallback.conf
     title Arch Linux (fallback)
     linux /vmlinuz-linux
     initrd /initramfs-linux-fallback.img
-    options root=/dev/mapper/cryptroot rootflags=compress=zstd,subvol=@,discard
+    options root=/dev/mapper/cryptroot rootflags=compress=zstd,subvol=@,discard=async
     ```
 
 ## Post-installation
@@ -204,7 +204,7 @@ For Lenovo user, Enter `F12` for Boot Menu when on bootstrap stage
 ### Network
 
 Using systemd-networkd & systemd-resolved & iwd
-- Wireless adapter configuration
+- Wireless and Wired adapter configuration
   > Use `ip link` to show network interface names
   ```properties /etc/systemd/network/25-wireless.network
   [Match]
@@ -213,6 +213,21 @@ Using systemd-networkd & systemd-resolved & iwd
   [Network]
   DHCP=yes
   IgnoreCarrierLoss=3s
+  RouteMetric=20
+  
+  [IPv6AcceptRA]
+  RouteMetric=20
+  ```
+  ```properties /etc/systemd/network/20-wired.network
+  [Match]
+  Name=<Your wired interface name>
+  
+  [Network]
+  DHCP=yes
+  RouteMetric=10
+  
+  [IPv6AcceptRA]
+  RouteMetric=10
   ```
   Enable daemons and systemd-resolved stub mode:
   ```console
@@ -226,11 +241,11 @@ Using systemd-networkd & systemd-resolved & iwd
 
 1. Random number generation
    ```console
-   # systemctl enable rngd.service
+   # systemctl enable --now rngd.service
    ```
 2. Enable sshd
    ```console
-   # systemctl enable sshd.service
+   # systemctl enable --now sshd.service
    ```
 
 ### Configurate zram-generator
@@ -250,7 +265,7 @@ Applying changes
 ### Enable bluetooth auto power-on
 
 ```console
-# systemctl enable bluetooth.service
+# systemctl enable --now bluetooth.service
 ```
 Bluetooth auto power-on after boot:
 ```properties /etc/bluetooth/main.conf
@@ -430,7 +445,7 @@ A key may be enrolled in both the TPM and the LUKS volume using only one command
 
 Specifying the root volume using the `/etc/crypttab.initramfs`:
 ```properties /etc/crypttab.initramfs
-cryptroot       UUID=<UUID_OF_ROOTFS>       -       tpm2-device=auto,discard
+cryptroot       UUID=<UUID_OF_ROOTFS>       none       tpm2-device=auto,discard,no-read-workqueue,no-write-workqueue
 ```
 Regenerate the initramfs:
 ```console

@@ -564,7 +564,7 @@ In Vim, every time you press `u` and then make a different change, Vim stores th
 | `gv`                   | Go to the previous visual mode                         |
 | `<C-`{`x`,`a`}`>`      | {Decrement,Increment} numbers, alphabetical characters |
 | v\_b\_`g <C-`{`x`,`a`} | {Decrement,Increment} across multiple lines            |
-| `>`/ `<`               | Indent visual block forward / backward                 |
+| `>` / `<`              | Indent visual block forward / backward                 |
 
 ### Visual Mode Navigation
 
