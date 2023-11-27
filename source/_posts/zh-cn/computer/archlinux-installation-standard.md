@@ -7,9 +7,7 @@ tags:
 toc: true
 ---
 
-The standard of archlinux installation & configurations for me
-
-For Lenovo user, Enter `F12` for Boot Menu when on bootstrap stage
+My standards of install Arch Linux.
 
 <!-- more -->
 
@@ -75,10 +73,8 @@ For Lenovo user, Enter `F12` for Boot Menu when on bootstrap stage
    # mount -o compress=zstd,subvol=@var_log,discard=async /dev/mapper/cryptroot /mnt/var/log
    ```
 3. Create nested subvolumes
-   Create any nested subvolumes you do **not** want to have snapshots of when taking a snapshot of `/`.
+   Create any nested subvolumes you do **not** want to have snapshots when taking a snapshot of `/`.
    Every nested subvolume will be an empty directory inside the snapshot.
-   Since the `@` subvolume is mounted at `/mnt` you will need to create a subvolume at `/mnt/var/cache/pacman/pkg` as a nested subvolume
-   You may have to create any parent directories first.
    ```console
    # mkdir -p /mnt/var/cache/pacman
    # btrfs subvolume create /mnt/var/cache/pacman/pkg
@@ -87,305 +83,80 @@ For Lenovo user, Enter `F12` for Boot Menu when on bootstrap stage
 
 ## Installation
 
-1. Select the mirrors
-   I will use huaweicloud as main mirror
+1. Select mirrors
    ```console
    # sed -i '1iServer = https://mirrors.cloud.tencent.com/archlinux/$repo/os/$arch' /etc/pacman.d/mirrorlist
    ```
 2. Install essential packages
    ```console
-   # pacstrap -K /mnt base linux linux-firmware base-devel btrfs-progs vim rng-tools git tmux openssh bash-completion zram-generator snapper bluez bluez-utils iwd
+   # pacstrap -K /mnt base linux linux-firmware \
+   rng-tools openssh zram-generator bluez bluez-utils iwd zerotier-one \
+   btrfs-progs tmux bash-completion udisks2 btop man rsync tealdeer \
+   zsh{,-autosuggestions,-syntax-highlighting,-history-substring-search} \
+   pipewire wireplumber pipewire-alsa pipewire-pulse \
+   base-devel git gvim ripgrep fzf ctags \
+   vulkan-tools libva-utils hyfetch \
+   xorg-server bspwm sxhkd ly polybar xdo xorg-xrdb picom rofi redshift flameshot alacritty \
+   noto-fonts{,-cjk,-emoji} \
+   fcitx5-im fcitx5-chinese-addons
    ```
 
 ## Configure the system
 
-1. Fstab
-   ```console
-   # genfstab -U /mnt >> /mnt/etc/fstab
-   ```
-2. Chroot
-   ```console
-   # arch-chroot /mnt
-   ```
-3. Time zone
-   ```console
-   # ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
-   # hwclock --systohc
-   ```
-4. Localization
-   ```console
-   # sed -i 's/#en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/g' /etc/locale.gen
-   # sed -i 's/#zh_CN.UTF-8 UTF-8/zh_CN.UTF-8 UTF-8/g' /etc/locale.gen
-   # locale-gen
-   # echo 'LANG=en_US.UTF-8' >> /etc/locale.conf
-   # echo 'KEYMAP=us' >> /etc/vconsole.conf
-   ```
-5. Network configuration
-   Create the `/etc/hostname` file:
-   ```console
-   # echo 'myhostname' > /etc/hostname
-   ```
-   Add matching entries to [hosts(5)](https://man.archlinux.org/man/hosts.5.en):
-   ```properties /etc/hosts
-   127.0.0.1   localhost
-   ::1         localhost
-   127.0.1.1   myhostname.neo    myhostname
-   ```
-
-6. Configuring mkinitcpio
-   Using the `sd-encrypt` hook with the systemd-base initramfs. (replace hook `udev` with `systemd`)
-   <figure class="highlight properties">
-     <figcaption><span>/etc/mkinitcpio.conf</span></figcaption>
-     <table>
-       <tr>
-         <td class="gutter">
-           <pre><span class="line">1</span><br></pre>
-         </td>
-         <td class="code">
-           <pre><span class="line">HOOKS=(base <b>systemd</b> autodetect modconf kms <b>keyboard</b> <b>sd-vconsole</b> block <b>sd-encrypt</b> filesystems fsck)</span><br></pre>
-         </td>
-      </tr>
-     </table>
-   </figure>
-
-   Configure `/etc/crypttab.initramfs` (As `/etc/crypttab` but in initramfs)
-   > Use `blkid` or `lsblk -f` to see the persistent block device naming
-   > Here I enabled Discard/TRIM support for SSD
-   ```properties /etc/crypttab.initramfs
-   cryptroot       UUID=<UUID_OF_ROOTFS>       none       discard,no-read-workqueue,no-write-workqueue
-   ```
-   Recreate the initramfs image
-   ```console
-   # mkinitcpio -P
-   ```
-7. Users and password
-   Create and use an unprivileged(non-root) user account(s) for most tasks
-   ```console
-   # useradd -m -s /bin/bash <Username>
-   ```
-   sudo: add user to sudoers and disable password prompt timeout
-   ```console
-   # echo '<Username> ALL=(ALL) ALL' >> /etc/sudoers.d/<Username>
-   # echo 'Defaults passwd_timeout=0' > /etc/sudoers.d/notimeout
-   ```
-   Setting the new user and root user's password
-   ```console
-   # passwd <Username>
-   # passwd root
-   ```
-8. Boot loader
-    Installing the EFI boot manager
-    ```console
-    # bootctl install
-    ```
-    Configuring the boot loader
-    ```properties /boot/loader/loader.conf
-    default  arch.conf
-    timeout  4
-    console-mode max
-    editor   no
-    ```
-
-    ```properties /boot/loader/entries/arch.conf
-    title   Arch Linux
-    linux   /vmlinuz-linux
-    initrd  /initramfs-linux.img
-    options root=/dev/mapper/cryptroot rootflags=compress=zstd,subvol=@,discard=async
-    ```
-    ```properties /boot/loader/entries/arch-fallback.conf
-    title Arch Linux (fallback)
-    linux /vmlinuz-linux
-    initrd /initramfs-linux-fallback.img
-    options root=/dev/mapper/cryptroot rootflags=compress=zstd,subvol=@,discard=async
-    ```
-
-## Post-installation
-
-### Network
-
-Using systemd-networkd & systemd-resolved & iwd
-- Wireless and Wired adapter configuration
-  > Use `ip link` to show network interface names
-  ```properties /etc/systemd/network/25-wireless.network
-  [Match]
-  Name=<Your wireless interface name>
-  
-  [Network]
-  DHCP=yes
-  IgnoreCarrierLoss=3s
-  RouteMetric=20
-  
-  [IPv6AcceptRA]
-  RouteMetric=20
-  ```
-  ```properties /etc/systemd/network/20-wired.network
-  [Match]
-  Name=<Your wired interface name>
-  
-  [Network]
-  DHCP=yes
-  RouteMetric=10
-  
-  [IPv6AcceptRA]
-  RouteMetric=10
-  ```
-  Enable daemons and systemd-resolved stub mode:
-  ```console
-  # systemctl enable --now iwd.service
-  # systemctl enable --now systemd-networkd.service
-  # systemctl enable --now systemd-resolved.service
-  # ln -rsf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
-  ```
-
-### Miscellaneous
-
-1. Random number generation
-   ```console
-   # systemctl enable --now rngd.service
-   ```
-2. Enable sshd
-   ```console
-   # systemctl enable --now sshd.service
-   ```
-
-### Configurate zram-generator
-
-Configuration
-```properties /etc/systemd/zram-generator.conf
-[zram0]
-zram-size = min(min(ram, 4096) + max(ram - 4096, 0) / 2, 32 * 1024)
-compression-algorithm = zstd
-```
-Applying changes
-```console
-# systemctl daemon-reload
-# systemctl restart systemd-zram-setup@zram0
+```console shell
+# genfstab -U /mnt >> /mnt/etc/fstab
+# arch-chroot /mnt
+# hwclock --systohc
+# locale-gen
+$ #Recreate the initramfs image
+# mkinitcpio -P
+# useradd -m -s /bin/bash <Username>
+$ # Setting the new user and root user's password
+# passwd <Username>
+# passwd root
 ```
 
-### Enable bluetooth auto power-on
-
-```console
-# systemctl enable --now bluetooth.service
+Installing the EFI boot manager
+```console shell
+# bootctl install
 ```
-Bluetooth auto power-on after boot:
-```properties /etc/bluetooth/main.conf
-[Policy]
-AutoEnable=true
-```
-
-Bluetooth audio support:
-```console
-# pacman -S pipewire-pulse
+Configuring the boot loader
+```properties /boot/loader/loader.conf
+default  arch.conf
+timeout  4
+console-mode max
+editor   no
 ```
 
-### Userspace OOM daemon
-
-Enable [systemd-oomd](https://fedoraproject.org/wiki/Changes/EnableSystemdOomd)
-```console
-# systemctl enable systemd-oomd.service
+```properties /boot/loader/entries/arch.conf
+title   Arch Linux
+linux   /vmlinuz-linux
+initrd  /initramfs-linux.img
+options root=/dev/mapper/cryptroot rootflags=compress=zstd,subvol=@,discard=async
+```
+```properties /boot/loader/entries/arch-fallback.conf
+title Arch Linux (fallback)
+linux /vmlinuz-linux
+initrd /initramfs-linux-fallback.img
+options root=/dev/mapper/cryptroot rootflags=compress=zstd,subvol=@,discard=async
 ```
 
-Configure memory pressure killing (Here I set it slice wide to make it observable in `oomctl`):
-```console
-# systemctl edit user.slice
-```
-Having this in your editor:
-```properties
-[Slice]
-ManagedOOMMemoryPressure=kill
-ManagedOOMMemoryPressureLimit=50%
-```
-
-Configure swap-based killing:
-```console
-# systemctl edit --force -- -.slice
-```
-With this in your edior:
-```properties
-[Slice]
-ManagedOOMSwap=kill
-```
-
-(Optional) See also [oomd.conf(5)](https://man.archlinux.org/man/oomd.conf.5.en):
-```properties /etc/systemd/oomd.conf
-[OOM]
-SwapUsedLimit=80%
-DefaultMemoryPressureDurationSec=20s
-```
-
-Furthmore, you can set `OOMPolicy=kill` to a service unit, which says if one of the process belong to this service is being killed by systemd-oomd, the whole service will also get killed (this option sets service's cgroup `memory.oom.group` to `1`, which means all tasks belonging to this cgroup were killed together).
-
-### Archlinuxcn's repository
-
-```properties /etc/pacman.conf
-[archlinuxcn]
-Server = https://repo.archlinuxcn.org/$arch
-## or install archlinuxcn-mirrorlist-git and use the mirrorlist
-#Include = /etc/pacman.d/archlinuxcn-mirrorlist
-```
-
-Install archlinux-keyring:
-```console
-# pacman -S archlinuxcn-keyring
-```
-
-### Swapfile in a btrfs filesystem within dm-crypt and also hibernation support
-
-1. Swap file creation
-   Create a zero length file, set the `No_COW` attribute on it with `chattr`, and make sure compression is disabled, then using `dd` to allocate a swap file:
-   ```console
-   # truncate -s 0 /.snapshots/swapfile
-   # chattr +C /.snapshots/swapfile
-   # btrfs property set /.snapshots/swapfile compression none
-   # dd if=/dev/zero of=/.snapshots/swapfile bs=1M count=4096 status=progress
-   # chmod 600 /.snapshots/swapfile
-   # mkswap /.snapshots/swapfile
-   # swapon /.snapshots/swapfile
-   ```
-   Adding the appropriate entry in `fstab`:
-   ```properties /etc/fstab
-   ...
-   /.snapshots/swapfile none swap defaults 0 0
-   ```
-2. Setting the required kernel parameters
-   The `resume_offset` number can be computed using the tool [btrfs_map_physical.c](https://github.com/osandov/osandov-linux/blob/master/scripts/btrfs_map_physical.c). Do not try to use the `filefrag` tool, on Btrfs the "physical" offset you get from `filefrag` is not the real physical offset on disk.
-   ```console
-   #  ./btrfs_map_physical /.snapshots/swapfile | head -n 2
-   FILE OFFSET  FILE SIZE   EXTENT OFFSET   EXTENT TYPE LOGICAL SIZE    LOGICAL OFFSET  PHYSICAL SIZE   DEVID   PHYSICAL OFFSET
-   0    134217728   0   regular 134217728   2605207552  134217728   1   3687337984
-   $ getconf PAGESIZE
-   4096
-   $ echo $((3687337984/4096))
-   900229
-   ```
-   Note the the first physical offset returned by this tool. In this example, we see `3687337984`.
-   To compute the `resume_offset` value, divide the physical offset by the pagesize. In this example, it is `3687337984 / 4096 = 900229`.
-
-   Finally, edit the boot loader's configuration:
-   ```properties /boot/loader/entries/arch.conf
-   ...
-   options ... resume=/dev/mapper/cryptroot resume_offset=900229
-   ```
-
-### AUR helper
-
-Here I Using [paru](https://aur.archlinux.org/packages/paru/) as AUR helper.
-
-1. Create makepkg wrapper `makepkg-shallow` to make makepkg do shallow clone
+AUR helper [paru](https://aur.archlinux.org/packages/paru/).
+1. [Optional] Create makepkg wrapper `makepkg-shallow` to make makepkg do shallow clone
    ```shell /usr/bin/makepkg-shallow
    #!/bin/bash
 
    git() {
-     if [[ $# -gt 1 && $1 == 'clone' && $2 != '-s' ]]; then
-       /bin/git "$@" --depth=1 --no-single-branch
-     elif [[ $# -gt 1 && $1 == 'fetch' ]]; then
-       /bin/git fetch --depth=3 -p
-     elif [[ $# -gt 1 && [$1 == 'describe' || $1 == 'rev-list'] ]]; then
-       /bin/git fetch --unshallow -p
-       /bin/git "$@"
-     else
-       /bin/git "$@"
-     fi
+   if [[ $# -gt 1 && $1 == 'clone' && $2 != '-s' ]]; then
+      /bin/git "$@" --depth=1 --no-single-branch
+   elif [[ $# -gt 1 && $1 == 'fetch' ]]; then
+      /bin/git fetch --depth=3 -p
+   elif [[ $# -gt 1 && [$1 == 'describe' || $1 == 'rev-list'] ]]; then
+      /bin/git fetch --unshallow -p
+      /bin/git "$@"
+   else
+      /bin/git "$@"
+   fi
    }
 
    source /bin/makepkg "$@"
@@ -404,54 +175,44 @@ Here I Using [paru](https://aur.archlinux.org/packages/paru/) as AUR helper.
    # rm -rf /build
    ```
 
-> Rebooting to installed system to ensure that systemd is running.
+> Reboot to installed system to ensure that systemd is running.
 
-### Btrfs snapshots & Snapper
 
-Ensure `/.snapshots` is not mounted and does not exist as folder:
-```console
-# umount /.snapshots
-# rm -r /.snapshots
-```
-Then create a new configuration for `/`. Snapper create-config automatically creates a subvolume `.snapshots` with the root subvolume `@` as its parent, that is not needed for current filesystem layout, and can be deleted.
-```console
-# snapper -c root create-config /
-# btrfs subvolume delete /.snapshots
-# mkdir /.snapshots
-```
-Now mount `@snapshots` to `/.snapshots`:
-```console
-# mount -o compress=zstd,subvol=@snapshots,discard=async /dev/mapper/cryptroot /.snapshots
-```
+## Post-installation
 
-Pacman Hook:
-```console
-pacman -S snap-pac
-```
+### Enable daemons
 
-### Unlocking encrypted root filesystem by using TPM 2
+```console shell
+# systemctl enable --now iwd.service
+# systemctl enable --now systemd-networkd.service
+# systemctl enable --now systemd-resolved.service
+$ # Enable Random number generation
+# systemctl enable --now rngd.service
+$ # Enable sshd
+# systemctl enable --now sshd.service
+$ # Enable bluetooth auto power-on
+# systemctl enable --now bluetooth.service
+$ Enable systemd-oomd (Userspace OOM daemon)
+# systemctl enable systemd-oomd.service
+```
+### Enroll TPM key
 
 list installed TPMs and the driver in use:
-```console
+```console shell
 $ systemd-cryptenroll --tpm2-device=list
 ```
-> If you encounter such message "<span style="color:#FF0000;">TPM2 support is not installed</span>" then try to install `tpm2-tss`
+> If you encounter messages such as "<span style="color:#FF0000;">TPM2 support is not installed</span>", try install `tpm2-tss`.
 
-A key may be enrolled in both the TPM and the LUKS volume using only one command. The following example binds the key to PCRs 0 and 7 (the system firmware and Secure Boot state):
+Binds the key to PCRs 0 and 7 (System firmware and Secure Boot state):
 ```console
-# systemd-cryptenroll --tpm2-device=/path/to/tpm2_device --tpm2-pcrs=0+7 /dev/sda2
+# systemd-cryptenroll --tpm2-device=auto --tpm2-pcrs=0+7 /dev/sda2
 ```
-> Tip: If your computer has only one TPM installed, which is usually the case, you may instead specify `--tpm2-device=auto` to automatically select the only available TPM.
 
-Specifying the root volume using the `/etc/crypttab.initramfs`:
-```properties /etc/crypttab.initramfs
-cryptroot       UUID=<UUID_OF_ROOTFS>       none       tpm2-device=auto,discard,no-read-workqueue,no-write-workqueue
-```
 Regenerate the initramfs:
 ```console
 # mkinitcpio -P
 ```
-> To remove a key enrolled using this method, run:
+> To remove a key enrolled, run:
 > ```console
 > # systemd-cryptenroll /dev/sdX --wipe-slot=slot_number
 > ```
@@ -461,6 +222,30 @@ Regenerate the initramfs:
 > # systemd-cryptenroll /dev/sdX --wipe-slot=tpm2
 > ```
 > to remove all TPM-associated keys from your LUKS volume.
+
+### Swapfile in a btrfs filesystem and enable hibernation (support dm-crypt)
+
+1. Swap file creation
+   ```console
+   # btrfs filesystem mkswapfile --size 32g --uuid clear /.snapshots/swapfile
+   # swapon /.snapshots/swapfile
+   ```
+   Add appropriate entry in `fstab`:
+   ```properties /etc/fstab
+   ...
+   /.snapshots/swapfile none swap defaults 0 0
+   ```
+2. Setting the required kernel parameters
+   ```console
+   # btrfs inspect-internal map-swapfile -r /swap/swapfile
+   198122980
+   ```
+
+   Finally, edit the bootloader's configuration:
+   ```properties /boot/loader/entries/arch.conf
+   ...
+   options ... resume=/dev/mapper/cryptroot resume_offset=198122980
+   ```
 
 ### Secure Boot by using a signed boot loader (shim)
 
@@ -491,50 +276,8 @@ Sign boot loader (named `grubx64.efi`) and kernel:
 # sbsign --key MOK.key --cert MOK.crt --output /boot/vmlinuz-linux /boot/vmlinuz-linux
 # sbsign --key MOK.key --cert MOK.crt --output /boot/EFI/BOOT/grubx64.efi /boot/EFI/BOOT/grubx64.efi
 ```
-We can automate the kernel signing with a pacman hook:
-> Create pacman's default hooks directory if it doesn's exist:
-> ```console
-> # mkdir /etc/pacman.d/hooks
-> ```
 
-```properties /etc/pacman.d/hooks/999-sign_kernel_for_secureboot.hook
-[Trigger]
-Operation = Install
-Operation = Upgrade
-Type = Package
-Target = linux
-Target = linux-lts
-Target = linux-hardened
-Target = linux-zen
-
-[Action]
-Description = Signing kernel with Machine Owner Key for Secure Boot
-When = PostTransaction
-Exec = /usr/bin/find /boot/ -maxdepth 1 -name 'vmlinuz-*' -exec /usr/bin/sh -c 'if ! /usr/bin/sbverify --list {} 2>/dev/null | /usr/bin/grep -q "signature certificates"; then /usr/bin/sbsign --key /etc/pacman.d/hooks/MOK.key --cert /etc/pacman.d/hooks/MOK.crt --output {} {}; fi' ;
-Depends = sbsigntools
-Depends = findutils
-Depends = grep
-```
-Also, there is a pacman hook for systemd-boot upgrades:
-```properties /etc/pacman.d/hooks/100-systemd-boot.hook
-[Trigger]
-Type = Package
-Operation = Upgrade
-Target = systemd
-
-[Action]
-Description = Gracefully upgrading systemd-boot...
-When = PostTransaction
-Exec = /bin/sh -c '/usr/bin/systemctl restart systemd-boot-update.service && cp /boot/EFI/systemd/systemd-bootx64.efi /boot/EFI/BOOT/grubx64.efi && cp /usr/share/shim-signed/shimx64.efi /boot/EFI/BOOT/BOOTx64.EFI && sbsign --key /etc/pacman.d/hooks/MOK.key --cert /etc/pacman.d/hooks/MOK.crt --output /boot/EFI/BOOT/grubx64.efi /boot/EFI/BOOT/grubx64.efi'
-Depends = shim-signed
-Depends = sbsigntools
-```
-
-Then copy `Mok.key` and `MOK.crt` to the path which is specified above:
-```console
-# cp MOK.key MOK.crt /etc/pacman.d/hooks/
-```
-Copy `MOK.cer` to a FAT formatted file system (you can use EFI system partition).
+Copy `MOK.cer` to a FAT formatted file system (Here I use EFI system partition).
 ```console
 # cp MOK.cer /boot/
 ```
@@ -580,196 +323,131 @@ Using `PRIME render offload` which was official method supported by NVIDIA
         ```
      3. Reboot the system
 
-## Desktop Environment
+## Tips
 
-1. Installation
-   * KDE
-     ```console
-     # pacman -S plasma-meta konsole dolphin kdegraphics-thumbnailers gwenview kimageformats ark kio-fuse
-     # systemctl enable sddm.service
-     ```
-   * GNOME
-     > Some packages require archlinuxcn's repository
-     ```console
-     $ paru -S gnome-shell gnome-shell-extensions gdm \
-     nautilus file-roller gvfs-mtp sushi seahorse eog \
-     gnome-{control-center,terminal,tweaks,keyring,backgrounds,clocks,logs,screenshot,menus} \
-     gtk-engine-murrine materia-gtk-theme \
-     dconf-editor loginized gpaste
-     # systemctl enable gdm.service
-     ```
-   * Bspwm
-     ```console
-     $ paru -S bspwm sxhkd polybar-git xtitle xdo xorg-xrdb clight picom flameshot
-     ```
-2. (Optional) Install & Configure input method:
-   ```console
-   # pacman -S fcitx5-im fcitx5-chinese-addons
-   $ cp /usr/share/applications/org.fcitx.Fcitx5.desktop ~/.config/autostart/
-   ```
-   ```properties ~/.config/environment.d/fcitx5.conf
-   GTK_IM_MODULE=fcitx
-   QT_IM_MODULE=fcitx
-   XMODIFIERS=@im=fcitx
-   ```
-3. (Optional|KDE) Turn off DPMS & auto-locking session:
-   Go to: System Settings > Notifications > Applications(The button "Configure") > Search "Screen Saver" > Configure Events:
-   Select Screen locked and check box "Run command", paste `/bin/sleep 2; /usr/bin/xset dpms force off` into it.
+- Run `fc-cache -fv` to rebuild font information cache files.
+- Use `blkid` or `lsblk -f` to see the persistent block device naming
+- Use `ip link` to show network interface names
+- Configure memory pressure killing (Here I set it slice wide to make it observable in `oomctl`):
+  ```console shell
+  # systemctl edit user.slice
+  ```
+  Having this in your editor:
+  ```properties
+  [Slice]
+  ManagedOOMMemoryPressure=kill
+  ManagedOOMMemoryPressureLimit=50%
+  ```
+- Configure swap-based killing:
+  ```console
+  # systemctl edit --force -- -.slice
+  ```
+  With this in your edior:
+  ```properties
+  [Slice]
+  ManagedOOMSwap=kill
+  ```
+  
+  (Optional) See also [oomd.conf(5)](https://man.archlinux.org/man/oomd.conf.5.en):
+  ```properties /etc/systemd/oomd.conf
+  [OOM]
+  SwapUsedLimit=80%
+  DefaultMemoryPressureDurationSec=20s
+  ```
 
-## Troubleshot
+  > Furthmore, you can set `OOMPolicy=kill` to a service unit, which says if one of the process belong to this service is being killed by systemd-oomd, the whole service will also get killed (this option sets service's cgroup `memory.oom.group` to `1`, which means all tasks belonging to this cgroup were killed together).
 
-1. Disable media automount in GNOME
-   ```console
-   $ gsettings set org.gnome.desktop.media-handling automount false
-   $ gsettings set org.gnome.desktop.media-handling automount-open false 
-   ```
-2. Video Decode is disabled in Microsoft Edge
-   ```properties ~/.config/microsoft-edge-dev-flags.conf
-   --ignore-gpu-blocklist
-   --enable-features=VaapiVideoDecoder
-   --enable-accelerated-video-decode
-   ```
-3. In Surface Devices:
-   > I use KDE for more smooth experience
-   * Instal linux-surface kernel
-     ```console
-     $ curl -s https://raw.githubusercontent.com/linux-surface/linux-surface/master/pkg/keys/surface.asc \
-         | sudo pacman-key --add -
-     $ sudo pacman-key --finger 56C464BAAC421453
-     $ sudo pacman-key --lsign-key 56C464BAAC421453
-     ```
-     Add the repository:
-     ```properties /etc/pacman.conf
-     [linux-surface]
-     Server = https://pkg.surfacelinux.com/arch/
-     ```
-     Then you can install the linux-surface kernel and its dependencies. You should also enable the iptsd service for touchscreen and stylus support:
-     ```console
-     $ sudo pacman -Syu
-     $ sudo pacman -S linux-surface linux-surface-headers iptsd
-     $ sudo systemctl enable iptsd
-     ```
-     Don't forget to change the corresponding loader entries' config
-   * SDDM has problem with NetworkManager & Long loading time:
-     Use GDM as a replace, don't forget to configure KDE Wallet's PAM:
-     ```properties /etc/pam.d/gdm-password
-     ...
-     auth            optional        pam_kwallet5.so
-     session         optional        pam_kwallet5.so auto_start
-     ```
-   * Auto disable touch screen after login (X11):
-     First install `xorg-xinput`.
-     Then create a shell script:
-     ```bash disable_touch_screen.sh
-     #!/bin/bash
-     if [[ ${XDG_SESSION_TYPE} = "x11" ]]; then
-         xinput disable `xinput list | egrep -o "IPTS Touch.+id=[0-9]+" | egrep -o "[0-9]+"`
-     fi
-     ```
-     Finally go to System Settings > Startup and Shutdown > Autostart:
-     Press Add button and select Add Login Script, choose the script you just created.
+```plaintext Additional Packages
+[AUR] fcitx5-pinyin-zhwiki
+fcitx5-material-color
 
-## Additional Packages
+# GPU - Intel
+vulkan-intel
+intel-media-driver
+^[AUR] libva-intel-driver-hybrid
+- [AUR] intel-hybrid-codec-driver
 
-   ```plaintext
-   ## GNOME
-   [AUR] gnome-shell-extension-appindicator
-   [AUR] gnome-shell-extension-kimpanel-git
-   [AUR] gnome-shell-extension-dash-to-dock
-   [AUR] gnome-shell-extension-desktop-icons-ng
-   [AUR] gnome-shell-extension-freon-git
+# GPU - AMD
+mesa
+vulkan-radeon
+libva-mesa
 
-   noto-fonts{,-cjk,-emoji}
+htop
+cmake
+gdb
+tree
+nmap
+compsize
+bc
+p7zip
+unrar
+openbsd-netcat
+traceroute
+wireguard-tools
+ntfs-3g
+docker{,-compose}
+howdy
+arch-install-scripts pacman-contrib
+picocom  # ($ picocom -b 1500000 /dev/ttyUSB0, Ctrl-a Ctrl-q to quit)
+[AUR] snowflake-pt-client-git
+[AUR] cppman
 
-   [AUR] fcitx5-pinyin-zhwiki
-   fcitx5-material-color
+cmus # Music Player
+gdu/ncdu/dust # Calculate storage usage
 
-   ## GPU
-   vulkan-intel
-   vulkan-tools
-   libva-utils
-   intel-media-driver
-   ^[AUR] libva-intel-driver-hybrid
-   - [AUR] intel-hybrid-codec-driver
+## Desktop apps
+anki-bin
+blender
+krita
+libreoffice-still
+mpv
+obs-studio
+remmina libvncserver freerdp
+telegram-desktop
+zathura
+thunderbird
+[AUR] bitwarden
+[AUR] yesplaymusic-electron
+[AUR] microsoft-edge-dev-bin
+[AUR] qv2ray
+[AUR] visual-studio-code-bin
+- gnome-keyring # required to store vscode login token
+- seahorse      # GUI to manage keyring
 
-   ## Misc
-   htop man cmake gdb rsync tree nmap compsize bc p7zip unrar openbsd-netcat traceroute wireguard-tools tealdeer ntfs-3g
-   docker{,-compose}
-   zerotier-one
-   arch-install-scripts pacman-contrib
-   picocom  # ($ picocom -b 1500000 /dev/ttyUSB0, Ctrl-a Ctrl-q to quit)
-   [AUR] cppman
+## Gaming
+steam
+vkd3d-proton-mingw-git
 
-   ## Vim's things
-   gvim ripgrep fzf ctags
+lutris
+innoextract
 
-   zsh{,-autosuggestions,-syntax-highlighting,-history-substring-search}
+python-pip
+python-matplotlib
+python-pandas
+python-seaborn
 
-   ## TUI apps
-   cmus # Music Player
-   btop gdu/ncdu
-   ly # Display Manager
-   
-   ## Desktop apps
-   anki
-   blender
-   krita
-   libreoffice-still
-   mpv
-   obs-studio
-   remmina libvncserver freerdp
-   telegram-desktop
-   zathura
-   thunderbird
-   [AUR] bitwarden
-   [AUR] yesplaymusic-electron
-   [AUR] microsoft-edge-dev-bin
-   [AUR] qv2ray
-   [AUR] visual-studio-code-bin
-   - gnome-keyring # required to store vscode login token
-   - seahorse      # GUI to manage keyring
+[AUR] hexo-cli
+[AUR] clight clightd
 
+texlive-most
+- [AUR] tllocalmgr-git
 
-   ## Audio
-   pipewire wireplumber pipewire-alsa pipewire-pulse
-   
-   ## Gaming
-   ## Yep, probably the fastest way to set up a 32 runtime environment
-   steam ttf-liberation lib32-vulkan-intel
+## MATLAB
+libxcrypt-compat gtk2
 
-   lutris innoextract
-   wine lib32-pipewire lib32-giflib lib32-gnutls mpg123 lib32-mpg123 lib32-openal lib32-v4l-utils lib32-libpulse lib32-libxcomposite lib32-libxinerama ocl-icd lib32-ocl-icd lib32-libxslt lib32-gst-plugins-base-libs vkd3d lib32-vkd3d
+[AUR] wsdd2
 
-   python-pip
-   python-matplotlib
-   python-pandas
-   python-seaborn
+## Systemd-nspawn bootstrap
+debootstrap ubuntu-keyring
 
-   [AUR] hexo-cli
+## VM
+virt-manager libvirt dmidecode dnsmasq iptables-nft edk2-ovmf swtpm
+qemu
+  ^[AUR] qemu-user-static
+   - [AUR] binfmt-qemu-static-all-arch
 
-   texlive-most
-   - [AUR] tllocalmgr-git
-
-   ## MATLAB
-   libxcrypt-compat gtk2
-
-   ## KDE file shareing
-   ## This enable dolphin accesses fileshares of another Windows machine.
-   samba kdenetwork-filesharing
-   [AUR] wsdd2
-
-   ## Systemd-nspawn bootstrap
-   debootstrap ubuntu-keyring
-
-   ## VM
-   virt-manager libvirt dmidecode dnsmasq iptables-nft edk2-ovmf swtpm
-   qemu
-     ^[AUR] qemu-user-static
-      - [AUR] binfmt-qemu-static-all-arch
-
-   [AUR] xray
-   [AUR] v2raya
-   [Archlinuxcn] fcitx5-pinyin-moegirl
-   [AUR] syncthing-gtk
-   qtcreator
-   ```
+[AUR] xray
+[AUR] v2raya
+[AUR] fcitx5-pinyin-moegirl
+qtcreator
+```

@@ -56,13 +56,13 @@ A window is how you are viewing a buffer through
 |                                            |                                                                                      |
 | --                                         | --                                                                                   |
 | `:`[`v`]`split `[`filename`]               | Split window                                                                         |
-| `:`[`vertical `]`sbuffer [N]`              | Split window by buffer. (`[N]` is buffer's NO.)                                      |
-| `<C-w> `{`h,j,k,l`}                        | Navigate                                                                             |
-| `<C-w> `{`v,s`}                            | Opens a new {vertical,horizontal} split                                              |
+| `:`[`vertical `]`sbuffer [N]`              | Split window by buffer [N].                                    |
+| `<C-w> `{`h`,`j`,`k`,`l`}                        | Navigate                                                                             |
+| `<C-w> `{`v`,`s`}                            | Opens a new {vertical,horizontal} split                                              |
 | `<C-w> `{`c,o`}                            | Closes {focused window,all other windows}                                            |
-| `<C-w> `{`r`,`R`,`H`,`J`,`K`,`L`}          | Rotate focused window {(down|right),(up|left),far left,far bottom,far top,far right} |
+| `<C-w> `{`r`,`R`,`H`,`J`,`K`,`L`}          | Rotate focused window {down\|right,up\|left,far left,far bottom,far top,far right} |
 | `:`[`vertical `]`resize `{`80`,`+5`}       | {Set,Increment} {[width],height} of focused window to {80,5}                         |
-| `<C-w> `{(`-`,`+`,`_`),(`<`,`>`,`\|`),`=`} | (Decrease  1,Increase 1,Maximize) (row,column) for current (horizontal,vertical) split; Equal balance for horizontal or vertical split |
+| `<C-w> `{`-`,`+`,`_`,`<`,`>`,`\|`,`=`} | {Decrease 1 ,increase 1 ,maximize row, decrease 1, increase 1, maximize column, equal balance} for current horizontal or vertical split |
 
 ### Tabs
 
