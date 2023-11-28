@@ -96,7 +96,7 @@ My standards of install Arch Linux.
    pipewire wireplumber pipewire-alsa pipewire-pulse \
    base-devel git gvim ripgrep fzf ctags \
    vulkan-tools libva-utils hyfetch \
-   xorg-server bspwm sxhkd ly polybar xdo xorg-xrdb picom rofi redshift flameshot alacritty \
+   xorg-server bspwm sxhkd ly polybar xdo xorg-xrdb picom rofi redshift flameshot alacritty feh \
    noto-fonts{,-cjk,-emoji} \
    fcitx5-im fcitx5-chinese-addons
    ```
