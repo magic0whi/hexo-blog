@@ -98,7 +98,7 @@ My standards of install Arch Linux.
    vulkan-tools libva-utils hyfetch \
    xorg-server bspwm sxhkd ly polybar xdo xorg-xrdb picom rofi redshift flameshot alacritty feh \
    noto-fonts{,-cjk,-emoji} \
-   fcitx5-im fcitx5-chinese-addons
+   fcitx5-im fcitx5-chinese-addons fcitx5-pinyin-zhwiki
    ```
 
 ## Configure the system
@@ -142,38 +142,17 @@ options root=/dev/mapper/cryptroot rootflags=compress=zstd,subvol=@,discard=asyn
 ```
 
 AUR helper [paru](https://aur.archlinux.org/packages/paru/).
-1. [Optional] Create makepkg wrapper `makepkg-shallow` to make makepkg do shallow clone
-   ```shell /usr/bin/makepkg-shallow
-   #!/bin/bash
-
-   git() {
-   if [[ $# -gt 1 && $1 == 'clone' && $2 != '-s' ]]; then
-      /bin/git "$@" --depth=1 --no-single-branch
-   elif [[ $# -gt 1 && $1 == 'fetch' ]]; then
-      /bin/git fetch --depth=3 -p
-   elif [[ $# -gt 1 && [$1 == 'describe' || $1 == 'rev-list'] ]]; then
-      /bin/git fetch --unshallow -p
-      /bin/git "$@"
-   else
-      /bin/git "$@"
-   fi
-   }
-
-   source /bin/makepkg "$@"
-   ```
-2. Build & Install paru
-   ```console
-   # chmod 755 /usr/bin/makepkg-shallow
-   # mkdir /build
-   # chown -R <Username>:<Username> /build
-   # cd /build
-   # sudo -u <Username> git clone --depth=1 https://aur.archlinux.org/paru.git
-   # cd paru
-   # sudo -u <Username> makepkg-shallow --noconfirm -si
-   # pacman -Qtdq | xargs -r pacman --noconfirm -Rcns
-   # rm -rf /home/<Username>/.cache
-   # rm -rf /build
-   ```
+```console
+# mkdir /build
+# chown -R <Username>:<Username> /build
+# cd /build
+# sudo -u <Username> git clone --depth=1 https://aur.archlinux.org/paru.git
+# cd paru
+# sudo -u <Username> GITFLAGS="--depth=1" makepkg --noconfirm -si
+# pacman -Qtdq | xargs -r pacman --noconfirm -Rcns
+# rm -rf /home/<Username>/.cache
+# rm -rf /build
+```
 
 > Reboot to installed system to ensure that systemd is running.
 
@@ -237,7 +216,7 @@ Regenerate the initramfs:
    ```
 2. Setting the required kernel parameters
    ```console
-   # btrfs inspect-internal map-swapfile -r /swap/swapfile
+   # btrfs inspect-internal map-swapfile -r /.snapshots/swapfile
    198122980
    ```
 
@@ -284,45 +263,6 @@ Copy `MOK.cer` to a FAT formatted file system (Here I use EFI system partition).
 Reboot and enable Secure Boot. If shim does not find the certificate `grubx64.efi` is signed with in MokList it will launch MokManager (`mmx64.efi`).
 In MokManager select Enroll key from disk, find `MOK.cer` and add it to MokList. When done select Continue boot and your boot loader will launch and it will be capable launching any binary signed with your Machine Owner Key.
 
-### NVIDIA & NVIDIA Optimus
-
-Using `PRIME render offload` which was official method supported by NVIDIA
-
-1. The [nvidia-prime](https://www.archlinux.org/packages/?name=nvidia-prime) package provides a script that can be used to run programs on the NVIDIA card.
-   ```console
-   # pacman -S nvidia nvidia-prime
-   ```
-   To run a program on the NVIDIA card you can use the prime-run command:
-   ```console
-   $ prime-run glxinfo | grep "OpenGL renderer"
-   $ prime-run vulkaninfo
-   ```
-2. Dynamic power management of the dGPU
-   * Enable runtime power management for each PCI function
-     ```console
-     # echo auto > /sys/bus/pci/devices/<Domain>:<Bus>:<Device>.<Function>/power/control
-     # modprobe nvidia "NVreg_DynamicPowerManagement=0x02"
-     ```
-
-   * The automated ways to perform the manual steps mentioned above so that this feature works seamlessly after boot:
-     1. Create a file named `80-nvidia-pm.rules` in `/lib/udev/rules.d/` directory
-        ```properties /lib/udev/rules.d/80-nvidia-pm.rules
-        # Remove NVIDIA Audio devices, if present
-        ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x040300", ATTR{remove}="1"
-
-        # Enable runtime PM for NVIDIA VGA/3D controller devices on driver bind
-        ACTION=="bind", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x030000", TEST=="power/control", ATTR{power/control}="auto"
-
-        # Disable runtime PM for NVIDIA VGA/3D controller devices on driver unbind
-        ACTION=="unbind", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x030000", TEST=="power/control", ATTR{power/control}="on"
-        ```
-        > You can use `udevadm info --attribute-walk --path=/sys/bus/pci/devices/<Domain>\:<Bus>\:<Slot>.<Function>` to get a PCI device's   attribution
-     2. Set the driver option via the kernel module configuration files
-        ```properties /etc/modprobe.d/nvidia.conf
-        options nvidia "NVreg_DynamicPowerManagement=0x02"
-        ```
-     3. Reboot the system
-
 ## Tips
 
 - Run `fc-cache -fv` to rebuild font information cache files.
@@ -358,7 +298,9 @@ Using `PRIME render offload` which was official method supported by NVIDIA
   > Furthmore, you can set `OOMPolicy=kill` to a service unit, which says if one of the process belong to this service is being killed by systemd-oomd, the whole service will also get killed (this option sets service's cgroup `memory.oom.group` to `1`, which means all tasks belonging to this cgroup were killed together).
 
 ```plaintext Additional Packages
-[AUR] fcitx5-pinyin-zhwiki
+[AUR] ttf-material-design-icons-extended
+[AUR] fcitx5-pinyin-moegirl
+[AUR] fcitx5-pinyin-cedict
 fcitx5-material-color
 
 # GPU - Intel
@@ -367,11 +309,19 @@ intel-media-driver
 ^[AUR] libva-intel-driver-hybrid
 - [AUR] intel-hybrid-codec-driver
 
+# GPU - Nvidia
+nvidia-open nvidia-prime
+
 # GPU - AMD
 mesa
 vulkan-radeon
 libva-mesa
 
+# GPU Tools
+[AUR] raytracinginvulkan-git
+
+ranger ffmpegthumbnailer perl-image-exiftool ueberzug
+yt-dlp
 htop
 cmake
 gdb
@@ -387,7 +337,8 @@ wireguard-tools
 ntfs-3g
 docker{,-compose}
 howdy
-arch-install-scripts pacman-contrib
+arch-install-scripts pacman-contrib devtools
+cifs-utils
 picocom  # ($ picocom -b 1500000 /dev/ttyUSB0, Ctrl-a Ctrl-q to quit)
 [AUR] snowflake-pt-client-git
 [AUR] cppman
@@ -396,6 +347,8 @@ cmus # Music Player
 gdu/ncdu/dust # Calculate storage usage
 
 ## Desktop apps
+firefox
+profile-sync-daemon
 anki-bin
 blender
 krita
@@ -404,7 +357,7 @@ mpv
 obs-studio
 remmina libvncserver freerdp
 telegram-desktop
-zathura
+zathura zathura-pdf-poppler
 thunderbird
 [AUR] bitwarden
 [AUR] yesplaymusic-electron
@@ -420,6 +373,8 @@ vkd3d-proton-mingw-git
 
 lutris
 innoextract
+
+sunshine
 
 python-pip
 python-matplotlib
@@ -440,7 +395,8 @@ libxcrypt-compat gtk2
 ## Systemd-nspawn bootstrap
 debootstrap ubuntu-keyring
 
-## VM
+## Manager & VM
+cockpit-machines virt-install
 virt-manager libvirt dmidecode dnsmasq iptables-nft edk2-ovmf swtpm
 qemu
   ^[AUR] qemu-user-static
@@ -448,6 +404,5 @@ qemu
 
 [AUR] xray
 [AUR] v2raya
-[AUR] fcitx5-pinyin-moegirl
 qtcreator
 ```
