@@ -349,7 +349,7 @@ gdu/ncdu/dust # Calculate storage usage
 ## Desktop apps
 firefox
 profile-sync-daemon
-anki-bin
+anki-bin fcitx5-qt6-git
 blender
 krita
 libreoffice-still
@@ -384,8 +384,9 @@ python-seaborn
 [AUR] hexo-cli
 [AUR] clight clightd
 
-texlive-most
-- [AUR] tllocalmgr-git
+texlive-latexextra
+texlive-binextra
+texlive-mathscience
 
 ## MATLAB
 libxcrypt-compat gtk2

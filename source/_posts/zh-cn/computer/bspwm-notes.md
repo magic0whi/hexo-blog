@@ -97,29 +97,31 @@ Automatic Mode: The insertion position of new node determined by automatic schem
 
 ## Cheatsheet
 
-|                              |                                                                         |                                                     |
-| --                           | --                                                                      | --                                                  |
-| `<super-Return>`             | Open terminal                                                           |                                                     |
-| `<super-Space>`              | Open menu launcher                                                      |                                                     |
-| `<super-Esc>`                | sxhkd reload                                                            |                                                     |
-| `<super-M>-`{`q`,`r`}        | Quit / Restart bspwm                                                    | `bspc `{`quit`,`wm -r`}                             |
-| `<super-`[`S`]`>-w`          | Close / Kill focused node                                               | `bspc node -`{`c`,`k`}                              |
-| `<super>-m`                  | Alter tiled / monocle layout                                            | `bspc desktop -l next`                              |
-| `<super>-y`                  | Send the newest marked node to the newest preselected node              |                                                     |
-| `<super>-g`                  | Swap focused node and the node has biggest window                       |                                                     |
-| `<super>-`{`t`,`<S>-t`,`s`,`f`} | Set node state to tiled / pseudo tilted / floating / fullscreen      |                                                     |
-| `<super-C>-`{`m`,`x`,`y`,`z`} | Set node flag to marked / locked / sticky / private                    |                                                     |
-| `<super-`[`S`]`>-`{`h`,`j`,`k`,`l`} | Traverse / Swap node to west / south / north / east              |                                                     |
-| `<super>-`{`p`,`b`,`comma`,`period`} | Traverse the parent / brother / first / second node             |                                                     |
-| `<super-`[`S`]`>-c`          | Traverse next / previous node in focused desktop                        |                                                     |
-| `<super>-`{`{`,`}`}          | Traverse next / previous desktop in focused monitor                     |                                                     |
-| `<super>-`{`` ` ``,`<Tab>`}  | Traverse last node / desktop                                            |                                                     |
-| `<super>-`{`o`,`i`}          | Traverse older / newer node in traverse history                         |                                                     |
-| `<super-`[`S`]`>-`{`0-9`}    | Traverse desktop 0-9 / Send focused node to desktop 0-9                 |                                                     |
-| `<super-C>-`{`h`,`j`,`k`,`l`,`1-9`} | Preselect direction / ratio for new node to insert               | `bspc node `{`-p `{`west`,`souch`,`north`,`east`},`-o 0.`{`1-9`}} |
-| `<super-C-`[`S`]`-Space>`    | Cancel the preselection for focused node / desktop                      |                                                     |
-| `<super-M-`[`S`]`>-`{`h`,`j`,`k`,`l`} | (Resize) Expand / Contract node by moving one of its side outward / inward |                                         |
-| `<super-`{`Left`,`Upwn`,`UP`,`Right`}`>` | Move a floating node                                         |                                                    |
+|                              |                                                                                   |                                                     |
+| --                           | --                                                                                | --                                                  |
+| `<super-Return>`             | Open terminal                                                                     |                                                     |
+| `<super-Space>`              | Open menu launcher                                                                |                                                     |
+| `<super-Esc>`                | sxhkd reload                                                                      |                                                     |
+| `<super-M>-q`,`r`          | Quit / Restart bspwm                                                              | `bspc `{`quit`,`wm -r`}                             |
+| `<super-`[`S`]`>-w`          | Close / Kill focused node                                                         | `bspc node -`{`c`,`k`}                              |
+| `<super>-m`                  | Alter tiled / monocle layout                                                      | `bspc desktop -l next`                              |
+| `<super>-y`                  | Send the newest marked node to the newest preselected node (only current desktop) |                                                     |
+| `<super>-g`                  | Swap focused node and the node has biggest window                                 |                                                     |
+| `<super>-t`,`<S>-t`,`s`,`f` | Set node state to tiled / pseudo tilted / floating / fullscreen                |                                                     |
+| `<super-C>-m`,`x`,`y`,`z`  | Set node flag to marked / locked / sticky / private                              |                                                     |
+| `<super-`[`S`]`>`-`h`,`j`,`k`,`l` | Traverse / Swap node to west / south / north / east                        |                                                     |
+| `<super>-b`                  | Traverse brother node                                                             |                                                     |
+| `<super>-p`                  | Select parent node                                                                |                                                     |
+| `<super>-comma`,`period` | Traverse first / second node while selecting a parent node                        |                                                     |
+| `<super-`[`S`]`>`-`c`          | Traverse next / prev node in current desktop                                  |                                                     |
+| `<super>-{`,`}`          | Traverse prev / next desktop in current monitor                               |                                                     |
+| `` <super>-` ``,`<Tab>`  | Traverse last node / desktop                                                      |                                                     |
+| `<super>-o`,`i`          | Traverse older / newer node in traverse history                                   |                                                     |
+| `<super-`[`S`]`>-0-9`    | Traverse desktop 0-9 / Send focused node to desktop 0-9                           |                                                     |
+| `<super-C>-h`,`j`,`k`,`l`,`1-9` | Preselect direction / ratio for new node to insert                         | `bspc node `{`-p `{`west`,`souch`,`north`,`east`},`-o 0.`{`1-9`}} |
+| `<super-C-`[`S`]`-Space>`    | Cancel the preselection for focused node / desktop                                |                                                     |
+| `<super-M-`[`S`]`>-h`,`j`,`k`,`l` | (Resize) Expand / Contract node by moving one of its side outward / inward |                                         |
+| `<super-Left`,`Upwn`,`UP`,`Right>` | Move a floating node                                                  |                                                    |
 
 ## See Also
 
