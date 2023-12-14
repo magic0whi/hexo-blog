@@ -98,7 +98,7 @@ My standards of install Arch Linux.
    vulkan-tools libva-utils hyfetch \
    xorg-server bspwm sxhkd ly polybar xdo xorg-xrdb picom rofi redshift flameshot alacritty feh \
    noto-fonts{,-cjk,-emoji} \
-   fcitx5-im fcitx5-chinese-addons fcitx5-pinyin-zhwiki
+   fcitx5-im fcitx5-chinese-addons fcitx5-mozc fcitx5-pinyin-zhwiki
    ```
 
 ## Configure the system
