@@ -303,6 +303,9 @@ In MokManager select Enroll key from disk, find `MOK.cer` and add it to MokList.
 [AUR] fcitx5-pinyin-cedict
 fcitx5-material-color
 
+# Proxy
+[AUR] nekoray sing-geoip sing-geosite
+
 # GPU - Intel
 vulkan-intel
 intel-media-driver
