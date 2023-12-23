@@ -47,32 +47,49 @@ Using Qemu GTK to get a more smoothly experience:
 </domain>
 ```
 
-### Hypervisor Feafures
+### Hypervisor XML
 
-Meanwhile, I've set some minor stuffs such like KVM hidden, vendor_id, full KVM mode and cpu pins (specific for my i7-8750H, with a iothread created). Whereas some virtio features for disks and network bridges were enabled to satisfy my experience:
+The number of hugepages is memory size of virtual machine / Hugepagesize.
+```console
+$ echo "scale=2;<VM Memory size in GiB>*1024^2/$(grep Hugepagesize /proc/meminfo | awk '{print $2}')+1180" | bc
+```
+
+E.G. 4096 for a 8GiB VM, add additional 1180 for other uses.
+```properties /etc/sysctl.d/40-hugepage.conf
+vm.nr_hugepages=5276
+```
+
 ```xml
 <domain type='kvm' xmlns:qemu='http://libvirt.org/schemas/domain/qemu/1.0'>
+  <memory unit='KIB'>8388608</memory>
+  <memoryBacking>
+    <hugepages/>
+  </memoryBacking>
   <os>
-    <loader readonly='yes' secure='yes' type='pflash'>/usr/share/edk2-ovmf/x    64/OVMF_CODE.secboot.fd</loader> <!-- Secure Boot -->
+    <!-- Secure Boot -->
+    <loader readonly='yes' secure='yes' type='pflash'>/usr/share/edk2/x64/OVMF_CODE.secboot.4m.fd</loader>
   </os>
   <iothreads>1</iothreads>
   <vcpu placement='static'>8</vcpu>
   <cputune>
-    <!-- Use lscpu -e to see cpu topology. Here I pinned CPU2,3,4,5. To hypervisor, CPU1 to emulator and iothread -->
+    <!-- Use lscpu -e to see cpu topology. Here I pinned CPU2,3,4,5 to hypervisor, CPU1 to emulator and iothread -->
     <vcpupin vcpu='0' cpuset='2'/>
-    <vcpupin vcpu='1' cpuset='8'/>
+    <vcpupin vcpu='1' cpuset='10'/>
     <vcpupin vcpu='2' cpuset='3'/>
-    <vcpupin vcpu='3' cpuset='9'/>
+    <vcpupin vcpu='3' cpuset='11'/>
     <vcpupin vcpu='4' cpuset='4'/>
-    <vcpupin vcpu='5' cpuset='10'/>
+    <vcpupin vcpu='5' cpuset='12'/>
     <vcpupin vcpu='6' cpuset='5'/>
-    <vcpupin vcpu='7' cpuset='11'/>
-    <emulatorpin cpuset='1,7'/>
-    <iothreadpin iothread='1' cpuset='1,7'/>
+    <vcpupin vcpu='7' cpuset='13'/>
+    <emulatorpin cpuset='1,9'/>
+    <iothreadpin iothread='1' cpuset='1,9'/>
   </cputune>
   <cpu mode='host-passthrough' check='none' migratable='off'>
     <topology sockets='1' dies='1' cores='4' threads='2'/>
     <cache mode='passthrough'/>
+    <numa>
+      <cell memory='memory size of virtual machine' unit='KiB' memAccess='shared'/>
+    </numa>
   </cpu>
   <features>
     <hyperv mode='custom'>
@@ -82,12 +99,13 @@ Meanwhile, I've set some minor stuffs such like KVM hidden, vendor_id, full KVM 
       <vpindex state='on'/>
       <runtime state='on'/>
       <synic state='on'/>
-      <!-- For me, enable stimer will cause win10 KVM don't boot -->
-      <!-- <stimer state='on'>
+      <!-- Enable stimer may cause win10 KVM don't boot on i7-8750H -->
+      <stimer state='on'>
         <direct state='on'/>
-      </stimer> -->
+      </stimer>
       <reset state='on'/>
       <vendor_id state='on' value='GenuineIntel'/>
+      <!-- vendor_id state='on' value='AuthenticAMD'/> -->
       <frequencies state='on'/>
       <reenlightenment state='on'/>
       <tlbflush state='on'/>
@@ -95,13 +113,14 @@ Meanwhile, I've set some minor stuffs such like KVM hidden, vendor_id, full KVM 
       <evmcs state='on'/>
     </hyperv>
     <kvm>
-      <hidden state='on'/>
+      <hidden state='off'/>
     </kvm>
     <ioapic driver='kvm'/>
-    <smm state='on'/> <!-- Secure Boot -->
+    <!-- Secure Boot -->
+    <smm state='on'/>
   </features>
   <clock offset='localtime'>
-    <timer name='rtc' tickpolicy='catchup'/>
+    <timer name='rtc' tickpolicy='catchup' track='guest'/>
     <timer name='pit' tickpolicy='delay'/>
     <timer name='hpet' present='no'/>
     <timer name='kvmclock' present='no'/>
@@ -109,7 +128,7 @@ Meanwhile, I've set some minor stuffs such like KVM hidden, vendor_id, full KVM 
     <timer name='tsc' present='yes' mode='native'/>
   </clock>
   <devices>
-     <!-- Through I've added the virtio mouse and keyboard, the PS2 devices cannot be removed as they are an internal function of the emulated Q35/440FX chipsets -->
+     <!-- Through the virtio mouse and keyboard added, the PS2 devices cannot be removed as they are internal function of the emulated Q35/440FX chipsets -->
     <input type='mouse' bus='virtio'/>
     <input type='keyboard' bus='virtio'/>
     <disk type='file' device='disk'>
@@ -117,11 +136,20 @@ Meanwhile, I've set some minor stuffs such like KVM hidden, vendor_id, full KVM 
       <source file='/mnt/storage4/win10.qcow2'/>
       <target dev='vda' bus='virtio'/>
     </disk>
+    <filesystem type='mount' accessmode='passthrough'>
+      <driver type='virtiofs'/>
+      <source dir='/mnt/storage2/virt_share_dir'/>
+      <target dir='mount_tag'/>
+    </filesystem>
     <interface type='direct'>
       <mac address='11:45:14:19:19:81'/>
       <source dev='macvtap0' mode='vepa'/>
       <model type='virtio'/>
     </interface>
+    <rng model='virtio'>
+      <backend model='random'>/dev/random</backend>
+    </rng>
+    <panic model='hyperv'/>
   </devices>
 </domain>
 ```
