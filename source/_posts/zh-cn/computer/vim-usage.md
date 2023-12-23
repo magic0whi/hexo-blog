@@ -27,7 +27,7 @@ TODO: works to be merged
 `sort` sort command sort the lines
 Spell Check:
 {`]`,`[`}`s` Jump to next / prev wrong word
-`z`[`u`]{`g`,`w`,`G`,`w`} Add / Undo add good / wrong word under cursor to `spellfile` / or save to current session (Which is temporarily if you don't save session)
+`z`[`u`]{`g`,`w`,`G`,`W`} Add / Undo add good / wrong word under cursor to `spellfile` / or save to current session (Which is temporarily if you don't save session)
 `z=` Find suggestion of the word under cursor
 
 

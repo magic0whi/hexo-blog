@@ -16,24 +16,24 @@ A paper of my Linux gists
 
 ### Shell builtin & Concept
 
-- filter: 能用在管道里的命令属于过滤器.
-  什么样的命令能用于管道? 能对 stdin 文本按行处理, 并将结果输出到 stdout 的命令
-  cp, diff 不属于过滤器
-- Linux 命令特点
-  - 如果没有 argument, 默认从 stdin 读.
-  - 默认输出到 stdout
+- filter: Programs that can be used in shell pipe.
+  What programs can be used in shell pipe? Programs that process `stdin` line-by-line, then output results to `stdout`.
+  E.G. `cp`, `diff` are NOT belong to filter
+- Linux Shell Features
+  - If no argument, default read from `stdin`.
+  - Default output into stdout
 
-- `type xxx` 查看命令类型(外部命令还是内部命令)
-- `man builtins` 查看 shell 的内部命令文档
-- `help xxx` 可查看内部命令的快速帮助
-- `history` 查看命令历史, 搭配 `fc` 使用
+- `type xxx` Show command type (builtin or outer)
+- `man builtins` Show manual of shell builtins.
+- `help xxx` Fast help for shell builtin `xxx`.
+- `history` Show shell history, which can be used along with `fc`.
 
 Redirect:
-- 覆盖（write）输出重定向 `>`
-- 追加（append）重定向 `>>`
-- 字符串输入重定向 `<<<`
+- Write (Override) Output redirect `>`
+- Append output redirect `>>`
+- Input redirect (Strings) `<<<`
 
-- 理解命令行参数的实现，`stdin`/`stdout`/`stderr`的用法
+- How to process shell args and `stdin`, `stdout`, `stderr`:
   ```C++
   #include<stdio.h>
   int main(int argc, char *argv[]) {
@@ -129,15 +129,30 @@ Redirect:
 
 ### Filesystem
 
-6. 一个文件对应一个 inode (存储文件属性+block的指针列表)和0~n个block(存储文件真实内容)
-7. 硬链接: 同一个文件, 有多个名字; 只针对文件, 不支持目录; 不能跨文件系统.
+1. 一个文件对应一个 inode (存储文件属性+block的指针列表)和0~n个block(存储文件真实内容)
+2. 硬链接: 同一个文件, 有多个名字; 只针对文件, 不支持目录; 不能跨文件系统.
    软连接: 不同文件; 文件/目录都可以; 可用跨文件系统.
-8. 为什么文件夹不能创建硬链接, 硬连接数却大于1? 因为目录下的"."和子目录的".."能够增加目录硬链接数.
+3. 为什么文件夹不能创建硬链接, 硬连接数却大于1? 因为目录下的"."和子目录的".."能够增加目录硬链接数.
 
 ### Misc
 
 - `findmnt` list all mounted filesystems.
 - `# systool -v -m module_name` list options that are set for a loaded module.
+
+### Clean Build
+
+- Use paru
+  ```console
+  $ sudo mount --mkdir -t tmpfs -o defaults,size=20G tmpfs /mnt/chroots/arch | sudo chown <Username>: /mnt/chroots/arch
+  $ paru -S --chroot=/mnt/chroots/arch <Packages>
+  ```
+- Manual Way
+  ```console
+  $ sudo mount --mkdir -t tmpfs -o defaults,size=20G tmpfs /mnt/chroots/arch | sudo chown proteus: /mnt/chroots/arch
+  $ CHROOT=/mnt/chroots/arch
+  $ mkarchroot $CHROOT/root base-devel
+  $ makechrootpkg -c -r $CHROOT [-I ../Build_Deps/Build_Deps.pkg.tar.zst]
+  ```
 
 ### sed
 
@@ -255,9 +270,9 @@ By using glob extension in bash:
 
 ## Iptables
 
-1. IPSET u32 匹配
-   判断一个包的 TCP Seq 的最后一个值是否等于 41 : `0>>22&0x3C@ 4 &0xFF=0x29`
-   举个例子(可以用 WireShark 抓包):
+1. IPSET u32 match
+   Check whether the last value of TCP Seq in a network package equals 41 : `0>>22&0x3C@ 4 &0xFF=0x29`
+   Example (Use WireShark to catch packages):
    ```
    Source IP: 121.41.89.52
    = 01111001 00101001 01011001 00110100B = 79 29 59 34H = 2032752948D

@@ -96,7 +96,7 @@ My standards of install Arch Linux.
    pipewire wireplumber pipewire-alsa pipewire-pulse \
    base-devel git gvim ripgrep fzf ctags \
    vulkan-tools libva-utils hyfetch \
-   xorg-server bspwm sxhkd ly polybar xdo xorg-xrdb picom rofi redshift flameshot alacritty feh \
+   xorg-server bspwm sxhkd ly polybar xdo xorg-xrdb picom rofi redshift flameshot alacritty feh polkit-gnome \
    noto-fonts{,-cjk,-emoji} \
    fcitx5-im fcitx5-chinese-addons fcitx5-mozc fcitx5-pinyin-zhwiki
    ```
@@ -397,8 +397,10 @@ libxcrypt-compat gtk2
 debootstrap ubuntu-keyring
 
 ## Manager & VM
-cockpit-machines virt-install
-virt-manager libvirt dmidecode dnsmasq iptables-nft edk2-ovmf swtpm
+samba
+[AUR] wsdd2
+cockpit-machines virt-install dnsmasq dmidecode edk2-ovmf swtpm
+virt-manager
 qemu
   ^[AUR] qemu-user-static
    - [AUR] binfmt-qemu-static-all-arch
