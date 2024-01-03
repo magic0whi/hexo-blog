@@ -16,6 +16,13 @@ A paper of my Linux gists
 
 ### Shell builtin & Concept
 
+- Shortcut:
+  `<M-b/f>` Move back / forward a word.
+  `<C-b/f>` Move back / forward a char.
+  `<C-s>` Pause STDOUT
+  `<C-q>` resume STDOUT
+  `<C-r>` Enter history search mode
+  `<C-g>` Beaak out a newline; Leave history search mode
 - filter: Programs that can be used in shell pipe.
   What programs can be used in shell pipe? Programs that process `stdin` line-by-line, then output results to `stdout`.
   E.G. `cp`, `diff` are NOT belong to filter
@@ -141,17 +148,27 @@ Redirect:
 
 ### Clean Build
 
+- Prepare
+  ```console
+  $ RAMDISK_SIZE=20
+  $ sudo mount --mkdir -t tmpfs -o defaults,size=${RAMDISK_SIZE}G tmpfs /mnt/chroots/tmp
+  $ sudo dd if=/dev/zero of=/mnt/chroots/tmp/ramdisk status=progress bs=1M count=$(($RAMDISK_SIZE*1024))
+  $ sudo mkfs.btrfs -n 8k -m single -f /mnt/chroots/tmp/ramdisk
+  $ sudo mount --mkdir -t btrfs -o loop,sync,compress=zstd /mnt/chroots/tmp/ramdisk /mnt/chroots/arch
+  $ CHROOT=/mnt/chroots/arch
+  ```
 - Use paru
   ```console
-  $ sudo mount --mkdir -t tmpfs -o defaults,size=20G tmpfs /mnt/chroots/arch | sudo chown <Username>: /mnt/chroots/arch
   $ paru -S --chroot=/mnt/chroots/arch <Packages>
   ```
 - Manual Way
   ```console
-  $ sudo mount --mkdir -t tmpfs -o defaults,size=20G tmpfs /mnt/chroots/arch | sudo chown proteus: /mnt/chroots/arch
-  $ CHROOT=/mnt/chroots/arch
   $ mkarchroot $CHROOT/root base-devel
   $ makechrootpkg -c -r $CHROOT [-I ../Build_Deps/Build_Deps.pkg.tar.zst]
+  ```
+- Umount
+  ```console
+  sudo umount $CHROOT /mnt/chroots/tmp
   ```
 
 ### sed

@@ -96,7 +96,7 @@ My standards of install Arch Linux.
    pipewire wireplumber pipewire-alsa pipewire-pulse \
    base-devel git gvim ripgrep fzf ctags \
    vulkan-tools libva-utils hyfetch \
-   xorg-server bspwm sxhkd ly polybar xdo xorg-xrdb picom rofi redshift flameshot alacritty feh polkit-gnome \
+   xorg-server bspwm sxhkd ly polybar xdo xorg-xrdb picom rofi flameshot alacritty feh polkit-gnome slock \
    noto-fonts{,-cjk,-emoji} \
    fcitx5-im fcitx5-chinese-addons fcitx5-mozc fcitx5-pinyin-zhwiki
    ```
@@ -104,14 +104,23 @@ My standards of install Arch Linux.
 ## Configure the system
 
 ```console shell
-# genfstab -U /mnt >> /mnt/etc/fstab
+# git clone --depth=1 --bare https://github.com/magic0whi/proteuslaptop_etc.git .git
+# git config core.bare false
+# git checkout HEAD .
+Modify /etc/{fstab,hostname,hosts}
 # arch-chroot /mnt
 # hwclock --systohc
 # locale-gen
 $ #Recreate the initramfs image
 # mkinitcpio -P
-# useradd -m -s /bin/bash <Username>
-$ # Setting the new user and root user's password
+# useradd -m -s /bin/zsh <Username>
+# su <Username>
+$ cd
+$ git clone --depth=1 --bare https://github.com/magic0whi/proteuslaptop_dotfiles.git .dotfiles
+$ alias gitdot='git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
+$ gitdot config core.bare false
+$ gitdot checkout HEAD .'
+$ exit
 # passwd <Username>
 # passwd root
 ```
@@ -323,6 +332,8 @@ libva-mesa
 # GPU Tools
 [AUR] raytracinginvulkan-git
 
+wireless-regdb
+
 ranger ffmpegthumbnailer perl-image-exiftool ueberzug
 yt-dlp
 htop
@@ -340,9 +351,10 @@ wireguard-tools
 ntfs-3g
 docker{,-compose}
 howdy
-arch-install-scripts pacman-contrib devtools
+pacman-contrib devtools
 cifs-utils
 picocom  # ($ picocom -b 1500000 /dev/ttyUSB0, Ctrl-a Ctrl-q to quit)
+usbutils
 [AUR] snowflake-pt-client-git
 [AUR] cppman
 
@@ -402,7 +414,7 @@ debootstrap ubuntu-keyring
 ## Manager & VM
 samba
 [AUR] wsdd2
-cockpit-machines virt-install dnsmasq dmidecode edk2-ovmf swtpm
+cockpit-machines cockpit-storaged virt-install dnsmasq dmidecode edk2-ovmf swtpm
 virt-manager
 qemu
   ^[AUR] qemu-user-static

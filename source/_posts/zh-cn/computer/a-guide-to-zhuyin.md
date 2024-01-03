@@ -24,5 +24,6 @@ A brief guide to zhuyin input & keyboard
 | ㄈ f | ㄌ l | ㄏ h | ㄒ x | ㄖ r | ㄙ s | ㄩ yu/ü | ㄝ ê | ㄡ ou | ㄥ eng |  |
 
 
-| ㄧㄣ in | ㄩㄣ ün | ㄧㄥ ing | ㄨㄥ weng/ong | ㄩㄥ yong |
-|---|---|---|---|---|
+`ㄧㄣ` in, `ㄩㄣ` ün.
+`ㄧㄥ` ing, `ㄨㄥ` weng/ong, `ㄩㄥ` yong
+`ㄨㄟ` ui.
