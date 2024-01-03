@@ -181,7 +181,7 @@ $ # Enable sshd
 $ # Enable bluetooth auto power-on
 # systemctl enable --now bluetooth.service
 $ Enable systemd-oomd (Userspace OOM daemon)
-# systemctl enable systemd-oomd.service
+# systemctl enable --now systemd-oomd.service
 ```
 ### Enroll TPM key
 
