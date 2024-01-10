@@ -227,7 +227,7 @@ To generate 20 different passwords which has length 12 and at least one big lett
 $ pwgen -cnys 12 20
 ```
 
-### Recursively chmod all directories and exclude files
+### `chmod` directories only (exclude files)
 
 To recursively give directories read & execute privileges:
 ```console
@@ -243,11 +243,19 @@ Reference from [StackExchange](https://superuser.com/questions/91935/how-to-recu
 
 ### Exclusive delete
 
-By using glob extension in bash:
-```console
-# shopt -s extglob
-# rm -r !(filename1|filename2|dir1)
-```
+Enable glob extension
+
+- Bash
+  ```console
+  $ shopt -s extglob
+  $ rm -r !(file1|file2|dir)
+  ```
+- Zsh
+  ```console
+   $ setopt extendedglob
+   $ rm -r ^(file1|file2|dir)
+   ```
+
 
 ### ssh-keygen
 
@@ -271,18 +279,35 @@ By using glob extension in bash:
    ```console
    $ cat /proc/sys/kernel/random/uuid
    ```
-2. Show available entropy:
-   ```console
-   cat /proc/sys/kernel/random/entropy_avail
-   ```
-3. Show battery capacity remain:
+2. Show battery capacity remain:
    ```console
    $ cat /sys/class/power_supply/<Your battery name>/capacity
    ```
-4. List network interfaces: ` ls /sys/class/net` or `ip link`
-5. Show monitor modes from kernel DRM module
+3. List network interfaces: ` ls /sys/class/net` or `ip link`
+4. Show monitor modes from kernel DRM module
    ```console
-   $ cat /sys/class/drm/card0/card0-eDP-1/modes
+   $ cat /sys/class/drm/card1/card1-eDP-1/modes
+   ```
+5. (D-Bus) Manually inhibit / pause [clighti<sup>AUR<sup>](https://aur.archlinux.org/packages/clight).
+   Check all
+   ```console
+   $ busctl --user introspect org.clight.clight /org/clight/clight org.clight.clight
+   ```
+   Call method Inhibit
+   ```console
+   $ busctl --user call org.clight.clight /org/clight/clight org.clight/clight Inhibit b true
+   ```
+   Check property Inhibited
+   ```console
+   $ busctl --user get-property org.clight.clight /org/clight/clight org.clight.clight Inhibited
+   ```
+   Or call method Pause
+   ```console
+   $ busctl --user call org.clight.clight /org/clight/clight org.clight.clight Pause b true
+   ```
+   Check property Suspended
+   ```console
+   $ busctl --user get-property org.clight.clight /org/clight/clight org.clight.clight Suspended
    ```
 
 ## Iptables

@@ -196,10 +196,6 @@ Binds the key to PCRs 0 and 7 (System firmware and Secure Boot state):
 # systemd-cryptenroll --tpm2-device=auto --tpm2-pcrs=0+7 /dev/sda2
 ```
 
-Regenerate the initramfs:
-```console
-# mkinitcpio -P
-```
 > To remove a key enrolled, run:
 > ```console
 > # systemd-cryptenroll /dev/sdX --wipe-slot=slot_number
