@@ -134,6 +134,47 @@ Redirect:
 - `nohup` 防止退出账户导致程序挂起
   让程序后台运行 `nohup bash run0.sh &`
 
+### DSDT (Differentiated System Description Table)
+
+Here is an example to fix s2idle issue on the Lenovo Yoga Air 14s APU8 (aka. Yoga Slim 7 Gen 8 14APU8)
+
+Extract & Modify DSDT
+```console
+$ # Extract the binary ACPI tables
+# cat /sys/firmware/acpi/tables/DSDT > dsdt.dat
+$ # Disassemble the ACPI tables to a .dsl file
+$ iasl -d dsdt.dat
+$ # Modify DSDT
+$ vim dsdt.dsl
+$ # Attempt to create a hex AML table (in C) dsdt.aml
+$ iasl -tc dsdt.dsl | grep Errors
+```
+
+Extract & Modify SSDT
+```console
+$ # Modify SSDT (System Service Descriptor Table)
+# for i in /sys/firmware/acpi/tables/SSDT*; do \
+    cat $i > ${i##*/}; \
+done
+$ iasl -d SSDT*
+$ rg "SB.PCI0.GPP8.NVME" SSDT*.dsl
+$ # Found keywords in SSDT14.dsl, comment out it
+$ vim SSDT14.dsl
+$ # Compile SSDT to generate SSDT14.aml
+$ iasl -tc SSDT14.dsl
+$ # Create a CPIO archive
+$ mkdir -p kernel/firmware/acpi
+$ # through dsdt.aml is optional if it keep untouched
+$ cp dsdt.aml SSDT14.aml kernel/firmware/acpi
+$ find kernel | cpio -o -H newc > SSDT14
+```
+
+> To extract CPIO archive
+> ```console
+> $ cpio -iv -H newc < SSDT14
+> $ iasl -d kernel/firmware/acpi/SSDT14.aml
+> ```
+
 ### Filesystem
 
 1. 一个文件对应一个 inode (存储文件属性+block的指针列表)和0~n个block(存储文件真实内容)

@@ -304,8 +304,7 @@ In MokManager select Enroll key from disk, find `MOK.cer` and add it to MokList.
 
 ```plaintext Additional Packages
 [AUR] ttf-material-design-icons-extended
-[AUR] fcitx5-pinyin-moegirl
-[AUR] fcitx5-pinyin-cedict
+[AUR] fcitx5-pinyin-moegirl fcitx5-pinyin-cedict
 fcitx5-material-color
 
 # Proxy
@@ -346,7 +345,7 @@ traceroute
 wireguard-tools
 ntfs-3g
 docker{,-compose}
-howdy
+howdy linux-enable-ir-emitter
 pacman-contrib devtools
 cifs-utils
 picocom  # ($ picocom -b 1500000 /dev/ttyUSB0, Ctrl-a Ctrl-q to quit)
@@ -356,6 +355,7 @@ usbutils
 
 cmus # Music Player
 gdu/ncdu/dust # Calculate storage usage
+nsxiv # Image Viewer
 
 ## Desktop apps
 firefox
