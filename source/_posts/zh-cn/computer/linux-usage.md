@@ -8,7 +8,7 @@ toc: true
 
 一份我的 Linux 手扎
 
-A paper of my Linux gists
+A manual of my Linux gists
 
 <!-- more -->
 
@@ -175,12 +175,17 @@ $ find kernel | cpio -o -H newc > SSDT14
 > $ iasl -d kernel/firmware/acpi/SSDT14.aml
 > ```
 
+### Inkscape
+
+- **!** key inverts node selection in current subpath(s).
+
 ### Filesystem
 
-1. 一个文件对应一个 inode (存储文件属性+block的指针列表)和0~n个block(存储文件真实内容)
-2. 硬链接: 同一个文件, 有多个名字; 只针对文件, 不支持目录; 不能跨文件系统.
-   软连接: 不同文件; 文件/目录都可以; 可用跨文件系统.
-3. 为什么文件夹不能创建硬链接, 硬连接数却大于1? 因为目录下的"."和子目录的".."能够增加目录硬链接数.
+1. A file corresponds to one inode (which stores the file properties and the pointer table of blocks) and ordered number 0~n blocks (stores the data of the file).
+2. Hard symbol links: Same file but has multiple names; Only apply to file, does not support directory; Can't across filesystems.
+   Soft symbol links: Different file but same name; Could apply to file or directory; Can across filesystems.
+3. Why directories could not have hard link, but it has hard link count more than 1?
+   Because directories have pointer "." and "..", which increase the hard link count.
 
 ### Misc
 
@@ -193,7 +198,7 @@ $ find kernel | cpio -o -H newc > SSDT14
   ```console
   $ RAMDISK_SIZE=20
   $ sudo mount --mkdir -t tmpfs -o defaults,size=${RAMDISK_SIZE}G tmpfs /mnt/chroots/tmp
-  $ sudo dd if=/dev/zero of=/mnt/chroots/tmp/ramdisk status=progress bs=1M count=$(($RAMDISK_SIZE*1024))
+  $ sudo dd if=/dev/zero of=/mnt/chroots/tmp/ramdisk status=progress bs=128K count=$(($RAMDISK_SIZE*8192))
   $ sudo mkfs.btrfs -n 8k -m single -f /mnt/chroots/tmp/ramdisk
   $ sudo mount --mkdir -t btrfs -o loop,sync,compress=zstd /mnt/chroots/tmp/ramdisk /mnt/chroots/arch
   $ CHROOT=/mnt/chroots/arch

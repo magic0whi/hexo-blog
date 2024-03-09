@@ -304,7 +304,7 @@ In MokManager select Enroll key from disk, find `MOK.cer` and add it to MokList.
 
 ```plaintext Additional Packages
 [AUR] ttf-material-design-icons-extended
-[AUR] fcitx5-pinyin-moegirl fcitx5-pinyin-cedict
+[AUR] fcitx5-pinyin-moegirl
 fcitx5-material-color
 
 # Proxy
