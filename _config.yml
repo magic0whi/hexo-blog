@@ -7,7 +7,7 @@ language:
   - zh-cn
   - en
 timezone: Asia/Shanghai
-url: 'http://blog.ndoskrnl.net'
+url: 'https://magic0whi.github.io'
 root: /
 permalink: ':lang/:category/:year/:title/'
 permalink_defaults:
