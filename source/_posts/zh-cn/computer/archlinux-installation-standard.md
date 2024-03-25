@@ -94,7 +94,7 @@ My standards of install Arch Linux.
    btrfs-progs tmux bash-completion udisks2 btop man rsync tealdeer \
    zsh{,-autosuggestions,-syntax-highlighting,-history-substring-search} \
    pipewire wireplumber pipewire-alsa pipewire-pulse \
-   base-devel git gvim ripgrep fzf ctags \
+   base-devel git helix ripgrep fzf \
    vulkan-tools libva-utils hyfetch \
    xorg-server bspwm sxhkd ly polybar xdo xorg-xrdb picom rofi flameshot alacritty feh polkit-gnome slock \
    noto-fonts{,-cjk,-emoji} \
@@ -308,7 +308,7 @@ In MokManager select Enroll key from disk, find `MOK.cer` and add it to MokList.
 fcitx5-material-color
 
 # Proxy
-[AUR] nekoray sing-geoip sing-geosite
+[AUR] sing-box
 
 # GPU - Intel
 vulkan-intel
