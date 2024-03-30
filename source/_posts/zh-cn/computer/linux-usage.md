@@ -6,8 +6,6 @@ tags:
 toc: true
 ---
 
-一份我的 Linux 手扎
-
 A manual of my Linux gists
 
 <!-- more -->
@@ -177,7 +175,12 @@ $ find kernel | cpio -o -H newc > SSDT14
 
 ### Inkscape
 
-- **!** key inverts node selection in current subpath(s).
+<u>N</u>odeTool
+1. Editing paths
+  - Dragging over line with `<M>` to select their nodes, release to switch to rubberband mode.
+  - `!` key inverts node selection in current subpath(s).
+  - `[`,`]` rotate 15&deg; `<`,`>` keys scale.
+  - `Double Clicking` deletes node. `<C-M>-Click` adds node.
 
 ### Filesystem
 
@@ -301,6 +304,35 @@ Enable glob extension
    $ setopt extendedglob
    $ rm -r ^(file1|file2|dir)
    ```
+
+### Bluetooth dual boot pairing
+
+Extracting on Linux
+
+```console
+# cryptsetup open --type=bitlk /dev/nvme0n1p3 win11 <<<XXXXXX-XXXXXX-XXXXXX-XXXXXX-XXXXXX-XXXXXX-XXXXXX-XXXXXX
+# mount /dev/mapper/win11 /mnt/win11
+$ cd /mnt/Windows/System32/config
+$ chntpw -e SYSTEM
+> cd ControlSet001\Services\BTHPORT\Parameters\Keys
+> cd xxxxxxxxxxxx
+> hex xxxxxxxxxxxx # For not a Bluetooth 5.1 devices
+> cd xxxxxxxxxxxx # For Bluetooth 5.1 devices
+> hex LTK
+> hex ERand
+> hex EDIV
+> hex IRK
+```
+
+```console
+$ python
+>>> LTK='<hex-of-LTK>'.replace(' ', '')
+>>> ERand=int(''.join(list(reversed('<hex-of-ERand>'.strip().split()))), 16)
+>>> EDIV=int(''.join(list(reversed('<hex-of-EDIV>'.strip().split()))), 16)
+>>> IRK=list(reversed('<hex-of-IRK>'.strip().split()))
+>>> print('LTK: ', LTK, '\n', 'ERand: ', ERand, '\n', 'EDIV: ', EDIV, '\n', 'IRK: ', ''.join(IRK))
+```
+
 
 
 ### ssh-keygen
@@ -471,9 +503,7 @@ Enable glob extension
 
 ## SSH Tunnel
 
-X11vnc startup
-
-With SDDM and SSH Tunnel.
+X11vnc startup with SDDM and SSH Tunnel.
 Please be aware that this command need to be executed on client-side.
 
 ```console

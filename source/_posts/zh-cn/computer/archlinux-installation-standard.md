@@ -98,7 +98,7 @@ My standards of install Arch Linux.
    vulkan-tools libva-utils hyfetch \
    xorg-server bspwm sxhkd ly polybar xdo xorg-xrdb picom rofi flameshot alacritty feh polkit-gnome slock \
    noto-fonts{,-cjk,-emoji} \
-   fcitx5-im fcitx5-chinese-addons fcitx5-mozc fcitx5-pinyin-zhwiki
+   fcitx5-im fcitx5-chinese-addons fcitx5-mozc fcitx5-chewing fcitx5-pinyin-zhwiki
    ```
 
 ## Configure the system
@@ -198,12 +198,12 @@ Binds the key to PCRs 0 and 7 (System firmware and Secure Boot state):
 
 > To remove a key enrolled, run:
 > ```console
-> # systemd-cryptenroll /dev/sdX --wipe-slot=slot_number
+> # systemd-cryptenroll --wipe-slot=slot_number /dev/sdX
 > ```
 > where `slot_number` is the numeric LUKS slot number in which your TPM key is stored.
 > Alternatively, run:
 > ```console
-> # systemd-cryptenroll /dev/sdX --wipe-slot=tpm2
+> # systemd-cryptenroll --wipe-slot=tpm2 /dev/sdX
 > ```
 > to remove all TPM-associated keys from your LUKS volume.
 
