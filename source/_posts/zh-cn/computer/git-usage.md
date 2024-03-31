@@ -62,24 +62,20 @@ Remove file in index only: `git rm --cached <file>`
 
 ## Commit
 
-Automatically stage changes then commit: `git commit -a`
-
-Fast modify last commit: `git commit --amend`
+- Automatically stage changes, add signoff, GPG-sign the commit: `git commit -asS`
+- Fast modify last commit: `git commit --amend`
 
 ## Log
 
-Show log in a friendly format: `git log --graph --oneline --decorate --all`
-
-Show commits with diff patch (`-p`/`-u`/`--patch`/`--cc` (dense)): `git log -cc`, `git log --cc -1` (For HEAD only)
-
-Show commits for a user (`--author=`/`--committer=`): `git log --author=<pattern>`
-
-Grep in commit logs: `git log --grep=<pattern>`
+- Show log in a friendly format: `git -P log --pretty='format:%C(auto)%G?%d %h %an %ar %s' --graph --all`
+- Show commits with diff patch (`-p`/`-u`/`--patch`/`--cc` (dense)): `git log -cc`, `git log --cc -1` (For HEAD only)
+- Show commits for a user (`--author=`/`--committer=`): `git log --author=<pattern>`
+- Grep in commit logs: `git log --grep=<pattern>`
 
 ## Diff
 
-Show a summary: `git diff --stat`
-Show diff of the last commit: `git diff HEAD HEAD~1` or `git diff HEAD^!`
+- Show a summary: `git -P diff --stat`
+- Show diff of the last commit: `git -P diff HEAD HEAD~1` or `git -P diff HEAD^!`
 
 ## Blame
 

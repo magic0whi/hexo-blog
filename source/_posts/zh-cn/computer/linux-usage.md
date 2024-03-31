@@ -324,6 +324,7 @@ $ chntpw -e SYSTEM
 > hex IRK
 ```
 
+Useful python snippets
 ```console
 $ python
 >>> LTK='<hex-of-LTK>'.replace(' ', '')
