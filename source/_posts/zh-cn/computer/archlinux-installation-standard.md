@@ -350,6 +350,7 @@ pacman-contrib devtools
 cifs-utils
 picocom  # ($ picocom -b 1500000 /dev/ttyUSB0, Ctrl-a Ctrl-q to quit)
 usbutils
+img2pdf
 [AUR] snowflake-pt-client-git
 [AUR] cppman
 
@@ -370,6 +371,7 @@ remmina libvncserver freerdp
 telegram-desktop
 zathura zathura-pdf-poppler
 thunderbird
+gimp
 [AUR] bitwarden
 [AUR] yesplaymusic-electron
 [AUR] microsoft-edge-dev-bin

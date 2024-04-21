@@ -12,15 +12,81 @@ A manual of my Linux gists
 
 ## Linux Common Commands
 
+### PDF Generate
+
+Example:
+```console
+img2pdf --output out.pdf --creator 'Canon SC1011' --producer 'IJ Scan Utility' --creationdate 'Wed Mar 20 16:33:38 2024 CST' -D --engine internal -s 600dpi [1-5].jpg
+```
+
+### Steam
+
+Launch Heart of Iron IV (With FSR1, VRR, MangoHud)
+```console
+gamescope -w 1728 -h 1080 -W 2944 -H 1840 --adaptive-sync -F fsr --fsr-sharpness 10 -- env LD_PRELOAD='/usr/lib/mangohud/libMangoApp.so /usr/lib/mangohud/libMangoHud.so /usr/lib/mangohud/libMangoHud_dlsym.so /usr/lib/mangohud/libMangoHud_opengl.so' sh ./cream.sh %command%
+```
+
+### Libvirt
+
+> Use `--print-xml | less` to see generated xml only for debugging.
+
+- Install a Arm Cortex-a53 machine
+  ```console
+  virt-install --connect qemu:///system \
+   --memory 2048 --memorybacking hugepages.page0.size=2048 \
+   --arch=aarch64 --cpu cortex-a53 --machine virt \
+   --vcpus vcpu=4,vcpu.placement=static --iothreads 1 \
+   --cputune vcpupin0.vcpu=0,vcpupin0.cpuset=2,vcpupin1.vcpu=1,vcpupin1.cpuset=10,vcpupin2.vcpu=2,vcpupin2.cpuset=3,vcpupin3.vcpu=3,vcpupin3.cpuset=11,emulatorpin.cpuset='1,9',iothreadpin0.iothread=1,iothreadpin0.cpuset='1,9' \
+   --cpu topology.sockets=1,topology.dies=1,topology.cores=4,topology.threads=1,numa.cell0.memory=2048,numa.cell0.unit=MiB,numa.cell0.memAccess=shared \
+   --osinfo archlinux \
+   --disk size=10,format=qcow2,driver.cache=none,driver.io=native,driver.discard=unmap,driver.iothread=1,driver.queues=4,driver.iommu=on,target.bus=virtio \
+   --boot firmware=efi,loader=/usr/share/edk2/aarch64/QEMU_CODE.fd,loader.readonly=yes,loader.type=pflash,nvram.template=/usr/share/edk2/aarch64/QEMU_VARS.fd,boot0.dev=network,boot1.dev=hd \
+   --features gic.version=3,kvm.hidden.state=off,pmu.state=on \
+   --clock offset=localtime,timer0.name=rtc,timer0.tickpolicy=catchup,timer0.track=guest,timer1.name=pit,timer1.tickpolicy=delay \
+   --network direct,trustGuestRxFilters=yes,source=macvtap0,source.mode=vepa,model=virtio,driver.iommu=on \
+   --controller virtio-serial,driver.iommu=on \
+   --video virtio,model.vram=16384,model.heads=1 \
+   --watchdog i6300esb \
+   --rng /dev/random,model=virtio,driver.iommu=on \
+   --tpm emulator,backend.version=2.0 \
+   --memballoon virtio,driver.iommu=on \
+   --iommu virtio \
+   --panic pvpanic \
+   --import
+  ```
+- Install a RISC-V machine
+  ```console
+  virt-install --connect qemu:///system \
+   --memory 2048 --memorybacking hugepages.page0.size=2048 \
+   --arch riscv64 --machine virt \
+   --vcpus vcpu=4,vcpu.placement=static --iothreads 1 \
+   --cputune vcpupin0.vcpu=0,vcpupin0.cpuset=2,vcpupin1.vcpu=1,vcpupin1.cpuset=10,vcpupin2.vcpu=2,vcpupin2.cpuset=3,vcpupin3.vcpu=3,vcpupin3.cpuset=11,emulatorpin.cpuset='1,9',iothreadpin0.iothread=1,iothreadpin0.cpuset='1,9' \
+   --cpu topology.sockets=1,topology.dies=1,topology.cores=4,topology.threads=1,numa.cell0.memory=2048,numa.cell0.unit=MiB,numa.cell0.memAccess=shared \
+   --osinfo archlinux \
+   --disk size=10,format=qcow2,driver.cache=none,driver.io=native,driver.discard=unmap,driver.iothread=1,driver.queues=4,driver.iommu=on,target.bus=virtio \
+   --boot loader=/usr/share/qemu/opensbi-riscv64-generic-fw_dynamic.bin,boot0.dev=network,boot1.dev=hd \
+   --features kvm.hidden.state=off \
+   --clock offset=localtime,timer0.name=rtc,timer0.tickpolicy=catchup,timer0.track=guest,timer1.name=pit,timer1.tickpolicy=delay \
+   --network direct,trustGuestRxFilters=yes,source=macvtap0,source.mode=vepa,model=virtio,driver.iommu=on \
+   --controller virtio-serial,driver.iommu=on \
+   --video virtio,model.vram=16384,model.heads=1 \
+   --watchdog i6300esb \
+   --rng /dev/random,model=virtio,driver.iommu=on \
+   --tpm emulator,backend.version=2.0 \
+   --memballoon virtio,driver.iommu=on \
+   --import
+  ```
+
 ### Shell builtin & Concept
 
 - Shortcut:
   `<M-b/f>` Move back / forward a word.
   `<C-b/f>` Move back / forward a char.
-  `<C-s>` Pause STDOUT
-  `<C-q>` resume STDOUT
-  `<C-r>` Enter history search mode
-  `<C-g>` Beaak out a newline; Leave history search mode
+  `<C-s>` Pause STDOUT.
+  `<C-q>` resume STDOUT.
+  `<C-r>` Enter history search mode.
+  `<C-g>` Beaak out a newline; Leave history search mode.
+  `<M-h>` Open manual for current typed command.
 - filter: Programs that can be used in shell pipe.
   What programs can be used in shell pipe? Programs that process `stdin` line-by-line, then output results to `stdout`.
   E.G. `cp`, `diff` are NOT belong to filter
@@ -175,12 +241,26 @@ $ find kernel | cpio -o -H newc > SSDT14
 
 ### Inkscape
 
-<u>N</u>odeTool
-1. Editing paths
+1. <u>N</u>ode Tool
+   > When switching the type of node, preseve the position of one of the two handles by hovering cursor over it. So that only the other handle is rotated / scaled to match.
   - Dragging over line with `<M>` to select their nodes, release to switch to rubberband mode.
   - `!` key inverts node selection in current subpath(s).
   - `[`,`]` rotate 15&deg; `<`,`>` keys scale.
-  - `Double Clicking` deletes node. `<C-M>-Click` adds node.
+  -  `<C-M-LeftMouse>` adds node.
+  - `2x<LeftMouse>` or ``<Del>`` or `<C-M>-<LeftMouse>` deletes node. `<C-Del>` preserve the shape when deleting.
+  - `<S>-d` duplicates selected notes, `<S>-b` broken selected notes, `<S>-j` joins two selected endnotes.
+  - `<S>-c` mades note cusp, which means its two handles can move independently at any angle, to each other.
+  - `<S>-s` mades node smooth, which means its handles are always colinear.
+  - `<S>-y` mades node symmetric, which is same as smooth, but the handles also have the same length.
+  - `<S>-a` mades node auto-smooth, which is a special node that automatically adjusts the handles of the node and surrounding auto-smooth nodes to maintain a smooth curve. 
+2. Pen Tool (B)
+  - `<LeftMouse>` creates a sharp node.
+  - `<LeftMouse>-Drag` creates a smooth Bezier node.
+  - `<S>` while dragging out a handle.
+  - `<C>` limits the direction of either the current line segment or the Bezier handles to 15 &deg; increments.
+  - `<CR>` finalizes the line; `<Esc>` cancels it.
+
+
 
 ### Filesystem
 
