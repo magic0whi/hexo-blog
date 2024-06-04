@@ -303,6 +303,7 @@ In MokManager select Enroll key from disk, find `MOK.cer` and add it to MokList.
   > Furthmore, you can set `OOMPolicy=kill` to a service unit, which says if one of the process belong to this service is being killed by systemd-oomd, the whole service will also get killed (this option sets service's cgroup `memory.oom.group` to `1`, which means all tasks belonging to this cgroup were killed together).
 
 ```plaintext Additional Packages
+[AUR] clight clightd
 [AUR] ttf-material-design-icons-extended
 [AUR] fcitx5-pinyin-moegirl
 [AUR] sing-box
@@ -321,18 +322,22 @@ linux-zen-headers
 nvidia-open-dkms nvidia-prime
 
 # GPU - AMD
-mesa
-vulkan-radeon
-libva-mesa
+mesa vulkan-radeon libva-mesa
 
 # GPU Tools
 [AUR] raytracinginvulkan-git
 
-wireless-regdb
+# TeX
+texlive-latexextra
+texlive-binextra
+texlive-mathscience
 
-ranger ffmpegthumbnailer perl-image-exiftool ueberzug
+# Spell checkers
+nuspell hunspell-en_us
+
+# CLI Utilities
 yt-dlp
-htop
+openbsd-netcat
 cmake
 gdb
 tree
@@ -341,59 +346,45 @@ compsize
 bc
 p7zip
 unrar
-openbsd-netcat
-traceroute
-wireguard-tools
 ntfs-3g
+cifs-utils
 docker{,-compose}
 howdy linux-enable-ir-emitter
 pacman-contrib devtools
-cifs-utils
 picocom  # ($ picocom -b 1500000 /dev/ttyUSB0, Ctrl-a Ctrl-q to quit)
 usbutils
 img2pdf
-[AUR] snowflake-pt-client-git
-[AUR] cppman
-
 cmus # Music Player
 gdu/ncdu/dust # Calculate storage usage
-
-# Image Viewer
-nsxiv
-imv
-
-# Spell checkers
-nuspell hunspell-en_us
+innoextract
+[AUR] hexo-cli
+[AUR] cppman
+traceroute
+wireguard-tools
 
 ## Desktop apps
+zathura zathura-pdf-poppler
 firefox
 profile-sync-daemon
-[AUR]anki
+mpv
+bitwarden
+telegram-desktop
+gimp
+dolphin ffmpegthumbnailer
+imv # Image Viewer
+[AUR] anki
 blender
 krita
 libreoffice-still
-mpv
 obs-studio
 remmina libvncserver freerdp
-telegram-desktop
-zathura zathura-pdf-poppler
 thunderbird
-gimp
-[AUR] bitwarden
 [AUR] yesplaymusic-electron
-[AUR] microsoft-edge-dev-bin
-[AUR] qv2ray
-[AUR] visual-studio-code-bin
-- gnome-keyring # required to store vscode login token
-- seahorse      # GUI to manage keyring
 
 ## Gaming
 steam
-vkd3d-proton-mingw-git
 [AUR] protontricks
-
 lutris
-innoextract
 
 sunshine
 
@@ -402,17 +393,8 @@ python-matplotlib
 python-pandas
 python-seaborn
 
-[AUR] hexo-cli
-[AUR] clight clightd
-
-texlive-latexextra
-texlive-binextra
-texlive-mathscience
-
 ## MATLAB
 libxcrypt-compat gtk2
-
-[AUR] wsdd2
 
 ## Systemd-nspawn bootstrap
 debootstrap ubuntu-keyring
@@ -428,4 +410,12 @@ qemu
 
 qtcreator
 fcitx5-material-color
+[AUR] qv2ray
+[AUR] microsoft-edge-dev-bin
+[AUR] visual-studio-code-bin
+- gnome-keyring # required to store vscode login token
+- seahorse      # GUI to manage keyring
+vkd3d-proton-mingw-git
+[AUR] snowflake-pt-client-git
+wireless-regdb
 ```
