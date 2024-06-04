@@ -89,14 +89,14 @@ My standards of install Arch Linux.
    ```
 2. Install essential packages
    ```console
-   # pacstrap -K /mnt base linux linux-firmware \
+   # pacstrap -K /mnt base linux-zen linux-firmware \
    rng-tools openssh zram-generator bluez bluez-utils iwd zerotier-one \
    btrfs-progs tmux bash-completion udisks2 btop man rsync tealdeer \
    zsh{,-autosuggestions,-syntax-highlighting,-history-substring-search} \
    pipewire wireplumber pipewire-alsa pipewire-pulse \
    base-devel git helix ripgrep fzf \
    vulkan-tools libva-utils hyfetch \
-   xorg-server bspwm sxhkd ly polybar xdo xorg-xrdb picom rofi flameshot alacritty feh polkit-gnome slock \
+   ly hyprland hyprlock hypridle hyprpaper mako xdg-desktop-portal-hyprland rofi-wayland cliphist polkit-kde-agent power-profiles-daemon kwallet-pam qt6ct alacritty \
    noto-fonts{,-cjk,-emoji} \
    fcitx5-im fcitx5-chinese-addons fcitx5-mozc fcitx5-chewing fcitx5-pinyin-zhwiki
    ```
@@ -305,10 +305,10 @@ In MokManager select Enroll key from disk, find `MOK.cer` and add it to MokList.
 ```plaintext Additional Packages
 [AUR] ttf-material-design-icons-extended
 [AUR] fcitx5-pinyin-moegirl
-fcitx5-material-color
-
-# Proxy
 [AUR] sing-box
+
+etckeeper
+kwalletmanager
 
 # GPU - Intel
 vulkan-intel
@@ -317,7 +317,8 @@ intel-media-driver
 - [AUR] intel-hybrid-codec-driver
 
 # GPU - Nvidia
-nvidia-open nvidia-prime
+linux-zen-headers
+nvidia-open-dkms nvidia-prime
 
 # GPU - AMD
 mesa
@@ -356,12 +357,18 @@ img2pdf
 
 cmus # Music Player
 gdu/ncdu/dust # Calculate storage usage
-nsxiv # Image Viewer
+
+# Image Viewer
+nsxiv
+imv
+
+# Spell checkers
+nuspell hunspell-en_us
 
 ## Desktop apps
 firefox
 profile-sync-daemon
-anki-bin fcitx5-qt6-git
+[AUR]anki
 blender
 krita
 libreoffice-still
@@ -383,6 +390,7 @@ gimp
 ## Gaming
 steam
 vkd3d-proton-mingw-git
+[AUR] protontricks
 
 lutris
 innoextract
@@ -418,7 +426,6 @@ qemu
   ^[AUR] qemu-user-static
    - [AUR] binfmt-qemu-static-all-arch
 
-[AUR] xray
-[AUR] v2raya
 qtcreator
+fcitx5-material-color
 ```

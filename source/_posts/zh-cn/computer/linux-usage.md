@@ -242,20 +242,21 @@ $ find kernel | cpio -o -H newc > SSDT14
 ### Inkscape
 
 1. <u>N</u>ode Tool
-   > When switching the type of node, preseve the position of one of the two handles by hovering cursor over it. So that only the other handle is rotated / scaled to match.
   - Dragging over line with `<M>` to select their nodes, release to switch to rubberband mode.
   - `!` key inverts node selection in current subpath(s).
-  - `[`,`]` rotate 15&deg; `<`,`>` keys scale.
-  -  `<C-M-LeftMouse>` adds node.
-  - `2x<LeftMouse>` or ``<Del>`` or `<C-M>-<LeftMouse>` deletes node. `<C-Del>` preserve the shape when deleting.
-  - `<S>-d` duplicates selected notes, `<S>-b` broken selected notes, `<S>-j` joins two selected endnotes.
-  - `<S>-c` mades note cusp, which means its two handles can move independently at any angle, to each other.
-  - `<S>-s` mades node smooth, which means its handles are always colinear.
-  - `<S>-y` mades node symmetric, which is same as smooth, but the handles also have the same length.
-  - `<S>-a` mades node auto-smooth, which is a special node that automatically adjusts the handles of the node and surrounding auto-smooth nodes to maintain a smooth curve. 
+  - `[`,`]` rotate 15&deg; `<`,`>` scale.
+  - `2x<LMB>` or `<C-M-LMB>` adds node.
+  - `2x<LMB>` or `<C-M-LMB>` or ``<Del>`` deletes node. Use `<C-Del>` if you don't wanna Inkscape to preserve the shape.
+  - `<S>-d` duplicates selected nodes, `<S>-b` breaks selected nodes, `<S>-j` joins two selected endnodes.
+
+> When switching the type of node, preseve one position of the two handles by hovering cursor over it. So that only the other handle is rotated / scaled to match.
+> - `<S>-c` mades note cusp, which means its two handles can move independently at any angle, to each other.
+> - `<S>-s` mades node smooth, which means its handles are always colinear.
+> - `<S>-y` mades node symmetric, which is same as smooth, but the handles also have the same length.
+> - `<S>-a` mades node auto-smooth, which is a special node that automatically adjusts the handles of the node and surrounding auto-smooth nodes to maintain a smooth curve. 
 2. Pen Tool (B)
-  - `<LeftMouse>` creates a sharp node.
-  - `<LeftMouse>-Drag` creates a smooth Bezier node.
+  - `<LMB>` creates a sharp node.
+  - `<LMB>-Drag` creates a smooth Bezier node.
   - `<S>` while dragging out a handle.
   - `<C>` limits the direction of either the current line segment or the Bezier handles to 15 &deg; increments.
   - `<CR>` finalizes the line; `<Esc>` cancels it.
