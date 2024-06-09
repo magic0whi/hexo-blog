@@ -12,6 +12,12 @@ A manual of my Linux gists
 
 ## Linux Common Commands
 
+### Reset User faillocks
+
+```console
+faillock --user <username> --reset
+```
+
 ### PDF Generate
 
 Example:
@@ -261,8 +267,6 @@ $ find kernel | cpio -o -H newc > SSDT14
   - `<C>` limits the direction of either the current line segment or the Bezier handles to 15 &deg; increments.
   - `<CR>` finalizes the line; `<Esc>` cancels it.
 
-
-
 ### Filesystem
 
 1. A file corresponds to one inode (which stores the file properties and the pointer table of blocks) and ordered number 0~n blocks (stores the data of the file).
@@ -301,7 +305,7 @@ $ find kernel | cpio -o -H newc > SSDT14
   sudo umount $CHROOT /mnt/chroots/tmp
   ```
 
-### sed
+### Sed
 
 The usage of group in regular expression: (`(regex)` and `\1`)
 ```console
@@ -414,8 +418,6 @@ $ python
 >>> IRK=list(reversed('<hex-of-IRK>'.strip().split()))
 >>> print('LTK: ', LTK, '\n', 'ERand: ', ERand, '\n', 'EDIV: ', EDIV, '\n', 'IRK: ', ''.join(IRK))
 ```
-
-
 
 ### ssh-keygen
 
