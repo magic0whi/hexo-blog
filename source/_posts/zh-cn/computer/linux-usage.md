@@ -18,11 +18,29 @@ A manual of my Linux gists
 faillock --user <username> --reset
 ```
 
-### PDF Generate
+### Binary File Editing
 
-Example:
+Generate hexdump:
+```console
+xxd TIAS2781RCA4.bin > TIAS2781RCA4.bin.txt
+```
+
+Revert plaintext hexdump back into binary:
+```console
+cat TIAS2781RCA4.bin.txt | xxd -r > TIAS2781RCA4_mod.bin
+```
+
+### PDF Editing
+
+PDF Extracting:
+```console
+pdfimages --all in.pdf out_dir/
+```
+
+PDF Regenerate:
 ```console
 img2pdf --output out.pdf --creator 'Canon SC1011' --producer 'IJ Scan Utility' --creationdate 'Wed Mar 20 16:33:38 2024 CST' -D --engine internal -s 600dpi [1-5].jpg
+pdfinfo out.pdf
 ```
 
 ### Steam
@@ -251,15 +269,22 @@ $ find kernel | cpio -o -H newc > SSDT14
   - Dragging over line with `<M>` to select their nodes, release to switch to rubberband mode.
   - `!` key inverts node selection in current subpath(s).
   - `[`,`]` rotate 15&deg; `<`,`>` scale.
-  - `2x<LMB>` or `<C-M-LMB>` adds node.
-  - `2x<LMB>` or `<C-M-LMB>` or ``<Del>`` deletes node. Use `<C-Del>` if you don't wanna Inkscape to preserve the shape.
+  - `2x<LMB>` or `<C-M-LMB>`: Add node.
+  - `2x<LMB>` or `<C-M-LMB>` or ``<Del>``: Delete node. Use `<C-Del>` if you don't wanna Inkscape to preserve the shape.
   - `<S>-d` duplicates selected nodes, `<S>-b` breaks selected nodes, `<S>-j` joins two selected endnodes.
-
-> When switching the type of node, preseve one position of the two handles by hovering cursor over it. So that only the other handle is rotated / scaled to match.
-> - `<S>-c` mades note cusp, which means its two handles can move independently at any angle, to each other.
-> - `<S>-s` mades node smooth, which means its handles are always colinear.
-> - `<S>-y` mades node symmetric, which is same as smooth, but the handles also have the same length.
-> - `<S>-a` mades node auto-smooth, which is a special node that automatically adjusts the handles of the node and surrounding auto-smooth nodes to maintain a smooth curve. 
+  - `<S>-c` mades note cusp, which means its two handles can move independently at any angle, to each other.
+    `<S>-s` mades node smooth, which means its handles are always colinear.
+    `<S>-y` mades node symmetric, which is same as smooth, but the handles also have the same length.
+    `<S>-a` mades node auto-smooth, which is a special node that automatically adjusts the handles of the node and surrounding auto-smooth nodes to maintain a smooth curve. 
+    > When switching the type of node, preseve one position of the two handles by hovering cursor over it. So that only the other handle is rotated / scaled to match.
+  - `<C-LMB>`: Retract handle.
+    `<S-LMB>`: Pull out handle.
+    `<C>-k`: Combine into compound path.
+    `<C-S>-k`: Break apart compound path.
+  - `<S>-c` mades note cusp, which means its two handles can move independently at any angle, to each other.
+  - `<S>-s` mades node smooth, which means its handles are always colinear.
+  - `<S>-y` mades node symmetric, which is same as smooth, but the handles also have the same length.
+  - `<S>-a` mades node auto-smooth, which is a special node that automatically adjusts the handles of the node and surrounding auto-smooth nodes to maintain a smooth curve. 
 2. Pen Tool (B)
   - `<LMB>` creates a sharp node.
   - `<LMB>-Drag` creates a smooth Bezier node.

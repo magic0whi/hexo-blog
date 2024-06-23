@@ -96,7 +96,7 @@ My standards of install Arch Linux.
    pipewire wireplumber pipewire-alsa pipewire-pulse \
    base-devel git helix ripgrep fzf \
    vulkan-tools libva-utils hyfetch \
-   ly hyprland hyprlock hypridle hyprpaper mako xdg-desktop-portal-hyprland rofi-wayland cliphist polkit-kde-agent power-profiles-daemon kwallet-pam qt6ct alacritty \
+   ly hyprland hyprlock hypridle hyprpaper waybar mako xdg-desktop-portal-hyprland rofi-wayland cliphist polkit-kde-agent power-profiles-daemon kwallet-pam qt6ct alacritty \
    noto-fonts{,-cjk,-emoji} \
    fcitx5-im fcitx5-chinese-addons fcitx5-mozc fcitx5-chewing fcitx5-pinyin-zhwiki
    ```
@@ -355,8 +355,10 @@ picocom  # ($ picocom -b 1500000 /dev/ttyUSB0, Ctrl-a Ctrl-q to quit)
 usbutils
 img2pdf
 cmus # Music Player
+playerctl
 gdu/ncdu/dust # Calculate storage usage
 innoextract
+tinyxxd
 [AUR] hexo-cli
 [AUR] cppman
 traceroute
@@ -407,6 +409,8 @@ virt-manager
 qemu
   ^[AUR] qemu-user-static
    - [AUR] binfmt-qemu-static-all-arch
+
+[AUR] modrinth-app-git flite
 
 qtcreator
 fcitx5-material-color

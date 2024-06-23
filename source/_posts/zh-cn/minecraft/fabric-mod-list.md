@@ -29,41 +29,35 @@ Powered by [itzg's docker image](https://github.com/itzg/docker-minecraft-server
 | Mod name | Download link | Last Update |
 | -------- | ------------- | ---------- |
 | Fabric API | [fabric-api-0.48.0+1.18.2.jar](https://modrinth.com/mod/fabric-api/versions) | Mar 13, 2022 |
-| Architectury API (Fabric) | [architectury-4.1.36.jar](https://www.curseforge.com/minecraft/mc-mods/architectury-fabric/files/all) | Mar 27, 2022 |
-| Cloth Config API (Fabric) | [cloth-config-6.2.57-fabric.jar](https://www.curseforge.com/minecraft/mc-mods/cloth-config/files/all) | Feb 8, 2022 |
+| Architectury API | [architectury-4.1.36.jar](https://www.curseforge.com/minecraft/mc-mods/architectury-fabric/files/all) | Mar 27, 2022 |
+| Cloth Config API | [cloth-config-6.2.57-fabric.jar](https://www.curseforge.com/minecraft/mc-mods/cloth-config/files/all) | Feb 8, 2022 |
 | Fabric Language Kotlin | [fabric-language-kotlin-1.7.1+kotlin.1.6.10.jar](https://modrinth.com/mod/fabric-language-kotlin/versions) | Dec 20, 2021 |
 | Patchouli | [Patchouli-1.18.2-66-FABRIC.jar](https://modrinth.com/mod/patchouli/versions) | Mar 7, 2022 |
-| Not Enough Crashes (Fabric) | [notenoughcrashes-4.1.4+1.18.2-fabric.jar](https://modrinth.com/mod/notenoughcrashes/versions) | Mar 12, 2022 |
-| LazyDFU | [lazydfu-0.1.2.jar](https://modrinth.com/mod/lazydfu/versions) | Feb 20, 2021 |
+| Not Enough Crashes | [notenoughcrashes-4.1.4+1.18.2-fabric.jar](https://modrinth.com/mod/notenoughcrashes/versions) | Mar 12, 2022 |
 | Krypton | [krypton-0.1.9.jar](https://modrinth.com/mod/krypton/versions) | Mar 9, 2022 |
-| Lithium (Fabric) | [lithium-fabric-mc1.18.2-0.7.9.jar](https://modrinth.com/mod/lithium/versions) | Mar 3, 2022 |
-| Starlight (Fabric) | [starlight-1.0.2+fabric.89b8d9f.jar](https://modrinth.com/mod/starlight/versions) | Feb 28, 2022 |
+| Lithium | [lithium-fabric-mc1.18.2-0.7.9.jar](https://modrinth.com/mod/lithium/versions) | Mar 3, 2022 |
 | Alternate Current | [alternate-current-mc1.18-1.1.0.jar](https://modrinth.com/mod/alternate-current/versions) | Dec 1, 2021 |
 | Concurrent Chunk Management Engine (Fabric) | [c2me-fabric-mc1.18.2-0.2.0+alpha.7.0-all.jar](https://modrinth.com/mod/c2me-fabric/versions) | Mar 5, 2022 |
 | FerriteCore (Fabric) | [ferritecore-4.2.0-fabric.jar](https://modrinth.com/mod/ferrite-core/versions) | Mar 4, 2022 |
-| Roughly Enough Items (REI) | [RoughlyEnoughItems-8.0.442.jar](https://www.curseforge.com/minecraft/mc-mods/roughly-enough-items/files/all) | Mar 3, 2022 |
+| Roughly Enough Items (REI) | [RoughlyEnoughItems-8.0.442.jar](https://modrinth.com/mod/rei/versions) | Mar 3, 2022 |
 | WTHIT | [wthit-fabric-4.8.0.jar](https://modrinth.com/mod/wthit/versions) | Mar 21, 2022 |
-| megane | [megane-7.3.0.jar](https://www.curseforge.com/minecraft/mc-mods/megane/files/all) | Mar 28, 2022 |
-| Polymorph (Fabric) | [polymorph-fabric-0.0.20-1.18.2.jar](https://www.curseforge.com/minecraft/mc-mods/polymorph-fabric/files/all) | Mar 25, 2022 |
-| FallingTree (Forge&Fabric) | [FallingTree-1.18.2-3.4.1.jar](https://modrinth.com/mod/fallingtree/versions) | Mar 21, 2022 |
+| megane | [megane-7.3.0.jar](https://modrinth.com/mod/megane/versions) | Mar 28, 2022 |
+| Polymorph | [polymorph-fabric-0.0.20-1.18.2.jar](https://modrinth.com/mod/polymorph/versions) | Mar 25, 2022 |
+| FallingTree | [FallingTree-1.18.2-3.4.1.jar](https://modrinth.com/mod/fallingtree/versions) | Mar 21, 2022 |
 | Universal Graves | [graves-2.0.0+1.18.2.jar](https://modrinth.com/mod/universal-graves/versions) | Mar 30, 2022 |
 | AppleSkin | [appleskin-fabric-mc1.18.2-2.4.0.jar](https://modrinth.com/mod/appleskin/versions) | Mar 29, 2022 |
 | Applied Energistics 2 | [appliedenergistics2-11.0.0-alpha.1.jar](https://modrinth.com/mod/ae2/versions) | Mar 27, 2022 |
 | Applied Energistics 2 Wireless Terminals | [AE2WTLib-11.0.0-alpha.1.jar](https://modrinth.com/mod/applied-energistics-2-wireless-terminals/versions) | Mar 27, 2022 |
 | Deep Mob Learning: Refabricated | [deepmoblearning-refabricated-0.5.4-beta.jar](https://www.curseforge.com/minecraft/mc-mods/deep-mob-learning-refabricated/files/all) | Mar 26, 2022 |
-| Reborn Core | [RebornCore-5.2.0-beta.2.jar](https://www.curseforge.com/minecraft/mc-mods/reborncore/files/all) | Mar 5, 2022 |
-| Tech Reborn | [TechReborn-5.2.0-beta.2.jar](https://www.curseforge.com/minecraft/mc-mods/techreborn/files/all) | Mar 5, 2022 |
 | Modern Industrialization | [Modern-Industrialization-1.1.0-alpha.01.jar](https://modrinth.com/mod/modern-industrialization/versions) | Mar 27, 2022 |
 | Space Dimensions (Fabric) | [agape_space_18_2-0.5.6.jar](https://www.curseforge.com/minecraft/mc-mods/moon-and-space-dimensions-fabric/files/all) | Mar 17, 2022 |
-| CC: Restitched | [cc-restitched-1.100.5.jar](https://modrinth.com/mod/cc-restitched/versions) | Mar 30, 2022 |
-| Prefab | [prefab-fabric-3.1.2.jar](https://modrinth.com/mod/prefab/versions) | Mar 29, 2022 |
+| CC: Tweaked | [cc-restitched-1.100.5.jar](https://modrinth.com/mod/cc-tweaked/versions) | Mar 30, 2022 |
 | Tax Free Levels | [TaxFreeLevels-1.3.jar](https://modrinth.com/mod/tax-free-levels/versions) | Dec 8, 2021 |
-| Chest Cavity | [chestcavity-2.15.1.jar](https://www.curseforge.com/minecraft/mc-mods/chest-cavity/files/all) | Mar 23, 2022 |
-| Nature's Compass | [NaturesCompass-1.18.2-2.0.3-fabric.jar](https://www.curseforge.com/minecraft/mc-mods/natures-compass/files/all) | Mar 12, 2022 |
+| Nature's Compass | [NaturesCompass-1.18.2-2.0.3-fabric.jar](https://modrinth.com/mod/natures-compass/versions) | Mar 12, 2022 |
 | Milk+ | [milk_plus-3.0.0.jar](https://modrinth.com/mod/milk_plus/versions) | Mar 5, 2022 |
-| Enhanced Mob Spawners | [fabric-branders-spawnermod-1.18.2-1.1.2.jar](https://www.curseforge.com/minecraft/mc-mods/enhanced-mob-spawners/files/all) | Mar 5, 2022 |
+| Enhanced Mob Spawners | [fabric-branders-spawnermod-1.18.2-1.1.2.jar](https://modrinth.com/mod/enhanced-mob-spawners/versions) | Mar 5, 2022 |
 | GeckoLib | [geckolib-fabric-1.18-3.0.35.jar](https://www.curseforge.com/minecraft/mc-mods/geckolib/files/all) | Mar 1, 2022 |
-| Happiness (is a) Warm Gun | [HWGMod-1.18.2-1.1.4.jar](https://www.curseforge.com/minecraft/mc-mods/happiness-is-a-warm-gun/files/all) | Mar 27, 2022 |
+| Happiness (is a) Warm Gun | [HWGMod-1.18.2-1.1.4.jar](https://modrinth.com/mod/happiness-is-a-warm-gun/versions) | Mar 27, 2022 |
 | Immersive Portals (**DISABLED**) | [immersive-portals-1.2.5-mc1.18.1-fabric.jar](https://modrinth.com/mod/immersiveportals/versions) | Jan 25, 2022 |
 | Observable (**DISABLED**) | [observable-1.2.3-fabric.jar](https://modrinth.com/mod/observable/versions) | Jan 28, 2022 |
 | Roughly Enough Resources (**DISABLED**) | [rer-2.4.1.jar](https://www.curseforge.com/minecraft/mc-mods/roughly-enough-resources/files/all) | Feb 16, 2022 |
@@ -78,20 +72,18 @@ Pending Mods (Management): None.
 | -------- | ------------- | ---------- |
 | WMITAF | [wmitaf-fabric-mc1.18.1-2.2.0.jar](https://modrinth.com/mod/wmitaf/versions) | Dec 15, 2021 |
 | cAn i MiNe thIS bLOCk? | [can-i-mine-this-block-1.2.0.jar](https://www.curseforge.com/minecraft/mc-mods/can-i-mine-this-block/files/all) | Mar 7, 2022 |
-| Better Sneak | [BetterSneak-Fabric-1.18.2-1.0.0.jar](https://www.curseforge.com/minecraft/mc-mods/better-sneak/files/all) | Mar 31, 2022 |
 | Mouse Tweaks | [MouseTweaks-fabric-mc1.18-2.22.jar](https://modrinth.com/mod/mouse-tweaks/versions) | Jan 13, 2022 |
-| Just Enough Keys \[JEK\] \[Fabric\] | [justenoughkeys-0.5.3-fabric.jar](https://www.curseforge.com/minecraft/mc-mods/just-enough-keys-fabric/files/all) | Jan 12, 2022 |
-| Autofish | [Autofish-0.9.4-fabric-mc1.18.jar](https://www.curseforge.com/minecraft/mc-mods/autofish/files/all) | Dec 31, 2021 |
-| Xaero's Minimap | [Xaeros_Minimap_22.4.0_Fabric_1.18.2.jar](https://chocolateminecraft.com/minimapdownload.php) | Mar 26, 2022 |
+| XPlus Autofish (Fabric / Forge) | [Autofish-0.9.4-fabric-mc1.18.jar](https://modrinth.com/mod/x+-autofish/versions) | Dec 31, 2021 |
+| Xaero's Minimap | [Xaeros_Minimap_22.4.0_Fabric_1.18.2.jar](https://modrinth.com/mod/xaeros-minimap/versions) | Mar 26, 2022 |
 | Light Overlay (Rift/Forge/Fabric) | [light-overlay-6.0.5.jar](https://www.curseforge.com/minecraft/mc-mods/light-overlay/files/all) | Mar 1, 2022 |
 | Trajectory preview \[Fabric\] | [Trajectory Preview-1.0-1.18.1.jar](https://www.curseforge.com/minecraft/mc-mods/trajectory-preview-fabric/files/all) | Dec 21, 2021 |
 | Mod Menu | [modmenu-3.1.0.jar](https://modrinth.com/mod/modmenu/versions) | Mar 2, 2022 |
-| ToolTipFix | [tooltipfix-1.0.4-1.18.jar](https://www.curseforge.com/minecraft/mc-mods/tooltipfix/files/all) | Dec 1, 2021 |
+| ToolTipFix | [tooltipfix-1.0.4-1.18.jar](https://modrinth.com/mod/tooltipfix/versions) | Dec 1, 2021 |
 | Better Fps - Render Distance\[Forge/Fabric\] | [betterfpsdist-fabric-1.18-1.7.jar](https://www.curseforge.com/minecraft/mc-mods/better-fps-render-distance-fabric/files/all) | Feb 24, 2022 |
 | Dynamic FPS | [dynamic-fps-2.1.0.jar](https://modrinth.com/mod/dynamic-fps/versions) | Jan 15, 2022 |
 | Enhanced Block Entities | [enhancedblockentities-0.6+1.18.2.jar](https://modrinth.com/mod/ebe/versions) | Mar 27, 2022 |
 | Cull Leaves | [cullleaves-2.3.2.jar](https://modrinth.com/mod/cull-leaves/versions) | Oct 30, 2021 |
-| Entity Culling Fabric/Forge | [entityculling-fabric-mc1.18-1.5.0.jar](https://www.curseforge.com/minecraft/mc-mods/entityculling/files/all) | Feb 9, 2022 |
+| Entity Culling | [entityculling-fabric-mc1.18-1.5.0.jar](https://modrinth.com/mod/entityculling/versions) | Feb 9, 2022 |
 | Sodium | [sodium-fabric-mc1.18.2-0.4.1+build.15.jar](https://modrinth.com/mod/sodium/versions) | Mar 2, 2022 |
 | Sodium Extra | [sodium-extra-mc1.18.2-0.4.2.jar](https://modrinth.com/mod/sodium-extra/versions) | Mar 9, 2022 |
 | Reese's Sodium Options | [reeses_sodium_options-mc1.18.2-1.4.2.jar](https://modrinth.com/mod/reeses-sodium-options/versions) | Mar 9, 2022 |
@@ -99,7 +91,7 @@ Pending Mods (Management): None.
 | Baritone | [baritone-standalone-fabric-1.8.3.jar](https://github.com/cabaletta/baritone/releases) | Mar 9, 2021 |
 | Advanced XRay (Fabric Edition) | [advanced-xray-fabric-1.18.2-1.0.0-build.11.jar](https://www.curseforge.com/minecraft/mc-mods/advanced-xray-fabric-edition/files/all) | Mar 27, 2022 |
 | Canvas Renderer (**DISABLED**) | [canvas-fabric-mc118-1.0.2282.jar](https://modrinth.com/mod/canvas/versions) | Jab 11, 2021 |
-| WorldEdit CUI (Fabric) (**DISABLED**) | [WorldEditCUI-1.18.1+01-SNAPSHOT.jar](https://github.com/EngineHub/WorldEditCUI/actions?query=branch%3Amc%2F1.18) | Fan 7, 2022 |
+| WorldEdit CUI (Fabric) (**DISABLED**) | [WorldEditCUI-1.18.1+01-SNAPSHOT.jar](https://modrinth.com/mod/worldedit-cui/versions) | Fan 7, 2022 |
 
 Pending mod: [Watson](https://modrinth.com/mod/watson)
 
