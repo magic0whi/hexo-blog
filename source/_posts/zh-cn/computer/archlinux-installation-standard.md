@@ -89,7 +89,7 @@ My standards of install Arch Linux.
    ```
 2. Install essential packages
    ```console
-   # pacstrap -K /mnt base linux-zen linux-firmware \
+   # pacstrap -K /mnt base linux-zen linux-firmware sbctl \
    rng-tools openssh zram-generator bluez bluez-utils iwd zerotier-one \
    btrfs-progs tmux bash-completion udisks2 btop man rsync tealdeer \
    zsh{,-autosuggestions,-syntax-highlighting,-history-substring-search} \
@@ -104,50 +104,39 @@ My standards of install Arch Linux.
 ## Configure the system
 
 ```console shell
+# arch-chroot /mnt
+# cd /etc
 # git clone --depth=1 --bare https://github.com/magic0whi/proteuslaptop_etc.git .git
 # git config core.bare false
 # git checkout HEAD .
-Modify /etc/{fstab,hostname,hosts}
-# arch-chroot /mnt
 # hwclock --systohc
-# locale-gen
-$ #Recreate the initramfs image
+# # Modify /etc/{crypttab.initramfs,fstab,hostname,hosts}
+# # Installing the EFI boot manager
+# bootctl install
+# # Recreate the initramfs image
 # mkinitcpio -P
+# # Secure boot
+# sbctl create-keys
+# sbctl enroll-keys -m
+# locale-gen
 # useradd -m -s /bin/zsh <Username>
+# passwd <Username>
+# passwd root
 # su <Username>
 $ cd
 $ git clone --depth=1 --bare https://github.com/magic0whi/proteuslaptop_dotfiles.git .dotfiles
 $ alias gitdot='git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
 $ gitdot config core.bare false
-$ gitdot checkout HEAD .'
+$ gitdot checkout HEAD .
 $ exit
-# passwd <Username>
-# passwd root
 ```
 
-Installing the EFI boot manager
-```console shell
-# bootctl install
-```
 Configuring the boot loader
 ```properties /boot/loader/loader.conf
 default  arch.conf
 timeout  4
 console-mode max
 editor   no
-```
-
-```properties /boot/loader/entries/arch.conf
-title   Arch Linux
-linux   /vmlinuz-linux
-initrd  /initramfs-linux.img
-options root=/dev/mapper/cryptroot rootflags=compress=zstd,subvol=@,discard=async
-```
-```properties /boot/loader/entries/arch-fallback.conf
-title Arch Linux (fallback)
-linux /vmlinuz-linux
-initrd /initramfs-linux-fallback.img
-options root=/dev/mapper/cryptroot rootflags=compress=zstd,subvol=@,discard=async
 ```
 
 AUR helper [paru](https://aur.archlinux.org/packages/paru/).
@@ -230,43 +219,6 @@ Binds the key to PCRs 0 and 7 (System firmware and Secure Boot state):
    ...
    options ... resume=/dev/mapper/cryptroot resume_offset=198122980
    ```
-
-### Secure Boot by using a signed boot loader (shim)
-
-Install `shim-signed`<sup>[AUR]</sup>, `sbsigntools` and `efibootmgr`
-```console
-# paru -S shim-signed sbsigntools efibootmgr
-```
-As shim tries to launch `grubx64.efi`, rename systemd boot loader to it.
-```console
-# cp /boot/EFI/systemd/systemd-bootx64.efi /boot/EFI/BOOT/grubx64.efi
-```
-Copy shim and MokManager to boot loader directory:
-```console
-# cp /usr/share/shim-signed/shimx64.efi /boot/EFI/BOOT/BOOTx64.EFI
-# cp /usr/share/shim-signed/mmx64.efi /boot/EFI/BOOT/
-```
-(Optional) create a new NVRAM entry to boot `BOOTx64.EFI`:
-```console
-# efibootmgr --verbose --disk /dev/sda --part 1 --create --label "Shim" --loader /EFI/BOOT/BOOTx64.EFI
-```
-Generate a Machine Owner Key:
-```console
-$ openssl req -newkey rsa:4096 -nodes -keyout MOK.key -new -x509 -sha256 -days 3650 -subj "/CN=my Machine Owner Key/" -out MOK.crt
-$ openssl x509 -outform DER -in MOK.crt -out MOK.cer
-```
-Sign boot loader (named `grubx64.efi`) and kernel:
-```console
-# sbsign --key MOK.key --cert MOK.crt --output /boot/vmlinuz-linux /boot/vmlinuz-linux
-# sbsign --key MOK.key --cert MOK.crt --output /boot/EFI/BOOT/grubx64.efi /boot/EFI/BOOT/grubx64.efi
-```
-
-Copy `MOK.cer` to a FAT formatted file system (Here I use EFI system partition).
-```console
-# cp MOK.cer /boot/
-```
-Reboot and enable Secure Boot. If shim does not find the certificate `grubx64.efi` is signed with in MokList it will launch MokManager (`mmx64.efi`).
-In MokManager select Enroll key from disk, find `MOK.cer` and add it to MokList. When done select Continue boot and your boot loader will launch and it will be capable launching any binary signed with your Machine Owner Key.
 
 ## Tips
 
