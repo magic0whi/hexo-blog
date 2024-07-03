@@ -94,9 +94,9 @@ My standards of install Arch Linux.
    btrfs-progs tmux bash-completion udisks2 btop man rsync tealdeer \
    zsh{,-autosuggestions,-syntax-highlighting,-history-substring-search} \
    pipewire wireplumber pipewire-alsa pipewire-pulse \
-   base-devel git helix ripgrep fzf \
-   vulkan-tools libva-utils hyfetch \
-   ly hyprland hyprlock hypridle hyprpaper waybar mako xdg-desktop-portal-hyprland rofi-wayland cliphist polkit-kde-agent power-profiles-daemon kwallet-pam qt6ct alacritty \
+   base-devel git helix ripgrep fzf bc etckeeper syncthing \
+   vulkan-tools libva-utils alsa-utils hyfetch \
+   ly hyprland hyprlock hypridle hyprpaper waybar mako xdg-desktop-portal-hyprland rofi-wayland cliphist polkit-kde-agent power-profiles-daemon qt6ct alacritty grim slurp \
    noto-fonts{,-cjk,-emoji} \
    fcitx5-im fcitx5-chinese-addons fcitx5-mozc fcitx5-chewing fcitx5-pinyin-zhwiki
    ```
@@ -106,24 +106,29 @@ My standards of install Arch Linux.
 ```console shell
 # arch-chroot /mnt
 # cd /etc
+# git config --global commit.gpgsign true
 # git clone --depth=1 --bare https://github.com/magic0whi/proteuslaptop_etc.git .git
 # git config core.bare false
+# rm /etc/resolv.conf
 # git checkout HEAD .
 # hwclock --systohc
-# # Modify /etc/{crypttab.initramfs,fstab,hostname,hosts}
+# # Modify /etc/{crypttab.initramfs,fstab,hostname,hosts,systemd/networks/*}
 # # Installing the EFI boot manager
 # bootctl install
 # # Recreate the initramfs image
 # mkinitcpio -P
+# rm /boot/*.img
 # # Secure boot
 # sbctl create-keys
 # sbctl enroll-keys -m
+# sbctl verify | sed 's/✗ /sbctl sign -s /e'
 # locale-gen
 # useradd -m -s /bin/zsh <Username>
 # passwd <Username>
 # passwd root
 # su <Username>
 $ cd
+$ git config --global commit.gpgsign true
 $ git clone --depth=1 --bare https://github.com/magic0whi/proteuslaptop_dotfiles.git .dotfiles
 $ alias gitdot='git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
 $ gitdot config core.bare false
@@ -154,7 +159,6 @@ AUR helper [paru](https://aur.archlinux.org/packages/paru/).
 
 > Reboot to installed system to ensure that systemd is running.
 
-
 ## Post-installation
 
 ### Enable daemons
@@ -171,6 +175,12 @@ $ # Enable bluetooth auto power-on
 # systemctl enable --now bluetooth.service
 $ Enable systemd-oomd (Userspace OOM daemon)
 # systemctl enable --now systemd-oomd.service
+# systemctl enable --now ly.service
+$ systemctl --user enable --now clight.service
+$ systemctl --user enable --now fcitx5.service
+$ systemctl --user enable --now plasma-polkit-agent.service
+$ systemctl --user enable --now syncthing.service
+$ systemctl --user enable --now waybar.service
 ```
 ### Enroll TPM key
 
@@ -178,7 +188,6 @@ list installed TPMs and the driver in use:
 ```console shell
 $ systemd-cryptenroll --tpm2-device=list
 ```
-> If you encounter messages such as "<span style="color:#FF0000;">TPM2 support is not installed</span>", try install `tpm2-tss`.
 
 Binds the key to PCRs 0 and 7 (System firmware and Secure Boot state):
 ```console
@@ -213,11 +222,14 @@ Binds the key to PCRs 0 and 7 (System firmware and Secure Boot state):
    # btrfs inspect-internal map-swapfile -r /.snapshots/swapfile
    198122980
    ```
-
-   Finally, edit the bootloader's configuration:
-   ```properties /boot/loader/entries/arch.conf
+   ```properties /etc/cmdline.d/root.conf
    ...
-   options ... resume=/dev/mapper/cryptroot resume_offset=198122980
+   resume=/dev/mapper/cryptroot
+   resume_offset=198122980
+   ```
+   Regenerate UKI:
+   ```console
+   # mkinitcpio -P
    ```
 
 ## Tips
@@ -260,14 +272,13 @@ Binds the key to PCRs 0 and 7 (System firmware and Secure Boot state):
 [AUR] fcitx5-pinyin-moegirl
 [AUR] sing-box
 
-etckeeper
-kwalletmanager
+amd-ucode
+^intel-ucode
 
 # GPU - Intel
 vulkan-intel
 intel-media-driver
-^[AUR] libva-intel-driver-hybrid
-- [AUR] intel-hybrid-codec-driver
+^[AUR] libva-intel-driver-hybrid intel-hybrid-codec-driver
 
 # GPU - Nvidia
 linux-zen-headers
@@ -279,10 +290,21 @@ mesa vulkan-radeon libva-mesa
 # GPU Tools
 [AUR] raytracinginvulkan-git
 
+# Language Server
+bash-language-server
+marksman
+taplo
+texlab
+python-lsp-server
+vscode-css-languageserver
+vscode-json-languageserver
+yaml-language-server
+
 # TeX
 texlive-latexextra
 texlive-binextra
 texlive-mathscience
+texlive-xetex
 
 # Spell checkers
 nuspell hunspell-en_us
@@ -295,7 +317,6 @@ gdb
 tree
 nmap
 compsize
-bc
 p7zip
 unrar
 ntfs-3g
@@ -321,10 +342,10 @@ zathura zathura-pdf-poppler
 firefox
 profile-sync-daemon
 mpv
-bitwarden
+bitwarden kwallet-pam kwalletmanager
 telegram-desktop
 gimp
-dolphin ffmpegthumbnailer
+doublecmd-qt6 ffmpegthumbnailer gvfs gvfs-mtp
 imv # Image Viewer
 [AUR] anki
 blender

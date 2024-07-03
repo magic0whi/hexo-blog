@@ -178,7 +178,7 @@ Redirect:
 - Shell Function
   ```bash sum.sh
   function sum() {
-     echo $# # 收到的参数数量
+     echo $# # The numeber of parameters
      echo $* # 参数的字符串
      echo $0 # 第0个参数, 执行文件的名字
      echo $1 # 第一个参数
@@ -195,17 +195,14 @@ Redirect:
   ```
 
 - awk
-  awk 过滤第三列成绩大于等于 90 的同学: `awk '$3 >= 90 {print}' scores.txt4 | less`
-  `$3 >= 90` 为条件式 (pattern) `{print}` 为动作 (action)
-  输出单独第二列列可用 `{print $2}` (`$0`则表示所有列, 即整行)
-  条件式为可选, 如输出第二列和第五列 `awk '{print $2, $5}' scores.txt | less`
-  特殊变量`NR`表示当前行号, 如过滤掉第一行 `awk 'NR > 1 {print $2, $5}' scores.txt | less`
-  特殊模式 `BEGIN` 表示文件开始, `END` 表示文件结尾, 如在文件开始添加一行表头, 在结尾加一句 "Hi, bye": `awk 'BEGIN {print "No. ID. Score"}; {print}; END {print "HI, BYE"}' scores.txt4 | less`
-  awk 还能定义变量计算平均成绩: `awk 'BEGIN {sum = 0}; {sum = sum + $3}; END {aver = sum / NR; print NR, sum, aver}' scores.txt4 | less`
-  或者计算字符数 `awk '{cn = cn + length($0) + 1}; END {print NR, cn}' scores.txt4` (+1 是因为每行的末尾还有一个换行符)
-  或者计算字段(用到特殊变量`NF`, 表示当前行字段数) `awk '{cn = cn + length($0) + 1; wn = wn + NF}; END {print NR, wn, cn}' scores.txt4`
-  (可通过 `wc scores.txt4` 来验证行数、字段数和字符数)
-
+  To filter only the column 3 with value >= 90: `awk '$3 >= 90 { print }'`,
+  where `$3 >= 90` is pattern (Optional), `print` is the action.
+  `$0` means whole line.
+  `NR` means current line number. e.g. To ignore the first line `awk 'NR > 1 { print $2, $5 }'`
+  `BEGIN` means the start of file. `END` means end of file e.g. `awk 'BEGIN { print "SOF" } { print } END { print "EOF" }'`
+  awk support variables, To calculate sum `awk 'BEGIN { sum = 0 } { sum = sum + $3 } END { avg = sum / NR; print NR, sum, avg }'`
+  e.g. To do char count `awk '{ cc = cc + length($0) + 1 } END { print NR, wc }'` (Validate by `wc -ml`. The extra +1 because there is `\n` at each end of line)
+  `NF` means mean word count of current line. e.g. Do word counts `awk '{ cc = cc + length($0) + 1; wc = wc + NF } END {print NR, cc, wc }'` (Validate by `wc`)
 - `egrep -o` 只显示匹配上的文字, 如只显示匹配2000年人民日报的序号 `cat */*.txt | egrep '^[0-9-]+' -o | sort | less`
   `-n` 可显示行号, `-v` 匹配取反, `-i` 大小写不敏感, `-r` 递归查询文件夹目录
 - `sort`默认是使用ASCII码排序, 对于数字排序, 需要加上参数 `-n`
@@ -219,8 +216,13 @@ Redirect:
 - `diff` 共有三个命令: d(delete)、c(change)、a(add)
    如 `130d129` 为删除 130 行对齐到 129 行, `249a130,131` 为将后者的 130, 131 行添加到前者的 249 行后, `271,373c163,271` 为拿后者的 163, 271 行去替换前者的 271, 373行
 
-- `nohup` 防止退出账户导致程序挂起
+- `nohup` prevents program to hang on session terminate
   让程序后台运行 `nohup bash run0.sh &`
+  - `set -eufo pipefail`
+    `-e` let bash exit immediately if any command has non-zero exit status.
+    `-u` let bash exit immediately if has any reference to variable haven't defined yet.
+    `-f` disables pathname expansion (globbing).
+    `-o pipefail` prevents erros in pipeline from begin masked. Any command fails in pipeline will keep its return code for whole pipeline.
 
 ### DSDT (Differentiated System Description Table)
 
