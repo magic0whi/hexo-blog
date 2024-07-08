@@ -152,41 +152,45 @@ Redirect:
   }
   ```
 
-- 取值符 `$`
-  `$$`(等价于 `${$}`) 当前 Shell 的 PID
-  `$0` 上一个命令返回的状态编号 (≥0)
-- Shell中的变量
-  - 默认是字符串
-  - `declare -i` 可定于整数类型变量
-    ```Console
-    $ x=5
-    $ y=3
-    $ declare -i l=$x+$y
-    $ l=l+3 // 此时变量l是整数类型
-    // 也可用 k=$(($x+$y)), 不过 k 依然是字符串类型
-    ```
-  - 如果做整数数值运算, 会把非整数都理解为 0.
-  - `declare +i` 把变量整数属性去掉
+- `$$` (equivalent to `${$}`) is current shell's PID.
+  Variables in shell default to string.
+  Shell treat all string type as zero if do arithmetic to them.
+  `declare -i` defines integer variable
+  ```Console
+  $ x=5
+  $ y=3
+  $ declare -i l=$x+$y
+  $ l=l+3 // Integer variable can do arithmetic directly
+  $ k=$(($x+$y)) // do arithmetic but the type of 'k' still remains string
+  ```
+  `declare +i` removes integer attribute of the variable.
 - Shell For loop
   ```bash for.sh
-  sum=$1
-  for ((i=0;i<$num; i=i+1))
-  do
-      nohup ./run-folder.sh $num $i &
+  for ((i=0;i<10; i=i+1)); do
+    echo $i
+  done
+
+  for i in {1..10}; do
+    echo $i
+  done
+
+  # Step = 2
+  for i in {1..10..2}; do
+    echo $i
   done
   ```
 - Shell Function
   ```bash sum.sh
   function sum() {
      echo $# # The numeber of parameters
-     echo $* # 参数的字符串
-     echo $0 # 第0个参数, 执行文件的名字
-     echo $1 # 第一个参数
-     echo $@ # 参数数组
+     echo $* # Parameters in string type
+     echo $0 # The 0st parameter, which is the name of executed file itself
+     echo $1 # The first parameter
+     echo $@ # Parameters in array type
   }
 
-  sum 1 2 7 'a' # 函数调用
-  # 结果是
+  sum 1 2 7 'a'
+  # Result:
   # 4
   # 1 2 7 a
   # ./sum.sh
@@ -203,26 +207,26 @@ Redirect:
   awk support variables, To calculate sum `awk 'BEGIN { sum = 0 } { sum = sum + $3 } END { avg = sum / NR; print NR, sum, avg }'`
   e.g. To do char count `awk '{ cc = cc + length($0) + 1 } END { print NR, wc }'` (Validate by `wc -ml`. The extra +1 because there is `\n` at each end of line)
   `NF` means mean word count of current line. e.g. Do word counts `awk '{ cc = cc + length($0) + 1; wc = wc + NF } END {print NR, cc, wc }'` (Validate by `wc`)
-- `egrep -o` 只显示匹配上的文字, 如只显示匹配2000年人民日报的序号 `cat */*.txt | egrep '^[0-9-]+' -o | sort | less`
-  `-n` 可显示行号, `-v` 匹配取反, `-i` 大小写不敏感, `-r` 递归查询文件夹目录
-- `sort`默认是使用ASCII码排序, 对于数字排序, 需要加上参数 `-n`
-   对 scores.txt4 的第三列(成绩)进行排序 `sort -n -k 3 scores.txt4 | less`
-   反向排序时可加参数 `-r`.
-   `-u` 可删除排序内容相同的行, 与 `sort | uniq` 的区别是 `uniq` 命令是删除完全一样的行, 而前者会删除匹配列内容相同的行.
-- `tr` 可转换文字大小写, 如 `tr 'a-z' 'A-Z'`
-- `xargs` 可将管道前一个命令的输出作为输入参数
-   如计算一堆文件内数字及'-'的数量 `find . -name '*[0-9][0-9][0-9]*.txt' | xargs egrep -o '^[0-9-]+' | wc -l`
+  `-F` set the delimiter `awk -F':'` 
+- `egrep -o` show only contents that matched, e.g. To show the order number only:  `cat */*.txt | egrep '^[0-9-]+' -o | sort | less`
+  `-n` show line nunber, `-v` reverse mathch, `-i` case insensitive, `-r` search directories recursively.
+- `sort` default to ASCII code sort, for nunberic sort, use parameter `-n`.
+   e.g. Sort the third column of `scores.txt`: `sort -n -k 3 scores.txt | less`
+   `-r` do reverse sort.
+   `-u` remove duplicates. The difference to `sort | uniq` is `uniq` removes exactly same content line, while `sort -u` remove lines which has the same match.
+- `tr` do uppercase / lowercase. e.g. `tr 'a-z' 'A-Z'` (equivalent to `tr '[:lower:]' '[:upper:]'`)
+- `xargs` format stdin as parameters to the command.
+   e.g. To calculate numbers and the symbol '-' in a pile of files `find . -name '*[0-9][0-9][0-9]*.txt' | xargs egrep -o '^[0-9-]+' | wc -l`.
 
-- `diff` 共有三个命令: d(delete)、c(change)、a(add)
-   如 `130d129` 为删除 130 行对齐到 129 行, `249a130,131` 为将后者的 130, 131 行添加到前者的 249 行后, `271,373c163,271` 为拿后者的 163, 271 行去替换前者的 271, 373行
-
-- `nohup` prevents program to hang on session terminate
-  让程序后台运行 `nohup bash run0.sh &`
-  - `set -eufo pipefail`
-    `-e` let bash exit immediately if any command has non-zero exit status.
-    `-u` let bash exit immediately if has any reference to variable haven't defined yet.
-    `-f` disables pathname expansion (globbing).
-    `-o pipefail` prevents erros in pipeline from begin masked. Any command fails in pipeline will keep its return code for whole pipeline.
+- `diff`'s format explanation:
+   Three actions: d(elete), c(hange), a(dd)
+   e.g. `130d129` delete line 130 and then align to line 129; `249a130,131` add later's line 130, 131 to former's line 249; `271,373c163,271` replace later's line 163, 271 to former's line 271, 373.
+- `nohup` prevents program to hang on session terminate. e.g. `nohup bash run0.sh &`
+- `set -eufo pipefail`
+  `-e` let bash exit immediately if any command has non-zero exit status.
+  `-u` let bash exit immediately if has any reference to variable haven't defined yet.
+  `-f` disables pathname expansion (globbing).
+  `-o pipefail` prevents erros in pipeline from begin masked. Any command fails in pipeline will keep its return code for whole pipeline.
 
 ### DSDT (Differentiated System Description Table)
 
@@ -269,24 +273,28 @@ $ find kernel | cpio -o -H newc > SSDT14
 
 1. <u>N</u>ode Tool
   - Dragging over line with `<M>` to select their nodes, release to switch to rubberband mode.
-  - `!` key inverts node selection in current subpath(s).
+  - `!` invert node selection in current subpath(s).
   - `[`,`]` rotate 15&deg; `<`,`>` scale.
   - `2x<LMB>` or `<C-M-LMB>`: Add node.
   - `2x<LMB>` or `<C-M-LMB>` or ``<Del>``: Delete node. Use `<C-Del>` if you don't wanna Inkscape to preserve the shape.
-  - `<S>-d` duplicates selected nodes, `<S>-b` breaks selected nodes, `<S>-j` joins two selected endnodes.
-  - `<S>-c` mades note cusp, which means its two handles can move independently at any angle, to each other.
-    `<S>-s` mades node smooth, which means its handles are always colinear.
-    `<S>-y` mades node symmetric, which is same as smooth, but the handles also have the same length.
-    `<S>-a` mades node auto-smooth, which is a special node that automatically adjusts the handles of the node and surrounding auto-smooth nodes to maintain a smooth curve. 
+  - `<S>-d` duplicate selected nodes, `<S>-b` breaks selected nodes, `<S>-j` joins two selected endnodes.
+  - `<S>-c` made node cusp, which means its two handles can move independently at any angle, to each other.
+    `<S>-s` made node smooth, which means its handles are always colinear.
+    `<S>-y` made node symmetric, which is same as smooth, but the handles also have the same length.
+    `<S>-a` made node auto-smooth, which is a special node that automatically adjusts the handles of the node and surrounding auto-smooth nodes to maintain a smooth curve. 
     > When switching the type of node, preseve one position of the two handles by hovering cursor over it. So that only the other handle is rotated / scaled to match.
-  - `<C-LMB>`: Retract handle.
-    `<S-LMB>`: Pull out handle.
-    `<C>-k`: Combine into compound path.
-    `<C-S>-k`: Break apart compound path.
-  - `<S>-c` mades note cusp, which means its two handles can move independently at any angle, to each other.
-  - `<S>-s` mades node smooth, which means its handles are always colinear.
-  - `<S>-y` mades node symmetric, which is same as smooth, but the handles also have the same length.
-  - `<S>-a` mades node auto-smooth, which is a special node that automatically adjusts the handles of the node and surrounding auto-smooth nodes to maintain a smooth curve. 
+  - `<C-LMB>` retract handle.
+    `<S-LMB>` pull out handle.
+    `<C>-k` combine into compound path.
+    `<C-S>-k` break apart compound path.
+  > - Compound path is not the same as a group. It's a single object which is only selectable as a whole.
+  > - Parts of a path (i.e. a selection of nodes) can also be copied with `<C>-c` and inserted as a new path with `<C>-v`.
+  > - `<C-S>-c` convert shape or text to path.
+  - Boolean operators
+    Union `<C>-+`; Difference `<C>--`(Bottom minus top); Intersection `<C>-*`;
+    Exclusion `<C>-^`; Division `<C>-/`; Cut Path `<C-M>-/`.
+    > <u>Exclusion</u> command looks similar to <u>Combine</u>, but it is different in that <u>Exclusion</u> adds extra nodes where the original paths intersect.
+    > The difference between <u>Division</u> and <u>Cut Path</u> is that the former cuts the entire buttom object by the path of the top object, while the latter only cuts the bottom object's stroke and removes any fill.
 2. Pen Tool (B)
   - `<LMB>` creates a sharp node.
   - `<LMB>-Drag` creates a smooth Bezier node.
@@ -498,35 +506,39 @@ $ python
    ```console
    $ busctl --user get-property org.clight.clight /org/clight/clight org.clight.clight Suspended
    ```
+6. Show current modules paraeter
+  ```console
+  # cat /sys/module/nvidia_drm/parameters/modeset
+  ```
 
 ## Iptables
 
 1. IPSET u32 match
-   Check whether the last value of TCP Seq in a network package equals 41 : `0>>22&0x3C@ 4 &0xFF=0x29`
-   Example (Use WireShark to catch packages):
-   ```
-   Source IP: 121.41.89.52
-   = 01111001 00101001 01011001 00110100B = 79 29 59 34H = 2032752948D
-   IP Header：
-   45 00 00 3c 00 00 40 00 31 06 ef 34 **79 29 59 34** c0 a8 c7 81
-   TCP Header：
-   00 50 95 3c 8d 7f 52 ac 69 15 33 be a0 12 71 20 cd dc 00 00 02 04 05 14 04 02 08 0a 08 c8 62 fa 00 1c 30 a1 01 03 03 07
-   ```
-   `0>>22` 的含义是从 IP 报头的 0 下标取 4 字节(共 32 位, u32 默认取 4 字节), 然后按位右移 22 位, 从而得到剩余的开头 10 位.
-   如 `45 00 00 3c = 0100 0101 0000 0000 0000 0000 0011 1100` 右移 22 位
-   得到 `1 14 = 01 0001 0100`
-   
-   后面的 `&0x3C` 的含义是和 `0x3C = 0011 1100` 进行按位与运算(实际上就是过滤)
-   因此本例中 `0>>22&0x3C` 即 `01 0001 0100 & 00 0011 1100` 得到 `00 0001 0100`,
-   
-   通过这两个操作我们得到了 IP 头的第 4~7 位的值
-   记录 IP 头长度的值是 IP 头的第 4~7 位的值值再加两个 0 也就是 `01 0100` (十进制的 20)
-   `@` 的含义是根据左边的值推进指针, 本例中 `0>>22&0x3C@` 即推进 20 个字节
-
-   剩下的也没什么好说的了,
-   从 TCP 头第 4 下标处取 4 字节然后用掩码 `0xFF` 按位与取得其中的最后一个字节,
-   然后比较是否等于 `0x29 = 41D`
-   > 等号后可以是单个值也可以是一个区间, 如判断一个包的 TCP Seq 的最后一个值是否在 41~60 之间 `0>>22&0x3C@ 4 &0xFF=0x29:0x3C`
+  Check whether the last value of TCP Seq in a network package equals 41 : `0>>22&0x3C@ 4 &0xFF=0x29`
+  Example (Use WireShark to catch packages), have this IP header:
+  ```
+  Source IP: 121.41.89.52
+  = 01111001 00101001 01011001 00110100B = 79 29 59 34H = 2032752948D
+  IP Header：
+  45 00 00 3c 00 00 40 00 31 06 ef 34 **79 29 59 34** c0 a8 c7 81
+  TCP Header：
+  00 50 95 3c 8d 7f 52 ac 69 15 33 be a0 12 71 20 cd dc 00 00 02 04 05 14 04 02 08 0a 08 c8 62 fa 00 1c 30 a1 01 03 03 07
+  ```
+  `0`: Start from offset 0, get 4 bytes (since u32 means 32 bits). Here is `45 00 00 3c`.
+  `>>22` shift right 22 bits. So `45 00 00 3c = 0100 0101 0000 0000 0000 0000 0011 1100` becomes `1 14 = 01 0001 0100`.
+  `&0x3C` do bitwise AND with `0x3C` (like a filter). Then
+  ```
+    01 0001 0100
+  & 00 0011 1100
+  --------------
+    00 0001 0100
+  ````
+  Conclusion, `0>>22&0x3C` get the 4-7 bits from the IP header.
+  So the length of this IP header is `01 0100 = 20D`.
+   `@` offset the pointer with the value on the left. So `0>>22&0x3C@` gets 20 bytes forward from the start address.
+  We want to know the TTL value of this tcp packet. So get value from TCP header at index of 4 and filter it using mask `0xFF` to get last 1 byte (8 bits).
+   Finally compares to`0x29 = 41D`
+   > It can also compares to a range. e.g. Whether between 41-60: `0>>22&0x3C@ 4 &0xFF=0x29:0x3C`
 
 ## bash
 

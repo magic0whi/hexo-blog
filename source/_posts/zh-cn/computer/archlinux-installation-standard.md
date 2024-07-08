@@ -87,19 +87,6 @@ My standards of install Arch Linux.
    ```console
    # sed -i '1iServer = https://mirrors.cloud.tencent.com/archlinux/$repo/os/$arch' /etc/pacman.d/mirrorlist
    ```
-2. Install essential packages
-   ```console
-   # pacstrap -K /mnt base linux-zen linux-firmware sbctl \
-   rng-tools openssh zram-generator bluez bluez-utils iwd zerotier-one \
-   btrfs-progs tmux bash-completion udisks2 btop man rsync tealdeer \
-   zsh{,-autosuggestions,-syntax-highlighting,-history-substring-search} \
-   pipewire wireplumber pipewire-alsa pipewire-pulse \
-   base-devel git helix ripgrep fzf bc etckeeper syncthing \
-   vulkan-tools libva-utils alsa-utils hyfetch \
-   ly hyprland hyprlock hypridle hyprpaper waybar mako xdg-desktop-portal-hyprland rofi-wayland cliphist polkit-kde-agent power-profiles-daemon qt6ct alacritty grim slurp \
-   noto-fonts{,-cjk,-emoji} \
-   fcitx5-im fcitx5-chinese-addons fcitx5-mozc fcitx5-chewing fcitx5-pinyin-zhwiki
-   ```
 
 ## Configure the system
 
@@ -267,99 +254,32 @@ Binds the key to PCRs 0 and 7 (System firmware and Secure Boot state):
   > Furthmore, you can set `OOMPolicy=kill` to a service unit, which says if one of the process belong to this service is being killed by systemd-oomd, the whole service will also get killed (this option sets service's cgroup `memory.oom.group` to `1`, which means all tasks belonging to this cgroup were killed together).
 
 ```plaintext Additional Packages
-[AUR] clight clightd
-[AUR] ttf-material-design-icons-extended
-[AUR] fcitx5-pinyin-moegirl
-[AUR] sing-box
-
-amd-ucode
-^intel-ucode
-
-# GPU - Intel
-vulkan-intel
-intel-media-driver
 ^[AUR] libva-intel-driver-hybrid intel-hybrid-codec-driver
-
-# GPU - Nvidia
-linux-zen-headers
-nvidia-open-dkms nvidia-prime
-
-# GPU - AMD
-mesa vulkan-radeon libva-mesa
 
 # GPU Tools
 [AUR] raytracinginvulkan-git
-
-# Language Server
-bash-language-server
-marksman
-taplo
-texlab
-python-lsp-server
-vscode-css-languageserver
-vscode-json-languageserver
-yaml-language-server
-
-# TeX
-texlive-latexextra
-texlive-binextra
-texlive-mathscience
-texlive-xetex
 
 # Spell checkers
 nuspell hunspell-en_us
 
 # CLI Utilities
 yt-dlp
-openbsd-netcat
-cmake
 gdb
-tree
 nmap
-compsize
-p7zip
-unrar
-ntfs-3g
-cifs-utils
 docker{,-compose}
 howdy linux-enable-ir-emitter
 pacman-contrib devtools
 picocom  # ($ picocom -b 1500000 /dev/ttyUSB0, Ctrl-a Ctrl-q to quit)
-usbutils
-img2pdf
-cmus # Music Player
-playerctl
-gdu/ncdu/dust # Calculate storage usage
-innoextract
 tinyxxd
-[AUR] hexo-cli
 [AUR] cppman
 traceroute
 wireguard-tools
 
 ## Desktop apps
-zathura zathura-pdf-poppler
-firefox
-profile-sync-daemon
-mpv
-bitwarden kwallet-pam kwalletmanager
-telegram-desktop
-gimp
-doublecmd-qt6 ffmpegthumbnailer gvfs gvfs-mtp
-imv # Image Viewer
-[AUR] anki
-blender
-krita
 libreoffice-still
-obs-studio
 remmina libvncserver freerdp
 thunderbird
 [AUR] yesplaymusic-electron
-
-## Gaming
-steam
-[AUR] protontricks
-lutris
 
 sunshine
 
@@ -377,9 +297,6 @@ debootstrap ubuntu-keyring
 ## Manager & VM
 samba
 [AUR] wsdd2
-cockpit-machines cockpit-storaged virt-install dnsmasq dmidecode edk2-ovmf swtpm
-virt-manager
-qemu
   ^[AUR] qemu-user-static
    - [AUR] binfmt-qemu-static-all-arch
 
@@ -394,5 +311,4 @@ fcitx5-material-color
 - seahorse      # GUI to manage keyring
 vkd3d-proton-mingw-git
 [AUR] snowflake-pt-client-git
-wireless-regdb
 ```
