@@ -295,6 +295,10 @@ $ find kernel | cpio -o -H newc > SSDT14
     Exclusion `<C>-^`; Division `<C>-/`; Cut Path `<C-M>-/`.
     > <u>Exclusion</u> command looks similar to <u>Combine</u>, but it is different in that <u>Exclusion</u> adds extra nodes where the original paths intersect.
     > The difference between <u>Division</u> and <u>Cut Path</u> is that the former cuts the entire buttom object by the path of the top object, while the latter only cuts the bottom object's stroke and removes any fill.
+  - Common use cases
+    <u>Split Path</u>: `<C-S-M>-k` splits non-connected sections of a path.
+    <u>Fracture</u>: `<S-M>-f` fractures connected paths piece by piece.
+    <u>Flatten</u>: `<S>-f`, new difference that remove all overlapped areas in the selected paths.
 2. Pen Tool (B)
   - `<LMB>` creates a sharp node.
   - `<LMB>-Drag` creates a smooth Bezier node.
