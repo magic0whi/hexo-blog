@@ -27,3 +27,8 @@ A brief guide to zhuyin input & keyboard
 `ㄧㄣ` in, `ㄩㄣ` ün.
 `ㄧㄥ` ing, `ㄨㄥ` weng/ong, `ㄩㄥ` yong
 `ㄨㄟ` ui.
+
+## Notes
+
+- 呢 `ㄋㄜ-`
+- 兄 `ㄒㄩㄥ`

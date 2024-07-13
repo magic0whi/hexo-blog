@@ -273,24 +273,24 @@ $ find kernel | cpio -o -H newc > SSDT14
 
 1. <u>N</u>ode Tool
   - Dragging over line with `<M>` to select their nodes, release to switch to rubberband mode.
-  - `!` invert node selection in current subpath(s).
+  - `!` inverts node selection in current subpath(s).
   - `[`,`]` rotate 15&deg; `<`,`>` scale.
   - `2x<LMB>` or `<C-M-LMB>`: Add node.
   - `2x<LMB>` or `<C-M-LMB>` or ``<Del>``: Delete node. Use `<C-Del>` if you don't wanna Inkscape to preserve the shape.
   - `<S>-d` duplicate selected nodes, `<S>-b` breaks selected nodes, `<S>-j` joins two selected endnodes.
-  - `<S>-c` made node cusp, which means its two handles can move independently at any angle, to each other.
-    `<S>-s` made node smooth, which means its handles are always colinear.
-    `<S>-y` made node symmetric, which is same as smooth, but the handles also have the same length.
-    `<S>-a` made node auto-smooth, which is a special node that automatically adjusts the handles of the node and surrounding auto-smooth nodes to maintain a smooth curve. 
+  - `<S>-c` mades node cusp, which means its two handles can move independently at any angle, to each other.
+    `<S>-s` mades node smooth, which means its handles are always colinear.
+    `<S>-y` mades node symmetric, which is same as smooth, but the handles also have the same length.
+    `<S>-a` mades node auto-smooth, which is a special node that automatically adjusts the handles of the node and surrounding auto-smooth nodes to maintain a smooth curve. 
     > When switching the type of node, preseve one position of the two handles by hovering cursor over it. So that only the other handle is rotated / scaled to match.
-  - `<C-LMB>` retract handle.
-    `<S-LMB>` pull out handle.
-    `<C>-k` combine into compound path.
-    `<C-S>-k` break apart compound path.
+  - `<C-LMB>`: Retract handle.
+    `<S-LMB>`: Pull out handle.
+    `<C>-k`: Combine into compound path.
+    `<C-S>-k`: Break apart compound path.
   > - Compound path is not the same as a group. It's a single object which is only selectable as a whole.
   > - Parts of a path (i.e. a selection of nodes) can also be copied with `<C>-c` and inserted as a new path with `<C>-v`.
-  > - `<C-S>-c` convert shape or text to path.
-  - Boolean operators
+  > - `<C-S>-c`: Convert shape or text to path.
+  - Boolean Operators
     Union `<C>-+`; Difference `<C>--`(Bottom minus top); Intersection `<C>-*`;
     Exclusion `<C>-^`; Division `<C>-/`; Cut Path `<C-M>-/`.
     > <u>Exclusion</u> command looks similar to <u>Combine</u>, but it is different in that <u>Exclusion</u> adds extra nodes where the original paths intersect.
@@ -299,12 +299,32 @@ $ find kernel | cpio -o -H newc > SSDT14
     <u>Split Path</u>: `<C-S-M>-k` splits non-connected sections of a path.
     <u>Fracture</u>: `<S-M>-f` fractures connected paths piece by piece.
     <u>Flatten</u>: `<S>-f`, new difference that remove all overlapped areas in the selected paths.
+  - Shape Build Tool (<u>X</u>)
+    Before switch to the tool, select at least one overlapping object.
+    `<LMB>` to add a section to the result;
+    `<S-LMB>` to removee it (it can be used to create a hole in it's place).
+    `<LMB>-Drag` to connect multiple sections to one.
+    `<S-LMB>-Drag` to remove a contiguous section.
+  - Inset and Outset
+    Inkscape can expand and contract shapes not only by scaling, but also by <u>offsetting</u> an object's path, i.e. by displacing perpendicular to the path in each point.
+    `<C>-(` Inset; `<C>-)` Outset.
+    `<C>-j` Dynamic Offset (create an object with a draggable handle controlling the offset distance).
+    `<C-M>-i` Linked Offset, create a dynamic offset linked to the original path.
+  - Simplitication
+    `<C>-l`: Simplify. This may be useful for paths created by the Pencil tool. The amount of simplication depends on the size of the selesction. Moreover, the simply command is accelerated if press `<C>-l` several times in quick succession.
 2. Pen Tool (B)
   - `<LMB>` creates a sharp node.
   - `<LMB>-Drag` creates a smooth Bezier node.
   - `<S>` while dragging out a handle.
   - `<C>` limits the direction of either the current line segment or the Bezier handles to 15 &deg; increments.
   - `<CR>` finalizes the line; `<Esc>` cancels it.
+3. <u>T</u>ext Tool
+  `<C-S>-t`: Open the Text and Font dialog.
+  `<M>-<`,`>`: Decrease, Increase the <u>letter spacing</u> of a text object. `<C-M>-<`,`>` adjust <u>line spacing</u> in multi-line text objects.
+  `<M-Left,Right,Up,Down>`: Kerning the letters right of the cursor horizontally, vertically.
+  `<LMB>-Drag`: Click and drag with the text tool.
+4. XML Editor
+  `<C-S>-x`: Allows to do tricks.
 
 ### Filesystem
 

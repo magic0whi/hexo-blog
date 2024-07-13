@@ -18,18 +18,6 @@ Here comes a cheatsheet
 `<CR>` means `<Enter>` or `<Return>`
 i\_`<C-p>` means `<C-p>` in Insert Mode
 v\_b\_`g <C-a>` means `g <C-a>` in Visual Block-Wise Mode
-{`a`,`b`,`c`} means either a or b or c
-[`a`,`b`,`c`] means either a or b or c or none.
-
-TODO: works to be merged
-`:t` (copy) method copies all matches to an address.
-`:j` join command join the lines
-`sort` sort command sort the lines
-Spell Check:
-{`]`,`[`}`s` Jump to next / prev wrong word
-`z`[`u`]{`g`,`w`,`G`,`W`} Add / Undo add good / wrong word under cursor to `spellfile` / or save to current session (Which is temporarily if you don't save session)
-`z=` Find suggestion of the word under cursor
-
 
 ## Ch 01. Starting Vim
 
@@ -956,4 +944,23 @@ You may only have one quickfix list, whereas you can have as many location list 
 | --                                                       | --                                                         |
 | `:l`{`vim`,`grep`}` /bagel/ **/*.md`                     | location list variant for the `:vimgrep` / `:grep` command |
 | `:l`{`open`,`close`,`first`,`last`,`next`,`prev`,`make`} | bunch of location list vraiant commands                    |
+
+## Addendum
+
+|    |    |
+| -- | -- |
+| `:t` | copy command copies all matches to an address. |
+| `:j` | join command join the lines |
+| `:sort` | sort command sort the lines |
+
+
+Spell Check
+| | |
+| -- | -- |
+| {`]`,`[`}`s` | Jump to next, prev wrong word |
+| `z`[`u`]{`g`,`w`,`G`,`W`} | Add, Undo good, wrong word under cursor to `spellfile`; Or save to current session |
+| `z=` | Find suggestion of the word under cursor |
+
+`let mapleader="\<space>"`: Change leader key.
+`nnoremap`: `n` represents the normal mode. `nore` means non-recursive, it is a good practice to use the non-recursive variant to avoid potential infinite loop. `map` is the map command
 

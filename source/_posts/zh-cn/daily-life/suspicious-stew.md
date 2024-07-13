@@ -1390,6 +1390,8 @@ $$
    恶心/呕吐
    震颤
    全身乏力
+2. Bupropion
+   Serzures
 
 ## 身体数据
 
@@ -1403,3 +1405,18 @@ $$
    颈围 35.5, 腰围 72, 上胸围 84.5, 下胸围 76
    臀围 92, 大腿 52, 小腿 37
    肩宽 37.5
+
+## Sugar in Beverages and Misconceptions
+
+- The fiber in fruits slows down the absorption of fructose.
+- Concentrated juice is basically sugar solution with a sugar content of 60%-70%, so it's prone to intake excessive fructoses.
+
+## Old Elecronics Recycling Notice
+
+- Avoid mail-in recycling.
+- First choice is brick-and-mortar store.
+- Don't do disassemble inspection before the price is agreed upon.
+
+## How to Persue Rights Legally
+
+不予立案：派出所開據不予立案通知書（找法制課）&rarr;市局督察部門復議
