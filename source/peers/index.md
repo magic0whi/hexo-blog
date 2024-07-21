@@ -1,11 +1,11 @@
 ---
 title: Peers
 date: 2020-12-23 10:10:27
+toc: true
 ---
 
-Proteusの友人们
-
-按字母排序, 在我心中不分先后哦
+Proteusの友達
+There are more interesting blogs below.
 
 * [本地磁盘小日记ヾ(≧▽≦*)ゝ](http://ohayou.aimo.moe/)
 * [clansty(凌莞)](https://c5y.moe/) `凌莞大可爱!`
@@ -13,8 +13,6 @@ Proteusの友人们
 * [MinatoAster](http://minatoaster.github.io)
 * [霜晨月](https://datasickle.gitee.io/)
 * [xtlsoft(徐天乐)](https://www.xtlsoft.top)
-
-**下面是单向友链**
 
 ## Computer
 

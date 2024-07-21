@@ -8,784 +8,463 @@ toc: true
 
 Notes on Cherno C++ Tutorial
 
-TODO: 重新格式化这篇文章
+TODO: Format this article
 
 <!-- more -->
 
-> 写在前面: 如果你在看到一半的时候, 若出现**还没有讲到过的操作出现在示范代码中**(比如new), 知道它**基本起什么作用**即可, 在后面的episodes肯定会细讲
-
-> 如果你看到夹杂英文, 那是我直接copy了@Cherno的话并懒得翻译
-
 ## Notice
 
-1. Always pass your function parameters with const if possible
-2. If an object have pointer variable inside, write a copy constructor and use it
-3. 节约内存的小技巧
-   由于内存最小可操作单位是 byte, 而 bool 类型只需要 1 字节即可(0 和 1)，巧妙的方法是使用 1 个 byte 表示 8 个 bool 类型变量
-4. 头文件 or inline? （inline实际上就是将函数整个代码复制到调用这个函数的函数那里）
-5. 宏使用`#if`和`#endif`作为条件判断
-   `#if 1`为`true`
-6. 声明为 static 的变量和函数只在它所在的 translation unit 有效
-7. 默认的浮点数是double类型的, 如果你只用float的精度, 在数据后加上"f"如 `float a = 5.5f`
+1. If an object have pointer variable inside, write a copy constructor and use it.
+2. Reduce memory usage by using 1 byte to store 8 bools.
+3. Default float type is `double`, use `float a = 5.5f`.
+4. Header or inline?  (the later copys whole function body into the area where the function is called).
 
-
-@Cherno 写Class的规范:
-
-1. m_LogLevel的"m_"表示变量是类内部(private)变量
-2. public和private可以分离, 如一部分Public修饰变量, 另一部分Public修饰函数:
-
-   ```C++
-   class Log {
-   public:
-       const int LogLevelError = 0;
-       const int LogLevelWarning = 1;
-       const int LogLevelInfo = 2;
-   private:
-       int m_LogLevel = LogLevelInfo;
-   public:
-       void SetLevel(int level)
-       {
-           m_LogLevel = level;
-       }
-   
-       void Error(const char* message){
-           if (m_LogLevel >= LogLevelError)
-               std::cout << "[Error]:" << message << std::endl;
-       }
-   
-       void Warn(const char* message){
-           if (m_LogLevel >= LogLevelWarning)
-           std::cout << "[WARNING]:" << message << std::endl;
-       }
-       void Info(const char* message){
-           if (m_LogLevel >= LogLevelInfo)
-           std::cout << "[INFO]:" << message << std::endl;
-       }
-   }
-   ```
 
 ## How C++ Works
 
-Concepts:
-* Every .cpp will compile to one .o/.obj file
-* multiple .cpp and .h has `#include` with each other can compose to a translation unit
-* Compile Process Path: Source->Compile->Linker->Executables
+* A translation unit typically consists of a single `.cpp` file and its associated `.h` files.
+* Compile Process Path: Source&rarr;Compile&rarr;Linker&rarr;Executables
 
-1. Generate Pre-process file
-   Pro-process file is the source code that the macro (such like `#include`) was parsed by the compiler.
-   * VS2015: Project Settings->Preprocessor->Preprocess to a File
-   * GCC: `cpp hello.cpp > hello.i`
+1. Pre-process
+   Compiler parses all the macros (such as `#include`) in source file.
+   - VS2015: `Project Settings`->`Preprocessor`->`Preprocess to a File`
+   - GCC: `cpp hello.cpp > hello.i`
 2. Compile & Assembly
-   * VS2015: Compile Only (Ctrl+F7)
-   * GCC: `g++ -S main.i; as main.s -o main.o`
+   Each `.cpp` compile to one `.o` (aka. `.obj`) file.
+   - VS2015: Compile Only (`<C-F7>`)
+   - GCC: `g++ -S hello.i && as hello.s -o main.o`
 3. Linker
-   Externally defined functions will be integrated in the link phase,
-   and function declarations that never be called will be optimized away.
+   Externally defined functions will be integrated in the link phase. Function declarations that never be called will be optimized away.
    
-   The parameter of `ld` are platform specific (mainly depend on your gcc version)
-   Use `g++ -v -o hello hello.cpp` we can get the parameter of the `collect2` (which is an alias for `ld`)
+   The parameter of `ld` are platform specific (mainly depends on GCC version). Enable verbose to get the parameter of the `collect2` (which is an alias of `ld`):
    ```console
    $ g++ -v -o hello hello.cpp
-   ...
-   /usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/collect2 -plugin /usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/lto-wrapper -plugin-opt=-fresolution=/tmp/ccDNo0Hr.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -o main.exe /usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/../../../../lib/Scrt1.o /usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/../../../../lib/crti.o /usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/crtbeginS.o -L/usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0 -L/usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/../../../../lib -L/lib/../lib -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/../../.. /tmp/ccs86P3x.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/crtendS.o /usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/../../../../lib/crtn.o
-   ...
    ```
-   So the `ld` command should be
+   Lt may looks messy, but you can probably significantly shorten that link line by removing some arguments. Here's the minimal set I came up after some experimentations:
    ```console
-   $ ld
-   > -plugin-opt=/usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/lto-wrapper
-   > -plugin-opt=-fresolution=/tmp/ccHyR7Od.res
-   > -plugin-opt=-pass-through=-lgcc_s
-   > -plugin-opt=-pass-through=-lgcc
-   > -plugin-opt=-pass-through=-lc
-   > -plugin-opt=-pass-through=-lgcc_s
-   > -plugin-opt=-pass-through=-lgcc
-   > --build-id
-   > --eh-frame-hdr
-   > --hash-style=gnu
-   > -m elf_x86_64
-   > -dynamic-linker /lib64/ld-linux-x86-64.so.2
-   > -pie
-   > -o main /usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/../../../../lib/Scrt1.o
-   > /usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/../../../../lib/crti.o
-   > /usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/crtbeginS.o
-   > -L/usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0
-   > -L/usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/../../../../lib
-   > -L/lib/../lib
-   > -L/usr/lib/../lib
-   > -L/usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/../../..
-   > main.o
-   > -lstdc++
-   > -lm
-   > -lgcc_s
-   > -lgcc
-   > -lc
-   > -lgcc_s
-   > -lgcc /usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/crtendS.o
-   > /usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/../../../../lib/crtn.o
-   ```
-   You can probably significantly shorten that link line by removing some arguments. Here's the minimal set I came up with after some experimentation:
-   ```console
-   $ ld
-   > -dynamic-linker /lib64/ld-linux-x86-64.so.2
-   > -o main /usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/../../../../lib/Scrt1.o
-   > /usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/../../../../lib/crti.o
-   > /usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/crtbeginS.o
-   > -L/usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0
-   > main.o
-   > -lstdc++
-   > -lc
-   > /usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/crtendS.o
-   > /usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/../../../../lib/crtn.o
+   $ ld \
+   -I /lib64/ld-linux-x86-64.so.2 \
+   -o hello
+   /usr/lib/Scrt1.o \
+   /usr/lib/crti.o \
+   /usr/lib/gcc/x86_64-pc-linux-gnu/14.1.1/crtbeginS.o \
+   -L /usr/lib/gcc/x86_64-pc-linux-gnu/14.1.1 \
+   hello.o \
+   -l stdc++ \
+   -l c \
+   /usr/lib/gcc/x86_64-pc-linux-gnu/14.1.1/crtendS.o \
+   /usr/lib/crtn.o
    ```
 
-## Variables in C++
+## Variables
 
-Main idea: The difference between C++ data types are simply the different allocated memory size and the declaration of the type of data to be stored
+> The difference between C++ data types are simply different allocated memory size.
+> You can use `sizeof()` to see the data type size.
 
 Different memory allocation size for C++ Data Type:
 | | |
 |---| --- |
-| char | 1 Byte |
-| short | 2 Bytes |
-| int | 4 Bytes | 
-| long | **commonly** 4 Bytes |
-| long long | 8 Bytes |
-| float | 4 Bytes |
-| double | 8 Bytes |
+| `char` | 1 byte |
+| `short` | 2 bytes |
+| `int` | 4 bytes | 
+| `long` | 8 bytes (`C++20`), >= 4 bytes |
+| `long long` | 8 bytes |
+| `float` | 4 bytes |
+| `double` | 8 bytes |
+| `void*` | 8 bytes (64 bits), 4 bytes (32 bits) |
 
-> You can use `sizeof()` to see the data type size.
+## Functions
 
-## Functions in C++
+- Write formal parameters with `const` if possible.
+- *Function* is a function **not** in a class. whereas *Method* is a function in a class.
+- Don't frequently divide your code into functions, calling a function requires creating an entire stack frame. This means we have to push parameters and so on into the stack, and also pull something called the return address from the stack, so that after the function executed the `PC` (Program counter) register could return to the address before the function call.
+  Conclusion: Jumping around in memory to execute function instructions comsumes additional time.
 
-* **Function** means a function that is not in a class.
-  **Method** means a function in a class.
-* The main purpose of the function is to reduce code duplication.
-  But don't frequently divide your code into functions, calling a function requires
-  creating an entire stack frame for that function.
-  This means we have to push parameters and so on into the stack, and also, put something
-  called the return address into the stack, so that after the function executed the PC register could return to the address before the function call.
-  TLDR: Jumping around in memory to execute function instructions comsumes additional time.
-* Generally we write function definitions in header files (.h) and function bodies in .cpp files.
+## Header Files
 
-## C++ Header Files
+Prevent multiple inclusion: You include header file `b.h` in `a.cpp`, but `b.h` includes another header file `c.h`, while you have already include `c.h` before in `a.cpp`)
 
-`#pragma once` can prevent include same header file multiple times in a translation unit
-(e.g. your include header file b.h in a.cpp, but b.h includes andther header file c.h, while you have already include b.h before in a.cpp)
+Two ways:
+- `#pragma once`
+- 
+  ```c++ Log.h
+  #ifndef _LOG_H
+  #define _LOG_H
 
-The second way do the same thing as `#pragma once` (In CLion this is the default way):
-```C++ Log.h
-#ifndef _LOG_H
-#define _LOG_H
+  // some sentence...
 
-// some sentence...
+  #endif
+  ```
 
-#endif
-```
+## How to debug
 
-## How to DEBUG C++ in VISUAL STUDIO
+Visual Studio
+- The `watch view` in VS2015 allows you to specify the variables to be monitored,
+  In `memory window` you can search by keyword `&a` to show the address of variable `a`
+- The default value of uninitialized variables is `0xcccccccc`
 
-* The **watch view** in VS2015 allows you to specify the veriables to be monitored,
-  In **memory window** you can search by keyword `&a` to show the address of variable `a`
-* The default value of uninitialized variables is `0xcccccccc`
+## Visual Studio Setup
 
-## Visual Studio Setup for C++
+- Use `Show All Files` view under `Solution Explorer`.
+- By default VS2015 put intermediate files in debug directory
+- It's recommand to set `Output Directory` into `$(SolutionDir)bin\$(Platform)\$(Configuration)\`
+  and set `Intermediate Directory` into `$(SolutionDir)bin\intermediate\$(Platform)\$(Configuration)\`
 
-* Use **Show All Files** view under Solution Explorer
-* By default VS2015 put intermediate files in debug directory
-* It's recommand to set Output Directory into `$(SolutionDir)bin\$(Platform)\$(Configuration)\`
-  and set Intermediate Directory into `$(SolutionDir)bin\intermediate\$(Platform)\$(Configuration)\`
+## Pointers
 
-## CONDITIONS and BRANCHES in C++
-
-* In C++ 0 means false, any other numbers means true
-* `else if` is equivalent to `else { if(){} }`
-
-## Loops in C++
-
-`for` can also be written in the form of `while`:
-```C++
-int i = 0;
-bool condition = true;
-for ( ; condition; )
-{
-    Log("Hello World!");
-    i++;
-    if (!(i<5))
-        condition = false;
-}
-```
-
-## POINTERS in C++
-
-* Pointer: the pointer represents a momory address,
-  generally the data type of the pointer is used to represent the data type of the data at the target address.
-  So if we don't care the pointed data's data type, just using `void*`
-* Pointer to Pointer:
-  ```C++
+- The pointer represents a memory address, generally the data type of the pointer is used to represent the type of the data at the target address.
+- Pointer to Pointer:
+  ```c++
   #include <cstring>
 
-  // ...
-
-  // Allocate a space with 8 char's and fill it with zero, then finally release the memory space.
-  char* buffer = new char[8];
-  memset(buffer, 0, 8);
-  delete[] buffer;
+  // Allocate a space with 8 chars
+  char* buf = new char[8];
+  std::memset(buf, 0, 8); // Fill it with zero,
+  // Finally release the memory space.
+  delete[] buf;
   
   // pointer to pointer
-  char** ptr = &buffer;
+  char** ptr = &buf;
   ```
-  In running, `ptr` 储存的数据为 `0x00B6FED4` (即 `buffer` 作为变量本身的地址),
-在 VS2019 自带的 Memory View 中
-`buffer`储存的数据为`f0 dd d0 00` (`buffer`指向8个char长度的空间地址),
-由于x86的设计,
-我们从 Memory View **看到的是反转的数据**, 实际应该是`00 d0 dd f0`(即 0x00d0ddf0), 这个地址就是那8个char长度空间的所在地.
+  In memory, it may like this:
+  ```plaitext
+  0x00B6FED4 (&buf):        00 D0 FF F0
+  0x00D0FFF0 (new char[8]): 00 00 00 00 00 00 00 00
+  0x???????? (&ptr):        00 B6 FE D4
+  ```
+  > Due to x86's little endian design, what we see from `Memory View` is start from lower bits to higer bits, which is reversed from human's convient that write the most significant digit first. e.g.:
+  > ```plaintext
+  >                    0x0 0x1 0x2 0x3
+  > 0x00B6FED4 (&buf):  F0  FF  D0  00
+  > ```
 
-## Reference in C++
+## Reference
 
-函数的形式参数中
-使用引用可以使代码**相比指针更简洁**
-因为访问引用变量不使用需要去引用化符号 "*"
+- Variables are convert to memory address in assembly by compiler. Reference let compiler just substitute memory address as is (like a macro) using it's copy operator (`=()`), so it is different to `const void*` with creates a memory area to store a memory address (Can be `NULL`).
+- Copy operator `=()` copies value of a variable. Send actual parameters to a function implicitly calls copy operator.
+- Dereference operator (aka. indirection operator) `*()` get the value from a memory address.
+- Address-of operator `&()` obtain the memory address of a variable. Since directly send variable name to `=()` only get its stored values.
 
-## CLASSES vs STRUCTS in C++
+## Classes vs Structs, and Enums
 
-Struct和Class**无本质区别**
-Struct更适合存储多个变量, 侧重于表达数据结构, 而对象侧重于表达对象
-Struct中的变量默认是Public修饰.
-同时, Class可以继承Struct(但编译器会报警)
+They are no different in low level, so a `class` can inherit a `struct` (Not recommand).
+`sturct` is more suitable for store multiple variables, it's variables are default have attribute `public`, therefore it's convient to express a data structure. While Classes are more suitable for express objects, which has both member variables and methods.
 
-`public:` 和 `private:` 在类中可有多处
-
-## Static in C++
-
-Basically just to `cut to the chase` (切入正题/长话短说),
-static outside of class means that the linkage of that symbol that you declare to be static is going to be internal meaning. It;s only going to be visible to that translation unit that you've defined it in.
-
-Whereas a static variable inside a class or struct means that variable is actually going to share memory with all of the instances of the class meaning that basically across all instances that you create of that class or struct, there's only going to be one instance of that static variable
-and a similar thing applies to static methods in a class there is no instance of that class being passed into that method. (Cherno讲的是背后的原理)
-
-第一种情况翻译: 由于translation unit中的(不是class中的)全局变量/函数是全局可见的, 所以加上static让全局变量只在它所在的translation unit可见. 否则在不同的translation unit声明相同符号的变量将在链接阶段报重复定义错误. 类似于translation unit的private修饰
-
-@Cherno 的命名规范:
-
-s_开头代表变量为静态 `static int s_Variable = 5;`
-
-***
-
-尽量在头文件使用static变量, 因为它只是简单将内容复制到cpp文件
-
-### Local Static
-
-使变量在局部可见的同时有static的性质
+Enum is a way to define a set of distinct values that have underlying integer types (can use `char` type as well, see below).
 
 ```c++
-void Function()
-{
-	static int i = 0;
-	i++;
-	std::cout << i << std::endl;
-}
-
-int main()
-{
-	Function();
-	Function();
-	Function();
-	Function();
-}
-```
-
-### Classical Singleton
-
-Singleton类在整个程序中只有一个实例
-
-```C++
-// 第一种实现
-class Singleton
-{
-private:
-	static Singleton* s_Instance;
-    Singleton() {}; // 这一行作用阻止类被实例化, 后面构造函数会讲
-public:
-	static Singleton& Get() { return *s_Instance; };
-	void Hello() { std::cout << "Hello" << std::endl; };
-};
-
-Singleton* Singleton::s_Instance = nullptr;
-
-int main()
-{
-	Singleton::Get().Hello();
-```
-
-```C++
-// 或者将对象实例放在局部静态变量中(好处: 相比上一种更少的代码量)
-class Singleton
-{
-private:
-    Singleton() {}; // 这一行作用阻止类被实例化, 后面构造函数会讲
-public:
-	static Singleton& Get() 
-	{
-		static Singleton instance;
-		return instance;
-	};
-	void Hello() { std::cout << "Hello" << std::endl; };
-};
-
-int main()
-{
-	Singleton::Get().Hello();
-}
-}
-```
-
-## Enum in C++
-
-枚举用来管理标识符, 增强代码可读性, 本质是Integer(可指定which types of integer you want to be)
-如
-(模式是32位Integer, 这里用unsigned char只有8位可以节约内存)
-
-```C++
 enum Example : unsigned char
 {
     A, B, C
 };
 ```
 
-使用enum后的Log类
-
-```C++
-class Log
-{
+```c++
+class Log {
+// Access specifiers 'public', 'private' can be placed multiple times
 public:
-    enum Level
-    { // LevelError = 0代表从零开始递进, 当然默认就是0
-        LevelError = 0, LevelWarning, LevelInfo
-    };
+  enum Level {
+    // Start from one, default is 0
+    LevelError = 1, LevelWarning, LevelInfo
+  };
 private:
-    Level m_LogLevel = LevelInfo;
+  Level m_log_lv = LevelInfo;
 public:
-    void SetLevel(Level level)
-    {
-        m_LogLevel = level;
-    }
-
-    void Error(const char* message) {
-        if (m_LogLevel >= LevelError)
-            std::cout << "[Error]:" << message << std::endl;
-    }
-
-    void Warn(const char* message) {
-        if (m_LogLevel >= LevelWarning)
-            std::cout << "[WARNING]:" << message << std::endl;
-    }
-    void Info(const char* message) {
-        if (m_LogLevel >= LevelInfo)
-            std::cout << "[INFO]:" << message << std::endl;
-    }
+  void set_lv(Level lv) {
+    m_log_lv = lv;
+  }
+  void err(const char* msg) {
+    if (m_log_lv >= LevelError) std::cout << "[Error]:" << msg << '\n';
+  }
+  void warn(const char* msg) {
+    if (m_log_lv >= LevelWarning) std::cout << "[WARN]:" << msg<< '\n';
+  }
+  void info(const char* msg) {
+    if (m_log_lv >= LevelInfo)
+      std::cout << "[INFO]:" << msg<< '\n';
+  }
 };
-
 int main() {
-    Log log;
-    log.SetLevel(Log::LevelWarning);
-    log.Error("Hello");
-    log.Warn("Hello");
-    log.Info("Hello");
+  Log log;
+  log.set_lv(Log::LevelWarning); // Enum name is optional
+  log.err("Hello");
+  log.warn("Hello");
+  log.info("Hello");
 }
 ```
 
-## Constructors in C++
+## Static
 
-You have to manually initialize all of your primitive types otherwise they will be set to whatever was left over in that memory.
+- Static functions and variables outside of class limit the scope in its translation unit (like `private` in a class). But define static functions or variables that share a same name in different translation unit will causes duplicate definition error in linking stage.
+- Static variable inside a class or struct means that variable is going to share memory with all of the instances of the class, in other words there's only one instance of that static variable. Static methods cannot pass an instance of a class.
+- Define `static` variables in header files if possible.
+- Local Static
+  ```c++
+  void func() {
+    static int s_i = 0; // 's_' means static
+    s_i++;
+    std::cout << s_i << '\n';
+  }
+  int main() { func(); func(); func(); func(); }
+  ```
 
-禁止实例化类, 只需要把构造函数设为Private, 或者删除构造函数
-If you did not want people creating instances...
+### Classical Singleton
 
-```C++
-class Log
-{
+Singleton are claess that allows only one instance.
+- One way:
+  ```c++
+  class Singleton {
+  private:
+    static Singleton* s_instance;
+      Singleton() {}; // Private empty construct function prevents instantiate
+  public:
+    static Singleton& get() { return *s_instance; };
+    void hello() { std::cout << "Hello" << '\n'; };
+  };
+  Singleton* Singleton::s_instance = nullptr;
+  int main() { Singleton::get().hello(); }
+  ```
+- Another way:
+  ```c++
+  class Singleton {
+  private:
+    Singleton() {};
+  public:
+    static Singleton& get() {
+      // Put instace into a local static variable (Pro: less code)
+      static Singleton s_instance;
+      return s_instance;
+    };
+    void hello() { std::cout << "Hello" << '\n'; };
+  };
+  int main() { Singleton::get().hello(); }
+  ```
+
+## Constructors & Destructors
+
+Corstructor provides a way to initialize primitive types when creating instance. Otherwise you have to do it manually or they will be keep to whatever is left over in that memory.
+
+To Prevent creating instance, you can set constructor as priavate, or delete it.
+```c++
+class Log {
 Private:
     Log() {} // One way
 public:
     Log() = delete; // Another way
-
-    static void Write()
-    {
-
-    }
+    static void write() {}
 };
-
-int main()
-{
-    // Only Write() can be invoke
-    Log::Write();
-
-    // Now you cannot access the constructor
-    Log l;
+int main() {
+    Log::write(); // Only Write() can be invoke
+    Log l; // Now you cannot access the constructor
 }
 ```
 
-## Destructors in C++
+Destructor provides a way to gently recycle memory when `delete` an object.
+It can be called directly: `SomeClass.~SomeClass();`
 
-折构函数可以被这样调用, 但是基本上不会用到, It's weired
+## Inheritance & Virtual Functions
 
-someClass.~someClass();
+Size of sub class: (base class) + (defined variables)
 
-## Inheritance in C++
-
-没啥好说的, 唯一要注意的是继承的类的大小将是: 父类所有的变量总和 + 自己声明变量总和
-
-Use colon to inerit a class
-
-```C++
-class Sub_Class : Main_Class
-{
-
-}
-```
-
-## Virtual Function in C++
-
-首先我们来看为什么要有Virtual函数
-
-```C++
-class Entity
-{
+Why we need virtual function:
+```c++
+class Entity {
 public:
-    std::string GetName() { return "Entity"; }  
+    std::string get_name() { return "Entity"; }  
 };
-
-class Player : public Entity
-{
+// public inheritance keep public members in base class public in sub class,
+// otherwise they becomes to private
+class Player : public Entity {
 private:
-    std::string m_Name;
+  std::string m_Name;
 public:
-    Player(const std::string& name)
-        : m_Name(name) {}
-
-    std::string GetName() { return m_Name; }
+  Player(const std::string& name) : m_Name(name) {}
+  std::string get_name() { return m_Name; }
 };
+int main() {
+  Entity* entity = new Entity();
+  std::cout << entity->get_name() << '\n';
 
-int main()
-{
-    Entity* entity = new Entity();
-    std::cout << entity->GetName() << std::endl;
-
-    Player* player = new Player("Cherno");
-    Eneity* entity2 = player;
-    std::cout << entity2->GetName() << std::endl;
+  Player* player = new Player("Cherno");
+  Entity* entity2 = player; // Cast player to Entity
+  std::cout << entity2->get_name() << '\n';
 }
 ```
-
-输出:
-
-```
+Outputs:
+```console
 Entity
 Entity
 ```
-
-发现问题了吗, 第二个输出本应是"Cherno"
-
-实际上当指针类型是父类Entity时, 通过该指针调用子类Player类的重载函数GetName()并没有被调用, 而是父类定义的内容, 这会导致许多问题
-
-
-C++11引入了Override关键字, 它不是必须的, 但能够避免发生拼写错误并能增强代码的可读性
-
-正确示范:
-
-```C++
-class Entity
-{
+The problem occurs that the second output should be "Cherno"
+When the pointer type is the main class `Entity`, the method `get_name()` uses it's main class' version even it's actually an instance of `Player`, this definitely a problem.
+If you want to override a method you have to mark the method in the base class as `virtual`. Correct version:
+```c++
+class Entity {
 public:
-    // 加上了virtual
-    virtual std::string GetName() { return "Entity"; }  
+    // with 'virtual' marked
+    virtual std::string get_name() { return "Entity"; }  
 };
-
-class Player : public Entity
-{
+class Player : public Entity {
 private:
     std::string m_Name;
 public:
-    Player(const std::string& name)
-        : m_Name(name) {}
+    Player(const std::string& name) : m_Name(name) {}
 
-    // 加上了override
-    std::string GetName() override { return m_Name; }
+    // 'override' is not necessary but it could avoid typo and imporve readability
+    std::string get_name() override { return m_Name; }
 };
-
-int main()
-{
+int main() {
     Entity* entity = new Entity();
-    std::cout << entity->GetName() << std::endl;
+    std::cout << entity->get_name() << '\n';
 
     Player* player = new Player("Cherno");
-    Eneity* entity2 = player;
-    std::cout << entity2->GetName() << std::endl;
+    Entity* entity2 = player;
+    std::cout << entity2->get_name() << '\n';
 }
 ```
 
-总结:
+> `virtual` could reduce "dynamic dispatch" (change object's vtable in runtime).
+> `virtual` has its own overhead, it needs extra Vtable space, in order to dispatch the correct method it includes a member pointer in the base class that points to the vtable. And every time we call virtual method, we go through that table to decision which method to map.
+> Through the extra overhead it's still recommand to use as much as possible.
 
-If you want to override a function you have to mark the base function in the base class as virtual.
+### Interface (Pure Virtual Method)
 
-不重要的补充: 
-
-1. 使用virtual可以减少dynamic dispatch这种操作的使用 (运行时修改对象的vtable).
-
-2. 很不幸virtual它不属于免费的午餐, 首先使用它会需要额外的Vtable空间以让我们能够dispatch to the correct function that includes a member pointer in the actual base class that points to the Vtable. 第二, 我们每次调用virtual函数我们都要通过那个table来决定which function to actually map to.
-
-    但是基本上区别并不明显, 所以能用就用. 除非你的程序要跑在一个性能真的非常非常差的嵌入式设备上.
-
-
-## Interface (Pure virtual method)
-
-在Printable中创建一个GetClassName的赋值为0的函数, 它就是一个接口
-
-这个类也不能被直接实例化, 需要实现此方法的子类才能工作
-
-```C++
-class Printable{
+```c++
+// Interface class cannot be instantiated directlly
+class Printable {
 public:
-    virtual std::string GetClassName() = 0;
-}
-```
-
-简单的示例
-
-```C++
-
-class Player : public Entity, Printable // 子类可以继承多个接口类
-{
+    // interface (pure virtual method)
+    virtual std::string get_class_name() = 0;
+};
+class Player : public Entity, Printable { // a sub class can inherit multiple interface class
 public:
-    std::string GetClassName() override { return "Player"; }
+    std::string get_class_name() override { return "Player"; }
+};
+void print(Printable* obj) {// 通过这样的函数, 我们只需要实现这个方法, 该函数就会调用我们的实现
+    std::cout << obj->get_class_name() << std::endl;
 }
-
-void Print(Printable* obj) // 通过这样的函数, 我们只需要实现这个方法, 该函数就会调用我们的实现
-{
-    std::cout << obj->GetClassName() << std::endl;
+int main() {
+    Player* player = new Player();
+    print(player);
+    print(new Player); // don't do this, it's very easily to cause memory leak
 }
-
-void main()
-{
-    Player player = new Player();
-    Print(player);
-
-    Print(new Player); // 不要这么用, 会导致内存泄漏
-}
-
 ```
 
 ## Visibility in C++
 
-The default visibility of a Class would actually be private; if its a Struct then it would be public by default.
+- The default visibility of a Class would be `private`; if its a `struct` then it would be `public` by default.
+- `private` things only visiable in it's own class, nor in sub class, except friend class.
+- `protected` things can be seen by sub class.
 
-private标记的内容只有本类能访问, 子类也不行, 但是朋友类(friend class)可以, 会在以后视频中讲到.
+## Raw Arrays && C++11 Standard Arrays
 
-protected标记是在private基础上, 子类可以访问
+> Be aware for operations out of index (e.g.`example[-1] = 0`), in C++ you can do this by force the compiler to ignore this check, and it's definitely discouraged.
 
-## Arrays in C++
-
-### Raw Arrays
-
-举个例子`int example[5]`
-
-数组名称 example 是一个指针, 指向 example[0] 的所在地址
-
-请注意, 不能使用超出数组下标的操作(如`example[-1] = 0`), 那意味着访问不在当前数组许可范围内的内存; 在debug模式下它会报错, 但在release下它可能会造成不可预料的后果
-
-还可以用指针的方式访问数组
-
-```C++
-int example[5];
-int* ptr = example;
+```c++
+// 'arr' is actually a pointer of type int[5], stores the begin address of the array
+int arr[5]; // On heap, destory on function end
+int* arr = new int[5]; // on stack, would not auto destory
+int* ptr = arr;
 for (int i = 0; i< 5; i++)
-    example[i] = 2;
+  arr[i] = 2;
 
-example[2] = 5;
-// equals to *(ptr + 2) = 5;
-// 因为这个指针是int类型, 所以每次+1都向后偏移4字节的内存地址(对指针进行加减操作是不同于普通的);
-// 所以也可以写成:
-// *(int*)((char*)ptr + 8) = 6;
-// 即先以1 byte的char*进行指针加法操作, 然后再转回int*
-// It is pretty wild line of code.
+arr[2] = 5;
+// this is equals to
+*(ptr + 2) = 5;
+// Bacause 'ptr' has type 'int' (32 bits, 4 bytes),
+// so + 2 let it advance two 'int's length (64 bits, 8 bytes)
+// *(int*)((char*) ptr + 8) = 5;
+// It is pretty wild of this code.
+
+// You cannot dynamically chack a raw array's size.
+// Ways like this is unstable
+int count = sizeof(arr) / sizeof(int);
+
+// a good ways is to use an constant to remember the array size,
+// or using c++11 standard arrays instead.
+static const int arr_size = 5;
+int arr[arr_size];
+
+// Use square brackets to release an array on stack
+delete[] arr;
 ```
 
-更多的, 两种不同的创建数组的方式
+- Standard Arrays
+  It's more safe, but has little bit more overhead.
+  ```c++
+  #include <array>
+  
+  int main() {
+    std::array<int, 5> arr;
+    for (int i = 0; i < arr.size(); i++)
+      arr[i] = 2;
+  }
+  ```
 
-```C++
-int example[5];
-int* another = new int[5];
-// 前者是创建在stack上的并且会在函数执行完后被摧毁
-// 后者是创建在heap上的
-// 建议在类中使用前者, 在函数中使用后者
+## How Strings Work (and How to Use Them)
 
-// We need to delete using the square brackets
-delete[] another;
-```
+### C-style Strings (Sring Literals)
 
-**在C++中你无法动态地检查一个普通数组的大小**
-
-```C++
-int* another = new int[5];
-
-int count = sizeof(another) / sizeof(int);
-// 使用这样的方式是不靠谱的
-// 由于another是个指针, 所以最终 count 的结果是1, 这显然不对
-```
-
-一个比较好的办法是管理一些记录数组大小的常量
-
-```C++
-static const int exampleSize = 5;
-int example[size];
-```
-
-### C++11 Standard Arrays
-
-好处是能很方便地检查一个数组的大小
-
-```C++
-#include <array>
-
-int main(){
-    std::array<int, 5> another;
-
-    for (int i = 0; i < another.size(); i++)
-        eanother[i] = 2;
-}
-```
-
-两者区别是Standard Arrays 相比 Raw Array s有更多性能的开销(但是值得), 且更安全
-
-@TheCherno 更喜欢用Raw Arrays, Because he like to live dangerously :)
-
-
-## How Strings Work in C++ (and how to use them)
-
-### C风格字符串
-
-```C++
+C-style strings are store in code segment (virtual address space, which is read-only), this means you can only replace new string to the variable to "change" it.
+```c++
 const char* name = "Cherno";
+"Cherno" + " hello!"; // You cannot do '+()' to raw strings since it's constant
 ```
 
-字符串分配的内存是fixed allocated block, 这表示想要扩充只能通过分配全新的字符串(新的地址)并删除旧的字符串来实现
-同时由于这是个char指针所以这个字符串不能用delete(后面会细讲new和delete, rule of thumb is just if you don't use 'new' keyword dont't use the 'delete' keyword)
+> Each strings at end has `\0` (named "null termination character") to prevent out of index at iteration. e.g. `char str[7] = {'C', 'h', 'e', 'r', 'n', 'o', '\0'};`
+> Terminal character will actuall break the behavior of string in many cases
+> ```c++
+> const char name[8] = "Che\0rno";
+> std::cout << strlen(name) << std::endl;
+> ```
 
-#### 细节的东西
+### std::string
 
-`null termination character`: 每个字符串末尾都会有一个null结束符0(int类型, 等价于'\0'这个char类型)
-比如 `char name[7] = {'C', 'h', 'e', 'r', 'n', 'o', '\0'};`
-如果没有结束符, 那么当使用cout输出字符串时, 它会一直输出接下来的内存数据直到读到'\0'. (表现为输出"Cherno"然后跟着一串乱码)
+It's a char array indeed.
 
-**注意**: Double quote "" by default it becomes a char pointer; 翻译: "Cherno" 默认表示为类型为 char* 的数据.
-为什么是 const char* ? 因为字符串本质是char数组, 而数组变量本质上储存的也就是这个数组的起始地址, 所以用 const char* 没毛病, cout对const char*有特殊对待不不断地读下去直到碰到前文所说的`null termination character`
-
-同时, 从Memory View看到的十六进制 `cc` 大概率表示we are right outside of the bounds of our allocation.
-
-### C++ 标准字符串
-
-**本质上是char array**
-
-```C++
+```c++
 #include <iostream>
-#include <string> // cout没有输出string类型的overload, 如果不输出可以不用include
 
-int main()
-{
-    
-
-    std::string name = "Cherno" + " hello!"; //这种方式是不对的, 因为"Cherno"是一个 const char* 类型
-    
-    std::string name = "Cherno";
-    name += " hello!"; // 这种是对的, a nice easy way, because you are adding it to a string, and "+=" is overloaded in the string class to be able to let you do that.
-    // 或者这样(虽然会有更多的对象拷贝操作, 大多数情况下性能影响不大)
-    std::string name = std::string("Cherno") + " hello!";
-
-    std::cout << name << std::endl;
+int main() {
+  std::string str = "Cherno";
+  str += " hello!"; // '+=()' is overloaded in the string class to let you do that.
+  std::string str = std::string("Cherno") + " hello!"; // This does more object copy operations
+  std::cout << str;
+  // Check whether a string has specific word
+  bool const contains = name.find("no") != std::string::npos
 }
 ```
 
-简单的使用:
+```c++
+int main() {
+    const char* name = u8"Cherno"; // utf-8, which is default
+    const char16_t* name2 = u"Cherno"; // utf-16, two bytes per character
+    const char32_t* name3 = U"Cherno"; // utf-32, four bytes per character
+    const wchar_t* name4 = L"Cherno"; // eitger 2 or 4 bytes, depends on compiler
+    // Useful or you want to keep format
+    const char* rawstring = R"(Line1
+Line2
+Line3
+Line4)";
 
-```C++
-// 判断字符串是否包含指定文字
-bool const contains = name.find("no") != std::string::npos // std::string::npos 代表没有找到返回的值
-
-// 因为字符串操作在c++中很普遍, 而每次都进行不必要的对象复制无疑很低效, 使用const xxx&将对象直接以只读形式传入函数
-void PrintString(const std::string& string)
-{
-    string += "h";
-    std::cout << string << std::endl;
-}
-```
-## String literals
-
-
-Terminal character will actuall break the behavior of this string in many cases
-```C++
-#include <stdlib.h>
-
-int main()
-{
-    const char name[8] = "Che\0rno";
-    std::cout << strlen(name) << std::endl;
-}
-```
-
-String literals are stored in read-only section of memory
-This code might not vaild for all CPP compilers.
-And edit this string is actually didn't work:
-```C++
-int main()
-{
-    char* name = "Cherno";
-    // 这种定义是错误的, 字符串类型指针应该永远是const char*
-    // 要想运行时修改字符串, 正确操作应是定义一个字符串数组而不是一个指针
-    // char name[] = "Cherno";
-    name[2] = 'a';
-    std::cout << name << std::endl;
-}
-
-```
-
-### 其他类型的字符串
-```C++
-int main()
-{
-    const char* name = u8"Cherno"; // utf-8, u8前缀非必要
-    const char16_t* name2 = u"Cherno"; // two bytes per character (utf-16)
-    const char32_t* name3 = U"Cherno"; // four bytes per character (utf-32)
-    const wchar_t* name4 = L"Cherno"; // 由编译器决定, eitger 2 ir 4 bytes, its 2 bytes on Windows and 4 on Linux and I acpect Mac as well
-}
-```
-
-C++14标准
-```C++
-int main()
-{
+    //C++14 Standards
     using namespace std::string_literals;
     std::string name0 = "Cherno"s + " hello";
     std::wstring name1 = L"Cherno"s + L" hello";
     std::u32string name1 = U"Cherno"s + U" hello";
 
-    // raw形式赋值, 对拷贝大篇文章时保留文章格式有用
-    const char* rawstring = R"(Line1
-Line2
-Line3
-Line4)";
 }
 ```
 
 ## const in C++
 
+`const`s does not have any memory address, they are replaced by primitive value at compile time.
+
 ### const pointer
 
-在前, you cannot change the data at that memory address
-在后, you cannot reassign the actual pointer itself to point something else
 
-```C++
-const inst MAX_AGE = 90;
+```c++
+const int MAX_AGE = 90;
 
 // 1. Pointer to const value
 const int* a = new int;
@@ -795,13 +474,13 @@ a = (int*) &MAX_AGE; // But I can change the pointer itself
 // 2. Const pointers
 int* const b = new int;
 *b = 2;
-b = (int*) &MAX_AGE; // but you cannot change the pointer whose value
+b = (int*) &MAX_AGE; // but I cannot change the pointer's value
 
 // 3. Const pointer to a const value
 const int* const c = (int*) &MAX_AGE;
 ```
 
-注意: `const int*` 和 `int const*` 是相等的, 你需要将`const` 放在 `*` 号后面
+> `const int*` equals `int const*`
 
 <span id="const_method"></span>
 ### const method

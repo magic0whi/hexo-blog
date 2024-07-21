@@ -4,28 +4,22 @@ date: 2020-02-08 15:14:28
 ---
 
 ```plaintext
-           _           _               _ 
- _ __   __| | ___  ___| | ___ __ _ __ | |
-| '_ \ / _` |/ _ \/ __| |/ / '__| '_ \| |
-| | | | (_| | (_) \__ \   <| |  | | | | |
-|_| |_|\__,_|\___/|___/_|\_\_|  |_| |_|_|
-                                         
+ ____  ____   ___ _____ _____ _   _ ____  
+|  _ \|  _ \ / _ \_   _| ____| | | / ___| 
+| |_) | |_) | | | || | |  _| | | | \___ \ 
+|  __/|  _ <| |_| || | | |___| |_| |___) |
+|_|   |_| \_\\___/ |_| |_____|\___/|____/ 
 ```
 
-你好, I'm Proteus, 中文昵称暂定为钱桑, 很高兴认识你.
-我喜欢捣鼓自己不懂的东西, 请多指教.
+Hello, I'm Proteus Chan, it is nice to meet you!
+こんにちは、私はプロテウス・チャンです。はじめまして♫
+你好，我是錢桑，很高興認識你!
 
-目前受到性别焦虑的影响, 属于 <font color=#5BCFFA>M</font>t<font color=#F5ABB9>F</font> 群体.
+I enjoy exploring things I don't understand. Feel free to share me.
+私わ分からん物が好きです。よろしくお願いします。
+我喜歡搗鼓自己不懂的東西，請多指教。
 
-When a child is not insecure, they don't succumb the danger. If you make her confident who she is that she is amazing the way she is. She will not succumb to other people and that is how she would navigate.
 
-Ultimately I believe the biggest miss in the world is people focusing on things don't matter and underestimating the things matter.
-Focusing the things that matter most and building up self-esteem around that. And then, suffocating and muting the stuff society values, because in reality long term it doesn't matters much.
-
+Contact:
 - Email: lollipop.studio.cn@gmail.com
-- Mastodon: [@ndoskrnl@mastodon.social](https://mastodon.social/web/@ndoskrnl) (不活跃)
-- Telegram: [@ndoskrnl](https://t.me/ndoskrnl)
-- QQ: 2113952182 (已停用)
-- Zhihu: [ndoskrnl](https://www.zhihu.com/people/logarithm-96) (不活跃)
-- Twitter: [@ndoskrnl](https://twitter.com/ndoskrnl) (已停用)
-
+- Maybe a member of <font color=#5BCFFA>M</font>t<font color=#F5ABB9>F</font>?

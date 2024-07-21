@@ -1,5 +1,5 @@
 ---
-title: windows10-usage
+title: windows-usage
 category: computer
 date: 2020-02-09 09:44:22
 tags:
@@ -118,3 +118,44 @@ dism.exe /online /Cleanup-Image /StartComponentCleanup # 执行组件存储清�
    Set-Item wsman:\localhost\Client\TrustedHosts -Value `
    "$curValue, Server01.Domain01.Fabrikam.com"
    ```
+## Windows 10/11
+
+1. Disable Telemetry
+   In Group Policy:
+   ```
+   Administrative Templates
+    -> Windows Components
+     -> Data Collection and Preview Builds
+      -> Allow Telemetry -> Enabled, Options: 0 - Security [Enterprise Only]
+   ```
+   ```
+   Task Scheduler Library
+    -> Microsoft
+     -> Windows
+      -> Application Experience
+       -> Microsoft Compatibility Appraiser -> Disable
+   ```
+   Disable Connected User Experiences and Telemetry Service
+   ```powershell
+   Set-Service DiagTrack -StartupType Disabled
+   ```
+3. Enable UTC
+   ```batch
+   reg add "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\TimeZoneInformation" /v RealTimeIsUniversal /d 1 /t REG_QWORD /f
+   ```
+   [Archlinux Wiki](https://wiki.archlinux.org/index.php/System_time#UTC_in_Windows)
+4. Disable CPU Spectre / Meltdown / ZombieLoad Patch
+   ```batch
+   reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v FeatureSettingsOverride /t REG_DWORD /d 3 /f
+   reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v FeatureSettingsOverrideMask /t REG_DWORD /d 3 /f
+   ```
+   [Microsoft Docs](https://support.microsoft.com/en-us/help/4073119/protect-against-speculative-execution-side-channel-vulnerabilities-in)
+5. Show seconds in taskbar
+   ```batch
+   reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v ShowSecondsInSystemClock /t REG_DWORD /d 1 /f
+   ```
+6. Windows 11 full right-click menu
+   enable: `reg add "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" /f /ve`
+   disable: `reg delete "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}" /f`
+   > Don't forget to reboot.
+   reference: https://gist.github.com/nebula-moe/75c49c261d1fc9e780df8ed9d0baed97

@@ -57,7 +57,6 @@ Powered by [itzg's docker image](https://github.com/itzg/docker-minecraft-server
 | Milk+ | [milk_plus-3.0.0.jar](https://modrinth.com/mod/milk_plus/versions) | Mar 5, 2022 |
 | Enhanced Mob Spawners | [fabric-branders-spawnermod-1.18.2-1.1.2.jar](https://modrinth.com/mod/enhanced-mob-spawners/versions) | Mar 5, 2022 |
 | GeckoLib | [geckolib-fabric-1.18-3.0.35.jar](https://www.curseforge.com/minecraft/mc-mods/geckolib/files/all) | Mar 1, 2022 |
-| Happiness (is a) Warm Gun | [HWGMod-1.18.2-1.1.4.jar](https://modrinth.com/mod/happiness-is-a-warm-gun/versions) | Mar 27, 2022 |
 | Immersive Portals (**DISABLED**) | [immersive-portals-1.2.5-mc1.18.1-fabric.jar](https://modrinth.com/mod/immersiveportals/versions) | Jan 25, 2022 |
 | Observable (**DISABLED**) | [observable-1.2.3-fabric.jar](https://modrinth.com/mod/observable/versions) | Jan 28, 2022 |
 | Roughly Enough Resources (**DISABLED**) | [rer-2.4.1.jar](https://www.curseforge.com/minecraft/mc-mods/roughly-enough-resources/files/all) | Feb 16, 2022 |

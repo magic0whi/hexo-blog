@@ -15,39 +15,46 @@ A manual of my Linux gists
 ### Reset User faillocks
 
 ```console
-faillock --user <username> --reset
+$ faillock --user <username> --reset
 ```
 
 ### Binary File Editing
 
 Generate hexdump:
 ```console
-xxd TIAS2781RCA4.bin > TIAS2781RCA4.bin.txt
+$ xxd TIAS2781RCA4.bin > TIAS2781RCA4.bin.txt
 ```
 
 Revert plaintext hexdump back into binary:
 ```console
-cat TIAS2781RCA4.bin.txt | xxd -r > TIAS2781RCA4_mod.bin
+$ cat TIAS2781RCA4.bin.txt | xxd -r > TIAS2781RCA4_mod.bin
 ```
 
 ### PDF Editing
 
 PDF Extracting:
 ```console
-pdfimages --all in.pdf out_dir/
+$ pdfimages --all in.pdf out_dir/
 ```
 
 PDF Regenerate:
 ```console
-img2pdf --output out.pdf --creator 'Canon SC1011' --producer 'IJ Scan Utility' --creationdate 'Wed Mar 20 16:33:38 2024 CST' -D --engine internal -s 600dpi [1-5].jpg
-pdfinfo out.pdf
+$ img2pdf --output out.pdf \
+--creator 'Canon SC1011' \
+--producer 'IJ Scan Utility' \
+--creationdate 'Wed Mar 20 16:33:38 2024 CST' \
+-D \
+--engine internal \
+-s 600dpi \
+[1-5].jpg
+$ pdfinfo out.pdf
 ```
 
 ### Steam
 
 Launch Heart of Iron IV (With FSR1, VRR, MangoHud)
 ```console
-gamescope -w 1728 -h 1080 -W 2944 -H 1840 --adaptive-sync -F fsr --fsr-sharpness 10 -- env LD_PRELOAD='/usr/lib/mangohud/libMangoApp.so /usr/lib/mangohud/libMangoHud.so /usr/lib/mangohud/libMangoHud_dlsym.so /usr/lib/mangohud/libMangoHud_opengl.so' sh ./cream.sh %command%
+$ gamescope -w 1728 -h 1080 -W 2944 -H 1840 --adaptive-sync -F fsr --fsr-sharpness 10 -- env LD_PRELOAD='/usr/lib/mangohud/libMangoApp.so /usr/lib/mangohud/libMangoHud.so /usr/lib/mangohud/libMangoHud_dlsym.so /usr/lib/mangohud/libMangoHud_opengl.so' sh ./cream.sh %command%
 ```
 
 ### Libvirt
@@ -129,20 +136,18 @@ Redirect:
 - Input redirect (Strings) `<<<`
 
 - How to process shell args and `stdin`, `stdout`, `stderr`:
-  ```C++
+  ```c++
   #include<stdio.h>
   int main(int argc, char *argv[]) {
 	  int i = 0;
 	  char c;
-     for (; i < argc; ++i) {
+     for (; i < argc; ++i)
 		  fprintf(stdout, "%d: %s\n", i, argv[i]);
-	  }
 	  fflush(stdout);
 	  c = fgetc(stdin);
 	  while (c != EOF) {
-		  if (c >= 'a' && c <= 'z') {
-		  c = c + 'A' - 'a';
-	  }
+		  if (c >= 'a' && c <= 'z')
+		    c = c + 'A' - 'a';
 		  fputc(c, stdout);
 		  c = fgetc(stdin);
 	  }
@@ -669,3 +674,46 @@ Reset signal `TERM`'s action to the default: `trap - TERM`
 | 1             | HUP         | Terminate (Hangup, normal, sent from SSH disconnect)       |
 | 3             | QUIT        | Terminate (Harshest but still handle ignorable, core dump) |
 | 9             | KILL        | Terminate (Unconditionally)                                |
+
+## GPU Environment Variables
+
+```console
+# /usr/share/glvnd/egl_vendor.d/*
+__EGL_VENDOR_LIBRARY_FILENAMES='/usr/share/glvnd/egl_vendor.d/10_nvidia.json'
+__GLX_VENDOR_LIBRARY_NAME=nvidia
+# /usr/share/vulkan/icd.d/*
+VK_ICD_FILENAMES='/usr/share/vulkan/icd.d/nvidia_icd.json'
+
+# lspci -D | grep VGA
+DRI_PRIME=pci-0000_06_00_0 glxinfo | grep 'OpenGL renderer'
+
+# /usr/lib/dri/*_dri.so
+MESA_LOADER_DRIVER_OVERRIDE=iris
+
+# /usr/lib/dri/*_drv_video.so
+LIBVA_DRIVER_NAME=
+
+LIBVA_DRIVER_NAME=radeonsi vainfo --display drm --device /
+```
+
+## Matlab
+
+```ini matlab.desktop
+Name=Matlab2022b
+Comment=A high-level language for numerical computation and visualization
+GenericName=Matlab
+Exec=env _JAVA_AWT_WM_NONREPARENTING=1 LD_PRELOAD=/usr/lib/libstdc++.so LD_LIBRARY_PATH=/usr/lib/xorg/modules/drivers/ MESA_LOADER_DRIVER_OVERRIDE=iris /home/proteus/MATLAB/R2022b/bin/matlab -desktop
+Categories=Education
+Type=Application
+```
+
+```plaintext java.opts
+-Djpgl.disable.openglarbcontext=1
+```
+
+## Certbot
+
+Register a wildcard domain hosted on Cloudflare
+```console
+# certbot certonly --dns-cloudflare --dns-cloudflare-credentials ~/.secrets/cloudflare.ini --server https://acme-v02.api.letsencrypt.org/directory --email <EMAIL> --agree-tos --no-eff-email -d '*.ndoskrnl.net'
+```

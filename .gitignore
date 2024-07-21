@@ -5,5 +5,5 @@ db.json
 node_modules/
 public/
 .deploy*/
-.vscode/
-tags
+_multiconfig.yml
+yarn.lock
