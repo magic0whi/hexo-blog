@@ -108,6 +108,31 @@ $ gamescope -w 1728 -h 1080 -W 2944 -H 1840 --adaptive-sync -F fsr --fsr-sharpne
    --import
   ```
 
+## OpenSSL Self signing
+
+Generate CA certificate & private key:
+```console
+openssl req -noenc -newkey EC -pkeyopt ec_paramgen_curve:P-384 -keyout ca.key.pem -x509 -new -sha384 -days 730 -subj '/C=JP/ST=Toukyouto/L=Setagayaku Kitazawa/O=Homo114514/OU=Yajuu Sa-ba-/CN=Homo home/emailAddress=sudaku233@outlook.com' -out ca.pem
+```
+
+Generate certificate signing request & private key (optional, can use CA's key):
+```console
+openssl req -noenc -newkey EC -pkeyopt ec_paramgen_curve:P-384 -keyout server.key.pem -new -sha384 -subj '/C=JP/ST=Toukyouto/L=Setagayaku Kitazawa/O=Homo114514/OU=Yajuu Sa-ba-/CN=*.tailba6c3f.ts.net/emailAddress=sudaku233@outlook.com' -out server.csr.pem
+```
+
+Generate certificate by signing request with CA certificate:
+```console
+openssl x509 -CA ca.pem -CAkey ca.key.pem -CAcreateserial -extfile <(printf "subjectAltName = DNS:localhost,DNS:*.tailba6c3f.ts.net\nauthorityKeyIdentifier = keyid,issuer\nbasicConstraints = CA:FALSE\nkeyUsage = digitalSignature, keyEncipherment\nextendedKeyUsage=serverAuth") -req -in server.csr.pem -sha384 -out server.pem
+````
+> `-CAcreateserial` will generate `ca.srl`, afterwards using `-CAserial ca.srl`.
+
+Show information:
+```console
+openssl openssl ec -text -noout -in server.key.pem
+openssl req -text -verify -in server.csr.pem
+openssl x509 -noout -text -in server.pem
+```
+
 ### Shell builtin & Concept
 
 - Shortcut:
@@ -465,7 +490,7 @@ $ cd /mnt/Windows/System32/config
 $ chntpw -e SYSTEM
 > cd ControlSet001\Services\BTHPORT\Parameters\Keys
 > cd xxxxxxxxxxxx
-> hex xxxxxxxxxxxx # For not a Bluetooth 5.1 devices
+> hex xxxxxxxxxxxx # For < Bluetooth 5.1 devices
 > cd xxxxxxxxxxxx # For Bluetooth 5.1 devices
 > hex LTK
 > hex ERand

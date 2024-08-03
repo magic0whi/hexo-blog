@@ -196,12 +196,12 @@ tags:
       这个结论叫做微积分基本定理, 也称牛顿⋅莱布尼茨公式.
 
 
-## 数列
+## Progression
 
-1. 等差数列 (Arithmetic progression)
-   通项公式: \\(a_n=a_1+(n-1)d\\)
-   前 \\(n\\) 项和: \\(S_n=na_1+\frac{(n-1)n}{2}d=\frac{(a_1+a_n)n}{2}\\)
-   性质:
+1. Arithmetic progression
+   \\(n\\)-th term: \\(a_n=a_1+(n-1)d\\)
+   Sum: \\(S_n=na_1+\frac{n(n-1)}{2}d=\frac{n(a_1+a_n)}{2}\\)
+   Attributes:
    1. 设等差数列 \\(A,B,C\\) , 若 \\(B\\) 为等差中项, 则有 \\(B=\frac{A+C}{2}\\)
    2. \\(m+n=p+q\rArr a_m+a_n=a_p+a_q\enspace\\) (\\(m,n,p,q\in N^+\\))
    3. 数列的前 \\(n\\) 项和 \\(S_n\\) 和 \\(a_n\\) 的关系

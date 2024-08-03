@@ -66,7 +66,7 @@ Different memory allocation size for C++ Data Type:
 |---| --- |
 | `char` | 1 byte |
 | `short` | 2 bytes |
-| `int` | 4 bytes | 
+| `int` | 4 bytes |
 | `long` | 8 bytes (`C++20`), >= 4 bytes |
 | `long long` | 8 bytes |
 | `float` | 4 bytes |
@@ -360,35 +360,36 @@ int main() {
 
 > Be aware for operations out of index (e.g.`example[-1] = 0`), in C++ you can do this by force the compiler to ignore this check, and it's definitely discouraged.
 
-```c++
-// 'arr' is actually a pointer of type int[5], stores the begin address of the array
-int arr[5]; // On heap, destory on function end
-int* arr = new int[5]; // on stack, would not auto destory
-int* ptr = arr;
-for (int i = 0; i< 5; i++)
-  arr[i] = 2;
-
-arr[2] = 5;
-// this is equals to
-*(ptr + 2) = 5;
-// Bacause 'ptr' has type 'int' (32 bits, 4 bytes),
-// so + 2 let it advance two 'int's length (64 bits, 8 bytes)
-// *(int*)((char*) ptr + 8) = 5;
-// It is pretty wild of this code.
-
-// You cannot dynamically chack a raw array's size.
-// Ways like this is unstable
-int count = sizeof(arr) / sizeof(int);
-
-// a good ways is to use an constant to remember the array size,
-// or using c++11 standard arrays instead.
-static const int arr_size = 5;
-int arr[arr_size];
-
-// Use square brackets to release an array on stack
-delete[] arr;
-```
-
+- Literal array
+  ```c++
+  // 'arr' is actually a pointer of type int[5], stores the begin address of the array
+  int arr[5]; // On stack, destory on function end
+  int* arr = new int[5]; // on heap, would not auto destory
+  int* ptr = arr;
+  for (int i = 0; i< 5; i++)
+    arr[i] = 2;
+  
+  arr[2] = 5;
+  // this is equals to
+  *(ptr + 2) = 5;
+  // Bacause 'ptr' has type 'int' (32 bits, 4 bytes),
+  // so + 2 let it advance two 'int's length (64 bits, 8 bytes)
+  // *(int*)((char*) ptr + 8) = 5;
+  // It is pretty wild of this code.
+  
+  // You cannot dynamically chack a raw array's size.
+  // Ways like this is unstable
+  int count = sizeof(arr) / sizeof(int);
+  
+  // a good ways is to use an constant to remember the array size,
+  // or using c++11 standard arrays instead.
+  // Discourage, if wanna dynamically sized array,
+  static const int arr_size = 5;
+  int arr[arr_size];
+  
+  // Use square brackets to release an array on heap
+  delete[] arr;
+  ```
 - Standard Arrays
   It's more safe, but has little bit more overhead.
   ```c++
@@ -458,10 +459,12 @@ Line4)";
 
 ## const in C++
 
-`const`s does not have any memory address, they are replaced by primitive value at compile time.
+The mutable of const depends on how it stores:
+String Literal stored in the read-only section of the memory. So modifying will cause segmentation fault.
+constant variables may convert to a literal and place the primitive value in assemble in compile time,
+while if the code attempt to take the address of constant variable the compiler will let it place in memory.
 
 ### const pointer
-
 
 ```c++
 const int MAX_AGE = 90;
@@ -473,8 +476,8 @@ a = (int*) &MAX_AGE; // But I can change the pointer itself
 
 // 2. Const pointers
 int* const b = new int;
-*b = 2;
-b = (int*) &MAX_AGE; // but I cannot change the pointer's value
+*b = 2; // I can change the contents of the pointer
+b = (int*) &MAX_AGE; // But I cannot change the pointer's value
 
 // 3. Const pointer to a const value
 const int* const c = (int*) &MAX_AGE;
@@ -483,74 +486,34 @@ const int* const c = (int*) &MAX_AGE;
 > `const int*` equals `int const*`
 
 <span id="const_method"></span>
-### const method
+### Const Method
 
-const 修饰的方法无法改变类中的变量
-Only avaliable in class method
+Const methods cannot change member variables in the class, except for `mutable` variables.
 
-涉及内容:
-1. 当const方法返回指针类型时怎么做: 方法数据类型应为 "const int* const"
-2. 以 `const Object&` 实例化的对象只能访问const方法
-3. `mutable` 变量
-
-```C++
-class Entity
-{
+```c++
+class Entity {
 private:
-    int m_X, *m_Y, *m_Z; // 定义多个变量时指针类型要为每个单独加 '*' 号
-    mutable int var;
+    int m_x, * m_y;
+    mutable int m_z;
 public:
-    int GetX() const
-    {
-        // m_X = 2; 你不能修改变量的值
-        var = 233; // 但我们可以在const方法中修改mutable修饰的变量
-        return m_X;
+    void set_x() {
+        m_x = 2;
     }
-
-    const int* const GetY() const // 若const方法要返回指针类型变量, 方法数据类型应为 "const int* const"
-    {
-        return m_Y;
+    const int* const get_y() const { // When a const method return pointer types, it should has 'const' on both side
+        return m_y;
     }
-
-    void SetX()
-    {
-        m_X = 2;
+    int get_z() const {
+        // m_X = 2; // I cannot change member variable
+        m_z = 233; // But I can change mutable variable
+        return m_z;
     }
-}
-
-void PrintEntity (const Eneity& e)
-{
-    // std::cout << e.SetX() << endl; 常量型对象无法访问无const修饰的方法
-    std::cout << e.GetX() << endl;
-}
-
-int main()
-{
-    Entity e = new Entity();
-    PrintEneity(e);
+};
+int main() {
+    const Entity& e = Entity();
+    // e.set_x(); // A const object can only call its const methods.
+    std::cout << e.get_z() << '\n';
 }
 ```
-
-## Mutable Keyword in C++
-
-`mutalbe`有两种用法, \
-第一种用于常量方法中, 见[#const method](#const_method),
-第二种用于lambda, 用的不多
-
-```C++
-int x = 8;
-auto f = [=]() mutable
-{
-    x++;
-    std::cout << x << std::endl;
-}
-
-f();
-// x is still = 8, 因为[=]模式 is just copy this value into this lambda, mutable代表它能更改传递进来的值并且不让编译器报错, 但实际上8本身是个常数所以没有效果.
-```
-
-**什么是lambda**: a lambda is basically like a little throwaway function that you can write and assign to a variable quickly.
-
 
 ## Memory Initializer Lists in C++ (Constructor Initializer List)
 
@@ -592,35 +555,22 @@ int main()
 
 ## Ternary Operators in C++ (Conditional Assignment)
 
-使用三目运算符可以简化if_else语句
-```C++
+Ternaay can simplify `if else`
+```c++
 #include <string>
 
-static int s_Level = 1;
-static int s_Speed = 2;
+static int s_level = 1;
+static int s_speed = 2;
 
-int main()
-{
-    s_Speed = s_Level > 5 && s_Level < 100 ? s_Level > 10 ? 15 : 10 : 5;
-
-    std::cout << s_Speed << std::endl;
-
-    // 以上式子等价于
-    // if (s_Level > 5 && s_Level < 100)
-    // {
-    //     if(s_Level > 10)
-    //     {
-    //         s_Speed = 15;
-    //     }
-    //     else
-    //     {
-    //         s_Speed = 10;
-    //     }
-    // } 
-    // else 
-    // {
-    //     s_Speed = 5;
-    // }
+int main() {
+  s_speed = s_level > 5 && s_level < 100 ? s_level > 10 ? 15 : 10 : 5;
+  // Above sentence equals to:
+  // if (s_Level > 5 && s_Level < 100)
+  //   if(s_level > 10) s_speed = 15;
+  //   else s_Speed = 10;
+  // else 
+  //   s_Speed = 5;
+  std::cout << s_speed;
 }
 ```
 
@@ -1570,130 +1520,112 @@ Ignore...
 
 ## Lambdas in C++
 
+A lambda is basically a little throwaway function that you can write and assign to a variable quickly.
+
 1. How to put outside variables into lambda function
-   [=] : Pass everything in by value, the pass in variables is independent of the outside.
-   [&] : Pass everything in by reference.
-   [a] : Pass 'a' by value
-   [&a] : Pass 'a' by reference.
-2. using `mutable` keyword to allow modify outside variables
-```C++
-int main()
-{
-    int a = 5;
-    auto lambda = [=]() mutable { a = 5; std::cout << "Value: " << a << std::endl; };
-}
-```
-3. We need to use std::function instand of raw function pointer if our callback lambda function have pass in variables.
-   ```C++
+   `[=]`: Pass everything in by value, the pass in variables is independent of the outside.
+   `[&]`: Pass everything in by reference.
+   `[a]`: Pass `a` by value
+   `[&a]`: Pass `a` by reference.
+2. using `mutable` keyword to allow modify pass in variables
+   ```c++
+   int main() {
+     int a = 5;
+     auto f = [=]() mutable { a = 5; std::cout << "Value: " << a << std::endl; };
+     f();
+     std::cout << "Value: " << a << '\n'; // x is still = 8, because [=] just copy value into this lambda.
+   }
+   ```
+3. We need to use `std::function` instand of raw function pointer if lambda has pass in variables (stateful).
+   ```c++
+   #include<iostream>
+   #include<vector>
    #include<functional>
 
-   // Here is the only difference (Use "const &" because its an object)
-   // "void(*func)(int)" to "const std::function<void(int)>& func"
-   void ForEach(const std::vector<int>* values, const std::function<void(int)>& func)
-   {
-       // ...
+   void for_each(const std::vector<int>& values, const std::function<void(int)>& func) {
+     for (const int& i : values) func(i);
    }
-
-   int main()
-   {
-       // ...
-       int a = 5;
-       auto lambda = [=](int value)) {std::cout << "Value: " << a << std::endl;
-
-       ForEach(values, lambda};
-
+   int main() {
+     std::vector<int> values = {1, 2, 3, 4, 5};
+     int state = 0;
+     // Cannot use C-style void(*callback)(int)
+     auto callback = [&](int value) { std::cout << "Current state: " << state << " Value: " << value << '\n'; };
+     steate = 1;
+     for_each(values, callback);
    }
    ```
-4. Usage of std::find_if (Returns an iterator to the first element for which callback function returns true)
-   ```C++
-   std::vector<int> values = { 1, 5, 4, 2, 3 };
-   auto iterator = std::find_if(values.begin(), values.end(), [](int value) { return value > 3;});
+4. Usage of `std::find_if` (returns an iterator to the first element for which callback function returns true)
+   ```c++
+   std::vector<int> values = {1, 5, 4, 2, 3};
+   auto iterator = std::find_if(values.begin(), values.end(), [](int value) { return value > 3; });
    std::cout << *iterator << std::endl;
    ```
-
-## Why I don't "using namespace std"
-
-Don't absolutely use `using namespace` in header files
-But if you must using `using namespace`, please use it in a small scope as possible, but NEVER EVER in a header file.
-
-For example a serious issue of implicit conversion :
-```C++
-namespace apple
-{
-    void print(cout std::string& text)
-    {
-        std::cout << text << std::endl;
-    }
-}
-
-namespace orange
-{
-    void print(const char* text)
-    {
-        std::string temp = text;
-        std::reverse(temp.begin(), temp.end());
-        std::cout << temp << std::endl;
-    }
-}
-
-using namespace apple;
-using namespace orange;
-
-int main()
-{
-    print("Hello");
-    // Which one will get called?
-    // Answer: the orange::print() will be called, because the type of "Hello" is "char*"
-}
-```
 
 ## Namespaces in C++
 
 Use Namespace to
-1. avoid naming conflict: `apple::print()`, `orange::print()`
-2. avoid C library like naming: `GLFW_initialize` to `GLFW::initialize`
+1. Avoid naming conflict: `apple::print()`, `orange::print()`
+2. Avoid C library like naming: `GLFW_initialize` to `GLFW::initialize`
 
 Usage:
 1. We can set to use only specific symbol in a namespace
-   ```C++
+   ```c++
    namespcae apple {
-       void print(const char* text)
-       {
+     void print(const char* text) {
            //...
-       }
-       void print_again()
-       { 
+     }
+     void print_again() { 
            ///...
-       }
+     }
    }
-   
-   int main()
-   {
-       using apple::print;
-       print("Hello");
-       
-       //We still need "apple::" to call print_again()
-       apple::print_again();
+   int main() {
+     using apple::print;
+     print("Hello");
+     apple::print_again(); //We still need 'apple::' to call print_again()
    }
    ```
-2. Nested Namespaces can be shorten using Alias
-   ```C++
-   namespace apple { // Or apple::functions (c++17)
-       namespace functions {
-           void print(const char* test)
-           {
-               // ...
-           }
-       }
+2. Nested namespaces can be shorten using alias:
+   ```c++
+   namespace apple::functions {
+     void print(const char* test) {
+       // ...
+     }
    }
-
-   int main()
-   {
+   int main() {
        namespace a = apple::functions;
-
        a::print("Hello");
    } 
    ```
+
+### Why don't "using namespace std"
+
+Absolutely don't use `using namespace` in header files.
+If you must using `using namespace`, please use it in a small scope as possible.
+
+For example a serious issue of implicit conversion:
+```c++
+#include <algorithm>
+#include <iostream>
+#include <string>
+
+namespace apple {
+  void print(const std::string& text) { std::cout << text << '\n'; }
+}
+namespace orange {
+  void print(const char* text) {
+    std::string tmp = text;
+    std::reverse(tmp.begin(), tmp.end());
+    std::cout << tmp << std::endl;
+  }
+}
+using namespace apple;
+using namespace orange;
+
+int main() {
+    print("Hello"); // Which one will get called?
+    // Answer: the orange::print() will be called, because the type of "Hello" is 'char*'
+}
+```
 
 ## Threads in C++
 
@@ -1978,35 +1910,29 @@ int main()
 
 ## Casting in C++
 
-C++ cast not do anything that C-style casts cannot do
-those casts do make you code more solid and looks better.
+C++'s cast can do anything that C-style casts can do, those casts make you code more solid and looks better.
 
-1. Static cast (Will do compile time checking)
-2. Interpret cast (for Type Punning)
-3. Dynamic cast (Will return `NULL` if casting is failed)
+1. Static cast (compile time checking).
+2. Interpret cast (for Type Punning).
+3. Dynamic cast (will return `NULL` if casting is failed)
 4. Const cast (TODO: Supplement this content)
 
-```C++
-class Base
-{
+```c++
+class Base {
 public:
-    Base() { }
-    virtual ~Base() { }
+    Base() {}
+    virtual ~Base() {}
 };
-
-class Derived : public Base
-{
+class Derived : public Base {
     // ...
 };
-
-int main()
-{
+int main() {
     // Static cast
     double value = 5.5;
-    double s = static_cast<int>(value);
+    double sc = static_cast<int>(value);
 
-    Base* base = new Base();
-    Derived* ac = dynamic_cast<Derived*>(base);
+    Base* p_base = new Base();
+    Derived* ac = dynamic_cast<Derived*>(p_base); // Main class cannot be casted to sub class
     if (!ac) { std::cout << "Converting failed\n"; }
 }
 ```
@@ -2032,10 +1958,8 @@ Look to 7:07
 If we force type casting a Enemy class to Player and access data(funcions, variables) that is unique to player, the program will probablly crash.
 
 Dynamic Casting is actually does some validation for us to ensure that cast is valid
-```C++
-class Entity
-{
-};
+```c++
+class Entity {};
 
 class Player : public Entity
 {
