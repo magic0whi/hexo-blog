@@ -4,56 +4,73 @@ category: learn
 date: 2020-02-08 16:45:08
 tags:
 toc: true
+variant: cyberpunk
+article:
+  highlight:
+    theme: github-dark
 ---
 
 Notes on Cherno C++ Tutorial
 
-TODO: Format this article
-
 <!-- more -->
+<style>
+.card:not(#back-to-top) .card-content::before {
+  background-color: #1b1b1b;
+}
+article.article .content {
+  font-family: KaTeX_Main, FZYaSongS-R-GB, serif;
+  font-size: 18px;
+  word-spacing: 2px;
+}
+article.article .content code, article.article .content pre {
+  font-family: Iosevka Term Extended, monospace;
+  font-size: 14px;
+}
+</style>
 
 ## Notice
 
 1. If an object have pointer variable inside, write a copy constructor and use it.
-2. Reduce memory usage by using 1 byte to store 8 bools.
+2. Reduce memory usage by using bit-fields make 1 byte stores 8 bools.
 3. Default float type is `double`, use `float a = 5.5f`.
 4. Header or inline?  (the later copys whole function body into the area where the function is called).
 
 
 ## How C++ Works
 
-* A translation unit typically consists of a single `.cpp` file and its associated `.h` files.
+* A translation unit consists of a single `.cpp` file and its associated `.h` files.
 * Compile Process Path: Source&rarr;Compile&rarr;Linker&rarr;Executables
 
 1. Pre-process
    Compiler parses all the macros (such as `#include`) in source file.
-   - VS2015: `Project Settings`->`Preprocessor`->`Preprocess to a File`
+   - Clang: `clang -x c++ -E hello.cpp -o hello.i`
    - GCC: `cpp hello.cpp > hello.i`
+   - VS2015: `Project Settings`->`Preprocessor`->`Preprocess to a File`
 2. Compile & Assembly
-   Each `.cpp` compile to one `.o` (aka. `.obj`) file.
-   - VS2015: Compile Only (`<C-F7>`)
+   - Clang: `clang++ -x c++-cpp-output -S hello.i -o hello.o`
    - GCC: `g++ -S hello.i && as hello.s -o main.o`
+   - VS2015: Compile Only (`<C-F7>`)
 3. Linker
    Externally defined functions will be integrated in the link phase. Function declarations that never be called will be optimized away.
    
-   The parameter of `ld` are platform specific (mainly depends on GCC version). Enable verbose to get the parameter of the `collect2` (which is an alias of `ld`):
+   The parameter of `ld` are platform specific (mainly depends on Clang/GCC version). Enable verbose to get the parameter of the `collect2` (which is an alias of `ld`):
+   For Clang:
    ```console
-   $ g++ -v -o hello hello.cpp
+   # # Only run preprocess, compile, and assemble steps
+   $ clang++ -v -c hello.cpp -o hello.o
+   # # For GCC:
+   $ g++ -v -c hello.cpp -o hello.o
    ```
-   Lt may looks messy, but you can probably significantly shorten that link line by removing some arguments. Here's the minimal set I came up after some experimentations:
+   Ld may looks messy, but you can significantly shorten that link line by removing some arguments. Here's the minimal set I came up after some experimentations:
    ```console
-   $ ld \
-   -I /lib64/ld-linux-x86-64.so.2 \
-   -o hello
-   /usr/lib/Scrt1.o \
-   /usr/lib/crti.o \
-   /usr/lib/gcc/x86_64-pc-linux-gnu/14.1.1/crtbeginS.o \
-   -L /usr/lib/gcc/x86_64-pc-linux-gnu/14.1.1 \
+   $ ld -I/lib64/ld-linux-x86-64.so.2 \
+   -o hello \
+   /usr/lib64/Scrt1.o \
+   -L/usr/lib64/gcc/x86_64-pc-linux-gnu/14.2.1 \
    hello.o \
-   -l stdc++ \
-   -l c \
-   /usr/lib/gcc/x86_64-pc-linux-gnu/14.1.1/crtendS.o \
-   /usr/lib/crtn.o
+   -l stdc++ -l m -l gcc_s -l gcc -l c \
+   /sbin/../lib64/gcc/x86_64-pc-linux-gnu/14.2.1/crtendS.o \
+   /usr/lib64/crtn.o
    ```
 
 ## Variables
@@ -76,13 +93,13 @@ Different memory allocation size for C++ Data Type:
 ## Functions
 
 - Write formal parameters with `const` if possible.
-- *Function* is a function **not** in a class. whereas *Method* is a function in a class.
+- *Function* is a function **not** in a class. whereas *method* is a function in a class.
 - Don't frequently divide your code into functions, calling a function requires creating an entire stack frame. This means we have to push parameters and so on into the stack, and also pull something called the return address from the stack, so that after the function executed the `PC` (Program counter) register could return to the address before the function call.
   Conclusion: Jumping around in memory to execute function instructions comsumes additional time.
 
 ## Header Files
 
-Prevent multiple inclusion: You include header file `b.h` in `a.cpp`, but `b.h` includes another header file `c.h`, while you have already include `c.h` before in `a.cpp`)
+Duplicate inclusion: You include header file `b.h` in `a.cpp`, but `b.h` includes another header file `c.h`, while you have already include `c.h` before in `a.cpp`)
 
 Two ways:
 - `#pragma once`
@@ -96,19 +113,16 @@ Two ways:
   #endif
   ```
 
-## How to debug
-
-Visual Studio
-- The `watch view` in VS2015 allows you to specify the variables to be monitored,
-  In `memory window` you can search by keyword `&a` to show the address of variable `a`
-- The default value of uninitialized variables is `0xcccccccc`
-
-## Visual Studio Setup
+## Visual Studio Setup & Debug
 
 - Use `Show All Files` view under `Solution Explorer`.
 - By default VS2015 put intermediate files in debug directory
 - It's recommand to set `Output Directory` into `$(SolutionDir)bin\$(Platform)\$(Configuration)\`
   and set `Intermediate Directory` into `$(SolutionDir)bin\intermediate\$(Platform)\$(Configuration)\`
+
+- The `watch view` in VS2015 allows you to specify the variables to be monitored,
+  In `memory window` you can search by keyword `&a` to show the address of variable `a`
+- The default value of uninitialized variables is `0xcccccccc`
 
 ## Pointers
 
@@ -116,21 +130,18 @@ Visual Studio
 - Pointer to Pointer:
   ```c++
   #include <cstring>
-
-  // Allocate a space with 8 chars
-  char* buf = new char[8];
-  std::memset(buf, 0, 8); // Fill it with zero,
-  // Finally release the memory space.
-  delete[] buf;
-  
-  // pointer to pointer
-  char** ptr = &buf;
+  int main() {
+    char* buf{new char[8]}; // Allocate a space with 8 chars
+    std::memset(buf, 0, 8); // Fill it with zero,
+    char** ptr_to_ptr{&buf}; // pointer to pointer
+    delete[] buf; // Finally release the memory space.
+  }
   ```
   In memory, it may like this:
   ```plaitext
-  0x00B6FED4 (&buf):        00 D0 FF F0
-  0x00D0FFF0 (new char[8]): 00 00 00 00 00 00 00 00
-  0x???????? (&ptr):        00 B6 FE D4
+  0x00B6FED4 &buf:           00 D0 FF F0
+  0x00D0FFF0 *(new char[8]): 00 00 00 00 00 00 00 00
+  0x???????? &ptr_to_ptr:    00 B6 FE D4
   ```
   > Due to x86's little endian design, what we see from `Memory View` is start from lower bits to higer bits, which is reversed from human's convient that write the most significant digit first. e.g.:
   > ```plaintext
@@ -141,28 +152,25 @@ Visual Studio
 ## Reference
 
 - Variables are convert to memory address in assembly by compiler. Reference let compiler just substitute memory address as is (like a macro) using it's copy operator (`=()`), so it is different to `const void*` with creates a memory area to store a memory address (Can be `NULL`).
-- Copy operator `=()` copies value of a variable. Send actual parameters to a function implicitly calls copy operator.
+- Copy operator `=()` copies value of a variable. Send the actual parameters to a function implicitly calls copy operator.
 - Dereference operator (aka. indirection operator) `*()` get the value from a memory address.
 - Address-of operator `&()` obtain the memory address of a variable. Since directly send variable name to `=()` only get its stored values.
 
 ## Classes vs Structs, and Enums
 
 They are no different in low level, so a `class` can inherit a `struct` (Not recommand).
-`sturct` is more suitable for store multiple variables, it's variables are default have attribute `public`, therefore it's convient to express a data structure. While Classes are more suitable for express objects, which has both member variables and methods.
 
-Enum is a way to define a set of distinct values that have underlying integer types (can use `char` type as well, see below).
+`sturct` is more suitable for store multiple variables, its variables are default have attribute `public`, therefore it's convient to express a data structure. While `class` is more suitable for express object, which has both member variables and methods.
 
-```c++
-enum Example : unsigned char
-{
-    A, B, C
-};
-```
+Enum is a way to define a set of distinct values that have underlying integer types (, see below).
 
 ```c++
+#include <iostream>
 class Log {
 // Access specifiers 'public', 'private' can be placed multiple times
 public:
+  // Can use `char` type as well
+  // enum Level : unsigned char
   enum Level {
     // Start from one, default is 0
     LevelError = 1, LevelWarning, LevelInfo
@@ -195,44 +203,47 @@ int main() {
 
 ## Static
 
-- Static functions and variables outside of class limit the scope in its translation unit (like `private` in a class). But define static functions or variables that share a same name in different translation unit will causes duplicate definition error in linking stage.
-- Static variable inside a class or struct means that variable is going to share memory with all of the instances of the class, in other words there's only one instance of that static variable. Static methods cannot pass an instance of a class.
+- Static functions and variables outside of class limit the scope in its translation unit (like `private` in a class). But define static functions or variables that share a same name in different translation unit will cause duplicate definition error in linking stage.
+- Static variable inside a class or struct means that variable is going to share memory with all of the instances of the class, in other words there's only one instance of that static variable. Static methods cannot access non-static members its class, hence it don't have instance of the class.
 - Define `static` variables in header files if possible.
 - Local Static
   ```c++
+  #include <iostream>
   void func() {
-    static int s_i = 0; // 's_' means static
+    static int s_i{0}; // 's_' means static
     s_i++;
     std::cout << s_i << '\n';
   }
   int main() { func(); func(); func(); func(); }
+
   ```
 
 ### Classical Singleton
 
-Singleton are claess that allows only one instance.
+Singleton are classes that allow only one instance.
 - One way:
   ```c++
   class Singleton {
   private:
     static Singleton* s_instance;
-      Singleton() {}; // Private empty construct function prevents instantiate
+    Singleton() {}; // Private empty construct function prevents instantiate
   public:
     static Singleton& get() { return *s_instance; };
     void hello() { std::cout << "Hello" << '\n'; };
   };
-  Singleton* Singleton::s_instance = nullptr;
+  Singleton* Singleton::s_instance{nullptr}; // Given a nullptr to pass static analyze
+  // Though no memory spaces created for the class, we can still access methods
   int main() { Singleton::get().hello(); }
   ```
 - Another way:
   ```c++
+  #include <iostream>
   class Singleton {
   private:
     Singleton() {};
   public:
     static Singleton& get() {
-      // Put instace into a local static variable (Pro: less code)
-      static Singleton s_instance;
+      static Singleton s_instance; // Put instace into a local static variable (Pro: less code)
       return s_instance;
     };
     void hello() { std::cout << "Hello" << '\n'; };
@@ -247,15 +258,15 @@ Corstructor provides a way to initialize primitive types when creating instance.
 To Prevent creating instance, you can set constructor as priavate, or delete it.
 ```c++
 class Log {
-Private:
-    Log() {} // One way
+private:
+  Log() {} // One way
 public:
-    Log() = delete; // Another way
-    static void write() {}
+  // Log() = delete; // Another way
+  static void write() {}
 };
 int main() {
-    Log::write(); // Only Write() can be invoke
-    Log l; // Now you cannot access the constructor
+  Log::write(); // Only Write() can be invoke
+  // Log l; // Now you cannot access the constructor
 }
 ```
 
@@ -268,25 +279,27 @@ Size of sub class: (base class) + (defined variables)
 
 Why we need virtual function:
 ```c++
+#include <iostream>
+#include <string>
 class Entity {
 public:
-    std::string get_name() { return "Entity"; }  
+  std::string get_name() { return "Entity"; }  
 };
 // public inheritance keep public members in base class public in sub class,
 // otherwise they becomes to private
 class Player : public Entity {
 private:
-  std::string m_Name;
+  std::string m_name;
 public:
-  Player(const std::string& name) : m_Name(name) {}
-  std::string get_name() { return m_Name; }
+  Player(const std::string& name) : m_name{name} {}
+  std::string get_name() { return m_name; }
 };
 int main() {
-  Entity* entity = new Entity();
+  Entity* entity{new Entity()};
   std::cout << entity->get_name() << '\n';
 
-  Player* player = new Player("Cherno");
-  Entity* entity2 = player; // Cast player to Entity
+  Player* player{new Player("Cherno")};
+  Entity* entity2{player}; // Cast player to Entity
   std::cout << entity2->get_name() << '\n';
 }
 ```
@@ -295,31 +308,31 @@ Outputs:
 Entity
 Entity
 ```
-The problem occurs that the second output should be "Cherno"
-When the pointer type is the main class `Entity`, the method `get_name()` uses it's main class' version even it's actually an instance of `Player`, this definitely a problem.
+The problem occurs that the second output should be "Cherno". When the pointer type is the main class `Entity`, the method `get_name()` uses it's main class' version even it's actually an instance of `Player`, this definitely a problem.
+
 If you want to override a method you have to mark the method in the base class as `virtual`. Correct version:
 ```c++
+#include <iostream>
 class Entity {
 public:
-    // with 'virtual' marked
-    virtual std::string get_name() { return "Entity"; }  
+  virtual std::string get_name() { return "Entity"; } // with 'virtual' marked
 };
 class Player : public Entity {
 private:
-    std::string m_Name;
+  std::string m_name;
 public:
-    Player(const std::string& name) : m_Name(name) {}
+  Player(const std::string& name) : m_name{name} {}
 
-    // 'override' is not necessary but it could avoid typo and imporve readability
-    std::string get_name() override { return m_Name; }
+  // 'override' is not necessary but it could avoid typo and imporve readability
+  std::string get_name() override { return m_name; }
 };
 int main() {
-    Entity* entity = new Entity();
-    std::cout << entity->get_name() << '\n';
+  Entity* entity{new Entity()};
+  std::cout << entity->get_name() << '\n';
 
-    Player* player = new Player("Cherno");
-    Entity* entity2 = player;
-    std::cout << entity2->get_name() << '\n';
+  Player* player{new Player("Cherno")};
+  Entity* entity2 = player;
+  std::cout << entity2->get_name() << '\n';
 }
 ```
 
@@ -330,21 +343,21 @@ int main() {
 ### Interface (Pure Virtual Method)
 
 ```c++
-// Interface class cannot be instantiated directlly
-class Printable {
+#include <iostream>
+#include <string>
+class Entity {};
+class Printable { // Interface class cannot be instantiated directlly
 public:
-    // interface (pure virtual method)
-    virtual std::string get_class_name() = 0;
+  virtual std::string get_class_name() = 0; // interface (pure virtual method)
 };
-class Player : public Entity, Printable { // a sub class can inherit multiple interface class
+class Player : public Entity, public Printable { // a sub class can inherit multiple interface class
 public:
     std::string get_class_name() override { return "Player"; }
 };
-void print(Printable* obj) {// 通过这样的函数, 我们只需要实现这个方法, 该函数就会调用我们的实现
-    std::cout << obj->get_class_name() << std::endl;
-}
+// Now even the Player instance is casted into its base class, it will still use sub class's function implement
+void print(Printable* obj) { std::cout << obj->get_class_name() << '\n'; }
 int main() {
-    Player* player = new Player();
+    Player* player{new Player()};
     print(player);
     print(new Player); // don't do this, it's very easily to cause memory leak
 }
@@ -352,53 +365,52 @@ int main() {
 
 ## Visibility in C++
 
-- The default visibility of a Class would be `private`; if its a `struct` then it would be `public` by default.
+- The default visibility of a Class would be `private`. If it's a `struct` then it would be `public` by default.
 - `private` things only visiable in it's own class, nor in sub class, except friend class.
 - `protected` things can be seen by sub class.
 
-## Raw Arrays && C++11 Standard Arrays
+## Literal Arrays & C++11 Standard Arrays
 
-> Be aware for operations out of index (e.g.`example[-1] = 0`), in C++ you can do this by force the compiler to ignore this check, and it's definitely discouraged.
+> Be aware for operations out of index (e.g. `example[-1] = 0`), in C++ you can do this by force the compiler to ignore this check, and it's definitely discouraged.
 
-- Literal array
+- Literal Array
   ```c++
-  // 'arr' is actually a pointer of type int[5], stores the begin address of the array
-  int arr[5]; // On stack, destory on function end
-  int* arr = new int[5]; // on heap, would not auto destory
-  int* ptr = arr;
-  for (int i = 0; i< 5; i++)
-    arr[i] = 2;
+  #include <iostream>
+  int main() {
+    int arr[5]; // On stack, destory on function end
   
-  arr[2] = 5;
-  // this is equals to
-  *(ptr + 2) = 5;
-  // Bacause 'ptr' has type 'int' (32 bits, 4 bytes),
-  // so + 2 let it advance two 'int's length (64 bits, 8 bytes)
-  // *(int*)((char*) ptr + 8) = 5;
-  // It is pretty wild of this code.
+    int* arr2{new int[5]}; // on heap, would not auto destory
+    delete[] arr2; // Use square brackets to release an array on heap
   
-  // You cannot dynamically chack a raw array's size.
-  // Ways like this is unstable
-  int count = sizeof(arr) / sizeof(int);
+    int* ptr{arr}; // 'arr' is actually a pointer which stores the begin address of the array
+    for (int i = 0; i< 5; i++) arr[i] = i;
+    
+    arr[2] = 5; 
+    *(ptr + 2) = 5; // this is equal but in a pretty wild way
+    // Bacause 'ptr' has type 'int' (32 bits, 4 bytes),
+    // so + 2 let it advance two 'int's length (64 bits, 8 bytes)
+    // We can also do the same operation in this form (`char` is 8 bits, 1 bytes)
+    *(int*) ((char*) ptr + 8) = 5;
   
-  // a good ways is to use an constant to remember the array size,
-  // or using c++11 standard arrays instead.
-  // Discourage, if wanna dynamically sized array,
-  static const int arr_size = 5;
-  int arr[arr_size];
-  
-  // Use square brackets to release an array on heap
-  delete[] arr;
+    for (int i = 0; i< 5; i++) std::cout << arr[i] << '\n';
+    
+    // You cannot dynamically chack a raw array's size.
+    int count{sizeof(arr) / sizeof(int)}; // Ways like this is unstable
+    
+    // A good ways is to use an constant to remember the array size,
+    // or using c++11 standard arrays instead.
+    static const int&& arr_size{5};
+    int arr3[arr_size];
+  }
   ```
 - Standard Arrays
   It's more safe, but has little bit more overhead.
   ```c++
   #include <array>
-  
+
   int main() {
     std::array<int, 5> arr;
-    for (int i = 0; i < arr.size(); i++)
-      arr[i] = 2;
+    for (int i = 0; i < arr.size(); i++) arr[i] = 2;
   }
   ```
 
@@ -406,17 +418,25 @@ int main() {
 
 ### C-style Strings (Sring Literals)
 
-C-style strings are store in code segment (virtual address space, which is read-only), this means you can only replace new string to the variable to "change" it.
+C-style strings are stored in code segment (virtual address space, which is read-only), this means you can only replace new string to the variable to "change" it.
 ```c++
-const char* name = "Cherno";
-"Cherno" + " hello!"; // You cannot do '+()' to raw strings since it's constant
+#include <cstring>
+int main() {
+  const char*&& name{"Cherno"};
+  // "Cherno" + " hello!"; // You cannot do '+()' to literal strings since it's constant
+}
 ```
 
 > Each strings at end has `\0` (named "null termination character") to prevent out of index at iteration. e.g. `char str[7] = {'C', 'h', 'e', 'r', 'n', 'o', '\0'};`
 > Terminal character will actuall break the behavior of string in many cases
 > ```c++
-> const char name[8] = "Che\0rno";
-> std::cout << strlen(name) << std::endl;
+> #include <cstring>
+> #include <iostream>
+> int main() {
+>   char name[8] = "Che\0rno";
+>   std::cout << strlen(name) << std::endl;
+>  }
+> 
 > ```
 
 ### std::string
@@ -425,41 +445,39 @@ It's a char array indeed.
 
 ```c++
 #include <iostream>
-
 int main() {
-  std::string str = "Cherno";
+  std::string str{"Cherno"};
   str += " hello!"; // '+=()' is overloaded in the string class to let you do that.
-  std::string str = std::string("Cherno") + " hello!"; // This does more object copy operations
-  std::cout << str;
-  // Check whether a string has specific word
-  bool const contains = name.find("no") != std::string::npos
+  std::string str2{std::string("Cherno") + " hello!"}; // This does more object copy operations
+  std::cout << str << '\n';
+  const bool contains = str.find("no") != std::string::npos; // Check whether a string has specific word
+  std::cout << contains << '\n';
 }
 ```
 
 ```c++
+#include <string>
 int main() {
-    const char* name = u8"Cherno"; // utf-8, which is default
-    const char16_t* name2 = u"Cherno"; // utf-16, two bytes per character
-    const char32_t* name3 = U"Cherno"; // utf-32, four bytes per character
-    const wchar_t* name4 = L"Cherno"; // eitger 2 or 4 bytes, depends on compiler
-    // Useful or you want to keep format
-    const char* rawstring = R"(Line1
+  const char8_t*&& name1{u8"Cherno"}; // utf-8, which is default
+  const char16_t*&& name2{u"Cherno"}; // utf-16, two bytes per character
+  const char32_t*&& name3{U"Cherno"}; // utf-32, four bytes per character
+  const wchar_t*&& name4{L"Cherno"}; // eitger 2 or 4 bytes, depends on compiler
+  // Useful or you want to keep format
+  const char*&& raw_string{R"(Line1
 Line2
 Line3
-Line4)";
-
-    //C++14 Standards
-    using namespace std::string_literals;
-    std::string name0 = "Cherno"s + " hello";
-    std::wstring name1 = L"Cherno"s + L" hello";
-    std::u32string name1 = U"Cherno"s + U" hello";
-
+Line4)"};
+  // c++14 Standards
+  using namespace std::string_literals;
+  std::string name5 = "Cherno"s + " hello";
+  std::wstring name6 = L"Cherno"s + L" hello";
+  std::u32string name7 = U"Cherno"s + U" hello";
 }
 ```
 
-## const in C++
+## Constants in C++
 
-The mutable of const depends on how it stores:
+The mutability of const depends on how it stores:
 String Literal stored in the read-only section of the memory. So modifying will cause segmentation fault.
 constant variables may convert to a literal and place the primitive value in assemble in compile time,
 while if the code attempt to take the address of constant variable the compiler will let it place in memory.
