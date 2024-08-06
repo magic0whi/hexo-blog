@@ -200,7 +200,7 @@ tags:
 
 1. Arithmetic progression
    \\(n\\)-th term: \\(a_n=a_1+(n-1)d\\)
-   Sum: \\(S_n=na_1+\frac{n(n-1)}{2}d=\frac{n(a_1+a_n)}{2}\\)
+   Sum: \\(S_n=\frac{n(a_1+a_n)}{2}=na_1+\frac{n(n-1)}{2}d\\)
    Attributes:
    1. 设等差数列 \\(A,B,C\\) , 若 \\(B\\) 为等差中项, 则有 \\(B=\frac{A+C}{2}\\)
    2. \\(m+n=p+q\rArr a_m+a_n=a_p+a_q\enspace\\) (\\(m,n,p,q\in N^+\\))

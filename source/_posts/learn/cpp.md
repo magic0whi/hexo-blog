@@ -1342,54 +1342,40 @@ Example scenario: we have a function called `ParseShader()` , it needs to return
 Template can improve code reuse rate and reduce duplicate code (for example function overload)
 The essence of template is similar to macros
 
-This chapter includes:
 1. template type
-2. template argument
-```C++
-// In this case, template specifying how to create methods based on your usage of them.(Automatically generate corresponding overloaded function)
-// So if nobody call this function, it's code will not exist in compiled file,
-// even if there is a grammatical error in this function code, it will still compile successfully.
-
-template<typename T>// exactly same with: "template<class T>"
-void Print(T value)
-{
+  ```c++
+  // In this case, template specifying how to create methods based on your usage of them. (Automatically generate corresponding overloaded function)
+  // So if nobody call this function, it's code will not exist in compiled file,
+  // Even if there is a grammatical error in function code, it will still compile successfully.
+  template<class T> // exactly same with 'template<typename T>'
+  void print(T value) {
     std::cout << value << std::endl;
-}
-
-int main()
-{
-    Print(5);
-    // I actually specifying the type explicitly
-    // The complete code should be:
-    // Print<int>(5);
-    Print("Hello");
-    Print(5.5f);
-}
-```
-
-```C++
-// Yes, multiple template targets can be in one template definition
-template<typename T, int N>
-class Array
-{
+  }
+  int main() {
+      print(5);
+      print<int>(5); // It's a good manner specifying the type explicitly
+      print<const char*>("Hello");
+      print<float>(5.5f);
+  }
+  ```
+2. template argument
+ ```c++
+template<class T, int N> // Multiple template targets can be in one template definition
+class Array {
 private:
-    T m_Arry[N];
+  T m_arr[N];
 public:
-    int GetSize() const { return N; }
+  int get_size() const { return N; }
 };
-
-int main()
-{
-    Array<int, 5> array;
-    // Which means its will generate the following code:
-    // class Array
-    // {
-    // private:
-    //     int m_Arry[5];
-    // public:
-    //     int GetSize() const { return 5; }
-    // };
-    std::cout << array.GetSize() << std::endl;
+int main() {
+  Array<int, 5> arr; // It will generate the following code:
+  // class Array {
+  // private:
+  //   int m_arry[5];
+  // public:
+  //   int get_size() const { return 5; }
+  // };
+  std::cout << arr.get_size() << '\n';
 }
 ```
 
