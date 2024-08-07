@@ -210,12 +210,11 @@ int main() {
   ```c++
   #include <iostream>
   void func() {
-    static int s_i{0}; // 's_' means static
+    static int s_i{}; // 's_' means static
     s_i++;
     std::cout << s_i << '\n';
   }
   int main() { func(); func(); func(); func(); }
-
   ```
 
 ### Classical Singleton
@@ -223,6 +222,7 @@ int main() {
 Singleton are classes that allow only one instance.
 - One way:
   ```c++
+  #include <iostream>
   class Singleton {
   private:
     static Singleton* s_instance;
@@ -231,7 +231,8 @@ Singleton are classes that allow only one instance.
     static Singleton& get() { return *s_instance; };
     void hello() { std::cout << "Hello" << '\n'; };
   };
-  Singleton* Singleton::s_instance{nullptr}; // Given a nullptr to pass static analyze
+  // Static members in class shoud defined out-of-line, but here I given a nullptr to pass static analyze
+  Singleton* Singleton::s_instance{nullptr};
   // Though no memory spaces created for the class, we can still access methods
   int main() { Singleton::get().hello(); }
   ```
@@ -243,7 +244,7 @@ Singleton are classes that allow only one instance.
     Singleton() {};
   public:
     static Singleton& get() {
-      static Singleton s_instance; // Put instace into a local static variable (Pro: less code)
+      static Singleton s_instance; // Put instance into a local static variable (Pro: less code)
       return s_instance;
     };
     void hello() { std::cout << "Hello" << '\n'; };
@@ -295,10 +296,10 @@ public:
   std::string get_name() { return m_name; }
 };
 int main() {
-  Entity* entity{new Entity()};
+  Entity* entity{new Entity};
   std::cout << entity->get_name() << '\n';
 
-  Player* player{new Player("Cherno")};
+  Player* player{new Player{"Cherno"}};
   Entity* entity2{player}; // Cast player to Entity
   std::cout << entity2->get_name() << '\n';
 }
@@ -327,11 +328,11 @@ public:
   std::string get_name() override { return m_name; }
 };
 int main() {
-  Entity* entity{new Entity()};
+  Entity* entity{new Entity};
   std::cout << entity->get_name() << '\n';
 
-  Player* player{new Player("Cherno")};
-  Entity* entity2 = player;
+  Player* player{new Player{"Cherno"}};
+  Entity* entity2{player};
   std::cout << entity2->get_name() << '\n';
 }
 ```
@@ -352,14 +353,14 @@ public:
 };
 class Player : public Entity, public Printable { // a sub class can inherit multiple interface class
 public:
-    std::string get_class_name() override { return "Player"; }
+  std::string get_class_name() override { return "Player"; }
 };
 // Now even the Player instance is casted into its base class, it will still use sub class's function implement
 void print(Printable* obj) { std::cout << obj->get_class_name() << '\n'; }
 int main() {
-    Player* player{new Player()};
-    print(player);
-    print(new Player); // don't do this, it's very easily to cause memory leak
+  Player* player{new Player};
+  print(player);
+  print(new Player); // don't do this, it's very easily to cause memory leak
 }
 ```
 
@@ -407,7 +408,6 @@ int main() {
   It's more safe, but has little bit more overhead.
   ```c++
   #include <array>
-
   int main() {
     std::array<int, 5> arr;
     for (int i = 0; i < arr.size(); i++) arr[i] = 2;
@@ -416,7 +416,7 @@ int main() {
 
 ## How Strings Work (and How to Use Them)
 
-### C-style Strings (Sring Literals)
+### C-style Strings (String Literals) and std::string_view
 
 C-style strings are stored in code segment (virtual address space, which is read-only), this means you can only replace new string to the variable to "change" it.
 ```c++
@@ -424,6 +424,8 @@ C-style strings are stored in code segment (virtual address space, which is read
 int main() {
   const char*&& name{"Cherno"};
   // "Cherno" + " hello!"; // You cannot do '+()' to literal strings since it's constant
+  TODO
+  std::string_view name2{name};
 }
 ```
 
@@ -433,10 +435,9 @@ int main() {
 > #include <cstring>
 > #include <iostream>
 > int main() {
->   char name[8] = "Che\0rno";
+>   char name[8]{"Che\0rno"};
 >   std::cout << strlen(name) << std::endl;
->  }
-> 
+> }
 > ```
 
 ### std::string
@@ -448,7 +449,7 @@ It's a char array indeed.
 int main() {
   std::string str{"Cherno"};
   str += " hello!"; // '+=()' is overloaded in the string class to let you do that.
-  std::string str2{std::string("Cherno") + " hello!"}; // This does more object copy operations
+  std::string str2{std::string{"Cherno"} + " hello!"}; // This does more object copy operations
   std::cout << str << '\n';
   const bool contains = str.find("no") != std::string::npos; // Check whether a string has specific word
   std::cout << contains << '\n';
@@ -469,211 +470,178 @@ Line3
 Line4)"};
   // c++14 Standards
   using namespace std::string_literals;
-  std::string name5 = "Cherno"s + " hello";
-  std::wstring name6 = L"Cherno"s + L" hello";
-  std::u32string name7 = U"Cherno"s + U" hello";
+  std::string name5{"Cherno"s + " hello"};
+  std::wstring name6{L"Cherno"s + L" hello"};
+  std::u32string name7{U"Cherno"s + U" hello"};
 }
 ```
 
 ## Constants in C++
 
 The mutability of const depends on how it stores:
-String Literal stored in the read-only section of the memory. So modifying will cause segmentation fault.
-constant variables may convert to a literal and place the primitive value in assemble in compile time,
-while if the code attempt to take the address of constant variable the compiler will let it place in memory.
+- String Literal stored in the read-only section of the memory. So modifying will cause segmentation fault.
+- Constant variables may convert to a literal and place the primitive value in assemble in compile stage, while if the code attempt to take the address of constant variable the compiler will let it place in memory.
 
-### const pointer
+### Constant Pointer
 
 ```c++
-const int MAX_AGE = 90;
-
-// 1. Pointer to const value
-const int* a = new int;
-*a = 2; // I cannot change the contents of the pointer
-a = (int*) &MAX_AGE; // But I can change the pointer itself
-
-// 2. Const pointers
-int* const b = new int;
-*b = 2; // I can change the contents of the pointer
-b = (int*) &MAX_AGE; // But I cannot change the pointer's value
-
-// 3. Const pointer to a const value
-const int* const c = (int*) &MAX_AGE;
+#include <iostream>
+int main() {
+  const int MAX_AGE{90};
+  // 1. Pointer to const value
+  const int* a{new int};
+  std::cout << a << '\n';
+  // *a = 2; // I can't change the contents of the pointer
+  a = (int*) &MAX_AGE; // But I can change the pointer itself
+  std::cout << a << '\n';
+  // 2. Const pointers
+  int* const b{new int};
+  *b = 2; // I can change the contents of the pointer
+  // b = (int*) &MAX_AGE; // But I can't change the pointer's value
+  // 3. Const pointer to a const value
+  const int* const c{&MAX_AGE};
+}
 ```
 
-> `const int*` equals `int const*`
+> `const int*` equals `int const*`. So `const int*& ptr{&a}` is illegal since `a`'s address is a rvalue, `const int* const& ptr{&a}` or `const int*&& ptr{&a}` should work.
 
-<span id="const_method"></span>
 ### Const Method
 
-Const methods cannot change member variables in the class, except for `mutable` variables.
+Const methods cannot change member variables in the class, except for `mutable` and `static` variables.
 
 ```c++
+#include <iostream>
 class Entity {
 private:
-    int m_x, * m_y;
-    mutable int m_z;
+  int m_x, * m_y;
+  mutable int m_z;
 public:
-    void set_x() {
-        m_x = 2;
-    }
-    const int* const get_y() const { // When a const method return pointer types, it should has 'const' on both side
-        return m_y;
-    }
-    int get_z() const {
-        // m_X = 2; // I cannot change member variable
-        m_z = 233; // But I can change mutable variable
-        return m_z;
-    }
+  // When a const method return pointer types, it should has 'const' on both side
+  const int* const get_y() const { return m_y; }
+  int get_z() const {
+    // m_x = 2; // I can't change member variable
+    m_z = 2; // But I can change mutable variable
+    return m_z;
+  }
 };
 int main() {
-    const Entity& e = Entity();
-    // e.set_x(); // A const object can only call its const methods.
-    std::cout << e.get_z() << '\n';
+  const Entity& e{Entity()};
+  // e.set_x(); // A const object can only call its const methods.
+  std::cout << e.get_z() << '\n';
 }
 ```
 
-## Memory Initializer Lists in C++ (Constructor Initializer List)
+## Member Initializer Lists in C++ (Constructor Initializer List)
 
-使用构造初始化列表可以避免使用 "=" 从而实列化两次对象
+Use member initializer lists can prevent the use of `=` which may initialize object twice.
 
-```C++
-class Example
-{
+```c++
+#include <iostream>
+class Example {
 public:
-    Example()
-    {
-        std::cout << "Created Entity!" << std::endl;
-    }
-
-    Example(int x)
-    {
-        std::cout << "Create Entity with " << x << "!" << std::endl;
-    }
-}
-
-class Entity
-{
+  Example() { std::cout << "Created Entity!" << '\n'; }
+  Example(int x) { std::cout << "Created Entity with " << x << "!" << '\n'; }
+};
+class Entity {
 private:
-    Example m_example;
-    int x, y, z;
+  Example m_example;
+  int m_x, m_y, m_z;
 public:
-    Entity()
-        : m_example(Example(8)), x(0), y(0), z(0) // m_example(Example(8)) 或者m_example(8)都行
-        {
-            // m_Example = Example(8); 如果在构造函数中实列化内部变量, 该对象会实例化两次
-        }
-}
-
-int main()
-{
-    Entity e0;
-}
+  Entity() : m_example{8}, m_x{}, m_y{}, m_z{} { // m_example{8} equals m_example{Example(8)}
+  // m_example = Example{8}; // This will initialize twice
+  }
+};
+int main() { Entity e; }
 ```
 
 ## Ternary Operators in C++ (Conditional Assignment)
 
 Ternaay can simplify `if else`
 ```c++
-#include <string>
-
-static int s_level = 1;
-static int s_speed = 2;
-
+#include <iostream>
+static int s_level{1};
+static int s_speed{2};
 int main() {
   s_speed = s_level > 5 && s_level < 100 ? s_level > 10 ? 15 : 10 : 5;
   // Above sentence equals to:
-  // if (s_Level > 5 && s_Level < 100)
+  // if (s_level > 5 && s_level < 100)
   //   if(s_level > 10) s_speed = 15;
-  //   else s_Speed = 10;
-  // else 
-  //   s_Speed = 5;
+  //   else s_speed = 10;
+  // else s_speed = 5;
   std::cout << s_speed;
 }
 ```
 
-## How to CREATE/INSTANTIATE OBJECTS in C++
+## Create/Instantiate Objects
 
-There are two main section of memory: the stack and heap
+There are two main section of memory: stack and heap.
+- Stack objects have an automatic lifespan, their lifetime is actually controlled by the their scope.
+  the stack size is small (usually 1~10M), if you have a big object, you have to store it in the heap.
+- Heap: once you allocated an object in the heap, it's gonna sit there unill you explicit delete it.
 
-Stack objects have an automatic lifespan, there lifetime is actually controlled by the scope their declared
-
-Heap: once you allocated an object in that heap, it's gonna sit there unill you explicit delete it
-
-栈空间一般只有1M到几M(取决于平台), 如果你需要创建一个巨大的对象, 你将不得不将他创建在堆内存上
-
-
-不使用 `new` 关键字, 对象创建在栈空间上
-```C++
-Entity entity("Cherno");
-// 或者
-Entity entity = Entity("Cherno");
+```c++
+#include <iostream>
+class Entity {
+public:
+  Entity(const char* str) { std::cout<< str << '\n'; }
+};
+int main() {
+  // Without `new`, object created on the stack
+  Entity entity{"Cherno"}; // equals Entity entity{Entity("Cherno")};
+  // With 使用 `new`, object created on the heap, new returns the memory address
+  Entity* entity2 = new Entity("Cherno");
+  // We need manually release the object on the heap
+  delete entity2;
+}
 ```
 
-使用 `new` 关键字, 对象创建在堆空间上
-```C++
-// new 返回的是创建对象的内存地址, 所以用 Entity*
-Entity* entity = new Entity("Cherno");
-// 你需要手动删除 new 创建的对象来释放内存
-delete entity;
-```
+> Manual resource release is memory leak prone, use smart pointer is a better idea.
 
-所以用 `new` 创建对象很容易导致内存泄漏, 之后会讲的 **智能指针** 可用很好地解决这个问题
+### The New/Delete Keyword
 
-## The NEW Keyword in C++
+How the `new` keyword find free space on memory? There is something called *free list* which maintain the addresses that have bytes free. It's obvously written in intelligent but it's stll quite slow.
+- `new` is just an operator, it uses the underlying C function `malloc()`, means that you can overload `new` and change its bahavious.
+  `new` also calls the constructor.
+- `delete` also calls the destructor.
 
-更多new的细节
+Three uses of `new` (normal new, array new, placement new)
+```c++
+#include <cstdlib>
+#include <new>
+class Entity {};
+int main() {
+  Entity* entity{new Entity}; // Normal `new`
+  delete entity; // Remember delete object
 
-How the `new` keyword find free space on memory? There is something called *free list* which actually maintain the addresses that have bytes free. It's obvously written in intelligent but its stll quite slow.
+  // If we want an array of entries (An array which is stored 50 Objects of Entity)
+  Entity* entity2{new Entity[50]}; // Array `new`
+  delete[]entity2; // Also we need calling delete with square bracket
 
-几点事实:
-1. `new` is just an operator, means that you can overload `new` and change its bahavious
-2. Usually calling `new` will call the underlying C Function `malloc()`
-3. **delete** also calls the destructor
-
-三种 `new` 的不同使用方法(normal new, array new, placement new)
-```C++
-int main()
-{
-    // If we wanted an array of entries (An array which is stored 50 Objects of Entity)
-    Entity* entity = new Entity();
-
-    delete entity; // Remember delete object
-
-    // If using new with square bracket "[" and "]"
-    // The new operator is actually a slightly differ function than normal
-    Entity* entity2 = new Entity()[50];
-    // Also we need calling delete with square bracket
-    delete[] eneity2;
-
-    // Placement New is where you actually get to decide kind of where the memory comes from.
-    // You don't really allocating memory wieh new,
-    // you're just calling the constructor and initializing you Object in a specific memory address
-    int* buffer = new int[50];
-    Entity* entity3 = new(buffer) Entity();
-    delete entity3;
-    delete[] buffer;
-    // in C there are some kinds of equivalent:
-    // Entity* entity = (Entity*) malloc(sizeof(Entity));
-    // malloc() will not call the constructor so you need to call it in manual
-    // So it's better don't use this in C++
+  // Placement `new` is where you actually get to decide where the memory comes from.
+  // You don't really allocating memory with `new`,
+  // but just calling the constructor and initializing object in a specific memory address
+  int* buffer{new int[50]};
+  Entity* entity3{new(buffer) Entity};
+  delete entity3;
+  // delete[] buffer; // This will cause double free
+  // In C there are some kinds of equivalent:
+  Entity* entity4{(Entity*) malloc(sizeof(Entity))};
+  new(entity4) Entity(); // malloc() will not call the constructor so I need to call it in manual
+  entity4->~Entity(); // free() will now call the destructor
+  free(entity);
 }
 ```
 
 ## Implicit Conversion and the Explicit Keyword in C++
 
-```C++
-class Entity
-{
+```c++
+class Entity {
 private:
-    std::string m_Name;
-    int m_Age;
+  std::string m_Name;
+  int m_Age;
 public:
-    Entity(const std::string& name)
-        : m_Name(name), m_Age(-1) P{}
-    // Use explicit keyword to disable implicit conversion
-    explicit Entity(int age)
-        : m_Name("Unknown"), m_Age(age) {}
+  Entity(const std::string& name) : m_Name(name), m_Age(-1) P{}
+  explicit Entity(int age) : m_Name("Unknown"), m_Age(age) {} // Use explicit keyword to disable implicit conversion
 };
 
 void PrintEntity(const Entity& entity)
@@ -688,7 +656,6 @@ int main()
     // It implicit converting "Cherno" into Entity's Constructor Method: Entity(const std::string& name)
     Entity a = std::string("Cherno");
     // 虽然上面是个很好的隐式转换的例子, 但是不建议用这种语法实例化对象
-
 
     // You cannot do implicit conversion with explicit method anymore
     // This is not allowed
