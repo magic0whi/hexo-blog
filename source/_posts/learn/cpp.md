@@ -629,8 +629,8 @@ int main() {
   // delete[] buffer; // This will cause double free
   // In C there are some kinds of equivalent:
   Entity* entity4{(Entity*) malloc(sizeof(Entity))};
-  new(entity4) Entity(); // malloc() will not call the constructor so I need to call it in manual
-  entity4->~Entity(); // free() will now call the destructor
+  new(entity4) Entity; // malloc() will not call the constructor so I need to call it in manual
+  entity4->~Entity(); // free() also not call the destructor automatically
   free(entity);
 }
 ```
@@ -722,8 +722,8 @@ int main() {
   }
   class Entity {
   public:
-    void print() { std::cout<< "Print from Entity" << '\n'; }
-    ~Entity() { std::cout << "Entity released!" << '\n'; }
+    void print() { std::cout<< "Print from Entity!" << '\n'; }
+    ~Entity() { std::cout << "Entity released~" << '\n'; }
   };
   // We can use `std::unique_pointer` which is a scoped pointer,
   // but here we write our own to explain how it works
@@ -739,12 +739,15 @@ int main() {
     // dereference the founded pointer.
     T* operator->() { return m_ptr; }
     T operator*() { return *m_ptr; }
+    ScopedPtr(ScopedPtr<T>&) = delete; // Inhibit copy constructor
+    ScopedPtr<T> operator=(ScopedPtr<T>) = delete; // Inhibit copy assignment
   };
   int main() {
     { // scope with brace
       Entity e; // the object created on stack will gets free when out of the scope
   
-      ScopedPtr<Entity> ptr{new Entity()};
+      ScopedPtr<Entity> ptr = {new Entity};
+      // ScopedPtr<Entity> ptr2{ptr};
       ptr->print();
       (*ptr).print();
     }
@@ -757,138 +760,81 @@ int main() {
 
 Smart pointers is that when you call `new` , you don't have to call `delete`. Actually in many cases with smart pointers we don't even have to call `new`.
 
-- Unique pointer
-- Shared pointer & Weak pointer
+- **Unique pointer**
+- **Shared pointer** & **Weak pointer**
+  Shared pointer use something called reference counting. If create one shread pointer and define another shared pointer and copy the previous one, the reference count is now 2; when the first one dies (out of scope), the reference count goes down 1; when the last one dies. the reference count goes back to zero and free the memory.
+  Weak pointer will not increase the reference count.
 
 ```c++
 #include <iostream>
-#include <string>
 #include <memory>
-
-class Entity()
-{
+class Entity {
 public:
-    Entity()
-    {
-        std::cout << "Created Entity!" << std::endl;
-    }
+  Entity() { std::cout << "Created Entity!" << std::endl; }
+  ~Entity() { std::cout << "Destoryed Entity~" << std::endl; }
+  void print() {}
+};
+int main() {
+  // All smart pointer are marked as explicit due to exception safety
+  std::unique_ptr<Entity> unique_entity{new Entity};
+  // The preferred way to construct this would be use std::make_unique<T>()
+  auto unique_entity2{std::make_unique<Entity>()};
 
-    ~Entity()
-    {
-        std::cout << "Destoryed Entity~" << std::endl;
-    }
+  // I can access it like I would normally
+  unique_entity2->print();
 
-    void Print() {}
-}
-
-int main()
-{
-    {
-        // All smart pointer are marked as explicit
-        std::unique_ptr<Entity> uniqueEntity(new Entity());
-        // The preferred way through to construct this would be to assign it to std::make_unique<Entity>
-        // The primary that is important for unique pointers is due to exception safety
-        std::unique_ptr<Entity> uniqueEntity = std::make_unique<Entity>();
-
-        // You can access it like you would normally
-        uniqueEntity->Print();
-
-        // Tou cannot copy unique pointer, you will get a compile error
-        std::unique_ptr<Entity> e0 = entity;
-
-        
-        // If you go to definition of unique pointer you'll see that the copy constructor
-        // and copy assignment operator are deleted;
-
-         // shared pointer is use something called reference counting
-         // You create one shread pointer and you define another shared pointer and copy the
-         // previous one, the reference count is now 2,
-         // when the first one dies(out of scope), the reference count goes down 1
-         // and when the last one dies. the reference count goes back to zero,
-         // and free the memory.
-         // BTW, for shared pointer using make_shared is very recommand because its more efficient
+  // In the definition of unique pointer, the copy constructor
+  // and copy assignment operator are deleted
+  // std::unique_ptr<Entity> e0{unique_entity2}; // I cannot copy unique pointer
          
-         // There is something else that you can use with shared pointer is called weak pointer
-         // weak pointer will not increase the reference count
-         std::weak_ptr<Entity> weakEntity;
-         {
-
-             std::shared_ptr<Entity> sharedEntity = std::make_shared<Entity>();
-             weakEntity = sharedEntity2;
-         }
-         // The sharedEntity will still be free immediately here.
-
-    }
-    
+  // Weak pointer won't increase the reference count
+  std::weak_ptr<Entity> weak_entity;
+  { // For shared pointer use make_shared is very recommand because its more efficient
+    auto shared_entity{std::make_shared<Entity>()};
+    std::cout << "Current count: " << shared_entity.use_count() << '\n';
+    auto shared_entity2{shared_entity};
+    std::cout << "Current count: " << shared_entity.use_count() << '\n';
+    weak_entity = shared_entity;
+    std::cout << "Current count: " << shared_entity.use_count() << '\n';
+  } // The shared_entity will be free immediately here.
 }
-
 ```
 
-## Copying and Copy Constructors in C++
+## Copying and Copy Constructors
 
-1. Ues "="(called Shallow Copy) to copy 
-   an object created on heap(with `new`) which is without a Copy Constuctors
-   or an object created on stack but with private pointer variables(objects created on heap)
-   will lead to unexpected results.
-   It's essentially just copy the address data in pointer variable
-2. So you need a Copy Constructor which delimit the behavior of the copy operation.
+Ues `=` (shallow copy) to copy. An object created on heap without a copy constuctors or an object created on stack but with pointer variables that point objects on heap will lead to unexpected results since shallow copy don't copy them fully but essentially just copy the address in pointer variable. So a copy constructor is required to delimit the behavior of the copy operation.
 
-```C++
-class String
-{
+```c++
+#include <algorithm>
+#include <cstring>
+#include <iostream>
+class String {
 private:
-    char* m_Buffer;
-    unsigned int m_Size;
+  char* m_buffer;
+  size_t m_size;
 public:
-    String(const char* string)
-    {
-        m_Size = strlen(string);
-        m_Buffer = new char[m_Size + 1]; // +1 for last null termination char
-        // You can also use strcpy()
-        memcpy(m_Buffer, string, m_Size + 1);
-    }
-
-    // Copy Consturcor
-    String(const String& other)
-        : m_Size(other.m_Size)
-    {
-        m_Buffer = new char[m_Size + 1];
-        // Or if you want to be more exciting, you can use this instead
-        // memcpy(this, &other, sizeof(String));
-    }
-
-    // Or you can just prevent this object to do copy operation
-    //String(const String& other) = delete;
-
-    ~String()
-    {
-        delete[] m_Buffer;
-    }
-
-    char& operator[](unsigned int index)
-    {
-        return m_Buffer[index];
-    }
-
-    // make <<() to be a fried so it can access private variables in this object
-    friend std::ostream& operator<<(std::ostream& stream, const String& string);
+  String(const char* str) : m_size{strlen(str)} {
+    m_buffer = new char[m_size + 1]; // +1 for last null termination char
+    std::copy_n(str, m_size, m_buffer);
+    // memcpy(m_buffer, str, m_size + 1); // C-style way, you can also use strcpy()
+  }
+  String(const String& other) : m_size(other.m_size) { // Copy Consturcor
+    m_buffer = new char[m_size + 1];
+    std::copy_n(other.m_buffer, m_size, m_buffer);
+  }
+  // String(const String& other) = delete; // Or you can just prevent this object to do copy operation
+  ~String() { delete m_buffer; }
+  char& operator[](unsigned int idx) { return m_buffer[idx]; }
+  // make <<() to be a fried so it can access private variables in this object
+  friend std::ostream& operator<<(std::ostream& stream, const String& str);
 };
-
-std::ostream& operator<<(std::ostream& stream, const String& string)
-{
-    stream << string.m_Buffer;
-    return stream;
-}
-
-int main()
-{
-    String first_String = "Cherno";
-    String second_string = first_string;
-    
-    second_string[2] = 'a';
-
-    std::cout << first_String << endl;
-    std::cout << first_String << endl;
+std::ostream& operator<<(std::ostream& stream, const String& str) { return stream << str.m_buffer; }
+int main() {
+  String first_str = "Cherno";
+  String second_str = first_str;
+  second_str[2] = 'a';
+  std::cout << first_str << '\n';
+  std::cout << second_str << '\n';
 }
 ``` 
 
