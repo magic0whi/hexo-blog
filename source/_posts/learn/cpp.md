@@ -31,7 +31,7 @@ article.article .content code, article.article .content pre {
 ## Notice
 
 1. If an object have pointer variable inside, write a copy constructor and use it.
-2. Reduce memory usage by using bit-fields make 1 byte stores 8 bools.
+2. Reduce memory usage by using bit-fields that make 1 byte stores 8 bools.
 3. Default float type is `double`, use `float a = 5.5f`.
 4. Header or inline?  (the later copys whole function body into the area where the function is called).
 
@@ -84,7 +84,7 @@ Different memory allocation size for C++ Data Type:
 | `char` | 1 byte |
 | `short` | 2 bytes |
 | `int` | 4 bytes |
-| `long` | 8 bytes (`C++20`), >= 4 bytes |
+| `long` | 8 bytes (`c++20`), >= 4 bytes |
 | `long long` | 8 bytes |
 | `float` | 4 bytes |
 | `double` | 8 bytes |
@@ -166,6 +166,7 @@ Enum is a way to define a set of distinct values that have underlying integer ty
 
 ```c++
 #include <iostream>
+#include <string_view>
 class Log {
 // Access specifiers 'public', 'private' can be placed multiple times
 public:
@@ -181,13 +182,13 @@ public:
   void set_lv(Level lv) {
     m_log_lv = lv;
   }
-  void err(const char* msg) {
+  void err(const std::string_view msg) const {
     if (m_log_lv >= LevelError) std::cout << "[Error]:" << msg << '\n';
   }
-  void warn(const char* msg) {
+  void warn(const std::string_view msg) const {
     if (m_log_lv >= LevelWarning) std::cout << "[WARN]:" << msg<< '\n';
   }
-  void info(const char* msg) {
+  void info(const std::string_view msg) const {
     if (m_log_lv >= LevelInfo)
       std::cout << "[INFO]:" << msg<< '\n';
   }
@@ -421,16 +422,16 @@ int main() {
 C-style strings are stored in code segment (virtual address space, which is read-only), this means you can only replace new string to the variable to "change" it.
 ```c++
 #include <cstring>
+#include <string_view>
 int main() {
-  const char*&& name{"Cherno"};
+  const char* name{"Cherno"};
   // "Cherno" + " hello!"; // You cannot do '+()' to literal strings since it's constant
-  TODO
-  std::string_view name2{name};
+  std::string_view name2{name}; // c++17, it's same with 'const char*'
 }
 ```
 
 > Each strings at end has `\0` (named "null termination character") to prevent out of index at iteration. e.g. `char str[7] = {'C', 'h', 'e', 'r', 'n', 'o', '\0'};`
-> Terminal character will actuall break the behavior of string in many cases
+> Terminal character will actuall break the behavior of string in many cases, use `std::string_view` can prevent this problem.
 > ```c++
 > #include <cstring>
 > #include <iostream>
@@ -459,12 +460,12 @@ int main() {
 ```c++
 #include <string>
 int main() {
-  const char8_t*&& name1{u8"Cherno"}; // utf-8, which is default
-  const char16_t*&& name2{u"Cherno"}; // utf-16, two bytes per character
-  const char32_t*&& name3{U"Cherno"}; // utf-32, four bytes per character
-  const wchar_t*&& name4{L"Cherno"}; // eitger 2 or 4 bytes, depends on compiler
+  const char8_t* name1{u8"Cherno"}; // utf-8, which is default
+  const char16_t* name2{u"Cherno"}; // utf-16, two bytes per character
+  const char32_t* name3{U"Cherno"}; // utf-32, four bytes per character
+  const wchar_t* name4{L"Cherno"}; // eitger 2 or 4 bytes, depends on compiler
   // Useful or you want to keep format
-  const char*&& raw_string{R"(Line1
+  const char* raw_string{R"(Line1
 Line2
 Line3
 Line4)"};
@@ -525,7 +526,7 @@ public:
   }
 };
 int main() {
-  const Entity& e{Entity()};
+  const Entity& e{Entity{}};
   // e.set_x(); // A const object can only call its const methods.
   std::cout << e.get_z() << '\n';
 }
@@ -545,11 +546,13 @@ public:
 class Entity {
 private:
   Example m_example;
-  int m_x, m_y, m_z;
+  int x, y, z;
 public:
-  Entity() : m_example{8}, m_x{}, m_y{}, m_z{} { // m_example{8} equals m_example{Example(8)}
+  Entity() : m_example{8}, x{}, y{}, z{} { // m_example{8} equals m_example = Example{8}
   // m_example = Example{8}; // This will initialize twice
   }
+  Entity(int x, int y) { this->x = x, this->y = y; } // `this` is a pointer point to current object,
+  // to avoid ambiguity in member variable and the method's args
 };
 int main() { Entity e; }
 ```
@@ -581,15 +584,16 @@ There are two main section of memory: stack and heap.
 
 ```c++
 #include <iostream>
+#include <string_view>
 class Entity {
 public:
-  Entity(const char* str) { std::cout<< str << '\n'; }
+  Entity(const std::string_view str) { std::cout<< str << '\n'; }
 };
 int main() {
   // Without `new`, object created on the stack
-  Entity entity{"Cherno"}; // equals Entity entity{Entity("Cherno")};
-  // With 使用 `new`, object created on the heap, new returns the memory address
-  Entity* entity2 = new Entity("Cherno");
+  Entity entity{"Cherno"}; // equals Entity entity = Entity{"Cherno"};
+  // With `new`, object created on the heap, new returns the memory address
+  Entity* entity2{new Entity{"Cherno"}};
   // We need manually release the object on the heap
   delete entity2;
 }
@@ -600,8 +604,7 @@ int main() {
 ### The New/Delete Keyword
 
 How the `new` keyword find free space on memory? There is something called *free list* which maintain the addresses that have bytes free. It's obvously written in intelligent but it's stll quite slow.
-- `new` is just an operator, it uses the underlying C function `malloc()`, means that you can overload `new` and change its bahavious.
-  `new` also calls the constructor.
+- `new` is just an operator, it uses the underlying C function `malloc()`, means that you can overload `new` and change its bahavious. `new` also calls the constructor.
 - `delete` also calls the destructor.
 
 Three uses of `new` (normal new, array new, placement new)
@@ -635,193 +638,129 @@ int main() {
 ## Implicit Conversion and the Explicit Keyword in C++
 
 ```c++
+#include <iostream>
+#include <string_view>
 class Entity {
 private:
-  std::string m_Name;
-  int m_Age;
+  std::string_view m_name;
+  int m_age;
 public:
-  Entity(const std::string& name) : m_Name(name), m_Age(-1) P{}
-  explicit Entity(int age) : m_Name("Unknown"), m_Age(age) {} // Use explicit keyword to disable implicit conversion
+  Entity(const std::string_view name) : m_name{name}, m_age{-1} {}
+  explicit Entity(int age) : m_name("Unknown"), m_age(age) {} // Use explicit keyword to disable implicit conversion
+  std::string_view get_name() const { return m_name; }
 };
+void print_entity(const Entity& entity) { std::cout << entity.get_name() << '\n'; }
+int main() {
+  // This is a implicit conversion
+  Entity a = std::string_view{"Cherno"};
+  // It implicit converting std::string_view{"Cherno"} into
+  // Entity's constructor method Entity(const std::string_view& name)
+  // It's weird , you can't do this in other languages (such as C# or Java)
 
-void PrintEntity(const Entity& entity)
-{
-    // Printing Statements
-}
-
-int main()
-{
-    // It's weird , you can't do this in other languages(such as C# or Java)
-    // This is called implicit conversion
-    // It implicit converting "Cherno" into Entity's Constructor Method: Entity(const std::string& name)
-    Entity a = std::string("Cherno");
-    // 虽然上面是个很好的隐式转换的例子, 但是不建议用这种语法实例化对象
-
-    // You cannot do implicit conversion with explicit method anymore
-    // This is not allowed
-    Entity b = 22;
-    // Correct sentence:
-    Entity b = Entity(22);
-    
-
-    // This is not allowed
-    Entity a = "Cherno";
-    // and
-    PrintEntity("Cherno"); 
-    
-    // "Cherno" is a const char array
-    // C++ need to do two conversions, one from const char* to std::string, and then call into Entity(const std::string& name)
-    // It's only allowed to do one implicit conversion at same time
-    // Correct sentence:
-    PrintEntity(std::string("Cherno");
-    // or as normal:
-    PrintEntity(Entity("Cherno"));
+  // Entity b = 22; // I can't do implicit conversion with explicit method anymore
+  Entity b{22}; // equals Entity b = Entity{22};
+  // {} is uniform initialization, it is narrowing conversion (high to low precision) prevention
+  
+  // C++ allows only one implicit conversion at same time
+  // "Cherno" is a const char array, C++ needs to do two conversions,
+  // one from const char* to std::string_view, and then call into Entity(const std::string_view& name)
+  // Entity c = "Cherno"; // Fail
+  // print_entity("Cherno"); // Fail
+  print_entity(std::string_view{"Cherno"});
+  print_entity(Entity{"Cherno"});
+  print_entity({"Cherno"}); // Same as above
 }
 ```
 
-## OPERATORS and OPERATOR OVERLOADING in C++
+## Operators and Operator Overloading in C++
 
 In the case of operator overloading you're allowed to define or change the behavior of operator
 
-**Operators are just functions**
+- **Operators are just functions**
 
 Here goes some examples:
-```C++
-struct Vector2
-{
-    float x, y;
-
-    Vector2(float x, float y)
-        : x(x), y(y) {}
-
-    // overload the function "operator+()" equals redefine the behavior of operator plus in this Object
-    Vector2 operator+(const Vector2& other) const
-    {
-        return Vector2(x + other.x, y + other.y);
-    }
-
-    // As same with above
-    Vector2 operator*(const Vector2& other) const
-    {
-        return Vector2(x * other.x, y * other.y);
-    }
-
-    // As same with above
-    bool operator==(const Vector2& other) const
-    {
-        return x == other.x && y == other.y;
-    }
-    
-    bool operator!=(const Vector2& other) const
-    {
-        // We have a simple way
-        return !operator==(other);
-        // Or
-        // return !(*this == other);
-    }
+```c++
+#include <ostream>
+#include <iostream>
+struct Vector2 {
+  float x, y;
+  Vector2(float x, float y) : x{x}, y{y} {}
+  // overload the function "operator+()" equals redefine the behavior of '+' in this Object
+  Vector2 operator+(const Vector2& other) const { return Vector2(x + other.x, y + other.y); }
+  Vector2 operator*(const Vector2& other) const { return Vector2(x * other.x, y * other.y); }
+  bool operator==(const Vector2& other) const { return x == other.x && y == other.y; }
+  bool operator!=(const Vector2& other) const { return !operator==(other); } // Or return !(*this == other);
 };
-
-// See the use case in main()
-std::ostream& operator<<(std::string& stream, const Vector2& other)
-{
-    stream << other.x << ", " << other.y;
-    return stream;
+std::ostream& operator<<(std::ostream& stream, const Vector2& other) {
+  return stream << other.x << ", " << other.y;
 }
-
-int main()
-{
-    Vector2 position(4.0f, 4.0f);
-    Vector2 speed(0.5f, 1.5f);
-    Vector2 powerup(1.1f, 1.1f);
-
-
-    Vector2 result1 = position + speed * powerup;
-
-    // We cannot output the variables in vector directly
-    // We need overload the function "operator<<"
-    std::cout << result1 << std::endl;
-
-
-    // In programs such like Java we have to use equals() to compare objects
-    // but in C++ we can simply overload the "operator=="
-    if(retult1 == position) std::cout<< "foo" << std::endl;
-
+int main() {
+  Vector2 pos{4.0f, 4.0f};
+  Vector2 spd{0.5f, 1.5f};
+  Vector2 time{1.1f, 1.1f};
+  Vector2 res{pos + spd * time};
+  // We cannot output the variables in vector directly,
+  // We need overload the function `operator<<`
+  std::cout << res << '\n';
+  // In programs such as Java we have to use equals() to compare objects,
+  // but in C++ we can simply overload the "operator=="
+  if(res == pos) std::cout << "foo" << '\n';
+  else std::cout << "bar" << '\n';
 }
 ```
 
-## Ths "this" keyword in C++
+## Object Lifetime (Stack/Scope Lifetimes)
 
-this是一个指向当前方法所在对象的指针
-避免形参名字和对象成员变量的名字一样所造成的歧义
-
-```C++
-class Entity
-{
-public:
-    int x, y;
-    Entity(int x, int y)
-    {
-        // 这里只是示范, 实际有更方便的构造参数列表来赋值
-        this->x = x; // or (*this).x = x;
+- Don't return object stored in stack
+- Use `{}` to create a local scope so that stacked things will be released earlier.
+- Underlying of Unique Pointer
+  ```c++
+  #include <iostream>
+  int* CreateArray() {
+    int array[50]; // Don't write code like this
+    return array; // The array gets cleared as soon as we go out of scope
+  }
+  class Entity {
+  public:
+    void print() { std::cout<< "Print from Entity" << '\n'; }
+    ~Entity() { std::cout << "Entity released!" << '\n'; }
+  };
+  // We can use `std::unique_pointer` which is a scoped pointer,
+  // but here we write our own to explain how it works
+  template<class T>
+  class ScopedPtr {
+  private:
+    T* m_ptr;
+  public:
+    ScopedPtr(T* ptr) : m_ptr{ptr} {}
+    ~ScopedPtr() { delete m_ptr; }
+    // `->` is special, it's invoked in a loop to call another `->` if
+    // the return value is another object (not a pointer), and will finally
+    // dereference the founded pointer.
+    T* operator->() { return m_ptr; }
+    T operator*() { return *m_ptr; }
+  };
+  int main() {
+    { // scope with brace
+      Entity e; // the object created on stack will gets free when out of the scope
+  
+      ScopedPtr<Entity> ptr{new Entity()};
+      ptr->print();
+      (*ptr).print();
     }
-}
-```
+    // since the scoped pointer object gets allocated on the stack which means it
+    // will gets deleted when out of the scope and call ~ScopedPtr()
+  }
+  ```
 
-## Object Lifetime in C++ (Stack/Scope Lifetimes)
+## Smart Pointers (std::unique_ptr, std::shared_ptr, std::weak_ptr)
 
-下面的例子讲了三件事:
-1. 编写函数时不要返回在stack内存空间创建的对象
-2. 使用 `{}` 创建局部scope以使stack上的对象更早地被自动清理
-3. Unique Pointer的基本原理展示
+Smart pointers is that when you call `new` , you don't have to call `delete`. Actually in many cases with smart pointers we don't even have to call `new`.
 
-```C++
-int* CreateArray()
-{
-    // Don't write code like this
-    // The array gets cleared as soon as we go out of scope
-    int array[50];
-    return array;
-}
+- Unique pointer
+- Shared pointer & Weak pointer
 
-class ScopedPtr
-{
-private:
-    Entity* m_Ptr;
-public:
-    ScopedPtr(Entity* ptr) : m_Ptr(ptr)
-    {}
-
-    ~ScopedPtr()
-    {
-        delete m_Ptr; // delete Entity when ScopedPtr get deleted
-    }
-}
-
-int main()
-{
-    // scope with brace
-    {
-        Entity e; // the object created on stack will gets free when out of the scope
-
-        // We could use something in the standard library called unique pointer which is a scoped pointer
-        // but here we write our own to explain how it works
-        ScopedPtr e = new Entity(); // It's implicit conversion
-        // because the scoped pointer object gets allocated on the stack which means it will gets deleted when out of the scope and call ~ScopedPtr()
-        // then corresponding the Entity will gets deleted
-    }
-}
-```
-
-## SMART POINTERS in C++ (std::unique_ptr, std::shared_ptr, std::weak_ptr)
-
-Smart pointers mean that when you call `new` , you don't have to call `delete`
-In face in many cases with smart pointers we don't even have to call `new`
-
-This episode introduce:
-1. unique pointer
-2. shared pointer & weak pointer
-
-```C++
+```c++
 #include <iostream>
 #include <string>
 #include <memory>
