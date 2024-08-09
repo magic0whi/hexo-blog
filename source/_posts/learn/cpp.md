@@ -324,7 +324,6 @@ private:
   std::string m_name;
 public:
   Player(const std::string& name) : m_name{name} {}
-
   // 'override' is not necessary but it could avoid typo and imporve readability
   std::string get_name() override { return m_name; }
 };
@@ -426,7 +425,7 @@ C-style strings are stored in code segment (virtual address space, which is read
 int main() {
   const char* name{"Cherno"};
   // "Cherno" + " hello!"; // You cannot do '+()' to literal strings since it's constant
-  std::string_view name2{name}; // c++17, it's same with 'const char*'
+  std::string_view name2{name}; // c++17, it's equivalent to 'const char*'
 }
 ```
 
@@ -680,18 +679,18 @@ In the case of operator overloading you're allowed to define or change the behav
 
 Here goes some examples:
 ```c++
-#include <ostream>
 #include <iostream>
+#include <ostream>
 struct Vector2 {
   float x, y;
-  Vector2(float x, float y) : x{x}, y{y} {}
+  Vector2(float const x, float const y) : x{x}, y{y} {}
   // overload the function "operator+()" equals redefine the behavior of '+' in this Object
-  Vector2 operator+(const Vector2& other) const { return Vector2(x + other.x, y + other.y); }
-  Vector2 operator*(const Vector2& other) const { return Vector2(x * other.x, y * other.y); }
-  bool operator==(const Vector2& other) const { return x == other.x && y == other.y; }
-  bool operator!=(const Vector2& other) const { return !operator==(other); } // Or return !(*this == other);
+  Vector2 operator+(Vector2 const& other) const { return Vector2(x + other.x, y + other.y); }
+  Vector2 operator*(Vector2 const& other) const { return Vector2(x * other.x, y * other.y); }
+  bool operator==(Vector2 const& other) const { return x == other.x && y == other.y; }
+  bool operator!=(Vector2 const& other) const { return !operator==(other); /*Or return !(*this == other);*/ }
 };
-std::ostream& operator<<(std::ostream& stream, const Vector2& other) {
+std::ostream& operator<<(std::ostream& stream, Vector2 const& other) {
   return stream << other.x << ", " << other.y;
 }
 int main() {
@@ -704,7 +703,7 @@ int main() {
   std::cout << res << '\n';
   // In programs such as Java we have to use equals() to compare objects,
   // but in C++ we can simply overload the "operator=="
-  if(res == pos) std::cout << "foo" << '\n';
+  if (res == pos) std::cout << "foo" << '\n';
   else std::cout << "bar" << '\n';
 }
 ```
@@ -813,7 +812,7 @@ private:
   char* m_buffer;
   size_t m_size;
 public:
-  String(const char* str) : m_size{strlen(str)} {
+  String(const char* str) : m_size{strlen(str) + 1} {
     m_buffer = new char[m_size + 1]; // +1 for last null termination char
     std::copy_n(str, m_size, m_buffer);
     // memcpy(m_buffer, str, m_size + 1); // C-style way, you can also use strcpy()
@@ -821,195 +820,134 @@ public:
   String(const String& other) : m_size(other.m_size) { // Copy Consturcor
     m_buffer = new char[m_size + 1];
     std::copy_n(other.m_buffer, m_size, m_buffer);
+    // The shallow copy is like 'memcpy(this, &other, sizeof(String));'
   }
   // String(const String& other) = delete; // Or you can just prevent this object to do copy operation
-  ~String() { delete m_buffer; }
-  char& operator[](unsigned int idx) { return m_buffer[idx]; }
+  ~String() { delete[] m_buffer; }
+  char& operator[](unsigned int const idx) const { return m_buffer[idx]; }
   // make <<() to be a fried so it can access private variables in this object
   friend std::ostream& operator<<(std::ostream& stream, const String& str);
 };
 std::ostream& operator<<(std::ostream& stream, const String& str) { return stream << str.m_buffer; }
 int main() {
-  String first_str = "Cherno";
-  String second_str = first_str;
+  String first_str{"Cherno"};
+  String second_str{first_str};
   second_str[2] = 'a';
   std::cout << first_str << '\n';
   std::cout << second_str << '\n';
 }
-``` 
+```
 
-## The Arrow Operator in C++
+## The Arrow Operator
 
-0. Normal usage
-   ```C++
-   int main()
-   {
-       Entity* entity = new Entity();
-       entity->x = 2; // = (*entity).x = 2;
-   }
-   ```
-1. It is actually possible to overload the Arror Operator and use it in specific class such as ScopedPtr (For more see previous chapter: SMART POINTERS in C++).
-   ```C++
-   class Entity
-   {
-   public:
-       void Print() const { std::cout << "Hello!" << std::endl; }
-   };
-
-   class ScopedPtr
-   {
-   private:
-       Entity* m_Obj;
-   public:
-       ScopedPtr(Entity* entity)
-           : m_Obj(entity)
-       {}
-
-       ~ScopedPtr()
-       {
-           delete m_Obj;
-       }
-
-       Entity* operator->()
-       {
-           return m_Obj;
-       }
-   };
-
-   int main()
-   {
-       ScopedPtr entity = new Entity(); // Do you still remember the Implicit Conversion?
-       entity->Print();
-   }
-   ```
-2. It can also be used to get the variable's memory offset in an Object (In some memory hack :)
-   ```C++
-   struct Vector3
-   {
-       // I deliberately desrupt the naming order to make it in a different memory layout.
-       float z, y, x;
-   };
-   
-   int main()
-   {
-       // Get the offset of that 'x'
-       int offset = (int) &((Vector3*)0)->x; // Or &((Vector3*)nullptr)->x;
-       std::cout << offset << std::endl;
-   }
-   ```
-
-## Dynamic Arrays in C++ (std::vector)
-
-1. Vector in C++ is not mathematical vector, it's kind of like Dynamic Arrays
-
-```C++
-struct Vertex
-{
-    float x, y, z;
+- It's possible to overload the Arror Operator and use it in specific class such as ScopedPtr:
+- It can also be used to get the variable's memory offset in an object (in some memory hack):
+```c++
+#include <iostream>
+struct Vector3 {
+  float z, y, x; // I deliberately desrupt the naming order to make it in a different memory layout.
 };
-
-std::ostream& operator<<(std::ostream& stream, const Vertex& vertex)
-{
-    stream << vertex.x << ", " << vertex.y << ", " << vertex.z;
-    return stream;
-}
-
-int main()
-{
-    // the '<Object>' is called template, will show in later chapter
-    // For now, we only need to know this definite the type which the Dynamic Arrarys stores
-    std::vector<Vertex> vertices;
-    // It is hard to decide whether you should be using like vertex pointers
-    // or just vertex object in this case
-    // Which is object stored in line or fragmented in memory
-
-    // Add object to the end of Dynamic Array
-    vertices.push_back({ 1, 2, 3 }); // Note: Implicit conversion
-    vertices.push_back({ 4, 5, 6 });
-
-    // Using range based 'for loop' to iterate the object in Dynamic Array
-    for (const Vertex& v : vertices)
-        std::cout << v << sed::endl;
-
-    // We can remove object in dynamic array individually
-    // This remove the second object in dynamic array
-    vertices.erase(vertices.begin() + 1);
-
-    // Or we can clean the whole dynamic array
-    vertices.clear();
+int main() {
+  // float has 4 bytes, 32 bits, long in c++20 has 8 bytes, 64 bits
+  long offset_x{(long) &((Vector3*) 0)->x}; // Or &((Vector3*) nullptr)->x;
+  std::cout << offset_x << std::endl;
+  long offset_y{(long) &((Vector3*) 0)->y}; // Or &((Vector3*) nullptr)->x;
+  std::cout << offset_y << std::endl;
+  long offset_z{(long) &((Vector3*) 0)->z}; // Or &((Vector3*) nullptr)->x;
+  std::cout << offset_z << std::endl;
 }
 ```
 
-## Optimizing the usage of std::vector in C++
+## Dynamic Arrays (std::vector)
+
+Vector in C++ is not mathematical vector, it's kind of dynamic arrays like.
+
+```c++
+#include <iostream>
+#include <ostream>
+#include <vector>
+struct Vertex {
+  float x, y, z;
+};
+std::ostream& operator<<(std::ostream& stream, Vertex const& vertex) {
+  stream << vertex.x << ", " << vertex.y << ", " << vertex.z;
+  return stream;
+}
+int main() {
+  std::vector<Vertex> vertices;
+  vertices.push_back({1, 2, 3});
+  vertices.push_back({4, 5, 6});
+  // Using range based 'for loop' to iterate the object in dynamic array
+  for (const Vertex& v : vertices) std::cout << v << '\n';
+  vertices.erase(vertices.begin() + 1); // Remove the second object by using an iterator
+  vertices.clear();                     // Or we can clean the whole dynamic array
+}
+```
+
+### Optimizing the usage of std::vector
 
 Two ways to reduce memory copy
 
-```C++
-struct Vertex
-{
-    float x, y, z;
-
-    Vertex(float x, float y, float z)
-        : x(x), y(y), z(z)
-    {
-    }
-
-    // Copy Constructor, used to capture copied times
-    Vertex(const Vertex& v)
-        : x(v.x), y(v.y), z(v.z)
-    {
-        // Output to console to see how many times copied
-        std::cout << "Copied!" << std::endl;
-    }
+```c++
+#include <iostream>
+#include <vector>
+struct Vertex {
+  float x, y, z;
+  static int copy_count;
+  Vertex(float x, float y, float z) : x(x), y(y), z(z) {}
+  // Copy Constructor, used to capture copied times
+  Vertex(Vertex const& v) : x(v.x), y(v.y), z(v.z) { std::cout << "Copied " << ++copy_count << " times" << '\n'; }
 };
+int Vertex::copy_count{};
+int main() {
+  std::vector<Vertex> vertices_bad;
+  vertices_bad.push_back({1, 2, 3}); // 1 copy to store
+  // Trigger rearrange, new size is current_elements x 2, which is 2 x Vertex
+  vertices_bad.push_back({4, 5, 6}); // 1 copies to rearrange + 1 copy to store
+  // Trigger rearrange, now reserved 4 x Vertex
+  vertices_bad.push_back({7, 8, 9});    // 2 copies to rearrange + 1 copy to store
+  vertices_bad.push_back({10, 11, 12}); // 1 copy to store
+  // Trigger rearrange, new reserved 8 x Vertex
+  vertices_bad.push_back({13, 14, 15}); // 4 copies to rearrange,  1 copy to store
+  vertices_bad.push_back({16, 17, 18}); // 1 copy to store
+  vertices_bad.push_back({19, 20, 21}); // 1 copy to store
+  vertices_bad.push_back({22, 23, 24}); // 1 copy to store
+  // Trigger rearrange, new reserved 16 x Vertex
+  vertices_bad.push_back({25, 26, 27}); // 8 copies to store, 1 copies to store, total 24
+  // Each time push_back() will do 1 copy operation to store the Vertex to vector,
+  // And each push back may let vector do memory rearrange if reserved memory is full, which copies
+  // previous objects in dynamic array into new memory area.
 
-int main()
-{
-    std::vector<Vertex> vertices_bad;
-    vertices_bad.push_back(Vertex(1, 2, 3)); // Make it easier to read than previous chapter
-    vertices_bad.push_back(Vertex(4, 5, 6));
-    vertices_bad.push_back(Vertex(7, 8, 9));
-    vertices_bad.push_back(Vertex(10, 11, 12));
-    // Each pass parameter operation in push_back() will cause 1 copy operation
-    // And **each push_back() called will cause memory rearrange**,
-    // which are copy previous objects in dynamic array into new memory area.
-    // So total copied times: 1 + (1 + 1) + (1 + 2) + (1 + 3) = 10
-
-    std::cout << "vertices good" << std::endl;
-    std::vector<Vertex> vertices_good;
-
-    // Below is the optimized implementation
-    // 1. Use reserver() to prevent memory rearrange.
-    vertices_good.reserve(4);
-    // 2. Replace push_back() with emplace_back() to prevent parameter copy
-    // it acts as a proxy to process you provided parameter into Constructor.
-    vertices_good.emplace_back(1, 2, 3);
-    vertices_good.emplace_back(4, 5, 6);
-    vertices_good.emplace_back(7, 8, 9);
-    vertices_good.emplace_back(10, 11, 12);
+  std::cout << "vertices good" << '\n';
+  std::vector<Vertex> vertices_good;
+  // 1. Use reserver() to prevent memory rearrange.
+  vertices_good.reserve(4);
+  // 2. Replace push_back() with emplace_back() to prevent parameter copy
+  // it acts as a proxy to process you provided parameter into Constructor.
+  vertices_good.emplace_back(1, 2, 3);
+  vertices_good.emplace_back(4, 5, 6);
+  vertices_good.emplace_back(7, 8, 9);
+  vertices_good.emplace_back(10, 11, 12);
 }
 ```
 
 ## Using Libraries in C++
 
-Preposition work:
- Visual Studio Setup
-   Using GLFW as example:
-   1. Create a folder called "Dependencies" under your project directory
-      and then put your libraries into it.
-      ```txt C:\Users\USERNAME\source\repos\Your_Project_Directory\
-      Dependencies\
-      -> GLFW\
-         -> include\
-            -> GLFW\
-               glfw3.h
-               ...
-         -> lib-vc2015\
-            glfw3.dll
-            glfw3.lib
-            glfw3.dll.lib
+Using GLFW as example.
+- Visual Studio
+  1. Create a folder called "Dependencies" under your project directory and then put the library into it.
+     ```plaintext
+     C:\Users\USERNAME\source\repos\Your_Project_Directory\Dependencies\
+     -> GLFW\
+       -> include\GLFW\
+         glfw3.h
+         ...
+       -> lib-vc2015\
+         glfw3.dll
+         glfw3.lib
+         glfw3.dll.lib
       ```
-   2. Open your project settings:
+   2. Open project settings:
       -> Configuration: All Configuration
       -> C/C++ -> Additional Include Directories: `$(SolutionDir)\Dependencies\GLFW\include`
       -> Linker -> General -> Additional Library Directories: `$(SolutionDir)\Dependencies\GLFW\lib-vc2015`
@@ -1018,18 +956,18 @@ Preposition work:
 
 Static linking happens at compile time, the lib intergrate into executable or a dynamic library
 
-1. Open your project setting
+Visual Studio
+1. Open project setting
    -> Linker -> Input -> Additional Dependencies: `glfw3.lib;xxxxxx;balabala;...`
 2. Static Link
-   ```C++ Main.cpp
+   ```c++ Main.cpp
    // quote for header in this project, regular bracket for external library
    #include <GLFW/glfw3.h>
-   \\ Or `extern "C" int glfwInit();`
-   \\ Because GLFW is actually a C library so we need `extern "C"`
-   int main()
-   {
-       int result = glfwInit();
-       std::cout << result << std::endl;
+   // Or `extern "C" int glfwInit();`
+   // Since GLFW is actually a C library so we need `extern "C"`
+   int main() {
+     int result = glfwInit();
+     std::cout << result << '\n';
    }
    ```
 
@@ -1037,16 +975,17 @@ Static linking happens at compile time, the lib intergrate into executable or a 
 
 Dynamic linking happens at runtime
 
-* Some librarys like GLFW  supports both static and dynamic linking in a single header file
-* `glfw3.dll.lib` is basically a series of pointers into `glwfw3.dll`
+- Some librarys like GLFW supports both static and dynamic linking in a single header file.
+- `glfw3.dll.lib` is basically a series of pointers into `glwfw3.dll`
+- Code is basically as same as static linking.
 
-0. Code is basically as same as the Static linking above
-1. Open your project settings:
+Visual Studio
+1. Open project settings:
    -> Linker -> Input -> Additional Dependencies: `glfw3.dll.lib;xxxxxx;balabala;...`
-2. put your dll file(`glfw3.dll`) to the same folder as your executable file(i.e: `$(SolutionDir)\Debug`)
+2. Put `glfw3.dll` to the same folder as your executable file (i.e: `$(SolutionDir)\Debug`)
 3. In fact, to call a function in dynamic library, it needs a prefix called `__declspec(dllimport)`
-   If you explore `glfw3.h` you will see there is a `GLFWAPI` prefix in every function definition,
-   ```C++
+   If you explore `glfw3.h` you will see there is a prefix `GLFWAPI` in every function's definition,
+   ```c++
    #elif defined(_WIN32) && defined(GLFW_DLL)
    /* We are calling GLFW as a Win32 DLL */
     #define GLFWAPI __declspec(dllimport)
@@ -1248,6 +1187,10 @@ int main() {
   std::cout << arr.get_size() << '\n';
 }
 ```
+
+## TODO SFINAE
+
+*"Substitution Failure Is Not An Error"*
 
 ## Stack vs Heap Memory in C++
 

@@ -4,15 +4,14 @@ date: 2020-12-23 10:10:27
 toc: true
 ---
 
-Proteusの友達
-There are more interesting blogs below.
+Here are bunch of interesting blogs:
 
-* [本地磁盘小日记ヾ(≧▽≦*)ゝ](http://ohayou.aimo.moe/)
-* [clansty(凌莞)](https://c5y.moe/) `凌莞大可爱!`
-* [Makito(朵朵)](https://keep.moe/) `Full-Stack`
-* [MinatoAster](http://minatoaster.github.io)
-* [霜晨月](https://datasickle.gitee.io/)
-* [xtlsoft(徐天乐)](https://www.xtlsoft.top)
+- [本地磁盘小日记ヾ(≧▽≦*)ゝ](http://ohayou.aimo.moe/)
+- [clansty(凌莞)](https://nyac.at/) `凌莞大可爱!`
+- [Makito(朵朵)](https://keep.moe/) `Full-Stack`
+- [MinatoAster](http://minatoaster.github.io)
+- [霜晨月](https://datasickle.gitee.io/)
+- [xtlsoft(徐天乐)](https://www.xtlsoft.top)
 
 ## Computer
 
