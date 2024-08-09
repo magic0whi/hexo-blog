@@ -440,6 +440,41 @@ int main() {
 > }
 > ```
 
+A sample implementation of `std::string_view`:
+```c++
+// An implementation of std::string_view
+class StaticString {
+  using const_iterator = char const*;
+private:
+  char const* const m_str;
+  std::size_t const m_size;
+public:
+  template <std::size_t N>
+  constexpr StaticString(char const (&str)[N]) noexcept : m_str{str}, m_size{N - 1} {}
+  constexpr StaticString(char const* str, std::size_t N) noexcept : m_str{str}, m_size{N} {}
+  constexpr const char* data() const noexcept { return m_str; }
+  constexpr std::size_t size() const noexcept { return m_size; }
+  constexpr const_iterator begin() const noexcept { return m_str; }
+  constexpr const_iterator end() const noexcept { return m_str + m_size; }
+  constexpr operator char const* const() const { return m_str; }
+  constexpr char operator[](std::size_t n) const {
+    // clang-format off
+    return n == std::numeric_limits<size_t>::max()
+      ? m_str[m_size - 1]
+      : n < m_size ? m_str[n] : throw std::out_of_range(std::format("static_string: out of range, index at {}", n));
+    // clang-format on
+  }
+};
+inline std::ostream& operator<<(std::ostream& os, StaticString const& str) { return os.write(str.data(), str.size()); }
+int main() {
+  StaticString str{"homo114514"};
+  try {
+    str[-1];
+    str[-2];
+  } catch (std::out_of_range e) { std::cout << e.what() << '\n'; }
+}
+```
+
 ### std::string
 
 It's a char array indeed.
@@ -984,11 +1019,10 @@ Visual Studio
    -> Linker -> Input -> Additional Dependencies: `glfw3.dll.lib;xxxxxx;balabala;...`
 2. Put `glfw3.dll` to the same folder as your executable file (i.e: `$(SolutionDir)\Debug`)
 3. In fact, to call a function in dynamic library, it needs a prefix called `__declspec(dllimport)`
-   If you explore `glfw3.h` you will see there is a prefix `GLFWAPI` in every function's definition,
+   If you explore `glfw3.h` you will see there is a prefix `GLFWAPI` in every function's definition:
    ```c++
-   #elif defined(_WIN32) && defined(GLFW_DLL)
    /* We are calling GLFW as a Win32 DLL */
-    #define GLFWAPI __declspec(dllimport)
+   #define GLFWAPI __declspec(dllimport)
    ```
    So **you need to define a Macro** in VS:
    Open your project setting:
@@ -1000,197 +1034,217 @@ Visual Studio
 ## Making and Working with Libraries in C++ (Multiple Projects in Visual Studio)
 
 1. Visual Studio Setup:
-   1. Create one solution with 2 projects "Game" and "Engine",
+   1. Create one solution with 2 projects: "Game" and "Engine",
    2. Project "Game":
-   -> Ceneral->Project Defaults->Configuration Type: Application (.exe)
-   -> C/C++ -> General -> Additional include Directories: `$(SolutionDir)\Engine\src;`
-
+      Ceneral->Project Defaults->Configuration Type: Application (.exe)
+      -> C/C++ -> General -> Additional include Directories: `$(SolutionDir)\Engine\src;`
    3. Project "Engine":
-   Ceneral->Project Defaults->Configuration Type: Static library (.lib)
-
-   4. Right click on projects "Game" -> Add -> Reference -> Select project "Enginx"
+      Ceneral->Project Defaults->Configuration Type: Static library (.lib)
+   4. Right click on projects "Game" -> Add -> Reference -> Select project "Engine"
 2. Code for project "Engine":
-   ```C++ Your_Project_Directory\src\Engine.h
+   ```c++ Your_Project_Directory\src\Engine.h
    #pragma once
-
    namespace engine {
-       void PrintMessage();
+     void print_message();
    }
    ```
-   ```C++ Your_Project_Directory\src\Engine.cpp
+   ```c++ Your_Project_Directory\src\Engine.cpp
    #include "Engine.h"
-
    #include <iostream>
-
    namespace engine {
-       void PrintMessage()
-       {
-           std::cout << "Hello World!" << std::endl;
-       }
+     void print_message() { std::cout << "Hello Game!" << '\n'; }
    }
    ```
 3. Code for project "Game":
-   ```C++ Your_Project_Directory\src\Application.cpp
+   ```c++ Your_Project_Directory\src\Application.cpp
    #include "Engine.h"
-
-   int main()
-   {
-       engine::PrintMessage();
-   }
+   int main() { engine::print_message(); }
    ```
 
 ## How to Deal with Multiple Return Values in C++
 
-Example scenario: we have a function called `ParseShader()` , it needs to return two strings
+Example scenario: We have a function called `parse_shader()`, it needs to return two strings.
 
-1. Return a struct cotains two strings (Cherno's choose):
-   ```C++
-   struct ShaderProgramSource
-   {
-       std::string VertexSource;
-       std::string FragmentSource;
+- Return a struct cotains two strings (Cherno's choose):
+  ```c++
+  #include <string>
+  struct ShaderProgramSource {
+    std::string vertex_source;
+    std::string fragment_source;
+  };
+  ShaderProgramSource parse_shader() {
+    // ... (Some statements that process result 'vs' and 'fs')
+    std::string vs, fs;
+    return {vs, fs};
+  }
+  ```
+- Use reference paremeter (Probably one of the most optimal way)
+   ```c++
+   #include <string>
+   void parse_shader(std::string& out_vertex_source, std::string& out_fragment_source) {
+     // ... (Some statements that process result 'vs' and 'fs')
+     std::string vs, fs;
+     std::tie(out_vertex_source, out_fragment_source) = std::tuple{vs, fs};
    }
-
-   ShaderProgramSource ParseShader()
-   {
-       // Some statements that process result 'vs' and 'fs'
-       // ...
-       return { vs, fs };
+   // Or use pointer parameter if you want to pass nullptr (ignore the output):
+   void parse_shader2(std::string* outVertexSource, std::string* outFragmentSource) {
+     std::string vs, fs;
+     if (outVertexSource) *outVertexSource = vs;
+     if (outFragmentSource) *outFragmentSource = fs;
    }
-   ```
-2. Using reference paremeter (Probably one of the most optimal way)
-   ```C++
-   void ParseShader(std::string& outVertexSource, std::string& outFragmentSource)
-   {
-       // Some statements that process result 'vs' and 'fs'
-       // ...
-       outVertexSource = vs;
-       outFragmentSource = fs;
-   }
-
-   main()
-   {
-       std::string vertexSource, fragmentSource;
-       ParseShader(vertexSource, fragmentSource)
-   }
-
-   // Or using Pointer parameter if you want to pass nullptr(ignore the output):
-   // void ParseShader(std::string* outVertexSource, std::string* outFragmentSource)
-   // {
-   //     if (outVertexSource)
-   //         *outVertexSource = vs;
-   //     if (outFragmentSource)
-   //         *outFragmentSource = fs;
-   // }
-   // main()
-   // {
-   //     ParseShader(nullptr, &fragmentSource)
-   // }
-   ```
-3. Return a `std::array` or `std::vector`(ignored, too simple)
-   The different is primarly the arrays can be create on the stack where as
-   vectors gonna store its underlying storage on the heap.
-   So technically returning a standard array would be faster.
-   ```C++
-   #include <array>
-
-   std::array<std::string, 2> ParseShader()
-   {
-       // Some statements that process result 'vs' and 'fs'
-       // ...
-       std::array<std::string, 2> result;
-       result[0] = vs;
-       result[1] = fs;
-       return result;
+   int main() {
+     std::string vertex_source, fragment_source;
+     parse_shader(vertex_source, fragment_source);
+     parse_shader2(nullptr, &fragment_source);
    }
    ```
-4. Using `std::tuple` and `std::pair`
-   1. `std:tuple` (Can return more than two elements)
-      ```C++
-      #include <tuple>
+- Return a `std::array` or `std::vector`
+  The different is primarly the arrays can be create on the stack whereas vectors gonna store its underlying storage on the heap.
+  So technically returning a standard array would be faster.
+  ```c++
+  #include <array>
+  #include <string>
+  std::array<std::string, 2> parse_shader() {
+    std::string vs, fs;
+    // ... (Some statements that process result 'vs' and 'fs')
+    return {vs, fs};
+  }
+  ```
+- Using `std::tuple` and `std::pair`
+  ```c++
+  #include <string>
+  #include <tuple>
+  std::tuple<std::string, int> create_person() { return {"Cherno", 24}; }
+  std::pair<std::string, int> create_person2() { return {"Cherno", 24}; }
+  int main() {
+    // std::tuple can return more than two elements
+    auto person{create_person()};    // Automatically deduce the return type
+    auto& name{std::get<0>(person)}; // Get values in std::tuple
+    int age{std::get<1>(person)};
+    // std::pair is a little bit faster than tuple
+    auto [name2, age2]{create_person2()}; // c++17 structure binding
+  }
+  ```
 
-      std::tuple<std::string, int> CreatePerson()
-      {
-          return { "Cherno", 24 }; // Implicit conversation
-          // Or use "std::make_pair()":
-          // return std::make_pair("Cherno", 24);
-      }
+## Templates
 
-      int main()
-      {
-          // 'auto' means automatically check the return type
-          auto person = CreatePerson();
-          // Get values in std::tuple
-          std::string& name = std::get<0>(person);
-          int age = std::get<1>(person);
-      
-          // Or using std::tie()
-          std::string name2;
-          int age2;
-          std::tie(name2, age2) = person;
-      }
-      ```
-   2. `std::pair` (A little bit faster than tuple)
-      ```C++
-      // Show the only difference with 'std::tuple'
-      std::pair<std::string, std::string> ParseShader()
-      {
-          // ...
-      }
-
-      int main()
-      {
-          // ...
-          vertexSource = sources.first;
-          vertexSource = sources.second;
-      }
-      ```
-
-## Templates in C++
-
-Template can improve code reuse rate and reduce duplicate code (for example function overload)
-The essence of template is similar to macros
+Template can improve code reuse rate and reduce duplicate code (e.g. function overload), the essence of template is similar to macros
 
 1. template type
   ```c++
-  // In this case, template specifying how to create methods based on your usage of them. (Automatically generate corresponding overloaded function)
-  // So if nobody call this function, it's code will not exist in compiled file,
-  // Even if there is a grammatical error in function code, it will still compile successfully.
-  template<class T> // exactly same with 'template<typename T>'
-  void print(T value) {
-    std::cout << value << std::endl;
-  }
+  // In this case, template specifying how to create methods based on usage of them.
+  // So if nobody call this function, it's code will not exist in compiled file,  and
+  // even if there is a grammatical error in templated function code, it will still
+  // compile successfully.
+  #include <iostream>
+  template <class T> // exactly same with 'template<typename T>'
+  void print(T value) { std::cout << value << '\n'; }
   int main() {
-      print(5);
-      print<int>(5); // It's a good manner specifying the type explicitly
-      print<const char*>("Hello");
-      print<float>(5.5f);
+    print(5);      // Auto deducing
+    print<int>(5); // It's a good manner specifying the type explicitly
+    print<char const*>("Hello");
+    print<float>(5.5f);
   }
   ```
 2. template argument
- ```c++
-template<class T, int N> // Multiple template targets can be in one template definition
-class Array {
-private:
-  T m_arr[N];
-public:
-  int get_size() const { return N; }
+   ```c++
+   template<class T, int N> // Multiple template targets can be in one template definition
+   class Array {
+   private:
+     T m_arr[N];
+   public:
+     int get_size() const { return N; }
+   };
+   int main() {
+     Array<int, 5> arr; // It will generate the following code:
+     // class Array {
+     // private:
+     //   int m_arry[5];
+     // public:
+     //   int get_size() const { return 5; }
+     // };
+     std::cout << arr.get_size() << '\n';
+   }
+   ```
+
+### SFINAE
+
+*"Substitution Failure Is Not An Error"*, compiler will continue to find suitable template.
+
+```c++
+// Template if statement using SFINAE
+template <bool Cond, typename IfTrue, typename IfFalse>
+struct conditional {
+  using type = IfTrue;
 };
-int main() {
-  Array<int, 5> arr; // It will generate the following code:
-  // class Array {
-  // private:
-  //   int m_arry[5];
-  // public:
-  //   int get_size() const { return 5; }
-  // };
-  std::cout << arr.get_size() << '\n';
-}
+template <typename IfTrue, typename IfFalse>
+struct conditional<false, IfTrue, IfFalse> { // This will has higher priority
+  using type = IfFalse;
+};
+
+// Narrowing conversion check using SFINAE
+template <typename From, typename To, typename = void>
+struct is_narrowing_conversion : std::true_type {};
+template <typename From, typename To>
+// To{std::declval<From>()} is ill-formed in case of narrowing cast, so will prevents match this template
+struct is_narrowing_conversion<From, To, std::void_t<decltype(To{std::declval<From>()})>> : std::false_type {};
+static_assert(!is_narrowing_conversion<std::int8_t, std::int16_t>::value);
+static_assert(!is_narrowing_conversion<std::uint8_t, std::int16_t>::value);
+static_assert(!is_narrowing_conversion<float, double>::value);
+static_assert( is_narrowing_conversion<double, float>::value);
+static_assert( is_narrowing_conversion<int, uint32_t>::value);
 ```
 
-## TODO SFINAE
+### Ways to Print Type Name
 
-*"Substitution Failure Is Not An Error"*
+```c++
+#include <cxxabi.h>
+#include <iostream>
+#include <memory>
+#include <source_location>
+#include <string_view>
+template <typename T>
+// One way
+std::string type_name() {
+  using TRR = std::remove_reference<T>::type;
+  std::unique_ptr<char, void (*)(void*)> p_demangled_name{abi::__cxa_demangle(typeid(TRR).name(), nullptr, nullptr, nullptr),
+                                                          std::free};
+  std::string ret{p_demangled_name != nullptr ? p_demangled_name.get() : typeid(TRR).name()};
+  if (std::is_const<TRR>::value) ret += " const";
+  if (std::is_volatile<TRR>::value) ret += " volatile";
+  if (std::is_lvalue_reference<T>::value) ret += "&";
+  else if (std::is_rvalue_reference<T>::value) ret += "&&";
+  return ret;
+}
+// Another way using function name with signature
+template <typename T>
+constexpr std::string_view type_name2() {
+  char const* p = std::source_location::current().function_name(); // Or "__PRETTY_FUNCTION__" for < c++20
+  // e.g. "static_string type_name2() [T = const int &]"
+  while (*p++ != '=');    // " const int &]"
+  for (; *p == ' '; p++); // "const int &"
+  char const* p2{p};
+  while (*++p2 != ']');
+  return {p, std::size_t(p2 - p)};
+}
+int& foo_lref();
+int&& foo_rref();
+int foo_value();
+int main() {
+  int i = 0;
+  int const ci = 0;
+  std::cout << "decltype(i) is " << type_name<decltype(i)>() << '\n';
+  std::cout << "decltype((i)) is " << type_name<decltype((i))>() << '\n';
+  std::cout << "decltype(ci) is " << type_name<decltype(ci)>() << '\n';
+  std::cout << "decltype((ci)) is " << type_name<decltype((ci))>() << '\n';
+  std::cout << "decltype(static_cast<int&>(i)) is " << type_name<decltype(static_cast<int&>(i))>() << '\n';
+  std::cout << "decltype(static_cast<int&&>(i)) is " << type_name<decltype(static_cast<int&&>(i))>() << '\n';
+  std::cout << "decltype(static_cast<int>(i)) is " << type_name<decltype(static_cast<int>(i))>() << '\n';
+  std::cout << "decltype(foo_lref()) is " << type_name<decltype(foo_lref())>() << '\n';
+  std::cout << "decltype(foo_rref()) is " << type_name<decltype(foo_rref())>() << '\n';
+  std::cout << "decltype(foo_value()) is " << type_name<decltype(foo_value())>() << '\n';
+}
+```
 
 ## Stack vs Heap Memory in C++
 
@@ -1198,75 +1252,66 @@ Ignore...
 
 ## Macros in C++
 
-1. Macros do text replace when preprocessor
-   ```C++
-   #define WAIT std::cin.get()
+Macros do text replace at preprocessor stage
+ ```c++
+ #include <iostream>
+ #define WAIT std::cin.get()
+ int main() {
+   WAIT;
+ }
+ ```
 
-   int main()
-   {
-       WAIT;
-   }
-   ```
-2. Macros function and combine with the environment
-   Environment variables can be defined at:
-   Open your project settings:
-   C/C++ -> Preprocessor -> Preprocessor Definitions
-   ```C++
-   #ifdef PR_DEBUG
-   #define LOG(x) std::cout << x << std::endl
-   #elif defined(PR_RELEASE)
-   #define LOG(x) // Do nothing
-   #endif
-   
-   int main()
-   {
-       LOG("Hello");
-   }
-   ```
+Macros function and combine with the environment, environment variables can be defined at: Project settings -> C/C++ -> Preprocessor -> Preprocessor Definitions
+ ```c++
+ #ifdef PR_DEBUG
+ #define LOG(x) std::cout << x << '\n'
+ #elif defined(PR_RELEASE)
+ #define LOG(x) // Do nothing
+ #endif
+   int main() {
+   LOG("Hello");
+ }
+ ```
 
-## The "auto" keyword in C++
+## The "auto" Keyword
 
-1. be careful with `auto`
-```C++
-std::string GetName()
-{
-    return "Cherno";
-}
-
-int main()
-{
-    auto name = GetName();
-    // Call a type specific method
-    // if the return type of GetName() changed to "char*" , this will be broken
-    int a = name.size();
-    std::cout << a << std::endl;
+Be careful with `auto`:
+```c++
+#include <iostream>
+#include <string>
+std::string get_name() { return "Cherno"; }
+// char* get_name() { return "Cherno"; }
+int main() {
+  auto name{get_name()};
+  // Call a type specific method size(), if the return type of GetName() changed to "char*" , this will be broken
+  int a = name.size();
+  std::cout << a << '\n';
 }
 ```
-1. `auto`' to reduce type length
-   ```C++
-   class DeviceManager
-   {
-   private:
-       std::unordered_map<std::string, std::vector<Device*>> m_Devices;
-   public:
-       const std::unordered_map<std::string, std::vector<Device*>>& GetDevices() const
-       {
-           return m_Devices;
-       }
-   }
 
-   int main()
-   {
-       DeviceManager dm;
-       // The type is too mass
-       const std::unordered_map<std::string, std::vector<Device*>>& devices = dm.GetDevices();
-       // You can use keyword "using" or "typedef"
-       using DeviceMap = std::unordered_map<std::string, std::vector<Device*>>;
-       const DeviceMap& devices2 = dm.GetDevices();
-       // Or auto
-       const auto& devices3 = dm.GetDevices();
-   }
-   ```
+`auto`' can reduce type length
+```c++
+#include <string>
+#include <unordered_map>
+#include <vector>
+class Device {};
+class DeviceManager {
+  using Device_t = std::unordered_map<std::string, std::vector<Device*>>;
+private:
+  Device_t m_devices;
+public:
+  const Device_t& GetDevices() const { return m_devices; }
+};
+int main() {
+  DeviceManager dm;
+  // The type is too mass
+  const std::unordered_map<std::string, std::vector<Device*>>& devices{dm.GetDevices()};
+  // You can use keyword "using" or "typedef" to make alias
+  using DeviceMap = std::unordered_map<std::string, std::vector<Device*>>;
+  const DeviceMap& devices2{dm.GetDevices()};
+  const auto& devices3{dm.GetDevices()}; // Or auto
+}
+```
 
 ## Static Arrays in C++ (std::array)
 
@@ -1852,7 +1897,7 @@ int main()
 Only in C++17 and newer
 a better way compare to How to Deal with Multiple Return Values in C++
 
-```C++
+```c++
 std::tuple<std::string, int> CreatePerson()
 {
     return { "Cherno", 24 };
@@ -1863,6 +1908,11 @@ int main()
     // Structured binding
     auto[name, age] = CreatePerson();
     std::cout << name;
+
+// Or std::tie for already defined variables
+  std::string name2;
+  int age2;
+  std::tie(name2, age2) = std::tuple("", 14);
 }
 ```
 
