@@ -1304,7 +1304,7 @@ public:
 };
 int main() {
   DeviceManager dm;
-  // The type is too mass
+  // The type is too messy
   const std::unordered_map<std::string, std::vector<Device*>>& devices{dm.GetDevices()};
   // You can use keyword "using" or "typedef" to make alias
   using DeviceMap = std::unordered_map<std::string, std::vector<Device*>>;
