@@ -31,9 +31,8 @@ article.article .content code, article.article .content pre {
 ## Notice
 
 1. If an object have pointer variable inside, write a copy constructor and use it.
-2. Reduce memory usage by using bit-fields that make 1 byte stores 8 bools.
-3. Default float type is `double`, use `float a = 5.5f`.
-4. Header or inline?  (the later copys whole function body into the area where the function is called).
+2. Default float type is `double`, use `float a = 5.5f`.
+3. Header or inline?  (the later copys whole function body into the area where the function is called).
 
 ## Assembly
 
@@ -1212,11 +1211,41 @@ Template can improve code reuse rate and reduce duplicate code (e.g. function ov
    // considered a static member
    template <class T>
    struct S {
-     T::U r;                        // member type
-     T::P f(T::P p) {               // But Ok in class scope, argument type of a methods
+     T::U r; // member type
+     T::P f(T::P p) { // But Ok in class scope, argument type of a methods
        return static_cast<T::R>(p); // Type in casts
      }
    };
+   ```
+4. Non-type template parameter (C++20)
+   ```c++
+   template<class T> struct X { constexpr X(T) {} };
+   template <X x> struct Y {}; // Non-type template parameter
+   Y<0> y; // OK, Y<X<int>(0)>
+  
+   template <typename T, std::size_t N>
+   struct S2 { T data[N]; /* Array of dependent bound */ };
+   S2 s{{1, 2, 3, 4, 5}};
+   ```
+5. User-defined deduction guides
+   ```c++
+   template <class T>
+   struct Container {
+     Container(T t) {}
+     template <class Iter> Container(Iter begin, Iter end) {}
+   };
+   template <class Iter> // Guides compiler how to deducing elements type
+   Container(Iter b, Iter e) -> Container<typename std::iterator_traits<Iter>::value_type>;
+   
+   std::vector<double> v{1, 2};
+   Container d{v.begin(), v.end()}; // Deduces Container<double>
+   ```
+6. Abbreviated function template (C++20)
+   ```c++
+   void f1(auto); // same as template<class T> void f1(T)
+   void f2(Concept1 auto);
+   template<>
+   f1(int); // Can be specialized like normal
    ```
 
 ### How to Make Base Class Access Derived Class's Methods (CRTP)
@@ -1235,8 +1264,8 @@ private:
   friend Templ_Derived<T>;
 public:
   void print_derived_add(T a, T b) {
-    auto& derived{static_cast<Templ_Derived<T>&>(*this)};
-    std::cout << derived.add(a, b) << '\n';
+    auto& d{static_cast<Templ_Derived<T>&>(*this)};
+    std::cout << d.add(a, b) << '\n';
   }
 };
 template <Addable T>
@@ -1283,27 +1312,28 @@ static_assert( is_narrowing<int, uint32_t>::value);
 A skillfully implementation of custom `std::formatter`. The `parse()` method is a template, since it's `constexpr` specified, any possible cases that result a `throw` will be filtered in a SFINAE way.
 ```c++
 struct QuotableString : std::string_view {};
-template <>
-struct std::formatter<QuotableString, char> {
+template <typename CharT>
+struct std::formatter<QuotableString, CharT> {
   bool quoted{false};
   template <class ParseContext>
   constexpr ParseContext::iterator parse(ParseContext& ctx) {
     auto it{ctx.begin()};
     if (it == ctx.end()) return it;
-    if (*it == '#') {
-      quoted = true;
-      ++it;
-    }
+    if (*it == '#') (quoted = true), ++it;
     if (it != ctx.end() && *it != '}') // How could this pass the compile?
       throw std::format_error("Invalid format args for QuotableString.");
     return it;
   }
+  // template <class FmtContext>
+  // FmtContext::iterator format(QuotableString s, FmtContext& ctx) const {
+  //   std::ostringstream out;
+  //   if (quoted) out << std::quoted(s);
+  //   else out << s;
+  //   return std::ranges::copy(std::move(out).str(), ctx.out()).out; // std::move is not necessary in C++20 since it do type deducing
+  // }
   template <class FmtContext>
-  FmtContext::iterator format(QuotableString s, FmtContext& ctx) const {
-    std::ostringstream out;
-    if (quoted) out << std::quoted(s);
-    else out << s;
-    return std::ranges::copy(std::move(out).str(), ctx.out()).out;
+  constexpr FmtContext::iterator format(QuotableString s, FmtContext& ctx) const noexcept { // constexpr version
+    return quoted ? std::format_to(ctx.out(), "{:?}", static_cast<std::string_view>(s)) : std::ranges::copy(s, ctx.out()).out;
   }
 };
 int main() {
@@ -1312,14 +1342,6 @@ int main() {
   std::cout << std::format("To {0} or not to {0}, that is {1}.\n", a, b);
   std::cout << std::format("To {0:} or not to {0:}, that is {1:}.\n", a, b);
   std::cout << std::format("To {0:#} or not to {0:#}, that is {1:#}.\n", a2, b);
-  std::string str{"To {0:#} or not to {0:#}, that is {1:#}.\n"};
-  auto it = str.begin();
-  if (it == str.end()) std::println("return it");
-  if (*it == '#') {
-    std::println("quoted = true");
-    ++it;
-  }
-  if (it != str.end() && *it != '}') std::println("err {}", *it);
 }
 ```
 
@@ -1331,12 +1353,11 @@ int main() {
 #include <memory>
 #include <source_location>
 #include <string_view>
-template <typename T>
-// One way
-std::string type_name() {
+template <typename T> // One way
+std::string type_name() noexcept {
   using TRR = std::remove_reference<T>::type;
-  std::unique_ptr<char, void (*)(void*)> p_demangled_name{abi::__cxa_demangle(typeid(TRR).name(), nullptr, nullptr, nullptr),
-                                                          std::free};
+  std::unique_ptr<char, std::function<void(void*)>> p_demangled_name{abi::__cxa_demangle(typeid(TRR).name(), nullptr, nullptr, nullptr),
+                                                                     std::free};
   std::string ret{p_demangled_name != nullptr ? p_demangled_name.get() : typeid(TRR).name()};
   if (std::is_const<TRR>::value) ret += " const";
   if (std::is_volatile<TRR>::value) ret += " volatile";
@@ -1344,12 +1365,11 @@ std::string type_name() {
   else if (std::is_rvalue_reference<T>::value) ret += "&&";
   return ret;
 }
-// Another way using function name with signature
-template <typename T>
-std::string_view type_name2() {
-  char const* p{std::source_location::current().function_name()}; // Or "__PRETTY_FUNCTION__" for < c++20
+template <typename T> // Another way using function name with signature
+constexpr std::string_view type_name2() noexcept {
+  std::string_view capt{std::source_location::current().function_name()}; // Or "__PRETTY_FUNCTION__" for < c++20
   // e.g. "static_string type_name2() [T = const int &]"
-  return {capt.cbegin() + capt.find('=') + 1, capt.cend() - 1};
+  return {capt.cbegin() + capt.find('=') + 2, capt.cend() - 1};
 }
 int& foo_lref();
 int&& foo_rref();
@@ -1882,39 +1902,34 @@ Defined member in `union` means they all in same memory location, `union` is a c
 ```c++
 struct Vector2 {
   float x, y;
+  constexpr Vector2(float const x, float const y) noexcept : x{x}, y{y} {}
+  // overload the function "operator+()" equals redefine the behavior of '+' in this Object
+  constexpr Vector2 operator+(Vector2 const& other) const noexcept { return Vector2(x + other.x, y + other.y); }
+  constexpr Vector2 operator*(Vector2 const& other) const noexcept { return Vector2(x * other.x, y * other.y); }
+  constexpr bool operator==(Vector2 const& other) const noexcept { return x == other.x && y == other.y; }
+  constexpr bool operator!=(Vector2 const& other) const noexcept { return !operator==(other); /*Or return !(*this == other);*/ }
 };
-union Point {
-  struct Vector4 { float x, y, z, w; };
-  struct Vector2x2 { Vector2 xy, zw; };
-  Vector4 vec4;
-  Vector2x2 vec2x2;
-};
-template <>
-struct std::formatter<Point, char> {
-  template <class ParseContext>
-  constexpr auto parse(ParseContext const& ctx) { return ctx.begin(); } // Do noting, this methods use SFINAE
-  template <class FmtContext>
-  auto format(Point p, FmtContext& ctx) const {
-    return std::format_to(ctx.out(), "[{}, {}, {}, {}]", p.vec4.x, p.vec4.y, p.vec4.z, p.vec4.w);
-  }
-};
+constexpr std::ostream& operator<<(std::ostream& stream, Vector2 const& other) noexcept { return stream << '[' << other.x << ", " << other.y << ']'; }
+
 template <>
 struct std::formatter<Vector2, char> {
-  template <class ParseContext>
-  constexpr auto parse(ParseContext const& ctx) { return ctx.begin(); } // Do noting, this methods use SFINAE
+  template <class ParseContext> constexpr ParseContext::iterator parse(ParseContext const& ctx) noexcept { return ctx.begin(); }
   template <class FmtContext>
-  auto format(Vector2 vec2, FmtContext& ctx) const {
+  FmtContext::iterator constexpr format(Vector2 vec2, FmtContext& ctx) const noexcept {
     return std::format_to(ctx.out(), "[{}, {}]", vec2.x, vec2.y);
   }
 };
 int main() {
-  Point pt{{1.0f, 2.0f, 3.0f, 4.0f}};
-  std::println("{}", pt);
-  std::print("{}", pt.vec2x2.xy), std::println("{}", pt.vec2x2.zw);
-  std::println("------------------");
-  pt.vec4.z = 500.0f;
-  std::println("{}", pt);
-  std::print("{}", pt.vec2x2.xy), std::println("{}", pt.vec2x2.zw);
+  Vector2 pos{4.0f, 4.0f}, spd{0.5f, 1.5f}, time{1.1f, 1.1f}, res{pos + spd * time};
+  // We cannot output the variables in vector directly, we need overload the function
+  // operator<<()
+  std::cout << res << '\n';
+  std::println("{}", res); // Or use a custom std::formatter for std::print
+
+  // In programs such as Java we have to use equals() to compare objects,
+  // but in C++ we can simply overload the operator==()
+  if (res == pos) std::println("foo");
+  else std::println("bar");
 }
 ```
 
