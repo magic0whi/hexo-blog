@@ -1228,6 +1228,7 @@ Template can improve code reuse rate and reduce duplicate code (e.g. function ov
    S2 s{{1, 2, 3, 4, 5}};
    ```
 5. User-defined deduction guides
+   Template parameters of a class template could not be deduced from a constructor call until the introduction of deduction guides in C++17
    ```c++
    template <class T>
    struct Container {
@@ -1255,7 +1256,7 @@ Curiously Recurring Template Pattern (CRTP): A derived class derives the base cl
 ```c++
 #include <iostream>
 // Template template parameter can be constrained (Though not necessary)
-template <template <Addable This_Arg_Is_Optional> typename Templ_Derived, typename T>
+template <template <Addable> typename Templ_Derived, typename T>
 // Requires clause also works
 // template <template <typename T> requires Addable<T> typename Templ_Derived, typename T>
 class Base {
@@ -1526,50 +1527,31 @@ int main() {
 
 ## Static Arrays in C++ (std::array)
 
-Ignore...
+TODO
 
 ## Function Pointers in C++
 
 1. 3 ways to definite a Function Pointers
-   ```C++
-   void HelloWorld(int a)
-   {
-       std::cout << "Hello World! Value: " << a << std::endl;
-   }
-   
-   int main()
-   {
-       auto function = HelloWorld();
-
-       // second way:
-       // void(*function)(int) = HelloWorld();
-
-       // third way:
-       // typedef void(*Balabala)(int);
-       // Balabala function = HelloWorld;
-   
-       function(233);
+   ```c++
+   void hello_world(int a) noexcept { std::println("Hello World! Value: {}", a); }
+   int main() {
+     auto const f1{hello_world};                // auto deducing
+     void (*const f2)(int){hello_world};        // C-style function pointer
+     using Balabala = std::function<void(int)>; // Using alias
+     // typedef void (*Balabala)(int);             // Or C-style typedef
+     Balabala const& f3{hello_world};
+     f1(1), f2(2), f3(3);
    }
    ```
 2. A simple usage - the ForEach function:
-   ```C++
-   void PrintValue(int value)
-   {
-       std::cout << "Value: " << value << std::endl;
-   }
-
-   void ForEach(const std::vector<int>& values, void(*func)(int))
-   {
-       for(int value : values)
-           func(value);
-   }
-
-   int main()
-   {
-       std::vector<int> values = { 1, 5, 4, 2, 3 };
-       ForEach(values, PrintValue);
-       // We can use lambda to simply the function PrintValue() (see more in next episode)
-       // ForEach(values, [](int value) { std::cout << "Value: " << value << std::endl; })
+   ```c++
+   template <typename E> void print_value(E value) { std::println("Value: {}", value); }
+   template <typename Cont, typename Func> requires requires(Func func) { static_cast<std::function<void(typename Cont::value_type)>>(func); }
+   void for_each(Cont const& cont, Func func) { for (typename Cont::value_type v : cont) func(v); }
+   int main() {
+     std::vector vec{1, 5, 4, 2, 3};
+     for_each(vec, print_value<int>);
+     for_each(vec, []<typename E>(E value) { std::println("Value: {}", value); }); // Or use a lambda (with template parameter)
    }
    ```
 
@@ -1585,53 +1567,49 @@ A lambda is basically a little throwaway function that you can write and assign 
 2. using `mutable` keyword to allow modify pass in variables
    ```c++
    int main() {
-     int a = 5;
-     auto f = [=]() mutable { a = 5; std::cout << "Value: " << a << std::endl; };
+     int a{8};
+     auto f{[=]() mutable { a = 5; std::println("Value: {}",a); }};
      f();
-     std::cout << "Value: " << a << '\n'; // x is still = 8, because [=] just copy value into this lambda.
+     std::println("Value: {}", a); // x is still 8, because [=] just copy value into this lambda.
    }
    ```
-3. We need to use `std::function` instand of raw function pointer if lambda has pass in variables (stateful).
+3. We need to use `std::function` instand of C-style raw function pointer if lambda has pass in variables (stateful).
    ```c++
-   #include<iostream>
-   #include<vector>
-   #include<functional>
-
-   void for_each(const std::vector<int>& values, const std::function<void(int)>& func) {
-     for (const int& i : values) func(i);
+   void for_each(std::vector<int> const& values, std::function<void(int)> const& func) noexcept {
+     for (int const i : values) func(i);
    }
    int main() {
-     std::vector<int> values = {1, 2, 3, 4, 5};
-     int state = 0;
-     // Cannot use C-style void(*callback)(int)
-     auto callback = [&](int value) { std::cout << "Current state: " << state << " Value: " << value << '\n'; };
-     steate = 1;
+     std::vector values{1, 2, 3, 4, 5};
+     int state{};
+     // Cannot cast to C-style void(*callback)(int)
+     auto callback{[&](int value) { std::println("Current state: {}, Value: {}", state, value); }};
+     state = 1;
      for_each(values, callback);
    }
    ```
-4. Usage of `std::find_if` (returns an iterator to the first element for which callback function returns true)
+4. Usage of `std::find_if` (returns an iterator to the first element when callback function returns true)
    ```c++
-   std::vector<int> values = {1, 5, 4, 2, 3};
-   auto iterator = std::find_if(values.begin(), values.end(), [](int value) { return value > 3; });
-   std::cout << *iterator << std::endl;
+   int main() {
+     std::vector values{1, 5, 4, 2, 3};
+     auto iterator{std::find_if(values.begin(), values.end(), [](int value) { return value > 3; })};
+     std::println("First element that > 3: {}", *iterator);
+   }
    ```
-
-### Capturing Parameter Packs in Lambda
-
-```c++
-// improved capturing parameter packs in lambda
-int add(int a, int b) { return a + b; }
-template <typename F, typename... Args>
-auto delay_call(F&& f, Args&&... args) {
-  return [f = std::forward<F>(f), ... f_args = std::forward<Args>(args)]() { return f(f_args...); };
-  // "..." is like says "take whatever on the life and unpack it accordingly"
-  // If the parms pack f_args is "<int, int>{1, 2}"
-  // Compiler will expand `f(args...)` to `f(1, 2)`, expand `f(args)...` to `f(arg1), f(arg2)`
-}
-int main() {
-  std::println("{}", delay_call(add, 1, 2)());
-}
-```
+5. Capturing Parameter Packs in Lambda
+   ```c++
+   constexpr int add(int a, int b) noexcept { return a + b; }
+   template <typename F, typename... Args>
+   constexpr auto delay_call(F&& f, Args&&... args) noexcept {
+     // C++20 improved capturing parameter packs in lambda
+     return [f = std::forward<F>(f), ... f_args = std::forward<Args>(args)]() constexpr noexcept { return f(f_args...); };
+     // "..." is like says "take whatever on the life and unpack it accordingly"
+     // If the parms pack f_args is "<int, int>{1, 2}"
+     // Compiler will expand `f(args...)` to `f(1, 2)`, expand `f(args)...` to `f(arg1), f(arg2)`
+   }
+   int main() {
+     std::println("{}", delay_call(add, 1, 2)());
+   }
+   ```
 
 ## Namespaces in C++
 
@@ -1641,26 +1619,27 @@ Use Namespace to
 
 We can set to use only specific symbol in a namespace
 ```c++
-namespcae apple {
-  void print(const char* text) {}
-  void print_again() {}
-}
+namespace apple {
+static char const* s_text;
+void print(char const* text) { s_text = text, std::println("{}", text); }
+void print_again() { std::println("{}", s_text); }
+}; // namespace apple
 int main() {
   using apple::print;
   print("Hello");
-  apple::print_again(); //We still need 'apple::' to call print_again()
+  apple::print_again(); // We still need 'apple::' to call print_again()
 }
 ```
 
 Nested namespaces can be shorten using alias:
 ```c++
 namespace apple::functions {
-  void print(const char* test) {}
-}
+void print(const char* text) { std::println("{}", text); }
+} // namespace apple::functions
 int main() {
-    namespace a = apple::functions;
-    a::print("Hello");
-} 
+  namespace a = apple::functions;
+  a::print("Hello");
+}
 ```
 
 ### Why don't "using namespace std"
@@ -1670,165 +1649,216 @@ If you must using `using namespace`, please use it in a small scope as possible.
 
 For example a serious issue of implicit conversion:
 ```c++
-#include <algorithm>
-#include <iostream>
-#include <string>
-
 namespace apple {
-  void print(const std::string& text) { std::cout << text << '\n'; }
-}
+void print(std::string const& text) { std::println("{}", text); }
+} // namespace apple
 namespace orange {
-  void print(const char* text) {
-    std::string tmp = text;
-    std::reverse(tmp.begin(), tmp.end());
-    std::cout << tmp << std::endl;
-  }
+void print(char const* text) {
+  std::string tmp{text};
+  std::reverse(tmp.begin(), tmp.end());
+  std::println("{}", tmp);
 }
+} // namespace orange
 using namespace apple;
 using namespace orange;
-
 int main() {
-    print("Hello"); // Which one will get called?
-    // Answer: the orange::print() will be called, because the type of "Hello" is 'char*'
+  print("Hello"); // Which one will get called?
+  // Answer: the orange::print() will be called, because the type of "Hello" is 'char*'
 }
 ```
 
-## Threads in C++
+## Threads
 
-If we want to do something else when we called functions that will block the current thread, we can use threads.
+If we want to do something else when we called functions that will block the current thread, we can use threads (or coroutines in C++20).
+
+- A `std::thread` shoud have either `join()` or `detach()` called otherwise it will call `std::terminate()` in its destructor.
 
 Here is an example:
 We created a thread that will do loop on outputting "Working..",
 and simultaneously the main() function is waiting for user input.
-```C++
-#include <iostream>
-#include <thread>
-
-static bool is_Finished = false;
-
-void DoWork()
-{
-    using namespace std::literals::chrono_literals; // Or use "sleep_for(std::chrono::seconds(1))" below
-
-    std::cout << "Started thread id=" << std::this_thread::get_id() << std::endl;
-
-    while (!is_Finished)
-    {
-        std::cout << "Working...\n";
-
-        std::this_thread::sleep_for(1s);
+```c++
+int main() {
+  std::println("[Main] tid={}", std::this_thread::get_id());
+  bool is_finished{false};
+  // In a async operation, there are ways to store the result of a thread's processing':
+  // std::promise' is use by the producer/writer, while 'std::future' is used by the consumer/reader,
+  // the latter don't have ability to set/write.
+  std::promise<std::string> promise;
+  std::future<std::string> future{promise.get_future()};
+  std::thread worker([&is_finished, promise = std::move(promise)]() mutable { // As soon as we create thread instance, it's going to immediately kick off that thread
+    std::println("[thread] Started, tid={}", std::this_thread::get_id());
+    while (!is_finished) {
+      std::println("Working...");
+      std::this_thread::sleep_for(std::chrono::seconds(1));
+      // using namespace std::literals::chrono_literals; // Or use namespace for convenience
+      // std::this_thread::sleep_for(1s);
     }
-}
-
-int main()
-{
-    // As soon as we create instance, it's going to immediately kick off that thread
-    std::thread worker(DoWork);
-
-    std::cin.get();
-    is_Finished = true;
-
-    // Call main thread to wait this thread (block main thread)
-    worker.join();
-    std::cout << "Finished." << std::endl;
+    promise.set_value("From thread: I'm completed!");
+  });
+  // Since the ownership of the 'promise' has 'std::move()'d to the thread 'worker',
+  // we can no longer use it in this function
+  std::cin.get();
+  is_finished = true;
+  worker.join(); // Let main thread to wait for this thread (block main thread)
+  std::println("Finished. Get values from thread: {}", future.get());
 }
 ```
 
-## Timing in C++
+## Coroutines
 
-1. Make a Timer for statistical time-consuming
-```C++
-struct Timer
-{
-    std::chrono::time_point<std::chrono::steady_clock> start, end;
-    std::chrono::duration<float> duration;
-
-    Timer()
-    {
-        start = std::chrono::high_resolution_clock::now();
+```c++
+// Promise
+template <typename T>
+struct Co {
+  struct promise_type;
+  std::coroutine_handle<promise_type> handle;
+  struct promise_type {
+    int m_count{};
+    T m_ret;
+    Co get_return_object() { return Co{.handle = std::coroutine_handle<promise_type>::from_promise(*this)}; }
+    auto initial_suspend() { return std::suspend_never{}; } // Called when coroutine object instantiated, can either return `std::suspend_always`, `std::suspend_never`, or construct a custom awaiter struct/class
+    auto final_suspend() const noexcept { return std::suspend_always{}; } // Called when coroutine function completed
+    void unhandled_exception() const { std::terminate(); }
+    // void return_void() { std::println("[promise_type] return_void"); } // Called by 'co_return'
+    void return_value(T value) { m_ret = value; } // Called by 'co_return <value>', can't coexist with 'return_void()'
+    auto yield_value(int value) { // Called by `co_yield`, normally you should choose either `co_yield` or `co_await`
+      m_count = value;
+      return std::suspend_always{};
     }
-
-    ~Timer()
-    {
-        end = std::chrono::high_resolution_clock::now();
-        duration = end - start;
-
-        float ms = duration.count() * 1000.0f;
-        std::<< "Timer took " << ms << "ms " << std::endl;
+    auto await_transform(std::function<T()> const& func) const {
+      struct Awaiter {
+        std::future<T> m_future;
+        std::thread m_thr;
+        bool await_ready() { return false; } // Called by 'co_await', return false to suspend
+        void await_suspend(std::coroutine_handle<>) { std::println("[Awaiter] await_suspend"); } // Called at suspend
+        T await_resume() { // Called at resume
+          std::println("[Awaiter] Thread block? Main thread tid#{}", std::this_thread::get_id());
+          return m_future.get();
+        }
+      };
+      std::promise<T> promise;
+      std::future<T> future{promise.get_future()};
+      std::thread thr([&func, promise{std::move(promise)}]() mutable {
+                      std::println("[co_await] tid#{}", std::this_thread::get_id());
+                      T value{func()};
+                      promise.set_value(value); });
+      thr.detach();
+      return Awaiter{std::move(future), std::move(thr)}; // Use 'std::move()' so they won't be cleaned up at method completed
     }
-}
+  };
+};
+int main() {
+  auto co{[]() -> Co<int> { // Coroutine
+    std::println("[run] before co_await");
+    int ret{co_await []() { std::this_thread::sleep_for(std::chrono::seconds(2)); return 114514; }}; // Dummy function for coroutine to run
+    std::println("[run] after co_await");
+    co_yield 1;
+    std::println("[run] after co_yield");
+    co_return ret;
+    std::println("[run] after co_return");
+  }()};
 
-void Function()
-{
-    // The timer will be auto delete when run out of the scope
-    Timer timer;
+  std::println("[main] tid#{}", std::this_thread::get_id());
+  for (int i{1}; !co.handle.done(); i++) {
+    std::println("\n[main]resume {} times", i);
+    std::println("[main]m_count {}", co.handle.promise().m_count);
+    co.handle.resume();
+  }
+  std::println("[main] get returned value: {}", co.handle.promise().m_ret);
+  co.handle.destroy(); // Don't forget to destory, or memory leak could occur.
+{}
+```
 
-    for (int i = 0; i < 100; i++)
-        std::cout << "Hello\n"; // std::endl is quiet slow
-} 
+## Timing
 
-int main()
-{
-    Function();
+Make a Timer for statistical time-consuming
+```c++
+template <class Res = std::chrono::milliseconds>
+class Timer {
+  using Clock = std::conditional_t<std::chrono::high_resolution_clock::is_steady,
+                                   std::chrono::high_resolution_clock, std::chrono::steady_clock>;
+private:
+  std::chrono::time_point<Clock> const m_start_time;
+  std::chrono::time_point<Clock> m_last_time;
+public:
+  Timer() noexcept : m_start_time(Clock::now()), m_last_time{Clock::now()} { std::println("Timer start!"); }
+  ~Timer() {
+    std::println("Time destructored, life time {}", std::chrono::duration_cast<Res>(Clock::now() - m_start_time));
+  }
+  inline void count() noexcept {
+    std::println("Time took: {}", std::chrono::duration_cast<Res>(Clock::now() - m_last_time));
+    m_last_time = Clock::now();
+  }
+  inline void renew() noexcept { m_last_time = Clock::now(); }
+};
+int main() {
+  []() {
+    Timer timer; // The timer will be auto delete when run out of the scope
+    std::this_thread::sleep_for(std::chrono::milliseconds(1145)); // Sleep for 114514ms
+  }();
 }
 ```
 
-## Multidimensional Arrays in C++
+## Multidimensional Arrays
 
-```C++
-int main()
-{
-    // Allocate a 2D array to store twenty integer pointers
-    int** a2d = new int*[20];
+```c++
+int main() {
+  int** a2d{new int*[20]}; // 2D array, stores type 'int*'
+  for (int i{}; i < 20; i++) { // Initiate a 20x30 2D array
+    a2d[i] = new int[30];
+    for (int j{}; j < 30; j++) a2d[i][j] = i * 30 + j; // Given values
+  }
+  for (int i{}; i < 20; i++) { // Print the 2D array
+    std::print("{:3}", a2d[i][0]);
+    for (int j{1}; j < 30; j++) std::print(" {:3}", a2d[i][j]);
+    std::println("");
+  }
+  for (int i{}; i < 20; i++) delete[] a2d[i]; // First release the sub array
+  delete[] a2d;
 
-    // We can set each of these pointers to point to an array
-    for (int i = 0; i < 20; i++)
-        a2d[i] = new int[50];
-    
-    // 3D array, you can imagine a cube with size of 20x30x40
-    int*** a3d = new int**[20];
-    for (int i = 0 i < 20; i++)
-    {
-        a3d[i] = new int*[30];
-        for (int j = 0; j < 20; j++)
-        {
-            a3d[i][j] = new int[40]:
-        }
-            
+  // 3D array, you can imagine a cube with size 2x3x4 (row, column, height)
+  int*** a3d{new int**[2]};
+  for (int i{}; i < 2; i++) {
+    a3d[i] = new int*[3];
+    for (int j{}; j < 3; j++) {
+      a3d[i][j] = new int[4];
+      for (int k{}; k < 4; k++) a3d[i][j][k] = k * 2 * 3 + i * 3 + j;
     }
-
-    a3d[0][0][0] = 666;
-
-    // When you want to delete this array, you have to go through inner array and delete all of those arrays from inside to out
-    for(int i = 0; i < 20; i++)
-    {
-        for (int j = 0; j < 30; j++)
-        {
-            delete[] a3d[i][j];
-        }
-        delete[] a3d[i];
+  }
+  // Now print the 3D array by slicing the heights
+  std::println("Layer1       Layer2     Layer3      Layer4");
+  for (int i{}; i < 2; i++) {
+    for (int k{}; k < 4; k++) {
+      std::print("{:2}", a3d[i][0][k]);
+      for (int j{1}; j < 3; j++) std::print(" {:2}", a3d[i][j][k]);
+      std::print("    ");
     }
-    delete[] a3d;
+    std::println("");
+  }
+  // When you want to delete this array, you have to go through inner array and
+  // delete all of those arrays from inside to out
+  for (int i{0}; i < 2; i++) {
+    for (int j{0}; j < 3; j++) delete[] a3d[i][j];
+    delete[] a3d[i];
+  }
+  delete[] a3d;
 }
 ```
 
-The most issue is that the Multidimensional Arrays will results memory fragmentation.
-When iterating the array we have to jump to another location to read or write that data,
-and that's results probably a cache miss which means that we're wasting time fetching data from our actual RAM.
+The most issue is that the Multidimensional Arrays will results memory fragmentation. When iterating the array we have to jump to another location to read or write that data, and that results probably a cache miss which means that we're wasting time fetching data from RAM.
 
-One of the most important things you can do is just store them in a single dimensional array:
-
-```C++
-int main()
-{
-    int* array =new int[5 * 5];
-    for (int x = 0; x < 5; y++)
-    {
-        for (int y = 0; y < 5; x++)
-        {
-            array[x * 5 + y] = 2;
-        }
+One of the most feasible thing you can do is just store them in a single dimensional array:
+```c++
+int main() {
+  int* arr{new int[5 * 5]};
+  for (int i{}; i < 5 * 5; i++) arr[i] = i;
+  for (int i{}; i < 5 * 5; i++)
+    switch (i % 5) {
+    case 4: std::println(" {:2}", arr[i]); break;
+    default: std::print(" ");
+    case 0: std::print("{:2}", arr[i]);
     }
+  delete[] arr;
 }
 ```
 
@@ -2557,85 +2587,6 @@ int main() {
 }
 ```
 
-
-## Coroutines
-
-```c++
-// Promise
-template <typename T>
-struct Co {
-  struct promise_type;
-  std::coroutine_handle<promise_type> handle;
-  struct promise_type {
-    int m_count{};
-    T m_ret_value;
-    Co get_return_object() { return Co{.handle = std::coroutine_handle<promise_type>::from_promise(*this)}; }
-    auto initial_suspend() {
-      std::println("[promise_type] initial_suspend (don't suspend)");
-      return std::suspend_never{}; // Can either return `std::suspend_always`, `std::suspend_never`, or construct a custom awaiter struct/class
-    }
-    auto final_suspend() noexcept {
-      std::println("[promise_type] final_suspend");
-      return std::suspend_always{};
-    }
-    void unhandled_exception() { std::terminate(); }
-    // constexpr void return_void() noexcept { std::println("[promise_type] return_void"); } // for single `co_return`
-    void return_value(T value) { // for `co_return <value>`, cannot coexists with `return_void()`
-      m_ret_value = value;
-      std::println("[promose_type] return_value");
-    }
-    auto yield_value(int value) { // called by `co_yield`, normally you should choose either `co_yield` or `co_await`
-      m_count = value;
-      return std::suspend_always{};
-    }
-    auto await_transform(std::function<T()> const& work) {
-      struct Awaiter {
-        std::future<T> m_future;
-        std::thread m_thr;
-        bool await_ready() { return false; } // return false to suspend
-        // Called at suspend
-        void await_suspend(std::coroutine_handle<>) { std::println("[Awaiter] await_suspend"); }
-        T await_resume() { // Called at resume
-          std::println("[Awaiter] Thread block? Coroutine tid#{}", std::this_thread::get_id());
-          return m_future.get();
-        }
-      };
-      std::promise<T> promise;
-      std::future<T> future{promise.get_future()};
-      std::thread thr([work{std::move(work)}, promise{std::move(promise)}]() mutable {
-                      std::println("[work] tid#{}", std::this_thread::get_id());
-                      T value{work()};
-                      promise.set_value(value); });
-      thr.detach();
-      return Awaiter{.m_future{std::move(future)}, .m_thr{std::move(thr)}};
-    }
-  };
-};
-
-// coroutine
-Co<int> run() {
-  std::println("[run] before co_await");
-  int ret{co_await []() { std::this_thread::sleep_for(std::chrono::seconds(2)); return 114514; }}; // Dummy function for coroutine to run
-  std::println("[run] after co_await");
-  co_yield 1;
-  std::println("[run] after co_yield");
-  co_return ret;
-  std::println("[run] after co_return");
-}
-
-int main() {
-  auto co = run();
-  std::println("[main] tid#{}", std::this_thread::get_id());
-
-  for (int i{1}; !co.handle.done(); i++) {
-    std::println("\n[main]resume {} times", i);
-    std::println("[main]m_count {}", co.handle.promise().m_count);
-    co.handle.resume();
-  }
-  std::println("[main] get returned value: {}", co.handle.promise().m_ret_value);
-}
-```
-
 ## Modules
 
 Module units whose declaration has `export` are termed *module interface units*; all other module units are termed `module implementation units`.
@@ -2669,5 +2620,6 @@ main () {
 
 ### References
 
-1. [All C++20 core language features with examples](https://oleksandrkvl.github.io/2021/04/02/cpp-20-overview.html#attr-likely)
-2. [c++20 の coroutine 使ってみる](https://qiita.com/ousttrue/items/0572c7cec966bb33067f)
+1. [C++ by The Cherno](https://www.youtube.com/playlist?list=PLlrATfBNZ98dudnM48yfGUldqGD0S4FFb)
+2. [All C++20 core language features with examples](https://oleksandrkvl.github.io/2021/04/02/cpp-20-overview.html#attr-likely)
+3. [c++20 の coroutine 使ってみる](https://qiita.com/ousttrue/items/0572c7cec966bb33067f)
