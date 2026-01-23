@@ -65,25 +65,23 @@ tags:
    \\(f(x)\\) 关于直线 \\(x=a\\) 对称, 则 \\(f(x)=f(2a-x)\\)
    \\(f(x)\\) 关于点 \\((a,b)\\) 对称, 则 \\(f(x)+f(2a-x)=2b\\)
 
-### 函数与方程
+### Functions and Equations
 
-1. 二次函数 (Quadratic function)
-   形如 \\(y=ax^2+bx+c\enspace\\) (\\(a \neq 0\\))
-   性质:
-   * 顶点坐标: \\((-\frac{b}{2a},\frac{4ac-b^2}{4a})\\)
-   * 方程根: \\((\frac{-b - \sqrt{\Delta}}{2a}, 0)和(\frac{-b + \sqrt{\Delta}}{2a}, 0)\\)
-   * \\(\Delta=b^2-4ac\\)
-     若 \\(\Delta>0\\) , 函数与 \\(x\\) 轴交于两点
-     若 \\(\Delta=0\\) , 函数与 \\(x\\) 轴交于一点
-     若 \\(\Delta<0\\) , 函数与 \\(x\\) 轴无公共点
-2. 零点: \\(f(x)=0\\) 的时候 \\(x\\) 的值
-3. 二分法 (Dichotomy)
+1. Quadratic function
+   \\(y=ax^2+bx+c\ (a\neq0)\\).
+   - Vertex: \\(\left(-\frac{b}{2a},\frac{4ac-b^2}{4a}\right)\\)
+   - Root: \\((\frac{-b - \sqrt{\Delta}}{2a}, 0)和(\frac{-b + \sqrt{\Delta}}{2a}, 0)\\)
+   - \\(\Delta=b^2-4ac\\)
+     If \\(\Delta>0\\), The function intersects the \\(x\\)-axis at one pints;
+     If \\(\Delta=0\\), The function intersects the \\(x\\)-axis at two points;
+     If \\(\Delta<0\\), The function don't intersects the \\(x\\)-axis.
+2. 二分法 (Dichotomy)
    对于区间 \\([a,b]\\) 上连续不断且 \\(f(a)\cdot f(b)<0\\) 的函数 \\(y=f(x)\\) ,
    通过不断地把函数 \\(f(x)\\) 的零点所在的区间一分为二,
    使区间的两个端点逐步逼近零点, 进而得到零点近似值的方法叫二分法
-4. 零点存在性质定理:
-   若 \\(f(x)\\) 在 \\([a,b]\\) 上连续不断, 且 \\(f(x)\cdot f(b)<0\\) , 则在区间 \\([a,b]\\) 存在变号零点
-5. 零点与方程根的关系 (Realtionship between zero point and equation root)
+3. 零点存在性质定理:
+   若 \\(f\\) 在 \\([a,b]\\) 上连续不断, 且 \\(f(x)\cdot f(b)<0\\) , 则在区间 \\([a,b]\\) 存在变号零点
+4. 零点 \\(f(0)\\) 与方程根的关系 (Realtionship between zero point and equation root)
    函数 \\(y＝f(x)\\) 有零点说明方程 \\(f(x)＝0\\) 有实数根(几何意义为函数 \\(y＝f(x)\\) 的图象与 \\(x\\) 轴有交点)
 
 ### 三角函数

@@ -11,6 +11,14 @@ tags:
 
 <!-- more -->
 
+## Daily Journals
+
+### 09-13-24
+
+Morning
+- Waked up around 9:30, today's sleep quality is not good, Since I was got into sleeping around 3:00.
+- Trying to install
+
 ## 二次元萌萌人语录
 
 (u1s1, 看着这些内容我都不自觉地脸红...)
