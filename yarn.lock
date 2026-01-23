@@ -1716,10 +1716,10 @@ hexo-cli@^4.3.2:
     resolve "^1.20.0"
     tildify "^2.0.0"
 
-hexo-component-inferno@^3.1.0:
-  version "3.1.1"
-  resolved "https://registry.npmjs.org/hexo-component-inferno/-/hexo-component-inferno-3.1.1.tgz"
-  integrity sha512-sWp91pMioR/bxe8Q8oeWvvr4YYAiDQNxBYTGfq/+FmuDq46MXxJopLwVo8IWeKFepNWAini8Z1XTkBd/TBQ61g==
+hexo-component-inferno@^3.1.2:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/hexo-component-inferno/-/hexo-component-inferno-3.1.2.tgz#7f38c9c545a50a830a95a80be38ea0ff122a5682"
+  integrity sha512-AdZKn0C/ss288/sLCri9nGl6bM8m32L2gtP8tATAtIPdS0HVKwmtyA+myGmh5GReTtCJ9fucHvKQTu6s06k20Q==
   dependencies:
     ajv "^8.12.0"
     hexo "^7.1.1"
@@ -1881,15 +1881,15 @@ hexo-server@^3.0.0:
     picocolors "^1.0.0"
     serve-static "^1.14.1"
 
-hexo-theme-icarus@^6.1.0:
-  version "6.1.0"
-  resolved "https://registry.npmjs.org/hexo-theme-icarus/-/hexo-theme-icarus-6.1.0.tgz"
-  integrity sha512-/hCCeBEiQY6xpSbMZK6YPaNHbmhpVFdqqQkp9bmLPhsNOHX+K9reWq+2qn2h/AtNOHQOAsgSI/+Zmt+yYLkPww==
+hexo-theme-icarus@^6.1.1:
+  version "6.1.1"
+  resolved "https://registry.yarnpkg.com/hexo-theme-icarus/-/hexo-theme-icarus-6.1.1.tgz#acac8c29b887b06173cfc9f0639525a8fc4f9197"
+  integrity sha512-Fh54gMFQWajZaZ/xvUQmshSz+5P7R96O2gdBqeHfvXyRa7pGAgnRTHMuJKba0EocKoZIqaz9paWriaXWq4RAjA==
   dependencies:
     bulma-stylus "0.8.0"
     deepmerge "^4.3.1"
     hexo "^7.1.1"
-    hexo-component-inferno "^3.1.0"
+    hexo-component-inferno "^3.1.2"
     hexo-log "^4.1.0"
     hexo-pagination "^3.0.0"
     hexo-renderer-inferno "^1.0.2"
