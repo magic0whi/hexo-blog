@@ -8,13 +8,12 @@ jobs:
     name: A job to deploy blog.
     steps:
     - name: Checkout
-      uses: actions/checkout@v1
+      uses: actions/checkout@v6.0.1
       with:
         submodules: true # Checkout private submodules(themes or something else).
-    
     # Caching dependencies to speed up workflows. (GitHub will remove any cache entries that have not been accessed in over 7 days.)
     - name: Cache node modules
-      uses: actions/cache@v1
+      uses: actions/cache@v5.0.2
       id: cache
       with:
         path: node_modules
@@ -28,11 +27,11 @@ jobs:
     # Deploy hexo blog website.
     - name: Deploy
       id: deploy
-      uses: marsen/hexo-action@v1.0.11
+      uses: marsen/hexo-action@v1.0.12
       with:
         deploy_key: ${{ secrets.HEXO_DEPLOY_KEY }}
-        user_name: magic0whi  # (or delete this input setting to use bot account)
-        user_email: lollipop.studio.cn@gmail.com  # (or delete this input setting to use bot account)
+        user_name: Proteus Qian  # (or delete this input setting to use bot account)
+        user_email: sudaku233@outlook.com  # (or delete this input setting to use bot account)
         commit_msg: ${{ github.event.head_commit.message }}  # (or delete this input setting to use hexo default settings)
     # Use the output from the `deploy` step(use for test action)
     - name: Get the output
